@@ -1,0 +1,3 @@
+# Build, scoring engine and tests
+numpy>=1.26
+# Optional extras: pip install -r requirements-optional.txt

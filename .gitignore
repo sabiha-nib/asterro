@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+.venv/
+venv/
+.env
+.DS_Store
+*.log
+*.tmp
+# raw ingestion outputs (data/raw/) ARE committed: they are the checksummed scientific inputs

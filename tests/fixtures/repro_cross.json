@@ -1,0 +1,86 @@
+{
+  "target": "cross",
+  "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 2.5,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+  },
+  "profile": "custom",
+  "algorithm_version": "tai-sim-1.0.0",
+  "rules": {
+    "min_coverage": 0.8,
+    "distinct_sep_km": 300,
+    "cross_planet": "min"
+  },
+  "normalization_ranges": {
+    "aridity": [
+      0,
+      1
+    ],
+    "annual_temperature_range": [
+      0.3400001525878906,
+      59.91999816894531
+    ],
+    "elevation": [
+      -75.2784423828125,
+      5702
+    ],
+    "slope": [
+      0,
+      20.94510841369629
+    ],
+    "surface_roughness": [
+      0,
+      1500.462158203125
+    ],
+    "lst_diurnal_range": [
+      -6.9000091552734375,
+      75.871
+    ]
+  },
+  "grid_resolution": "0.5 deg lat x 0.625 deg lon (NASA POWER / MERRA-2 native), cell centres",
+  "dataset_versions": {
+    "nasa_power": "API v2.10.0; source MERRA-2",
+    "modis_aqua_lst": "Collections 006 / 061 as served by GIBS",
+    "gmted2010": "GMTED2010",
+    "mola": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+    "meda": "Bundle 6.0, doi:10.17189/1522849",
+    "lola": "Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+    "diviner": "level4_polar hourly_maps (2009-07-05 to 2019-02-17)"
+  },
+  "predictor_stack": {
+    "sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+    "n_cells": 76781,
+    "file_hashes": {
+      "stack.bin": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+      "targets.json": "6ffe4553efdd792b025e2d932579f87ec9b34f210e841e209e4b1d67c06fe5de",
+      "labels.json": "8bbc4f91590769d8db3ce57028c1a9b067d99bf1a0dbcefdcb29894190522447"
+    }
+  },
+  "targets_version": "targets.json 1.0.0",
+  "selected_cell": {
+    "cell_id": 144992,
+    "lat": 35.5,
+    "lon": 80,
+    "expected_score": 0.786798856761,
+    "expected_rank": 4
+  },
+  "expected_top3": [
+    {
+      "cell_id": 78515,
+      "score": 0.798030925491
+    },
+    {
+      "cell_id": 144992,
+      "score": 0.786798856761
+    },
+    {
+      "cell_id": 74483,
+      "score": 0.786569065089
+    }
+  ],
+  "reproduce_with": "python -m scripts.reproduce reproduce.json"
+}

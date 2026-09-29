@@ -1,0 +1,25 @@
+{
+ "summer": {
+  "mean_dT_K": 69.4687644727966,
+  "median_dT_K": 54.229305267333984,
+  "p10_dT_K": -21.411369323730465,
+  "p90_dT_K": 172.22297973632814,
+  "mean_T14_K": 144.50725228453268,
+  "mean_T02_K": 75.03848781173609,
+  "bins_valid": 51562,
+  "bins_total": 53361
+ },
+ "winter": {
+  "mean_dT_K": 39.89552754101477,
+  "median_dT_K": 15.580223083496094,
+  "p10_dT_K": 0.23293495178222656,
+  "p90_dT_K": 156.58481216430664,
+  "mean_T14_K": 94.65374513238892,
+  "mean_T02_K": 54.75821759137414,
+  "bins_valid": 46811,
+  "bins_total": 53361
+ },
+ "lst_diurnal_range_K": 54.68214600690568,
+ "window_km": 55.5976,
+ "source": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/south/"
+}

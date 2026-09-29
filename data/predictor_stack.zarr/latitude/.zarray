@@ -1,0 +1,17 @@
+{
+ "zarr_format": 2,
+ "shape": [
+  361
+ ],
+ "chunks": [
+  361
+ ],
+ "dtype": "<f4",
+ "compressor": {
+  "id": "zlib",
+  "level": 6
+ },
+ "fill_value": "NaN",
+ "order": "C",
+ "filters": null
+}

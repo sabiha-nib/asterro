@@ -1,0 +1,94 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ASTERRO</title>
+<meta name="description" content="ASTERRO — Planetary Analogue Intelligence. Find Earth's environmental analogues for worlds beyond Earth. Deterministic, traceable, NASA data.">
+<meta name="application-name" content="ASTERRO">
+<meta property="og:title" content="ASTERRO — Planetary Analogue Intelligence">
+<meta property="og:description" content="Find Earth's environmental analogues for worlds beyond Earth. Deterministic similarity on NASA, USGS and PDS data; every score traceable and reproducible.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>/*__CSS__*/</style>
+
+<div id="app" class="is-hero" data-target="mars_jezero">
+  <header class="bar">
+    <div class="brand" aria-label="ASTERRO — Planetary Analogue Intelligence">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><circle cx="16" cy="16" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" stroke-width="1" opacity=".55" transform="rotate(-24 16 16)"/><circle cx="28.2" cy="10.6" r="1.8" fill="var(--accent)"/></svg>
+      <div class="brand-txt"><b>ASTERRO</b><span>PLANETARY ANALOGUE INTELLIGENCE</span></div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Instrument views">
+      <button role="tab" data-tab="explore" aria-selected="true" id="tab-explore">Explore</button>
+      <button role="tab" data-tab="compare" id="tab-compare">Compare</button>
+      <button role="tab" data-tab="scenarios" id="tab-scenarios">Scenarios</button>
+      <button role="tab" data-tab="discover" id="tab-discover">Discover</button>
+      <button role="tab" data-tab="data" id="tab-data">Data</button>
+      <button role="tab" data-tab="method" id="tab-method">Method</button>
+    </nav>
+    <div class="target-ctl" role="radiogroup" aria-label="Planetary target">
+      <button role="radio" data-target="mars_jezero" aria-checked="true" id="tgt-mars"><i>MARS</i>Jezero Crater</button>
+      <button role="radio" data-target="moon_south_pole" aria-checked="false" id="tgt-moon"><i>MOON</i>Lunar South Pole</button>
+      <button role="radio" data-target="cross" aria-checked="false" id="tgt-cross"><i>BOTH</i>Cross-planet</button>
+    </div>
+    <button class="btn-search" id="btn-search">Search Earth</button>
+  </header>
+
+  <main class="stage">
+    <aside class="panel left" id="left" aria-label="Analysis panel"></aside>
+
+    <section class="viewport" id="viewport" aria-label="Earth similarity field">
+      <canvas id="globe" aria-label="Interactive globe showing the similarity field. Drag to rotate, scroll to zoom, click a location for its planetary analogue profile." tabindex="0"></canvas>
+      <div class="markers" id="markers" aria-hidden="true"></div>
+      <div class="vp-top">
+        <div class="seg" role="group" aria-label="Projection">
+          <button data-proj="0" aria-pressed="true" id="proj-globe">Globe</button>
+          <button data-proj="1" aria-pressed="false" id="proj-map">Map</button>
+        </div>
+        <div class="seg" role="group" aria-label="Layer">
+          <button data-layer="sim" aria-pressed="true" id="layer-sim">Similarity</button>
+          <button data-layer="clusters" aria-pressed="false" id="layer-clusters">Constellations</button>
+          <button data-layer="delta" aria-pressed="false" id="layer-delta">Change</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="readout" id="readout" aria-live="polite"></div>
+      <div class="status" id="status"></div>
+
+      <div class="hero" id="hero">
+        <p class="eyebrow">ASTERRO · Planetary Analogue Intelligence · NASA Space Apps 2026</p>
+        <h1>Find Earth's<br>other worlds.</h1>
+        <p class="sub">Search Earth's environments for measurable analogues to the Moon and Mars.</p>
+        <div class="hero-targets" role="radiogroup" aria-label="Choose another world">
+          <button class="ht" data-target="mars_jezero" role="radio" aria-checked="true" id="ht-mars">
+            <img src="data/thumb_jezero_mola.png" alt="Hillshade of MOLA elevation around Jezero Crater">
+            <span><i>MARS</i><b>Jezero Crater</b><em>18.38°N 77.58°E</em></span>
+          </button>
+          <button class="ht" data-target="moon_south_pole" role="radio" aria-checked="false" id="ht-moon">
+            <img src="data/thumb_southpole_lola.png" alt="Hillshade of LOLA elevation at the lunar south pole">
+            <span><i>MOON</i><b>Lunar South Pole</b><em>90°S · Shackleton</em></span>
+          </button>
+        </div>
+        <div class="hero-cta">
+          <button class="btn-primary" id="hero-search">Search Earth</button>
+          <button class="btn-ghost" id="hero-science">Explore the science</button>
+        </div>
+        <p class="hero-facts" id="hero-facts">Loading predictor stack…</p>
+      </div>
+    </section>
+
+    <aside class="panel right" id="right" aria-label="Analogue field ranking"></aside>
+  </main>
+
+  <footer class="console" id="console" aria-label="Weight control"></footer>
+
+  <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-card">
+      <div class="sheet-head"><h2 id="sheet-title"></h2><div class="sheet-actions" id="sheet-actions"></div><button class="icon-btn" id="sheet-close" aria-label="Close">×</button></div>
+      <div class="sheet-body" id="sheet-body"></div>
+    </div>
+  </div>
+  <div class="sr-only" aria-live="polite" id="announcer"></div>
+</div>
+<script>/*__ENGINE__*/</script>
+<script>/*__APP__*/</script>

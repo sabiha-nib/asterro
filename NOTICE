@@ -1,0 +1,19 @@
+ASTERRO - Planetary Analogue Intelligence
+Copyright 2026 the ASTERRO contributors (NASA Space Apps Challenge 2026)
+
+The application code in this repository is licensed under the Apache License, Version 2.0 (LICENSE).
+
+THIRD-PARTY DATA ARE NOT LICENSED UNDER APACHE-2.0. Files under data/ and public/data/ are derived
+from the datasets below and remain subject to their providers' terms:
+
+- NASA POWER (NASA Langley Research Center POWER Project, funded through the NASA Earth Science
+  Directorate Applied Science Program) - open data; acknowledgement requested.
+- MODIS/Aqua LST MYD11C3 (NASA LP DAAC), delivered via NASA GIBS - NASA EOSDIS open data.
+- GMTED2010 (USGS EROS / NGA) - USGS public domain.
+- MGS MOLA DEM mosaic and LRO LOLA LDEM (NASA PDS / USGS Astrogeology) - public domain.
+- Mars 2020 MEDA bundle 6.0 (NASA PDS Atmospheres Node, doi:10.17189/1522849) - NASA PDS open data.
+- LRO Diviner polar temperature maps (Williams et al. 2019, JGR Planets 124:2505, doi:10.1029/2019JE006028).
+- Natural Earth (public domain) and NASA Blue Marble (NASA imagery) - context layers only.
+
+NASA, the NASA insignia and mission names are used only to identify data sources; this project is
+not endorsed by or affiliated with NASA, USGS or any space agency.

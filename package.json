@@ -1,0 +1,16 @@
+{
+  "name": "asterro",
+  "version": "1.0.0",
+  "description": "ASTERRO - Planetary Analogue Intelligence. Find Earth's environmental analogues for worlds beyond Earth.",
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build:data": "python3 -m src.data.preprocessing.build_stack ${ASTERRO_RAW_DIR:-data/raw} . && python3 -m src.data.preprocessing.build_targets ${ASTERRO_RAW_DIR:-data/raw} .",
+    "build": "python3 scripts/build_web.py . && python3 scripts/export_reference.py . && python3 scripts/write_provenance.py .",
+    "test:py": "python3 scripts/run_tests_offline.py",
+    "test:js": "node tests/test_js_parity.mjs",
+    "test": "npm run test:py && npm run test:js",
+    "start": "python3 -m http.server ${PORT:-8080} -d public"
+  }
+}

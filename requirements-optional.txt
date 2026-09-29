@@ -1,0 +1,14 @@
+# Optional: real pytest (scripts/run_tests_offline.py works without it)
+pytest>=8
+# Optional: zarr-python (without it the built-in Zarr v2 writer is used)
+zarr>=2.16
+# Ingestion only (re-downloading raw data from NASA/USGS/PDS)
+requests>=2.31
+Pillow>=10
+rasterio>=1.3
+netCDF4>=1.6
+pandas>=2.0
+shapely>=2.0
+pyshp>=2.3
+# UI smoke test only
+playwright>=1.44

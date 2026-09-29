@@ -1,0 +1,1788 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ASTERRO</title>
+<meta name="description" content="ASTERRO — Planetary Analogue Intelligence. Find Earth's environmental analogues for worlds beyond Earth. Deterministic, traceable, NASA data.">
+<meta name="application-name" content="ASTERRO">
+<meta property="og:title" content="ASTERRO — Planetary Analogue Intelligence">
+<meta property="og:description" content="Find Earth's environmental analogues for worlds beyond Earth. Deterministic similarity on NASA, USGS and PDS data; every score traceable and reproducible.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>/* ASTERRO · Planetary Analogue Intelligence — mission-instrument visual system (single dark theme, deliberate). */
+[hidden]{display:none!important}
+:root{
+  color-scheme: dark;
+  --ground:#090B0E; --panel:#0F1317; --panel-2:#141A1F; --raise:#1A2128;
+  --line:#212931; --line-2:#2E3842; --ink:#E6E9EC; --ink-2:#A4AEB9; --ink-3:#6C7783;
+  --mars:#E0874F; --moon:#AFC7DA; --cross:#D6C07A; --earth:#7FB3AE;
+  --accent:var(--mars); --accent-dim:#5b3520;
+  --match:#8CC08F; --partial:#D8B45B; --mismatch:#D9705F;
+  --f-display:"Big Shoulders Display","Oswald","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:3px; --bar-h:58px;
+}
+#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#2c3c48}
+#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#4a4226}
+html,body{height:100%;background:var(--ground);color:var(--ink)}
+body{font:14px/1.45 var(--f-body);-webkit-font-smoothing:antialiased;overflow:hidden}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+#app{height:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:var(--bar-h) minmax(0,1fr) auto;min-height:0}
+.bar,.stage,.console{min-width:0}
+
+/* ---------- top bar ---------- */
+.bar{display:flex;align-items:center;gap:18px;padding:0 16px;border-bottom:1px solid var(--line);background:var(--ground);position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);flex:none}
+.brand-txt{display:flex;flex-direction:column;line-height:1;width:157px} /* = width of the previous wordmark: keeps the tab bar in place */
+.brand-txt b{font:800 19px/1 var(--f-display);letter-spacing:.14em}
+.brand-txt span{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.18em;color:var(--ink-3)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tabs button{font:600 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:9px 11px;color:var(--ink-3);border-radius:var(--r);white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);background:var(--panel-2);box-shadow:inset 0 -2px 0 var(--accent)}
+.target-ctl{display:flex;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;flex:none}
+.target-ctl button{padding:6px 11px;font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;border-right:1px solid var(--line)}
+.target-ctl button:last-child{border-right:0}
+.target-ctl i{font:500 9px/1.3 var(--f-mono);letter-spacing:.2em;font-style:normal;color:var(--ink-3)}
+.target-ctl button[aria-checked="true"]{background:var(--panel-2);color:var(--ink)}
+.target-ctl button[aria-checked="true"] i{color:var(--accent)}
+.btn-search,.btn-primary{font:700 15px/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;background:var(--accent);color:#120c08;padding:11px 18px;border-radius:var(--r);flex:none;transition:filter .2s}
+.btn-search:hover,.btn-primary:hover{filter:brightness(1.1)}
+.btn-ghost{font:600 13px/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--line-2);padding:11px 16px;border-radius:var(--r);color:var(--ink-2)}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink-3)}
+.btn-sm{font:600 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-2);padding:8px 10px;border-radius:var(--r);color:var(--ink-2);background:var(--panel)}
+.btn-sm:hover{color:var(--ink);border-color:var(--accent)}
+.btn-sm.on{color:#120c08;background:var(--accent);border-color:var(--accent)}
+
+/* ---------- stage ---------- */
+.stage{display:grid;grid-template-columns:minmax(330px,390px) minmax(0,1fr) minmax(280px,320px);min-height:0;position:relative}
+.panel{background:var(--panel);min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.left{border-right:1px solid var(--line)}
+.right{border-left:1px solid var(--line)}
+#app.is-hero .left,#app.is-hero .right{opacity:.0;pointer-events:none}
+#app .left,#app .right{transition:opacity .6s ease}
+#app.wide .stage{grid-template-columns:minmax(560px,760px) minmax(0,1fr) minmax(280px,320px)}
+
+.viewport{position:relative;min-width:0;min-height:0;overflow:hidden;background:radial-gradient(120% 90% at 50% 45%,#0d1319 0%,var(--ground) 70%)}
+#globe{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#globe:active{cursor:grabbing}
+.vp-top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;pointer-events:none;z-index:2}
+.seg{display:flex;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;background:rgba(9,11,14,.78);pointer-events:auto;backdrop-filter:blur(4px)}
+.seg button{font:500 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;color:var(--ink-3)}
+.seg button[aria-pressed="true"]{color:var(--ink);background:var(--raise)}
+#app.is-hero .vp-top,#app.is-hero .legend,#app.is-hero .status{opacity:0}
+.legend{position:absolute;left:14px;bottom:44px;z-index:2;background:rgba(9,11,14,.8);border:1px solid var(--line);border-radius:var(--r);padding:9px 11px;min-width:220px;transition:opacity .5s}
+.legend h4{margin:0 0 6px;font:500 9.5px/1 var(--f-mono);letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase}
+.legend .ramp{height:8px;border-radius:1px}
+.legend .ticks{display:flex;justify-content:space-between;font:400 10.5px/1.6 var(--f-mono);color:var(--ink-2)}
+.legend .sw{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11.5px;color:var(--ink-2)}
+.legend .sw span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.status{position:absolute;left:14px;right:14px;bottom:12px;font:400 10.5px/1.3 var(--f-mono);color:var(--ink-3);letter-spacing:.04em;z-index:2;transition:opacity .5s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.readout{position:absolute;right:14px;bottom:40px;z-index:2;font:400 11px/1.5 var(--f-mono);color:var(--ink-2);background:rgba(9,11,14,.82);border:1px solid var(--line);border-radius:var(--r);padding:7px 10px;pointer-events:none;max-width:300px}
+.readout:empty{display:none}
+.readout b{color:var(--ink);font-weight:500}
+.markers{position:absolute;inset:0;pointer-events:none;z-index:1}
+.mk{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;font:500 10px/1 var(--f-mono);color:var(--ink);display:flex;align-items:center;gap:5px;transition:opacity .25s}
+.mk i{width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;background:rgba(9,11,14,.6);flex:none}
+.mk span{background:rgba(9,11,14,.72);padding:2px 4px;border-radius:2px;letter-spacing:.06em}
+.mk.sel i{width:15px;height:15px;background:var(--accent);box-shadow:0 0 0 4px rgba(224,135,79,.18)}
+.mk.pick i{border-color:var(--ink);border-style:dashed}
+.mk.back{opacity:0;pointer-events:none}
+
+/* ---------- hero ---------- */
+.hero{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:32px clamp(20px,5vw,72px);background:linear-gradient(90deg,rgba(9,11,14,.94) 0%,rgba(9,11,14,.72) 44%,rgba(9,11,14,0) 75%);transition:opacity .9s ease,transform .9s ease}
+#app:not(.is-hero) .hero{opacity:0;pointer-events:none;transform:translateX(-24px)}
+.eyebrow{font:500 10.5px/1.4 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin:0 0 18px}
+.hero h1{font:800 clamp(52px,8.4vw,118px)/.86 var(--f-display);letter-spacing:.01em;text-transform:uppercase;margin:0;max-width:9ch;text-wrap:balance}
+.hero .sub{font-size:17px;color:var(--ink-2);max-width:40ch;margin:18px 0 26px}
+.hero-targets{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.ht{display:flex;align-items:center;gap:12px;border:1px solid var(--line-2);border-radius:var(--r);padding:8px 14px 8px 8px;background:rgba(15,19,23,.85);text-align:left;min-width:230px}
+.ht img{width:54px;height:54px;border-radius:2px;filter:grayscale(1) contrast(1.15);flex:none}
+.ht span{display:flex;flex-direction:column;line-height:1.25}
+.ht i{font:500 9.5px/1.4 var(--f-mono);letter-spacing:.2em;font-style:normal;color:var(--ink-3)}
+.ht b{font:700 20px/1.1 var(--f-display);letter-spacing:.06em;text-transform:uppercase}
+.ht em{font:400 10.5px/1.5 var(--f-mono);font-style:normal;color:var(--ink-3)}
+.ht[aria-checked="true"]{border-color:var(--accent);background:rgba(20,26,31,.95)}
+.ht[aria-checked="true"] i{color:var(--accent)}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.hero-facts{font:400 11px/1.6 var(--f-mono);color:var(--ink-3);margin:22px 0 0;letter-spacing:.04em;max-width:62ch}
+
+/* ---------- panel content ---------- */
+.sec{padding:16px 18px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.lbl{font:500 10px/1.2 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lbl .n{color:var(--accent)}
+h2.ttl{font:700 26px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;margin:0}
+h3.ttl{font:700 19px/1.05 var(--f-display);letter-spacing:.05em;text-transform:uppercase;margin:0}
+.meta{font:400 11px/1.5 var(--f-mono);color:var(--ink-3)}
+p.note{color:var(--ink-2);font-size:12.5px;margin:8px 0 0;max-width:62ch}
+p.note.small{font-size:11.5px;color:var(--ink-3)}
+.body-tag{font:500 10px/1 var(--f-mono);letter-spacing:.22em;color:var(--accent)}
+.tgt-head{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center}
+.tgt-head img{width:76px;height:76px;border-radius:2px;filter:grayscale(1) contrast(1.1)}
+.cap{font:400 9.5px/1.4 var(--f-mono);letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+.tag{display:inline-block;font:500 9px/1 var(--f-mono);letter-spacing:.14em;padding:3px 5px;border-radius:2px;border:1px solid var(--line-2);color:var(--ink-3);text-transform:uppercase;white-space:nowrap}
+.tag.direct{color:var(--earth);border-color:#2e4a47}
+.tag.proxy{color:var(--partial);border-color:#54452a}
+.tag.na{color:var(--ink-3);border-style:dashed}
+.big{font:800 54px/.9 var(--f-display);letter-spacing:.01em}
+.big small{font:500 11px/1 var(--f-mono);letter-spacing:.18em;color:var(--ink-3);margin-left:8px;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+.kv{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kv span{font:500 9.5px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.kv b{font:500 13px/1.3 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink);overflow-wrap:anywhere}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.toggles{display:flex;gap:4px}
+.toggles button{font:500 9.5px/1 var(--f-mono);letter-spacing:.14em;padding:5px 7px;border-radius:2px;color:var(--ink-3);border:1px solid transparent;text-transform:uppercase}
+.toggles button[aria-pressed="true"]{color:var(--ink);border-color:var(--line-2);background:var(--raise)}
+.empty{color:var(--ink-3);font-size:13px;border:1px dashed var(--line-2);border-radius:var(--r);padding:14px;text-align:left}
+svg text{font-family:var(--f-mono)}
+.fp-svg{width:100%;height:auto;display:block}
+
+/* criterion bars */
+.cb{display:grid;grid-template-columns:104px 1fr 62px;gap:8px;align-items:center;padding:5px 0;font-size:12px}
+.cb .nm{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb .v{font:400 11.5px/1 var(--f-mono);text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.track{position:relative;height:10px;background:var(--raise);border-radius:1px}
+.track .fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);opacity:.85}
+.track .mark{position:absolute;top:-3px;width:2px;height:16px;background:var(--ink)}
+.track .tmark{position:absolute;top:-4px;width:10px;height:10px;transform:translateX(-5px) rotate(45deg);border:1.5px solid var(--accent);background:var(--ground);top:0}
+
+/* match / mismatch */
+.mm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mm h5{margin:0 0 6px;font:500 10px/1 var(--f-mono);letter-spacing:.18em}
+.mm ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:12.5px}
+.mm li{display:flex;gap:6px;align-items:baseline}
+.mm li b{font-family:var(--f-mono);font-weight:500;width:12px;flex:none}
+.c-match{color:var(--match)} .c-partial{color:var(--partial)} .c-mismatch{color:var(--mismatch)}
+.mm .none{color:var(--ink-3);font-size:11.5px}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:12px}
+table.t th{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--line-2);white-space:nowrap}
+table.t td{padding:6px 8px 6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.t td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+table.t th.n{text-align:right}
+table.t tr.hl td{background:rgba(255,255,255,.03)}
+.pos{color:var(--match)} .neg{color:var(--mismatch)}
+
+/* right rail list */
+.rail-head{padding:14px 16px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:1}
+.site{display:grid;grid-template-columns:34px 1fr auto;gap:2px 10px;padding:9px 16px;border-bottom:1px solid var(--line);text-align:left;width:100%;align-items:center}
+.site:hover{background:var(--panel-2)}
+.site[aria-current="true"]{background:var(--raise);box-shadow:inset 3px 0 0 var(--accent)}
+.site .rk{font:500 12px/1 var(--f-mono);color:var(--ink-3)}
+.site .nm{font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.site .sc{font:700 20px/1 var(--f-display);letter-spacing:.02em;text-align:right}
+.site .sub{grid-column:2/3;font:400 10px/1.3 var(--f-mono);color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site .mv{grid-column:3/4;font:500 10px/1 var(--f-mono);text-align:right}
+.site .spark{grid-column:2/4;display:flex;gap:2px;height:4px;margin-top:3px}
+.site .spark i{flex:1;background:var(--raise);position:relative;overflow:hidden}
+.site .spark i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--accent);opacity:.8}
+.mv.up{color:var(--match)} .mv.dn{color:var(--mismatch)}
+
+/* console */
+.console{border-top:1px solid var(--line);background:var(--ground);padding:10px 16px 10px;display:grid;grid-template-columns:1fr;gap:8px;z-index:4}
+#app.is-hero .console{opacity:.0;pointer-events:none}
+.console{transition:opacity .6s}
+.sliders{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 18px}
+.sl{display:flex;flex-direction:column;gap:4px;min-width:0}
+.sl label{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:var(--ink-2);align-items:baseline}
+.sl label b{font:500 12px/1 var(--f-mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.sl .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sl .foot{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.sl .share{font:400 10px/1 var(--f-mono);color:var(--ink-3)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:linear-gradient(90deg,var(--accent) var(--p,33%),var(--line-2) var(--p,33%))}
+input[type=range]::-moz-range-track{height:3px;background:var(--line-2)}
+input[type=range]::-moz-range-progress{height:3px;background:var(--accent)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:16px;margin-top:-6.5px;background:var(--ink);border-radius:1px;border:0}
+input[type=range]::-moz-range-thumb{width:12px;height:16px;background:var(--ink);border-radius:1px;border:0}
+input[type=range]:disabled{opacity:.35}
+.profiles{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.con-side{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.disclaimer{font-size:10.5px;color:var(--ink-3);max-width:78ch;text-align:right;line-height:1.35;flex:1 1 340px}
+
+/* sheet */
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(4,6,8,.72);display:flex;justify-content:center;align-items:flex-start;padding:4vh 16px;overflow-y:auto}
+.sheet-card{background:var(--panel);border:1px solid var(--line-2);border-radius:4px;width:min(880px,100%);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.sheet-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:1}
+.sheet-head h2{font:700 20px/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase;margin:0;flex:1}
+.sheet-actions{display:flex;gap:6px}
+.icon-btn{font-size:22px;line-height:1;width:32px;height:32px;border-radius:var(--r);color:var(--ink-2)}
+.icon-btn:hover{background:var(--raise);color:var(--ink)}
+.sheet-body{padding:18px 22px 26px}
+.sheet-body h3{font:700 15px/1.2 var(--f-display);letter-spacing:.14em;text-transform:uppercase;margin:22px 0 8px;color:var(--ink-2)}
+.sheet-body h3:first-child{margin-top:0}
+pre.code{font:400 11.5px/1.55 var(--f-mono);background:var(--ground);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;overflow-x:auto;color:var(--ink-2);margin:0;white-space:pre}
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:6px 0 4px}
+.flow div{flex:1 1 110px;border:1px solid var(--line-2);padding:8px 10px;font:500 10px/1.35 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);position:relative;background:var(--panel-2)}
+.flow div b{display:block;color:var(--ink);font:700 14px/1.1 var(--f-display);letter-spacing:.08em;margin-bottom:3px}
+.flow div+div{border-left:0}
+.formula{font:400 13px/1.9 var(--f-mono);background:var(--ground);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;color:var(--ink);overflow-x:auto;white-space:pre}
+.callout{border-left:2px solid var(--partial);padding:8px 12px;background:rgba(216,180,91,.06);font-size:12.5px;color:var(--ink-2)}
+.chip-list{display:flex;flex-wrap:wrap;gap:6px}
+.whatif{border:1px solid var(--line-2);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--panel-2)}
+.whatif q{font:700 17px/1.15 var(--f-display);letter-spacing:.04em;text-transform:uppercase;quotes:none}
+.bfaf{display:flex;align-items:center;gap:14px}
+.bfaf .b{display:flex;flex-direction:column}
+.bfaf .b span{font:500 9.5px/1 var(--f-mono);letter-spacing:.18em;color:var(--ink-3)}
+.bfaf .b b{font:800 34px/1 var(--f-display)}
+.bfaf .arr{font:400 20px/1 var(--f-mono);color:var(--ink-3)}
+.cluster{display:grid;grid-template-columns:26px 1fr auto;gap:2px 10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:start;width:100%;text-align:left}
+.cluster .id{font:700 18px/1 var(--f-display)}
+.cluster .nm{font:700 16px/1.1 var(--f-display);letter-spacing:.05em;text-transform:uppercase}
+.cluster .ct{font:400 11px/1.4 var(--f-mono);color:var(--ink-3)}
+.cluster .sw{width:10px;height:10px;border-radius:50%;margin-top:4px}
+canvas.plot{width:100%;height:auto;display:block;background:var(--ground);border:1px solid var(--line);border-radius:var(--r)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  body{overflow:auto}
+  #app{height:auto;min-height:100%;grid-template-rows:auto auto auto}
+  .bar{flex-wrap:wrap;padding-block:8px;gap:10px}
+  .tabs{order:3;flex-basis:100%}
+  .stage,#app.wide .stage{grid-template-columns:minmax(0,1fr) 300px;grid-template-rows:62vh auto}
+  .left{grid-column:1/3;grid-row:2;border-right:0;border-top:1px solid var(--line);overflow:visible}
+  .viewport{grid-row:1;grid-column:1}
+  .right{grid-row:1;grid-column:2;max-height:62vh}
+  .sliders{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .brand-txt span{display:none}
+  .target-ctl{order:2;flex-basis:100%}
+  .target-ctl button{flex:1}
+  .btn-search{margin-left:auto}
+  .stage,#app.wide .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:56vh auto auto}
+  .viewport{grid-row:1}
+  .right{grid-column:1;grid-row:2;max-height:none;border-left:0;border-top:1px solid var(--line)}
+  .right.collapsed .site:nth-child(n+7){display:none}
+  .left{grid-column:1;grid-row:3}
+  .console{grid-template-columns:1fr}
+  .console.collapsed .sliders{display:none}
+  .con-side{align-items:flex-start}
+  .disclaimer{text-align:left}
+  .sliders{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{background:linear-gradient(180deg,rgba(9,11,14,.95),rgba(9,11,14,.8));justify-content:flex-start;overflow-y:auto}
+  .hero h1{font-size:54px}
+  .ht{min-width:0;flex:1 1 100%}
+  .legend{min-width:0;left:8px;right:auto;bottom:34px}
+  .readout{display:none}
+  .mm{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* hero state: instrument closed, globe full width */
+.stage{transition:grid-template-columns .8s cubic-bezier(.2,.7,.2,1)}
+#app.is-hero .stage{grid-template-columns:0px minmax(0,1fr) 0px}
+#app.is-hero .panel{overflow:hidden;border:0}
+#app.is-hero .console{display:none}
+@media (max-width:1180px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr) 0px}#app.is-hero .left{display:none}}
+@media (max-width:760px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:100vh}#app.is-hero .right,#app.is-hero .left{display:none}}
+.site.pulse{animation:pulse 1.6s ease-in-out 3}
+@keyframes pulse{0%,100%{box-shadow:inset 3px 0 0 transparent}50%{box-shadow:inset 3px 0 0 var(--accent);background:var(--panel-2)}}
+.linkish{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;text-align:left}
+.linkish:hover{text-decoration-color:var(--accent)}
+.rail-more,.con-toggle{display:none}
+@media (max-width:760px){
+  .rail-more{display:block;margin:10px 16px 14px}
+  .con-toggle{display:inline-block}
+  .console:not(.open) .sliders{display:none}
+  .right:not(.open) .site:nth-of-type(n+7){display:none}
+  .hero{padding:24px 16px}
+  .hero .eyebrow{letter-spacing:.14em}
+  .hero-cta button{flex:1 1 auto}
+}
+</style>
+
+<div id="app" class="is-hero" data-target="mars_jezero">
+  <header class="bar">
+    <div class="brand" aria-label="ASTERRO — Planetary Analogue Intelligence">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><circle cx="16" cy="16" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" stroke-width="1" opacity=".55" transform="rotate(-24 16 16)"/><circle cx="28.2" cy="10.6" r="1.8" fill="var(--accent)"/></svg>
+      <div class="brand-txt"><b>ASTERRO</b><span>PLANETARY ANALOGUE INTELLIGENCE</span></div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Instrument views">
+      <button role="tab" data-tab="explore" aria-selected="true" id="tab-explore">Explore</button>
+      <button role="tab" data-tab="compare" id="tab-compare">Compare</button>
+      <button role="tab" data-tab="scenarios" id="tab-scenarios">Scenarios</button>
+      <button role="tab" data-tab="discover" id="tab-discover">Discover</button>
+      <button role="tab" data-tab="data" id="tab-data">Data</button>
+      <button role="tab" data-tab="method" id="tab-method">Method</button>
+    </nav>
+    <div class="target-ctl" role="radiogroup" aria-label="Planetary target">
+      <button role="radio" data-target="mars_jezero" aria-checked="true" id="tgt-mars"><i>MARS</i>Jezero Crater</button>
+      <button role="radio" data-target="moon_south_pole" aria-checked="false" id="tgt-moon"><i>MOON</i>Lunar South Pole</button>
+      <button role="radio" data-target="cross" aria-checked="false" id="tgt-cross"><i>BOTH</i>Cross-planet</button>
+    </div>
+    <button class="btn-search" id="btn-search">Search Earth</button>
+  </header>
+
+  <main class="stage">
+    <aside class="panel left" id="left" aria-label="Analysis panel"></aside>
+
+    <section class="viewport" id="viewport" aria-label="Earth similarity field">
+      <canvas id="globe" aria-label="Interactive globe showing the similarity field. Drag to rotate, scroll to zoom, click a location for its planetary analogue profile." tabindex="0"></canvas>
+      <div class="markers" id="markers" aria-hidden="true"></div>
+      <div class="vp-top">
+        <div class="seg" role="group" aria-label="Projection">
+          <button data-proj="0" aria-pressed="true" id="proj-globe">Globe</button>
+          <button data-proj="1" aria-pressed="false" id="proj-map">Map</button>
+        </div>
+        <div class="seg" role="group" aria-label="Layer">
+          <button data-layer="sim" aria-pressed="true" id="layer-sim">Similarity</button>
+          <button data-layer="clusters" aria-pressed="false" id="layer-clusters">Constellations</button>
+          <button data-layer="delta" aria-pressed="false" id="layer-delta">Change</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="readout" id="readout" aria-live="polite"></div>
+      <div class="status" id="status"></div>
+
+      <div class="hero" id="hero">
+        <p class="eyebrow">ASTERRO · Planetary Analogue Intelligence · NASA Space Apps 2026</p>
+        <h1>Find Earth's<br>other worlds.</h1>
+        <p class="sub">Search Earth's environments for measurable analogues to the Moon and Mars.</p>
+        <div class="hero-targets" role="radiogroup" aria-label="Choose another world">
+          <button class="ht" data-target="mars_jezero" role="radio" aria-checked="true" id="ht-mars">
+            <img src="data/thumb_jezero_mola.png" alt="Hillshade of MOLA elevation around Jezero Crater">
+            <span><i>MARS</i><b>Jezero Crater</b><em>18.38°N 77.58°E</em></span>
+          </button>
+          <button class="ht" data-target="moon_south_pole" role="radio" aria-checked="false" id="ht-moon">
+            <img src="data/thumb_southpole_lola.png" alt="Hillshade of LOLA elevation at the lunar south pole">
+            <span><i>MOON</i><b>Lunar South Pole</b><em>90°S · Shackleton</em></span>
+          </button>
+        </div>
+        <div class="hero-cta">
+          <button class="btn-primary" id="hero-search">Search Earth</button>
+          <button class="btn-ghost" id="hero-science">Explore the science</button>
+        </div>
+        <p class="hero-facts" id="hero-facts">Loading predictor stack…</p>
+      </div>
+    </section>
+
+    <aside class="panel right" id="right" aria-label="Analogue field ranking"></aside>
+  </main>
+
+  <footer class="console" id="console" aria-label="Weight control"></footer>
+
+  <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-card">
+      <div class="sheet-head"><h2 id="sheet-title"></h2><div class="sheet-actions" id="sheet-actions"></div><button class="icon-btn" id="sheet-close" aria-label="Close">×</button></div>
+      <div class="sheet-body" id="sheet-body"></div>
+    </div>
+  </div>
+  <div class="sr-only" aria-live="polite" id="announcer"></div>
+</div>
+<script>/* ASTERRO · Planetary Analogue Intelligence — deterministic engine (browser + Node).
+ * Line-for-line port of src/compute/{similarity,ranking,clustering}.py.
+ * Parity with the Python reference is asserted by tests/test_js_parity.mjs.
+ * No randomness, no learned model, no generative component. */
+(function (root) {
+  "use strict";
+  const MIN_COVERAGE = 0.80;
+  const MATCH = 0.85, PARTIAL = 0.60;
+  const R_EARTH_KM = 6371.0088;
+  const N_CANDIDATES = 800, K_CHOICES = [3, 4, 5];
+  const ALGORITHM_VERSION = "tai-sim-1.0.0";
+
+  function activeCriteria(criteria, tv, w) {
+    return criteria.filter(c => w[c] != null && +w[c] > 0 && tv[c] != null);
+  }
+
+  /* stack: {criterion: Float32Array}; returns Float64 arrays */
+  function similarity(stack, criteria, tv, w, ranges) {
+    for (const c of criteria) {
+      if (w[c] == null) continue;
+      if (!Number.isFinite(+w[c])) throw new Error("non-finite weight " + c);
+      if (+w[c] < 0) throw new Error("negative weight " + c);
+    }
+    const act = activeCriteria(criteria, tv, w);
+    if (!act.length) throw new Error("no active criteria");
+    let totalW = 0; for (const c of act) totalW += +w[c];
+    const n = stack[act[0]].length;
+    const num = new Float64Array(n), wsum = new Float64Array(n);
+    for (const c of act) {
+      const e = stack[c], t = +tv[c], lo = ranges[c][0], span = ranges[c][1] - ranges[c][0], wc = +w[c];
+      if (!(Number.isFinite(lo) && Number.isFinite(span) && span > 0)) throw new Error("undefined normalization range " + c);
+      for (let i = 0; i < n; i++) {
+        const x = e[i];
+        if (x - x !== 0) continue;                   // NaN or ±Infinity: missing Earth value
+        let s = 1 - Math.abs(x - t) / span;
+        s = s < 0 ? 0 : (s > 1 ? 1 : s);
+        num[i] += wc * s; wsum[i] += wc;
+      }
+    }
+    const final = new Float64Array(n), coverage = new Float64Array(n), eff = new Float64Array(n);
+    const eligible = new Uint8Array(n);
+    for (let i = 0; i < n; i++) {
+      final[i] = wsum[i] > 0 ? num[i] / wsum[i] : NaN;
+      coverage[i] = wsum[i] / totalW;
+      eligible[i] = coverage[i] >= MIN_COVERAGE - 1e-12 ? 1 : 0;
+      eff[i] = eligible[i] && final[i] === final[i] ? final[i] : -1;
+    }
+    return { final, coverage, eligible, eff, active: act, totalW };
+  }
+
+  /* Full per-criterion breakdown for ONE cell (trace). */
+  function detail(stack, criteria, i, tv, w, ranges) {
+    const act = activeCriteria(criteria, tv, w);
+    let wsum = 0; const rows = [];
+    for (const c of criteria) {
+      const e0 = stack[c][i], e = e0 - e0 === 0 ? e0 : NaN, t = tv[c], on = act.includes(c);
+      const row = { c, e: e === e ? e : null, t, w: +(w[c] || 0), active: on, lo: ranges[c][0], hi: ranges[c][1] };
+      if (on && e === e) {
+        row.d = Math.abs(e - t) / (ranges[c][1] - ranges[c][0]);
+        let s = 1 - row.d; row.s = s < 0 ? 0 : (s > 1 ? 1 : s);
+        row.en = (e - ranges[c][0]) / (ranges[c][1] - ranges[c][0]);
+        row.tn = (t - ranges[c][0]) / (ranges[c][1] - ranges[c][0]);
+        wsum += row.w;
+      } else if (e === e) {
+        row.en = (e - ranges[c][0]) / (ranges[c][1] - ranges[c][0]);
+        row.tn = t == null ? null : (t - ranges[c][0]) / (ranges[c][1] - ranges[c][0]);
+      }
+      rows.push(row);
+    }
+    let final = 0, num = 0;
+    for (const r of rows) if (r.s != null) { r.k = r.w * r.s / wsum; num += r.w * r.s; }
+    final = wsum > 0 ? num / wsum : NaN;
+    let totalW = 0; for (const c of act) totalW += +w[c];
+    return { rows, final, coverage: wsum / totalW, wsum, totalW };
+  }
+
+  function classify(s) { return s >= MATCH ? "MATCH" : (s >= PARTIAL ? "PARTIAL" : "MISMATCH"); }
+
+  function order(eff, cell) {
+    const n = eff.length, idx = new Int32Array(n);
+    for (let i = 0; i < n; i++) idx[i] = i;
+    idx.sort((a, b) => (eff[b] - eff[a]) || (cell[a] - cell[b]));
+    return idx;
+  }
+  function ranksFromOrder(o) {
+    const r = new Int32Array(o.length);
+    for (let k = 0; k < o.length; k++) r[o[k]] = k + 1;
+    return r;
+  }
+  function haversine(la1, lo1, la2, lo2) {
+    const r = Math.PI / 180, p1 = la1 * r, p2 = la2 * r, dp = p2 - p1, dl = (lo2 - lo1) * r;
+    let a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+    a = a < 0 ? 0 : (a > 1 ? 1 : a);
+    return 2 * R_EARTH_KM * Math.asin(Math.sqrt(a));
+  }
+  function distinctSites(o, lat, lon, n = 20, sep = 300) {
+    const kept = [];
+    for (let k = 0; k < o.length && kept.length < n; k++) {
+      const i = o[k]; let ok = true;
+      for (const j of kept) if (haversine(lat[i], lon[i], lat[j], lon[j]) < sep) { ok = false; break; }
+      if (ok) kept.push(i);
+    }
+    return kept;
+  }
+
+  /* ---- clustering (constellations) ---- */
+  function kmeans(X, d, k) {
+    const n = X.length / d, C = new Float64Array(k * d), idx = [0];
+    const dist = new Float64Array(n);
+    const sq = (i, cRow, CC) => { let s = 0; for (let q = 0; q < d; q++) { const v = X[i * d + q] - CC[cRow * d + q]; s += v * v; } return s; };
+    for (let q = 0; q < d; q++) C[q] = X[q];
+    for (let i = 0; i < n; i++) dist[i] = sq(i, 0, C);
+    for (let j = 1; j < k; j++) {
+      let best = 0; for (let i = 1; i < n; i++) if (dist[i] > dist[best]) best = i;
+      idx.push(best); for (let q = 0; q < d; q++) C[j * d + q] = X[best * d + q];
+      for (let i = 0; i < n; i++) { const v = sq(i, j, C); if (v < dist[i]) dist[i] = v; }
+    }
+    let lab = new Int32Array(n);
+    for (let it = 0; it < 100; it++) {
+      const nl = new Int32Array(n);
+      for (let i = 0; i < n; i++) {
+        let b = 0, bv = Infinity;
+        for (let j = 0; j < k; j++) { const v = sq(i, j, C); if (v < bv) { bv = v; b = j; } }
+        nl[i] = b;
+      }
+      let same = it > 0; if (same) for (let i = 0; i < n; i++) if (nl[i] !== lab[i]) { same = false; break; }
+      if (same) break;
+      lab = nl;
+      for (let j = 0; j < k; j++) {
+        let m = 0; const acc = new Float64Array(d);
+        for (let i = 0; i < n; i++) if (lab[i] === j) { m++; for (let q = 0; q < d; q++) acc[q] += X[i * d + q]; }
+        if (m) for (let q = 0; q < d; q++) C[j * d + q] = acc[q] / m;
+      }
+    }
+    return lab;
+  }
+  function silhouette(X, d, lab, k) {
+    const n = lab.length; let tot = 0;
+    const D = (i, j) => { let s = 0; for (let q = 0; q < d; q++) { const v = X[i * d + q] - X[j * d + q]; s += v * v; } return Math.sqrt(s); };
+    for (let i = 0; i < n; i++) {
+      const sum = new Float64Array(k), cnt = new Float64Array(k);
+      for (let j = 0; j < n; j++) { if (j === i) continue; sum[lab[j]] += D(i, j); cnt[lab[j]]++; }
+      const own = lab[i];
+      if (cnt[own] === 0) continue;
+      const a = sum[own] / cnt[own]; let b = Infinity;
+      for (let j = 0; j < k; j++) if (j !== own && cnt[j] > 0) b = Math.min(b, sum[j] / cnt[j]);
+      const m = Math.max(a, b); tot += m > 0 ? (b - a) / m : 0;
+    }
+    return tot / n;
+  }
+  /* norm(i, c) -> normalized value or NaN */
+  function constellations(o, act, normFn) {
+    const cand = Array.from(o.slice(0, N_CANDIDATES));
+    const d = act.length, X = new Float64Array(cand.length * d);
+    for (let q = 0; q < d; q++) {
+      let s = 0, m = 0;
+      for (const i of cand) { const v = normFn(i, act[q]); if (v === v) { s += v; m++; } }
+      const mean = m ? s / m : 0.5;
+      cand.forEach((i, r) => { const v = normFn(i, act[q]); X[r * d + q] = v === v ? v : mean; });
+    }
+    let best = null;
+    for (const k of K_CHOICES) {
+      if (cand.length <= k) continue;
+      const lab = kmeans(X, d, k), sil = silhouette(X, d, lab, k);
+      if (!best || sil > best.sil + 1e-12) best = { k, lab, sil };
+    }
+    return { candidates: cand, labels: best.lab, k: best.k, silhouette: best.sil };
+  }
+  function aridityClass(a) { return a < 0.05 ? "Hyper-arid" : a < 0.20 ? "Arid" : a < 0.50 ? "Semi-arid" : a < 0.65 ? "Dry sub-humid" : "Humid"; }
+  function thermalClass(t) { return t < 0 ? "Cold" : (t < 18 ? "Temperate" : "Hot"); }
+  function terrainClass(s, e) { const r = s < 2 ? "plains" : (s < 6 ? "rolling terrain" : "rugged terrain"); return e >= 3000 ? "high-altitude " + r : r; }
+  function describe(st) {
+    const mid = st.aridity == null || st.aridity !== st.aridity ? "" : aridityClass(st.aridity).toLowerCase() + " ";
+    return thermalClass(st.t2m_mean_c) + " " + mid + terrainClass(st.slope, st.elevation);
+  }
+
+  const api = { MIN_COVERAGE, MATCH, PARTIAL, N_CANDIDATES, ALGORITHM_VERSION, activeCriteria, similarity, detail,
+    classify, order, ranksFromOrder, haversine, distinctSites, kmeans, silhouette, constellations, describe,
+    aridityClass, thermalClass, terrainClass };
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.TAIEngine = api;
+})(typeof window !== "undefined" ? window : globalThis);
+</script>
+<script>/* ===== 01 core: state, loading, helpers ===== */
+"use strict";
+const ENG = window.TAIEngine;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const el = (tag, attrs = {}, html = "") => { const e = document.createElement(tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (html) e.innerHTML = html; return e; };
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const clamp = (x, a, b) => x < a ? a : (x > b ? b : x);
+const REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const S = {
+  app: null, targets: null, T: {}, labels: null, A: {}, n: 0, lat: null, lon: null, cell: null,
+  crit: [], critIds: [], ranges: null,
+  targetId: "mars_jezero", weights: null, profile: "general",
+  tab: "explore", layer: "sim", proj: 0,
+  res: null,          // current result object (see compute())
+  prev: null,         // snapshot before the last committed change (for WHY DID THIS MOVE / Change layer)
+  selected: null,     // cell index (into valid-cell arrays)
+  picked: null,       // cell index chosen by clicking the globe (reverse search)
+  fpMode: "radial", searched: false, computeMs: 0, clusterFocus: null,
+};
+
+const fmtPct = (x, d = 1) => (x == null || x !== x || x < 0) ? "—" : (100 * x).toFixed(d) + "%";
+const fmtPts = x => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(1) + " pts";
+const fmtLat = v => Math.abs(v).toFixed(2) + "°" + (v >= 0 ? "N" : "S");
+const fmtLon = v => Math.abs(v).toFixed(2) + "°" + (v >= 0 ? "E" : "W");
+const pad2 = k => String(k).padStart(2, "0");
+function fmtVal(c, v) {
+  if (v == null || v !== v) return "N/A";
+  const cr = S.crit.find(x => x.id === c); const d = cr ? cr.fmt : 2;
+  return (+v).toFixed(d);
+}
+const unitOf = c => ({ aridity: "", annual_temperature_range: "K", elevation: "m", slope: "°", surface_roughness: "m", lst_diurnal_range: "K" }[c] || "");
+const shortOf = c => (S.crit.find(x => x.id === c) || {}).short || c;
+const labelOf = c => (S.crit.find(x => x.id === c) || {}).label || c;
+
+function announce(msg) { const a = $("#announcer"); if (a) { a.textContent = ""; setTimeout(() => a.textContent = msg, 30); } }
+
+function placeName(i) {
+  const r = S.A.region ? S.A.region[i] : -1, c = S.A.country ? S.A.country[i] : -1;
+  const title = s => s.toLowerCase().replace(/(^|[\s\-(])([a-z])/g, (m, a, b) => a + b.toUpperCase()).replace(/\bRa\.?$/, "Range");
+  const rn = r >= 0 ? title(S.labels.region[r]) : null;
+  const cn = c >= 0 ? S.labels.country[c] : null;
+  if (rn && cn) return { primary: rn, secondary: cn };
+  if (cn) return { primary: cn, secondary: null };
+  if (rn) return { primary: rn, secondary: null };
+  return { primary: "Unlabelled land cell", secondary: null };
+}
+const placeStr = i => { const p = placeName(i); return p.secondary ? `${p.primary}, ${p.secondary}` : p.primary; };
+function cellArea(i) {           // km², spherical cell 0.5° x 0.625°
+  const R = 6371.0088, la = S.lat[i], p1 = Math.max(-90, la - 0.25) * Math.PI / 180, p2 = Math.min(90, la + 0.25) * Math.PI / 180;
+  return R * R * (0.625 * Math.PI / 180) * Math.abs(Math.sin(p2) - Math.sin(p1));
+}
+function cellDims(i) { const kmDeg = 111.195; return [0.5 * kmDeg, 0.625 * kmDeg * Math.cos(S.lat[i] * Math.PI / 180)]; }
+
+async function loadAll(progress) {
+  const get = async (u, kind) => { const r = await fetch(u); if (!r.ok) throw new Error(u + " → HTTP " + r.status); return kind === "bin" ? r.arrayBuffer() : r.json(); };
+  progress("Loading registry…");
+  const [app, tg, lab] = await Promise.all([get("data/app.json"), get("data/targets.json"), get("data/labels.json")]);
+  S.app = app; S.targets = tg.targets; S.labels = lab;
+  for (const t of S.targets) S.T[t.id] = t;
+  S.crit = app.criteria; S.critIds = app.criteria.map(c => c.id); S.ranges = app.ranges;
+  progress(`Loading predictor stack · ${(app.stack.bytes / 1048576).toFixed(1)} MB · ${app.stack.n_cells.toLocaleString()} cells`);
+  // stack.bin is published base64-encoded as text (hosts serve only standard web types)
+  const r64 = await fetch("data/stack.b64.txt"); if (!r64.ok) throw new Error("data/stack.b64.txt → HTTP " + r64.status);
+  const bs = atob((await r64.text()).trim()), u8 = new Uint8Array(bs.length);
+  for (let k = 0; k < bs.length; k++) u8[k] = bs.charCodeAt(k);
+  const buf = u8.buffer;
+  try {
+    const h = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", buf)), b => b.toString(16).padStart(2, "0")).join("");
+    S.hashOK = h === app.stack.sha256; S.hashSeen = h;
+  } catch (e) { S.hashOK = null; }
+  if (S.hashOK === false) throw new Error(`predictor stack checksum mismatch (got ${S.hashSeen.slice(0, 12)}…, expected ${app.stack.sha256.slice(0, 12)}…). No scores are shown from unverified data.`);
+  if (buf.byteLength !== app.stack.bytes) throw new Error(`predictor stack size ${buf.byteLength} B ≠ expected ${app.stack.bytes} B.`);
+  const TA = { float32: Float32Array, uint32: Uint32Array, int16: Int16Array };
+  for (const L of app.stack.layout) S.A[L.name] = new TA[L.dtype](buf, L.offset, L.length);
+  S.n = app.stack.n_cells; S.cell = S.A.cell;
+  S.lat = new Float64Array(S.n); S.lon = new Float64Array(S.n);
+  S.index = new Int32Array(361 * 576).fill(-1);
+  for (let i = 0; i < S.n; i++) { const c = S.cell[i]; S.lat[i] = -90 + 0.5 * Math.floor(c / 576); S.lon[i] = -180 + 0.625 * (c % 576); S.index[c] = i; }
+  S.weights = { ...app.profiles.general.weights };
+  S.bytesLoaded = buf.byteLength;
+}
+/* nearest valid cell to (lat, lon), searching outward on the grid */
+function nearestCell(lat, lon) {
+  const i0 = Math.round((lat + 90) / 0.5), j0 = Math.round((lon + 180) / 0.625);
+  for (let r = 0; r <= 3; r++) {
+    let best = -1, bd = Infinity;
+    for (let di = -r; di <= r; di++) for (let dj = -r; dj <= r; dj++) {
+      if (Math.max(Math.abs(di), Math.abs(dj)) !== r) continue;
+      const i = i0 + di; if (i < 0 || i > 360) continue;
+      const j = ((j0 + dj) % 576 + 576) % 576, k = S.index[i * 576 + j];
+      if (k >= 0) { const d = ENG.haversine(lat, lon, S.lat[k], S.lon[k]); if (d < bd) { bd = d; best = k; } }
+    }
+    if (best >= 0) return best;
+  }
+  return -1;
+}
+
+/* ===== 02 globe: WebGL similarity-field renderer (globe <-> map morph) ===== */
+const RAMPS = {
+  mars_jezero: ["#1a0f0a", "#5a2a16", "#a8522a", "#e08a4e", "#fbe2b6"],
+  moon_south_pole: ["#0b1218", "#233a4b", "#4f7690", "#99b9cf", "#eef5fa"],
+  cross: ["#12100a", "#3d3419", "#86733a", "#d6c07a", "#f8f0d0"],
+};
+const CLUSTER_COLORS = ["#E6A15C", "#7FB3AE", "#B59BD6", "#D9705F", "#C9C46A", "#6F9BD1"];
+const hex3 = h => [1, 3, 5].map(k => parseInt(h.slice(k, k + 2), 16) / 255);
+
+const VS = `
+attribute vec2 aLL;
+uniform mat3 uRot; uniform mat4 uProj; uniform float uMorph, uDist, uScale; uniform vec2 uPan;
+varying vec2 vLL; varying vec3 vN;
+void main(){
+  float la = radians(aLL.y), lo = radians(aLL.x);
+  vec3 s = vec3(cos(la)*sin(lo), sin(la), cos(la)*cos(lo));
+  vec3 ps = uRot * s * uScale;
+  vec3 pp = vec3(aLL.x/180.0*1.9 + uPan.x, aLL.y/90.0*0.95 + uPan.y, (uScale-1.0)*0.2);
+  vec3 p = mix(ps, pp, uMorph);
+  vN = normalize(mix(uRot * s, vec3(0.0,0.0,1.0), uMorph));
+  vLL = aLL;
+  gl_Position = uProj * vec4(p.x, p.y, p.z - uDist, 1.0);
+}`;
+const FS = `
+#extension GL_OES_standard_derivatives : enable
+precision highp float;
+uniform sampler2D uField, uBase;
+uniform float uReveal, uBaseMix, uGrid, uLayer, uLo, uHi, uCellGrid, uMorph;
+uniform vec3 uRamp[5]; uniform vec3 uClus[6];
+varying vec2 vLL; varying vec3 vN;
+vec3 ramp(float t){
+  t = clamp(t,0.0,1.0)*4.0;
+  if (t < 1.0) return mix(uRamp[0], uRamp[1], t);
+  if (t < 2.0) return mix(uRamp[1], uRamp[2], t-1.0);
+  if (t < 3.0) return mix(uRamp[2], uRamp[3], t-2.0);
+  return mix(uRamp[3], uRamp[4], t-3.0);
+}
+void main(){
+  vec3 base = texture2D(uBase, vec2((vLL.x+180.0)/360.0, (90.0-vLL.y)/180.0)).rgb;
+  float lum = dot(base, vec3(0.3,0.59,0.11));
+  vec3 b = mix(vec3(lum)*vec3(0.62,0.68,0.76), base, 0.28) * 0.36 * uBaseMix + vec3(0.012,0.016,0.022);
+  float j = mod(floor((vLL.x+180.0)/0.625+0.5), 576.0);
+  float i = clamp(floor((vLL.y+90.0)/0.5+0.5), 0.0, 360.0);
+  vec4 f = texture2D(uField, vec2((j+0.5)/576.0, (i+0.5)/361.0));
+  vec3 col = b;
+  if (f.a > 0.0) {
+    float vis = step(f.g, uReveal + 0.0001);
+    float t = (f.r - uLo) / max(uHi - uLo, 0.001);
+    vec3 c = ramp(t); float a = mix(0.10, 0.96, smoothstep(0.0, 1.0, clamp(t,0.0,1.0)));
+    if (uLayer > 0.5 && uLayer < 1.5) {
+      float cid = floor(f.b*255.0 + 0.5);
+      if (cid > 0.5) { c = cid < 1.5 ? uClus[0] : cid < 2.5 ? uClus[1] : cid < 3.5 ? uClus[2] : cid < 4.5 ? uClus[3] : cid < 5.5 ? uClus[4] : uClus[5]; a = 0.95; }
+      else { c = ramp(t) * 0.55; a *= 0.35; }
+    } else if (uLayer > 1.5) {
+      float d = (f.a*255.0 - 128.0) / 127.0;
+      c = d >= 0.0 ? vec3(0.50,0.80,0.74) : vec3(0.86,0.42,0.36);
+      a = clamp(abs(d)*1.4, 0.0, 0.95);
+      col = mix(b, ramp(t)*0.25, 0.5*vis);
+    }
+    col = mix(col, c, a * vis);
+  }
+  #ifdef GL_OES_standard_derivatives
+  vec2 q = vLL / 15.0; vec2 g = abs(fract(q + 0.5) - 0.5) / max(fwidth(q), vec2(1e-5));
+  float line = 1.0 - min(min(g.x, g.y), 1.0);
+  col += vec3(0.45,0.55,0.66) * line * 0.10 * uGrid;
+  if (uCellGrid > 0.0) {
+    vec2 c2 = vec2((vLL.x+180.0)/0.625, (vLL.y+90.0)/0.5) + 0.5;
+    vec2 gg = abs(fract(c2) - 0.5) / max(fwidth(c2), vec2(1e-5));
+    col += vec3(1.0) * (1.0 - min(min(gg.x, gg.y), 1.0)) * 0.05 * uCellGrid;
+  }
+  #endif
+  float nd = clamp(vN.z, 0.0, 1.0);
+  col *= mix(0.42, 1.0, pow(nd, 0.6));
+  gl_FragColor = vec4(col, 1.0);
+}`;
+const FS_RIM = `precision highp float; varying vec2 vLL; varying vec3 vN; uniform float uMorph; uniform vec3 uTint;
+void main(){ float r = pow(1.0 - clamp(abs(vN.z),0.0,1.0), 3.0); gl_FragColor = vec4(uTint * r * 0.55 * (1.0-uMorph), 1.0); }`;
+const FS_LINE = `precision highp float; uniform vec4 uColor; varying vec3 vN; uniform float uMorph;
+void main(){ float f = uMorph > 0.5 ? 1.0 : smoothstep(0.0, 0.25, vN.z); gl_FragColor = vec4(uColor.rgb, uColor.a * f); }`;
+
+class Globe {
+  constructor(canvas) {
+    this.cv = canvas;
+    const gl = canvas.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false });
+    if (!gl) throw new Error("WebGL is not available in this browser.");
+    this.gl = gl; gl.getExtension("OES_standard_derivatives");
+    this.yaw = -0.35; this.pitch = 0.28; this.dist = 3.6; this.morph = 0; this.pan = [0, 0];
+    this.reveal = 1; this.baseMix = 1; this.grid = 1; this.layer = 0; this.lo = 0; this.hi = 1;
+    this.ramp = RAMPS.mars_jezero; this.tween = []; this.dirty = true; this.autoRotate = false; this.onFrame = null;
+    this.prog = this.program(VS, FS); this.rim = this.program(VS, FS_RIM); this.lineP = this.program(VS, FS_LINE);
+    this.mesh(); this.fieldTex = this.tex(); this.baseTex = this.tex();
+    gl.bindTexture(gl.TEXTURE_2D, this.baseTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([10, 14, 20, 255]));
+    this.fieldData = new Uint8Array(576 * 361 * 4);
+    this.uploadField();
+    new ResizeObserver(() => { this.resize(); this.dirty = true; }).observe(canvas);
+    this.resize(); this.bindInput(); this.loop = this.loop.bind(this); requestAnimationFrame(this.loop);
+  }
+  program(vs, fs) {
+    const gl = this.gl, sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+    gl.bindAttribLocation(p, 0, "aLL"); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    p.u = {}; const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (let k = 0; k < n; k++) { const a = gl.getActiveUniform(p, k), nm = a.name.replace("[0]", ""); p.u[nm] = gl.getUniformLocation(p, a.name); }
+    return p;
+  }
+  tex() { const gl = this.gl, t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t; }
+  mesh() {
+    const gl = this.gl, st = 2.5, nx = 360 / st + 1, ny = 180 / st + 1, v = [], ix = [];
+    for (let y = 0; y < ny; y++) for (let x = 0; x < nx; x++) v.push(-180 + x * st, -90 + y * st);
+    for (let y = 0; y < ny - 1; y++) for (let x = 0; x < nx - 1; x++) { const a = y * nx + x; ix.push(a, a + 1, a + nx, a + 1, a + nx + 1, a + nx); }
+    this.vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, this.vb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(v), gl.STATIC_DRAW);
+    this.ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(ix), gl.STATIC_DRAW);
+    this.nIdx = ix.length;
+  }
+  setCoast(polys) {
+    const gl = this.gl, seg = [];
+    for (const pl of polys) for (let k = 1; k < pl.length; k++) { const a = pl[k - 1], b = pl[k]; if (Math.abs(a[0] - b[0]) > 180) continue; seg.push(a[0], a[1], b[0], b[1]); }
+    this.lb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, this.lb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(seg), gl.STATIC_DRAW);
+    this.nLine = seg.length / 2; this.dirty = true;
+  }
+  setBase(img) { const gl = this.gl; gl.bindTexture(gl.TEXTURE_2D, this.baseTex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img); this.dirty = true; }
+  uploadField() { const gl = this.gl; gl.bindTexture(gl.TEXTURE_2D, this.fieldTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 576, 361, 0, gl.RGBA, gl.UNSIGNED_BYTE, this.fieldData); this.dirty = true; }
+  resize() { const r = this.cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    this.cv.width = Math.max(2, Math.round(r.width * d)); this.cv.height = Math.max(2, Math.round(r.height * d)); this.w = r.width; this.h = r.height; }
+  rot() { const cy = Math.cos(this.yaw), sy = Math.sin(this.yaw), cp = Math.cos(this.pitch), sp = Math.sin(this.pitch);
+    // R = Rx(pitch) * Ry(yaw), row-major rows
+    return [[cy, 0, sy], [sp * sy, cp, -sp * cy], [-cp * sy, sp, cp * cy]]; }
+  proj() { const f = 1 / Math.tan(17 * Math.PI / 180), a = this.w / Math.max(1, this.h), n = 0.05, fa = 50;
+    return [f / a, 0, 0, 0, 0, f, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, 2 * fa * n / (n - fa), 0]; }
+  project(lat, lon) {
+    const R = this.rot(), la = lat * Math.PI / 180, lo = lon * Math.PI / 180;
+    const s = [Math.cos(la) * Math.sin(lo), Math.sin(la), Math.cos(la) * Math.cos(lo)];
+    const ps = R.map(r => r[0] * s[0] + r[1] * s[1] + r[2] * s[2]);
+    const pp = [lon / 180 * 1.9 + this.pan[0], lat / 90 * 0.95 + this.pan[1], 0], m = this.morph;
+    const p = [0, 1, 2].map(k => ps[k] * (1 - m) + pp[k] * m);
+    const z = p[2] - this.dist, f = 1 / Math.tan(17 * Math.PI / 180), a = this.w / this.h;
+    const x = (p[0] * f / a) / -z, y = (p[1] * f) / -z;
+    return { x: (x * 0.5 + 0.5) * this.w, y: (0.5 - y * 0.5) * this.h, front: m > 0.5 || ps[2] > 0.08 };
+  }
+  unproject(px, py) {
+    const f = Math.tan(17 * Math.PI / 180), a = this.w / this.h;
+    const dx = ((px / this.w) * 2 - 1) * f * a, dy = (1 - (py / this.h) * 2) * f, dz = -1;
+    if (this.morph > 0.5) {
+      const t = this.dist; const x = dx * t, y = dy * t;
+      const lon = (x - this.pan[0]) / 1.9 * 180, lat = (y - this.pan[1]) / 0.95 * 90;
+      return (Math.abs(lon) <= 180 && Math.abs(lat) <= 90) ? { lat, lon } : null;
+    }
+    const L = Math.hypot(dx, dy, dz), d = [dx / L, dy / L, dz / L], c = [0, 0, -this.dist];
+    const b = d[0] * c[0] + d[1] * c[1] + d[2] * c[2], cc = this.dist * this.dist - 1, disc = b * b - cc;
+    if (disc < 0) return null;
+    const t = b - Math.sqrt(disc), h = [d[0] * t, d[1] * t, d[2] * t + this.dist], R = this.rot();
+    const s = [0, 1, 2].map(k => R[0][k] * h[0] + R[1][k] * h[1] + R[2][k] * h[2]);   // R^T h
+    return { lat: Math.asin(clamp(s[1], -1, 1)) * 180 / Math.PI, lon: Math.atan2(s[0], s[2]) * 180 / Math.PI };
+  }
+  animate(key, to, ms = 900, ease = t => 1 - Math.pow(1 - t, 3)) {
+    if (REDUCED) ms = 1;
+    this.tween = this.tween.filter(t => t.key !== key);
+    this.tween.push({ key, from: this[key], to, t0: performance.now(), ms, ease }); this.dirty = true;
+  }
+  flyTo(lat, lon) {
+    if (this.morph > 0.5) { const d = Math.min(this.dist, this.mapFit() * 0.5); this.animate("panX", -lon / 180 * 1.9); this.animate("panY", -lat / 90 * 0.95); this.animate("dist", d); return; }
+    let ty = -lon * Math.PI / 180; while (ty - this.yaw > Math.PI) ty -= 2 * Math.PI; while (this.yaw - ty > Math.PI) ty += 2 * Math.PI;
+    this.animate("yaw", ty, 1100); this.animate("pitch", clamp(lat, -75, 75) * Math.PI / 180, 1100); this.animate("dist", Math.min(this.dist, 2.9), 1100);
+  }
+  setProj(p) {
+    if (p === 1) { this.animate("yaw", 0, 800); this.animate("pitch", 0, 800); this.animate("morph", 1, 1100); this.animate("dist", this.mapFit(), 1100); this.animate("panX", 0, 800); this.animate("panY", 0, 800); }
+    else { this.animate("morph", 0, 1100); this.animate("dist", 3.4, 1100); this.animate("panX", 0, 800); this.animate("panY", 0, 800); }
+  }
+  get panX() { return this.pan[0]; } set panX(v) { this.pan[0] = v; }
+  get panY() { return this.pan[1]; } set panY(v) { this.pan[1] = v; }
+  bindInput() {
+    const cv = this.cv; let pts = new Map(), moved = 0, last = null, pinch = null;
+    cv.addEventListener("pointerdown", e => { cv.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); moved = 0; last = [e.clientX, e.clientY]; this.autoRotate = false; });
+    cv.addEventListener("pointermove", e => {
+      const r = cv.getBoundingClientRect();
+      if (!pts.has(e.pointerId)) { this.onHover && this.onHover(e.clientX - r.left, e.clientY - r.top); return; }
+      pts.set(e.pointerId, [e.clientX, e.clientY]);
+      if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch) this.zoomBy(pinch / d); pinch = d; moved += 10; return; }
+      const dx = e.clientX - last[0], dy = e.clientY - last[1]; last = [e.clientX, e.clientY]; moved += Math.abs(dx) + Math.abs(dy);
+      if (this.morph > 0.5) { const k = this.dist * 2 * Math.tan(17 * Math.PI / 180) / this.h; this.pan[0] += dx * k; this.pan[1] -= dy * k; }
+      else { const k = 0.0052 * (this.dist - 1) / 2.4; this.yaw += dx * k; this.pitch = clamp(this.pitch + dy * k, -1.45, 1.45); }
+      this.dirty = true;
+    });
+    const up = e => { if (!pts.has(e.pointerId)) return; pts.delete(e.pointerId); pinch = null;
+      if (moved < 5 && this.onPick) { const r = cv.getBoundingClientRect(); const ll = this.unproject(e.clientX - r.left, e.clientY - r.top); if (ll) this.onPick(ll); } };
+    cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+    cv.addEventListener("pointerleave", () => this.onHover && this.onHover(null));
+    cv.addEventListener("wheel", e => { e.preventDefault(); this.zoomBy(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+    cv.addEventListener("keydown", e => {
+      const k = e.key, s = 0.08; let h = true;
+      if (k === "ArrowLeft") this.yaw += s; else if (k === "ArrowRight") this.yaw -= s;
+      else if (k === "ArrowUp") this.pitch = clamp(this.pitch + s, -1.45, 1.45); else if (k === "ArrowDown") this.pitch = clamp(this.pitch - s, -1.45, 1.45);
+      else if (k === "+" || k === "=") this.zoomBy(0.88); else if (k === "-") this.zoomBy(1.14); else h = false;
+      if (h) { e.preventDefault(); this.dirty = true; }
+    });
+  }
+  mapFit() { const t = Math.tan(17 * Math.PI / 180), a = this.w / Math.max(1, this.h); return 1.04 * Math.max(0.95 / t, 1.9 / (t * a)); }
+  zoomBy(f) { const lo = this.morph > 0.5 ? 0.9 : 1.45; this.dist = clamp(this.dist * f, lo, this.morph > 0.5 ? Math.max(6, this.mapFit()) : 6); this.dirty = true; }
+  loop(now) {
+    if (this.tween.length) {
+      this.tween = this.tween.filter(t => { const u = clamp((now - t.t0) / t.ms, 0, 1); this[t.key] = t.from + (t.to - t.from) * t.ease(u); return u < 1; });
+      this.dirty = true;
+    }
+    if (this.autoRotate && !REDUCED) { this.yaw += 0.0009; this.dirty = true; }
+    if (this.dirty) { this.draw(); this.dirty = false; this.onFrame && this.onFrame(); }
+    requestAnimationFrame(this.loop);
+  }
+  uniforms(p, scale) {
+    const gl = this.gl, R = this.rot();
+    gl.uniformMatrix3fv(p.u.uRot, false, new Float32Array([R[0][0], R[1][0], R[2][0], R[0][1], R[1][1], R[2][1], R[0][2], R[1][2], R[2][2]]));
+    gl.uniformMatrix4fv(p.u.uProj, false, new Float32Array(this.proj()));
+    gl.uniform1f(p.u.uMorph, this.morph); gl.uniform1f(p.u.uDist, this.dist); gl.uniform1f(p.u.uScale, scale); gl.uniform2f(p.u.uPan, this.pan[0], this.pan[1]);
+  }
+  draw() {
+    const gl = this.gl; gl.viewport(0, 0, this.cv.width, this.cv.height);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST); gl.disable(gl.BLEND);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vb); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.ib);
+    const p = this.prog; gl.useProgram(p); this.uniforms(p, 1);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.fieldTex); gl.uniform1i(p.u.uField, 0);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.baseTex); gl.uniform1i(p.u.uBase, 1);
+    gl.uniform1f(p.u.uReveal, this.reveal); gl.uniform1f(p.u.uBaseMix, this.baseMix); gl.uniform1f(p.u.uGrid, this.grid);
+    gl.uniform1f(p.u.uLayer, this.layer); gl.uniform1f(p.u.uLo, this.lo); gl.uniform1f(p.u.uHi, this.hi);
+    gl.uniform1f(p.u.uCellGrid, this.morph > 0.5 ? clamp((1.6 - this.dist) * 1.5, 0, 1) : clamp((2.2 - this.dist) * 1.4, 0, 1));
+    gl.uniform3fv(p.u.uRamp, new Float32Array(this.ramp.flatMap(hex3)));
+    gl.uniform3fv(p.u.uClus, new Float32Array(CLUSTER_COLORS.flatMap(hex3)));
+    gl.drawElements(gl.TRIANGLES, this.nIdx, gl.UNSIGNED_SHORT, 0);
+    if (this.morph < 0.99) {        // atmosphere rim
+      gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE); gl.depthMask(false);
+      gl.useProgram(this.rim); this.uniforms(this.rim, 1.018); gl.uniform3fv(this.rim.u.uTint, new Float32Array(hex3(this.ramp[3]).map(x => x * 0.5 + 0.18)));
+      gl.enable(gl.CULL_FACE); gl.cullFace(gl.FRONT); gl.drawElements(gl.TRIANGLES, this.nIdx, gl.UNSIGNED_SHORT, 0); gl.disable(gl.CULL_FACE);
+      gl.depthMask(true);
+    }
+    if (this.lb) {
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.lb); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      gl.useProgram(this.lineP); this.uniforms(this.lineP, 1.0015); gl.uniform4f(this.lineP.u.uColor, 0.72, 0.78, 0.85, 0.30 * this.baseMix);
+      gl.drawArrays(gl.LINES, 0, this.nLine);
+    }
+  }
+}
+
+/* ===== 03 compute: deterministic pipeline (all numbers come from TAIEngine) ===== */
+const TARGET_IDS = ["mars_jezero", "moon_south_pole"];
+const simCache = new Map();
+
+function simFor(tid, w) {
+  const key = tid + "|" + S.critIds.map(c => (+w[c]).toFixed(4)).join(",");
+  if (simCache.has(key)) return simCache.get(key);
+  const r = ENG.similarity(S.A, S.critIds, S.T[tid].variables, w, S.ranges);
+  if (simCache.size > 24) simCache.delete(simCache.keys().next().value);
+  simCache.set(key, r); return r;
+}
+/* rank of one cell without sorting: 1 + #cells ordered ahead of it (same tie-break as the sort) */
+function rankOf(eff, i) {
+  if (eff[i] < 0) return null;
+  const e = eff[i], c = S.cell[i]; let k = 1;
+  for (let j = 0; j < S.n; j++) { const v = eff[j]; if (v > e || (v === e && S.cell[j] < c)) k++; }
+  return k;
+}
+function effectiveFor(tid, w) {
+  if (tid !== "cross") return simFor(tid, w).eff;
+  const a = simFor(TARGET_IDS[0], w).eff, b = simFor(TARGET_IDS[1], w).eff, out = new Float64Array(S.n);
+  for (let i = 0; i < S.n; i++) out[i] = (a[i] < 0 || b[i] < 0) ? -1 : Math.min(a[i], b[i]);
+  return out;
+}
+
+function compute() {
+  const t0 = performance.now(), tid = S.targetId, w = S.weights;
+  let r = null, rJ = null, rM = null;
+  if (tid === "cross") { rJ = simFor(TARGET_IDS[0], w); rM = simFor(TARGET_IDS[1], w); }
+  else r = simFor(tid, w);
+  const eff = effectiveFor(tid, w);
+  const order = ENG.order(eff, S.cell);
+  const rank = ENG.ranksFromOrder(order);
+  let nElig = 0; for (let i = 0; i < S.n; i++) if (eff[i] >= 0) nElig++;
+  const distinct = ENG.distinctSites(order, S.lat, S.lon, 20, S.app.thresholds.distinct_sep_km);
+  const hi = eff[order[0]], lo = eff[order[Math.floor(nElig / 2)]];
+  const active = tid === "cross" ? Array.from(new Set([...rJ.active, ...rM.active])) : r.active;
+  S.res = { tid, w: { ...w }, r, rJ, rM, eff, order, rank, nElig, distinct, lo, hi, active, clusters: null };
+  S.computeMs = performance.now() - t0;
+  scheduleClusters();
+  return S.res;
+}
+
+let clusterTimer = null;
+function scheduleClusters() {
+  clearTimeout(clusterTimer);
+  clusterTimer = setTimeout(() => { computeClusters(); paintField(); renderAll(["right", "left"]); }, 140);
+}
+function normOf(i, c) { const v = S.A[c][i], R = S.ranges[c]; return v === v ? (v - R[0]) / (R[1] - R[0]) : NaN; }
+function computeClusters() {
+  const R = S.res; if (!R) return;
+  const cl = ENG.constellations(R.order, R.active, normOf);
+  const groups = [];
+  for (let g = 0; g < cl.k; g++) groups.push({ id: g, members: [] });
+  cl.candidates.forEach((i, r) => groups[cl.labels[r]].members.push(i));
+  for (const G of groups) {
+    const m = G.members, mean = f => { let s = 0, k = 0; for (const i of m) { const v = f(i); if (v === v) { s += v; k++; } } return k ? s / k : NaN; };
+    G.stats = { aridity: mean(i => S.A.aridity[i]), t2m_mean_c: mean(i => S.A.t2m_mean_c[i]), slope: mean(i => S.A.slope[i]),
+                elevation: mean(i => S.A.elevation[i]), lst: mean(i => S.A.lst_diurnal_range[i]), score: mean(i => R.eff[i]) };
+    G.name = ENG.describe(G.stats);
+    G.area = m.reduce((a, i) => a + cellArea(i), 0);
+    G.best = m[0];                         // members are in rank order
+    const cc = new Map(); for (const i of m) { const k = placeName(i).secondary || placeName(i).primary; cc.set(k, (cc.get(k) || 0) + 1); }
+    G.countries = [...cc.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 3);
+  }
+  // order constellations by mean score (deterministic), keep ids for colours
+  groups.sort((a, b) => b.stats.score - a.stats.score || a.id - b.id);
+  groups.forEach((G, k) => G.rankNo = k + 1);
+  R.clusters = { k: cl.k, silhouette: cl.silhouette, groups, member: new Int8Array(S.n).fill(-1), threshold: R.eff[cl.candidates[cl.candidates.length - 1]] };
+  for (const G of groups) for (const i of G.members) R.clusters.member[i] = G.rankNo - 1;
+}
+
+/* per-cell breakdown (trace) — current or arbitrary weights */
+function detailFor(tid, i, w = S.weights) { return ENG.detail(S.A, S.critIds, i, S.T[tid].variables, w, S.ranges); }
+
+function paintField() {
+  const R = S.res, g = window.GLOBE; if (!R || !g) return;
+  const d = g.fieldData; d.fill(0);
+  const n = R.nElig, prev = S.prev && S.prev.tid === R.tid ? S.prev : null;
+  const pN = prev ? Math.max(1, prev.nElig - 1) : 1, dMax = 0.25;   // change layer: relative-rank (percentile) change
+  for (let k = 0; k < S.n; k++) {
+    const i = R.order[k], c = S.cell[i] * 4, e = R.eff[i];
+    d[c] = e < 0 ? 0 : Math.round(e * 255);
+    d[c + 1] = e < 0 ? 255 : Math.round(255 * (1 - k / Math.max(1, n - 1)));
+    d[c + 2] = R.clusters ? R.clusters.member[i] + 1 : 0;
+    let code = 128;
+    if (prev && e >= 0 && prev.eff[i] >= 0) {
+      const pNow = 1 - k / Math.max(1, n - 1), pWas = 1 - (prev.rank[i] - 1) / pN;
+      code = Math.round(128 + clamp((pNow - pWas) / dMax, -1, 1) * 127);
+    }
+    d[c + 3] = e < 0 ? 1 : Math.max(1, code);
+  }
+  g.lo = R.lo; g.hi = R.hi; g.ramp = RAMPS[R.tid]; g.uploadField();
+}
+
+/* analogue evolution: yearly LST replaces the climatological LST, everything else fixed */
+function evolution(tid, i, w = S.weights) {
+  const Y = S.app.stack.years, out = [];
+  const yr = S.A.lst_diurnal_range_yearly;
+  for (let y = 0; y < Y.length; y++) {
+    const raw = yr[y * S.n + i]; const v = raw === -32768 ? NaN : raw * 0.01;
+    const st = {}; for (const c of S.critIds) st[c] = new Float32Array([c === "lst_diurnal_range" ? v : S.A[c][i]]);
+    const scoreOf = t => { const r = ENG.similarity(st, S.critIds, S.T[t].variables, w, S.ranges); return r.eff[0]; };
+    const s = tid === "cross" ? Math.min(scoreOf(TARGET_IDS[0]), scoreOf(TARGET_IDS[1])) : scoreOf(tid);
+    out.push({ year: Y[y], lst: v, score: v === v ? s : null });
+  }
+  const sc = out.filter(o => o.score != null && o.score >= 0).map(o => o.score);
+  const range = sc.length ? (Math.max(...sc) - Math.min(...sc)) * 100 : null;
+  const cls = range == null ? "DATA NOT AVAILABLE" : (range <= S.app.thresholds.evolution_stable_pts ? "STABLE ANALOGUE" : "VARIABLE ANALOGUE");
+  return { series: out, rangePts: range, cls, years: sc.length };
+}
+
+function stability(tid, i) {
+  const rows = [];
+  for (const [pid, p] of Object.entries(S.app.profiles)) {
+    const eff = effectiveFor(tid, p.weights); rows.push({ pid, label: p.label, rank: rankOf(eff, i), score: eff[i] });
+  }
+  return rows;
+}
+function profileFor(i, w = S.weights) {   // reverse search: one Earth cell against every target
+  return TARGET_IDS.map(t => { const r = simFor(t, w); return { tid: t, score: r.eff[i], rank: rankOf(r.eff, i), cov: r.coverage[i] }; });
+}
+function paretoFront(w = S.weights, limit = 14) {
+  const a = simFor(TARGET_IDS[0], w).eff, b = simFor(TARGET_IDS[1], w).eff, idx = [];
+  for (let i = 0; i < S.n; i++) if (a[i] >= 0 && b[i] >= 0) idx.push(i);
+  idx.sort((x, y) => (a[y] - a[x]) || (b[y] - b[x]) || (S.cell[x] - S.cell[y]));
+  const front = []; let best = -1;
+  for (const i of idx) if (b[i] > best) { front.push(i); best = b[i]; }
+  return { front, a, b, count: idx.length };
+}
+function dataQuality(i, tid) {
+  const t = tid === "cross" ? null : S.T[tid];
+  const w = S.weights, act = S.res.active;
+  let proxies = 0; const tl = tid === "cross" ? TARGET_IDS.map(x => S.T[x]) : [t];
+  const pset = new Set(); for (const tt of tl) for (const c of act) if (tt.proxy_flags[c] && +w[c] > 0) pset.add(c);
+  proxies = pset.size;
+  const cov = tid === "cross" ? Math.min(S.res.rJ.coverage[i], S.res.rM.coverage[i]) : S.res.r.coverage[i];
+  const [dy, dx] = cellDims(i);
+  return { coverage: cov, modis: S.A.modis_coverage[i], land: S.A.gmted_land_fraction[i], proxies, active: act.length,
+           res: `0.5° × 0.625° (${dy.toFixed(1)} × ${dx.toFixed(1)} km)`, missing: act.filter(c => S.A[c][i] !== S.A[c][i]) };
+}
+
+/* ===== 04 views: panels, charts, lists ===== */
+const TNAME = { mars_jezero: "Jezero Crater", moon_south_pole: "Lunar South Pole", cross: "Cross-planet" };
+const TBODY = { mars_jezero: "MARS", moon_south_pole: "MOON", cross: "MARS + MOON" };
+const THUMB = { mars_jezero: "data/thumb_jezero_mola.png", moon_south_pole: "data/thumb_southpole_lola.png" };
+const THUMB_CAP = { mars_jezero: "Scientific data · MOLA 463 m hillshade · 55.6 km window", moon_south_pole: "Scientific data · LOLA 118 m hillshade · polar stereographic" };
+const GLYPH = { MATCH: "✓", PARTIAL: "△", MISMATCH: "×" };
+const CLS = { MATCH: "c-match", PARTIAL: "c-partial", MISMATCH: "c-mismatch" };
+
+function compTag(tid, c) {
+  if (tid === "cross") return "";
+  const t = S.T[tid], k = t.comparison[c] || "";
+  if (k.startsWith("proxy")) return `<span class="tag proxy" title="${esc(t.methodology[c])}">Proxy</span>`;
+  if (k.startsWith("not")) return `<span class="tag na" title="${esc(t.methodology[c])}">N/A</span>`;
+  return `<span class="tag direct" title="${esc(t.methodology[c])}">Direct</span>`;
+}
+
+/* ---------------- charts ---------------- */
+function radialSVG(rows, withSite, size = 300) {
+  const n = rows.length, cx = size / 2, cy = size / 2 + 4, R = size * 0.34;
+  const ang = k => -Math.PI / 2 + k * 2 * Math.PI / n, P = (k, r) => [cx + Math.cos(ang(k)) * R * r, cy + Math.sin(ang(k)) * R * r];
+  let s = `<svg class="fp-svg" viewBox="0 0 ${size} ${size + 8}" role="img" aria-label="Radial fingerprint of normalized criterion values">`;
+  for (const q of [0.25, 0.5, 0.75, 1]) s += `<polygon points="${rows.map((_, k) => P(k, q).join(",")).join(" ")}" style="fill:none;stroke:var(--line-2);stroke-width:${q === 1 ? 1 : .6}"/>`;
+  rows.forEach((r, k) => {
+    const [x, y] = P(k, 1.0), [lx, ly] = P(k, 1.2);
+    s += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" style="stroke:var(--line-2);stroke-width:.6${r.tn == null ? ';stroke-dasharray:3 3' : ''}"/>`;
+    s += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" style="fill:var(--ink-3);font-size:9.5px;letter-spacing:.08em">${shortOf(r.c)}</text>`;
+  });
+  const poly = (key, stroke, fill, dash) => {
+    const pts = rows.map((r, k) => r[key] == null ? null : P(k, clamp(r[key], 0, 1)));
+    const ok = pts.filter(Boolean);
+    return `<polygon points="${ok.map(p => p.join(",")).join(" ")}" style="fill:${fill};stroke:${stroke};stroke-width:1.6;${dash ? 'stroke-dasharray:4 3;' : ''}"/>` +
+      ok.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" style="fill:${stroke}"/>`).join("");
+  };
+  s += poly("tn", "var(--accent)", "var(--accent);fill-opacity:.1");
+  if (withSite) s += poly("en", "var(--ink)", "var(--ink);fill-opacity:.05", true);
+  return s + `</svg>`;
+}
+function barsHTML(rows, withSite, tid) {
+  return rows.map(r => {
+    const t = r.tn == null ? "" : `<i class="tmark" style="left:${(clamp(r.tn, 0, 1) * 100).toFixed(1)}%"></i>`;
+    const e = withSite && r.en != null ? `<i class="mark" style="left:${(clamp(r.en, 0, 1) * 100).toFixed(1)}%"></i>` : "";
+    const fill = withSite && r.s != null ? `<i class="fill" style="width:${(r.s * 100).toFixed(1)}%;opacity:.28"></i>` : "";
+    const v = withSite ? (r.s != null ? fmtPct(r.s, 0) : "N/A") : (r.t == null ? "N/A" : fmtVal(r.c, r.t) + " " + unitOf(r.c));
+    return `<div class="cb"><span class="nm" title="${esc(labelOf(r.c))}">${esc(labelOf(r.c))}</span><div class="track">${fill}${t}${e}</div><span class="v">${v}</span></div>`;
+  }).join("") + `<p class="note small">◇ target position${withSite ? " · | selected Earth cell · shaded bar = criterion similarity" : ""} · scale = normalization range (min–max of Earth cells ∪ targets).</p>`;
+}
+function matrixHTML(rows, withSite) {
+  return `<div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">Target</th>${withSite ? '<th class="n">Earth</th><th class="n">|Δ| norm.</th><th class="n">s</th><th></th>' : '<th class="n">Norm.</th>'}</tr></thead><tbody>` +
+    rows.map(r => {
+      const cls = r.s != null ? ENG.classify(r.s) : null;
+      return `<tr><td>${esc(shortOf(r.c))}</td><td class="n">${r.t == null ? "N/A" : fmtVal(r.c, r.t)}</td>` +
+        (withSite ? `<td class="n">${fmtVal(r.c, r.e)}</td><td class="n">${r.d != null ? r.d.toFixed(3) : "—"}</td><td class="n">${r.s != null ? r.s.toFixed(3) : "—"}</td><td class="${cls ? CLS[cls] : ''}">${cls ? GLYPH[cls] : ''}</td>`
+          : `<td class="n">${r.tn == null ? "—" : r.tn.toFixed(3)}</td>`) + `</tr>`;
+    }).join("") + `</tbody></table></div>`;
+}
+function fingerprintBlock(tid, i) {
+  if (tid === "cross") return `<p class="note">Cross-planet mode combines both fingerprints. Switch to a single target to view its fingerprint.</p>`;
+  const withSite = i != null;
+  const rows = withSite ? detailFor(tid, i).rows : S.critIds.map(c => { const t = S.T[tid].variables[c], R = S.ranges[c]; return { c, t, tn: t == null ? null : (t - R[0]) / (R[1] - R[0]) }; });
+  const m = S.fpMode;
+  const body = m === "radial" ? radialSVG(rows, withSite) : m === "bars" ? barsHTML(rows, withSite, tid) : matrixHTML(rows, withSite);
+  const legend = m === "radial" ? `<p class="note small"><span style="color:var(--accent)">━</span> ${esc(TNAME[tid])} ${withSite ? '&nbsp; <span style="color:var(--ink)">┅</span> selected Earth cell' : ''} · radius = position in normalization range.</p>` : "";
+  return `<div class="lbl">Planetary fingerprint${withSite ? " · target vs Earth" : ""}<span class="toggles" role="group" aria-label="Fingerprint view">
+    ${["radial", "bars", "matrix"].map(k => `<button data-fp="${k}" aria-pressed="${m === k}">${k}</button>`).join("")}</span></div>${body}${legend}`;
+}
+function dnaSVG(i, tid) {
+  const groups = [["CLIMATE", ["aridity", "annual_temperature_range"]], ["TERRAIN", ["elevation", "slope", "surface_roughness"]], ["THERMAL", ["lst_diurnal_range"]]];
+  const W = 344, H = 132, bw = 34, gap = 12, ggap = 20, top = 16, h = 72;
+  let x = 6, s = `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Analogue DNA: normalized environmental values of the selected Earth cell">`;
+  for (const [g, cs] of groups) {
+    const gx = x;
+    for (const c of cs) {
+      const v = normOf(i, c), R = S.ranges[c];
+      const tv = tid !== "cross" && S.T[tid].variables[c] != null ? (S.T[tid].variables[c] - R[0]) / (R[1] - R[0]) : null;
+      s += `<rect x="${x}" y="${top}" width="${bw}" height="${h}" style="fill:var(--raise)"/>`;
+      if (v === v) {
+        const bh = clamp(v, 0, 1) * h;
+        s += `<rect x="${x}" y="${(top + h - bh).toFixed(2)}" width="${bw}" height="${bh.toFixed(2)}" style="fill:var(--ink);opacity:.82"/>`;
+        for (let b = 1; b < 12; b++) s += `<line x1="${x}" x2="${x + bw}" y1="${(top + b * h / 12).toFixed(2)}" y2="${(top + b * h / 12).toFixed(2)}" style="stroke:var(--panel);stroke-width:1.4"/>`;
+      } else s += `<text x="${x + bw / 2}" y="${top + h / 2}" text-anchor="middle" style="fill:var(--ink-3);font-size:9px">N/A</text>`;
+      if (tv != null) s += `<line x1="${x - 3}" x2="${x + bw + 3}" y1="${top + h - clamp(tv, 0, 1) * h}" y2="${top + h - clamp(tv, 0, 1) * h}" style="stroke:var(--accent);stroke-width:2"/>`;
+      s += `<text x="${x + bw / 2}" y="${top + h + 13}" text-anchor="middle" style="fill:var(--ink-2);font-size:8.5px">${shortOf(c)}</text>`;
+      s += `<text x="${x + bw / 2}" y="${top + h + 25}" text-anchor="middle" style="fill:var(--ink-3);font-size:8.5px">${fmtVal(c, S.A[c][i])}</text>`;
+      x += bw + gap;
+    }
+    s += `<text x="${gx}" y="10" style="fill:var(--ink-3);font-size:8.5px;letter-spacing:.18em">${g}</text>`;
+    x += ggap - gap;
+  }
+  return s + `</svg><p class="note small">Bars: this cell's values within Earth's normalization range (data only). <span style="color:var(--accent)">━</span> target level.</p>`;
+}
+function matchBlock(rows) {
+  const b = { MATCH: [], PARTIAL: [], MISMATCH: [] };
+  for (const r of rows) if (r.s != null) b[ENG.classify(r.s)].push(r);
+  for (const k in b) b[k].sort((x, y) => y.s - x.s);
+  const col = k => `<div><h5 class="${CLS[k]}">${k}</h5><ul>${b[k].length ? b[k].map(r => `<li><b class="${CLS[k]}">${GLYPH[k]}</b><span>${esc(labelOf(r.c))} <span class="meta">${fmtPct(r.s, 0)}</span></span></li>`).join("") : '<li class="none">none</li>'}</ul></div>`;
+  const na = rows.filter(r => r.s == null && r.active === false && r.t == null);
+  return `<div class="lbl">Match / mismatch<span class="meta">s ≥ ${S.app.thresholds.match} ✓ · ≥ ${S.app.thresholds.partial} △</span></div><div class="mm">${col("MATCH")}${col("PARTIAL")}${col("MISMATCH")}</div>` +
+    (na.length ? `<p class="note small">Not applicable to this target: ${na.map(r => esc(labelOf(r.c))).join(", ")}.</p>` : "");
+}
+function radarSVG(rows, size = 220) {    // mismatch radar: criterion similarity s
+  const act = rows.filter(r => r.s != null), n = act.length; if (n < 3) return "";
+  const cx = size / 2, cy = size / 2, R = size * 0.36, P = (k, r) => [cx + Math.cos(-Math.PI / 2 + k * 2 * Math.PI / n) * R * r, cy + Math.sin(-Math.PI / 2 + k * 2 * Math.PI / n) * R * r];
+  let s = `<svg class="fp-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Mismatch radar of criterion similarities">`;
+  for (const q of [S.app.thresholds.partial, S.app.thresholds.match, 1]) s += `<polygon points="${act.map((_, k) => P(k, q).join(",")).join(" ")}" style="fill:none;stroke:${q === 1 ? 'var(--line-2)' : q === S.app.thresholds.match ? 'var(--match)' : 'var(--partial)'};stroke-width:.7;stroke-dasharray:${q === 1 ? '0' : '2 3'};opacity:.8"/>`;
+  s += `<polygon points="${act.map((r, k) => P(k, r.s).join(",")).join(" ")}" style="fill:var(--accent);fill-opacity:.16;stroke:var(--accent);stroke-width:1.5"/>`;
+  act.forEach((r, k) => { const [x, y] = P(k, r.s), [lx, ly] = P(k, 1.22), c = ENG.classify(r.s);
+    s += `<circle cx="${x}" cy="${y}" r="3" style="fill:var(--${c === 'MATCH' ? 'match' : c === 'PARTIAL' ? 'partial' : 'mismatch'})"/><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" style="fill:var(--ink-3);font-size:9px">${shortOf(r.c)} ${GLYPH[c]}</text>`; });
+  return s + `</svg>`;
+}
+function contribTable(det, title = "Criterion breakdown") {
+  return `<div class="lbl">${title}<span class="meta">Σ contributions = score</span></div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">Earth</th><th class="n">Target</th><th class="n">s</th><th class="n">w</th><th class="n">Contrib.</th></tr></thead><tbody>` +
+    det.rows.map(r => `<tr${r.active ? "" : ' style="opacity:.45"'}><td>${esc(shortOf(r.c))} <span class="meta">${unitOf(r.c)}</span></td><td class="n">${fmtVal(r.c, r.e)}</td><td class="n">${r.t == null ? "N/A" : fmtVal(r.c, r.t)}</td><td class="n">${r.s != null ? r.s.toFixed(3) : "—"}</td><td class="n">${r.w.toFixed(2)}</td><td class="n">${r.k != null ? (100 * r.k).toFixed(2) + " pts" : "—"}</td></tr>`).join("") +
+    `<tr class="hl"><td><b>Final score</b></td><td></td><td></td><td></td><td class="n">${det.wsum.toFixed(2)}</td><td class="n"><b>${(100 * det.final).toFixed(2)} pts</b></td></tr></tbody></table></div>`;
+}
+function qualityBlock(i, tid) {
+  const q = dataQuality(i, tid);
+  return `<div class="lbl">Data quality indicator<span class="meta">not a statistical confidence</span></div><div class="grid2">
+    <div class="kv"><span>Weight coverage</span><b>${fmtPct(q.coverage, 0)}</b></div>
+    <div class="kv"><span>MODIS month coverage</span><b>${fmtPct(q.modis, 0)}</b></div>
+    <div class="kv"><span>Proxy variables</span><b>${q.proxies} of ${q.active} active</b></div>
+    <div class="kv"><span>GMTED land fraction</span><b>${fmtPct(q.land, 0)}</b></div>
+    <div class="kv" style="grid-column:1/3"><span>Spatial resolution</span><b>${q.res}</b></div>
+    ${q.missing.length ? `<div class="kv" style="grid-column:1/3"><span>Missing at this cell</span><b style="color:var(--partial)">${q.missing.map(labelOf).join(", ")} — DATA NOT AVAILABLE (scored on remaining criteria)</b></div>` : ""}
+  </div>`;
+}
+function evolutionSVG(ev) {
+  const W = 330, H = 96, L = 30, Rr = 8, T = 10, B = 22, pts = ev.series.filter(p => p.score != null && p.score >= 0);
+  if (pts.length < 2) return `<p class="note">DATA NOT AVAILABLE — fewer than two valid years.</p>`;
+  const ys = pts.map(p => p.score * 100), lo = Math.floor(Math.min(...ys) - 1), hi = Math.ceil(Math.max(...ys) + 1);
+  const X = y => L + (y - ev.series[0].year) / (ev.series[ev.series.length - 1].year - ev.series[0].year) * (W - L - Rr), Y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  let s = `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Analogue evolution: yearly similarity">`;
+  for (const v of [lo, (lo + hi) / 2, hi]) s += `<line x1="${L}" x2="${W - Rr}" y1="${Y(v)}" y2="${Y(v)}" style="stroke:var(--line);stroke-width:.7"/><text x="${L - 4}" y="${Y(v) + 3}" text-anchor="end" style="fill:var(--ink-3);font-size:8.5px">${v.toFixed(0)}%</text>`;
+  const path = pts.map((p, k) => (k ? "L" : "M") + X(p.year).toFixed(1) + "," + Y(p.score * 100).toFixed(1)).join("");
+  s += `<path d="${path} L${X(pts[pts.length - 1].year)},${H - B} L${X(pts[0].year)},${H - B}Z" style="fill:var(--accent);opacity:.12"/><path d="${path}" style="fill:none;stroke:var(--accent);stroke-width:1.6"/>`;
+  pts.forEach((p, k) => s += `<circle cx="${X(p.year)}" cy="${Y(p.score * 100)}" r="${k === pts.length - 1 ? 3.2 : 2}" style="fill:var(--accent)"/>`);
+  ev.series.forEach((p, k) => { if (k % 3 === 0 || k === ev.series.length - 1) s += `<text x="${X(p.year)}" y="${H - 7}" text-anchor="middle" style="fill:var(--ink-3);font-size:8.5px">${p.year}</text>`; });
+  return s + `</svg>`;
+}
+
+/* ---------------- right rail ---------------- */
+function renderRight() {
+  const R = S.res, box = $("#right"); if (!R) { box.innerHTML = ""; return; }
+  const prevPos = new Map(); if (S.prev && S.prev.tid === R.tid) S.prev.distinct.forEach((i, k) => prevPos.set(i, k));
+  let h = `<div class="rail-head"><div class="lbl" style="margin:0 0 4px">Analogue field<span class="n">${esc(TNAME[R.tid])}</span></div>
+    <div class="meta" title="Top ${R.distinct.length} distinct sites (≥ ${S.app.thresholds.distinct_sep_km} km apart) of ${R.nElig.toLocaleString()} ranked cells; Analogue Score under ${esc(currentLabel())}">${R.distinct.length} distinct sites ≥ ${S.app.thresholds.distinct_sep_km} km apart · ${R.nElig.toLocaleString()} ranked · under ${esc(currentLabel())}</div></div>`;
+  R.distinct.forEach((i, k) => {
+    const p = placeName(i); let mv = "";
+    if (S.prev && S.prev.tid === R.tid) { const pk = prevPos.get(i); mv = pk == null ? '<span class="mv up">NEW</span>' : pk > k ? `<span class="mv up">▲${pk - k}</span>` : pk < k ? `<span class="mv dn">▼${k - pk}</span>` : ""; }
+    let spark = "";
+    if (R.tid === "cross") spark = TARGET_IDS.map(t => `<i style="--w:${(100 * clamp(R[t === TARGET_IDS[0] ? "rJ" : "rM"].eff[i], 0, 1)).toFixed(0)}%"></i>`).join("");
+    else { const d = detailFor(R.tid, i).rows.filter(r => r.s != null); spark = d.map(r => `<i title="${esc(shortOf(r.c))} ${fmtPct(r.s, 0)}" style="--w:${(100 * r.s).toFixed(0)}%"></i>`).join(""); }
+    h += `<button class="site" data-cell="${i}" aria-current="${S.selected === i}" id="site-${k}"><span class="rk">#${pad2(k + 1)}</span><span class="nm">${esc(p.primary)}</span><span class="sc">${fmtPct(R.eff[i])}</span>
+      <span class="sub">${esc(p.secondary || "")} · ${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · cell #${R.rank[i]}</span>${mv}<span class="spark">${spark}</span></button>`;
+  });
+  h += `<button class="btn-sm rail-more" data-railmore>${box.classList.contains("open") ? "Show top 6" : "Show all 20"}</button>`;
+  box.innerHTML = h;
+}
+
+/* ---------------- left panel per tab ---------------- */
+function targetBlock(tid) {
+  if (tid === "cross") {
+    return `<div class="sec"><div class="body-tag">MARS + MOON</div><h2 class="ttl" style="margin:4px 0 6px">Cross-planet analogues</h2>
+      <p class="note">Score = min(S<sub>Jezero</sub>, S<sub>South Pole</sub>): a cell ranks high only if it resembles <b>both</b> targets on the selected criteria. No cell is called universally superior — see the Pareto set in Compare.</p></div>`;
+  }
+  const t = S.T[tid];
+  return `<div class="sec"><div class="tgt-head"><img src="${THUMB[tid]}" alt="${esc(THUMB_CAP[tid])}"><div>
+    <div class="body-tag">${t.body.toUpperCase()}</div><h2 class="ttl" style="margin:3px 0 4px">${esc(t.name)}</h2>
+    <div class="meta">${fmtLat(t.location.lat)} ${fmtLon(t.location.lon_east)} · ${t.location.window_km} km window</div></div></div>
+    <div class="cap" style="margin-top:6px">${esc(THUMB_CAP[tid])}</div></div>`;
+}
+function selectedHeader(i) {
+  const R = S.res, p = placeName(i), pos = R.distinct.indexOf(i);
+  return `<div class="lbl">${pos >= 0 ? "Analogue #" + pad2(pos + 1) : (S.picked === i ? "Picked location · reverse search" : "Earth cell")}<span class="meta">cell rank #${R.rank[i]?.toLocaleString() ?? "—"} / ${R.nElig.toLocaleString()}</span></div>
+    <h3 class="ttl">${esc(p.primary)}</h3><div class="meta" style="margin:3px 0 10px">${esc(p.secondary || "")} · ${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · under ${esc(currentLabel())}</div>
+    <div class="row" style="justify-content:space-between;align-items:flex-end"><div class="big" style="color:var(--accent)">${fmtPct(R.eff[i])}<small title="Similarity under the current weighting profile — not physical, geological or engineering equivalence">ANALOGUE SCORE</small></div>
+    <div class="row"><button class="btn-sm" data-act="trace">Trace result</button><button class="btn-sm" data-act="report">Report</button></div></div>`;
+}
+function viewExplore() {
+  const tid = S.targetId, i = S.selected;
+  let h = targetBlock(tid);
+  h += `<div class="sec">${fingerprintBlock(tid, i)}</div>`;
+  if (i == null) {
+    h += `<div class="sec"><div class="empty">${S.searched ? "Select a site from the analogue field, or click anywhere on Earth to read its planetary analogue profile." : "Press <b>Search Earth</b> to compare every valid Earth cell against this fingerprint."}</div></div>`;
+    return h;
+  }
+  h += `<div class="sec">${selectedHeader(i)}</div>`;
+  if (tid !== "cross") {
+    const det = detailFor(tid, i);
+    h += `<div class="sec"><div class="lbl">Analogue DNA</div>${dnaSVG(i, tid)}</div>`;
+    h += `<div class="sec">${matchBlock(det.rows)}</div>`;
+  } else h += `<div class="sec">${crossSiteBlock(i)}</div>`;
+  h += `<div class="sec">${qualityBlock(i, tid)}</div>`;
+  return h;
+}
+function crossSiteBlock(i) {
+  const pr = profileFor(i);
+  return `<div class="lbl">Similarity to each target</div>` + pr.map(p => `<div class="cb"><span class="nm">${TNAME[p.tid]}</span><div class="track"><i class="fill" style="width:${(100 * clamp(p.score, 0, 1)).toFixed(1)}%"></i></div><span class="v">${fmtPct(p.score)}</span></div>`).join("") +
+    `<p class="note small">Cross-planet score is the lower of the two (${fmtPct(Math.min(pr[0].score, pr[1].score))}).</p>`;
+}
+function viewCompare() {
+  const tid = S.targetId, i = S.selected ?? S.picked;
+  let h = "";
+  if (i == null) return `<div class="sec"><div class="empty">Select an analogue or click Earth to compare it against the target.</div></div>` + (tid === "cross" ? crossPlot() : "");
+  h += `<div class="sec">${selectedHeader(i)}</div>`;
+  if (tid !== "cross") {
+    const det = detailFor(tid, i);
+    h += `<div class="sec">${fingerprintBlock(tid, i)}</div><div class="sec"><div class="lbl">Mismatch radar</div>${radarSVG(det.rows)}${matchBlock(det.rows)}</div><div class="sec">${contribTable(det)}</div>`;
+  }
+  const pr = profileFor(i);
+  h += `<div class="sec"><div class="lbl">Planetary analogue profile · reverse search</div><p class="note small" style="margin:0 0 8px">This Earth cell compared against every planetary target under the current weights.</p>
+    <table class="t"><thead><tr><th>Target</th><th class="n">Similarity</th><th class="n">Rank among Earth cells</th></tr></thead><tbody>
+    ${pr.map(p => `<tr><td>${TNAME[p.tid]}</td><td class="n">${fmtPct(p.score)}</td><td class="n">${p.rank ? "#" + p.rank.toLocaleString() : "not ranked"}</td></tr>`).join("")}</tbody></table></div>`;
+  if (tid === "cross") h += crossPlot();
+  return h;
+}
+function crossPlot() {
+  const pf = paretoFront();
+  setTimeout(() => drawScatter(pf), 0);
+  return `<div class="sec"><div class="lbl">Cross-planet analogues<span class="meta">${pf.count.toLocaleString()} cells ranked for both</span></div>
+    <canvas class="plot" id="xplot" width="680" height="420" aria-label="Scatter of similarity to Jezero versus similarity to the Lunar South Pole"></canvas>
+    <p class="note small">Each dot is one Earth cell. Highlighted: the Pareto set — cells for which no other cell is more similar to <b>both</b> targets.</p>
+    <table class="t"><thead><tr><th>Pareto cell</th><th class="n">Jezero</th><th class="n">S. Pole</th></tr></thead><tbody>
+    ${pf.front.slice(0, 10).map(i => `<tr><td><button class="linkish" data-cell="${i}">${esc(placeStr(i))}</button></td><td class="n">${fmtPct(pf.a[i])}</td><td class="n">${fmtPct(pf.b[i])}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function drawScatter(pf) {
+  const cv = $("#xplot"); if (!cv) return; const g = cv.getContext("2d"), W = cv.width, H = cv.height, L = 52, B = 44, T = 14, Rr = 14;
+  const lo = 0.3, hi = 0.9, X = v => L + (v - lo) / (hi - lo) * (W - L - Rr), Y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  const css = getComputedStyle(document.documentElement), c = k => css.getPropertyValue(k).trim();
+  g.clearRect(0, 0, W, H); g.font = "20px " + c("--f-mono"); g.fillStyle = c("--ink-3"); g.strokeStyle = c("--line");
+  for (let v = 0.3; v <= 0.9001; v += 0.1) { g.beginPath(); g.moveTo(X(v), T); g.lineTo(X(v), H - B); g.moveTo(L, Y(v)); g.lineTo(W - Rr, Y(v)); g.stroke(); g.fillText((v * 100).toFixed(0), X(v) - 11, H - B + 24); g.fillText((v * 100).toFixed(0), L - 34, Y(v) + 7); }
+  g.fillText("Jezero similarity (%) →", W - 300, H - 4); g.save(); g.translate(16, T + 230); g.rotate(-Math.PI / 2); g.fillText("South Pole similarity (%) →", 0, 0); g.restore();
+  g.fillStyle = "rgba(164,174,185,.25)";
+  const step = Math.max(1, Math.floor(S.n / 30000));
+  for (let i = 0; i < S.n; i += step) if (pf.a[i] >= lo && pf.b[i] >= lo) g.fillRect(X(pf.a[i]) - 1, Y(pf.b[i]) - 1, 2, 2);
+  g.fillStyle = c("--cross"); g.strokeStyle = c("--cross");
+  g.beginPath(); pf.front.forEach((i, k) => { k ? g.lineTo(X(pf.a[i]), Y(pf.b[i])) : g.moveTo(X(pf.a[i]), Y(pf.b[i])); }); g.stroke();
+  for (const i of pf.front) { g.beginPath(); g.arc(X(pf.a[i]), Y(pf.b[i]), 5, 0, 7); g.fill(); }
+}
+function viewScenarios() {
+  const tid = S.targetId, i = S.selected ?? (S.res ? S.res.distinct[0] : null);
+  let h = `<div class="sec"><div class="lbl">Mission profile</div><p class="note small" style="margin:0 0 8px">Each profile is a documented, editorial weight vector — not fitted to data. The weights are shown in full.</p>
+    <div class="tbl-wrap"><table class="t"><thead><tr><th>Profile</th>${S.critIds.map(c => `<th class="n">${shortOf(c)}</th>`).join("")}<th></th></tr></thead><tbody>
+    ${Object.entries(S.app.profiles).map(([pid, p]) => `<tr${S.profile === pid ? ' class="hl"' : ""}><td title="${esc(p.rationale)}">${esc(p.label)}</td>${S.critIds.map(c => `<td class="n">${(+p.weights[c]).toFixed(1)}</td>`).join("")}<td><button class="btn-sm${S.profile === pid ? " on" : ""}" data-profile="${pid}">${S.profile === pid ? "On" : "Use"}</button></td></tr>`).join("")}
+    </tbody></table></div></div>`;
+  h += `<div class="sec"><div class="lbl">What if?</div><div style="display:grid;gap:8px">
+    ${WHATIF.map(wf => `<div class="whatif"><q>${esc(wf.label)}</q><div class="meta">${esc(wf.desc)}</div><div><button class="btn-sm" data-whatif="${wf.id}">Apply</button></div></div>`).join("")}</div></div>`;
+  h += `<div class="sec" id="why">${whyBlock()}</div>`;
+  if (i != null) {
+    const st = stability(tid, i);
+    h += `<div class="sec"><div class="lbl">Ranking stability · ${esc(placeStr(i))}</div><table class="t"><thead><tr><th>Profile</th><th class="n">Similarity</th><th class="n">Cell rank</th></tr></thead><tbody>
+      ${st.map(r => `<tr${r.pid === S.profile ? ' class="hl"' : ""}><td>${esc(r.label)}</td><td class="n">${fmtPct(r.score)}</td><td class="n">${r.rank ? "#" + r.rank.toLocaleString() : "not ranked"}</td></tr>`).join("")}</tbody></table>
+      <p class="note small">Scenario-specific ranks among all ${S.res.nElig.toLocaleString()} ranked cells. No universal score is formed from them.</p></div>`;
+  }
+  return h;
+}
+function whyBlock() {
+  const P = S.prev, R = S.res;
+  if (!P || P.tid !== R.tid) return `<div class="lbl">Why did this move?</div><div class="empty">Change a weight, a profile or apply a What-if. The engine will show exactly which weighted contributions moved each site.</div>`;
+  const i = S.selected ?? R.distinct[0];
+  const before = P.tid === "cross" ? null : detailFor(R.tid, i, P.w), after = R.tid === "cross" ? null : detailFor(R.tid, i, R.w);
+  const rb = P.rank[i], ra = R.rank[i];
+  let h = `<div class="lbl">Why did this move?<span class="meta">${esc(P.label)} → ${esc(currentLabel())}</span></div><h3 class="ttl" style="margin-bottom:8px">${esc(placeStr(i))}</h3>
+    <div class="bfaf"><div class="b"><span>BEFORE</span><b>#${rb?.toLocaleString() ?? "—"}</b></div><div class="arr">→</div><div class="b"><span>AFTER</span><b style="color:var(--accent)">#${ra?.toLocaleString() ?? "—"}</b></div>
+    <div class="b" style="margin-left:auto;text-align:right"><span>SCORE</span><b style="font-size:22px">${fmtPct(P.eff[i])} → ${fmtPct(R.eff[i])}</b></div></div>`;
+  if (before && after) {
+    const rows = S.critIds.map(c => { const b = before.rows.find(r => r.c === c), a = after.rows.find(r => r.c === c); return { c, d: 100 * ((a.k || 0) - (b.k || 0)), wb: b.w, wa: a.w }; });
+    const total = 100 * (after.final - before.final);
+    h += `<table class="t" style="margin-top:10px"><thead><tr><th>Criterion</th><th class="n">Weight</th><th class="n">Contribution change</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td>${esc(labelOf(r.c))}</td><td class="n">${r.wb.toFixed(2)} → ${r.wa.toFixed(2)}</td><td class="n ${r.d > 0.005 ? "pos" : r.d < -0.005 ? "neg" : ""}">${fmtPts(r.d)}</td></tr>`).join("")}
+      <tr class="hl"><td><b>Overall change</b></td><td></td><td class="n"><b>${fmtPts(total)}</b></td></tr></tbody></table>
+      <p class="note small">Contributions are w·s / Σw. Raising one weight also dilutes every other criterion's share, which is why unchanged criteria can move.</p>`;
+  }
+  // biggest movers in the new top 20
+  const mv = R.distinct.map((c, k) => ({ c, k, pk: P.distinct.indexOf(c) })).filter(m => m.pk !== m.k).slice(0, 5);
+  if (mv.length) h += `<div class="lbl" style="margin-top:12px">Top-20 movement</div>` + mv.map(m => `<div class="meta">#${pad2(m.k + 1)} ${esc(placeStr(m.c))} — ${m.pk < 0 ? "new entry" : "was #" + pad2(m.pk + 1)}</div>`).join("");
+  return h;
+}
+function viewDiscover() {
+  const R = S.res; if (!R) return "";
+  let h = `<div class="sec"><div class="lbl">Analogue constellations<span class="meta">top ${S.app.thresholds.n_candidates} cells · k-means</span></div>`;
+  if (!R.clusters) h += `<div class="meta">Clustering…</div>`;
+  else {
+    h += `<p class="note small" style="margin:0 0 6px">k = ${R.clusters.k} chosen by silhouette (${R.clusters.silhouette.toFixed(3)}). Names are generated from cluster means with fixed thresholds (UNEP aridity classes, mean T2M, slope, elevation).</p>`;
+    for (const G of R.clusters.groups) h += `<button class="cluster" data-cluster="${G.rankNo - 1}" aria-pressed="${S.clusterFocus === G.rankNo - 1}"><span class="id" style="color:${CLUSTER_COLORS[G.rankNo - 1]}">${pad2(G.rankNo)}</span>
+      <span><span class="nm">${esc(G.name)}</span><br><span class="ct">${G.members.length} cells · ${Math.round(G.area).toLocaleString()} km² · mean ${fmtPct(G.stats.score)} · ${G.countries.map(c => esc(c[0])).join(", ")}</span></span>
+      <span class="sw" style="background:${CLUSTER_COLORS[G.rankNo - 1]}"></span></button>`;
+  }
+  h += `</div><div class="sec"><div class="lbl">Planetary analogue graph</div>${graphSVG()}</div>`;
+  h += `<div class="sec"><div class="lbl">Where candidates fall · latitude</div>${latHist()}</div>`;
+  const i = S.selected;
+  if (i != null) {
+    const ev = evolution(S.targetId, i);
+    h += `<div class="sec"><div class="lbl">Analogue evolution · ${esc(placeStr(i))}<span class="n">${ev.cls}</span></div>${evolutionSVG(ev)}
+      <p class="note small">Only the thermal criterion varies by year (MODIS ${S.app.stack.years[0]}–${S.app.stack.years[S.app.stack.years.length - 1]}); climate and terrain use their fixed climatologies. STABLE if the yearly score range ≤ ${S.app.thresholds.evolution_stable_pts} pts (here ${ev.rangePts == null ? "—" : ev.rangePts.toFixed(2) + " pts"}).</p></div>`;
+  }
+  return h;
+}
+function graphSVG() {
+  const w = S.weights, a = simFor(TARGET_IDS[0], w), b = simFor(TARGET_IDS[1], w);
+  const oa = ENG.order(a.eff, S.cell), ob = ENG.order(b.eff, S.cell);
+  const da = ENG.distinctSites(oa, S.lat, S.lon, 5, 300), db = ENG.distinctSites(ob, S.lat, S.lon, 5, 300);
+  const nodes = Array.from(new Set([...da, ...db])).sort((x, y) => (a.eff[y] - b.eff[y]) - (a.eff[x] - b.eff[x]) || S.cell[x] - S.cell[y]);
+  const W = 344, H = 40 + nodes.length * 26, xa = 22, xb = W - 22, xm = W / 2;
+  let s = `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Graph linking planetary targets to Earth cells by computed similarity">`;
+  const ya = H / 2, yb = H / 2;
+  nodes.forEach((i, k) => {
+    const y = 24 + k * 26;
+    for (const [x0, r] of [[xa, a], [xb, b]]) { const v = r.eff[i]; if (v < 0) continue; const wdt = 0.5 + Math.max(0, v - 0.5) * 14; s += `<path d="M${x0},${ya} C${(x0 + xm) / 2},${ya} ${(x0 + xm) / 2},${y} ${xm + (x0 < xm ? -62 : 62)},${y}" style="fill:none;stroke:${x0 < xm ? 'var(--mars)' : 'var(--moon)'};stroke-width:${wdt.toFixed(2)};opacity:${(0.25 + Math.max(0, v - 0.5) * 1.6).toFixed(2)}"/>`; }
+    s += `<rect x="${xm - 62}" y="${y - 9}" width="124" height="18" rx="2" style="fill:var(--panel-2);stroke:var(--line-2)"/><text x="${xm}" y="${y + 3.5}" text-anchor="middle" style="fill:var(--ink);font-size:8.6px">${esc(placeName(i).primary.slice(0, 22))}</text>`;
+    s += `<text x="${xm - 66}" y="${y + 3}" text-anchor="end" style="fill:var(--mars);font-size:8px">${(100 * a.eff[i]).toFixed(0)}</text><text x="${xm + 66}" y="${y + 3}" style="fill:var(--moon);font-size:8px">${(100 * b.eff[i]).toFixed(0)}</text>`;
+  });
+  s += `<circle cx="${xa}" cy="${ya}" r="9" style="fill:var(--mars)"/><text x="${xa}" y="${ya - 14}" text-anchor="middle" style="fill:var(--mars);font-size:8.5px">JEZERO</text>`;
+  s += `<circle cx="${xb}" cy="${yb}" r="9" style="fill:var(--moon)"/><text x="${xb}" y="${yb - 14}" text-anchor="middle" style="fill:var(--moon);font-size:8.5px">S. POLE</text>`;
+  return s + `</svg><p class="note small">Nodes: top-5 distinct sites for each target. Edge width and opacity ∝ computed similarity (% shown). Current weights.</p>`;
+}
+function latHist() {
+  const R = S.res, cand = R.order.slice(0, S.app.thresholds.n_candidates), bins = 18, all = new Array(bins).fill(0), top = new Array(bins).fill(0);
+  let area = 0; const aB = new Array(bins).fill(0);
+  for (let i = 0; i < S.n; i++) { const b = clamp(Math.floor((S.lat[i] + 90) / 10), 0, bins - 1); aB[b] += cellArea(i); area += cellArea(i); }
+  let tA = 0; for (const i of cand) { const b = clamp(Math.floor((S.lat[i] + 90) / 10), 0, bins - 1); top[b] += cellArea(i); tA += cellArea(i); }
+  const W = 344, H = 150, L = 34, BW = (W - L - 6) / bins, mx = Math.max(...aB.map(v => v / area), ...top.map(v => v / tA));
+  let s = `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Latitude distribution of candidate area versus all valid land area">`;
+  for (let b = 0; b < bins; b++) {
+    const x = L + b * BW, h1 = aB[b] / area / mx * (H - 34), h2 = top[b] / tA / mx * (H - 34);
+    s += `<rect x="${x + 1}" y="${H - 20 - h1}" width="${BW - 2}" height="${h1}" style="fill:var(--line-2)"/><rect x="${x + 3.5}" y="${H - 20 - h2}" width="${BW - 7}" height="${h2}" style="fill:var(--accent)"/>`;
+    if (b % 3 === 0) s += `<text x="${x}" y="${H - 6}" style="fill:var(--ink-3);font-size:8.5px">${-90 + b * 10}°</text>`;
+  }
+  const empty = aB.map((v, b) => v / area > 0.02 && top[b] === 0 ? (-90 + b * 10) + "°…" + (-80 + b * 10) + "°" : null).filter(Boolean);
+  return s + `</svg><p class="note small"><span style="color:var(--ink-3)">▮</span> share of valid land area &nbsp;<span style="color:var(--accent)">▮</span> share of top-${S.app.thresholds.n_candidates} candidate area. ${empty.length ? "Latitude bands with ≥2 % of land but no candidates: " + empty.join(", ") + "." : ""}</p>`;
+}
+function viewData() {
+  const A = S.app;
+  let h = `<div class="sec"><div class="lbl">Predictor stack</div><div class="grid2">
+    <div class="kv"><span>Valid Earth cells</span><b>${A.stack.n_cells.toLocaleString()}</b></div><div class="kv"><span>Grid</span><b>0.5° × 0.625° (MERRA-2)</b></div>
+    <div class="kv"><span>Bundle SHA-256</span><b>${A.stack.sha256.slice(0, 16)}… ${S.hashOK === true ? '<span style="color:var(--match)">✓ verified in this browser</span>' : S.hashOK === false ? '<span style="color:var(--mismatch)">× mismatch</span>' : '<span class="meta">not checked</span>'}</b></div><div class="kv"><span>Algorithm</span><b>${A.algorithm_version}</b></div>
+    <div class="kv"><span>POWER retrieved</span><b>${A.stack.retrieved.power}</b></div><div class="kv"><span>MODIS retrieved</span><b>${A.stack.retrieved.modis}</b></div></div>
+    <p class="note small">Valid cell = GMTED2010 land ≥ 50 % AND MODIS LST diurnal range available AND NASA POWER T2M available. The same float32 values drive the Python reference engine and this browser (bitwise-identical scores, tested).</p></div>`;
+  h += `<div class="sec"><div class="lbl">Data sources</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Dataset</th><th>Role</th><th>Resolution · coverage</th><th>Processing</th><th>Terms</th></tr></thead><tbody>
+    ${A.datasets.map(d => `<tr><td><b>${esc(d.provider)}</b><br><span class="meta">${esc(d.dataset)} · ${esc(d.version)}</span><br><a href="${esc(d.url)}" target="_blank" rel="noopener" class="meta" style="color:var(--earth)">source ↗</a></td><td>${esc(d.role)}</td><td class="meta">${esc(d.resolution)}<br>${esc(d.temporal)}<br>${esc(d.units)}</td><td class="meta">${esc(d.processing)}</td><td class="meta">${esc(d.license)}</td></tr>`).join("")}</tbody></table></div></div>`;
+  h += `<div class="sec"><div class="lbl">Normalization ranges<span class="meta">min–max over Earth cells ∪ targets</span></div><table class="t"><thead><tr><th>Criterion</th><th class="n">Min</th><th class="n">Max</th><th>Unit</th></tr></thead><tbody>
+    ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td><td class="n">${S.ranges[c][0].toFixed(3)}</td><td class="n">${S.ranges[c][1].toFixed(3)}</td><td class="meta">${esc(unitOf(c) || "index")}</td></tr>`).join("")}</tbody></table></div>`;
+  for (const t of S.targets) {
+    h += `<div class="sec"><div class="lbl">Target construction · ${esc(t.name)}</div><table class="t"><thead><tr><th>Criterion</th><th class="n">Value</th><th>Method</th></tr></thead><tbody>
+      ${S.critIds.map(c => `<tr><td>${esc(shortOf(c))}<br>${compTag(t.id, c)}</td><td class="n">${t.variables[c] == null ? "N/A" : fmtVal(c, t.variables[c])}</td><td class="meta">${esc(t.methodology[c])}</td></tr>`).join("")}</tbody></table>
+      <p class="note small"><b>Limitations:</b> ${t.limitations.map(esc).join(" ")}</p>
+      <p class="note small"><b>Sources:</b> ${t.sources.map((s, k) => `<a href="${esc(t.source_urls[k])}" target="_blank" rel="noopener" style="color:var(--earth)">${esc(s)}</a>`).join(" · ")}</p></div>`;
+  }
+  h += `<div class="sec"><div class="lbl">Result tools</div><div class="row"><button class="btn-sm" data-act="trace">Trace selected result</button><button class="btn-sm" data-act="reproduce">Reproduce this result</button><button class="btn-sm" data-act="report">Analogue analysis report</button></div></div>`;
+  return h;
+}
+function viewMethod() {
+  const th = S.app.thresholds;
+  return `<div class="sec"><div class="lbl">Method</div><h2 class="ttl" style="margin-bottom:8px">Compare fingerprints, not pictures.</h2>
+  <p class="note">Every valid Earth cell is compared against a planetary target on measurable criteria. The result is a deterministic weighted, range-normalized similarity. No language model, learned model or generated media computes, alters, ranks or explains any number here.</p>
+  <div class="flow" style="margin-top:12px"><div><b>NASA data</b>POWER · MODIS · GMTED · MOLA · LOLA · MEDA · Diviner</div><div><b>Normalize</b>|e − t| ÷ (max − min)</div><div><b>Weights</b>profile or custom</div><div><b>Similarity</b>Σ w·s ÷ Σ w</div><div><b>Result</b>rank · cluster · explain</div></div></div>
+  <div class="sec"><div class="lbl">Similarity mathematics</div><div class="formula">d<sub>c</sub> = |e<sub>c</sub> − t<sub>c</sub>| / (max<sub>c</sub> − min<sub>c</sub>)
+s<sub>c</sub> = clip(1 − d<sub>c</sub>, 0, 1)
+k<sub>c</sub> = w<sub>c</sub> · s<sub>c</sub> / Σ w      (weighted contribution)
+S   = Σ k<sub>c</sub>                (final score, 0…1)</div>
+  <p class="note small">Criteria with weight 0 or a null target (not applicable) are excluded. A cell missing an Earth value is scored on the remaining criteria and its weight coverage is reported; coverage &lt; ${fmtPct(th.min_coverage, 0)} → not ranked. Exact match ⇒ S = 1.0 (tested). Ranking ties break by cell id.</p></div>
+  <div class="sec"><div class="lbl">Documented rules</div><table class="t"><tbody>
+    <tr><td>Match / Partial / Mismatch</td><td class="meta">s ≥ ${th.match} / s ≥ ${th.partial} / below</td></tr>
+    <tr><td>Distinct sites</td><td class="meta">greedy: keep a ranked cell only if ≥ ${th.distinct_sep_km} km from every kept site</td></tr>
+    <tr><td>Constellations</td><td class="meta">top ${th.n_candidates} cells; k-means, farthest-point init, k ∈ {${th.k_choices.join(", ")}} by silhouette; names from cluster means</td></tr>
+    <tr><td>Cross-planet</td><td class="meta">min(S<sub>Jezero</sub>, S<sub>South Pole</sub>); Pareto set shown</td></tr>
+    <tr><td>Analogue evolution</td><td class="meta">yearly MODIS LST substituted; STABLE if score range ≤ ${th.evolution_stable_pts} pts</td></tr>
+    <tr><td>Elevation proxy</td><td class="meta">target = highest valid Earth cell (${S.T.mars_jezero.variables.elevation} m): rewards thinnest atmosphere</td></tr></tbody></table></div>
+  <div class="sec"><div class="lbl">Scientific comparability</div><p class="note">This Earth location exhibits similar values <b>for the selected modeled variables</b>. It is never physically identical to Mars or the Moon: gravity (0.38 g / 0.17 g), atmosphere and pressure (Mars ~0.74 kPa median at Jezero from MEDA; Moon ~vacuum), radiation, geology and mineralogy, day length, and spatial scale (rover-point and 55.6 km windows vs 0.5° cells) are not modelled. Proxy criteria are labelled wherever they appear.</p>
+  <div class="callout" style="margin-top:10px">This system identifies environmental analogues using selected measurable variables. A high similarity score does not establish geological equivalence, engineering suitability, habitability, safety, or mission-site certification.</div></div>
+  <div class="sec"><div class="lbl">Build & media</div><p class="note small">Data ingestion ran in a Higgsfield cloud sandbox with direct access to NASA/USGS/PDS servers; every relayed file was checked by SHA-256. Higgsfield's generative media layer is intentionally not used for any scientific value. No generated imagery appears in this build: the target thumbnails are hillshades of the actual MOLA and LOLA elevation data, and the basemap is NASA Blue Marble.</p>
+  <p class="note small">Application code: Apache-2.0. Third-party data remain under their providers' terms (see Data).</p></div>`;
+}
+
+function renderLeft() {
+  const v = { explore: viewExplore, compare: viewCompare, scenarios: viewScenarios, discover: viewDiscover, data: viewData, method: viewMethod }[S.tab];
+  const box = $("#left"), top = box.scrollTop;
+  box.innerHTML = S.app ? v() : "";
+  box.scrollTop = top;
+  $("#app").classList.toggle("wide", S.tab === "data" || S.tab === "method");
+}
+function renderLegend() {
+  const R = S.res, L = $("#legend"); if (!R) return;
+  if (S.layer === "clusters" && R.clusters) {
+    L.innerHTML = `<h4>Analogue constellations</h4><div class="sw">${R.clusters.groups.map(G => `<span><i style="background:${CLUSTER_COLORS[G.rankNo - 1]}"></i>${pad2(G.rankNo)} ${esc(G.name)}</span>`).join("")}</div>`;
+  } else if (S.layer === "delta") {
+    L.innerHTML = S.prev && S.prev.tid === R.tid
+      ? `<h4>Relative-rank change · ${esc(S.prev.label)} → ${esc(currentLabel())}</h4><div class="ramp" style="background:linear-gradient(90deg,#db6b5c,rgba(0,0,0,0) 50%,#80ccbd)"></div><div class="ticks"><span>−25 pct-pts</span><span>0</span><span>+25 pct-pts</span></div>`
+      : `<h4>Relative-rank change</h4><div class="meta">No adjustment yet — change a weight or profile.</div>`;
+  } else {
+    L.innerHTML = `<h4>Similarity field · ${esc(TNAME[R.tid])}</h4><div class="ramp" style="background:linear-gradient(90deg,${RAMPS[R.tid].join(",")})"></div><div class="ticks"><span>${fmtPct(R.lo)}</span><span>median → max</span><span>${fmtPct(R.hi)}</span></div>`;
+  }
+}
+function renderStatus(extra) {
+  const R = S.res; if (!R) return;
+  $("#status").textContent = `${S.n.toLocaleString()} valid Earth cells · 0.5° × 0.625° · field computed in this browser in ${S.computeMs.toFixed(0)} ms · ${S.app.algorithm_version}${extra ? " · " + extra : ""}`;
+}
+function renderMarkers() {
+  const g = window.GLOBE, box = $("#markers"), R = S.res; if (!g || !R) return;
+  if (!S.searched) { box.innerHTML = ""; return; }
+  if (!box._built || box._key !== R.distinct.join(",") + "|" + S.selected + "|" + S.picked) {
+    box._key = R.distinct.join(",") + "|" + S.selected + "|" + S.picked;
+    box.innerHTML = R.distinct.map((i, k) => `<div class="mk${S.selected === i ? " sel" : ""}" data-i="${i}"><i></i><span>${pad2(k + 1)}</span></div>`).join("") +
+      (S.picked != null && !R.distinct.includes(S.picked) ? `<div class="mk pick${S.selected === S.picked ? " sel" : ""}" data-i="${S.picked}"><i></i><span>PICK</span></div>` : "");
+    box._built = true;
+    $$(".mk", box).forEach(m => m.addEventListener("click", () => select(+m.dataset.i, true)));
+  }
+  for (const m of box.children) { const i = +m.dataset.i, p = g.project(S.lat[i], S.lon[i]); m.style.left = p.x + "px"; m.style.top = p.y + "px"; m.classList.toggle("back", !p.front); }
+}
+function renderAll(parts = ["right", "left", "legend", "status"]) {
+  if (parts.includes("right")) renderRight();
+  if (parts.includes("left")) renderLeft();
+  if (parts.includes("legend")) renderLegend();
+  if (parts.includes("status")) renderStatus();
+  renderMarkers();
+}
+
+/* ===== 05 console: weights, profiles, what-if, change tracking ===== */
+const WHATIF = [
+  { id: "thermal_x2", label: "What if thermal behaviour matters 2× more?", desc: "Doubles the thermal (LST diurnal range) weight.",
+    op: w => ({ ...w, lst_diurnal_range: 2 * w.lst_diurnal_range }) },
+  { id: "terrain_dominates", label: "What if terrain dominates the search?", desc: "Triples elevation, slope and roughness weights.",
+    op: w => Object.fromEntries(Object.entries(w).map(([c, v]) => [c, ["elevation", "slope", "surface_roughness"].includes(c) ? 3 * v : v])) },
+  { id: "ignore_climate", label: "What if all climate variables are ignored?", desc: "Sets aridity and annual temperature range weights to 0.",
+    op: w => Object.fromEntries(Object.entries(w).map(([c, v]) => [c, ["aridity", "annual_temperature_range"].includes(c) ? 0 : v])) },
+];
+const W_MAX = 6;
+
+function currentLabel() { return S.profile === "custom" ? "Custom weights" : S.app.profiles[S.profile].label; }
+function snapshot() { const R = S.res; return { tid: R.tid, w: { ...R.w }, eff: R.eff, rank: R.rank, nElig: R.nElig, distinct: R.distinct.slice(), label: currentLabel() }; }
+function detectProfile(w) {
+  for (const [pid, p] of Object.entries(S.app.profiles)) if (S.critIds.every(c => Math.abs(+p.weights[c] - +w[c]) < 1e-9)) return pid;
+  return "custom";
+}
+/* A weight vector is usable only if every selected target keeps >= 1 active criterion
+   (weight > 0 and target value not N/A) and every weight is finite and >= 0. */
+function weightsValid(w) {
+  if (!S.critIds.every(c => Number.isFinite(+w[c]) && +w[c] >= 0)) return false;
+  const tids = S.targetId === "cross" ? TARGET_IDS : [S.targetId];
+  return tids.every(t => ENG.activeCriteria(S.critIds, S.T[t].variables, w).length > 0);
+}
+const INVALID_W_MSG = "No score computed: at least one criterion that applies to the selected target needs a weight above 0.";
+function commitWeights(w, why) {
+  if (!weightsValid(w)) { announce(INVALID_W_MSG); renderStatus(INVALID_W_MSG); renderConsole(); return; }
+  S.prev = snapshot(); S.weights = { ...w }; S.profile = detectProfile(w);
+  compute(); paintField(); renderAll(); renderConsole();
+  const R = S.res, i = R.distinct[0];
+  announce(`${why || "Weights updated"}. Now #1: ${placeStr(i)} at ${fmtPct(R.eff[i])}.`);
+}
+let dragBase = null, raf = 0;
+function liveWeights(w) {
+  if (!weightsValid(w)) {            // keep the last valid field; never compute a score from zero weights
+    S.weights = { ...w }; updateConsoleNumbers(); renderStatus(INVALID_W_MSG); announce(INVALID_W_MSG); return;
+  }
+  if (!dragBase) { dragBase = snapshot(); S.prev = dragBase; }
+  S.weights = { ...w }; S.profile = detectProfile(w);
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => { compute(); paintField(); renderAll(["right", "legend", "status"]); updateConsoleNumbers(); });
+}
+function endDrag() {
+  if (!weightsValid(S.weights)) { dragBase = null; S.weights = { ...S.res.w }; S.profile = detectProfile(S.weights); renderConsole(); renderStatus("Weights restored to the last valid set. " + INVALID_W_MSG); return; }
+  if (!dragBase) return; dragBase = null; renderAll(); renderConsole(); announce(`Now #1: ${placeStr(S.res.distinct[0])}.`); }
+
+function renderConsole() {
+  const box = $("#console"); if (!S.app) return;
+  const tid = S.targetId, tv = tid === "cross" ? null : S.T[tid].variables;
+  const naFor = c => tid === "cross" ? S.targets.every(t => t.variables[c] == null) : tv[c] == null;
+  const tot = S.critIds.reduce((a, c) => a + (naFor(c) ? 0 : +S.weights[c]), 0);
+  box.innerHTML = `<div class="sliders">${S.critIds.map(c => {
+      const v = +S.weights[c], na = naFor(c);
+      return `<div class="sl"><label for="w-${c}"><span class="nm">${esc(labelOf(c))}</span><b id="wv-${c}">${v.toFixed(2)}</b></label>
+      <input type="range" id="w-${c}" data-c="${c}" min="0" max="${W_MAX}" step="0.25" value="${v}" style="--p:${(v / W_MAX * 100).toFixed(1)}%" aria-describedby="ws-${c}" aria-valuetext="weight ${v.toFixed(2)}${na ? ", not applicable to this target" : ""}">
+      <div class="foot">${na ? '<span class="tag na">N/A for target</span>' : compTag(tid, c) || (S.targets.every(t => t.variables[c] != null) ? '<span class="tag">Both</span>' : '<span class="tag na" title="Not applicable to the Lunar South Pole; scored for Jezero only">Mars only</span>')}<span class="share" id="ws-${c}">${na ? "excluded" : (tot > 0 ? (100 * v / tot).toFixed(0) : 0) + "% of weight"}</span></div></div>`;
+    }).join("")}</div>
+    <div class="con-side"><div class="profiles" role="group" aria-label="Mission profile">
+      <button class="btn-sm con-toggle" data-contoggle aria-expanded="${box.classList.contains("open")}">Weights ${box.classList.contains("open") ? "▴" : "▾"}</button>
+      ${Object.entries(S.app.profiles).map(([pid, p]) => `<button class="btn-sm${S.profile === pid ? " on" : ""}" data-profile="${pid}" title="${esc(p.rationale)}">${esc(p.label)}</button>`).join("")}
+      <span class="btn-sm${S.profile === "custom" ? " on" : ""}" aria-disabled="true">Custom</span></div>
+      <div class="disclaimer">This system identifies environmental analogues using selected measurable variables. A high similarity score does not establish geological equivalence, engineering suitability, habitability, safety, or mission-site certification.</div></div>`;
+  $$("input[type=range]", box).forEach(inp => {
+    inp.addEventListener("input", () => { inp.style.setProperty("--p", (inp.value / W_MAX * 100) + "%"); liveWeights({ ...S.weights, [inp.dataset.c]: +inp.value }); });
+    inp.addEventListener("change", endDrag);
+  });
+}
+function updateConsoleNumbers() {
+  const tid = S.targetId;
+  const naFor = c => tid === "cross" ? S.targets.every(t => t.variables[c] == null) : S.T[tid].variables[c] == null;
+  const tot = S.critIds.reduce((a, c) => a + (naFor(c) ? 0 : +S.weights[c]), 0);
+  for (const c of S.critIds) { const b = $("#wv-" + c); if (b) b.textContent = (+S.weights[c]).toFixed(2); const inp = $("#w-" + c); if (inp) inp.setAttribute("aria-valuetext", "weight " + (+S.weights[c]).toFixed(2)); const s = $("#ws-" + c); if (s && !naFor(c)) s.textContent = (tot > 0 ? (100 * S.weights[c] / tot).toFixed(0) : 0) + "% of weight"; }
+  $$(".profiles .btn-sm").forEach(b => b.classList.toggle("on", (b.dataset.profile || "custom") === S.profile));
+}
+function applyProfile(pid) { commitWeights({ ...S.app.profiles[pid].weights }, "Profile " + S.app.profiles[pid].label); }
+function applyWhatIf(id) {
+  const wf = WHATIF.find(x => x.id === id), next = wf.op({ ...S.weights });
+  commitWeights(next, wf.label.replace("What if ", "Applied: ").replace("?", ""));
+  if (S.tab !== "scenarios") setTab("scenarios");
+  setTimeout(() => { const w = $("#why"); w && w.scrollIntoView({ block: "start", behavior: REDUCED ? "auto" : "smooth" }); }, 50);
+  setLayer("delta");
+}
+
+/* ===== 06 sheets: trace, reproduce, report ===== */
+let sheetOpener = null;
+function openSheet(title, body, actions = "") {
+  if ($("#sheet").hidden) sheetOpener = document.activeElement;
+  $("#sheet-title").textContent = title; $("#sheet-body").innerHTML = body; $("#sheet-actions").innerHTML = actions;
+  $("#sheet").hidden = false; $("#sheet-close").focus();
+}
+function closeSheet() {
+  if ($("#sheet").hidden) return;
+  $("#sheet").hidden = true;
+  if (sheetOpener && document.contains(sheetOpener)) sheetOpener.focus();
+  sheetOpener = null;
+}
+document.addEventListener("keydown", e => {           // keep keyboard focus inside the open dialog
+  const sh = $("#sheet"); if (sh.hidden || e.key !== "Tab") return;
+  const f = $$("button, a[href], input, [tabindex]:not([tabindex='-1'])", sh).filter(x => !x.disabled && x.offsetParent !== null);
+  if (!f.length) return;
+  if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+  else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+});
+async function copyText(txt, btn) {
+  try { await navigator.clipboard.writeText(txt); if (btn) { const o = btn.textContent; btn.textContent = "Copied"; setTimeout(() => btn.textContent = o, 1400); } }
+  catch (e) { const pre = $("#sheet-body pre"); if (pre) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } if (btn) btn.textContent = "Press ⌘/Ctrl-C"; }
+}
+function needSel() { const i = S.selected ?? S.picked ?? (S.res && S.res.distinct[0]); return i; }
+function srcFor(c) { const id = S.crit.find(x => x.id === c).earth_source[0]; return S.app.datasets.find(d => d.id === id); }
+
+function traceHTML(i) {
+  const tids = S.targetId === "cross" ? TARGET_IDS : [S.targetId], R = S.res, [dy, dx] = cellDims(i), c = S.cell[i];
+  let h = `<div class="flow"><div><b>1 · Target</b>${tids.map(t => TNAME[t]).join(" + ")}</div><div><b>2 · Earth data</b>POWER · MODIS · GMTED2010</div><div><b>3 · Normalize</b>ranges</div><div><b>4 · Weights</b>${esc(currentLabel())}</div><div><b>5 · Result</b>${fmtPct(R.eff[i], 2)}</div></div>`;
+  h += `<h3>Earth cell</h3><div class="grid2"><div class="kv"><span>Location</span><b>${esc(placeStr(i))}</b></div><div class="kv"><span>Cell id (row·576 + col)</span><b>${c} (row ${Math.floor(c / 576)}, col ${c % 576})</b></div>
+    <div class="kv"><span>Centre</span><b>${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])}</b></div><div class="kv"><span>Bounds</span><b>${(S.lat[i] - .25).toFixed(2)}…${(S.lat[i] + .25).toFixed(2)}°, ${(S.lon[i] - .3125).toFixed(4)}…${(S.lon[i] + .3125).toFixed(4)}°</b></div>
+    <div class="kv"><span>Size</span><b>${dy.toFixed(1)} × ${dx.toFixed(1)} km · ${Math.round(cellArea(i)).toLocaleString()} km²</b></div><div class="kv"><span>Cell rank</span><b>#${R.rank[i]?.toLocaleString()} of ${R.nElig.toLocaleString()}</b></div></div>`;
+  h += `<h3>Raw Earth values & sources</h3><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">Value</th><th>Dataset</th></tr></thead><tbody>
+    ${S.critIds.map(k => `<tr><td>${esc(labelOf(k))}</td><td class="n">${fmtVal(k, S.A[k][i])} ${unitOf(k)}</td><td class="meta">${esc(srcFor(k).provider)} — ${esc(srcFor(k).dataset.split(";")[0])}</td></tr>`).join("")}
+    <tr><td class="meta">aux · precipitation / PET</td><td class="n">${S.A.precip_mm_yr[i].toFixed(0)} / ${S.A.pet_mm_yr[i].toFixed(0)} mm yr⁻¹</td><td class="meta">POWER PRECTOTCORR; Hargreaves-FAO56 · raw P/PET = ${S.A.aridity_index_raw[i] === S.A.aridity_index_raw[i] ? S.A.aridity_index_raw[i].toFixed(3) : "undefined"}</td></tr>
+    <tr><td class="meta">aux · MODIS day / night LST</td><td class="n">${S.A.lst_day_k[i].toFixed(1)} / ${S.A.lst_night_k[i].toFixed(1)} K</td><td class="meta">MYD11C3 via GIBS, ${S.app.stack.years[0]}–${S.app.stack.years.at(-1)}</td></tr>
+    <tr><td class="meta">aux · mean T2M</td><td class="n">${S.A.t2m_mean_c[i].toFixed(1)} °C</td><td class="meta">POWER T2M 2001–2020</td></tr></tbody></table></div>`;
+  for (const t of tids) {
+    const d = detailFor(t, i);
+    h += `<h3>${esc(TNAME[t])} — normalization, similarity, weights, contributions</h3><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">Earth e</th><th class="n">Target t</th><th class="n">Range</th><th class="n">e norm.</th><th class="n">t norm.</th><th class="n">d</th><th class="n">s</th><th class="n">w</th><th class="n">k = w·s/Σw</th></tr></thead><tbody>
+      ${d.rows.map(r => `<tr${r.active ? "" : ' style="opacity:.45"'}><td>${esc(shortOf(r.c))}${r.active ? "" : ' <span class="meta">excluded</span>'} ${compTag(t, r.c)}</td><td class="n">${fmtVal(r.c, r.e)}</td><td class="n">${r.t == null ? "N/A" : fmtVal(r.c, r.t)}</td><td class="n">${r.lo.toFixed(2)}…${r.hi.toFixed(2)}</td>
+        <td class="n">${r.en != null ? r.en.toFixed(4) : "—"}</td><td class="n">${r.tn != null ? r.tn.toFixed(4) : "—"}</td><td class="n">${r.d != null ? r.d.toFixed(4) : "—"}</td><td class="n">${r.s != null ? r.s.toFixed(4) : "—"}</td><td class="n">${r.w.toFixed(2)}</td><td class="n">${r.k != null ? r.k.toFixed(4) : "—"}</td></tr>`).join("")}</tbody></table></div>
+      <div class="formula">S = ${d.rows.filter(r => r.k != null).map(r => r.k.toFixed(4)).join(" + ")} = <b>${d.final.toFixed(4)}</b>  (${fmtPct(d.final, 2)})   ·   Σw = ${d.wsum.toFixed(2)}, weight coverage ${fmtPct(d.coverage, 0)}</div>`;
+  }
+  if (S.targetId === "cross") h += `<p class="note">Cross-planet score = min(${tids.map(t => detailFor(t, i).final.toFixed(4)).join(", ")}) = <b>${R.eff[i].toFixed(4)}</b>.</p>`;
+  h += `<h3>Target sources</h3>${tids.map(t => `<p class="note small"><b>${esc(TNAME[t])}:</b> ${S.T[t].sources.map((s, k) => `<a href="${esc(S.T[t].source_urls[k])}" target="_blank" rel="noopener" style="color:var(--earth)">${esc(s)}</a>`).join(" · ")}</p>`).join("")}`;
+  return h;
+}
+function reproConfig(i) {
+  const R = S.res, A = S.app;
+  return {
+    product: "ASTERRO — Planetary Analogue Intelligence", created_utc: new Date().toISOString(),
+    target: R.tid, target_name: TNAME[R.tid], target_ids: R.tid === "cross" ? TARGET_IDS.slice() : [R.tid],
+    target_status: Object.fromEntries((R.tid === "cross" ? TARGET_IDS : [R.tid]).map(t => [t, S.T[t].status || null])),
+    weights: Object.fromEntries(S.critIds.map(c => [c, +S.weights[c]])), profile: S.profile, profile_label: currentLabel(),
+    active_criteria: R.active,
+    algorithm_version: A.algorithm_version,
+    rules: { formula: "S = sum_c w_c*clip(1-|e_c-t_c|/(max_c-min_c),0,1) / sum_c w_c over active criteria with a finite Earth value",
+             min_coverage: A.thresholds.min_coverage, coverage_definition: "sum of weights with a finite Earth value / sum of active weights; ranked if >= min_coverage",
+             tie_break: "score descending, then cell_id ascending", distinct_sep_km: A.thresholds.distinct_sep_km,
+             distinct_method: "greedy over ranked cells, haversine R=6371.0088 km", cross_planet: "min",
+             normalization: "min-max over all valid Earth cells union all target values (fixed; independent of the selected target)",
+             valid_cell: "GMTED2010 land fraction >= 0.5 AND MODIS LST diurnal range finite AND NASA POWER T2M finite",
+             match_threshold: A.thresholds.match, partial_threshold: A.thresholds.partial },
+    normalization_ranges: S.ranges, grid_resolution: "0.5 deg lat x 0.625 deg lon (NASA POWER / MERRA-2 native), cell centres",
+    dataset_versions: Object.fromEntries(A.datasets.filter(d => !d.role.startsWith("Context")).map(d => [d.id, d.version])),
+    predictor_stack: { sha256: A.stack.sha256, n_cells: A.stack.n_cells, file_hashes: A.file_hashes },
+    targets_version: "targets.json 1.0.0",
+    selected_cell: i == null ? null : { cell_id: S.cell[i], lat: S.lat[i], lon: S.lon[i], location: placeStr(i), expected_score: +R.eff[i].toFixed(12), expected_rank: R.rank[i] },
+    expected_top3: R.distinct.slice(0, 3).map(k => ({ cell_id: S.cell[k], score: +R.eff[k].toFixed(12) })),
+    reproduce_with: "python -m scripts.reproduce reproduce.json",
+  };
+}
+function showTrace() { const i = needSel(); if (i == null) return; openSheet("Trace result", traceHTML(i), `<button class="btn-sm" id="to-repro">Reproduce</button>`); $("#to-repro").onclick = showReproduce; }
+function showReproduce() {
+  const i = needSel(), txt = JSON.stringify(reproConfig(i), null, 2);
+  openSheet("Reproduce this result", `<p class="note" style="margin:0 0 10px">This configuration, the published predictor stack (SHA-256 above) and <span class="mono">scripts/reproduce.py</span> regenerate the same scores to the last bit. The browser and the Python reference engine share one algorithm and are tested for bitwise parity.</p><pre class="code">${esc(txt)}</pre>`,
+    `<button class="btn-sm" id="copy-json">Copy JSON</button>`);
+  $("#copy-json").onclick = e => copyText(txt, e.target);
+}
+function reportMD(i) {
+  const R = S.res, tids = R.tid === "cross" ? TARGET_IDS : [R.tid], q = dataQuality(i, R.tid);
+  const L = [];
+  L.push(`# ANALOGUE ANALYSIS REPORT`, ``, `**Target:** ${tids.map(t => TNAME[t]).join(" + ")}  `, `**Earth location:** ${placeStr(i)}  `,
+    `**Coordinates (cell centre):** ${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · cell ${S.cell[i]} · 0.5° × 0.625°  `,
+    `**Similarity:** ${fmtPct(R.eff[i], 2)} · cell rank #${R.rank[i]} of ${R.nElig}  `, `**Weights:** ${currentLabel()} — ${S.critIds.map(c => `${shortOf(c)} ${(+S.weights[c]).toFixed(2)}`).join(", ")}`, ``);
+  for (const t of tids) {
+    const d = detailFor(t, i);
+    L.push(`## Criterion breakdown — ${TNAME[t]}`, ``, `| Criterion | Earth | Target | s | w | contribution | class |`, `|---|---:|---:|---:|---:|---:|---|`);
+    for (const r of d.rows) L.push(`| ${labelOf(r.c)} | ${fmtVal(r.c, r.e)} ${unitOf(r.c)} | ${r.t == null ? "N/A" : fmtVal(r.c, r.t)} | ${r.s != null ? r.s.toFixed(3) : "—"} | ${r.w.toFixed(2)} | ${r.k != null ? (100 * r.k).toFixed(2) + " pts" : "—"} | ${r.s != null ? ENG.classify(r.s) : (r.t == null ? "NOT APPLICABLE" : "excluded")} |`);
+    const mm = d.rows.filter(r => r.s != null && ENG.classify(r.s) === "MISMATCH").map(r => labelOf(r.c));
+    L.push(``, `**Mismatches:** ${mm.length ? mm.join(", ") : "none"}  `, `**Final:** ${d.final.toFixed(4)}`, ``);
+  }
+  L.push(`## Data quality indicator`, ``, `- Weight coverage: ${fmtPct(q.coverage, 0)}`, `- MODIS month coverage: ${fmtPct(q.modis, 0)}`, `- GMTED land fraction: ${fmtPct(q.land, 0)}`,
+    `- Proxy variables in use: ${q.proxies} of ${q.active}`, `- Spatial resolution: ${q.res}`, `- Missing: ${q.missing.length ? q.missing.map(labelOf).join(", ") : "none"}`, ``);
+  L.push(`## Sources`, ``); for (const d of S.app.datasets) L.push(`- ${d.provider} — ${d.dataset} (${d.version}). ${d.url}`);
+  L.push(``, `## Methodology`, ``, `d = |e − t| / (max − min); s = clip(1 − d, 0, 1); S = Σ w·s / Σ w. Normalization ranges: min–max over valid Earth cells ∪ targets. Algorithm ${S.app.algorithm_version}.`, ``);
+  L.push(`## Limitations`, ``); for (const t of tids) for (const l of S.T[t].limitations) L.push(`- ${l}`);
+  L.push(``, `> This system identifies environmental analogues using selected measurable variables. A high similarity score does not establish geological equivalence, engineering suitability, habitability, safety, or mission-site certification.`, ``);
+  L.push(`## Reproduction configuration`, ``, "```json", JSON.stringify(reproConfig(i), null, 2), "```");
+  return L.join("\n");
+}
+function showReport() {
+  const i = needSel(); if (i == null) return;
+  const md = reportMD(i), R = S.res, tids = R.tid === "cross" ? TARGET_IDS : [R.tid];
+  let h = `<div class="row" style="justify-content:space-between;align-items:flex-end"><div><div class="body-tag">${TBODY[R.tid]} · ${esc(tids.map(t => TNAME[t]).join(" + "))}</div><h3 class="ttl" style="font-size:26px;margin-top:4px">${esc(placeStr(i))}</h3><div class="meta">${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · cell ${S.cell[i]} · ${esc(currentLabel())}</div></div><div class="big" style="color:var(--accent)">${fmtPct(R.eff[i])}<small>ANALOGUE SCORE</small></div></div>`;
+  if (R.tid !== "cross") { const d = detailFor(R.tid, i); h += `<h3>Fingerprint</h3><div style="max-width:380px">${radialSVG(d.rows, true)}</div><h3>Match / mismatch</h3>${matchBlock(d.rows)}<h3>Criterion breakdown</h3>${contribTable(d, "Weighted contributions")}`; }
+  else h += `<h3>Similarity to each target</h3>${crossSiteBlock(i)}`;
+  h += `<h3>Data quality</h3>${qualityBlock(i, R.tid)}<h3>Limitations</h3><ul class="note">${tids.flatMap(t => S.T[t].limitations).map(l => `<li>${esc(l)}</li>`).join("")}</ul>
+    <div class="callout">This system identifies environmental analogues using selected measurable variables. A high similarity score does not establish geological equivalence, engineering suitability, habitability, safety, or mission-site certification.</div>
+    <h3>Markdown export</h3><pre class="code">${esc(md)}</pre>`;
+  openSheet("Analogue analysis report", h, `<button class="btn-sm" id="copy-md">Copy as Markdown</button>`);
+  $("#copy-md").onclick = e => copyText(md, e.target);
+}
+
+/* ===== 07 main: wiring, hero sequence ===== */
+function setTab(t) {
+  S.tab = t; $$(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  if (!S.searched && t !== "method" && t !== "data") return runSearch();
+  if ($("#app").classList.contains("is-hero")) $("#app").classList.remove("is-hero");
+  renderLeft(); try { history.replaceState(null, "", "#" + t); } catch (e) {}
+}
+function setTarget(tid) {
+  if (tid === S.targetId && S.res) return;
+  if (S.res) S.prev = null;
+  S.targetId = tid; $("#app").dataset.target = tid;
+  $$("[data-target]").forEach(b => { if (b.hasAttribute("aria-checked")) b.setAttribute("aria-checked", b.dataset.target === tid); });
+  S.selected = null; S.picked = null;
+  if (S.layer === "delta") setLayer("sim");
+  compute(); paintField(); renderAll(); renderConsole();
+  if (S.searched) announce(`${TNAME[tid]}: #1 ${placeStr(S.res.distinct[0])} at ${fmtPct(S.res.eff[S.res.distinct[0]])}.`);
+}
+function setLayer(l) {
+  S.layer = l; $$("[data-layer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layer === l));
+  GLOBE.layer = { sim: 0, clusters: 1, delta: 2 }[l]; GLOBE.dirty = true; renderLegend();
+}
+function setProj(p) { S.proj = p; $$("[data-proj]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.proj === p)); GLOBE.setProj(p); }
+function select(i, fly) {
+  S.selected = i; renderAll(["right", "left"]);
+  if (fly) GLOBE.flyTo(S.lat[i], S.lon[i]);
+  const el = $(`.site[data-cell="${i}"]`); el && el.scrollIntoView({ block: "nearest" });
+}
+
+async function runSearch() {
+  if (S.searched) return;
+  S.searched = true;
+  const app = $("#app"); app.classList.remove("is-hero");
+  GLOBE.autoRotate = false;
+  const n = S.n.toLocaleString();
+  renderAll(); renderConsole();
+  $("#right").innerHTML = `<div class="rail-head"><div class="lbl">Analogue field</div><div class="meta">Comparing ${n} Earth cells…</div></div>`;
+  GLOBE.animate("grid", 1, 700); GLOBE.animate("baseMix", 1, 1400);
+  if (S.proj === 1) setTimeout(() => { GLOBE.resize(); GLOBE.animate("dist", GLOBE.mapFit(), 600); }, 900);
+  const tgt = S.T[S.targetId] || S.T.mars_jezero;
+  if (S.targetId !== "cross") GLOBE.flyTo(15, S.targetId === "moon_south_pole" ? -60 : -30);
+  renderStatus(`fingerprint of ${TNAME[S.targetId]} applied to all ${n} cells — revealing from lowest to highest similarity`);
+  const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
+  await wait(500);
+  GLOBE.animate("reveal", 1, 2600, t => t * t * (3 - 2 * t));
+  await wait(2700);
+  if (!S.res.clusters) computeClusters(); paintField();
+  setLayer("clusters"); renderStatus(`${S.res.clusters.k} analogue constellations among the top ${S.app.thresholds.n_candidates} cells`);
+  await wait(1700);
+  setLayer("sim"); renderAll(); renderStatus();
+  const first = S.res.distinct[0];
+  GLOBE.flyTo(S.lat[first], S.lon[first]);
+  announce(`Search complete. #1 ${placeStr(first)} at ${fmtPct(S.res.eff[first])}. Select it to open its analogue DNA.`);
+  const f = $(".site[data-cell]"); if (f) f.classList.add("pulse");
+}
+
+function hover(x, y) {
+  const r = $("#readout"); if (x == null || !S.searched) { r.innerHTML = ""; return; }
+  const ll = GLOBE.unproject(x, y); if (!ll) { r.innerHTML = ""; return; }
+  const i = nearestCell(ll.lat, ll.lon);
+  if (i < 0 || ENG.haversine(ll.lat, ll.lon, S.lat[i], S.lon[i]) > 60) { r.innerHTML = `${fmtLat(ll.lat)} ${fmtLon(ll.lon)} · no valid land cell`; return; }
+  r.innerHTML = `<b>${esc(placeStr(i))}</b><br>${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · similarity <b>${fmtPct(S.res.eff[i])}</b> · rank #${S.res.rank[i] ? S.res.rank[i].toLocaleString() : "—"}`;
+}
+function pick(ll) {
+  if (!S.searched) return;
+  const i = nearestCell(ll.lat, ll.lon);
+  if (i < 0 || ENG.haversine(ll.lat, ll.lon, S.lat[i], S.lon[i]) > 60) { announce("No valid land cell there (ocean or missing data)."); return; }
+  S.picked = i; select(i, false);
+  if (S.tab !== "compare" && S.tab !== "explore") setTab("explore");
+  announce(`Picked ${placeStr(i)}: ${S.res.tid === "cross" ? "" : TNAME[S.res.tid] + " "}${fmtPct(S.res.eff[i])}.`);
+}
+
+function wire() {
+  $$(".tabs button").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
+  $$("[data-target]").forEach(b => { if (b.tagName === "BUTTON") b.addEventListener("click", () => setTarget(b.dataset.target)); });
+  $("#btn-search").addEventListener("click", () => { if (!S.searched) runSearch(); else { const f = S.res.distinct[0]; select(f, true); } });
+  $("#hero-search").addEventListener("click", runSearch);
+  $("#hero-science").addEventListener("click", () => { S.tab = "method"; $("#app").classList.remove("is-hero"); setTab("method"); renderConsole(); renderRight(); });
+  $$("[data-proj]").forEach(b => b.addEventListener("click", () => setProj(+b.dataset.proj)));
+  $$("[data-layer]").forEach(b => b.addEventListener("click", () => setLayer(b.dataset.layer)));
+  document.addEventListener("click", e => {
+    const tg = e.target.closest("[data-railmore],[data-contoggle]");
+    if (tg) { if (tg.dataset.railmore != null) { $("#right").classList.toggle("open"); renderRight(); } else { $("#console").classList.toggle("open"); renderConsole(); } return; }
+    const t = e.target.closest("[data-cell],[data-fp],[data-act],[data-profile],[data-whatif],[data-cluster]"); if (!t) return;
+    if (t.dataset.cell != null) { closeSheet(); select(+t.dataset.cell, true); }
+    else if (t.dataset.fp) { S.fpMode = t.dataset.fp; renderLeft(); }
+    else if (t.dataset.act === "trace") showTrace(); else if (t.dataset.act === "report") showReport(); else if (t.dataset.act === "reproduce") showReproduce();
+    else if (t.dataset.profile) applyProfile(t.dataset.profile);
+    else if (t.dataset.whatif) applyWhatIf(t.dataset.whatif);
+    else if (t.dataset.cluster != null) { const k = +t.dataset.cluster; S.clusterFocus = k; setLayer("clusters"); const G = S.res.clusters.groups[k]; GLOBE.flyTo(S.lat[G.best], S.lon[G.best]); renderLeft(); }
+  });
+  $("#sheet-close").addEventListener("click", closeSheet);
+  $("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeSheet(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#sheet").hidden) closeSheet(); });
+  GLOBE.onHover = hover; GLOBE.onPick = pick; GLOBE.onFrame = renderMarkers;
+}
+
+(async function boot() {
+  const facts = $("#hero-facts");
+  try {
+    window.GLOBE = new Globe($("#globe"));
+    GLOBE.reveal = 0; GLOBE.baseMix = 0.55; GLOBE.grid = 0.25; GLOBE.autoRotate = true;
+    await loadAll(m => facts.textContent = m);
+    const img = new Image(); img.onload = () => GLOBE.setBase(img); img.src = "data/bluemarble_2048.jpg";
+    GLOBE.setCoast(S.labels.coast);
+    compute(); paintField();
+    wire(); renderConsole();
+    facts.innerHTML = `${S.n.toLocaleString()} valid land cells · 6 criteria from NASA POWER, MODIS & GMTED2010 · targets built from MEDA, MOLA, LOLA & Diviner · every score deterministic and traceable`;
+    if (innerWidth < 760) { setProj(1); }
+    const h = (location.hash || "").slice(1);
+    if (["method", "data"].includes(h)) { $("#app").classList.remove("is-hero"); setTab(h); renderRight(); }
+    else if (["explore", "compare", "scenarios", "discover"].includes(h)) { S.tab = h; runSearch().then(() => setTab(h)); }
+  } catch (err) {
+    facts.innerHTML = `<span style="color:var(--mismatch)">Could not start: ${esc(err.message)}</span>`;
+    console.error(err);
+  }
+})();
+</script>

@@ -1,0 +1,21 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: pip install -r requirements.txt
+      - run: npm test          # 36 Python tests + JS/Python parity
+      - name: Rebuild stack from raw inputs and check the published SHA-256
+        run: |
+          mkdir -p /tmp/rebuild/data/metadata /tmp/rebuild/public/data
+          python -m src.data.preprocessing.build_stack data/raw /tmp/rebuild > /tmp/rebuild/log.txt
+          head -1 /tmp/rebuild/log.txt
+          want=$(python -c "import json;print(json.load(open('data/metadata/stack_build.json'))['sha256'])")
+          got=$(sha256sum /tmp/rebuild/public/data/stack.bin | cut -d' ' -f1)
+          test "$got" = "$want"

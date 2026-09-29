@@ -1,0 +1,620 @@
+{
+ "zarr_consolidated_format": 1,
+ "metadata": {
+  ".zgroup": {
+   "zarr_format": 2
+  },
+  ".zattrs": {
+   "title": "ASTERRO Planetary Analogue Intelligence - Earth predictor stack",
+   "grid": "NASA POWER / MERRA-2 native, lat -90..90 step 0.5, lon -180..179.375 step 0.625",
+   "crs": "EPSG:4326 (cell centres)",
+   "conventions": "NaN = invalid or missing",
+   "provenance": {
+    "power": {
+     "source": "NASA POWER Climatology API",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/regional",
+     "header": {
+      "title": "NASA/POWER Source Native Resolution Climatology Climatologies",
+      "api": {
+       "version": "v2.10.0",
+       "name": "POWER Climatology API"
+      },
+      "sources": [
+       "MERRA2"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20010101",
+      "end": "20201231"
+     },
+     "params": [
+      "T2M",
+      "T2M_MAX_AVG",
+      "T2M_MIN_AVG",
+      "PRECTOTCORR",
+      "TOA_SW_DWN"
+     ],
+     "months": [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+      "ANN"
+     ],
+     "retrieved_utc": "2026-09-23T12:11:35Z",
+     "failed_then_recovered": [
+      [
+       "T2M_MAX_AVG",
+       "-30",
+       "-140"
+      ],
+      [
+       "T2M_MAX_AVG",
+       "-30",
+       "-130"
+      ],
+      [
+       "T2M_MAX_AVG",
+       "-30",
+       "-120"
+      ],
+      [
+       "T2M_MIN_AVG",
+       "0",
+       "160"
+      ],
+      [
+       "T2M_MIN_AVG",
+       "0",
+       "170"
+      ],
+      [
+       "T2M_MIN_AVG",
+       "10",
+       "-180"
+      ],
+      [
+       "PRECTOTCORR",
+       "20",
+       "170"
+      ],
+      [
+       "PRECTOTCORR",
+       "30",
+       "-180"
+      ],
+      [
+       "PRECTOTCORR",
+       "30",
+       "-170"
+      ],
+      [
+       "TOA_SW_DWN",
+       "60",
+       "-90"
+      ],
+      [
+       "TOA_SW_DWN",
+       "60",
+       "-80"
+      ],
+      [
+       "TOA_SW_DWN",
+       "60",
+       "-70"
+      ]
+     ]
+    },
+    "terrain": {
+     "crs": "EPSG:4326",
+     "transform": [
+      0.008333333300000011,
+      0.0,
+      -180.00013888888893,
+      0.0,
+      -0.008333333300000011,
+      83.99986041511133
+     ],
+     "shape": [
+      20880,
+      43200
+     ],
+     "nodata": -32768.0,
+     "source": "GMTED2010 mn30 (USGS EROS)",
+     "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip",
+     "baseline_m": 926.6254359022073,
+     "retrieved_utc": "2026-09-23T11:48:19Z"
+    },
+    "modis": {
+     "source": "NASA GIBS WMS, MODIS Aqua L3 LST Monthly Day/Night",
+     "wms": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+     "colormap": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_Land_Surface_Temp.xml",
+     "years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+     ],
+     "pixel_deg": 0.1,
+     "quantisation_K": 0.6,
+     "retrieved_utc": "2026-09-23T11:45:42Z"
+    },
+    "years": [
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025
+    ]
+   }
+  },
+  "latitude/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361
+   ],
+   "chunks": [
+    361
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "latitude/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude"
+   ],
+   "units": "degrees_north"
+  },
+  "longitude/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    576
+   ],
+   "chunks": [
+    576
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "longitude/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "longitude"
+   ],
+   "units": "degrees_east"
+  },
+  "aridity/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "aridity/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "annual_temperature_range/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "annual_temperature_range/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "elevation/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "elevation/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "slope/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "slope/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "surface_roughness/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "surface_roughness/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "lst_diurnal_range/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "lst_diurnal_range/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "t2m_mean_c/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "t2m_mean_c/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "precip_mm_yr/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "precip_mm_yr/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "pet_mm_yr/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "pet_mm_yr/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "aridity_index_raw/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "aridity_index_raw/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "lst_day_k/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "lst_day_k/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "lst_night_k/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "lst_night_k/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "modis_coverage/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "modis_coverage/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "gmted_land_fraction/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "gmted_land_fraction/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  },
+  "lst_diurnal_range_yearly/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    10,
+    361,
+    576
+   ],
+   "chunks": [
+    1,
+    181,
+    288
+   ],
+   "dtype": "<f4",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": "NaN",
+   "order": "C",
+   "filters": null
+  },
+  "lst_diurnal_range_yearly/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "year",
+    "latitude",
+    "longitude"
+   ]
+  },
+  "valid/.zarray": {
+   "zarr_format": 2,
+   "shape": [
+    361,
+    576
+   ],
+   "chunks": [
+    181,
+    288
+   ],
+   "dtype": "|u1",
+   "compressor": {
+    "id": "zlib",
+    "level": 6
+   },
+   "fill_value": 0,
+   "order": "C",
+   "filters": null
+  },
+  "valid/.zattrs": {
+   "_ARRAY_DIMENSIONS": [
+    "latitude",
+    "longitude"
+   ]
+  }
+ }
+}
