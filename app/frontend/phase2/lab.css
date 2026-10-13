@@ -1,0 +1,60 @@
+/* ---------- Phase II · Research laboratory (scoped to new classes only) ---------- */
+.lab-head{position:sticky;top:0;background:var(--panel);z-index:2;padding-bottom:10px}
+.lab-nav{display:flex;flex-wrap:wrap;gap:2px}
+.lab-nav button{font:500 9.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:6px 7px;border-radius:2px;color:var(--ink-3);border:1px solid transparent}
+.lab-nav button:hover{color:var(--ink-2)}
+.lab-nav button[aria-selected="true"]{color:var(--ink);border-color:var(--line-2);background:var(--raise)}
+.lab-banner{font:400 11px/1.45 var(--f-mono);color:var(--ink-2);border:1px dashed var(--line-2);border-radius:var(--r);padding:7px 10px;margin:10px 0 4px}
+.lab-banner b{color:var(--partial);letter-spacing:.16em;margin-right:6px;font-weight:500}
+.lab-busy{padding:10px 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;background:var(--panel-2)}
+.lab-form{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;margin-top:10px}
+.lab-form label{display:flex;flex-direction:column;gap:4px;font:500 9.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.lab-form label.wide{flex:1 1 220px}
+.lab-form label.ck,.lab-picks label.ck{flex-direction:row;align-items:center;gap:5px;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-2)}
+.lab-form fieldset,.lab-picks{border:1px solid var(--line);border-radius:var(--r);padding:6px 10px;display:flex;flex-wrap:wrap;gap:4px 12px;margin:10px 0 8px}
+.lab-form input,.lab-form select,.lbl select,.lab-ta{font:400 12px/1.2 var(--f-mono);background:var(--ground);color:var(--ink);border:1px solid var(--line-2);border-radius:2px;padding:5px 6px;min-width:0}
+.lab-form input[type=number]{width:92px}
+.lab-form input[type=text]{width:100%}
+.lab-form input[type=checkbox],.lab-picks input[type=checkbox]{accent-color:var(--accent)}
+.lab-ta{width:100%;resize:vertical;margin:6px 0;line-height:1.45}
+button.lnk{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:2px;text-align:left;font:inherit}
+button.lnk:hover{text-decoration-color:var(--accent)}
+.hov{cursor:pointer}
+.hov:hover rect:first-child{fill:rgba(255,255,255,.03)}
+table.heat td.hc{background:rgba(224,135,79,var(--a));color:var(--ink)}
+#app[data-target="moon_south_pole"] table.heat td.hc{background:rgba(175,199,218,var(--a))}
+#app[data-target="cross"] table.heat td.hc{background:rgba(214,192,122,var(--a))}
+.tag.ev{font-size:8.5px}
+.tag.ev-m{color:var(--earth);border-color:#2e4a47}
+.tag.ev-d{color:var(--ink);border-color:var(--ink-3)}
+.tag.ev-i{color:var(--moon);border-color:#3a4b58}
+.tag.ev-a{color:var(--partial);border-color:#54452a}
+.tag.ev-u{color:var(--ink-3);border-style:dashed}
+.tag.ev-v{color:var(--mismatch);border-color:#5a2e28}
+details.lab-ev{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+details.lab-ev summary{cursor:pointer;font:500 9.5px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.ev-row{padding:7px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:3px}
+.ev-row:last-child{border-bottom:0}
+.ev-row .meta b{color:var(--ink-2);font-weight:500;margin-right:4px}
+.ev-text{font-size:12.5px;color:var(--ink-2)}
+.ev-legend{display:grid;grid-template-columns:1fr;gap:6px}
+.ev-legend div{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:baseline}
+.rq{font:500 11px/1.2 var(--f-mono);white-space:nowrap;color:var(--ink-3)}
+.rq b{font-weight:500;margin-right:2px}
+.hg-row{display:flex;flex-wrap:wrap;gap:10px 14px}
+figure.hg{margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.kv-list{display:flex;flex-direction:column;gap:8px}
+.unc-c{padding:8px 0 10px;border-bottom:1px solid var(--line)}
+.unc-c:last-child{border-bottom:0}
+.unc-c>.row b{font:700 15px/1.1 var(--f-display);letter-spacing:.05em;text-transform:uppercase}
+.fm-card{border:1px solid var(--line-2);border-radius:var(--r);padding:10px 12px;margin:8px 0;background:var(--panel-2)}
+.fm-h{font:700 15px/1.15 var(--f-display);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.fm-card dl{display:grid;grid-template-columns:140px 1fr;gap:4px 10px;margin:6px 0 0;font-size:12px}
+.fm-card dt{font:500 9.5px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.fm-card dd{margin:0;color:var(--ink-2)}
+.fm-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:10px}
+.lab-ol,.lab-ul{margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+pre.lab-pre{max-height:420px;overflow:auto;white-space:pre-wrap}
+.vault-msg{font:400 10.5px/1.5 var(--f-mono);color:var(--ink-2);margin-top:4px;max-width:46ch}
+.rv-ans{margin-top:10px}
+@media (max-width:760px){.fm-grid{grid-template-columns:1fr}.fm-card dl{grid-template-columns:1fr}}

@@ -1,0 +1,413 @@
+{
+ "schema": "asterro.experiment/1",
+ "module": "ablation",
+ "baseline": {
+  "product": "ASTERRO — Planetary Analogue Intelligence",
+  "algorithm_version": "tai-sim-1.0.0",
+  "phase2_version": "asterro-phase2-0.1.0",
+  "target": "mars_jezero",
+  "weights": {
+   "aridity": 1,
+   "annual_temperature_range": 1,
+   "elevation": 1,
+   "slope": 1,
+   "surface_roughness": 1,
+   "lst_diurnal_range": 1
+  },
+  "profile": "general",
+  "profile_label": "General analogue",
+  "normalization_ranges": {
+   "aridity": [
+    0,
+    1
+   ],
+   "annual_temperature_range": [
+    0.3400001525878906,
+    59.91999816894531
+   ],
+   "elevation": [
+    -75.2784423828125,
+    5702
+   ],
+   "slope": [
+    0,
+    20.94510841369629
+   ],
+   "surface_roughness": [
+    0,
+    1500.462158203125
+   ],
+   "lst_diurnal_range": [
+    -6.9000091552734375,
+    75.871
+   ]
+  },
+  "min_coverage": 0.8,
+  "distinct_sep_km": 300,
+  "predictor_stack": {
+   "sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+   "file_hashes": {
+    "stack.bin": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+    "targets.json": "1cb8b3ca70a4ecd6cbe5c36ac952c7dec5d11c9751a070eb71210454f4a2713e",
+    "labels.json": "8bbc4f91590769d8db3ce57028c1a9b067d99bf1a0dbcefdcb29894190522447"
+   }
+  },
+  "phase2_series_sha256": null,
+  "dataset_versions": {
+   "nasa_power": "API v2.10.0; source MERRA-2",
+   "modis_aqua_lst": "Collections 006 / 061 as served by GIBS",
+   "gmted2010": "GMTED2010",
+   "mola": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+   "meda": "Bundle 6.0, doi:10.17189/1522849",
+   "lola": "Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+   "diviner": "level4_polar hourly_maps (2009-07-05 to 2019-02-17)",
+   "natural_earth": "naciscdn.org current",
+   "blue_marble": "GIBS layer"
+  }
+ },
+ "params": {
+  "compareTop": 1000,
+  "nDistinct": 20
+ },
+ "id": "16c9447cf16c77b3",
+ "created_utc": "2026-10-13T18:03:39.181Z",
+ "outputs": [
+  {
+   "removed": "aridity",
+   "top": 77940,
+   "overlap": 7,
+   "rho": 0.7197807717807718,
+   "baselineDistinctNewRanks": [
+    1,
+    28,
+    13,
+    36,
+    29,
+    82,
+    115,
+    228,
+    208,
+    343,
+    305,
+    69,
+    537,
+    628,
+    643,
+    564,
+    676,
+    258,
+    312,
+    59
+   ],
+   "distinct": [
+    77940,
+    73909,
+    82546,
+    146152,
+    85422,
+    138661,
+    139248,
+    143839,
+    141543,
+    142130,
+    142700,
+    138667,
+    146737,
+    87146,
+    144439,
+    91174,
+    80822,
+    143293,
+    71025,
+    140961
+   ]
+  },
+  {
+   "removed": "annual_temperature_range",
+   "top": 146152,
+   "overlap": 12,
+   "rho": 0.8564836964836965,
+   "baselineDistinctNewRanks": [
+    7,
+    1,
+    55,
+    6,
+    79,
+    9,
+    160,
+    35,
+    66,
+    256,
+    152,
+    130,
+    117,
+    384,
+    357,
+    180,
+    493,
+    291,
+    238,
+    261
+   ],
+   "distinct": [
+    146152,
+    144419,
+    77940,
+    147310,
+    140963,
+    82546,
+    85422,
+    142696,
+    148471,
+    145565,
+    91174,
+    75058,
+    147863,
+    145017,
+    71025,
+    140399,
+    139818,
+    143853,
+    87146,
+    138618
+   ]
+  },
+  {
+   "removed": "elevation",
+   "top": 76786,
+   "overlap": 1,
+   "rho": -0.05021262221262221,
+   "baselineDistinctNewRanks": [
+    83,
+    450,
+    69,
+    2179,
+    645,
+    4173,
+    317,
+    970,
+    5070,
+    2012,
+    2634,
+    8686,
+    504,
+    102,
+    10,
+    5469,
+    37,
+    7633,
+    8690,
+    10754
+   ],
+   "distinct": [
+    76786,
+    128189,
+    74617,
+    73904,
+    87143,
+    123623,
+    121900,
+    83119,
+    79668,
+    121905,
+    70012,
+    124763,
+    134316,
+    127075,
+    131672,
+    78074,
+    137193,
+    129952,
+    133404,
+    124718
+   ]
+  },
+  {
+   "removed": "slope",
+   "top": 77940,
+   "overlap": 8,
+   "rho": 0.9173003573003573,
+   "baselineDistinctNewRanks": [
+    1,
+    18,
+    26,
+    16,
+    31,
+    45,
+    32,
+    113,
+    50,
+    37,
+    191,
+    233,
+    258,
+    242,
+    300,
+    175,
+    307,
+    254,
+    382,
+    409
+   ],
+   "distinct": [
+    77940,
+    80818,
+    74483,
+    144991,
+    146152,
+    84272,
+    142691,
+    71025,
+    90598,
+    147885,
+    147863,
+    146739,
+    139809,
+    141544,
+    136947,
+    137515,
+    121895,
+    87146,
+    145593,
+    149047
+   ]
+  },
+  {
+   "removed": "surface_roughness",
+   "top": 77940,
+   "overlap": 11,
+   "rho": 0.9228523188523189,
+   "baselineDistinctNewRanks": [
+    1,
+    10,
+    9,
+    59,
+    83,
+    49,
+    7,
+    91,
+    146,
+    102,
+    161,
+    218,
+    229,
+    272,
+    264,
+    301,
+    306,
+    336,
+    307,
+    338
+   ],
+   "distinct": [
+    77940,
+    75058,
+    82546,
+    146152,
+    144415,
+    142116,
+    85422,
+    147310,
+    71025,
+    91174,
+    146166,
+    140959,
+    128188,
+    140969,
+    121895,
+    143852,
+    147863,
+    125924,
+    80822,
+    149050
+   ]
+  },
+  {
+   "removed": "lst_diurnal_range",
+   "top": 77940,
+   "overlap": 10,
+   "rho": 0.9354275634275634,
+   "baselineDistinctNewRanks": [
+    1,
+    9,
+    44,
+    54,
+    64,
+    16,
+    132,
+    26,
+    116,
+    143,
+    61,
+    165,
+    216,
+    164,
+    234,
+    224,
+    190,
+    257,
+    225,
+    278
+   ],
+   "distinct": [
+    77940,
+    146730,
+    144420,
+    82546,
+    91174,
+    85422,
+    146737,
+    140963,
+    72178,
+    142697,
+    144414,
+    121895,
+    125924,
+    75056,
+    145016,
+    148471,
+    147863,
+    128189,
+    121326,
+    87146
+   ]
+  }
+ ],
+ "outputs_sha256": "fb9a33c7c9bf50faa2719fa308324ffc359e70a9680af5b2d3525cf4457a586f",
+ "limitations": [],
+ "claims": [
+  {
+   "id": "ablation",
+   "text": "Each active criterion removed in turn (weight 0); full re-ranking and distinct-site selection repeated (6 experiments).",
+   "category": "DERIVED",
+   "supporting": [],
+   "method": "Baseline formula with one weight set to 0; overlap counts baseline top-20 distinct sites present in the experimental top-20 (exact cell match); Spearman ρ over the baseline top-1000 cells.",
+   "provenance": [
+    "predictor stack cfbe1bf5fab5…"
+   ],
+   "assumptions": [],
+   "limitations": [
+    "An ablation is an alternative analysis, never a replacement score.",
+    "Exact-cell overlap undercounts a site that moved to a neighbouring cell."
+   ],
+   "completeness": "complete",
+   "reproduce": null
+  }
+ ],
+ "parent": null,
+ "replay": "browser + python (scripts/replay_experiment.py)",
+ "software": {
+  "app": "tai-sim-1.0.0",
+  "phase2": "asterro-phase2-0.1.0"
+ },
+ "package": {
+  "schema": "asterro.experiment-package/1",
+  "instructions": [
+   "1. Obtain the ASTERRO repository at the algorithm version in baseline.algorithm_version.",
+   "2. Check that public/data/stack.bin has SHA-256 baseline.predictor_stack.sha256.",
+   "3. Replay: python scripts/replay_experiment.py <this file> (robustness, ablation), or Lab → Vault → Import → Replay in the browser.",
+   "4. A replay is reproduced when the canonical-JSON SHA-256 of the recomputed outputs equals outputs_sha256."
+  ],
+  "contains": "configuration, metadata, outputs and checksums only — no source data, no credentials"
+ }
+}

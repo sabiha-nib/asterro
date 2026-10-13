@@ -1,0 +1,23 @@
+{
+ "app/frontend/engine.js": "fc35f110ed02b40de6a8c4b47b1425c8858e250adbc02725f6c12df7480684ed",
+ "app/frontend/styles.css": "e75982fc1bd0c6c64b658cf9d47d0f55cc30d2e5cf216567639f0a395c97ed66",
+ "app/frontend/index.src.html": "1cdc02bf2133f3f50d2a4368523ee58ae0c554782e998460f9015fa8ffa77ccb",
+ "app/frontend/js/01_core.js": "870e1461c0532ff6464c325ec61c09b27b3584be45e9af7bdbf1e739ea86da33",
+ "app/frontend/js/02_globe.js": "47bda33c42c550cd79cca527c2b5eb5f55ecff7336b1c12dd5c77ac6995835cd",
+ "app/frontend/js/03_compute.js": "24e20c18cb70b1ef41c681dc723a78c4df92d969bfda6a70706dbe01c9a53331",
+ "app/frontend/js/04_views.js": "eaeaa02e16241a314fd455372e96a1c6424dc9a12f648bef6090597f98331882",
+ "app/frontend/js/05_console.js": "174d091742e4f0d3919442fdcd80858612b803a565773847f078a4c820ff4f25",
+ "app/frontend/js/06_sheets.js": "5e1fd1b1950815a387148f331e42c9d9b331f056dbcc730f03307898a7079000",
+ "app/frontend/js/07_main.js": "9b5ae2cf9257a49a1780029ff854e7dfc51df51378a74978f2f5a56779d0443a",
+ "src/compute/similarity.py": "813dcb3b26cf2b3711430f425076e4edb30dff756dcfc79fa05cfb715e942f94",
+ "src/compute/ranking.py": "2d70da6b1b86ae9c0c7ef4dfb8fcb418d4d748eafdd2857b282d78fb6754e3d1",
+ "src/compute/normalization.py": "4e70ca5e37af528e64d99e2eb8096e39797144b2ce0a69e77a530aeb0e25ea75",
+ "src/compute/clustering.py": "23eae0407bcabf3e9fec6afc4cf089a4f19df7a1bb1770ea96271f920b14947e",
+ "src/compute/sensitivity.py": "5327e42d5e3d961274129dda6bf7e10a4fee734fb293262bce3ec6841536e4e3",
+ "src/compute/variables.py": "50fe91c907ec0e371b7f2559e8d513e543b019986e4b94b4097e602b09a70ccb",
+ "data/targets.json": "1cb8b3ca70a4ecd6cbe5c36ac952c7dec5d11c9751a070eb71210454f4a2713e",
+ "public/data/stack.bin": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "data/predictor_stack.npz": "89f1ca766e2292765d01485f54117389b3e13f28c1278dee44e733de5a752883",
+ "public/data/targets.json": "1cb8b3ca70a4ecd6cbe5c36ac952c7dec5d11c9751a070eb71210454f4a2713e",
+ "public/data/labels.json": "8bbc4f91590769d8db3ce57028c1a9b067d99bf1a0dbcefdcb29894190522447"
+}

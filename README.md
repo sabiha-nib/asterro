@@ -581,3 +581,42 @@ real data:
 * target thumbnails are hillshades of the MOLA and LOLA elevation data;
 * the basemap is NASA Blue Marble;
 * the opening sequence is rendered live from the real score field.
+
+---
+
+## Phase II — Research laboratory
+
+Phase II adds a **Lab** tab: thirteen analytical modules that sit **beside** the baseline engine. They
+answer questions the Analogue Score alone cannot — is a rank stable under other weightings, how
+varied is the surrounding area, which uncertainties can and cannot be quantified, what does the
+six-criterion model leave out, and which evidence is missing. The baseline score, weights,
+normalisation, thresholds, ranking, data, targets and interface are unchanged; the experimental
+scoring path reproduces the baseline engine bit-for-bit.
+
+| Module | What it adds | Status |
+|---|---|---|
+| Robustness | Weight-sensitivity designs (one-at-a-time, 3^k factorial, seeded sample), rank distributions, stability classes, criterion ablation | Implemented |
+| Multi-objective | Pareto front across criteria, diversity portfolio, portfolio comparison | Implemented |
+| Spatial atlas | Neighbourhood windows of whole cells, gradients, target-window terrain distributions, scale ladder | Partially (Earth sub-cell data not retained) |
+| Uncertainty | Score sensitivity to documented alternative inputs; unquantified sources listed | Implemented |
+| Failure modes | Points lost per criterion, unmodelled factors, activity checklists, counterexamples | Implemented |
+| Evidence graph | Typed provenance graph with upstream lineage | Implemented |
+| Cross-planet | Mars vs Moon fingerprints and compatibility; candidate trade-offs | Implemented |
+| Temporal | MODIS yearly series (Theil–Sen, Mann–Kendall), coverage, POWER monthly climatology | Implemented (trend test experimental) |
+| Requirements | User-defined analytical requirements mapped to evidence and evaluated | Implemented |
+| Observation value | Qualitative evidence-priority from rank disagreement (formal VOI blocked) | Partially |
+| Planner | Preliminary research plan (Markdown / JSON) from recorded outputs | Implemented |
+| Vault | Experiment records: verify, replay, compare, export | Implemented |
+| Review | Evidence-tagged answers; scientific-language check (language-model copilot not implemented) | Implemented |
+
+```
+npm run build:phase2                               # Phase II data products → public/data/phase2/
+npm test                                           # baseline tests + Phase II (Python 50, JS parity, Node 65)
+python tests/phase2/ui_lab_smoke.py <outdir>       # walks every Lab module (needs playwright)
+python scripts/replay_experiment.py record.json    # independent replay of an exported Lab record
+```
+
+Documentation: [architecture](docs/phase2/ARCHITECTURE.md) · [methods](docs/phase2/METHODS.md) ·
+[feature registry](docs/phase2/FEATURE_REGISTRY.md) · [baseline preservation](docs/phase2/BASELINE_PRESERVATION.md) ·
+[test report](docs/phase2/TEST_REPORT.md). Phase II results are analyses, not validation: no ranking has been
+compared with field-validated analogue sites, and nothing here is suitable for operational mission planning.

@@ -1,0 +1,192 @@
+{
+ "algorithm_version": "tai-sim-1.0.0",
+ "ranges": {
+  "aridity": [
+   0.0,
+   1.0
+  ],
+  "annual_temperature_range": [
+   0.3400001525878906,
+   59.91999816894531
+  ],
+  "elevation": [
+   -75.2784423828125,
+   5702.0
+  ],
+  "slope": [
+   0.0,
+   20.94510841369629
+  ],
+  "surface_roughness": [
+   0.0,
+   1500.462158203125
+  ],
+  "lst_diurnal_range": [
+   -6.9000091552734375,
+   75.871
+  ]
+ },
+ "profiles": {
+  "general": {
+   "label": "General analogue",
+   "rationale": "Equal weight on every available criterion.",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   }
+  },
+  "rover": {
+   "label": "Rover mobility",
+   "rationale": "Traversability is governed mainly by slope and roughness at the ~1 km baseline; climate is secondary.",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 0.5,
+    "elevation": 1,
+    "slope": 3,
+    "surface_roughness": 3,
+    "lst_diurnal_range": 0.5
+   }
+  },
+  "eva": {
+   "label": "EVA training",
+   "rationale": "Crew exposure: dryness, thermal swings and walkable terrain.",
+   "weights": {
+    "aridity": 2,
+    "annual_temperature_range": 1.5,
+    "elevation": 1,
+    "slope": 1.5,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 2
+   }
+  },
+  "thermal": {
+   "label": "Thermal testing",
+   "rationale": "Hardware thermal cycling: diurnal surface swing and seasonal air-temperature range dominate.",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 2,
+    "elevation": 1,
+    "slope": 0.5,
+    "surface_roughness": 0.5,
+    "lst_diurnal_range": 3
+   }
+  },
+  "habitat": {
+   "label": "Habitat operations",
+   "rationale": "Long-duration stays: thermal environment plus low slope for construction.",
+   "weights": {
+    "aridity": 1.5,
+    "annual_temperature_range": 2,
+    "elevation": 1,
+    "slope": 2,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 2
+   }
+  },
+  "instrument": {
+   "label": "Science instrument testing",
+   "rationale": "Dry surfaces and thin (high) atmosphere columns matter most for instrument analogues.",
+   "weights": {
+    "aridity": 3,
+    "annual_temperature_range": 1,
+    "elevation": 1.5,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1.5
+   }
+  }
+ },
+ "thresholds": {
+  "match": 0.85,
+  "partial": 0.6,
+  "min_coverage": 0.8,
+  "n_candidates": 800,
+  "k_choices": [
+   3,
+   4,
+   5
+  ],
+  "distinct_sep_km": 300,
+  "evolution_stable_pts": 2.0
+ },
+ "criteria": [
+  {
+   "id": "aridity",
+   "label": "Aridity",
+   "short": "ARID",
+   "unit": "index (P/PET, saturated at 1)",
+   "group": "climate",
+   "description": "UNEP-style aridity index P/PET. PET by Hargreaves (1985) from NASA POWER T2M, T2M_MAX_AVG, T2M_MIN_AVG with FAO-56 extraterrestrial radiation Ra (computed from latitude); P = PRECTOTCORR. Values >= 1 (energy-limited, humid) are saturated at 1. Missing where Hargreaves PET is undefined.",
+   "earth_source": [
+    "nasa_power"
+   ],
+   "fmt": 3
+  },
+  {
+   "id": "annual_temperature_range",
+   "label": "Annual temperature range",
+   "short": "T-RANGE",
+   "unit": "K",
+   "group": "climate",
+   "description": "Warmest-month minus coldest-month mean 2 m air temperature (NASA POWER T2M climatology 2001-2020).",
+   "earth_source": [
+    "nasa_power"
+   ],
+   "fmt": 1
+  },
+  {
+   "id": "elevation",
+   "label": "Elevation",
+   "short": "ELEV",
+   "unit": "m",
+   "group": "terrain",
+   "description": "Mean GMTED2010 30-arc-second elevation in the cell (m above EGM96).",
+   "earth_source": [
+    "gmted2010"
+   ],
+   "fmt": 0
+  },
+  {
+   "id": "slope",
+   "label": "Slope",
+   "short": "SLOPE",
+   "unit": "deg",
+   "group": "terrain",
+   "description": "Mean Horn (1981) slope on a 926.6 m baseline.",
+   "earth_source": [
+    "gmted2010"
+   ],
+   "fmt": 2
+  },
+  {
+   "id": "surface_roughness",
+   "label": "Surface roughness",
+   "short": "ROUGH",
+   "unit": "m",
+   "group": "terrain",
+   "description": "Standard deviation of 926.6 m-baseline elevations inside the cell.",
+   "earth_source": [
+    "gmted2010"
+   ],
+   "fmt": 0
+  },
+  {
+   "id": "lst_diurnal_range",
+   "label": "Thermal (LST diurnal range)",
+   "short": "THERM",
+   "unit": "K",
+   "group": "thermal",
+   "description": "MODIS Aqua land-surface temperature at ~13:30 minus ~01:30 local solar time, mean of monthly composites 2016-2025.",
+   "earth_source": [
+    "modis_aqua_lst"
+   ],
+   "fmt": 1
+  }
+ ],
+ "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "source": "git baseline commit 7e7835a (= GitHub 3073a87)"
+}

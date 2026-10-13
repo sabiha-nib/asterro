@@ -10,7 +10,9 @@
     "build": "python3 scripts/build_web.py . && python3 scripts/export_reference.py . && python3 scripts/write_provenance.py .",
     "test:py": "python3 scripts/run_tests_offline.py",
     "test:js": "node tests/test_js_parity.mjs",
-    "test": "npm run test:py && npm run test:js",
+    "test:phase2": "node tests/phase2/test_lab_engine.mjs",
+    "build:phase2": "python3 scripts/build_phase2_data.py .",
+    "test": "npm run test:py && npm run test:js && npm run test:phase2",
     "start": "python3 -m http.server ${PORT:-8080} -d public"
   }
 }

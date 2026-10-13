@@ -1,0 +1,2658 @@
+{
+ "product": "ASTERRO Phase II context data",
+ "generated_by": "scripts/build_phase2_data.py",
+ "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "n_cells": 76781,
+ "series": {
+  "file": "series.b64.txt",
+  "bytes": 5374670,
+  "sha256": "cc9fe3949d21eb1979add76ef814aa483db56c3808b6eb3435e0f9ba302006d4",
+  "layout": [
+   {
+    "name": "t2m_monthly",
+    "dtype": "int16",
+    "offset": 0,
+    "length": 921372,
+    "shape": [
+     12,
+     76781
+    ],
+    "scale": 0.01,
+    "unit": "degC",
+    "fill": -32768,
+    "source": "NASA POWER Climatology API v2.10.0 (MERRA-2) T2M, monthly climatology 2001-2020"
+   },
+   {
+    "name": "prec_monthly",
+    "dtype": "int16",
+    "offset": 1842744,
+    "length": 921372,
+    "shape": [
+     12,
+     76781
+    ],
+    "scale": 0.01,
+    "unit": "mm/day",
+    "fill": -32768,
+    "source": "NASA POWER Climatology API v2.10.0 (MERRA-2) PRECTOTCORR, monthly climatology 2001-2020"
+   },
+   {
+    "name": "modis_n_year",
+    "dtype": "uint16",
+    "offset": 3685488,
+    "length": 767810,
+    "shape": [
+     10,
+     76781
+    ],
+    "scale": 1,
+    "unit": "pixel-months",
+    "fill": 65535,
+    "source": "NASA GIBS MODIS Aqua monthly LST decode: valid 0.1-degree pixel-months per cell and year"
+   },
+   {
+    "name": "gmted_pixels",
+    "dtype": "uint16",
+    "offset": 5221108,
+    "length": 76781,
+    "shape": [
+     1,
+     76781
+    ],
+    "scale": 1,
+    "unit": "pixels",
+    "fill": 65535,
+    "source": "GMTED2010 mn30 30-arc-second pixels aggregated into the cell"
+   }
+  ],
+  "encoding": "base64 of little-endian binary; valid cells in stack.bin order"
+ },
+ "modis_years": [
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025
+ ],
+ "modis_quantisation_K": 0.6,
+ "modis_pixel_deg": 0.1,
+ "target_windows": {
+  "mars_jezero": {
+   "window_km": 55.59752615413244,
+   "baseline_m": 926.6254359022073,
+   "bins": "60 x 60",
+   "dem": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+   "dem_pixel_m": 463.0935415503709,
+   "source_pixels": 16176,
+   "slope_deg": {
+    "n": 3600,
+    "mean": 2.4133761788749446,
+    "sd": 2.578749700596612,
+    "min": 0.04033675044775009,
+    "max": 19.411531448364258,
+    "p10": 0.45669556856155397,
+    "p25": 0.7938604950904846,
+    "median": 1.5857114791870117,
+    "p75": 2.894661545753479,
+    "p90": 5.562865972518921,
+    "hist": {
+     "edges": [
+      0.0,
+      2.0,
+      4.0,
+      6.0,
+      8.0,
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      18.0,
+      20.0,
+      22.0,
+      24.0,
+      26.0,
+      28.0,
+      30.0,
+      32.0,
+      34.0,
+      36.0,
+      38.0,
+      40.0
+     ],
+     "counts": [
+      2185,
+      841,
+      263,
+      130,
+      93,
+      42,
+      22,
+      10,
+      10,
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "elevation_m": {
+    "n": 3600,
+    "mean": -2309.5115741644963,
+    "sd": 263.2411458700214,
+    "min": -2771.5,
+    "max": -1508.6666259765625,
+    "p10": -2649.75,
+    "p25": -2566.0625,
+    "median": -2311.625,
+    "p75": -2077.1875,
+    "p90": -1994.475,
+    "hist": {
+     "edges": [
+      -2771.5,
+      -2718.8819427490234,
+      -2666.263885498047,
+      -2613.6458282470703,
+      -2561.0277709960938,
+      -2508.409713745117,
+      -2455.7916564941406,
+      -2403.173599243164,
+      -2350.5555419921875,
+      -2297.937484741211,
+      -2245.3194274902344,
+      -2192.701370239258,
+      -2140.0833129882812,
+      -2087.4652557373047,
+      -2034.8471984863281,
+      -1982.2291412353516,
+      -1929.611083984375,
+      -1876.9930267333984,
+      -1824.3749694824219,
+      -1771.7569122314453,
+      -1719.1388549804688,
+      -1666.5207977294922,
+      -1613.9027404785156,
+      -1561.284683227539,
+      -1508.6666259765625
+     ],
+     "counts": [
+      2,
+      222,
+      428,
+      276,
+      218,
+      206,
+      188,
+      158,
+      131,
+      159,
+      142,
+      162,
+      324,
+      386,
+      289,
+      113,
+      67,
+      62,
+      21,
+      23,
+      6,
+      12,
+      3,
+      2
+     ]
+    }
+   },
+   "note": "Distribution over the 926.6 m bins of the 55.6 km target window used to build the target slope and roughness values (target slope = mean of these bins; roughness = SD of bin elevations)."
+  },
+  "moon_south_pole": {
+   "window_km": 55.59752615413244,
+   "baseline_m": 926.6254359022073,
+   "bins": "60 x 60",
+   "dem": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif",
+   "dem_pixel_m": 118.4505876,
+   "source_pixels": 24990760,
+   "slope_deg": {
+    "n": 3600,
+    "mean": 10.291848673721155,
+    "sd": 7.5034083105502685,
+    "min": 0.15024985373020172,
+    "max": 32.98984909057617,
+    "p10": 2.461331367492676,
+    "p25": 4.889084696769714,
+    "median": 8.588347434997559,
+    "p75": 13.301305770874023,
+    "p90": 20.35949459075927,
+    "hist": {
+     "edges": [
+      0.0,
+      2.0,
+      4.0,
+      6.0,
+      8.0,
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      18.0,
+      20.0,
+      22.0,
+      24.0,
+      26.0,
+      28.0,
+      30.0,
+      32.0,
+      34.0,
+      36.0,
+      38.0,
+      40.0
+     ],
+     "counts": [
+      251,
+      429,
+      506,
+      481,
+      445,
+      365,
+      315,
+      207,
+      138,
+      93,
+      59,
+      41,
+      15,
+      32,
+      53,
+      147,
+      23,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "elevation_m": {
+    "n": 3600,
+    "mean": -241.66983825058574,
+    "sd": 958.1354081551543,
+    "min": -2828.195556640625,
+    "max": 1938.9803466796875,
+    "p10": -1342.89404296875,
+    "p25": -955.6822357177734,
+    "median": -350.0579833984375,
+    "p75": 547.1492004394531,
+    "p90": 1080.2329467773436,
+    "hist": {
+     "edges": [
+      -2828.195556640625,
+      -2629.563227335612,
+      -2430.930898030599,
+      -2232.298568725586,
+      -2033.6662394205728,
+      -1835.0339101155598,
+      -1636.4015808105469,
+      -1437.7692515055337,
+      -1239.1369222005208,
+      -1040.5045928955078,
+      -841.8722635904946,
+      -643.2399342854815,
+      -444.60760498046875,
+      -245.97527567545558,
+      -47.342946370442405,
+      151.2893829345703,
+      349.9217122395835,
+      548.5540415445967,
+      747.1863708496094,
+      945.8187001546225,
+      1144.4510294596357,
+      1343.0833587646484,
+      1541.715688069662,
+      1740.3480173746748,
+      1938.9803466796875
+     ],
+     "counts": [
+      30,
+      20,
+      26,
+      32,
+      34,
+      69,
+      83,
+      150,
+      219,
+      474,
+      302,
+      263,
+      205,
+      201,
+      216,
+      198,
+      180,
+      181,
+      192,
+      235,
+      145,
+      87,
+      45,
+      13
+     ]
+    }
+   },
+   "note": "Distribution over the 926.6 m bins of the 55.6 km target window used to build the target slope and roughness values (target slope = mean of these bins; roughness = SD of bin elevations)."
+  }
+ },
+ "meda_ground": {
+  "sols": 269,
+  "t13_mean_K": 272.42916327261383,
+  "t01_mean_K": 196.87855003042046,
+  "dT_per_sol": {
+   "mean": 75.55061324219339,
+   "sd": 9.35195052860747,
+   "p10": 65.09835025946522,
+   "p90": 87.29066761063241,
+   "min": 50.91632570251912,
+   "max": 100.03400000000005
+  },
+  "per_sol": [
+   {
+    "sol": 16,
+    "ls": 13.531,
+    "dT": 78.814
+   },
+   {
+    "sol": 18,
+    "ls": 14.514,
+    "dT": 90.73
+   },
+   {
+    "sol": 30,
+    "ls": 20.349,
+    "dT": 88.581
+   },
+   {
+    "sol": 32,
+    "ls": 21.314,
+    "dT": 90.614
+   },
+   {
+    "sol": 34,
+    "ls": 22.276,
+    "dT": 79.86
+   },
+   {
+    "sol": 36,
+    "ls": 23.236,
+    "dT": 75.126
+   },
+   {
+    "sol": 38,
+    "ls": 24.194,
+    "dT": 76.707
+   },
+   {
+    "sol": 44,
+    "ls": 27.053,
+    "dT": 76.528
+   },
+   {
+    "sol": 46,
+    "ls": 28.001,
+    "dT": 74.745
+   },
+   {
+    "sol": 48,
+    "ls": 28.956,
+    "dT": 73.724
+   },
+   {
+    "sol": 50,
+    "ls": 29.892,
+    "dT": 73.635
+   },
+   {
+    "sol": 52,
+    "ls": 30.843,
+    "dT": 73.682
+   },
+   {
+    "sol": 54,
+    "ls": 31.775,
+    "dT": 71.877
+   },
+   {
+    "sol": 56,
+    "ls": 32.722,
+    "dT": 72.547
+   },
+   {
+    "sol": 58,
+    "ls": 33.659,
+    "dT": 72.779
+   },
+   {
+    "sol": 62,
+    "ls": 35.517,
+    "dT": 71.769
+   },
+   {
+    "sol": 64,
+    "ls": 36.456,
+    "dT": 72.207
+   },
+   {
+    "sol": 66,
+    "ls": 37.386,
+    "dT": 75.899
+   },
+   {
+    "sol": 68,
+    "ls": 38.314,
+    "dT": 67.951
+   },
+   {
+    "sol": 70,
+    "ls": 39.239,
+    "dT": 67.657
+   },
+   {
+    "sol": 72,
+    "ls": 40.155,
+    "dT": 67.037
+   },
+   {
+    "sol": 74,
+    "ls": 41.087,
+    "dT": 71.362
+   },
+   {
+    "sol": 76,
+    "ls": 41.998,
+    "dT": 71.379
+   },
+   {
+    "sol": 78,
+    "ls": 42.919,
+    "dT": 70.513
+   },
+   {
+    "sol": 80,
+    "ls": 43.837,
+    "dT": 70.222
+   },
+   {
+    "sol": 82,
+    "ls": 44.754,
+    "dT": 70.466
+   },
+   {
+    "sol": 84,
+    "ls": 45.669,
+    "dT": 69.546
+   },
+   {
+    "sol": 86,
+    "ls": 46.584,
+    "dT": 68.69
+   },
+   {
+    "sol": 88,
+    "ls": 47.496,
+    "dT": 62.627
+   },
+   {
+    "sol": 90,
+    "ls": 48.409,
+    "dT": 62.501
+   },
+   {
+    "sol": 92,
+    "ls": 49.319,
+    "dT": 73.937
+   },
+   {
+    "sol": 94,
+    "ls": 50.23,
+    "dT": 74.065
+   },
+   {
+    "sol": 100,
+    "ls": 52.952,
+    "dT": 67.795
+   },
+   {
+    "sol": 102,
+    "ls": 53.858,
+    "dT": 70.665
+   },
+   {
+    "sol": 104,
+    "ls": 54.763,
+    "dT": 85.762
+   },
+   {
+    "sol": 106,
+    "ls": 55.666,
+    "dT": 88.122
+   },
+   {
+    "sol": 108,
+    "ls": 56.57,
+    "dT": 79.459
+   },
+   {
+    "sol": 110,
+    "ls": 57.473,
+    "dT": 88.542
+   },
+   {
+    "sol": 112,
+    "ls": 58.374,
+    "dT": 76.045
+   },
+   {
+    "sol": 114,
+    "ls": 59.275,
+    "dT": 79.664
+   },
+   {
+    "sol": 116,
+    "ls": 60.177,
+    "dT": 79.466
+   },
+   {
+    "sol": 118,
+    "ls": 61.076,
+    "dT": 71.081
+   },
+   {
+    "sol": 120,
+    "ls": 61.975,
+    "dT": 70.775
+   },
+   {
+    "sol": 124,
+    "ls": 63.773,
+    "dT": 69.297
+   },
+   {
+    "sol": 126,
+    "ls": 64.674,
+    "dT": 64.793
+   },
+   {
+    "sol": 128,
+    "ls": 65.57,
+    "dT": 69.309
+   },
+   {
+    "sol": 130,
+    "ls": 66.467,
+    "dT": 72.095
+   },
+   {
+    "sol": 132,
+    "ls": 67.365,
+    "dT": 79.173
+   },
+   {
+    "sol": 134,
+    "ls": 68.262,
+    "dT": 79.328
+   },
+   {
+    "sol": 136,
+    "ls": 69.159,
+    "dT": 70.25
+   },
+   {
+    "sol": 138,
+    "ls": 70.056,
+    "dT": 50.916
+   },
+   {
+    "sol": 140,
+    "ls": 70.953,
+    "dT": 51.393
+   },
+   {
+    "sol": 142,
+    "ls": 71.85,
+    "dT": 50.98
+   },
+   {
+    "sol": 144,
+    "ls": 72.747,
+    "dT": 51.339
+   },
+   {
+    "sol": 146,
+    "ls": 73.643,
+    "dT": 51.039
+   },
+   {
+    "sol": 148,
+    "ls": 74.541,
+    "dT": 51.365
+   },
+   {
+    "sol": 150,
+    "ls": 75.438,
+    "dT": 51.172
+   },
+   {
+    "sol": 152,
+    "ls": 76.336,
+    "dT": 51.4
+   },
+   {
+    "sol": 154,
+    "ls": 77.233,
+    "dT": 82.528
+   },
+   {
+    "sol": 156,
+    "ls": 78.132,
+    "dT": 75.48
+   },
+   {
+    "sol": 158,
+    "ls": 79.03,
+    "dT": 65.271
+   },
+   {
+    "sol": 160,
+    "ls": 79.929,
+    "dT": 65.351
+   },
+   {
+    "sol": 162,
+    "ls": 80.828,
+    "dT": 65.057
+   },
+   {
+    "sol": 168,
+    "ls": 83.529,
+    "dT": 65.38
+   },
+   {
+    "sol": 170,
+    "ls": 84.43,
+    "dT": 84.053
+   },
+   {
+    "sol": 172,
+    "ls": 85.333,
+    "dT": 73.097
+   },
+   {
+    "sol": 174,
+    "ls": 86.236,
+    "dT": 75.795
+   },
+   {
+    "sol": 176,
+    "ls": 87.139,
+    "dT": 69.688
+   },
+   {
+    "sol": 178,
+    "ls": 88.043,
+    "dT": 67.909
+   },
+   {
+    "sol": 180,
+    "ls": 88.949,
+    "dT": 85.966
+   },
+   {
+    "sol": 186,
+    "ls": 91.672,
+    "dT": 82.441
+   },
+   {
+    "sol": 188,
+    "ls": 92.579,
+    "dT": 82.388
+   },
+   {
+    "sol": 190,
+    "ls": 93.49,
+    "dT": 81.512
+   },
+   {
+    "sol": 196,
+    "ls": 96.227,
+    "dT": 82.332
+   },
+   {
+    "sol": 198,
+    "ls": 97.142,
+    "dT": 82.95
+   },
+   {
+    "sol": 200,
+    "ls": 98.058,
+    "dT": 81.661
+   },
+   {
+    "sol": 210,
+    "ls": 102.662,
+    "dT": 73.243
+   },
+   {
+    "sol": 214,
+    "ls": 104.513,
+    "dT": 59.532
+   },
+   {
+    "sol": 216,
+    "ls": 105.442,
+    "dT": 59.761
+   },
+   {
+    "sol": 238,
+    "ls": 115.777,
+    "dT": 70.631
+   },
+   {
+    "sol": 240,
+    "ls": 116.728,
+    "dT": 74.122
+   },
+   {
+    "sol": 242,
+    "ls": 117.587,
+    "dT": 74.184
+   },
+   {
+    "sol": 248,
+    "ls": 120.559,
+    "dT": 71.902
+   },
+   {
+    "sol": 250,
+    "ls": 121.523,
+    "dT": 67.053
+   },
+   {
+    "sol": 252,
+    "ls": 122.489,
+    "dT": 67.56
+   },
+   {
+    "sol": 256,
+    "ls": 124.43,
+    "dT": 67.367
+   },
+   {
+    "sol": 258,
+    "ls": 125.404,
+    "dT": 67.901
+   },
+   {
+    "sol": 264,
+    "ls": 128.341,
+    "dT": 68.487
+   },
+   {
+    "sol": 266,
+    "ls": 129.326,
+    "dT": 69.248
+   },
+   {
+    "sol": 268,
+    "ls": 130.314,
+    "dT": 68.292
+   },
+   {
+    "sol": 270,
+    "ls": 131.305,
+    "dT": 68.642
+   },
+   {
+    "sol": 276,
+    "ls": 134.293,
+    "dT": 69.931
+   },
+   {
+    "sol": 280,
+    "ls": 136.302,
+    "dT": 76.641
+   },
+   {
+    "sol": 282,
+    "ls": 137.32,
+    "dT": 96.426
+   },
+   {
+    "sol": 284,
+    "ls": 138.322,
+    "dT": 87.271
+   },
+   {
+    "sol": 286,
+    "ls": 139.337,
+    "dT": 81.1
+   },
+   {
+    "sol": 288,
+    "ls": 140.355,
+    "dT": 82.628
+   },
+   {
+    "sol": 290,
+    "ls": 141.376,
+    "dT": 82.004
+   },
+   {
+    "sol": 292,
+    "ls": 142.401,
+    "dT": 80.245
+   },
+   {
+    "sol": 294,
+    "ls": 143.429,
+    "dT": 81.386
+   },
+   {
+    "sol": 296,
+    "ls": 144.461,
+    "dT": 82.656
+   },
+   {
+    "sol": 298,
+    "ls": 145.496,
+    "dT": 80.31
+   },
+   {
+    "sol": 300,
+    "ls": 146.534,
+    "dT": 83.139
+   },
+   {
+    "sol": 302,
+    "ls": 147.576,
+    "dT": 84.241
+   },
+   {
+    "sol": 304,
+    "ls": 148.622,
+    "dT": 85.917
+   },
+   {
+    "sol": 306,
+    "ls": 149.671,
+    "dT": 85.145
+   },
+   {
+    "sol": 308,
+    "ls": 150.733,
+    "dT": 87.159
+   },
+   {
+    "sol": 310,
+    "ls": 151.779,
+    "dT": 86.2
+   },
+   {
+    "sol": 312,
+    "ls": 152.85,
+    "dT": 87.548
+   },
+   {
+    "sol": 314,
+    "ls": 153.903,
+    "dT": 81.629
+   },
+   {
+    "sol": 316,
+    "ls": 154.971,
+    "dT": 73.167
+   },
+   {
+    "sol": 318,
+    "ls": 156.063,
+    "dT": 79.191
+   },
+   {
+    "sol": 320,
+    "ls": 157.126,
+    "dT": 86.155
+   },
+   {
+    "sol": 322,
+    "ls": 158.195,
+    "dT": 85.396
+   },
+   {
+    "sol": 324,
+    "ls": 159.287,
+    "dT": 84.222
+   },
+   {
+    "sol": 326,
+    "ls": 160.363,
+    "dT": 84.062
+   },
+   {
+    "sol": 328,
+    "ls": 161.464,
+    "dT": 83.592
+   },
+   {
+    "sol": 330,
+    "ls": 162.558,
+    "dT": 82.911
+   },
+   {
+    "sol": 332,
+    "ls": 163.656,
+    "dT": 83.623
+   },
+   {
+    "sol": 334,
+    "ls": 164.758,
+    "dT": 88.322
+   },
+   {
+    "sol": 336,
+    "ls": 165.864,
+    "dT": 77.844
+   },
+   {
+    "sol": 338,
+    "ls": 166.962,
+    "dT": 78.072
+   },
+   {
+    "sol": 340,
+    "ls": 168.087,
+    "dT": 77.197
+   },
+   {
+    "sol": 342,
+    "ls": 169.205,
+    "dT": 87.37
+   },
+   {
+    "sol": 344,
+    "ls": 170.327,
+    "dT": 80.096
+   },
+   {
+    "sol": 346,
+    "ls": 171.441,
+    "dT": 80.776
+   },
+   {
+    "sol": 348,
+    "ls": 172.572,
+    "dT": 79.918
+   },
+   {
+    "sol": 350,
+    "ls": 173.705,
+    "dT": 79.51
+   },
+   {
+    "sol": 352,
+    "ls": 174.843,
+    "dT": 85.248
+   },
+   {
+    "sol": 354,
+    "ls": 175.995,
+    "dT": 85.238
+   },
+   {
+    "sol": 356,
+    "ls": 177.141,
+    "dT": 93.771
+   },
+   {
+    "sol": 358,
+    "ls": 178.28,
+    "dT": 98.732
+   },
+   {
+    "sol": 360,
+    "ls": 179.445,
+    "dT": 90.703
+   },
+   {
+    "sol": 362,
+    "ls": 180.603,
+    "dT": 71.527
+   },
+   {
+    "sol": 364,
+    "ls": 181.765,
+    "dT": 69.397
+   },
+   {
+    "sol": 368,
+    "ls": 184.09,
+    "dT": 68.843
+   },
+   {
+    "sol": 370,
+    "ls": 185.263,
+    "dT": 68.973
+   },
+   {
+    "sol": 372,
+    "ls": 186.441,
+    "dT": 68.816
+   },
+   {
+    "sol": 374,
+    "ls": 187.623,
+    "dT": 68.823
+   },
+   {
+    "sol": 378,
+    "ls": 189.998,
+    "dT": 68.077
+   },
+   {
+    "sol": 380,
+    "ls": 191.18,
+    "dT": 78.141
+   },
+   {
+    "sol": 382,
+    "ls": 192.389,
+    "dT": 96.671
+   },
+   {
+    "sol": 384,
+    "ls": 193.59,
+    "dT": 91.259
+   },
+   {
+    "sol": 386,
+    "ls": 194.796,
+    "dT": 82.605
+   },
+   {
+    "sol": 388,
+    "ls": 196.005,
+    "dT": 100.034
+   },
+   {
+    "sol": 390,
+    "ls": 197.083,
+    "dT": 96.703
+   },
+   {
+    "sol": 396,
+    "ls": 200.876,
+    "dT": 92.074
+   },
+   {
+    "sol": 398,
+    "ls": 202.103,
+    "dT": 95.018
+   },
+   {
+    "sol": 400,
+    "ls": 203.334,
+    "dT": 91.649
+   },
+   {
+    "sol": 402,
+    "ls": 204.567,
+    "dT": 91.278
+   },
+   {
+    "sol": 404,
+    "ls": 205.805,
+    "dT": 87.819
+   },
+   {
+    "sol": 406,
+    "ls": 207.046,
+    "dT": 90.452
+   },
+   {
+    "sol": 408,
+    "ls": 208.29,
+    "dT": 86.42
+   },
+   {
+    "sol": 410,
+    "ls": 209.537,
+    "dT": 90.032
+   },
+   {
+    "sol": 414,
+    "ls": 212.041,
+    "dT": 90.817
+   },
+   {
+    "sol": 418,
+    "ls": 214.568,
+    "dT": 77.746
+   },
+   {
+    "sol": 420,
+    "ls": 215.831,
+    "dT": 69.926
+   },
+   {
+    "sol": 422,
+    "ls": 217.084,
+    "dT": 83.687
+   },
+   {
+    "sol": 424,
+    "ls": 218.356,
+    "dT": 78.792
+   },
+   {
+    "sol": 426,
+    "ls": 219.626,
+    "dT": 70.253
+   },
+   {
+    "sol": 428,
+    "ls": 220.895,
+    "dT": 73.806
+   },
+   {
+    "sol": 432,
+    "ls": 223.449,
+    "dT": 80.62
+   },
+   {
+    "sol": 436,
+    "ls": 226.012,
+    "dT": 78.094
+   },
+   {
+    "sol": 442,
+    "ls": 229.871,
+    "dT": 81.775
+   },
+   {
+    "sol": 450,
+    "ls": 235.042,
+    "dT": 76.685
+   },
+   {
+    "sol": 452,
+    "ls": 236.339,
+    "dT": 74.471
+   },
+   {
+    "sol": 454,
+    "ls": 237.637,
+    "dT": 74.316
+   },
+   {
+    "sol": 456,
+    "ls": 238.935,
+    "dT": 73.996
+   },
+   {
+    "sol": 458,
+    "ls": 240.209,
+    "dT": 70.997
+   },
+   {
+    "sol": 460,
+    "ls": 241.536,
+    "dT": 64.93
+   },
+   {
+    "sol": 464,
+    "ls": 244.141,
+    "dT": 70.426
+   },
+   {
+    "sol": 472,
+    "ls": 249.356,
+    "dT": 68.455
+   },
+   {
+    "sol": 474,
+    "ls": 250.661,
+    "dT": 69.424
+   },
+   {
+    "sol": 476,
+    "ls": 251.969,
+    "dT": 70.801
+   },
+   {
+    "sol": 478,
+    "ls": 253.274,
+    "dT": 76.122
+   },
+   {
+    "sol": 480,
+    "ls": 254.578,
+    "dT": 76.849
+   },
+   {
+    "sol": 482,
+    "ls": 255.879,
+    "dT": 76.469
+   },
+   {
+    "sol": 486,
+    "ls": 258.489,
+    "dT": 77.439
+   },
+   {
+    "sol": 488,
+    "ls": 259.792,
+    "dT": 73.792
+   },
+   {
+    "sol": 490,
+    "ls": 261.094,
+    "dT": 76.919
+   },
+   {
+    "sol": 492,
+    "ls": 262.394,
+    "dT": 77.377
+   },
+   {
+    "sol": 494,
+    "ls": 263.694,
+    "dT": 77.661
+   },
+   {
+    "sol": 496,
+    "ls": 264.993,
+    "dT": 76.201
+   },
+   {
+    "sol": 498,
+    "ls": 266.291,
+    "dT": 77.237
+   },
+   {
+    "sol": 500,
+    "ls": 267.587,
+    "dT": 76.569
+   },
+   {
+    "sol": 502,
+    "ls": 268.878,
+    "dT": 67.819
+   },
+   {
+    "sol": 504,
+    "ls": 270.175,
+    "dT": 69.086
+   },
+   {
+    "sol": 506,
+    "ls": 271.466,
+    "dT": 70.148
+   },
+   {
+    "sol": 508,
+    "ls": 272.756,
+    "dT": 70.125
+   },
+   {
+    "sol": 510,
+    "ls": 274.045,
+    "dT": 70.888
+   },
+   {
+    "sol": 512,
+    "ls": 275.33,
+    "dT": 71.234
+   },
+   {
+    "sol": 518,
+    "ls": 279.173,
+    "dT": 70.494
+   },
+   {
+    "sol": 520,
+    "ls": 280.451,
+    "dT": 70.256
+   },
+   {
+    "sol": 522,
+    "ls": 281.726,
+    "dT": 71.191
+   },
+   {
+    "sol": 524,
+    "ls": 282.999,
+    "dT": 71.476
+   },
+   {
+    "sol": 526,
+    "ls": 284.269,
+    "dT": 72.314
+   },
+   {
+    "sol": 528,
+    "ls": 285.537,
+    "dT": 71.301
+   },
+   {
+    "sol": 530,
+    "ls": 286.801,
+    "dT": 72.028
+   },
+   {
+    "sol": 532,
+    "ls": 288.062,
+    "dT": 72.144
+   },
+   {
+    "sol": 534,
+    "ls": 289.332,
+    "dT": 73.889
+   },
+   {
+    "sol": 536,
+    "ls": 290.577,
+    "dT": 78.468
+   },
+   {
+    "sol": 538,
+    "ls": 291.83,
+    "dT": 75.041
+   },
+   {
+    "sol": 540,
+    "ls": 293.08,
+    "dT": 82.441
+   },
+   {
+    "sol": 542,
+    "ls": 294.327,
+    "dT": 80.817
+   },
+   {
+    "sol": 544,
+    "ls": 295.57,
+    "dT": 74.181
+   },
+   {
+    "sol": 546,
+    "ls": 296.81,
+    "dT": 76.756
+   },
+   {
+    "sol": 548,
+    "ls": 298.047,
+    "dT": 78.514
+   },
+   {
+    "sol": 550,
+    "ls": 299.28,
+    "dT": 78.901
+   },
+   {
+    "sol": 552,
+    "ls": 300.51,
+    "dT": 81.875
+   },
+   {
+    "sol": 554,
+    "ls": 301.747,
+    "dT": 81.692
+   },
+   {
+    "sol": 556,
+    "ls": 302.959,
+    "dT": 78.647
+   },
+   {
+    "sol": 558,
+    "ls": 304.181,
+    "dT": 73.158
+   },
+   {
+    "sol": 562,
+    "ls": 306.608,
+    "dT": 73.499
+   },
+   {
+    "sol": 564,
+    "ls": 307.813,
+    "dT": 73.53
+   },
+   {
+    "sol": 566,
+    "ls": 309.02,
+    "dT": 76.691
+   },
+   {
+    "sol": 568,
+    "ls": 310.221,
+    "dT": 74.863
+   },
+   {
+    "sol": 570,
+    "ls": 311.417,
+    "dT": 71.761
+   },
+   {
+    "sol": 572,
+    "ls": 312.61,
+    "dT": 70.569
+   },
+   {
+    "sol": 574,
+    "ls": 313.798,
+    "dT": 59.254
+   },
+   {
+    "sol": 576,
+    "ls": 314.983,
+    "dT": 57.16
+   },
+   {
+    "sol": 578,
+    "ls": 316.164,
+    "dT": 57.553
+   },
+   {
+    "sol": 580,
+    "ls": 317.341,
+    "dT": 58.289
+   },
+   {
+    "sol": 582,
+    "ls": 318.512,
+    "dT": 61.173
+   },
+   {
+    "sol": 584,
+    "ls": 319.683,
+    "dT": 61.524
+   },
+   {
+    "sol": 586,
+    "ls": 320.849,
+    "dT": 61.681
+   },
+   {
+    "sol": 588,
+    "ls": 322.008,
+    "dT": 61.723
+   },
+   {
+    "sol": 590,
+    "ls": 323.165,
+    "dT": 62.539
+   },
+   {
+    "sol": 592,
+    "ls": 324.32,
+    "dT": 67.419
+   },
+   {
+    "sol": 594,
+    "ls": 325.469,
+    "dT": 74.339
+   },
+   {
+    "sol": 596,
+    "ls": 326.614,
+    "dT": 73.782
+   },
+   {
+    "sol": 598,
+    "ls": 327.755,
+    "dT": 75.337
+   },
+   {
+    "sol": 600,
+    "ls": 328.892,
+    "dT": 75.955
+   },
+   {
+    "sol": 602,
+    "ls": 330.024,
+    "dT": 77.073
+   },
+   {
+    "sol": 604,
+    "ls": 331.151,
+    "dT": 75.999
+   },
+   {
+    "sol": 608,
+    "ls": 333.397,
+    "dT": 62.146
+   },
+   {
+    "sol": 610,
+    "ls": 334.514,
+    "dT": 63.468
+   },
+   {
+    "sol": 612,
+    "ls": 335.626,
+    "dT": 65.685
+   },
+   {
+    "sol": 614,
+    "ls": 336.736,
+    "dT": 65.741
+   },
+   {
+    "sol": 616,
+    "ls": 337.841,
+    "dT": 65.109
+   },
+   {
+    "sol": 618,
+    "ls": 338.942,
+    "dT": 65.623
+   },
+   {
+    "sol": 620,
+    "ls": 340.038,
+    "dT": 64.928
+   },
+   {
+    "sol": 622,
+    "ls": 341.134,
+    "dT": 66.762
+   },
+   {
+    "sol": 624,
+    "ls": 342.222,
+    "dT": 65.759
+   },
+   {
+    "sol": 626,
+    "ls": 343.308,
+    "dT": 67.446
+   },
+   {
+    "sol": 628,
+    "ls": 344.389,
+    "dT": 65.95
+   },
+   {
+    "sol": 630,
+    "ls": 345.476,
+    "dT": 72.471
+   },
+   {
+    "sol": 632,
+    "ls": 346.541,
+    "dT": 70.564
+   },
+   {
+    "sol": 634,
+    "ls": 347.611,
+    "dT": 79.372
+   },
+   {
+    "sol": 636,
+    "ls": 348.678,
+    "dT": 79.068
+   },
+   {
+    "sol": 638,
+    "ls": 349.74,
+    "dT": 80.166
+   },
+   {
+    "sol": 640,
+    "ls": 350.799,
+    "dT": 80.297
+   },
+   {
+    "sol": 642,
+    "ls": 351.852,
+    "dT": 70.483
+   },
+   {
+    "sol": 644,
+    "ls": 352.904,
+    "dT": 70.082
+   },
+   {
+    "sol": 646,
+    "ls": 353.953,
+    "dT": 81.848
+   },
+   {
+    "sol": 648,
+    "ls": 354.998,
+    "dT": 85.959
+   },
+   {
+    "sol": 650,
+    "ls": 356.039,
+    "dT": 88.222
+   },
+   {
+    "sol": 652,
+    "ls": 357.076,
+    "dT": 85.915
+   },
+   {
+    "sol": 654,
+    "ls": 358.12,
+    "dT": 86.637
+   },
+   {
+    "sol": 656,
+    "ls": 359.141,
+    "dT": 83.161
+   },
+   {
+    "sol": 658,
+    "ls": 0.178,
+    "dT": 84.325
+   },
+   {
+    "sol": 660,
+    "ls": 1.201,
+    "dT": 82.986
+   },
+   {
+    "sol": 662,
+    "ls": 2.213,
+    "dT": 84.667
+   },
+   {
+    "sol": 664,
+    "ls": 3.231,
+    "dT": 86.848
+   },
+   {
+    "sol": 666,
+    "ls": 4.245,
+    "dT": 89.389
+   },
+   {
+    "sol": 668,
+    "ls": 5.256,
+    "dT": 85.04
+   },
+   {
+    "sol": 670,
+    "ls": 6.264,
+    "dT": 83.818
+   },
+   {
+    "sol": 672,
+    "ls": 7.268,
+    "dT": 83.379
+   },
+   {
+    "sol": 674,
+    "ls": 8.27,
+    "dT": 85.062
+   },
+   {
+    "sol": 676,
+    "ls": 9.268,
+    "dT": 88.406
+   }
+  ],
+  "method": "Per sol: mean TIRS ground temperature in LTST hour 13 (13:00-14:00) minus hour 1 (01:00-02:00), sols with both hours present; equal weight per sol (the target value itself uses equal weight per Ls bin).",
+  "source": "data/raw/mars_meda.json (PDS Mars 2020 MEDA CAL_TIRS)"
+ },
+ "catalog": {
+  "requirement_variables": {
+   "slope": {
+    "field": "slope",
+    "label": "Slope",
+    "statistic": "Cell-mean Horn slope (926.6 m baseline)",
+    "unit": "\u00b0",
+    "fmt": 2,
+    "dataset": "USGS/NGA GMTED2010 mn30",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0 cell mean of 926.6 m slopes",
+    "temporal": "static (2000-era source data)",
+    "years": null
+   },
+   "surface_roughness": {
+    "field": "surface_roughness",
+    "label": "Surface roughness",
+    "unit": "m",
+    "fmt": 1,
+    "statistic": "SD of 926.6 m elevations within the cell",
+    "dataset": "USGS/NGA GMTED2010 mn30",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0 cell",
+    "temporal": "static",
+    "years": null
+   },
+   "elevation": {
+    "field": "elevation",
+    "label": "Elevation",
+    "unit": "m",
+    "fmt": 0,
+    "statistic": "Cell-mean elevation (EGM96)",
+    "dataset": "USGS/NGA GMTED2010 mn30",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0 cell",
+    "temporal": "static",
+    "years": null
+   },
+   "aridity_index_raw": {
+    "field": "aridity_index_raw",
+    "label": "Aridity index P/PET (unsaturated)",
+    "unit": "",
+    "fmt": 3,
+    "statistic": "Annual P / Hargreaves-FAO56 PET",
+    "dataset": "NASA POWER (MERRA-2) PRECTOTCORR, T2M",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0 (MERRA-2 native)",
+    "temporal": "2001\u20132020 climatology",
+    "years": 20
+   },
+   "precip_mm_yr": {
+    "field": "precip_mm_yr",
+    "label": "Annual precipitation",
+    "unit": "mm yr\u207b\u00b9",
+    "fmt": 0,
+    "statistic": "Annual total of monthly climatology",
+    "dataset": "NASA POWER (MERRA-2) PRECTOTCORR",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2001\u20132020 climatology",
+    "years": 20
+   },
+   "annual_temperature_range": {
+    "field": "annual_temperature_range",
+    "label": "Annual air-temperature range",
+    "unit": "K",
+    "fmt": 2,
+    "statistic": "Warmest minus coldest monthly mean T2M",
+    "dataset": "NASA POWER (MERRA-2) T2M",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2001\u20132020 climatology",
+    "years": 20
+   },
+   "t2m_mean_c": {
+    "field": "t2m_mean_c",
+    "label": "Mean air temperature",
+    "unit": "\u00b0C",
+    "fmt": 1,
+    "statistic": "Annual mean T2M",
+    "dataset": "NASA POWER (MERRA-2) T2M",
+    "resolution": "0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2001\u20132020 climatology",
+    "years": 20
+   },
+   "lst_day_k": {
+    "field": "lst_day_k",
+    "label": "Daytime land-surface temperature",
+    "unit": "K",
+    "fmt": 1,
+    "statistic": "Mean MODIS Aqua day LST (~13:30)",
+    "dataset": "MODIS Aqua MYD11C3 via NASA GIBS",
+    "resolution": "0.1\u00b0 render aggregated to 0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2016\u20132025 monthly",
+    "years": 10
+   },
+   "lst_night_k": {
+    "field": "lst_night_k",
+    "label": "Night-time land-surface temperature",
+    "unit": "K",
+    "fmt": 1,
+    "statistic": "Mean MODIS Aqua night LST (~01:30)",
+    "dataset": "MODIS Aqua MYD11C3 via NASA GIBS",
+    "resolution": "0.1\u00b0 render aggregated to 0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2016\u20132025 monthly",
+    "years": 10
+   },
+   "lst_diurnal_range": {
+    "field": "lst_diurnal_range",
+    "label": "LST day \u2212 night",
+    "unit": "K",
+    "fmt": 2,
+    "statistic": "Mean of monthly day\u2212night LST pairs",
+    "dataset": "MODIS Aqua MYD11C3 via NASA GIBS",
+    "resolution": "0.1\u00b0 render aggregated to 0.5\u00b0 \u00d7 0.625\u00b0",
+    "temporal": "2016\u20132025 monthly",
+    "years": 10
+   },
+   "modis_coverage": {
+    "field": "modis_coverage",
+    "label": "MODIS data availability",
+    "unit": "fraction",
+    "fmt": 3,
+    "statistic": "Valid pixel-months / possible pixel-months",
+    "dataset": "MODIS Aqua MYD11C3 via NASA GIBS",
+    "resolution": "cell",
+    "temporal": "2016\u20132025",
+    "years": 10
+   },
+   "gmted_land_fraction": {
+    "field": "gmted_land_fraction",
+    "label": "GMTED land fraction",
+    "unit": "fraction",
+    "fmt": 3,
+    "statistic": "Valid 30\u2033 land pixels / pixels in cell",
+    "dataset": "USGS/NGA GMTED2010 mn30",
+    "resolution": "cell",
+    "temporal": "static",
+    "years": null
+   }
+  },
+  "missing_factors": [
+   {
+    "id": "gravity",
+    "label": "Gravity",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "No gravity variable exists in the predictor stack or targets; not evaluated."
+   },
+   {
+    "id": "pressure",
+    "label": "Atmospheric pressure",
+    "status": "PARTIAL",
+    "evidence": [
+     "Mars: MEDA median surface pressure (data/targets.json raw_reference.meda_median_pressure_Pa)"
+    ],
+    "note": "Represented only through the elevation PROXY ('thin atmosphere'). Earth surface pressure is not in the stack; no Earth surface approaches Mars pressure, so this difference is never closed."
+   },
+   {
+    "id": "composition",
+    "label": "Atmospheric composition",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Not evaluated."
+   },
+   {
+    "id": "radiation",
+    "label": "Radiation environment",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Not evaluated."
+   },
+   {
+    "id": "geology",
+    "label": "Geology and mineralogy",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Terrain criteria describe shape (slope, roughness), not material."
+   },
+   {
+    "id": "day_length",
+    "label": "Day length",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Thermal criterion compares day\u2212night differences at matched local solar times; the length of the solar day and of the night are not compared."
+   },
+   {
+    "id": "dust",
+    "label": "Dust characteristics",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Not evaluated."
+   },
+   {
+    "id": "absolute_temperature",
+    "label": "Absolute temperature level",
+    "status": "EVIDENCE_AVAILABLE",
+    "evidence": [
+     "Earth: MODIS day/night LST (lst_day_k, lst_night_k)",
+     "Mars: MEDA TIRS ground temperature 13\u201314 and 01\u201302 LTST",
+     "Moon: Diviner mean T(13\u201314 h) and T(01\u201302 h), summer and winter"
+    ],
+    "note": "The score uses only the day\u2212night DIFFERENCE. Absolute temperatures are compared here as a failure-mode check, never added to the score."
+   },
+   {
+    "id": "illumination",
+    "label": "Illumination conditions",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Polar illumination geometry (Moon) is not modelled; the window mixes sunlit and shadowed terrain."
+   },
+   {
+    "id": "subsurface",
+    "label": "Subsurface conditions",
+    "status": "UNMODELED",
+    "evidence": [],
+    "note": "Not evaluated."
+   }
+  ],
+  "activities": {
+   "rover_mobility": {
+    "label": "Rover mobility experiments",
+    "criteria": [
+     "slope",
+     "surface_roughness"
+    ],
+    "factors": [
+     "gravity",
+     "geology",
+     "dust"
+    ]
+   },
+   "terrain_navigation": {
+    "label": "Terrain navigation research",
+    "criteria": [
+     "slope",
+     "surface_roughness",
+     "elevation"
+    ],
+    "factors": [
+     "illumination",
+     "geology"
+    ]
+   },
+   "eva_preparation": {
+    "label": "Astronaut EVA preparation",
+    "criteria": [
+     "slope",
+     "surface_roughness",
+     "lst_diurnal_range"
+    ],
+    "factors": [
+     "gravity",
+     "pressure",
+     "radiation",
+     "absolute_temperature",
+     "dust"
+    ]
+   },
+   "instrument_testing": {
+    "label": "Surface instrument testing",
+    "criteria": [
+     "lst_diurnal_range",
+     "aridity"
+    ],
+    "factors": [
+     "absolute_temperature",
+     "pressure",
+     "dust",
+     "radiation"
+    ]
+   },
+   "thermal_equipment": {
+    "label": "Thermal equipment evaluation",
+    "criteria": [
+     "lst_diurnal_range",
+     "annual_temperature_range"
+    ],
+    "factors": [
+     "absolute_temperature",
+     "pressure",
+     "composition",
+     "day_length"
+    ]
+   },
+   "habitat_operations": {
+    "label": "Habitat operations research",
+    "criteria": [
+     "annual_temperature_range",
+     "aridity",
+     "slope"
+    ],
+    "factors": [
+     "pressure",
+     "radiation",
+     "gravity",
+     "absolute_temperature"
+    ]
+   },
+   "environmental_monitoring": {
+    "label": "Environmental monitoring",
+    "criteria": [
+     "lst_diurnal_range",
+     "aridity",
+     "annual_temperature_range"
+    ],
+    "factors": [
+     "composition",
+     "dust",
+     "day_length"
+    ]
+   },
+   "geological_fieldwork": {
+    "label": "Geological fieldwork",
+    "criteria": [
+     "slope",
+     "surface_roughness",
+     "elevation"
+    ],
+    "factors": [
+     "geology",
+     "subsurface"
+    ]
+   }
+  },
+  "uncertainty_sources": {
+   "measurement": "Instrument / retrieval error of each source product. Not distributed with the data used here except the MODIS GIBS colour-map quantisation (decoding bound).",
+   "temporal": "Year-to-year variability (MODIS 2016\u20132025 yearly values) and target seasonal / Ls-bin variability.",
+   "spatial": "Aggregation of finer source data to 0.5\u00b0 \u00d7 0.625\u00b0 cells; neighbourhood variability as context.",
+   "missing": "Missing observations (MODIS pixel-month coverage; undefined aridity).",
+   "target_reference": "Alternative statistics of the target data (Ls bins, sols, Diviner seasons).",
+   "product": "Differences between data products / instruments (MEDA TIRS, Diviner vs MODIS).",
+   "weights": "Weight sensitivity (see Robustness Laboratory).",
+   "proxy": "Proxy-variable limitations (aridity, elevation).",
+   "method": "Methodology differences (Hargreaves PET; GIBS decoding; window statistics).",
+   "comparability": "Known limits of comparing planetary environments (gravity, atmosphere, radiation \u2026)."
+  },
+  "scales": [
+   {
+    "item": "Earth cell (scoring unit)",
+    "scale": "0.5\u00b0 \u00d7 0.625\u00b0 \u2248 55 km \u00d7 69 km at the equator (latitude-dependent)"
+   },
+   {
+    "item": "NASA POWER source",
+    "scale": "MERRA-2 native 0.5\u00b0 \u00d7 0.625\u00b0 \u2014 no sub-cell information"
+   },
+   {
+    "item": "MODIS LST source",
+    "scale": "0.05\u00b0 CMG rendered at 0.1\u00b0 by GIBS, aggregated to the cell; sub-cell pixels not retained"
+   },
+   {
+    "item": "GMTED2010 source",
+    "scale": "30\u2033 (~926 m) \u2014 slopes on a 926.6 m baseline; sub-cell pixels not retained"
+   },
+   {
+    "item": "Mars terrain target",
+    "scale": "MOLA 463 m DEM binned to 926.6 m, 55.6 km window (3,600 bins)"
+   },
+   {
+    "item": "Moon terrain target",
+    "scale": "LOLA 118 m DEM binned to 926.6 m, 55.6 km window (3,600 bins)"
+   },
+   {
+    "item": "Mars thermal target",
+    "scale": "MEDA rover point measurement (metres), 12 Ls bins over one Mars year"
+   },
+   {
+    "item": "Moon thermal target",
+    "scale": "Diviner 240 m polar maps, 55.6 km window mean, summer and winter"
+   },
+   {
+    "item": "Globe display",
+    "scale": "2048 \u00d7 1024 basemap; cells drawn at native grid \u2014 display adds no information"
+   }
+  ]
+ },
+ "manifest": {
+  "product": "ASTERRO - Planetary Analogue Intelligence",
+  "algorithm_version": "tai-sim-1.0.0",
+  "generated_by": "scripts/write_provenance.py",
+  "grid": {
+   "nlat": 361,
+   "nlon": 576,
+   "lat0": -90.0,
+   "dlat": 0.5,
+   "lon0": -180.0,
+   "dlon": 0.625
+  },
+  "n_valid_cells": 76781,
+  "predictor_stack": {
+   "web_bundle": "public/data/stack.bin",
+   "sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+   "bytes": 6449606,
+   "zarr": "data/predictor_stack.zarr",
+   "npz": "data/predictor_stack.npz",
+   "zarr_writer": "builtin-zarr-v2"
+  },
+  "normalization": {
+   "rule": "min-max over all valid Earth cells UNION all non-null target values; one fixed table shared by every target and profile",
+   "ranges": {
+    "aridity": [
+     0.0,
+     1.0
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702.0
+    ],
+    "slope": [
+     0.0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0.0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   }
+  },
+  "criteria": [
+   {
+    "id": "aridity",
+    "label": "Aridity",
+    "unit": "index (P/PET, saturated at 1)",
+    "normalization_range": [
+     0.0,
+     1.0
+    ],
+    "earth_sources": [
+     {
+      "id": "nasa_power",
+      "dataset": "POWER Climatology API (regional), community AG; parameters T2M, T2M_MAX_AVG, T2M_MIN_AVG, PRECTOTCORR",
+      "version": "API v2.10.0; source MERRA-2",
+      "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional",
+      "license": "NASA open data; POWER asks users to acknowledge the NASA Langley Research Center POWER Project."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "PROXY",
+      "comparison": "proxy",
+      "value": 0.0,
+      "unit": "index",
+      "method": "PROXY. P/PET -> 0: Mars has no liquid precipitation (P = 0) while evaporative demand is non-zero, so the aridity index is 0 by construction (hyper-arid limit).",
+      "proxy_method": "definition: P = 0 on a body without liquid precipitation => P/PET = 0 (hyper-arid limit)",
+      "sources": []
+     },
+     "moon_south_pole": {
+      "status": "PROXY",
+      "comparison": "proxy",
+      "value": 0.0,
+      "unit": "index",
+      "method": "PROXY. No atmosphere and no precipitation: aridity index 0 by construction.",
+      "proxy_method": "definition: P = 0 on a body without liquid precipitation => P/PET = 0 (hyper-arid limit)",
+      "sources": []
+     }
+    }
+   },
+   {
+    "id": "annual_temperature_range",
+    "label": "Annual temperature range",
+    "unit": "K",
+    "normalization_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "earth_sources": [
+     {
+      "id": "nasa_power",
+      "dataset": "POWER Climatology API (regional), community AG; parameters T2M, T2M_MAX_AVG, T2M_MIN_AVG, PRECTOTCORR",
+      "version": "API v2.10.0; source MERRA-2",
+      "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional",
+      "license": "NASA open data; POWER asks users to acknowledge the NASA Langley Research Center POWER Project."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "DIRECT",
+      "comparison": "direct (cross-instrument)",
+      "value": 11.325,
+      "unit": "K",
+      "method": "Max minus min over 12 Ls bins (30 deg) of the diurnal-mean air temperature from MEDA ATS (median of the three RSM sensors, ~1.45 m), 335 sols of one Mars year. Bin means 212.61..223.93 K. A Mars 'month' (30 deg Ls) lasts ~56 sols vs ~30 days on Earth.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "meda",
+        "dataset": "urn:nasa:pds:mars2020_meda, data_calibrated_env (CAL_TIRS GROUND_TEMP, CAL_ATS, CAL_PS)",
+        "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+       }
+      ]
+     },
+     "moon_south_pole": {
+      "status": "N/A",
+      "comparison": "not applicable",
+      "value": null,
+      "unit": "K",
+      "method": "NOT APPLICABLE. The Moon has no near-surface air; this criterion is excluded from every lunar score (null, never filled).",
+      "proxy_method": null,
+      "sources": []
+     }
+    }
+   },
+   {
+    "id": "elevation",
+    "label": "Elevation",
+    "unit": "m",
+    "normalization_range": [
+     -75.2784423828125,
+     5702.0
+    ],
+    "earth_sources": [
+     {
+      "id": "gmted2010",
+      "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+      "version": "GMTED2010",
+      "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip",
+      "license": "USGS public domain."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "PROXY",
+      "comparison": "proxy",
+      "value": 5702.0,
+      "unit": "m (Earth-equivalent proxy)",
+      "method": "PROXY. Absolute elevations on different bodies are referenced to unrelated datums and are not physically comparable. The criterion is therefore re-interpreted as 'thin atmosphere': Earth pressure falls with altitude, and no Earth surface reaches Mars or Moon surface pressure, so the target is set to the highest mean elevation of any valid Earth cell (5702.0 m). Similarity on this criterion therefore rewards the lowest-pressure Earth terrain available. MEDA median surface pressure at Jezero ~740 Pa (Earth sea level ~101 325 Pa). Raw MOLA mean elevation of the window -2310 m (areoid) is reported, not used.",
+      "proxy_method": "thin-atmosphere reinterpretation: target = maximum mean elevation of valid Earth cells; rewards the lowest-pressure Earth terrain. NOT a comparison of planetary elevations.",
+      "sources": [
+       {
+        "id": "gmted2010",
+        "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+        "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip"
+       },
+       {
+        "id": "meda",
+        "dataset": "urn:nasa:pds:mars2020_meda, data_calibrated_env (CAL_TIRS GROUND_TEMP, CAL_ATS, CAL_PS)",
+        "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+       }
+      ]
+     },
+     "moon_south_pole": {
+      "status": "PROXY",
+      "comparison": "proxy",
+      "value": 5702.0,
+      "unit": "m (Earth-equivalent proxy)",
+      "method": "PROXY. Absolute elevations on different bodies are referenced to unrelated datums and are not physically comparable. The criterion is therefore re-interpreted as 'thin atmosphere': Earth pressure falls with altitude, and no Earth surface reaches Mars or Moon surface pressure, so the target is set to the highest mean elevation of any valid Earth cell (5702.0 m). Similarity on this criterion therefore rewards the lowest-pressure Earth terrain available. The Moon has an exosphere only (surface pressure ~0).",
+      "proxy_method": "thin-atmosphere reinterpretation: target = maximum mean elevation of valid Earth cells; rewards the lowest-pressure Earth terrain. NOT a comparison of planetary elevations.",
+      "sources": [
+       {
+        "id": "gmted2010",
+        "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+        "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "slope",
+    "label": "Slope",
+    "unit": "deg",
+    "normalization_range": [
+     0.0,
+     20.94510841369629
+    ],
+    "earth_sources": [
+     {
+      "id": "gmted2010",
+      "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+      "version": "GMTED2010",
+      "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip",
+      "license": "USGS public domain."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "DIRECT",
+      "comparison": "direct (identical algorithm)",
+      "value": 2.413,
+      "unit": "deg",
+      "method": "Horn (1981) slope on a 926.6 m grid binned from MGS MOLA 463 m DEM, mean over a 55.6 km x 55.6 km window -- the same code path as Earth.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "mola",
+        "dataset": "MGS MOLA DEM mosaic global 463 m",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif"
+       }
+      ]
+     },
+     "moon_south_pole": {
+      "status": "DIRECT",
+      "comparison": "direct (identical algorithm)",
+      "value": 10.292,
+      "unit": "deg",
+      "method": "Horn (1981) slope on a 926.6 m grid binned from LRO LOLA 118 m LDEM, mean over a 55.6 km window centred on the pole -- same code path as Earth.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "lola",
+        "dataset": "LRO LOLA Global LDEM 118 m (Mar 2014)",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "surface_roughness",
+    "label": "Surface roughness",
+    "unit": "m",
+    "normalization_range": [
+     0.0,
+     1500.462158203125
+    ],
+    "earth_sources": [
+     {
+      "id": "gmted2010",
+      "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+      "version": "GMTED2010",
+      "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip",
+      "license": "USGS public domain."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "DIRECT",
+      "comparison": "direct (identical algorithm)",
+      "value": 263.2,
+      "unit": "m",
+      "method": "Std. dev. of 926.6 m-binned MOLA elevations in the same window.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "mola",
+        "dataset": "MGS MOLA DEM mosaic global 463 m",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif"
+       }
+      ]
+     },
+     "moon_south_pole": {
+      "status": "DIRECT",
+      "comparison": "direct (identical algorithm)",
+      "value": 958.0,
+      "unit": "m",
+      "method": "Std. dev. of 926.6 m-binned LOLA elevations in the same window.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "lola",
+        "dataset": "LRO LOLA Global LDEM 118 m (Mar 2014)",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "lst_diurnal_range",
+    "label": "Thermal (LST diurnal range)",
+    "unit": "K",
+    "normalization_range": [
+     -6.9000091552734375,
+     75.871
+    ],
+    "earth_sources": [
+     {
+      "id": "modis_aqua_lst",
+      "dataset": "MYD11C3 MODIS/Aqua LST/Emissivity Monthly L3 Global 0.05 deg CMG (GIBS layers MODIS_Aqua_L3_Land_Surface_Temp_Monthly_Day / _Night)",
+      "version": "Collections 006 / 061 as served by GIBS",
+      "url": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+      "license": "NASA open data (EOSDIS data use policy); no restrictions."
+     }
+    ],
+    "targets": {
+     "mars_jezero": {
+      "status": "DIRECT",
+      "comparison": "direct (cross-instrument)",
+      "value": 75.871,
+      "unit": "K",
+      "method": "MEDA TIRS ground temperature, mean over 12 Ls bins of T(13-14 LTST) - T(01-02 LTST): the MODIS Aqua overpass local times.",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "meda",
+        "dataset": "urn:nasa:pds:mars2020_meda, data_calibrated_env (CAL_TIRS GROUND_TEMP, CAL_ATS, CAL_PS)",
+        "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+       }
+      ]
+     },
+     "moon_south_pole": {
+      "status": "DIRECT",
+      "comparison": "direct (cross-instrument)",
+      "value": 54.682,
+      "unit": "K",
+      "method": "Diviner polar hourly bolometric temperature maps (Williams et al. 2019): window mean of T(13-14 h local time) - T(01-02 h), averaged over the summer and winter maps. Bin check: the summer hour14 map equals the mean of the PDS 0.25-h products LTIM53-56 (13.00-14.00 h) to 7e-6 K rms (verified, docs/SCIENTIFIC_AUDIT.md); hour02 follows the same numbering (not separately checked). At the pole 'local time' is solar azimuth; slopes facing away from the Sun give negative differences (p10 summer -21.4 K, p90 172.2 K).",
+      "proxy_method": null,
+      "sources": [
+       {
+        "id": "diviner",
+        "dataset": "Diviner polar hourly bolometric temperature maps, south, summer & winter (hour02, hour14)",
+        "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  "missing_data_rules": {
+   "earth_value_missing": "NaN (or non-finite) Earth value: the criterion is dropped for that cell and the score is renormalised over the remaining active weights; weight coverage is reported. Never imputed.",
+   "coverage_rule": "coverage = sum of active weights with a finite Earth value / sum of active weights; a cell with coverage < 0.80 keeps its score but is not ranked (effective score -1).",
+   "target_not_applicable": "null target value (status N/A): criterion excluded from every score for that target; does not reduce coverage.",
+   "aridity_undefined": "Hargreaves PET = 0 (every monthly mean T < -17.8 C): aridity is NaN, not 0 and not 1.",
+   "invalid_cell": "Not land in GMTED2010 (< 50 % valid 30\" pixels) OR no MODIS LST diurnal range OR no POWER T2M: cell excluded from the stack."
+  },
+  "raw_inputs": [
+   {
+    "file": "power_climatology.npz",
+    "sha256": "602c4681d30292c3015adac6ecdd983446db4e76c469a8822ee90b0b2342f2d7",
+    "bytes": 17633399,
+    "produced_by": "src/data/ingestion/power_climatology.py",
+    "script_sha256": "504059cbdc904c26dd83d91184a81c4fe34cba91deafc25116b81fe433aaacd5",
+    "datasets": [
+     "nasa_power"
+    ]
+   },
+   {
+    "file": "modis_lst.npz",
+    "sha256": "2336bc666973e03f3250cd5bf0a98cbd962da1fae323f7f3b30ca2af8e8e7f79",
+    "bytes": 3893403,
+    "produced_by": "src/data/ingestion/modis_lst_gibs.py",
+    "script_sha256": "c9a2777cc9958131a5271ccda9c34f286ef21b4862ba8c9d908490813c38d731",
+    "datasets": [
+     "modis_aqua_lst"
+    ]
+   },
+   {
+    "file": "terrain_earth.npz",
+    "sha256": "f2145afe21f3f6f8b76b265cdb94f069d9614275d8ff5f928694b5635f1f07ae",
+    "bytes": 893190,
+    "produced_by": "src/data/ingestion/terrain.py",
+    "script_sha256": "0494e2213d303e8cade1443dd963271f96c552ff9db7d3310bdf20d34d094380",
+    "datasets": [
+     "gmted2010"
+    ]
+   },
+   {
+    "file": "terrain_planets.npz",
+    "sha256": "630c5650ab3ce6edfd3f94b17317077b640293f8c80ec66d2208b9d3c8c0513c",
+    "bytes": 49258,
+    "produced_by": "src/data/ingestion/terrain.py",
+    "script_sha256": "0494e2213d303e8cade1443dd963271f96c552ff9db7d3310bdf20d34d094380",
+    "datasets": [
+     "mola",
+     "lola"
+    ]
+   },
+   {
+    "file": "mars_meda.json",
+    "sha256": "d043030b1ade3bd49ec38b75fc56ccb354f836a00ff9caeb6bdb6914e3dcf875",
+    "bytes": 449576,
+    "produced_by": "src/data/ingestion/mars_meda.py",
+    "script_sha256": "317450e171381654a45de61a94fc06ebdd33aed1716a5d6d5003284fa5d720c9",
+    "datasets": [
+     "meda"
+    ]
+   },
+   {
+    "file": "meda_pressure.json",
+    "sha256": "c1285a45ef870d632b600b085ddeecaf9fa81d2b3de4bff6435a774f23258284",
+    "bytes": 2420,
+    "produced_by": "src/data/ingestion/meda_pressure.py",
+    "script_sha256": "38bd644e5f5dc9cf0151dba6020f7cf77e8215da4e797d6a452bcaf0e3963136",
+    "datasets": [
+     "meda"
+    ]
+   },
+   {
+    "file": "moon_diviner.json",
+    "sha256": "67e2eb04a9ca10127553cef671508bd4ad43a71c3d88315a1c7a443fd94d7105",
+    "bytes": 706,
+    "produced_by": "src/data/ingestion/moon_diviner.py",
+    "script_sha256": "0a5bab5d9a0a9e028fc460b635fa8515ffbdff0dcb8d18bdaa315fdf129e99cf",
+    "datasets": [
+     "diviner"
+    ]
+   },
+   {
+    "file": "labels.npz",
+    "sha256": "f9e41b6efba4d43a4b9acfdefb03cd2cf1c2a9414f21b0d1ba6849bea46886fe",
+    "bytes": 30504,
+    "produced_by": "src/data/ingestion/geo_context.py",
+    "script_sha256": "0d3aa9c097b3e54868e4198bfadc216cbfbcf77b13d0ece0d9972c1299cb25bb",
+    "datasets": [
+     "natural_earth"
+    ]
+   }
+  ],
+  "derived_checksums": {
+   "predictor_stack.npz": "89f1ca766e2292765d01485f54117389b3e13f28c1278dee44e733de5a752883",
+   "stack.bin": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+   "targets.json": "1cb8b3ca70a4ecd6cbe5c36ac952c7dec5d11c9751a070eb71210454f4a2713e"
+  },
+  "datasets": [
+   {
+    "id": "nasa_power",
+    "provider": "NASA Langley Research Center - POWER Project",
+    "role": "Earth predictor",
+    "dataset": "POWER Climatology API (regional), community AG; parameters T2M, T2M_MAX_AVG, T2M_MIN_AVG, PRECTOTCORR",
+    "version": "API v2.10.0; source MERRA-2",
+    "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional",
+    "resolution": "0.5 deg lat x 0.625 deg lon (MERRA-2 native)",
+    "units": "deg C; mm/day",
+    "temporal": "2001-01-01 to 2020-12-31 monthly climatology",
+    "processing": "Tiled 10x10 deg requests (3,240); monthly values mapped to the MERRA-2 grid; -999 -> missing. Derived: annual temperature range; Hargreaves PET with FAO-56 Ra; aridity index P/PET.",
+    "license": "NASA open data; POWER asks users to acknowledge the NASA Langley Research Center POWER Project."
+   },
+   {
+    "id": "modis_aqua_lst",
+    "provider": "NASA LP DAAC / MODIS; delivered through NASA GIBS",
+    "role": "Earth predictor",
+    "dataset": "MYD11C3 MODIS/Aqua LST/Emissivity Monthly L3 Global 0.05 deg CMG (GIBS layers MODIS_Aqua_L3_Land_Surface_Temp_Monthly_Day / _Night)",
+    "version": "Collections 006 / 061 as served by GIBS",
+    "url": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+    "resolution": "rendered at 0.1 deg, aggregated to 0.5 x 0.625 deg",
+    "units": "K",
+    "temporal": "2016-01 to 2025-12, 120 monthly day/night pairs",
+    "processing": "GIBS RGB decoded exactly through the published colormap MODIS_Land_Surface_Temp.xml v1.3 (0.6 K bins, open-ended <200 K / >350 K bins censored). Pixel pairs valid at both overpasses -> day minus night; cell mean over all months; per-year means for Analogue Evolution.",
+    "license": "NASA open data (EOSDIS data use policy); no restrictions."
+   },
+   {
+    "id": "gmted2010",
+    "provider": "USGS EROS / NGA",
+    "role": "Earth predictor",
+    "dataset": "GMTED2010 mean elevation, 30 arc-second (mn30_grd)",
+    "version": "GMTED2010",
+    "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/topo/downloads/GMTED/Grid_ZipFiles/mn30_grd.zip",
+    "resolution": "30 arc-second (~926 m)",
+    "units": "m (EGM96)",
+    "temporal": "Static (source data 2000-era)",
+    "processing": "Horn (1981) slope on a 926.6 m baseline, cell mean elevation, slope, and elevation standard deviation (roughness) per 0.5 x 0.625 deg cell; ocean = no data.",
+    "license": "USGS public domain."
+   },
+   {
+    "id": "mola",
+    "provider": "NASA PDS / USGS Astrogeology",
+    "role": "Mars target",
+    "dataset": "MGS MOLA DEM mosaic global 463 m",
+    "version": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+    "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+    "resolution": "463 m",
+    "units": "m (areoid)",
+    "temporal": "MGS mission 1997-2006",
+    "processing": "55.6 km window at 18.38 N 77.58 E binned to 926.6 m; Horn slope; std-dev roughness.",
+    "license": "NASA/USGS public domain."
+   },
+   {
+    "id": "meda",
+    "provider": "NASA PDS Atmospheres Node - Mars 2020 MEDA",
+    "role": "Mars target",
+    "dataset": "urn:nasa:pds:mars2020_meda, data_calibrated_env (CAL_TIRS GROUND_TEMP, CAL_ATS, CAL_PS)",
+    "version": "Bundle 6.0, doi:10.17189/1522849",
+    "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/",
+    "resolution": "Rover point measurements (~1 Hz)",
+    "units": "K; Pa",
+    "temporal": "Sols 8-676 (every 2nd sol; one Mars year)",
+    "processing": "Hourly LTST composites; Ls from PDS4 labels; 12 Ls bins weighted equally.",
+    "license": "NASA PDS open data."
+   },
+   {
+    "id": "lola",
+    "provider": "NASA PDS / USGS Astrogeology",
+    "role": "Moon target",
+    "dataset": "LRO LOLA Global LDEM 118 m (Mar 2014)",
+    "version": "Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+    "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif",
+    "resolution": "118 m",
+    "units": "m (1737.4 km sphere)",
+    "temporal": "LRO 2009-2013",
+    "processing": "55.6 km window centred on the south pole binned to 926.6 m; Horn slope; std-dev roughness.",
+    "license": "NASA/USGS public domain."
+   },
+   {
+    "id": "diviner",
+    "provider": "LRO Diviner team (UCLA) - Williams et al. 2019",
+    "role": "Moon target",
+    "dataset": "Diviner polar hourly bolometric temperature maps, south, summer & winter (hour02, hour14)",
+    "version": "level4_polar hourly_maps (2009-07-05 to 2019-02-17)",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/",
+    "resolution": "240 m polar stereographic",
+    "units": "K",
+    "temporal": "2009-2019",
+    "processing": "Window mean of T(13-14 h) - T(01-02 h), average of the two seasons.",
+    "license": "NASA-funded open data; cite Williams et al. (2019) doi:10.1029/2019JE006028."
+   },
+   {
+    "id": "natural_earth",
+    "provider": "Natural Earth",
+    "role": "Context only (labels, coastline)",
+    "dataset": "1:50m admin-0 countries, 1:50m geography regions, 1:110m coastline",
+    "version": "naciscdn.org current",
+    "url": "https://www.naturalearthdata.com/",
+    "resolution": "1:50m / 1:110m",
+    "units": "-",
+    "temporal": "-",
+    "processing": "Point-in-polygon on cell centres. Never used in scoring.",
+    "license": "Public domain."
+   },
+   {
+    "id": "blue_marble",
+    "provider": "NASA Earth Observatory via GIBS",
+    "role": "Context only (basemap)",
+    "dataset": "BlueMarble_ShadedRelief (August 2004)",
+    "version": "GIBS layer",
+    "url": "https://gibs.earthdata.nasa.gov/",
+    "resolution": "2048 x 1024 px render",
+    "units": "-",
+    "temporal": "2004",
+    "processing": "Dimmed basemap. Never used in scoring.",
+    "license": "NASA imagery, no copyright."
+   }
+  ],
+  "verified": [
+   "Raw input SHA-256 values match between the ingestion sandbox and this repository (inputs[].sha256).",
+   "Rebuilding the stack from the raw inputs in an independent environment (Higgsfield sandbox, numpy 2.4.6, zarr-python 3.1.6) reproduced public/data/stack.bin with identical SHA-256; the zarr-python store equalled the npz.",
+   "The built-in Zarr v2 writer's output was read back exactly by zarr-python 3.1.6 and xarray 2026.7.0.",
+   "Diviner summer hour14 map = mean of PDS LTIM53-56 products (13.00-14.00 h), rms 6.9e-6 K over 794,601 pixels.",
+   "JS engine scores are bitwise identical to the Python reference for both targets (tests/test_js_parity.mjs)."
+  ],
+  "unverified": [
+   "Diviner hour02 bin numbering is assumed to follow hour14 (hour14 = LTIM53-56 was verified; hour02 was not separately checked).",
+   "MODIS LST was decoded from NASA GIBS rendered imagery through the published colormap (0.6 K bins); values were not cross-checked against the MYD11C3 HDF science files.",
+   "NASA POWER climatology values were taken as served by the API; they were not cross-checked against MERRA-2 files.",
+   "Licence statements summarise each provider's published data policy; they have not been legally reviewed.",
+   "No analogue ranking has been validated against field studies or expert-selected analogue sites."
+  ],
+  "interpretation": "Analogue Scores measure similarity of selected modelled variables under a weighting profile. They do not establish geological equivalence, engineering suitability, habitability, safety or mission-site certification."
+ },
+ "manifest_sha256": "222c994ced6b40c7c9368c362ccf5c51df1545cbf69fccbbe58d7d819b4497b7"
+}

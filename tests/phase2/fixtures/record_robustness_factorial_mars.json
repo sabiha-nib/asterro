@@ -1,0 +1,1460 @@
+{
+ "schema": "asterro.experiment/1",
+ "module": "robustness",
+ "baseline": {
+  "product": "ASTERRO — Planetary Analogue Intelligence",
+  "algorithm_version": "tai-sim-1.0.0",
+  "phase2_version": "asterro-phase2-0.1.0",
+  "target": "mars_jezero",
+  "weights": {
+   "aridity": 1,
+   "annual_temperature_range": 1,
+   "elevation": 1,
+   "slope": 1,
+   "surface_roughness": 1,
+   "lst_diurnal_range": 1
+  },
+  "profile": "general",
+  "profile_label": "General analogue",
+  "normalization_ranges": {
+   "aridity": [
+    0,
+    1
+   ],
+   "annual_temperature_range": [
+    0.3400001525878906,
+    59.91999816894531
+   ],
+   "elevation": [
+    -75.2784423828125,
+    5702
+   ],
+   "slope": [
+    0,
+    20.94510841369629
+   ],
+   "surface_roughness": [
+    0,
+    1500.462158203125
+   ],
+   "lst_diurnal_range": [
+    -6.9000091552734375,
+    75.871
+   ]
+  },
+  "min_coverage": 0.8,
+  "distinct_sep_km": 300,
+  "predictor_stack": {
+   "sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+   "file_hashes": {
+    "stack.bin": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+    "targets.json": "1cb8b3ca70a4ecd6cbe5c36ac952c7dec5d11c9751a070eb71210454f4a2713e",
+    "labels.json": "8bbc4f91590769d8db3ce57028c1a9b067d99bf1a0dbcefdcb29894190522447"
+   }
+  },
+  "phase2_series_sha256": null,
+  "dataset_versions": {
+   "nasa_power": "API v2.10.0; source MERRA-2",
+   "modis_aqua_lst": "Collections 006 / 061 as served by GIBS",
+   "gmted2010": "GMTED2010",
+   "mola": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+   "meda": "Bundle 6.0, doi:10.17189/1522849",
+   "lola": "Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+   "diviner": "level4_polar hourly_maps (2009-07-05 to 2019-02-17)",
+   "natural_earth": "naciscdn.org current",
+   "blue_marble": "GIBS layer"
+  }
+ },
+ "params": {
+  "design": "factorial",
+  "samples": 300,
+  "seed": 20261013,
+  "logRange": 1,
+  "topPct": 1,
+  "topN": 20,
+  "stableFrac": 0.95,
+  "moderateFrac": 0.5,
+  "candidates": [
+   77940,
+   146152,
+   82546,
+   144991,
+   85422,
+   143844,
+   75058,
+   147310,
+   140962,
+   71025,
+   91174,
+   141544,
+   148471,
+   121895,
+   128189,
+   147863,
+   125924,
+   87146,
+   145017,
+   140400
+  ]
+ },
+ "id": "f3b1c89dfd60f07c",
+ "created_utc": "2026-10-13T18:03:38.148Z",
+ "outputs": {
+  "cells": [
+   77940,
+   146152,
+   82546,
+   144991,
+   85422,
+   143844,
+   75058,
+   147310,
+   140962,
+   71025,
+   91174,
+   141544,
+   148471,
+   121895,
+   128189,
+   147863,
+   125924,
+   87146,
+   145017,
+   140400
+  ],
+  "stats": [
+   {
+    "baseline": 1,
+    "min": 1,
+    "max": 65,
+    "median": 2,
+    "p25": 1,
+    "p75": 7,
+    "fracTopPct": 1,
+    "fracTopN": 0.934156378600823,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 9,
+    "min": 1,
+    "max": 177,
+    "median": 17,
+    "p25": 9,
+    "p75": 31,
+    "fracTopPct": 1,
+    "fracTopN": 0.5829903978052127,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 10,
+    "min": 2,
+    "max": 239,
+    "median": 18,
+    "p25": 11,
+    "p75": 46,
+    "fracTopPct": 1,
+    "fracTopN": 0.5555555555555556,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 21,
+    "min": 2,
+    "max": 1248,
+    "median": 41,
+    "p25": 21,
+    "p75": 82,
+    "fracTopPct": 0.9862825788751715,
+    "fracTopN": 0.24142661179698216,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 28,
+    "min": 13,
+    "max": 381,
+    "median": 58,
+    "p25": 40,
+    "p75": 92,
+    "fracTopPct": 1,
+    "fracTopN": 0.019204389574759947,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 30,
+    "min": 2,
+    "max": 1168,
+    "median": 46,
+    "p25": 20,
+    "p75": 110,
+    "fracTopPct": 0.9780521262002744,
+    "fracTopN": 0.25925925925925924,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 46,
+    "min": 9,
+    "max": 680,
+    "median": 66,
+    "p25": 27,
+    "p75": 138,
+    "fracTopPct": 0.9986282578875172,
+    "fracTopN": 0.1646090534979424,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 49,
+    "min": 5,
+    "max": 515,
+    "median": 74,
+    "p25": 43,
+    "p75": 123,
+    "fracTopPct": 1,
+    "fracTopN": 0.0877914951989026,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 101,
+    "min": 32,
+    "max": 3181,
+    "median": 121,
+    "p25": 83,
+    "p75": 215,
+    "fracTopPct": 0.9259259259259259,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 131,
+    "min": 21,
+    "max": 1605,
+    "median": 169,
+    "p25": 107,
+    "p75": 271,
+    "fracTopPct": 0.9574759945130316,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 133,
+    "min": 56,
+    "max": 1469,
+    "median": 173,
+    "p25": 125,
+    "p75": 241,
+    "fracTopPct": 0.9821673525377229,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 175,
+    "min": 40,
+    "max": 8158,
+    "median": 197,
+    "p25": 130,
+    "p75": 431,
+    "fracTopPct": 0.813443072702332,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 183,
+    "min": 22,
+    "max": 2034,
+    "median": 223,
+    "p25": 123,
+    "p75": 393,
+    "fracTopPct": 0.9711934156378601,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 219,
+    "min": 14,
+    "max": 1112,
+    "median": 217,
+    "p25": 99,
+    "p75": 417,
+    "fracTopPct": 0.9739368998628258,
+    "fracTopN": 0.009602194787379973,
+    "n": 729,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 223,
+    "min": 11,
+    "max": 2967,
+    "median": 183,
+    "p25": 59,
+    "p75": 461,
+    "fracTopPct": 0.9300411522633745,
+    "fracTopN": 0.05075445816186557,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 239,
+    "min": 104,
+    "max": 6195,
+    "median": 334,
+    "p25": 231,
+    "p75": 512,
+    "fracTopPct": 0.8271604938271605,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 245,
+    "min": 9,
+    "max": 2607,
+    "median": 228,
+    "p25": 85,
+    "p75": 492,
+    "fracTopPct": 0.9259259259259259,
+    "fracTopN": 0.0411522633744856,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 271,
+    "min": 129,
+    "max": 6493,
+    "median": 321,
+    "p25": 271,
+    "p75": 623,
+    "fracTopPct": 0.7695473251028807,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 283,
+    "min": 162,
+    "max": 8012,
+    "median": 344,
+    "p25": 275,
+    "p75": 710,
+    "fracTopPct": 0.7489711934156379,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 298,
+    "min": 103,
+    "max": 10591,
+    "median": 314,
+    "p25": 212,
+    "p75": 1153,
+    "fracTopPct": 0.6694101508916324,
+    "fracTopN": 0,
+    "n": 729,
+    "cls": "MODERATELY_SENSITIVE"
+   }
+  ],
+  "drivers": [
+   "elevation",
+   "annual_temperature_range",
+   "elevation",
+   "annual_temperature_range",
+   "elevation",
+   "elevation",
+   "elevation",
+   "aridity",
+   "elevation",
+   "annual_temperature_range",
+   "lst_diurnal_range",
+   "elevation",
+   "elevation",
+   "elevation",
+   "elevation",
+   "elevation",
+   "elevation",
+   "elevation",
+   "elevation",
+   "aridity"
+  ],
+  "oat": [
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 1,
+      "0.5": 5
+     },
+     "m": 2.321928094887362
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 2,
+      "0.5": 1
+     },
+     "m": 1
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 2,
+      "0.5": 1
+     },
+     "m": 1
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 1,
+      "0.5": 1
+     },
+     "m": 0
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 1,
+      "0.5": 1
+     },
+     "m": 0
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 1,
+      "0.5": 1
+     },
+     "m": 0
+    }
+   ],
+   [
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 30,
+      "0.5": 2
+     },
+     "m": 2.1699250014423126
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 9,
+      "0.5": 20
+     },
+     "m": 1.15200309344505
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 15,
+      "0.5": 7
+     },
+     "m": 0.7369655941662062
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 7,
+      "0.5": 12
+     },
+     "m": 0.41503749927884376
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 8,
+      "0.5": 11
+     },
+     "m": 0.289506617194985
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 9,
+      "0.5": 9
+     },
+     "m": 0
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 64,
+      "0.5": 12
+     },
+     "m": 2.678071905112638
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 18,
+      "0.5": 10
+     },
+     "m": 0.8479969065549501
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 6,
+      "0.5": 14
+     },
+     "m": 0.7369655941662062
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 12,
+      "0.5": 16
+     },
+     "m": 0.6780719051126377
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 7,
+      "0.5": 15
+     },
+     "m": 0.5849625007211562
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 13,
+      "0.5": 7
+     },
+     "m": 0.5145731728297583
+    }
+   ],
+   [
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 65,
+      "0.5": 10
+     },
+     "m": 1.6300503902496943
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 15,
+      "0.5": 55
+     },
+     "m": 1.3890422907458992
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 55,
+      "0.5": 19
+     },
+     "m": 1.3890422907458992
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 26,
+      "0.5": 33
+     },
+     "m": 0.6520766965796931
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 17,
+      "0.5": 31
+     },
+     "m": 0.561878887608115
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 28,
+      "0.5": 21
+     },
+     "m": 0.41503749927884376
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 75,
+      "0.5": 33
+     },
+     "m": 1.4214637684382767
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 64,
+      "0.5": 22
+     },
+     "m": 1.1926450779423958
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 37,
+      "0.5": 56
+     },
+     "m": 1
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 30,
+      "0.5": 49
+     },
+     "m": 0.8073549220576041
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 21,
+      "0.5": 49
+     },
+     "m": 0.8073549220576041
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 41,
+      "0.5": 27
+     },
+     "m": 0.5501970825604795
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 7,
+      "0.5": 108
+     },
+     "m": 2.0995356735509145
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 87,
+      "0.5": 14
+     },
+     "m": 1.5360529002402097
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 65,
+      "0.5": 21
+     },
+     "m": 1.1154772174199359
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 38,
+      "0.5": 37
+     },
+     "m": 0.3410369178350669
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 37,
+      "0.5": 37
+     },
+     "m": 0.3025627700204313
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 35,
+      "0.5": 35
+     },
+     "m": 0.22239242133644802
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 132,
+      "0.5": 27
+     },
+     "m": 1.5208321633014406
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 17,
+      "0.5": 106
+     },
+     "m": 1.4360991148066735
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 120,
+      "0.5": 17
+     },
+     "m": 1.4360991148066735
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 19,
+      "0.5": 85
+     },
+     "m": 1.2756344426134274
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 69,
+      "0.5": 30
+     },
+     "m": 0.6166713604484944
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 41,
+      "0.5": 52
+     },
+     "m": 0.17687776208407918
+    }
+   ],
+   [
+    {
+     "c": "aridity",
+     "r": {
+      "2": 26,
+      "0.5": 76
+     },
+     "m": 0.9142701259741159
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 28,
+      "0.5": 78
+     },
+     "m": 0.8073549220576042
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 84,
+      "0.5": 41
+     },
+     "m": 0.777607578663552
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 84,
+      "0.5": 45
+     },
+     "m": 0.777607578663552
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 81,
+      "0.5": 30
+     },
+     "m": 0.7251401587694165
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 37,
+      "0.5": 69
+     },
+     "m": 0.49381461266296084
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 73,
+      "0.5": 201
+     },
+     "m": 0.9928402084271338
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 179,
+      "0.5": 82
+     },
+     "m": 0.8256042945124618
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 146,
+      "0.5": 81
+     },
+     "m": 0.5316130761282224
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 74,
+      "0.5": 116
+     },
+     "m": 0.44875811712284497
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 85,
+      "0.5": 110
+     },
+     "m": 0.24882054661409303
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 119,
+      "0.5": 108
+     },
+     "m": 0.2366062805561487
+    }
+   ],
+   [
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 43,
+      "0.5": 183
+     },
+     "m": 1.6071582468353525
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 229,
+      "0.5": 84
+     },
+     "m": 0.8057807865594936
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 176,
+      "0.5": 144
+     },
+     "m": 0.426008617099847
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 160,
+      "0.5": 110
+     },
+     "m": 0.2885050933499121
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 122,
+      "0.5": 156
+     },
+     "m": 0.25197921732479805
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 120,
+      "0.5": 134
+     },
+     "m": 0.1265324059289318
+    }
+   ],
+   [
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 211,
+      "0.5": 89
+     },
+     "m": 0.6658167532059956
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 95,
+      "0.5": 157
+     },
+     "m": 0.4854268271702417
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 156,
+      "0.5": 164
+     },
+     "m": 0.302269569116894
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 113,
+      "0.5": 148
+     },
+     "m": 0.23510347308600188
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 118,
+      "0.5": 135
+     },
+     "m": 0.17263938613934843
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 143,
+      "0.5": 147
+     },
+     "m": 0.14438990933517493
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 121,
+      "0.5": 469
+     },
+     "m": 1.422233000683048
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 359,
+      "0.5": 123
+     },
+     "m": 1.0366289219907228
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 285,
+      "0.5": 152
+     },
+     "m": 0.7036069972197752
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 144,
+      "0.5": 200
+     },
+     "m": 0.28128611039001644
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 202,
+      "0.5": 169
+     },
+     "m": 0.20700037091946602
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 155,
+      "0.5": 193
+     },
+     "m": 0.1750867065580913
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 396,
+      "0.5": 115
+     },
+     "m": 1.1136567817955674
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 311,
+      "0.5": 150
+     },
+     "m": 0.7650709318465602
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 126,
+      "0.5": 292
+     },
+     "m": 0.6741247205959747
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 133,
+      "0.5": 215
+     },
+     "m": 0.4604174027828528
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 154,
+      "0.5": 208
+     },
+     "m": 0.24891329758914102
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 159,
+      "0.5": 201
+     },
+     "m": 0.20281688299968714
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 569,
+      "0.5": 61
+     },
+     "m": 1.8440497220382872
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 95,
+      "0.5": 282
+     },
+     "m": 1.2049314512702256
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 132,
+      "0.5": 377
+     },
+     "m": 0.7836336536674909
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 173,
+      "0.5": 247
+     },
+     "m": 0.34015883196444874
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 277,
+      "0.5": 186
+     },
+     "m": 0.338955106448015
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 203,
+      "0.5": 228
+     },
+     "m": 0.10945114241599718
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 663,
+      "0.5": 30
+     },
+     "m": 2.894009304311786
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 117,
+      "0.5": 278
+     },
+     "m": 0.9305351803369003
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 131,
+      "0.5": 382
+     },
+     "m": 0.776528928115444
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 163,
+      "0.5": 255
+     },
+     "m": 0.4521717456892272
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 180,
+      "0.5": 244
+     },
+     "m": 0.30904680359063
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 212,
+      "0.5": 227
+     },
+     "m": 0.0729794453571056
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 298,
+      "0.5": 398
+     },
+     "m": 0.7357578125629003
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 365,
+      "0.5": 198
+     },
+     "m": 0.610885845786631
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 201,
+      "0.5": 360
+     },
+     "m": 0.5909862883489261
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 356,
+      "0.5": 204
+     },
+     "m": 0.5748666229856491
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 199,
+      "0.5": 269
+     },
+     "m": 0.2642421874370997
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 245,
+      "0.5": 234
+     },
+     "m": 0.03577113102182194
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 664,
+      "0.5": 48
+     },
+     "m": 2.3516754382814145
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 88,
+      "0.5": 337
+     },
+     "m": 1.4772063203652734
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 153,
+      "0.5": 412
+     },
+     "m": 0.7498625881806478
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 198,
+      "0.5": 272
+     },
+     "m": 0.3072813189229609
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 296,
+      "0.5": 214
+     },
+     "m": 0.2728154266263793
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 203,
+      "0.5": 274
+     },
+     "m": 0.27130202181739427
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 292,
+      "0.5": 616
+     },
+     "m": 1.1846374993410298
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 611,
+      "0.5": 235
+     },
+     "m": 1.1728795284648579
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 221,
+      "0.5": 296
+     },
+     "m": 0.2942464819624401
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 311,
+      "0.5": 261
+     },
+     "m": 0.19862172877673098
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 285,
+      "0.5": 261
+     },
+     "m": 0.07266906769823242
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 275,
+      "0.5": 281
+     },
+     "m": 0.05227727886705446
+    }
+   ],
+   [
+    {
+     "c": "elevation",
+     "r": {
+      "2": 274,
+      "0.5": 788
+     },
+     "m": 1.4773935766244939
+    },
+    {
+     "c": "aridity",
+     "r": {
+      "2": 579,
+      "0.5": 258
+     },
+     "m": 1.0327612951573542
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 364,
+      "0.5": 258
+     },
+     "m": 0.36313639736681397
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 228,
+      "0.5": 320
+     },
+     "m": 0.3117682286671407
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 322,
+      "0.5": 255
+     },
+     "m": 0.18625863528273479
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 274,
+      "0.5": 291
+     },
+     "m": 0.04662615987135561
+    }
+   ],
+   [
+    {
+     "c": "aridity",
+     "r": {
+      "2": 1508,
+      "0.5": 183
+     },
+     "m": 2.339252192806503
+    },
+    {
+     "c": "elevation",
+     "r": {
+      "2": 220,
+      "0.5": 1171
+     },
+     "m": 1.9743568400390534
+    },
+    {
+     "c": "slope",
+     "r": {
+      "2": 243,
+      "0.5": 334
+     },
+     "m": 0.2943560168563807
+    },
+    {
+     "c": "annual_temperature_range",
+     "r": {
+      "2": 362,
+      "0.5": 277
+     },
+     "m": 0.2806773666210437
+    },
+    {
+     "c": "surface_roughness",
+     "r": {
+      "2": 270,
+      "0.5": 311
+     },
+     "m": 0.14235292341133063
+    },
+    {
+     "c": "lst_diurnal_range",
+     "r": {
+      "2": 306,
+      "0.5": 291
+     },
+     "m": 0.03821932223049015
+    }
+   ]
+  ],
+  "nConfigs": 729
+ },
+ "outputs_sha256": "886b0f1aaa3741e14b846833ca87114c093476a53a3ce303d6b27c4ad34bf43d",
+ "limitations": [
+  "Robust under the TESTED weight space only; other methodological choices (normalisation, criteria set, targets) are not varied.",
+  "Robustness is not scientific validation."
+ ],
+ "claims": [
+  {
+   "id": "robust.stability",
+   "text": "Rank statistics of 20 candidates across 729 weight configurations (Full factorial ×{½, 1, 2}).",
+   "category": "DERIVED",
+   "supporting": [],
+   "method": "Each configuration re-scores all 76,781 cells with the baseline formula; candidate ranks are exact (score desc, cell id asc).",
+   "provenance": [
+    "predictor stack cfbe1bf5fab5…",
+    "targets.json"
+   ],
+   "assumptions": [
+    "Every combination of the multipliers 0.5, 1 and 2 on the 6 active weights (3^6 = 729 configurations, deterministic enumeration; includes the baseline)."
+   ],
+   "limitations": [
+    "Robust under the TESTED weight space only; other methodological choices (normalisation, criteria set, targets) are not varied.",
+    "Robustness is not scientific validation."
+   ],
+   "completeness": "complete",
+   "reproduce": null
+  },
+  {
+   "id": "robust.classification",
+   "text": "Classification: stable if within the top 1% of eligible cells in ≥ 95% of configurations; moderately sensitive if ≥ 50%; otherwise highly sensitive; insufficient evidence if < 10 configurations or weight coverage < 100 %.",
+   "category": "INFERRED",
+   "supporting": [],
+   "method": "Threshold rule on the fraction of configurations (user-adjustable within documented bounds).",
+   "provenance": [],
+   "assumptions": [],
+   "limitations": [],
+   "completeness": "complete",
+   "reproduce": null
+  },
+  {
+   "id": "robust.validation",
+   "text": "No candidate's analogue value has been validated against field studies or expert-selected analogue sites.",
+   "category": "UNVALIDATED",
+   "supporting": [],
+   "method": null,
+   "provenance": [],
+   "assumptions": [],
+   "limitations": [],
+   "completeness": "partial",
+   "reproduce": null
+  }
+ ],
+ "parent": null,
+ "replay": "browser + python (scripts/replay_experiment.py)",
+ "software": {
+  "app": "tai-sim-1.0.0",
+  "phase2": "asterro-phase2-0.1.0"
+ },
+ "package": {
+  "schema": "asterro.experiment-package/1",
+  "instructions": [
+   "1. Obtain the ASTERRO repository at the algorithm version in baseline.algorithm_version.",
+   "2. Check that public/data/stack.bin has SHA-256 baseline.predictor_stack.sha256.",
+   "3. Replay: python scripts/replay_experiment.py <this file> (robustness, ablation), or Lab → Vault → Import → Replay in the browser.",
+   "4. A replay is reproduced when the canonical-JSON SHA-256 of the recomputed outputs equals outputs_sha256."
+  ],
+  "contains": "configuration, metadata, outputs and checksums only — no source data, no credentials"
+ }
+}
