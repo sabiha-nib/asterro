@@ -1,0 +1,28 @@
+{
+ "id": "moon_apollo15_hadley",
+ "primary": {
+  "elevation_m": -898.3146117223996,
+  "slope_deg": 9.080304028289481,
+  "surface_roughness_m": 1147.0871794573836,
+  "slope_p90_deg": 21.73850067841178,
+  "elevation_min_m": -2938.389705882353,
+  "elevation_max_m": 2083.1041666666665,
+  "bins_filled": 3600,
+  "bins_total": 3600,
+  "source_pixels": 262013,
+  "window_km": 55.59752615413244,
+  "baseline_m": 926.6254359022073,
+  "dem_url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif",
+  "dem_crs": "PROJCS[\"SimpleCylindrical Moon\",GEOGCS[\"GCS_Moon\",DATUM[\"D_Moon\",SPHEROID[\"Moon\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "dem_pixel_m": 118.4505876,
+  "dem_scale": 0.5,
+  "dem_offset": 0.0,
+  "center_lat": 26.13239,
+  "center_lon": 3.6332999999999913,
+  "read_mode": "box",
+  "rows_lat": null,
+  "grid_sha256": "d25d6583ed166d72752f9e6526e5f769e513dfef702a490d58ac6711246338c2",
+  "complete": true
+ },
+ "seconds": 11.4
+}

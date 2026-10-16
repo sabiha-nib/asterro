@@ -1,0 +1,215 @@
+{
+ "meta": {
+  "dataset": "LRO Diviner level-4 polar hourly bolometric temperature maps (Williams et al. 2019, JGR Planets 124, 2505-2521, doi:10.1029/2019JE006028)",
+  "provider": "UCLA Diviner team (J.-P. Williams); PDS-archived counterparts exist",
+  "period": "2009-07-05 to 2019-02-17 (per product description)",
+  "crs": "polar stereographic, R=1737.4 km",
+  "resolution_m": 240,
+  "units": "K",
+  "files": {
+   "south/polar_south_80_summer_tbol-hour14.grd": {
+    "sha256": "d9a351d122b93a942d6cf71b18377de8ba0b4559cbb22198bae6a2d5142a9d99",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/south/polar_south_80_summer_tbol-hour14.grd",
+    "headers": {
+     "etag": "\"3da12ef6f5-1883c30-596921d83f0c1\"",
+     "last-modified": "Tue, 05 Nov 2019 04:46:28 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "south/polar_south_80_summer_tbol-hour02.grd": {
+    "sha256": "ebd0b89d9f3d944accc2dcff0d781e6b44a6e2d077f64ef514507e8fad3d1dde",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/south/polar_south_80_summer_tbol-hour02.grd",
+    "headers": {
+     "etag": "\"3da12e62dd-1883c30-59692022f5417\"",
+     "last-modified": "Tue, 05 Nov 2019 04:38:49 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "south/polar_south_80_winter_tbol-hour14.grd": {
+    "sha256": "e7bcbb03006a47ddd096a6d052d4ea9c46fa913eeb4cccad6cadfa60e2bb7bca",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/south/polar_south_80_winter_tbol-hour14.grd",
+    "headers": {
+     "etag": "\"3da12ef775-1883c30-5968e4004d065\"",
+     "last-modified": "Tue, 05 Nov 2019 00:09:47 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "south/polar_south_80_winter_tbol-hour02.grd": {
+    "sha256": "59722c762431ebc266066f284f716dd856d033ada0199ed988544587dadd8688",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/south/polar_south_80_winter_tbol-hour02.grd",
+    "headers": {
+     "etag": "\"3da12ef75d-1883c30-5968e2385ccdd\"",
+     "last-modified": "Tue, 05 Nov 2019 00:01:49 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "north/polar_north_80_summer_tbol-hour14.grd": {
+    "sha256": "cf16d6fed49f7d8c518e3ac4aa32802e792209c414bea508ec514bd2fcbd24ad",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/north/polar_north_80_summer_tbol-hour14.grd",
+    "headers": {
+     "etag": "\"3e457f733a-1883c30-5968eb12c48d5\"",
+     "last-modified": "Tue, 05 Nov 2019 00:41:25 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "north/polar_north_80_summer_tbol-hour02.grd": {
+    "sha256": "9b435e4bd85649bbc630563dcfbef80330b59a226abb90bc2f855dca45cb83d3",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/north/polar_north_80_summer_tbol-hour02.grd",
+    "headers": {
+     "etag": "\"3e457f7322-1883c30-5968e7f407b36\"",
+     "last-modified": "Tue, 05 Nov 2019 00:27:28 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "north/polar_north_80_winter_tbol-hour14.grd": {
+    "sha256": "fd521544c30ce830a9963866aabb18439e5579e62038fd10de44054944eb418e",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/north/polar_north_80_winter_tbol-hour14.grd",
+    "headers": {
+     "etag": "\"3e457f747a-1883c30-5968f2244898a\"",
+     "last-modified": "Tue, 05 Nov 2019 01:13:02 GMT",
+     "content-length": "25705520"
+    }
+   },
+   "north/polar_north_80_winter_tbol-hour02.grd": {
+    "sha256": "7937ffb45a59fa4cbc3a5f1f03c4b7bb601242a7023606f6359ed8ea22b256bb",
+    "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/hourly_maps/north/polar_north_80_winter_tbol-hour02.grd",
+    "headers": {
+     "etag": "\"3e457f7462-1883c30-5968f05ec96bc\"",
+     "last-modified": "Tue, 05 Nov 2019 01:05:07 GMT",
+     "content-length": "25705520"
+    }
+   }
+  },
+  "retrieved_utc": "2026-10-15T17:12:07Z",
+  "processing": "window mean over bins valid at both local times of T(13-14 h) - T(01-02 h); mean of summer and winter",
+  "licence": "NASA mission data product; licence not stated by the provider; cite Williams et al. (2019)",
+  "limitations": "Bolometric brightness temperature, not MODIS split-window LST; polar seasons only (2 of 4); permanently shadowed areas dominate some windows."
+ },
+ "targets": {
+  "moon_south_pole": {
+   "summer": {
+    "mean_dT_K": 69.4687644727966,
+    "median_dT_K": 54.229305267333984,
+    "p10_dT_K": -21.411369323730465,
+    "p90_dT_K": 172.22297973632814,
+    "mean_T14_K": 144.50725228453268,
+    "mean_T02_K": 75.03848781173609,
+    "bins_valid": 51562,
+    "bins_total": 53361
+   },
+   "winter": {
+    "mean_dT_K": 39.89552754101477,
+    "median_dT_K": 15.580223083496094,
+    "p10_dT_K": 0.23293495178222656,
+    "p90_dT_K": 156.58481216430664,
+    "mean_T14_K": 94.65374513238892,
+    "mean_T02_K": 54.75821759137414,
+    "bins_valid": 46811,
+    "bins_total": 53361
+   },
+   "lst_diurnal_range_K": 54.68214600690568,
+   "valid_fraction": 0.8772511759524747,
+   "grid_sha256": "9b56553c935e30c259f9fd57579a97a5b210ce29c5383bc6dd2e9f731d6547e5"
+  },
+  "moon_shackleton": {
+   "summer": {
+    "mean_dT_K": 78.09250636663573,
+    "median_dT_K": 76.60389709472656,
+    "p10_dT_K": 0.940982055664065,
+    "p90_dT_K": 169.32294769287108,
+    "mean_T14_K": 149.7697781712474,
+    "mean_T02_K": 71.67727180461166,
+    "bins_valid": 51657,
+    "bins_total": 53655
+   },
+   "winter": {
+    "mean_dT_K": 43.87043177363902,
+    "median_dT_K": 19.267431259155273,
+    "p10_dT_K": 0.5071147918701175,
+    "p90_dT_K": 155.31568069458004,
+    "mean_T14_K": 99.04689240977712,
+    "mean_T02_K": 55.176460636138096,
+    "bins_valid": 46580,
+    "bins_total": 53655
+   },
+   "lst_diurnal_range_K": 60.98146907013738,
+   "valid_fraction": 0.8681390364364924,
+   "grid_sha256": "b828bd8e08e4f904076db5ab87c08ec4a04df23bd193a461c72d227f9b5c7cd1"
+  },
+  "moon_cabeus": {
+   "summer": {
+    "mean_dT_K": 87.0337141381069,
+    "median_dT_K": 64.68871307373047,
+    "p10_dT_K": 18.142654418945312,
+    "p90_dT_K": 174.9410858154297,
+    "mean_T14_K": 139.3636279964927,
+    "mean_T02_K": 52.32991385838581,
+    "bins_valid": 53831,
+    "bins_total": 53831
+   },
+   "winter": {
+    "mean_dT_K": 40.85476132918147,
+    "median_dT_K": 27.167316436767578,
+    "p10_dT_K": 7.7447967529296875,
+    "p90_dT_K": 112.11790084838867,
+    "mean_T14_K": 85.886162209614,
+    "mean_T02_K": 45.03140088043253,
+    "bins_valid": 53831,
+    "bins_total": 53831
+   },
+   "lst_diurnal_range_K": 63.94423773364419,
+   "valid_fraction": 1.0,
+   "grid_sha256": "7a6f4d583420b0e99fbf3e1cd47a1867114ac3e196926f3acb0ced9a83d8ddee"
+  },
+  "moon_malapert_massif": {
+   "summer": {
+    "mean_dT_K": 66.93819598761488,
+    "median_dT_K": 125.08951950073242,
+    "p10_dT_K": -134.78070602416992,
+    "p90_dT_K": 194.62321548461912,
+    "mean_T14_K": 171.48586017130563,
+    "mean_T02_K": 104.54766418369076,
+    "bins_valid": 53780,
+    "bins_total": 53780
+   },
+   "winter": {
+    "mean_dT_K": 78.97348755229667,
+    "median_dT_K": 62.49487495422363,
+    "p10_dT_K": -0.7307662963867175,
+    "p90_dT_K": 189.04759979248047,
+    "mean_T14_K": 143.47910741222265,
+    "mean_T02_K": 64.50561985992596,
+    "bins_valid": 53780,
+    "bins_total": 53780
+   },
+   "lst_diurnal_range_K": 72.95584176995578,
+   "valid_fraction": 1.0,
+   "grid_sha256": "6edce68b7192018a4158c6f82fc0f0494764ed8a93d7ff72d2a368b31529e387"
+  },
+  "moon_north_pole": {
+   "summer": {
+    "mean_dT_K": 74.04730997106316,
+    "median_dT_K": 71.36564064025879,
+    "p10_dT_K": 10.433874893188477,
+    "p90_dT_K": 146.46718940734863,
+    "mean_T14_K": 138.55415243316136,
+    "mean_T02_K": 64.50684246209822,
+    "bins_valid": 49652,
+    "bins_total": 53361
+   },
+   "winter": {
+    "mean_dT_K": 26.31695103471807,
+    "median_dT_K": 13.547908782958984,
+    "p10_dT_K": 0.6042869567871096,
+    "p90_dT_K": 70.70438995361327,
+    "mean_T14_K": 76.49638873363472,
+    "mean_T02_K": 50.179437698916644,
+    "bins_valid": 53175,
+    "bins_total": 53361
+   },
+   "lst_diurnal_range_K": 50.182130502890615,
+   "valid_fraction": 0.9304923071156838,
+   "grid_sha256": "f60703ad085894fd57a1d82ff60db05a68d21e30d5929e3be99b3c9379af7dc4"
+  }
+ }
+}

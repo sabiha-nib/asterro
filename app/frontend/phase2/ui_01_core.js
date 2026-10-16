@@ -219,7 +219,7 @@ const LAB_INPUTS = {};
 const LAB_STATUS = {
   robust: ["Implemented", "Predictor stack (baseline bundle)"],
   portfolio: ["Implemented", "Predictor stack"],
-  atlas: ["Partially implemented", "Stack neighbourhood + target windows; Earth sub-cell data not retained"],
+  atlas: ["Implemented (terrain sub-cell via Phase III; climate/thermal sub-cell not available)", "Stack neighbourhood, target windows, GMTED 30″ slope histograms"],
   uncert: ["Implemented (quantified where data allow; qualitative elsewhere)", "Stack, MODIS yearly, MEDA, Diviner"],
   failure: ["Implemented", "Stack, targets, catalogue"],
   graph: ["Implemented", "app.json, targets.json, provenance manifest"],

@@ -1,0 +1,28 @@
+{
+ "Mars": {
+  "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+  "R": 3396190.0,
+  "dataset": "MGS MOLA DEM mosaic global 463 m (USGS Astrogeology)",
+  "product_id": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+  "provider": "USGS Astrogeology Science Center (PDS Imaging Node / Annex mosaic)",
+  "version_headers": {
+   "etag": "\"cccf7001294ee9f503b13318eab83086-254\"",
+   "last-modified": "Thu, 10 Nov 2022 03:31:07 GMT",
+   "content-length": "2125771142"
+  },
+  "licence": "NASA / USGS planetary data products; U.S. Government work, generally not subject to copyright in the U.S. Cite the product. (Licence not restated by the provider page.)"
+ },
+ "Moon": {
+  "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif",
+  "R": 1737400.0,
+  "dataset": "LRO LOLA Global LDEM 118 m, March 2014 (USGS Astrogeology)",
+  "product_id": "Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+  "provider": "USGS Astrogeology Science Center (PDS Imaging Node / Annex mosaic)",
+  "version_headers": {
+   "etag": "\"722bebaeb337b9afc8b24ae5bd817aa3-1013\"",
+   "last-modified": "Tue, 08 Nov 2022 23:01:12 GMT",
+   "content-length": "8494203833"
+  },
+  "licence": "NASA / USGS planetary data products; U.S. Government work, generally not subject to copyright in the U.S. Cite the product. (Licence not restated by the provider page.)"
+ }
+}

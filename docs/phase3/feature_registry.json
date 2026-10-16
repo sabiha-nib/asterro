@@ -1,0 +1,21 @@
+{
+ "schema": "asterro.feature-registry/1",
+ "phase": "III",
+ "features": [
+  {"id": "target_atlas", "name": "Planetary Target Atlas", "status": "implemented", "files": ["src/phase3/target_catalog.py", "app/frontend/phase3/ui_02_catalog.js", "app/frontend/phase3/ui_03_target.js"], "data": "33 targets; gazetteer / NSSDCA / LROC anchors; readiness L2 x17, L4 x16"},
+  {"id": "data_pipeline", "name": "Planetary Target Data Pipeline", "status": "implemented", "files": ["src/phase3/pipeline/build_atlas.py", "src/phase3/pipeline/rems_gale.py", "src/phase3/pipeline/gmted_subcell.py", "scripts/build_phase3_data.py"], "data": "MOLA 463 m, LOLA 118 m, Diviner polar + GCP, MSL REMS (306 sols), GMTED2010 30\""},
+  {"id": "compatibility_registry", "name": "Variable compatibility registry and statuses", "status": "implemented", "files": ["src/phase3/target_catalog.py", "app/frontend/phase3/ui_12_copilot.js"]},
+  {"id": "comparison", "name": "Multi-target comparison workspace", "status": "implemented", "files": ["app/frontend/phase3/ui_04_compare.js"]},
+  {"id": "extremes", "name": "Global Environmental Extremes Explorer", "status": "implemented", "files": ["app/frontend/phase3/ui_06_extremes.js"]},
+  {"id": "landing", "name": "Landing-Site Intelligence Explorer (exploratory terrain assessment)", "status": "implemented", "files": ["app/frontend/phase3/ui_07_landing.js"], "limits": "no safety score; ~1 km resolution"},
+  {"id": "counterfactual", "name": "Counterfactual Laboratory", "status": "implemented", "files": ["app/frontend/phase3/ui_08_counter.js"]},
+  {"id": "mismatch", "name": "Mismatch Cartographer", "status": "implemented", "files": ["app/frontend/phase3/ui_09_mismatch.js"]},
+  {"id": "translator", "name": "Earth-to-World Analogue Translator", "status": "implemented", "files": ["app/frontend/phase3/ui_10_translate.js"]},
+  {"id": "expedition", "name": "Analogue Expedition Designer", "status": "implemented", "files": ["app/frontend/phase3/ui_10_translate.js"], "limits": "no travel, cost, access, permit or safety data"},
+  {"id": "constellation", "name": "Knowledge Constellation", "status": "implemented", "files": ["app/frontend/phase3/ui_11_constellation.js"]},
+  {"id": "copilot", "name": "Research Copilot Workspace", "status": "deterministic core implemented and tested; optional language-model mode implemented, untested outside a Claude viewer", "files": ["app/frontend/phase3/ui_12_copilot.js", "app/frontend/phase3/atlas_engine.js"]},
+  {"id": "workflow", "name": "Cross-module research workflow", "status": "implemented", "files": ["app/frontend/phase3/ui_05_workflow.js"]},
+  {"id": "contract_v2", "name": "Shared experiment contract asterro.experiment/2 with v1 adapter", "status": "implemented", "files": ["app/frontend/phase3/atlas_engine.js", "app/frontend/phase3/ui_05_workflow.js", "scripts/replay_atlas_record.py"]},
+  {"id": "phase2_subcell", "name": "Phase II Spatial Atlas sub-cell analysis", "status": "implemented for terrain; climate/thermal blocked (source pixels not retained)", "files": ["src/phase3/pipeline/gmted_subcell.py", "app/frontend/phase2/ui_04_atlas.js"]}
+ ]
+}

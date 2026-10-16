@@ -1,0 +1,28 @@
+{
+ "id": "mars_valles_marineris",
+ "primary": {
+  "elevation_m": -3771.904453703704,
+  "slope_deg": 9.416450210673698,
+  "surface_roughness_m": 1818.1374419955246,
+  "slope_p90_deg": 24.142201130961073,
+  "elevation_min_m": -5397.75,
+  "elevation_max_m": 2820.25,
+  "bins_filled": 3600,
+  "bins_total": 3600,
+  "source_pixels": 15872,
+  "window_km": 55.59752615413244,
+  "baseline_m": 926.6254359022073,
+  "dem_url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+  "dem_crs": "PROJCS[\"Equirectangular Mars\",GEOGCS[\"GCS_Mars\",DATUM[\"D_Mars\",SPHEROID[\"Mars_localRadius\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "dem_pixel_m": 463.0935415503709,
+  "dem_scale": 1.0,
+  "dem_offset": 0.0,
+  "center_lat": -14.0059,
+  "center_lon": -58.587699999999984,
+  "read_mode": "box",
+  "rows_lat": null,
+  "grid_sha256": "5843960eea0639fc1e71afd8e5a12ed546eb4a1edfec58c2c2b7c3e5f6e64d66",
+  "complete": true
+ },
+ "seconds": 1.9
+}

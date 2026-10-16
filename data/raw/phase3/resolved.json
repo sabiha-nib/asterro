@@ -1,0 +1,1209 @@
+{
+ "targets": [
+  {
+   "id": "mars_jezero",
+   "body": "Mars",
+   "anchor_type": "baseline",
+   "gazetteer": {
+    "name": "Jezero",
+    "clean_name": "Jezero",
+    "lat": 18.4082,
+    "lon_e": 77.68730000000001,
+    "diameter_km": 47.5212,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/14300",
+    "extent": {
+     "min_lat": 18.0077,
+     "max_lat": 18.8094,
+     "min_lon": 77.2663,
+     "max_lon": 78.11120000000001
+    }
+   },
+   "source": "ASTERRO baseline definition",
+   "lat": 18.38,
+   "lon": 77.57999999999998
+  },
+  {
+   "id": "mars_gale_aeolis_mons",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Aeolis Mons",
+    "clean_name": "Aeolis Mons",
+    "lat": -5.0834,
+    "lon_e": 137.8453,
+    "diameter_km": 88.991,
+    "type": "Mons, montes",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/15000",
+    "extent": {
+     "min_lat": -5.6113,
+     "max_lat": -4.4577,
+     "min_lon": 137.1088,
+     "max_lon": 138.6249
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/15000",
+   "lat": -5.0834,
+   "lon": 137.8453
+  },
+  {
+   "id": "mars_gale_curiosity",
+   "body": "Mars",
+   "anchor_type": "mission",
+   "gazetteer": {
+    "name": "Gale",
+    "clean_name": "Gale",
+    "lat": -5.3672,
+    "lon_e": 137.811,
+    "diameter_km": 154.084,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/2071",
+    "extent": {
+     "min_lat": -6.6671,
+     "max_lat": -4.0675,
+     "min_lon": 136.5078,
+     "max_lon": 139.1188
+    }
+   },
+   "source": "Wikipedia, List of artificial objects on Mars (secondary source; Curiosity landing 4\u00b035'22\"S 137\u00b026'30\"E)",
+   "lat": -4.5894,
+   "lon": 137.44169999999997
+  },
+  {
+   "id": "mars_elysium_planitia",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Elysium Planitia",
+    "clean_name": "Elysium Planitia",
+    "lat": 2.979,
+    "lon_e": 154.7372,
+    "diameter_km": 3000.7893,
+    "type": "Planitia, planitiae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/1784",
+    "extent": {
+     "min_lat": -7.7709,
+     "max_lat": 11.4038,
+     "min_lon": 128.256,
+     "max_lon": 179.1131
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/1784",
+   "lat": 2.979,
+   "lon": 154.73720000000003,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 750.197325,
+     "lat": 15.635282635690043,
+     "lon": 154.73720000000003
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 750.197325,
+     "lat": 11.854447992320898,
+     "lon": 163.84570216391342
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 750.197325,
+     "lat": 2.906553342038446,
+     "lon": 167.4100560784551
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 750.197325,
+     "lat": -5.970237000586702,
+     "lon": 163.6988461532418
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 750.197325,
+     "lat": -9.67728263569004,
+     "lon": 154.73720000000003
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 750.197325,
+     "lat": -5.970237000586706,
+     "lon": 145.77555384675827
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 750.197325,
+     "lat": 2.906553342038443,
+     "lon": 142.064343921545
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 750.197325,
+     "lat": 11.854447992320893,
+     "lon": 145.62869783608664
+    }
+   ]
+  },
+  {
+   "id": "mars_utopia_planitia",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Utopia Planitia",
+    "clean_name": "Utopia Planitia",
+    "lat": 46.7363,
+    "lon_e": 117.5168,
+    "diameter_km": 3560.448,
+    "type": "Planitia, planitiae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/6260",
+    "extent": {
+     "min_lat": 12.9159,
+     "max_lat": 73.1699,
+     "min_lon": 71.8562,
+     "max_lon": 164.8869
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/6260",
+   "lat": 46.7363,
+   "lon": 117.51679999999999,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 890.112,
+     "lat": 61.75302783146666,
+     "lon": 117.51679999999999
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 890.112,
+     "lat": 55.986390619951734,
+     "lon": 136.6352002352454
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 890.112,
+     "lat": 44.69551036273799,
+     "lon": 138.8931428433042
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 890.112,
+     "lat": 35.29407903558313,
+     "lon": 130.48853549205342
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 890.112,
+     "lat": 31.719572168533354,
+     "lon": 117.51679999999999
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 890.112,
+     "lat": 35.29407903558313,
+     "lon": 104.54506450794656
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 890.112,
+     "lat": 44.69551036273799,
+     "lon": 96.14045715669579
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 890.112,
+     "lat": 55.986390619951734,
+     "lon": 98.39839976475452
+    }
+   ]
+  },
+  {
+   "id": "mars_gusev",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Gusev",
+    "clean_name": "Gusev",
+    "lat": -14.530800000000001,
+    "lon_e": 175.5244,
+    "diameter_km": 158.125,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/2289",
+    "extent": {
+     "min_lat": -15.8649,
+     "max_lat": -13.1972,
+     "min_lon": 174.14960000000002,
+     "max_lon": 176.9052
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/2289",
+   "lat": -14.530800000000001,
+   "lon": 175.5244
+  },
+  {
+   "id": "mars_hellas_planitia",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Hellas Planitia",
+    "clean_name": "Hellas Planitia",
+    "lat": -42.4301,
+    "lon_e": 70.5025,
+    "diameter_km": 2299.1624,
+    "type": "Planitia, planitiae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/2432",
+    "extent": {
+     "min_lat": -55.416700000000006,
+     "max_lat": -27.863000000000003,
+     "min_lon": 45.5822,
+     "max_lon": 96.11710000000001
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/2432",
+   "lat": -42.4301,
+   "lon": 70.5025,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 574.7906,
+     "lat": -32.733034911241035,
+     "lon": 70.5025
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 574.7906,
+     "lat": -35.24958971753664,
+     "lon": 78.88875612269288
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 574.7906,
+     "lat": -41.68618668907601,
+     "lon": 83.537602319153
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 574.7906,
+     "lat": -48.84755165307705,
+     "lon": 80.93003031910973
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 574.7906,
+     "lat": -52.12716508875896,
+     "lon": 70.5025
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 574.7906,
+     "lat": -48.84755165307706,
+     "lon": 60.07496968089026
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 574.7906,
+     "lat": -41.68618668907601,
+     "lon": 57.467397680847
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 574.7906,
+     "lat": -35.24958971753664,
+     "lon": 62.11624387730714
+    }
+   ]
+  },
+  {
+   "id": "mars_valles_marineris",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Valles Marineris",
+    "clean_name": "Valles Marineris",
+    "lat": -14.0059,
+    "lon_e": 301.4123,
+    "diameter_km": 3761.2778,
+    "type": "Vallis, valles",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/6288",
+    "extent": {
+     "min_lat": -18.3293,
+     "max_lat": -2.7768,
+     "min_lon": 267.5958,
+     "max_lon": 331.15430000000003
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/6288",
+   "lat": -14.0059,
+   "lon": -58.587699999999984
+  },
+  {
+   "id": "mars_olympus_mons_summit",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Olympus Mons",
+    "clean_name": "Olympus Mons",
+    "lat": 18.6528,
+    "lon_e": 226.19750000000002,
+    "diameter_km": 610.13,
+    "type": "Mons, montes",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4453",
+    "extent": {
+     "min_lat": 13.4818,
+     "max_lat": 23.676000000000002,
+     "min_lon": 220.75670000000002,
+     "max_lon": 232.19840000000002
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4453",
+   "lat": 18.6528,
+   "lon": -133.8025
+  },
+  {
+   "id": "mars_olympus_mons_flank",
+   "body": "Mars",
+   "anchor_type": "offset",
+   "gazetteer": {
+    "name": "Olympus Mons",
+    "clean_name": "Olympus Mons",
+    "lat": 18.6528,
+    "lon_e": 226.19750000000002,
+    "diameter_km": 610.13,
+    "type": "Mons, montes",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4453",
+    "extent": {
+     "min_lat": 13.4818,
+     "max_lat": 23.676000000000002,
+     "min_lon": 220.75670000000002,
+     "max_lon": 232.19840000000002
+    }
+   },
+   "source": "150 km at bearing 90 deg from gazetteer centre of Olympus Mons",
+   "lat": 18.633939559408592,
+   "lon": -131.13181656107554
+  },
+  {
+   "id": "mars_olympus_mons_plains",
+   "body": "Mars",
+   "anchor_type": "offset",
+   "gazetteer": {
+    "name": "Olympus Mons",
+    "clean_name": "Olympus Mons",
+    "lat": 18.6528,
+    "lon_e": 226.19750000000002,
+    "diameter_km": 610.13,
+    "type": "Mons, montes",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4453",
+    "extent": {
+     "min_lat": 13.4818,
+     "max_lat": 23.676000000000002,
+     "min_lon": 220.75670000000002,
+     "max_lon": 232.19840000000002
+    }
+   },
+   "source": "450 km at bearing 90 deg from gazetteer centre of Olympus Mons",
+   "lat": 18.483351596909756,
+   "lon": -125.79517447708568
+  },
+  {
+   "id": "mars_arcadia_planitia",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Arcadia Planitia",
+    "clean_name": "Arcadia Planitia",
+    "lat": 49.02,
+    "lon_e": 188.15,
+    "diameter_km": 2245.0,
+    "type": "Planitia, planitiae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/348",
+    "extent": {
+     "min_lat": 33.879000000000005,
+     "max_lat": 64.1961,
+     "min_lon": 165.782,
+     "max_lon": 210.392
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/348",
+   "lat": 49.02,
+   "lon": -171.85000000000002,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 561.25,
+     "lat": 58.48862697661716,
+     "lon": -171.85000000000002
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 561.25,
+     "lat": 55.17881623422238,
+     "lon": -160.09575078385512
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 561.25,
+     "lat": 48.12931399911237,
+     "lon": -157.581213622743
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 561.25,
+     "lat": 41.941239603930335,
+     "lon": -162.8528359684048
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 561.25,
+     "lat": 39.55137302338283,
+     "lon": -171.85000000000002
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 561.25,
+     "lat": 41.941239603930335,
+     "lon": 179.15283596840476
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 561.25,
+     "lat": 48.12931399911237,
+     "lon": 173.88121362274296
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 561.25,
+     "lat": 55.17881623422238,
+     "lon": 176.39575078385508
+    }
+   ]
+  },
+  {
+   "id": "mars_amazonis_planitia",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Amazonis Planitia",
+    "clean_name": "Amazonis Planitia",
+    "lat": 25.746100000000002,
+    "lon_e": 197.0872,
+    "diameter_km": 2809.043,
+    "type": "Planitia, planitiae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/220",
+    "extent": {
+     "min_lat": 2.1393,
+     "max_lat": 49.7464,
+     "min_lon": 180.3433,
+     "max_lon": 219.42440000000002
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/220",
+   "lat": 25.746100000000002,
+   "lon": -162.9128,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 702.26075,
+     "lat": 37.59366362061364,
+     "lon": -162.9128
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 702.26075,
+     "lat": 33.77228807225291,
+     "lon": -152.85474168628875
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 702.26075,
+     "lat": 25.1589171348459,
+     "lon": -149.80245284627347
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 702.26075,
+     "lat": 17.119592978228116,
+     "lon": -154.17542128620175
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 702.26075,
+     "lat": 13.898536379386366,
+     "lon": -162.9128
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 702.26075,
+     "lat": 17.119592978228116,
+     "lon": -171.65017871379825
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 702.26075,
+     "lat": 25.158917134845897,
+     "lon": -176.02314715372654
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 702.26075,
+     "lat": 33.77228807225291,
+     "lon": -172.97085831371126
+    }
+   ]
+  },
+  {
+   "id": "mars_noctis_labyrinthus",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Noctis Labyrinthus",
+    "clean_name": "Noctis Labyrinthus",
+    "lat": -6.362500000000001,
+    "lon_e": 258.8111,
+    "diameter_km": 1190.3052,
+    "type": "Labyrinthus, labyrinthi",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4324",
+    "extent": {
+     "min_lat": -13.624,
+     "max_lat": -2.7933,
+     "min_lon": 248.4164,
+     "max_lon": 268.694
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4324",
+   "lat": -6.362500000000001,
+   "lon": -101.18889999999999,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 297.5763,
+     "lat": -1.3422078275600504,
+     "lon": -101.18889999999999
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 297.5763,
+     "lat": -2.8026862507200456,
+     "lon": -97.63703754730777
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 297.5763,
+     "lat": -6.337991732896469,
+     "lon": -96.13765498995281
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 297.5763,
+     "lat": -9.897733369383339,
+     "lon": -97.58762146655918
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 297.5763,
+     "lat": -11.382792172439952,
+     "lon": -101.18889999999999
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 297.5763,
+     "lat": -9.897733369383339,
+     "lon": -104.7901785334408
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 297.5763,
+     "lat": -6.337991732896471,
+     "lon": -106.24014501004717
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 297.5763,
+     "lat": -2.802686250720047,
+     "lon": -104.74076245269221
+    }
+   ]
+  },
+  {
+   "id": "mars_schiaparelli",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Schiaparelli",
+    "clean_name": "Schiaparelli",
+    "lat": -2.7138,
+    "lon_e": 16.7716,
+    "diameter_km": 458.52045,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/5366",
+    "extent": {
+     "min_lat": -6.5903,
+     "max_lat": 1.1507,
+     "min_lon": 12.9024,
+     "max_lon": 20.646800000000002
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/5366",
+   "lat": -2.7138,
+   "lon": 16.771600000000007,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 114.6301125,
+     "lat": -0.7799206671712062,
+     "lon": 16.771600000000007
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 114.6301125,
+     "lat": -1.3456977818590965,
+     "lon": 18.13930663283736
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 114.6301125,
+     "lat": -2.7122531622876824,
+     "lon": 18.70764896184727
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 114.6301125,
+     "lat": -4.080354716998756,
+     "lon": 18.14240466570442
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 114.6301125,
+     "lat": -4.647679332828794,
+     "lon": 16.771600000000007
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 114.6301125,
+     "lat": -4.080354716998756,
+     "lon": 15.400795334295594
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 114.6301125,
+     "lat": -2.712253162287683,
+     "lon": 14.835551038152744
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 114.6301125,
+     "lat": -1.3456977818590967,
+     "lon": 15.403893367162652
+    }
+   ]
+  },
+  {
+   "id": "mars_endeavour",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Endeavour",
+    "clean_name": "Endeavour",
+    "lat": -2.2836,
+    "lon_e": 354.8045,
+    "diameter_km": 21.77899,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/14501",
+    "extent": {
+     "min_lat": -2.4674,
+     "max_lat": -2.0999,
+     "min_lon": 354.6206,
+     "max_lon": 354.9884
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/14501",
+   "lat": -2.2836,
+   "lon": -5.195500000000038
+  },
+  {
+   "id": "mars_planum_boreum",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Planum Boreum",
+    "clean_name": "Planum Boreum",
+    "lat": 87.32000000000001,
+    "lon_e": 54.96,
+    "diameter_km": 354.63,
+    "type": "Planum, plana",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4754",
+    "extent": {
+     "min_lat": 80.5878,
+     "max_lat": 90.0,
+     "min_lon": -180.0,
+     "max_lon": 180.0
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4754",
+   "lat": 87.32000000000001,
+   "lon": 54.96000000000001
+  },
+  {
+   "id": "mars_planum_australe",
+   "body": "Mars",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Planum Australe",
+    "clean_name": "Planum Australe",
+    "lat": -83.35000000000001,
+    "lon_e": 157.70000000000002,
+    "diameter_km": 1429.87,
+    "type": "Planum, plana",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4753",
+    "extent": {
+     "min_lat": -90.0,
+     "max_lat": -71.72720000000001,
+     "min_lon": -180.0,
+     "max_lon": 180.0
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4753",
+   "lat": -83.35000000000001,
+   "lon": 157.70000000000005
+  },
+  {
+   "id": "moon_south_pole",
+   "body": "Moon",
+   "anchor_type": "baseline",
+   "source": "ASTERRO baseline definition",
+   "lat": -90.0,
+   "lon": 0.0
+  },
+  {
+   "id": "moon_shackleton",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Shackleton",
+    "clean_name": "Shackleton",
+    "lat": -89.67,
+    "lon_e": 129.78,
+    "diameter_km": 20.924982,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/5450",
+    "extent": {
+     "min_lat": -89.943,
+     "max_lat": -89.287,
+     "min_lon": 35.538000000000004,
+     "max_lon": 206.565
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/5450",
+   "lat": -89.67,
+   "lon": 129.77999999999997
+  },
+  {
+   "id": "moon_cabeus",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Cabeus",
+    "clean_name": "Cabeus",
+    "lat": -85.33030000000001,
+    "lon_e": 317.8673,
+    "diameter_km": 100.5816,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/953",
+    "extent": {
+     "min_lat": -86.9897,
+     "max_lat": -83.6725,
+     "min_lon": 297.6089,
+     "max_lon": 339.2624
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/953",
+   "lat": -85.33030000000001,
+   "lon": -42.1327
+  },
+  {
+   "id": "moon_malapert_massif",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Mons Malapert",
+    "clean_name": "Mons Malapert",
+    "lat": -85.98,
+    "lon_e": 358.33000000000004,
+    "diameter_km": 67.0,
+    "type": "Mons, montes",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/16338",
+    "extent": {
+     "min_lat": -86.312,
+     "max_lat": -85.013,
+     "min_lon": 344.0,
+     "max_lon": 371.505
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/16338",
+   "lat": -85.98,
+   "lon": -1.669999999999959
+  },
+  {
+   "id": "moon_aristarchus",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Aristarchus",
+    "clean_name": "Aristarchus",
+    "lat": 23.7299,
+    "lon_e": 312.5099,
+    "diameter_km": 39.994484,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/380",
+    "extent": {
+     "min_lat": 23.0704,
+     "max_lat": 24.389400000000002,
+     "min_lon": 311.78950000000003,
+     "max_lon": 313.2303
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/380",
+   "lat": 23.7299,
+   "lon": -47.490099999999984
+  },
+  {
+   "id": "moon_marius_hills",
+   "body": "Moon",
+   "anchor_type": "mission",
+   "source": "LROC Pits Atlas, Marius Hills Pit: https://lroc.im-ldi.com/atlases/pits/1",
+   "lat": 14.0917,
+   "lon": -56.77010000000001
+  },
+  {
+   "id": "moon_oceanus_procellarum",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Oceanus Procellarum",
+    "clean_name": "Oceanus Procellarum",
+    "lat": 20.671400000000002,
+    "lon_e": 303.3226,
+    "diameter_km": 2592.2378,
+    "type": "Oceanus, oceani",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4395",
+    "extent": {
+     "min_lat": -16.265800000000002,
+     "max_lat": 57.433,
+     "min_lon": 278.9165,
+     "max_lon": 333.15020000000004
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4395",
+   "lat": 20.671400000000002,
+   "lon": -56.67739999999998,
+   "ring": [
+    {
+     "k": 0,
+     "bearing_deg": 0,
+     "distance_km": 648.05945,
+     "lat": 42.043030803827214,
+     "lon": -56.67739999999998
+    },
+    {
+     "k": 1,
+     "bearing_deg": 45,
+     "distance_km": 648.05945,
+     "lat": 34.73803708339314,
+     "lon": -38.402914584145776
+    },
+    {
+     "k": 2,
+     "bearing_deg": 90,
+     "distance_km": 648.05945,
+     "lat": 19.191937658347403,
+     "lon": -33.98020547007221
+    },
+    {
+     "k": 3,
+     "bearing_deg": 135,
+     "distance_km": 648.05945,
+     "lat": 5.0279856621586765,
+     "lon": -41.68587147849661
+    },
+    {
+     "k": 4,
+     "bearing_deg": 180,
+     "distance_km": 648.05945,
+     "lat": -0.7002308038272015,
+     "lon": -56.67739999999998
+    },
+    {
+     "k": 5,
+     "bearing_deg": 225,
+     "distance_km": 648.05945,
+     "lat": 5.027985662158674,
+     "lon": -71.66892852150336
+    },
+    {
+     "k": 6,
+     "bearing_deg": 270,
+     "distance_km": 648.05945,
+     "lat": 19.1919376583474,
+     "lon": -79.37459452992776
+    },
+    {
+     "k": 7,
+     "bearing_deg": 315,
+     "distance_km": 648.05945,
+     "lat": 34.73803708339313,
+     "lon": -74.95188541585418
+    }
+   ]
+  },
+  {
+   "id": "moon_reiner_gamma",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Reiner Gamma",
+    "clean_name": "Reiner Gamma",
+    "lat": 7.3853,
+    "lon_e": 301.0417,
+    "diameter_km": 73.44105,
+    "type": "Albedo Feature",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/4987",
+    "extent": {
+     "min_lat": 6.7542,
+     "max_lat": 7.912500000000001,
+     "min_lon": 299.9543,
+     "max_lon": 302.3457
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/4987",
+   "lat": 7.3853,
+   "lon": -58.95830000000001
+  },
+  {
+   "id": "moon_schrodinger",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Schr\u00f6dinger",
+    "clean_name": "Schrodinger",
+    "lat": -74.7326,
+    "lon_e": 132.92520000000002,
+    "diameter_km": 316.38785,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/5381",
+    "extent": {
+     "min_lat": -79.9504,
+     "max_lat": -69.5179,
+     "min_lon": 112.32900000000001,
+     "max_lon": 153.4437
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/5381",
+   "lat": -74.7326,
+   "lon": 132.92520000000002
+  },
+  {
+   "id": "moon_orientale",
+   "body": "Moon",
+   "anchor_type": "gazetteer",
+   "gazetteer": {
+    "name": "Mare Orientale",
+    "clean_name": "Mare Orientale",
+    "lat": -19.8655,
+    "lon_e": 265.3297,
+    "diameter_km": 294.15512,
+    "type": "Mare, maria",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/3685",
+    "extent": {
+     "min_lat": -24.3901,
+     "max_lat": -15.231,
+     "min_lon": 260.0371,
+     "max_lon": 270.2586
+    }
+   },
+   "source": "USGS/IAU Gazetteer of Planetary Nomenclature (center points) http://planetarynames.wr.usgs.gov/Feature/3685",
+   "lat": -19.8655,
+   "lon": -94.6703
+  },
+  {
+   "id": "moon_apollo17_taurus_littrow",
+   "body": "Moon",
+   "anchor_type": "mission",
+   "source": "NASA NSSDCA, Apollo Landing Site Coordinates (determined from LRO images): https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+   "lat": 20.1911,
+   "lon": 30.7723
+  },
+  {
+   "id": "moon_apollo14_fra_mauro",
+   "body": "Moon",
+   "anchor_type": "mission",
+   "gazetteer": {
+    "name": "Fra Mauro",
+    "clean_name": "Fra Mauro",
+    "lat": -6.061,
+    "lon_e": 343.0262,
+    "diameter_km": 96.759224,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/2007",
+    "extent": {
+     "min_lat": -7.656700000000001,
+     "max_lat": -4.4654,
+     "min_lon": 341.42170000000004,
+     "max_lon": 344.6307
+    }
+   },
+   "source": "NASA NSSDCA, Apollo Landing Site Coordinates (determined from LRO images): https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+   "lat": -3.64589,
+   "lon": -17.47193999999999
+  },
+  {
+   "id": "moon_apollo16_descartes",
+   "body": "Moon",
+   "anchor_type": "mission",
+   "gazetteer": {
+    "name": "Descartes",
+    "clean_name": "Descartes",
+    "lat": -11.7428,
+    "lon_e": 15.6667,
+    "diameter_km": 47.72884,
+    "type": "Crater, craters",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/1498",
+    "extent": {
+     "min_lat": -12.5298,
+     "max_lat": -10.9558,
+     "min_lon": 14.8627,
+     "max_lon": 16.4706
+    }
+   },
+   "source": "NASA NSSDCA, Apollo Landing Site Coordinates (determined from LRO images): https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+   "lat": -8.9734,
+   "lon": 15.501100000000008
+  },
+  {
+   "id": "moon_apollo15_hadley",
+   "body": "Moon",
+   "anchor_type": "mission",
+   "gazetteer": {
+    "name": "Rima Hadley",
+    "clean_name": "Rima Hadley",
+    "lat": 25.7159,
+    "lon_e": 3.1467,
+    "diameter_km": 116.08555,
+    "type": "Rima, rimae",
+    "approval": "Adopted by IAU",
+    "link": "http://planetarynames.wr.usgs.gov/Feature/5064",
+    "extent": {
+     "min_lat": 24.532600000000002,
+     "max_lat": 26.7023,
+     "min_lon": 2.2608,
+     "max_lon": 3.5774
+    }
+   },
+   "source": "NASA NSSDCA, Apollo Landing Site Coordinates (determined from LRO images): https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+   "lat": 26.13239,
+   "lon": 3.6332999999999913
+  },
+  {
+   "id": "moon_north_pole",
+   "body": "Moon",
+   "anchor_type": "pole",
+   "source": "pole",
+   "lat": 90.0,
+   "lon": 0.0
+  }
+ ],
+ "gazetteer": {
+  "MARS": {
+   "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
+   "zip_sha256": "e2cb79671361b1bdafc1bdccda1dab1bcfb0cb40c63007c9fe1a6765bbc2c21a",
+   "n_features": 2052
+  },
+  "MOON": {
+   "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
+   "zip_sha256": "85f535bd0823251b4a6b18eb8be5ae431e562caf9543b4024d6a9a1fe236bb75",
+   "n_features": 9087
+  }
+ },
+ "retrieved_utc": "2026-10-15T16:57:43Z"
+}

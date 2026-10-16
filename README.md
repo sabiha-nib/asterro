@@ -620,3 +620,39 @@ Documentation: [architecture](docs/phase2/ARCHITECTURE.md) · [methods](docs/pha
 [feature registry](docs/phase2/FEATURE_REGISTRY.md) · [baseline preservation](docs/phase2/BASELINE_PRESERVATION.md) ·
 [test report](docs/phase2/TEST_REPORT.md). Phase II results are analyses, not validation: no ranking has been
 compared with field-validated analogue sites, and nothing here is suitable for operational mission planning.
+
+## Phase III — Planetary Research Observatory (additive)
+
+The **Atlas** tab adds a Planetary Target Atlas: 33 Mars and Moon target windows (Gale, Elysium,
+Utopia, Gusev, Hellas, Valles Marineris, Olympus Mons, Shackleton, Cabeus, Malapert, Aristarchus,
+the Apollo sites, both poles and more). Each target has:
+
+- a gazetteer-verified or mission-published location;
+- a fingerprint in which every value carries a status (DIRECT / PROXY / MISSING / INCOMPATIBLE …)
+  and its provenance;
+- a readiness level (L1–L4).
+
+The values come from MOLA, LOLA, LRO Diviner, MSL REMS and GMTED2010 data, processed by the
+unchanged baseline algorithms. Nothing is estimated or copied from the baseline targets.
+
+Through one shared engine and research context, the tab provides:
+
+- multi-target comparison: candidates, stability, distinguishing dimensions, shared and complementary
+  sites, missing evidence and discriminating measurements;
+- a guided workflow;
+- extremes, exploratory terrain assessment, counterfactuals, mismatch maps, a translator and an
+  expedition designer;
+- a knowledge constellation and an evidence-grounded copilot;
+- replayable `asterro.experiment/2` records.
+
+The baseline engine, scores, ranking, targets and data are unchanged; the evidence is in
+`docs/phase3/CHANGES.md`.
+
+```bash
+npm test                    # 65 Python + JS parity + 65 Phase II + 126 Phase III checks
+npm run build:phase3        # data/raw/phase3 → public/data/phase3, then rebuild index.html
+python3 scripts/replay_atlas_record.py record.json
+```
+
+See `docs/phase3/` for README, METHODS, ARCHITECTURE, CHANGES, TEST_REPORT and LIMITATIONS.
+ASTERRO is a research and education tool; it is not NASA-approved and it certifies no site.

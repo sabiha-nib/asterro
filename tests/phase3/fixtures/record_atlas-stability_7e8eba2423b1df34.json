@@ -1,0 +1,266 @@
+{
+ "schema": "asterro.experiment/2",
+ "contract": "2.0.0",
+ "module": "atlas-stability",
+ "context": {
+  "kind": "atlas",
+  "targets": [
+   "mars_gale_curiosity"
+  ],
+  "workflow_stage": "robustness",
+  "atlas": {
+   "version": "atlas-1.0.0",
+   "schema": "asterro.atlas/1",
+   "built_utc": "2026-10-16T06:13:27Z"
+  },
+  "normalisation": {
+   "kind": "target",
+   "id": "target",
+   "ranges": {
+    "mars_gale_curiosity": {
+     "aridity": [
+      0,
+      1
+     ],
+     "annual_temperature_range": [
+      0.3400001525878906,
+      59.91999816894531
+     ],
+     "elevation": [
+      -75.2784423828125,
+      5701.98876953125
+     ],
+     "slope": [
+      0,
+      20.94510841369629
+     ],
+     "surface_roughness": [
+      0,
+      1500.462158203125
+     ],
+     "lst_diurnal_range": [
+      -6.9000091552734375,
+      69.10945922540964
+     ]
+    }
+   }
+  },
+  "profile": "general",
+  "weights": {
+   "aridity": 1,
+   "annual_temperature_range": 1,
+   "elevation": 1,
+   "slope": 1,
+   "surface_roughness": 1,
+   "lst_diurnal_range": 1
+  },
+  "include_proxy": false,
+  "target_vectors": {
+   "mars_gale_curiosity": {
+    "aridity": null,
+    "annual_temperature_range": 21.820846859752777,
+    "elevation": null,
+    "slope": 6.081906581270038,
+    "surface_roughness": 1262.4572763979963,
+    "lst_diurnal_range": 69.10945922540964
+   }
+  },
+  "predictor_stack": {
+   "sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63"
+  },
+  "algorithm_version": "tai-sim-1.0.0",
+  "min_coverage": 0.8,
+  "distinct_sep_km": 300
+ },
+ "params": {
+  "candidates": [
+   65265,
+   146727,
+   69297,
+   149622,
+   139196,
+   83120,
+   149039,
+   72759,
+   154797,
+   145570,
+   145827,
+   153042,
+   6899,
+   147822,
+   140384,
+   149055,
+   146099,
+   92899,
+   145595,
+   149589
+  ],
+  "active": [
+   "annual_temperature_range",
+   "slope",
+   "surface_roughness",
+   "lst_diurnal_range"
+  ],
+  "factors": [
+   0.5,
+   1,
+   2
+  ]
+ },
+ "id": "7e8eba2423b1df34",
+ "created_utc": "2026-10-16T06:15:12.442Z",
+ "outputs": {
+  "stats": [
+   {
+    "baseline": 1,
+    "min": 1,
+    "max": 209,
+    "median": 2,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 2,
+    "min": 1,
+    "max": 52,
+    "median": 3,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 3,
+    "min": 2,
+    "max": 292,
+    "median": 7,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 4,
+    "min": 2,
+    "max": 76,
+    "median": 7,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 6,
+    "min": 2,
+    "max": 90,
+    "median": 10,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 7,
+    "min": 1,
+    "max": 9409,
+    "median": 8,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 8,
+    "min": 8,
+    "max": 190,
+    "median": 17,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 12,
+    "min": 2,
+    "max": 6905,
+    "median": 17,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 15,
+    "min": 7,
+    "max": 3963,
+    "median": 31,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 16,
+    "min": 6,
+    "max": 730,
+    "median": 32,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 17,
+    "min": 4,
+    "max": 415,
+    "median": 37,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 20,
+    "min": 7,
+    "max": 542,
+    "median": 41,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 23,
+    "min": 1,
+    "max": 12757,
+    "median": 23,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 26,
+    "min": 7,
+    "max": 2861,
+    "median": 41,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 30,
+    "min": 1,
+    "max": 501,
+    "median": 38,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 35,
+    "min": 35,
+    "max": 241,
+    "median": 69,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 36,
+    "min": 6,
+    "max": 6908,
+    "median": 48,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 38,
+    "min": 3,
+    "max": 17260,
+    "median": 62,
+    "cls": "MODERATELY_SENSITIVE"
+   },
+   {
+    "baseline": 39,
+    "min": 18,
+    "max": 313,
+    "median": 59,
+    "cls": "STABLE"
+   },
+   {
+    "baseline": 42,
+    "min": 25,
+    "max": 640,
+    "median": 87,
+    "cls": "STABLE"
+   }
+  ]
+ },
+ "outputs_sha256": "72593634ab8cfe6183ed6a1420b19d30ca37d564086476716ffa6de5ed28df9f",
+ "claims": [],
+ "limitations": [],
+ "parents": [],
+ "replay": "browser + python (scripts/replay_atlas_record.py)",
+ "software": {
+  "app": "tai-sim-1.0.0",
+  "phase2": "asterro-phase2-0.1.0",
+  "phase3": "asterro-phase3-0.1.0"
+ }
+}

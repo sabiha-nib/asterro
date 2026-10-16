@@ -1,0 +1,28 @@
+{
+ "id": "moon_marius_hills",
+ "primary": {
+  "elevation_m": -1497.650933973487,
+  "slope_deg": 1.4862287635331866,
+  "surface_roughness_m": 228.69729716459798,
+  "slope_p90_deg": 3.0691661269292942,
+  "elevation_min_m": -2166.5703125,
+  "elevation_max_m": -861.6875,
+  "bins_filled": 3600,
+  "bins_total": 3600,
+  "source_pixels": 242534,
+  "window_km": 55.59752615413244,
+  "baseline_m": 926.6254359022073,
+  "dem_url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif",
+  "dem_crs": "PROJCS[\"SimpleCylindrical Moon\",GEOGCS[\"GCS_Moon\",DATUM[\"D_Moon\",SPHEROID[\"Moon\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "dem_pixel_m": 118.4505876,
+  "dem_scale": 0.5,
+  "dem_offset": 0.0,
+  "center_lat": 14.0917,
+  "center_lon": -56.77010000000001,
+  "read_mode": "box",
+  "rows_lat": null,
+  "grid_sha256": "87fa56c20706ab4e6ffae7c46f05a3a059082fab72a234abc95ff3e21c5bd1cb",
+  "complete": true
+ },
+ "seconds": 13.2
+}

@@ -12,7 +12,9 @@
     "test:js": "node tests/test_js_parity.mjs",
     "test:phase2": "node tests/phase2/test_lab_engine.mjs",
     "build:phase2": "python3 scripts/build_phase2_data.py .",
-    "test": "npm run test:py && npm run test:js && npm run test:phase2",
+    "test:phase3": "node tests/phase3/test_atlas_engine.mjs",
+    "build:phase3": "python3 scripts/build_phase3_data.py && python3 scripts/build_web.py .",
+    "test": "npm run test:py && npm run test:js && npm run test:phase2 && npm run test:phase3",
     "start": "python3 -m http.server ${PORT:-8080} -d public"
   }
 }

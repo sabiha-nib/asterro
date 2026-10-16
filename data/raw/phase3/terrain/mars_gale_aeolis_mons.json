@@ -1,0 +1,28 @@
+{
+ "id": "mars_gale_aeolis_mons",
+ "primary": {
+  "elevation_m": -2081.597013888889,
+  "slope_deg": 8.78481319374466,
+  "surface_roughness_m": 1201.3163002058986,
+  "slope_p90_deg": 16.44218192497045,
+  "elevation_min_m": -4499.75,
+  "elevation_max_m": 736.25,
+  "bins_filled": 3600,
+  "bins_total": 3600,
+  "source_pixels": 15381,
+  "window_km": 55.59752615413244,
+  "baseline_m": 926.6254359022073,
+  "dem_url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+  "dem_crs": "PROJCS[\"Equirectangular Mars\",GEOGCS[\"GCS_Mars\",DATUM[\"D_Mars\",SPHEROID[\"Mars_localRadius\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "dem_pixel_m": 463.0935415503709,
+  "dem_scale": 1.0,
+  "dem_offset": 0.0,
+  "center_lat": -5.0834,
+  "center_lon": 137.8453,
+  "read_mode": "box",
+  "rows_lat": null,
+  "grid_sha256": "b10f90ae69764662aa8dad9d24e0842e15495995c44f933f333b9e234703aded",
+  "complete": true
+ },
+ "seconds": 2.0
+}

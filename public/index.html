@@ -362,6 +362,85 @@ pre.lab-pre{max-height:420px;overflow:auto;white-space:pre-wrap}
 .vault-msg{font:400 10.5px/1.5 var(--f-mono);color:var(--ink-2);margin-top:4px;max-width:46ch}
 .rv-ans{margin-top:10px}
 @media (max-width:760px){.fm-grid{grid-template-columns:1fr}.fm-card dl{grid-template-columns:1fr}}
+
+/* ---------- Phase III · Planetary research observatory (scoped to new classes only) ---------- */
+.at-ctx{display:flex;flex-wrap:wrap;gap:4px 14px;font:400 10.5px/1.5 var(--f-mono);color:var(--ink-3);margin-top:8px}
+.at-ctx b{color:var(--ink-2);font-weight:500}
+.at-controls{margin-top:6px}
+.st{font:500 9px/1 var(--f-mono);letter-spacing:.1em;padding:3px 5px;border-radius:2px;border:1px solid var(--line-2);white-space:nowrap}
+.st-d{color:var(--match);border-color:#2f4a33}
+.st-v{color:var(--ink);border-color:var(--ink-3)}
+.st-p{color:var(--partial);border-color:#54452a}
+.st-m{color:var(--ink-3);border-style:dashed}
+.st-x{color:var(--mismatch);border-color:#5a2e28}
+.st-u{color:#c9a2e0;border-color:#4a3558}
+.lvl{font:500 9.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 6px;border-radius:2px;white-space:nowrap;border:1px solid var(--line-2);color:var(--ink-2)}
+.lvl-1{color:var(--ink-3);border-style:dashed}
+.lvl-2{color:var(--partial);border-color:#54452a}
+.lvl-3{color:var(--earth);border-color:#2e4a47}
+.lvl-4{color:var(--match);border-color:#2f4a33}
+.at-base{color:var(--accent)}
+figure.at-map{margin:6px 0 0}
+figure.at-map svg{width:100%;height:auto;display:block;background:var(--ground);border:1px solid var(--line);border-radius:var(--r)}
+figure.at-map image[href$=".png"]{filter:brightness(.55) contrast(1.1)}
+figure.at-map .grat{stroke:rgba(255,255,255,.07);stroke-width:1}
+.atmk{cursor:pointer}
+.atmk circle{fill:var(--ink-3);stroke:var(--ground);stroke-width:1.5}
+.atmk.lvl-2 circle{fill:var(--partial)}
+.atmk.lvl-3 circle{fill:var(--earth)}
+.atmk.lvl-4 circle{fill:var(--match)}
+.atmk.on circle{stroke:var(--ink);stroke-width:2.5}
+.atmk.act circle{stroke:var(--accent);stroke-width:3}
+.atmk text{font:500 9px var(--f-mono);fill:var(--ink);paint-order:stroke;stroke:rgba(9,11,14,.85);stroke-width:3px;pointer-events:none}
+.atmk:focus{outline:none}.atmk:focus circle{stroke:var(--accent);stroke-width:3}
+.emk{cursor:pointer}
+.emk circle{fill:var(--panel);stroke:var(--accent);stroke-width:1.6}
+.emk.t1 circle{stroke:var(--moon)}.emk.t2 circle{stroke:var(--cross)}.emk.t3 circle{stroke:var(--earth)}
+.emk text{font:600 8px var(--f-mono);fill:var(--ink);pointer-events:none}
+.at-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.at-card{border:1px solid var(--line-2);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);display:flex;flex-direction:column;gap:6px}
+.at-card.act{border-color:var(--accent)}
+.at-card header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 8px;align-items:flex-start}
+.at-card-t{font:700 14px/1.15 var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.at-card footer{gap:6px;flex-wrap:wrap}
+.at-fpmini{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.at-fpmini div{display:flex;flex-direction:column;gap:2px;padding:4px;border:1px solid var(--line);border-radius:2px;min-width:0}
+.at-fpmini span{font:500 8.5px/1 var(--f-mono);letter-spacing:.1em;color:var(--ink-3)}
+.at-fpmini b{font:500 10px/1.1 var(--f-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.at-fpmini b.st-d{color:var(--ink)}.at-fpmini b.st-p{color:var(--partial)}.at-fpmini b.st-m{color:var(--ink-3)}.at-fpmini b.st-x{color:var(--mismatch)}
+.at-selbar .tag{display:inline-flex;gap:4px;align-items:center}
+table.at-fp td{vertical-align:top}
+.callout.warn{border-color:#5a2e28}
+canvas.at-raster{image-rendering:pixelated;border:1px solid var(--line);border-radius:2px;background:var(--ground);max-width:100%}
+.at-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:10px}
+.at-col-h{font:700 13px/1.2 var(--f-display);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+ol.at-rank{margin:6px 0 0;padding-left:20px;font-size:12px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+ol.at-rank li.on{color:var(--ink)}
+ol.at-rank b{font:500 11px var(--f-mono);color:var(--ink);margin-left:4px}
+ol.at-stages{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+ol.at-stages li{border:1px solid var(--line);border-radius:var(--r);padding:6px 8px;display:flex;flex-direction:column;gap:2px;min-width:0}
+ol.at-stages li b{font:600 11px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+ol.at-stages li span{font:500 9px/1 var(--f-mono);letter-spacing:.14em}
+ol.at-stages li em{font-style:normal;font-size:11px;color:var(--ink-3)}
+ol.at-stages li.done{border-color:#2f4a33}ol.at-stages li.done span{color:var(--match)}
+ol.at-stages li.ready{border-color:var(--line-2)}ol.at-stages li.ready span{color:var(--partial)}
+ol.at-stages li.blocked{border-style:dashed}ol.at-stages li.blocked span{color:var(--ink-3)}
+tr.dim td{color:var(--ink-3)}
+td.c-match{color:var(--match)}td.c-partial{color:var(--partial)}td.c-mismatch{color:var(--mismatch)}
+.tag.c-match{color:var(--match);border-color:#2f4a33}.tag.c-partial{color:var(--partial);border-color:#54452a}.tag.c-mismatch{color:var(--mismatch);border-color:#5a2e28}
+svg.kc{width:100%;height:auto;display:block;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r)}
+.kc-h{font:500 9px var(--f-mono);letter-spacing:.18em;fill:var(--ink-3)}
+.kc-n text{font:400 9.5px var(--f-mono);fill:var(--ink-2)}
+.kc-n circle{fill:var(--ink-3)}
+.kc-n.kd circle{fill:var(--earth)}.kc-n.kcr circle{fill:var(--ink)}.kc-n.ke circle{fill:var(--accent)}
+.kc-n.kt{cursor:pointer}.kc-n.kt.lvl-4 circle{fill:var(--match)}.kc-n.kt.lvl-2 circle{fill:var(--partial)}
+.cp-turn{padding:8px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+dl.at-dl{display:grid;grid-template-columns:120px 1fr;gap:3px 10px;margin:8px 0;font-size:11.5px}
+dl.at-dl dt{font:500 9px/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+dl.at-dl dd{margin:0;color:var(--ink-2);word-break:break-word}
+.mono{font-family:var(--f-mono)}
+@media (max-width:760px){.at-fpmini{grid-template-columns:repeat(3,1fr)}ol.at-stages{grid-template-columns:repeat(2,1fr)}.at-cards{grid-template-columns:1fr}dl.at-dl{grid-template-columns:1fr}}
+.callout.small{font-size:11px;margin-top:6px}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -2625,7 +2704,7 @@ const LAB_INPUTS = {};
 const LAB_STATUS = {
   robust: ["Implemented", "Predictor stack (baseline bundle)"],
   portfolio: ["Implemented", "Predictor stack"],
-  atlas: ["Partially implemented", "Stack neighbourhood + target windows; Earth sub-cell data not retained"],
+  atlas: ["Implemented (terrain sub-cell via Phase III; climate/thermal sub-cell not available)", "Stack neighbourhood, target windows, GMTED 30″ slope histograms"],
   uncert: ["Implemented (quantified where data allow; qualitative elsewhere)", "Stack, MODIS yearly, MEDA, Diviner"],
   failure: ["Implemented", "Stack, targets, catalogue"],
   graph: ["Implemented", "app.json, targets.json, provenance manifest"],
@@ -2938,6 +3017,15 @@ function histSVG(d, unit, mark, label) {
   g += `<text x="${(m.l + W - m.r) / 2}" y="${H - 3}" font-size="9" text-anchor="middle" fill="var(--ink-2)">${esc(label)} (${unit}) — count of 926.6 m bins</text>`;
   return `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)} distribution">${g}</svg>`;
 }
+/* Phase III completion: sub-cell slope distribution (GMTED2010 30″) when the Phase III data are present. */
+function atlasSubcellBlock(i) {
+  if (typeof atSubcell !== "function") return `<div class="callout">${SUBCELL_MSG}</div>`;
+  if (!A3.sub) { if (!A3.subErr) atSubcell().then(labRender); return A3.subErr ? `<div class="callout">${SUBCELL_MSG} (${esc(A3.subErr)})</div>` : `<p class="meta">Loading sub-cell terrain…</p>`; }
+  const n = atSubVal("n", i);
+  return `<div class="grid2">${[2, 5, 10, 15, 20, 30].map(x => `<div class="kv"><span>30″ pixels with slope ≤ ${x}°</span><b>${pct(atSubVal("frac_le_" + x, i))}</b></div>`).join("")}
+    <div class="kv"><span>slope p10 / p50 / p90</span><b>${f1(atSubVal("p10", i))} / ${f1(atSubVal("p50", i))} / ${f1(atSubVal("p90", i))}°</b></div><div class="kv"><span>pixels</span><b>${nfmt(n)}</b></div></div>
+    <p class="note small">Within-cell terrain only (GMTED2010 30″, Horn slope, the baseline pixel-to-cell mapping). ${SUBCELL_MSG.replace("characterization", "characterization of climate and thermal variables")}</p>`;
+}
 LAB_VIEWS.atlas = function () {
   if (!S.res) return `<div class="sec"><div class="empty">Run the search first.</div></div>`;
   const i = labSel(); if (i == null) return `<div class="sec"><div class="empty">Select a site.</div></div>`;
@@ -2949,8 +3037,8 @@ LAB_VIEWS.atlas = function () {
     <p class="note">Is the candidate's similarity spatially representative, or does it hide variation? <b>${esc(candShort(i))}</b> · ${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · cell ${dy.toFixed(0)} × ${dx.toFixed(0)} km.</p>
     <div class="row"><span class="meta">Context window</span><span class="toggles">${[1, 2, 3].map(k => `<button aria-pressed="${k === r}" data-lab="atlas-r" data-r="${k}">${2 * k + 1}×${2 * k + 1}</button>`).join("")}</span>
     ${S.targetId === "cross" ? `<span class="toggles">${TARGET_IDS.map(t => `<button aria-pressed="${t === tid}" data-lab="atlas-t" data-t="${t}">${esc(TNAME[t])}</button>`).join("")}</span>` : ""}</div></div>
-    <div class="sec"><div class="lbl">Sub-cell evidence</div><div class="callout">${SUBCELL_MSG}</div>
-    <p class="note small">Each Earth value is a single cell statistic. The finer source pixels (GMTED2010 30″, MODIS 0.1°) were aggregated during ingestion and are not retained, so no within-cell distribution can be shown. The neighbourhood below uses only other <b>whole cells</b>, which are context: they are not part of this cell's score footprint.</p>
+    <div class="sec"><div class="lbl">Sub-cell evidence</div>${atlasSubcellBlock(i)}
+    <p class="note small">Each Earth value in the score is a single cell statistic. The terrain distribution above (when shown) comes from the Phase III GMTED2010 30″ histogram pass; thermal and climate values have no within-cell distribution. The neighbourhood below uses only other <b>whole cells</b>, which are context: they are not part of this cell's score footprint.</p>
     <div class="grid2"><div class="kv"><span>MODIS pixel-month coverage (this cell)</span><b>${pct(S.A.modis_coverage[i])}</b></div><div class="kv"><span>GMTED land fraction (this cell)</span><b>${pct(S.A.gmted_land_fraction[i])}</b></div></div></div>
     <div class="sec"><div class="lbl">Candidate-vs-target similarity across the ${n}×${n} window · ${esc(TNAME[tid])}</div>
     <div class="hg-row">${act.map(c => heatGrid(WA.window, WA.perCrit[c].sims[tid], r, shortOf(c))).join("")}</div>
@@ -2973,7 +3061,7 @@ LAB_VIEWS.atlas = function () {
       <div class="callout">A large region having a similar <b>mean</b> environmental fingerprint is not the same as a specific location having been characterised in enough detail for a field activity. ASTERRO supports only the first statement.</div></div>`;
   } else h += `<div class="sec"><p class="meta">${L.ctxErr ? "Phase II context unavailable: " + esc(L.ctxErr) : "Loading target-window distributions…"}</p></div>`;
   const claims = [
-    LAB.claim({ id: "atlas.subcell", category: "UNAVAILABLE", text: SUBCELL_MSG, limitations: ["Source pixels not retained after aggregation."] }),
+    LAB.claim({ id: "atlas.subcell", category: "UNAVAILABLE", text: SUBCELL_MSG.replace("characterization", "characterization of climate and thermal variables"), limitations: ["MODIS and POWER source pixels not retained after aggregation; terrain sub-cell slope distribution available from the Phase III GMTED pass."] }),
     LAB.claim({ id: "atlas.window", category: "DERIVED", text: `Window statistics over ${WA.cellsValid} valid whole cells (${n}×${n}) around the candidate.`, method: "Descriptive statistics and least-squares plane of cell-mean values.", provenance: ["predictor stack"], limitations: ["Neighbours are context only and do not enter the candidate's score."] }),
   ];
   return h + `<div class="sec">${claimsBlock(claims)}</div>`;
@@ -3874,4 +3962,1553 @@ LAB_ACTIONS["rv-q"] = a => { L.rev.q = a.dataset.q; if (a.dataset.q === "unmodel
 LAB_INPUTS["rv-text"] = a => { L.reviewText = a.value; };
 LAB_ACTIONS["rv-run"] = () => { const ta = $("[data-labin=rv-text]"); if (ta) L.reviewText = ta.value; L.rev.flags = LAB.reviewText(L.reviewText); L.rev.nums = numberCheck(L.reviewText); labRender(); };
 LAB_ACTIONS["rv-plan"] = () => { L.reviewText = planMarkdown(L.plan.out); L.rev.flags = LAB.reviewText(L.reviewText); L.rev.nums = numberCheck(L.reviewText); labRender(); };
+
+/* ASTERRO Phase III — Planetary Target Atlas engine (browser + Node).
+ *
+ * Pure, deterministic functions shared by every Phase III module. They sit BESIDE the baseline
+ * engine (engine.js / TAIEngine) and the Phase II laboratory engine (lab_engine.js / AsterroLab):
+ *   - scoring reuses AsterroLab.prepare / fieldScore, i.e. the baseline formula and accumulation
+ *     order, with an explicit target vector and an explicit, versioned normalisation table;
+ *   - the baseline Analogue Score, weights, ranges and ranking are never read-modified-written;
+ *   - every result carries the readiness level and criterion statuses it was computed from;
+ *   - a missing value is never scored, never treated as a match, never imputed.
+ * No randomness except the seeded sampler inherited from AsterroLab. No learned or generative model.
+ */
+(function (root) {
+  "use strict";
+  const LAB = root.AsterroLab || (typeof require === "function" ? require("../phase2/lab_engine.js") : null);
+  const VERSION = "asterro-phase3-0.1.0";
+  const CONTRACT = "asterro.experiment/2";
+  const STATUS = ["DIRECT", "DERIVED", "PROXY", "MISSING", "INCOMPATIBLE", "UNVALIDATED"];
+  const SCOREABLE = { DIRECT: true, DERIVED: true };          // PROXY only on explicit request; never the others
+
+  /* ------------------------------------------------------------------ target vectors + eligibility */
+  function targetVector(t, critIds, { includeProxy = false } = {}) {
+    const tv = {};
+    for (const c of critIds) {
+      const s = t.status[c], v = t.values[c];
+      tv[c] = (SCOREABLE[s] || (includeProxy && s === "PROXY")) && v != null && Number.isFinite(+v) ? +v : null;
+    }
+    return tv;
+  }
+  function eligibility(t, critIds) {
+    const lvl = t.readiness.level;
+    if (lvl < 2) return { ok: false, mode: "none", reason: "Readiness level 1: no directly comparable criterion. Excluded from every ranking." };
+    const direct = critIds.filter(c => SCOREABLE[t.status[c]]);
+    const terrainOnly = direct.every(c => c === "slope" || c === "surface_roughness");
+    if (lvl === 2) return { ok: true, mode: terrainOnly ? "partial-terrain" : "partial", direct,
+      reason: `Readiness level 2: only ${direct.length} directly comparable criteria (${direct.join(", ")}). Results are a partial comparison, not a six-variable ranking.` };
+    return { ok: true, mode: "full", direct, reason: `Readiness level ${lvl}: ${direct.length} directly comparable criteria.` };
+  }
+
+  /* ------------------------------------------------------------------ normalisation alternatives */
+  /* atlas: the versioned table shipped in atlas.json (Earth ∪ all atlas targets).
+   * baseline: the baseline table (Earth ∪ the two baseline targets).
+   * target: Earth ∪ this target only (rankings independent of the rest of the catalogue).
+   * earth: Earth only; a target outside Earth's range is clipped to similarity 0 on that criterion. */
+  function earthRange(A, c) {
+    let lo = Infinity, hi = -Infinity; const e = A[c];
+    for (let i = 0; i < e.length; i++) { const x = e[i]; if (x - x !== 0) continue; if (x < lo) lo = x; if (x > hi) hi = x; }
+    return [lo, hi];
+  }
+  function rangesFor(kind, { A, critIds, atlas, baselineRanges, tv }) {
+    const out = {};
+    for (const c of critIds) {
+      if (kind === "atlas") out[c] = atlas.normalisation.ranges[c].slice();
+      else if (kind === "baseline") out[c] = baselineRanges[c].slice();
+      else {
+        const r = earthRange(A, c);
+        if (kind === "target" && tv && tv[c] != null) { r[0] = Math.min(r[0], tv[c]); r[1] = Math.max(r[1], tv[c]); }
+        out[c] = r;
+      }
+    }
+    return out;
+  }
+
+  /* ------------------------------------------------------------------ scoring */
+  function prepareTarget(A, critIds, t, ranges, opts = {}) {
+    const tv = targetVector(t, critIds, opts);
+    if (!Object.values(tv).some(v => v != null)) throw new Error(t.id + ": no scoreable criterion");
+    return Object.assign(LAB.prepare(A, critIds, tv, ranges), { tv, targetId: t.id });
+  }
+  function scoreTarget(P, w) { return LAB.fieldScore(P, w); }
+  function order(eff, cell) {
+    const n = eff.length, idx = new Int32Array(n);
+    for (let i = 0; i < n; i++) idx[i] = i;
+    idx.sort((a, b) => (eff[b] - eff[a]) || (cell[a] - cell[b]));
+    return idx;
+  }
+  function haversine(la1, lo1, la2, lo2) {
+    const r = Math.PI / 180, p1 = la1 * r, p2 = la2 * r, dp = p2 - p1, dl = (lo2 - lo1) * r;
+    let a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+    a = a < 0 ? 0 : (a > 1 ? 1 : a);
+    return 2 * 6371.0088 * Math.asin(Math.sqrt(a));
+  }
+  /* greedy 300 km non-maximum suppression: identical to the baseline distinct-site rule */
+  function distinct(eff, cell, lat, lon, n = 20, sep = 300) {
+    const o = order(eff, cell), kept = [];
+    for (let k = 0; k < o.length && kept.length < n; k++) {
+      const i = o[k]; if (eff[i] < 0) break;
+      let ok = true;
+      for (const j of kept) if (haversine(lat[i], lon[i], lat[j], lon[j]) < sep) { ok = false; break; }
+      if (ok) kept.push(i);
+    }
+    return kept;
+  }
+  function candidates({ A, cell, lat, lon, critIds, t, ranges, w, n = 20, sep = 300, includeProxy = false }) {
+    const el = eligibility(t, critIds);
+    if (!el.ok) return { eligible: false, reason: el.reason, mode: el.mode };
+    const P = prepareTarget(A, critIds, t, ranges, { includeProxy });
+    const F = scoreTarget(P, w);
+    const top = distinct(F.eff, cell, lat, lon, n, sep);
+    let elig = 0, near = 0; const best = top.length ? F.eff[top[0]] : -1;
+    for (let i = 0; i < F.eff.length; i++) { if (F.eff[i] >= 0) elig++; if (best >= 0 && F.eff[i] >= best - 0.001) near++; }
+    /* saturation: when many cells score within 0.1 pt of the best, their order is set by the tie-break
+     * (cell id), not by evidence — typical of terrain-only comparisons of flat plains. */
+    return { eligible: true, mode: el.mode, reason: el.reason, P, eff: F.eff, coverage: F.coverage, active: F.active, top, nEligible: elig,
+      nNearTop: near, saturated: near > 2 * n };
+  }
+
+  /* per-candidate explanation: criterion similarity, contribution, raw difference, out-of-Earth-range flags */
+  function explain(P, w, i, A, ranges) {
+    const act = P.applicable.filter(c => w[c] != null && +w[c] > 0);
+    let ws = 0; for (const c of act) if (P.s[c][i] === P.s[c][i]) ws += +w[c];
+    return act.map(c => {
+      const s = P.s[c][i], e = A[c][i], t = P.tv[c];
+      return { criterion: c, earth: e - e === 0 ? +e : null, target: t, similarity: s === s ? s : null,
+        contribution: s === s && ws > 0 ? +w[c] * s / ws : null, diff: e - e === 0 ? e - t : null,
+        normDiff: e - e === 0 ? Math.abs(e - t) / (ranges[c][1] - ranges[c][0]) : null };
+    });
+  }
+  function outsideEarth(A, critIds, tv) {
+    const out = [];
+    for (const c of critIds) {
+      if (tv[c] == null) continue;
+      const [lo, hi] = earthRange(A, c);
+      if (tv[c] > hi) out.push({ criterion: c, side: "above", earthMax: hi, target: tv[c], gap: tv[c] - hi });
+      else if (tv[c] < lo) out.push({ criterion: c, side: "below", earthMin: lo, target: tv[c], gap: lo - tv[c] });
+    }
+    return out;
+  }
+
+  /* ------------------------------------------------------------------ stability (Phase II robustness on atlas targets) */
+  function stability({ A, cell, critIds, t, ranges, w, cand, factors = [0.5, 1, 2], topN = 20, topPct = 1, includeProxy = false }) {
+    const P = prepareTarget(A, critIds, t, ranges, { includeProxy });
+    const act = P.applicable.filter(c => w[c] != null && +w[c] > 0);
+    const design = LAB.designFactorial(w, act, critIds, factors);
+    const run = LAB.runDesignSync({ Ps: [P], cell, cand, baseW: w, design });
+    const st = LAB.rankStats(run, { topN, topPct });
+    return { design: design.length, active: act, stats: st, run };
+  }
+
+  /* ------------------------------------------------------------------ distinguishing dimensions between targets */
+  function distinguishing(targets, critIds, ranges) {
+    const rows = critIds.map(c => {
+      const span = ranges[c][1] - ranges[c][0];
+      const vals = targets.map(t => ({ id: t.id, status: t.status[c], v: SCOREABLE[t.status[c]] && t.values[c] != null ? +t.values[c] : null }));
+      const known = vals.filter(x => x.v != null);
+      const proxyAll = targets.every(t => t.status[c] === "PROXY");
+      let spread = null, pairs = [];
+      if (known.length >= 2) {
+        const xs = known.map(x => x.v); spread = (Math.max(...xs) - Math.min(...xs)) / span;
+        for (let a = 0; a < known.length; a++) for (let b = a + 1; b < known.length; b++)
+          pairs.push({ a: known[a].id, b: known[b].id, normDiff: Math.abs(known[a].v - known[b].v) / span, diff: known[a].v - known[b].v });
+      }
+      const missing = vals.filter(x => x.v == null && !["PROXY", "INCOMPATIBLE"].includes(x.status)).map(x => x.id);
+      const incompatible = vals.filter(x => x.status === "INCOMPATIBLE").map(x => x.id);
+      let verdict;
+      if (proxyAll) verdict = "NOT_DISTINGUISHING_PROXY";
+      else if (known.length < 2) verdict = "NOT_COMPARABLE";
+      else if (missing.length || incompatible.length) verdict = "PARTIALLY_COMPARABLE";
+      else verdict = "COMPARABLE";
+      return { criterion: c, values: vals, spread, pairs, missing, incompatible, verdict };
+    });
+    const ranked = rows.filter(r => r.spread != null).sort((x, y) => y.spread - x.spread || (x.criterion < y.criterion ? -1 : 1));
+    return { rows, ranked };
+  }
+
+  /* ------------------------------------------------------------------ complementary + shared candidates */
+  /* shared: cells scoring well for every selected target (min rule, as the baseline cross-planet ranking).
+   * complementary: one candidate per target, each the best for that target that is >= sep km from
+   * those already chosen; reports what each adds. Both use the effective scores of each target. */
+  function shared(effs, cell, lat, lon, n = 10, sep = 300) {
+    const m = effs[0].length, out = new Float64Array(m);
+    for (let i = 0; i < m; i++) {
+      let v = Infinity;
+      for (const e of effs) { if (e[i] < 0) { v = -1; break; } if (e[i] < v) v = e[i]; }
+      out[i] = v;
+    }
+    return { eff: out, top: distinct(out, cell, lat, lon, n, sep) };
+  }
+  function complementary(results, cell, lat, lon, sep = 300) {
+    const chosen = [];
+    for (const r of results) {
+      if (!r.eligible) { chosen.push({ target: r.targetId, index: null, reason: r.reason }); continue; }
+      const o = order(r.eff, cell); let pick = null;
+      for (let k = 0; k < o.length; k++) {
+        const i = o[k]; if (r.eff[i] < 0) break;
+        if (chosen.every(c => c.index == null || haversine(lat[i], lon[i], lat[c.index], lon[c.index]) >= sep)) { pick = i; break; }
+      }
+      chosen.push({ target: r.targetId, index: pick, score: pick == null ? null : r.eff[pick],
+        scoresForOthers: results.map(q => ({ target: q.targetId, score: pick == null || !q.eligible ? null : q.eff[pick] })) });
+    }
+    return chosen;
+  }
+
+  /* ------------------------------------------------------------------ missing evidence + discriminating measurements */
+  function missingEvidence(t, critIds, w) {
+    let wAll = 0; for (const c of critIds) wAll += +(w[c] || 0);
+    const items = [];
+    for (const c of critIds) {
+      const s = t.status[c];
+      if (SCOREABLE[s]) continue;
+      items.push({ criterion: c, status: s, reason: t.status_reason[c], weightShare: wAll > 0 ? +(w[c] || 0) / wAll : 0,
+        action: s === "MISSING" ? "Assemble a compatible product (same definition as the Earth criterion) for this location."
+          : s === "UNVALIDATED" ? "Resolve the quality issue before the value can be used."
+          : s === "PROXY" ? "Proxy by rule; cannot distinguish targets. Not a measurement gap that a dataset can close."
+          : "No compatible counterpart exists; this dimension cannot be compared." });
+    }
+    const D = t.anchor && t.anchor.gazetteer && t.anchor.gazetteer.diameter_km;
+    if (t.terrain && !t.terrain.heterogeneity && t.kind === "named_feature" && D && D > 55.6) items.push({ criterion: "heterogeneity", status: "MISSING", weightShare: 0,
+      reason: "A single 55.6 km window represents this feature; between-location variability was not sampled.", action: "Sample additional windows across the feature." });
+    return items.sort((a, b) => b.weightShare - a.weightShare || (a.criterion < b.criterion ? -1 : 1));
+  }
+  /* For a target with a MISSING criterion: how much would the current candidate list change if the
+   * value were each of a set of SCENARIO values (explicitly labelled; e.g. the values observed at
+   * other targets on the same body)? Large change = a discriminating measurement. */
+  function measurementImpact({ A, cell, lat, lon, critIds, t, ranges, w, criterion, scenarios, n = 20, sep = 300 }) {
+    const base = candidates({ A, cell, lat, lon, critIds, t, ranges, w, n, sep });
+    if (!base.eligible) return { criterion, blocked: base.reason };
+    const baseSet = new Set(base.top);
+    const out = scenarios.map(sc => {
+      const t2 = { ...t, values: { ...t.values, [criterion]: sc.value }, status: { ...t.status, [criterion]: "DIRECT" }, readiness: { ...t.readiness, level: Math.max(2, t.readiness.level) } };
+      const r2 = { ...ranges, [criterion]: [Math.min(ranges[criterion][0], sc.value), Math.max(ranges[criterion][1], sc.value)] };
+      const res = candidates({ A, cell, lat, lon, critIds, t: t2, ranges: r2, w, n, sep });
+      const kept = res.top.filter(i => baseSet.has(i)).length;
+      return { label: sc.label, value: sc.value, overlap: kept / Math.max(1, base.top.length), newTop: res.top[0], baseTop: base.top[0], top: res.top };
+    });
+    const minOverlap = out.length ? Math.min(...out.map(o => o.overlap)) : 1;
+    /* agreement between scenarios: if different plausible values give different lists, the actual
+     * value matters (a discriminating measurement); if all scenarios agree, measuring it mainly
+     * adds a dimension without changing which sites are preferred. */
+    let agreement = null;
+    for (let a = 0; a < out.length; a++) for (let b = a + 1; b < out.length; b++) {
+      const sb = new Set(out[b].top), ov = out[a].top.filter(i => sb.has(i)).length / Math.max(1, out[a].top.length);
+      agreement = agreement == null ? ov : Math.min(agreement, ov);
+    }
+    return { criterion, scenarios: out, minOverlap, agreement, discriminating: agreement != null ? agreement < 0.5 : minOverlap < 0.5 };
+  }
+
+  /* ------------------------------------------------------------------ extremes (Earth stack, explainable) */
+  function median(a) { const s = a.slice().sort((x, y) => x - y), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : NaN; }
+  function robustZ(A, critIds) {
+    const Z = {}, M = {};
+    for (const c of critIds) {
+      const e = A[c], vals = [];
+      for (let i = 0; i < e.length; i++) if (e[i] - e[i] === 0) vals.push(+e[i]);
+      const med = median(vals), mad = median(vals.map(v => Math.abs(v - med))) * 1.4826;
+      M[c] = { median: med, mad, n: vals.length };
+      const z = new Float64Array(e.length);
+      for (let i = 0; i < e.length; i++) z[i] = e[i] - e[i] === 0 && mad > 0 ? (e[i] - med) / mad : NaN;
+      Z[c] = z;
+    }
+    return { Z, M };
+  }
+  /* regime = per-criterion tercile code (L/M/H) over the criteria chosen; explainable by construction */
+  function regimes(A, critIds) {
+    const cuts = {};
+    for (const c of critIds) {
+      const e = A[c], vals = [];
+      for (let i = 0; i < e.length; i++) if (e[i] - e[i] === 0) vals.push(+e[i]);
+      vals.sort((x, y) => x - y);
+      cuts[c] = [vals[Math.floor(vals.length / 3)], vals[Math.floor(2 * vals.length / 3)]];
+    }
+    const n = A[critIds[0]].length, code = new Array(n), count = new Map();
+    for (let i = 0; i < n; i++) {
+      let s = "";
+      for (const c of critIds) { const x = A[c][i]; s += x - x !== 0 ? "?" : (x < cuts[c][0] ? "L" : x < cuts[c][1] ? "M" : "H"); }
+      code[i] = s; count.set(s, (count.get(s) || 0) + 1);
+    }
+    return { cuts, code, count };
+  }
+
+  /* ------------------------------------------------------------------ landing-site style window analysis (exploratory) */
+  /* grid: 60x60 Float32 (row 0 = north). Returns class fractions and the largest 4-connected
+   * component meeting slope <= maxSlope (and optional dT range) in km² at 926.6 m bins. */
+  const BIN_M = 6371007.2 * Math.PI / 180 / 120;
+  function windowClasses(slope, { thresholds = [2, 5, 10, 15, 20, 30], maxSlope = 5, mask = null } = {}) {
+    const n = slope.length; let valid = 0; const le = thresholds.map(() => 0);
+    for (let i = 0; i < n; i++) { const s = slope[i]; if (s !== s) continue; valid++; thresholds.forEach((X, k) => { if (s <= X) le[k]++; }); }
+    const ok = new Uint8Array(n);
+    for (let i = 0; i < n; i++) ok[i] = slope[i] === slope[i] && slope[i] <= maxSlope && (!mask || mask[i]) ? 1 : 0;
+    const seen = new Uint8Array(n); let best = 0, bestCells = null, comps = 0;
+    for (let i = 0; i < n; i++) {
+      if (!ok[i] || seen[i]) continue;
+      comps++; const q = [i]; seen[i] = 1; const cells = [];
+      while (q.length) {
+        const k = q.pop(); cells.push(k);
+        const r = (k / 60) | 0, cc = k % 60;
+        for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const rr = r + dr, c2 = cc + dc; if (rr < 0 || rr >= 60 || c2 < 0 || c2 >= 60) continue;
+          const j = rr * 60 + c2; if (ok[j] && !seen[j]) { seen[j] = 1; q.push(j); }
+        }
+      }
+      if (cells.length > best) { best = cells.length; bestCells = cells; }
+    }
+    const binKm2 = (BIN_M / 1000) ** 2;
+    return { valid, total: n, fracLe: thresholds.map((X, k) => ({ deg: X, frac: valid ? le[k] / valid : null })),
+      components: comps, largestKm2: best * binKm2, largestCells: bestCells || [], binKm2, maxSlope };
+  }
+
+  /* ------------------------------------------------------------------ experiment contract v2 + v1 adapter */
+  function recordConfigV2(r) {
+    return { schema: r.schema, contract: r.contract, module: r.module, context: r.context, params: r.params };
+  }
+  /* v1 → v2: lossless; the v1 baseline block becomes context.baseline, target becomes context.targets */
+  function adaptV1(r) {
+    if (!r || r.schema !== "asterro.experiment/1") throw new Error("not an asterro.experiment/1 record");
+    return {
+      schema: CONTRACT, contract: "2.0.0", module: r.module,
+      context: { kind: "baseline-target", targets: [r.baseline.target], baseline: r.baseline, atlas: null, workflow_stage: null },
+      params: r.params, id_v1: r.id, created_utc: r.created_utc, outputs: r.outputs, outputs_sha256: r.outputs_sha256,
+      limitations: r.limitations || [], claims: r.claims || [], parents: r.parent ? [r.parent] : [], replay: r.replay, software: r.software,
+      adapted_from: "asterro.experiment/1",
+    };
+  }
+  function validateV2(r) {
+    const issues = [];
+    if (!r || r.schema !== CONTRACT) issues.push("schema must be " + CONTRACT);
+    for (const k of ["module", "context", "params", "outputs", "outputs_sha256"]) if (!r || r[k] === undefined) issues.push("missing " + k);
+    if (r && r.context && !Array.isArray(r.context.targets)) issues.push("context.targets must be an array");
+    if (r && r.claims) for (const c of r.claims) { try { LAB.claim(c); } catch (e) { issues.push(e.message); } }
+    return issues;
+  }
+
+  /* ------------------------------------------------------------------ workflow stages */
+  const STAGES = ["target", "candidate", "evidence", "robustness", "requirements", "measurements", "plan", "record"];
+  /* returns per-stage status: READY / DONE / BLOCKED (with the analytical boundary that stops it) */
+  function workflowState(ctx) {
+    const t = ctx.target, out = [];
+    const block = (s, why) => out.push({ stage: s, status: "BLOCKED", why });
+    if (!t) { STAGES.forEach(s => block(s, "Select a target.")); return out; }
+    out.push({ stage: "target", status: "DONE", why: `${t.name} · readiness L${t.readiness.level}` });
+    if (t.readiness.level < 2) { STAGES.slice(1).forEach(s => block(s, "Readiness level 1: no comparable criteria. Stop: assemble target data first.")); return out; }
+    out.push({ stage: "candidate", status: ctx.candidate != null ? "DONE" : "READY", why: ctx.candidate != null ? "Candidate selected." : "Choose an Earth candidate." });
+    if (ctx.candidate == null) { STAGES.slice(2).forEach(s => block(s, "Needs a candidate.")); return out; }
+    out.push({ stage: "evidence", status: "DONE", why: "Evidence record assembled from statuses and provenance." });
+    out.push({ stage: "robustness", status: ctx.stability ? "DONE" : "READY", why: ctx.stability ? "Weight-perturbation stability computed." : "Run stability." });
+    out.push({ stage: "requirements", status: ctx.requirements ? "DONE" : "READY", why: ctx.requirements ? "Requirements evaluated." : "Optional: define user requirements." });
+    const gaps = ctx.gaps || [];
+    out.push({ stage: "measurements", status: "DONE", why: gaps.length ? `${gaps.length} evidence gap(s) listed.` : "No gap among scoreable criteria." });
+    out.push({ stage: "plan", status: ctx.plan ? "DONE" : "READY", why: ctx.plan ? "Plan drafted." : "Draft a research plan." });
+    out.push({ stage: "record", status: ctx.record ? "DONE" : (ctx.plan ? "READY" : "BLOCKED"), why: ctx.record ? "Saved to the vault." : (ctx.plan ? "Save the record." : "Needs a plan.") });
+    return out;
+  }
+
+  /* ------------------------------------------------------------------ copilot (deterministic, evidence-grounded) */
+  const CANNOT = "I cannot determine that from the available evidence.";
+  /* Answers only questions whose answer is a lookup in the evidence index; otherwise CANNOT.
+   * index: [{id, kind, target, criterion, text, category}] built from atlas statuses, values, provenance. */
+  function copilotAnswer(question, index) {
+    const q = String(question || "").toLowerCase();
+    const forbidden = /(safe to land|certif|guarantee|approved|habitable|life|best landing|will it work|cost|travel|visa|permit)/;
+    if (forbidden.test(q)) return { text: CANNOT + " ASTERRO does not assess safety, certification, habitability, cost, travel or permits.", cites: [] };
+    const tHits = index.filter(e => e.target && (e.aliases || [String(e.targetName).toLowerCase()]).some(a => a && q.includes(a)));
+    const crit = [["thermal", "lst_diurnal_range"], ["diurnal", "lst_diurnal_range"], ["lst", "lst_diurnal_range"], ["annual", "annual_temperature_range"],
+      ["season", "annual_temperature_range"], ["slope", "slope"], ["rough", "surface_roughness"], ["elevation", "elevation"], ["arid", "aridity"]]
+      .filter(([k]) => q.includes(k)).map(([, c]) => c);
+    let hits = tHits.length ? tHits : index;
+    if (crit.length) hits = hits.filter(e => crit.includes(e.criterion));
+    if (/missing|gap|lack|unknown/.test(q)) hits = hits.filter(e => ["MISSING", "INCOMPATIBLE", "UNVALIDATED"].includes(e.status));
+    if (/readiness|level/.test(q)) hits = hits.filter(e => e.kind === "readiness");
+    if (!tHits.length && !crit.length && !/readiness|level|missing|gap/.test(q)) return { text: CANNOT, cites: [] };
+    if (!hits.length || hits.length > 40) return { text: CANNOT + (hits.length > 40 ? " The question matches too much evidence to answer specifically; name a target and a criterion." : ""), cites: [] };
+    return { text: hits.map(h => h.text).join(" "), cites: hits.map(h => h.id) };
+  }
+
+  const api = { VERSION, CONTRACT, STATUS, targetVector, eligibility, earthRange, rangesFor, prepareTarget, scoreTarget, order, haversine,
+    distinct, candidates, explain, outsideEarth, stability, distinguishing, shared, complementary, missingEvidence, measurementImpact,
+    robustZ, regimes, median, windowClasses, BIN_M, recordConfigV2, adaptV1, validateV2, STAGES, workflowState, CANNOT, copilotAnswer };
+  if (typeof module === "object" && module.exports) module.exports = api;
+  root.AsterroAtlas = api;
+})(typeof window !== "undefined" ? window : globalThis);
+
+/* ===== Phase III · Planetary Research Observatory — core (state, data, router, shared widgets) =====
+ * Integration with the baseline app and the Phase II laboratory is limited to:
+ *   1. one extra tab button ("Atlas") appended at runtime to the existing tab bar;
+ *   2. a wrapper around renderLeft() that renders the Atlas workspace when S.tab === "atlas" and
+ *      otherwise calls the previous renderLeft (Phase II wrapper → baseline) unchanged.
+ * The baseline state (S.*) and the Phase II state (L.*) are read, never written, except through the
+ * existing public action select() when the user explicitly opens a candidate in the baseline views. */
+const ATL = window.AsterroAtlas;
+const A3 = {
+  view: "catalog", atlas: null, err: null, loading: false, grids: null, gridErr: null, sub: null, subErr: null,
+  body: "Mars", q: "", kind: "all", minLevel: 1, sel: [], active: null, cand: {}, profile: "general",
+  includeProxy: false, norm: "target", cache: new Map(), stab: {}, busy: null, records: [], workflow: {},
+  imgs: {}, draw: [], copilot: { q: "", log: [] },
+};
+const A3_VIEWS = {};
+const A3_ACTIONS = {};
+const A3_INPUTS = {};
+const A3_NAV = [
+  { id: "catalog", label: "Atlas" }, { id: "target", label: "Target" }, { id: "compare", label: "Compare" },
+  { id: "workflow", label: "Workflow" }, { id: "extremes", label: "Extremes" }, { id: "landing", label: "Terrain" },
+  { id: "counter", label: "Counterfactual" }, { id: "mismatch", label: "Mismatch" }, { id: "translate", label: "Translator" },
+  { id: "expedition", label: "Expedition" }, { id: "constellation", label: "Constellation" }, { id: "copilot", label: "Copilot" },
+  { id: "records", label: "Records" }, { id: "provenance", label: "Provenance" },
+];
+
+/* ---------- data (lazy, checksummed) ---------- */
+async function atSha(buf) {
+  return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", buf)), b => b.toString(16).padStart(2, "0")).join("");
+}
+async function atLoad() {
+  if (A3.atlas || A3.err || A3.loading) return A3.atlas;
+  A3.loading = true;
+  try {
+    const r = await fetch("data/phase3/atlas.json"); if (!r.ok) throw new Error("data/phase3/atlas.json → HTTP " + r.status);
+    const a = await r.json();
+    if (a.stack_sha256 !== S.app.stack.sha256) throw new Error("The atlas was built for a different predictor stack (" + a.stack_sha256.slice(0, 12) + "…).");
+    a.byId = Object.fromEntries(a.targets.map(t => [t.id, t]));
+    A3.atlas = a;
+    if (!A3.active) A3.active = "mars_gale_curiosity";
+  } catch (e) { A3.err = e.message; }
+  A3.loading = false; atRender();
+  return A3.atlas;
+}
+async function atB64(file, sha) {
+  const r = await fetch("data/phase3/" + file); if (!r.ok) throw new Error(file + " → HTTP " + r.status);
+  const bs = atob((await r.text()).trim()), u8 = new Uint8Array(bs.length);
+  for (let k = 0; k < bs.length; k++) u8[k] = bs.charCodeAt(k);
+  if ((await atSha(u8.buffer)) !== sha) throw new Error(file + ": checksum mismatch; data not used.");
+  return u8;
+}
+async function atGrids() {
+  if (A3.grids || A3.gridErr) return A3.grids;
+  const a = await atLoad(); if (!a) return null;
+  try {
+    const F = a.files.grids, u8 = await atB64(F.file, F.sha256), G = {};
+    for (const Ly of F.layout) (G[Ly.target] = G[Ly.target] || {})[Ly.name] = new Float32Array(u8.buffer, Ly.offset, Ly.length);
+    A3.grids = G;
+  } catch (e) { A3.gridErr = e.message; }
+  atRender(); return A3.grids;
+}
+async function atSubcell() {
+  if (A3.sub || A3.subErr) return A3.sub;
+  const a = await atLoad(); if (!a) return null;
+  if (!a.files.subcell) { A3.subErr = "Earth sub-cell data not present in this build."; return null; }
+  try {
+    const F = a.files.subcell, u8 = await atB64(F.file, F.sha256), out = {};
+    const TA = { uint8: Uint8Array, u1: Uint8Array, uint16: Uint16Array, u2: Uint16Array };
+    for (const Ly of F.layout) out[Ly.name] = Object.assign(new (TA[Ly.dtype] || Uint16Array)(u8.buffer, Ly.offset, Ly.length), { meta: Ly });
+    A3.sub = out;
+  } catch (e) { A3.subErr = e.message; }
+  atRender(); return A3.sub;
+}
+function atSubVal(name, i) {
+  const a = A3.sub[name], m = a.meta, v = a[i];
+  if (m.missing != null && v === m.missing) return NaN;
+  return v * m.scale;
+}
+
+/* ---------- shared analytical context ---------- */
+const AT_PROFILE_NOTE = "Editorial weightings, not empirically fitted (same table as the baseline).";
+function atT(id) { return A3.atlas && A3.atlas.byId[id]; }
+function atWeights() { return { ...S.app.profiles[A3.profile].weights }; }
+function atRanges(t) {
+  return ATL.rangesFor(A3.norm, { A: S.A, critIds: S.critIds, atlas: A3.atlas, baselineRanges: S.app.ranges,
+    tv: t ? ATL.targetVector(t, S.critIds, { includeProxy: A3.includeProxy }) : null });
+}
+function atKey(t, extra = "") { return [t.id, A3.profile, A3.norm, A3.includeProxy ? 1 : 0, extra].join("|"); }
+function atCands(t, n = 20) {
+  const k = atKey(t, n);
+  if (!A3.cache.has(k)) {
+    const ranges = atRanges(t);
+    let r;
+    try { r = ATL.candidates({ A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, t, ranges, w: atWeights(), n, includeProxy: A3.includeProxy }); }
+    catch (e) { r = { eligible: false, reason: e.message, mode: "none" }; }
+    r.ranges = ranges; r.targetId = t.id;
+    A3.cache.set(k, r);
+  }
+  return A3.cache.get(k);
+}
+function atCtxLine() {
+  const P = S.app.profiles[A3.profile];
+  return `<div class="at-ctx"><span>Profile <b>${esc(P.label)}</b></span><span>Normalisation <b>${esc(A3_NORM_LABEL[A3.norm])}</b></span><span>Proxy criteria <b>${A3.includeProxy ? "included" : "excluded"}</b></span><span>Score type <b>atlas comparison score</b> (not the baseline Analogue Score)</span></div>`;
+}
+const A3_NORM_LABEL = { target: "Earth ∪ this target (default)", atlas: "Catalogue table (Earth ∪ all targets)", baseline: "Baseline table", earth: "Earth only" };
+
+/* ---------- shared widgets ---------- */
+const AT_ST_CLASS = { DIRECT: "st-d", DERIVED: "st-v", PROXY: "st-p", MISSING: "st-m", INCOMPATIBLE: "st-x", UNVALIDATED: "st-u" };
+function atStatus(s) { return `<span class="st ${AT_ST_CLASS[s] || ""}" title="${esc(A3.atlas ? A3.atlas.statuses[s] : s)}">${esc(s)}</span>`; }
+function atLevel(t) {
+  const l = t.readiness.level;
+  return `<span class="lvl lvl-${l}" title="${esc(t.readiness.meaning)}">L${l} · ${esc(t.readiness.label)}</span>`;
+}
+function atKind(k) { return `<span class="tag" title="${esc(A3.atlas.kinds[k])}">${esc(k.replace("_", " "))}</span>`; }
+function atVal(c, v) { return v == null || v !== v ? "—" : fmtVal(c, v) + (unitOf(c) ? " " + unitOf(c) : ""); }
+function atFmtLL(lat, lon) { return `${fmtLat(lat)} ${fmtLon(lon)}`; }
+function atBanner(kind = "exploratory analysis") {
+  return `<div class="lab-banner"><b>PHASE III</b>${esc(kind)} · beside the baseline engine · never changes the baseline Analogue Score, weights, ranges or ranking</div>`;
+}
+function atFingerprint(t, { compact = false } = {}) {
+  const rows = S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td><td class="n">${t.status[c] === "PROXY" ? `<span class="meta">${atVal(c, t.values[c])}</span>` : atVal(c, t.values[c])}</td><td>${atStatus(t.status[c])}</td>${compact ? "" : `<td class="meta small">${esc(t.status_reason[c] || "")}</td>`}</tr>`).join("");
+  return `<div class="tbl-wrap"><table class="t at-fp"><thead><tr><th>Criterion</th><th class="n">Value</th><th>Status</th>${compact ? "" : "<th>Basis</th>"}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function atClaims(t) {
+  const out = [];
+  for (const c of S.critIds) {
+    const s = t.status[c], prov = (t.provenance[c] || []).map(p => "dataset:" + p);
+    const base = { id: `${t.id}.${c}`, text: `${t.name} — ${labelOf(c)}: ${s === "DIRECT" || s === "PROXY" ? atVal(c, t.values[c]) : "no value"} (${s}). ${t.status_reason[c] || ""}` };
+    if (s === "DIRECT") out.push(LAB.claim({ ...base, category: "DERIVED", method: A3.atlas.compatibility[c].planet, provenance: prov.length ? prov : ["atlas.json"],
+      limitations: [A3.atlas.compatibility[c].why] }));
+    else if (s === "PROXY") out.push(LAB.claim({ ...base, category: "ASSUMED", limitations: [A3.atlas.compatibility[c].why] }));
+    else if (s === "UNVALIDATED") out.push(LAB.claim({ ...base, category: "UNVALIDATED", completeness: "partial", limitations: ["Not used for scoring."] }));
+    else out.push(LAB.claim({ ...base, category: "UNAVAILABLE", completeness: "none" }));
+  }
+  out.push(LAB.claim({ id: t.id + ".location", text: `Location ${atFmtLL(t.anchor.lat, t.anchor.lon)} (${t.anchor.type}). ${t.anchor.source || ""}`,
+    category: t.anchor.secondary_source ? "UNVALIDATED" : "MEASURED", completeness: t.anchor.secondary_source ? "partial" : "complete",
+    provenance: [t.anchor.source || "catalogue"], limitations: t.anchor.secondary_source ? ["Coordinate from a secondary source (Wikipedia); not checked against a primary mission archive."] : [] }));
+  return out;
+}
+function atBusyBar() {
+  if (!A3.busy) return "";
+  const b = A3.busy, f = b.total ? b.done / b.total : 0;
+  return `<div class="lab-busy"><div class="row"><span class="meta">${esc(b.label)}</span><span class="meta">${b.done}/${b.total}</span></div><div class="bar"><i style="width:${(100 * f).toFixed(1)}%"></i></div></div>`;
+}
+function atNeed() {
+  if (!S.app) return `<div class="sec"><div class="empty">Loading…</div></div>`;
+  if (A3.err) return `<div class="sec"><div class="callout">The Planetary Target Atlas is unavailable: ${esc(A3.err)} The baseline application is unaffected.</div></div>`;
+  if (!A3.atlas) return `<div class="sec"><div class="empty">Loading the Planetary Target Atlas…</div></div>`;
+  return null;
+}
+function atTargetPicker(cur, action = "at-active", filter = null) {
+  const ts = A3.atlas.targets.filter(t => !filter || filter(t));
+  return `<select data-a3in="${action}" aria-label="Target">${["Mars", "Moon"].map(b => `<optgroup label="${b}">${ts.filter(t => t.body === b).map(t => `<option value="${t.id}" ${t.id === cur ? "selected" : ""}>${esc(t.name)} — L${t.readiness.level}</option>`).join("")}</optgroup>`).join("")}</select>`;
+}
+function atControls() {
+  return `<div class="lab-form at-controls">
+    <label>Weighting profile<select data-a3in="profile">${Object.entries(S.app.profiles).map(([k, p]) => `<option value="${k}" ${k === A3.profile ? "selected" : ""}>${esc(p.label)}</option>`).join("")}</select></label>
+    <label>Normalisation<select data-a3in="norm">${Object.entries(A3_NORM_LABEL).map(([k, v]) => `<option value="${k}" ${k === A3.norm ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></label>
+    <label class="ck"><input type="checkbox" data-a3in="proxy" ${A3.includeProxy ? "checked" : ""}> include proxy criteria</label></div>`;
+}
+
+/* ---------- maps ---------- */
+/* Planetary map: equirectangular basemap (MOLA / LOLA shaded relief, context only) + target markers. */
+function atPlanetMap(body, targets, { w = 720, h = 360, selected = [], active = null } = {}) {
+  const F = A3.atlas.files["basemap_" + body.toLowerCase()];
+  const X = lon => (lon + 180) / 360 * w, Y = lat => (90 - lat) / 180 * h;
+  const grat = [-120, -60, 0, 60, 120].map(l => `<line x1="${X(l)}" x2="${X(l)}" y1="0" y2="${h}" class="grat"/>`).join("") +
+    [-60, -30, 0, 30, 60].map(l => `<line x1="0" x2="${w}" y1="${Y(l)}" y2="${Y(l)}" class="grat"/>`).join("");
+  const mk = targets.map(t => {
+    const x = X(t.anchor.lon), y = Y(t.anchor.lat), on = selected.includes(t.id), act = t.id === active;
+    return `<g class="atmk lvl-${t.readiness.level}${on ? " on" : ""}${act ? " act" : ""}" data-a3="pick" data-id="${t.id}" tabindex="0" role="button" aria-label="${esc(t.name)}, readiness level ${t.readiness.level}">
+      <circle cx="${x}" cy="${y}" r="${act ? 7 : 5}"/><text x="${x > w - 150 ? x - 8 : x + 8}" y="${y + 3}" text-anchor="${x > w - 150 ? "end" : "start"}">${esc(t.name.split(" (")[0].split(" — ")[0].replace(/ Crater$/, ""))}</text><title>${esc(t.name)} · ${atFmtLL(t.anchor.lat, t.anchor.lon)} · L${t.readiness.level}</title></g>`;
+  }).join("");
+  return `<figure class="at-map"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${body} map with ${targets.length} catalogued targets">
+    ${F ? `<image href="data/phase3/${F.file}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" opacity=".9"/>` : `<rect width="${w}" height="${h}" fill="var(--panel-2)"/>`}
+    ${grat}${mk}</svg>
+    <figcaption class="meta">${F ? `Shaded relief from ${esc(F.source.product_id)} (context only, never compared). Equirectangular, 0° E centred.` : "Basemap unavailable."} Marker fill = readiness level.</figcaption></figure>`;
+}
+/* Earth map: Blue Marble (context) + optional score field + labelled candidates.
+ * items: [{ i, label, title, cls }] (cell indices into the stack arrays). */
+function atEarthMap(id, items, { w = 720, h = 360, field = null } = {}) {
+  const X = lon => (lon + 180) / 360 * w, Y = lat => (90 - lat) / 180 * h;
+  const mk = items.map(o => `<g class="emk ${o.cls || ""}" data-a3="cand" data-i="${o.i}" data-t="${o.t || ""}" tabindex="0" role="button" aria-label="${esc(o.title || placeStr(o.i))}"><circle cx="${X(S.lon[o.i]).toFixed(1)}" cy="${Y(S.lat[o.i]).toFixed(1)}" r="${String(o.label).length > 2 ? 8 : 6.5}"/><text x="${X(S.lon[o.i]).toFixed(1)}" y="${(Y(S.lat[o.i]) + 3).toFixed(1)}" text-anchor="middle">${esc(o.label)}</text><title>${esc(o.title || placeStr(o.i))}</title></g>`).join("");
+  if (field) A3.draw.push(() => atDrawField(id, field, w, h));
+  return `<figure class="at-map"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Earth map with ${items.length} candidates">
+    <image href="data/bluemarble_2048.jpg" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" opacity=".55"/>
+    <image id="${id}-field" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none"/>${mk}</svg></figure>`;
+}
+function atDrawField(id, eff, w, h) {
+  const img = document.getElementById(id + "-field"); if (!img) return;
+  const c = document.createElement("canvas"); c.width = 576; c.height = 361;
+  const g = c.getContext("2d"), D = g.createImageData(576, 361);
+  const rgb = getComputedStyle($("#app")).getPropertyValue("--accent").trim() || "#E0874F";
+  const hx = rgb.replace("#", ""), R = parseInt(hx.slice(0, 2), 16), G = parseInt(hx.slice(2, 4), 16), B = parseInt(hx.slice(4, 6), 16);
+  for (let i = 0; i < eff.length; i++) {
+    const v = eff[i]; if (!(v >= 0)) continue;
+    const cl = S.cell[i], row = 360 - Math.floor(cl / 576), col = cl % 576, p = (row * 576 + col) * 4;
+    D.data[p] = R; D.data[p + 1] = G; D.data[p + 2] = B; D.data[p + 3] = Math.round(255 * Math.pow(v, 3) * 0.9);
+  }
+  g.putImageData(D, 0, 0);
+  img.setAttribute("href", c.toDataURL());
+}
+/* 60x60 window rasters (terrain hillshade / slope / thermal) drawn after render */
+function atRaster(id, arr, kind, px = 3) {
+  A3.draw.push(() => {
+    const c = document.getElementById(id); if (!c || !arr) return;
+    const g = c.getContext("2d"), D = g.createImageData(60, 60), b = ATL.BIN_M;
+    let lo = Infinity, hi = -Infinity;
+    for (const v of arr) if (v === v) { if (v < lo) lo = v; if (v > hi) hi = v; }
+    for (let r = 0; r < 60; r++) for (let q = 0; q < 60; q++) {
+      const k = r * 60 + q, v = arr[k], p = k * 4;
+      if (v !== v) { D.data[p] = 40; D.data[p + 1] = 20; D.data[p + 2] = 20; D.data[p + 3] = 255; continue; }
+      let s;
+      if (kind === "hill") {
+        const zl = arr[r * 60 + Math.max(0, q - 1)], zr = arr[r * 60 + Math.min(59, q + 1)], zu = arr[Math.max(0, r - 1) * 60 + q], zd = arr[Math.min(59, r + 1) * 60 + q];
+        const dzdx = ((zr === zr ? zr : v) - (zl === zl ? zl : v)) / (2 * b), dzdy = ((zu === zu ? zu : v) - (zd === zd ? zd : v)) / (2 * b);
+        const sl = Math.atan(Math.hypot(dzdx, dzdy)), as = Math.atan2(dzdy, -dzdx), z = Math.PI / 4, az = 5.497787;
+        s = Math.max(0, Math.cos(z) * Math.cos(sl) + Math.sin(z) * Math.sin(sl) * Math.cos(az - as));
+        const tint = hi > lo ? (v - lo) / (hi - lo) : 0.5; s = 0.75 * s + 0.25 * tint;
+        D.data[p] = D.data[p + 1] = D.data[p + 2] = Math.round(255 * s);
+      } else {
+        s = kind === "slope" ? Math.min(1, v / 30) : (hi > lo ? (v - lo) / (hi - lo) : 0.5);
+        const ramp = kind === "slope" ? [[22, 30, 36], [216, 180, 91], [217, 112, 95]] : [[30, 40, 70], [127, 179, 174], [230, 233, 236]];
+        const [a0, a1, a2] = ramp, m = s < 0.5 ? [a0, a1, s * 2] : [a1, a2, (s - 0.5) * 2];
+        for (let j = 0; j < 3; j++) D.data[p + j] = Math.round(m[0][j] + (m[1][j] - m[0][j]) * m[2]);
+      }
+      D.data[p + 3] = 255;
+    }
+    const t = document.createElement("canvas"); t.width = 60; t.height = 60; t.getContext("2d").putImageData(D, 0, 0);
+    g.imageSmoothingEnabled = false; g.drawImage(t, 0, 0, 60 * px, 60 * px);
+  });
+  return `<canvas id="${id}" width="${60 * px}" height="${60 * px}" class="at-raster" role="img" aria-label="${esc(kind)} map of the 55.6 km window"></canvas>`;
+}
+
+/* ---------- router ---------- */
+function atRender() { if (S.tab === "atlas") renderLeft(); }
+function viewAtlas() {
+  const nav = `<div class="lab-nav" role="tablist" aria-label="Atlas modules">${A3_NAV.map(m => `<button role="tab" aria-selected="${A3.view === m.id}" data-a3view="${m.id}">${esc(m.label)}</button>`).join("")}</div>`;
+  let body = atNeed();
+  if (!body) {
+    const v = A3_VIEWS[A3.view] || A3_VIEWS.catalog;
+    try { body = v(); } catch (e) { console.error(e); body = `<div class="sec"><div class="callout">This module failed: ${esc(e.message)}. The baseline application is unaffected.</div></div>`; }
+  }
+  const t = A3.atlas && atT(A3.active);
+  return `<div class="sec lab-head"><div class="lbl">Phase III · Planetary research observatory<span class="n">${t ? esc(t.name) + " · L" + t.readiness.level : ""}${A3.sel.length ? " · " + A3.sel.length + " selected" : ""}</span></div>${nav}</div>${atBusyBar()}${body}`;
+}
+const _p2RenderLeft = renderLeft;
+renderLeft = function () {
+  if (S.tab !== "atlas") return _p2RenderLeft.apply(this, arguments);
+  const box = $("#left"), top = box.scrollTop;
+  A3.draw = [];
+  box.innerHTML = S.app ? viewAtlas() : "";
+  box.scrollTop = top;
+  $("#app").classList.add("wide");
+  for (const f of A3.draw) { try { f(); } catch (e) { console.error(e); } }
+  if (S.app && !A3.atlas && !A3.err) atLoad();
+};
+(function addAtlasTab() {
+  const nav = $(".tabs"); if (!nav || $("#tab-atlas")) return;
+  const b = document.createElement("button");
+  b.setAttribute("role", "tab"); b.dataset.tab = "atlas"; b.id = "tab-atlas"; b.textContent = "Atlas";
+  b.title = "Phase III planetary target atlas and research observatory (beside the baseline)";
+  nav.appendChild(b);
+})();
+
+/* ---------- events (delegated, namespaced data-a3* attributes only) ---------- */
+document.addEventListener("click", e => {
+  const m = e.target.closest("[data-a3view]");
+  if (m) { A3.view = m.dataset.a3view; $("#left").scrollTop = 0; atRender(); return; }
+  const a = e.target.closest("[data-a3]"); if (!a) return;
+  const fn = A3_ACTIONS[a.dataset.a3]; if (fn) { e.preventDefault(); fn(a, e); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const a = e.target.closest && e.target.closest("g[data-a3]"); if (!a) return;
+  const fn = A3_ACTIONS[a.dataset.a3]; if (fn) { e.preventDefault(); fn(a, e); }
+});
+document.addEventListener("change", e => {
+  const a = e.target.closest("[data-a3in]"); if (!a) return;
+  const fn = A3_INPUTS[a.dataset.a3in]; if (fn) fn(a, e);
+});
+document.addEventListener("input", e => {
+  const a = e.target.closest("[data-a3live]"); if (!a) return;
+  const fn = A3_INPUTS[a.dataset.a3live]; if (fn) fn(a, e);
+});
+Object.assign(A3_ACTIONS, {
+  go(a) { A3.view = a.dataset.to; if (a.dataset.id) A3.active = a.dataset.id; $("#left").scrollTop = 0; atRender(); },
+  pick(a) { A3.active = a.dataset.id; if (A3.view === "catalog") { atRender(); return; } A3.view = "target"; atRender(); },
+  toggle(a) { const id = a.dataset.id, k = A3.sel.indexOf(id); if (k >= 0) A3.sel.splice(k, 1); else A3.sel.push(id); atRender(); },
+  cand(a) { const tid = a.dataset.t || A3.active; if (atT(tid)) { A3.active = tid; A3.cand[tid] = +a.dataset.i; } atRender(); },
+  baseline(a) { const i = +a.dataset.i; if (i >= 0) { select(i, true); } },
+  cancel() { if (A3.busy) A3.busy.cancel = true; },
+});
+Object.assign(A3_INPUTS, {
+  "at-active"(a) { A3.active = a.value; atRender(); },
+  profile(a) { A3.profile = a.value; atRender(); },
+  norm(a) { A3.norm = a.value; atRender(); },
+  proxy(a) { A3.includeProxy = a.checked; atRender(); },
+});
+
+/* ===== Phase III · Planetary Target Atlas — catalogue (map, search, filters, cards, multi-select) ===== */
+function atMatches(t) {
+  if (t.body !== A3.body) return false;
+  if (A3.kind !== "all" && t.kind !== A3.kind) return false;
+  if (t.readiness.level < A3.minLevel) return false;
+  const q = A3.q.trim().toLowerCase();
+  if (!q) return true;
+  const hay = [t.name, t.id, t.context, t.kind, t.anchor.gazetteer && t.anchor.gazetteer.name, t.anchor.gazetteer && t.anchor.gazetteer.clean_name].join(" ").toLowerCase();
+  return q.split(/\s+/).every(w => hay.includes(w));
+}
+function atCard(t) {
+  const on = A3.sel.includes(t.id), act = A3.active === t.id;
+  const tr = t.terrain, th = t.thermal;
+  const dir = S.critIds.filter(c => t.status[c] === "DIRECT").map(shortOf);
+  const gaps = S.critIds.filter(c => ["MISSING", "UNVALIDATED"].includes(t.status[c])).map(shortOf);
+  return `<article class="at-card${act ? " act" : ""}" aria-label="${esc(t.name)}">
+    <header><div><div class="at-card-t">${esc(t.name)}</div><div class="meta">${t.body} · ${atFmtLL(t.anchor.lat, t.anchor.lon)} ${t.baseline ? '· <b class="at-base">BASELINE TARGET</b>' : ""}</div></div>${atLevel(t)}</header>
+    <div class="row">${atKind(t.kind)}${t.anchor.secondary_source ? '<span class="tag st-u" title="Coordinate from a secondary source">secondary coordinate</span>' : ""}${tr && tr.heterogeneity ? '<span class="tag">9-window sample</span>' : ""}${th ? `<span class="tag">${esc(th.source.replace("_", " "))}</span>` : ""}</div>
+    <p class="note small">${esc(t.context)}</p>
+    <div class="at-fpmini">${S.critIds.map(c => `<div title="${esc(labelOf(c))}: ${esc(t.status[c])}"><span>${esc(shortOf(c))}</span><b class="${AT_ST_CLASS[t.status[c]]}">${t.status[c] === "DIRECT" ? atVal(c, t.values[c]) : t.status[c].slice(0, 4)}</b></div>`).join("")}</div>
+    <div class="meta small">Comparable: ${dir.length ? esc(dir.join(", ")) : "none"}${gaps.length ? " · Gaps: " + esc(gaps.join(", ")) : ""}</div>
+    <footer class="row"><button class="btn-sm" data-a3="go" data-to="target" data-id="${t.id}">Open</button>
+      <button class="btn-sm${on ? " on" : ""}" data-a3="toggle" data-id="${t.id}" aria-pressed="${on}">${on ? "Selected" : "Select to compare"}</button>
+      ${t.readiness.level >= 2 ? `<button class="btn-sm" data-a3="go" data-to="workflow" data-id="${t.id}">Workflow</button>` : `<span class="meta">Not rankable (L1)</span>`}</footer></article>`;
+}
+A3_VIEWS.catalog = function () {
+  const A = A3.atlas, all = A.targets.filter(t => t.body === A3.body), shown = A.targets.filter(atMatches);
+  const lv = [1, 2, 3, 4].map(l => all.filter(t => t.readiness.level === l).length);
+  let h = `<div class="sec"><h3 class="ttl">Planetary target atlas</h3>${atBanner("catalogue")}
+    <p class="note">${A.targets.length} catalogued targets on Mars and the Moon, each with a verified location, a fingerprint whose every value carries a status, and a readiness level. Values come only from mission data processed by documented scripts; nothing is copied from the baseline targets or estimated.</p>
+    <div class="lab-form"><span class="toggles" role="group" aria-label="Body">${["Mars", "Moon"].map(b => `<button aria-pressed="${A3.body === b}" data-a3="body" data-b="${b}">${b}</button>`).join("")}</span>
+      <label class="wide">Search<input type="text" data-a3live="q" value="${esc(A3.q)}" placeholder="name, feature, mission…" aria-label="Search targets"></label>
+      <label>Kind<select data-a3in="kind"><option value="all">all kinds</option>${Object.keys(A.kinds).map(k => `<option value="${k}" ${A3.kind === k ? "selected" : ""}>${esc(k.replace("_", " "))}</option>`).join("")}</select></label>
+      <label>Minimum readiness<select data-a3in="minlvl">${[1, 2, 3, 4].map(l => `<option value="${l}" ${A3.minLevel === l ? "selected" : ""}>L${l}+</option>`).join("")}</select></label></div>
+    <div class="row meta">${A3.body}: ${all.length} targets · ${lv.map((n, k) => `L${k + 1} ${n}`).join(" · ")} · showing ${shown.length}</div></div>
+    <div class="sec">${atPlanetMap(A3.body, shown, { selected: A3.sel, active: A3.active })}</div>`;
+  if (A3.sel.length) {
+    h += `<div class="sec at-selbar"><div class="lbl">Selected for comparison (${A3.sel.length})</div><div class="row">${A3.sel.map(id => `<span class="tag">${esc(atT(id).name)} <button class="lnk" data-a3="toggle" data-id="${id}" aria-label="Remove">×</button></span>`).join("")}
+      <button class="btn-sm" data-a3="go" data-to="compare" ${A3.sel.length < 1 ? "disabled" : ""}>Compare ${A3.sel.length}</button><button class="btn-sm" data-a3="selclear">Clear</button><button class="btn-sm" data-a3="selexample">Example: Gale · Elysium · Shackleton</button></div></div>`;
+  } else h += `<div class="sec"><div class="row"><span class="meta">Select two or more targets to compare them.</span><button class="btn-sm" data-a3="selexample">Example: Gale · Elysium · Shackleton</button></div></div>`;
+  h += `<div class="sec"><div class="at-cards">${shown.map(atCard).join("") || `<div class="empty">No target matches the filters.</div>`}</div></div>
+    <div class="sec"><div class="lbl">Readiness levels</div><div class="tbl-wrap"><table class="t"><tbody>${Object.entries(A.readiness_levels).map(([k, v]) => `<tr><td><span class="lvl lvl-${k}">L${k}</span></td><td>${esc(v.label)}</td><td class="meta">${esc(v.meaning)}</td></tr>`).join("")}</tbody></table></div>
+    <p class="note small">${esc(A.readiness_rule)}</p></div>`;
+  return h;
+};
+Object.assign(A3_ACTIONS, {
+  body(a) { A3.body = a.dataset.b; atRender(); },
+  selclear() { A3.sel = []; atRender(); },
+  selexample() { A3.sel = ["mars_gale_curiosity", "mars_elysium_planitia", "moon_shackleton"].filter(atT); A3.view = "compare"; atRender(); },
+});
+Object.assign(A3_INPUTS, {
+  q(a) { A3.q = a.value; clearTimeout(A3._qt); A3._qt = setTimeout(() => { const p = a.selectionStart; atRender(); const n = $('[data-a3live="q"]'); if (n) { n.focus(); n.setSelectionRange(p, p); } }, 160); },
+  kind(a) { A3.kind = a.value; atRender(); },
+  minlvl(a) { A3.minLevel = +a.value; atRender(); },
+});
+
+/* ===== Phase III · Target detail (fingerprint, statuses, provenance, previews, uncertainty) ===== */
+function atThermalBlock(t) {
+  const th = t.thermal; if (!th) return "";
+  if (th.source === "diviner_polar") {
+    return `<div class="sec"><div class="lbl">Thermal evidence · Diviner polar hourly maps</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Season</th><th class="n">mean ΔT</th><th class="n">median</th><th class="n">p10–p90</th><th class="n">T(13–14 h)</th><th class="n">T(01–02 h)</th><th class="n">valid bins</th></tr></thead><tbody>
+      ${["summer", "winter"].map(s => { const d = th.seasons[s]; return `<tr><td>${s}</td><td class="n">${f1(d.mean_dT_K)} K</td><td class="n">${f1(d.median_dT_K)}</td><td class="n">${f1(d.p10_dT_K)}–${f1(d.p90_dT_K)}</td><td class="n">${f1(d.mean_T14_K)}</td><td class="n">${f1(d.mean_T02_K)}</td><td class="n">${nfmt(d.bins_valid)} / ${nfmt(d.bins_total)}</td></tr>`; }).join("")}
+      </tbody></table></div><p class="note small">Fingerprint value = mean of the two seasonal window means. The two seasons differ by ${f1(Math.abs(th.seasons.summer.mean_dT_K - th.seasons.winter.mean_dT_K))} K — a measured, not modelled, indication of seasonal sensitivity. Bins are 240 m; the map shows them averaged to 926.6 m.</p></div>`;
+  }
+  if (th.source === "diviner_gcp") {
+    const P = th.primary;
+    return `<div class="sec"><div class="lbl">Thermal evidence · Diviner Global Cumulative Products</div><div class="grid2">
+      <div class="kv"><span>0.5° bins inside the window</span><b>${P.bins_in_window}</b></div><div class="kv"><span>bins with ≥2 of 4 valid quarter-hours at both local times</span><b>${P.bins_used}</b></div>
+      <div class="kv"><span>T(13–14 h) / T(01–02 h)</span><b>${f1(P.mean_T14_K)} / ${f1(P.mean_T02_K)} K</b></div><div class="kv"><span>bin ΔT range</span><b>${f1(P.min_bin_dT_K)}–${f1(P.max_bin_dT_K)} K</b></div></div>
+      ${th.ring && th.ring.length ? `<p class="note small">Ring windows: ${th.ring.map(r => r.lst_diurnal_range_K == null ? "no valid bins" : f1(r.lst_diurnal_range_K) + " K").join(" · ")}</p>` : ""}
+      <p class="note small">Cumulative average of all seasons (2009–2015). Bins are coarse relative to the window, so the value describes the window only approximately.</p></div>`;
+  }
+  if (th.source === "rems") {
+    const P = th.primary, Q = th.strict;
+    return `<div class="sec"><div class="lbl">Thermal evidence · MSL REMS (${th.sols_with_data} sols)</div>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Ls bin</th><th class="n">sols</th><th class="n">ground ΔT (13–14 − 01–02 LTST)</th><th class="n">air diurnal mean</th></tr></thead><tbody>
+      ${P.bins.map(b => `<tr><td>${b.ls_bin[0]}–${b.ls_bin[1]}°</td><td class="n">${b.ground_dr_sols}</td><td class="n">${f1(b.ground_dr_K)} K</td><td class="n">${f1(b.air_diurnal_mean_K)} K</td></tr>`).join("")}
+      </tbody></table></div>
+      <div class="grid2"><div class="kv"><span>Primary filter → ΔT / annual range</span><b>${f2(P.lst_diurnal_range_K)} / ${f2(P.annual_temperature_range_K)} K</b></div>
+      <div class="kv"><span>Strict filter (sensitivity) → ΔT / annual range</span><b>${f2(Q.lst_diurnal_range_K)} / ${f2(Q.annual_temperature_range_K)} K</b></div>
+      <div class="kv"><span>GTS long-term uncertainty, hours 13 / 1</span><b>${th.ground_uncertainty_K.map(f2).join(" / ")} K</b></div>
+      <div class="kv"><span>Ls check (Mars24 at Curiosity landing)</span><b>${f2(th.ls_check.curiosity_landing)}° (published ≈ ${th.ls_check.published_landing_ls}°)</b></div></div>
+      <p class="note small">The same aggregation code as the Jezero baseline (MEDA). Differences: REMS ground temperature sensor and boom ambient estimate vs MEDA TIRS and ATS; Mars year 31–32 vs 36; a single rover location.</p></div>`;
+  }
+  return "";
+}
+function atTerrainBlock(t) {
+  const tr = t.terrain; if (!tr) return `<div class="sec"><div class="callout">No terrain window for this target.</div></div>`;
+  const G = A3.grids && A3.grids[t.id];
+  const pre = G ? `<div class="hg-row"><figure class="hg">${atRaster("at-hs-" + t.id, G.z, "hill")}<figcaption class="meta">Shaded relief (926.6 m bins)</figcaption></figure>
+      <figure class="hg">${atRaster("at-sl-" + t.id, G.slope, "slope")}<figcaption class="meta">Horn slope, 0–30°+</figcaption></figure>
+      ${G.dT ? `<figure class="hg">${atRaster("at-dt-" + t.id, G.dT, "dT")}<figcaption class="meta">Diviner ΔT per bin</figcaption></figure>` : ""}</div>`
+    : `<p class="meta">${A3.gridErr ? "Window grids unavailable: " + esc(A3.gridErr) : "Loading window grids…"}</p>`;
+  if (!G && !A3.gridErr) atGrids();
+  const het = tr.heterogeneity;
+  return `<div class="sec"><div class="lbl">Terrain window · 55.6 × 55.6 km · ${esc(tr.read_mode)}</div>${pre}
+    <div class="grid2"><div class="kv"><span>Bins filled</span><b>${tr.bins_filled} / ${tr.bins_total}</b></div><div class="kv"><span>Slope p90</span><b>${f2(tr.slope_p90_deg)}°</b></div>
+    <div class="kv"><span>Elevation in window (product datum)</span><b>${nfmt(tr.elevation_min_m)} … ${nfmt(tr.elevation_max_m)} m</b></div><div class="kv"><span>Window grid SHA-256</span><b class="mono">${tr.grid_sha256.slice(0, 16)}…</b></div></div>
+    <p class="note small">${esc(tr.datum_note)} North up; window centred on ${atFmtLL(tr.center[0], tr.center[1])}.</p>
+    ${het ? `<div class="lbl">Between-location heterogeneity · ${het.slope_deg.n + 1} windows</div><div class="tbl-wrap"><table class="t"><thead><tr><th></th><th class="n">centre</th><th class="n">ring mean</th><th class="n">ring SD</th><th class="n">ring min–max</th></tr></thead><tbody>
+      <tr><td>Slope (°)</td><td class="n">${f2(t.values.slope)}</td><td class="n">${f2(het.slope_deg.mean)}</td><td class="n">${f2(het.slope_deg.sd)}</td><td class="n">${f2(het.slope_deg.min)}–${f2(het.slope_deg.max)}</td></tr>
+      <tr><td>Roughness (m)</td><td class="n">${f1(t.values.surface_roughness)}</td><td class="n">${f1(het.surface_roughness_m.mean)}</td><td class="n">${f1(het.surface_roughness_m.sd)}</td><td class="n">${f1(het.surface_roughness_m.min)}–${f1(het.surface_roughness_m.max)}</td></tr></tbody></table></div>
+      <p class="note small">${esc(het.method)}; ring radius ${nfmt(het.radius_km)} km. The fingerprint uses the centre window only; the ring shows how representative it is.</p>` :
+      (t.heterogeneity_note ? `<p class="note small">${esc(t.heterogeneity_note)}</p>` : (t.kind === "named_feature" ? `<p class="note small">Single window: between-location variability within this feature was not sampled.</p>` : ""))}</div>`;
+}
+A3_VIEWS.target = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const g = t.anchor.gazetteer, eg = ATL.eligibility(t, S.critIds);
+  const tv = ATL.targetVector(t, S.critIds), out = ATL.outsideEarth(S.A, S.critIds, tv);
+  const miss = ATL.missingEvidence(t, S.critIds, atWeights());
+  let h = `<div class="sec"><div class="row"><h3 class="ttl">${esc(t.name)}</h3>${atLevel(t)}</div>${atBanner("target record")}
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id)}</label></div>
+    <p class="note">${esc(t.context)}</p>
+    <div class="row">${atKind(t.kind)}${t.baseline ? '<span class="tag at-base">baseline target — definition and values unchanged</span>' : ""}</div>
+    <div class="grid2"><div class="kv"><span>Location</span><b>${atFmtLL(t.anchor.lat, t.anchor.lon)}</b></div><div class="kv"><span>Anchor</span><b>${esc(t.anchor.type)}</b></div>
+    ${g ? `<div class="kv"><span>Gazetteer feature</span><b>${esc(g.name)} · ${esc(g.type)} · ${esc(g.approval)}</b></div><div class="kv"><span>Feature diameter</span><b>${g.diameter_km ? nfmt(g.diameter_km) + " km" : "—"}</b></div>` : ""}</div>
+    <p class="note small">Source: ${esc((t.anchor.source || "—").replace(g ? g.link : "\u0000", "").trim())}${g ? ` · <a href="${esc(g.link)}" target="_blank" rel="noopener">${esc(g.link)}</a>` : ""}${t.anchor.secondary_source ? " · <b>secondary source — not checked against the mission archive</b>" : ""}</p></div>
+    <div class="sec"><div class="lbl">Fingerprint · status of every criterion</div>${atFingerprint(t)}
+    <div class="callout ${eg.ok ? "" : "warn"}">${esc(eg.reason)}</div>
+    ${out.length ? `<p class="note small"><b>Outside Earth's range:</b> ${out.map(o => `${esc(labelOf(o.criterion))} ${atVal(o.criterion, o.target)} is ${o.side} every Earth cell (${o.side === "above" ? "max " + atVal(o.criterion, o.earthMax) : "min " + atVal(o.criterion, o.earthMin)})`).join("; ")}. No Earth cell can match this dimension closely.</p>` : ""}</div>`;
+  if (t.reproduce_check) {
+    h += `<div class="sec"><div class="lbl">Reproducibility check against the baseline target</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">baseline</th><th class="n">recomputed by the Phase III pipeline</th><th class="n">|Δ|</th></tr></thead><tbody>
+      ${Object.entries(t.reproduce_check).map(([c, v]) => `<tr><td>${esc(labelOf(c))}</td><td class="n">${f3(v.baseline)}</td><td class="n">${f3(v.recomputed)}</td><td class="n">${v.abs_diff.toExponential(1)}</td></tr>`).join("")}</tbody></table></div>
+      <p class="note small">The atlas keeps the baseline values for this target; the recomputation demonstrates that the shared pipeline reproduces them.</p></div>`;
+  }
+  h += atTerrainBlock(t) + atThermalBlock(t);
+  h += `<div class="sec"><div class="lbl">Missing evidence</div>${miss.length ? `<div class="tbl-wrap"><table class="t"><thead><tr><th>Dimension</th><th>Status</th><th class="n">weight share (${esc(S.app.profiles[A3.profile].label)})</th><th>What would close it</th></tr></thead><tbody>
+    ${miss.map(m => `<tr><td>${esc(m.criterion === "heterogeneity" ? "Within-feature heterogeneity" : labelOf(m.criterion))}</td><td>${atStatus(m.status)}</td><td class="n">${pct(m.weightShare)}</td><td class="meta">${esc(m.action)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="meta">No gap among the six criteria.</p>`}</div>
+    <div class="sec"><div class="row"><button class="btn-sm" data-a3="go" data-to="workflow">Start workflow</button><button class="btn-sm" data-a3="toggle" data-id="${t.id}">${A3.sel.includes(t.id) ? "Remove from comparison" : "Add to comparison"}</button>
+      <button class="btn-sm" data-a3="go" data-to="landing">Terrain explorer</button><button class="btn-sm" data-a3="go" data-to="mismatch">Mismatch map</button></div>
+    ${claimsBlock(atClaims(t), "Evidence record")}</div>`;
+  return h;
+};
+
+/* ===== Phase III · Multi-target comparison workspace =====
+ * For the selected targets: Earth candidates per target, ranking stability, distinguishing
+ * dimensions, shared and complementary candidates, missing evidence and discriminating measurements. */
+const AT_LETTER = ["A", "B", "C", "D", "E", "F", "G", "H"];
+function atSelTargets() { return A3.sel.map(atT).filter(Boolean); }
+function atStabKey(t) { return atKey(t, "stab"); }
+async function atRunStability(ts) {
+  const w = atWeights();
+  A3.busy = { label: "Weight-perturbation stability", done: 0, total: ts.length, cancel: false }; atRender();
+  for (const t of ts) {
+    if (A3.busy.cancel) break;
+    const R = atCands(t, 20); if (!R.eligible) { A3.busy.done++; continue; }
+    const act = R.P.applicable.filter(c => w[c] > 0);
+    const factors = act.length <= 2 ? [0.5, 0.75, 1, 1.5, 2] : [0.5, 1, 2];
+    const design = LAB.designFactorial(w, act, S.critIds, factors);
+    const run = await LAB.runDesign({ Ps: [R.P], cell: S.cell, cand: R.top, baseW: w, design, onProgress: () => !A3.busy.cancel });
+    if (run.cancelled) break;
+    A3.stab[atStabKey(t)] = { stats: LAB.rankStats(run, { topN: 20, topPct: 1 }), design: design.length, factors, active: act, cand: R.top.slice(), flips: (pf => ({ any: pf.filter(p => p.flips > 0).length, pairs: pf.length, worst: pf[0] ? pf[0].frac : 0 }))(LAB.pairFlips(run)) };
+    A3.busy.done++; atRender();
+  }
+  A3.busy = null; atRender();
+}
+function atImpactKey(t) { return atKey(t, "impact"); }
+function atRunImpact(ts) {
+  const w = atWeights();
+  for (const t of ts) {
+    if (!ATL.eligibility(t, S.critIds).ok) continue;
+    const res = [];
+    for (const c of S.critIds) {
+      if (t.status[c] !== "MISSING") continue;
+      const sc = A3.atlas.targets.filter(o => o.body === t.body && o.id !== t.id && o.status[c] === "DIRECT")
+        .map(o => ({ label: "value observed at " + o.name, value: o.values[c] }));
+      if (!sc.length) { res.push({ criterion: c, blocked: `No other ${t.body} target has a measured ${labelOf(c)}; no scenario can be formed.` }); continue; }
+      res.push(ATL.measurementImpact({ A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, t, ranges: atRanges(t), w, criterion: c, scenarios: sc }));
+    }
+    A3.stab[atImpactKey(t)] = res;
+  }
+  atRender();
+}
+A3_VIEWS.compare = function () {
+  const ts = atSelTargets();
+  let h = `<div class="sec"><h3 class="ttl">Multi-target comparison</h3>${atBanner("comparison workspace")}
+    <p class="note">Compares Earth analogue evidence across the selected targets. Every score below is an <b>atlas comparison score</b> on the target's directly comparable criteria; it is not the baseline Analogue Score and it is not a suitability or safety rating.</p>${atControls()}${atCtxLine()}</div>`;
+  if (!ts.length) return h + `<div class="sec"><div class="empty">Select targets in the Atlas view, or <button class="lnk" data-a3="selexample">load the example (Gale · Elysium · Shackleton)</button>.</div></div>`;
+  const R = atRanges(null), D = ATL.distinguishing(ts, S.critIds, A3.norm === "atlas" ? A3.atlas.normalisation.ranges : S.app.ranges);
+  const res = ts.map(t => Object.assign(atCands(t, 20), { targetId: t.id }));
+  // 1 · fingerprints
+  h += `<div class="sec"><div class="lbl">1 · Fingerprints</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th>${ts.map((t, k) => `<th>${AT_LETTER[k]} · ${esc(t.name)}<div class="meta">L${t.readiness.level}</div></th>`).join("")}</tr></thead><tbody>
+    ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td>${ts.map(t => `<td>${t.status[c] === "DIRECT" ? atVal(c, t.values[c]) + " " : ""}${atStatus(t.status[c])}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>`;
+  // 2 · distinguishing dimensions
+  const VERD = { COMPARABLE: "comparable for all", PARTIALLY_COMPARABLE: "comparable for some", NOT_COMPARABLE: "not comparable", NOT_DISTINGUISHING_PROXY: "proxy — identical by rule" };
+  h += `<div class="sec"><div class="lbl">2 · Which dimensions distinguish the targets</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">normalised spread</th><th>largest pairwise difference</th><th>comparability</th></tr></thead><tbody>
+    ${D.rows.slice().sort((a, b) => (b.spread ?? -1) - (a.spread ?? -1)).map(r => { const p = r.pairs.slice().sort((x, y) => y.normDiff - x.normDiff)[0];
+      return `<tr><td>${esc(labelOf(r.criterion))}</td><td class="n">${r.spread == null ? "—" : r.spread.toFixed(3)}</td><td class="meta">${p ? `${esc(atT(p.a).name)} vs ${esc(atT(p.b).name)}: ${atVal(r.criterion, Math.abs(p.diff))}` : "—"}</td><td class="meta">${esc(VERD[r.verdict])}${r.missing.length ? " · missing: " + r.missing.map(x => esc(atT(x).name)).join(", ") : ""}${r.incompatible.length ? " · incompatible: " + r.incompatible.map(x => esc(atT(x).name)).join(", ") : ""}</td></tr>`; }).join("")}
+    </tbody></table></div><p class="note small">Spread = (max − min) / normalisation span over targets with a directly comparable value. A dimension that is missing for a target cannot distinguish it; proxies are identical for every planetary target by construction.</p></div>`;
+  // 3 · candidates per target + map
+  const items = [];
+  res.forEach((r, k) => { if (r.eligible) r.top.slice(0, 10).forEach((i, q) => items.push({ i, t: r.targetId, label: AT_LETTER[k] + (q + 1), cls: "t" + k, title: `${AT_LETTER[k]}${q + 1} · ${atT(r.targetId).name}: ${placeStr(i)} · ${fmtPct(r.eff[i])}` })); });
+  h += `<div class="sec"><div class="lbl">3 · Earth analogue candidates per target (top 10, ≥ 300 km apart)</div>${atEarthMap("at-cmp", items)}
+    <div class="at-cols">${res.map((r, k) => { const t = atT(r.targetId);
+      if (!r.eligible) return `<div class="at-col"><div class="at-col-h">${AT_LETTER[k]} · ${esc(t.name)}</div><div class="callout warn">${esc(r.reason)}</div></div>`;
+      const st = A3.stab[atStabKey(t)];
+      return `<div class="at-col"><div class="at-col-h">${AT_LETTER[k]} · ${esc(t.name)}</div><div class="meta small">${esc(r.mode === "full" ? "full comparison" : "partial comparison: " + r.P.applicable.map(shortOf).join(", "))} · ${nfmt(r.nEligible)} eligible cells</div>${r.saturated ? `<div class="callout warn small">${nfmt(r.nNearTop)} cells score within 0.1 pt of the best. With so few comparable criteria the list is saturated: the order among them comes from the tie-break (cell id), not from evidence.</div>` : ""}
+      <ol class="at-rank">${r.top.slice(0, 10).map((i, q) => { const s = st && st.cand.indexOf(i) >= 0 ? st.stats[st.cand.indexOf(i)] : null;
+        return `<li><button class="lnk" data-a3="cand" data-t="${t.id}" data-i="${i}">${esc(candShort(i))}</button> <b>${fmtPct(r.eff[i])}</b>${s ? ` ${clsTag(s.cls)}` : ""}</li>`; }).join("")}</ol></div>`; }).join("")}</div></div>`;
+  // 4 · stability
+  const haveStab = ts.every(t => !ATL.eligibility(t, S.critIds).ok || A3.stab[atStabKey(t)]);
+  h += `<div class="sec"><div class="lbl">4 · Which rankings are most stable</div>
+    ${haveStab ? ts.map((t, k) => { const st = A3.stab[atStabKey(t)]; if (!st) return "";
+      const cnt = {}; st.stats.forEach(s => cnt[s.cls] = (cnt[s.cls] || 0) + 1);
+      return `<p class="note small"><b>${AT_LETTER[k]} · ${esc(t.name)}</b>: ${st.design} weight configurations (factors ${st.factors.join(", ")} on ${st.active.map(shortOf).join(", ")}). ${Object.entries(cnt).map(([c, n]) => `${n} ${esc(LAB.CLASS_LABEL[c].toLowerCase())}`).join(" · ")}. Candidate pairs whose order flips in at least one configuration: ${st.flips.any} of ${st.flips.pairs} (worst pair flips in ${pct(st.flips.worst)} of configurations).${atCands(t, 20).saturated ? " <b>Not informative here:</b> the list is saturated (many cells tie near the top), so a stable rank reflects the tie-break, not robust evidence." : ""}</p>`; }).join("")
+      : `<p class="note small">Re-scores Earth under a factorial perturbation of the profile weights (Phase II robustness engine) and classifies each candidate by how often it stays in the top 1 % of eligible cells.</p><button class="btn-sm" data-a3="stab">Run stability for ${ts.length} target${ts.length > 1 ? "s" : ""}</button>`}</div>`;
+  // 5 · shared + complementary
+  const er = res.filter(r => r.eligible);
+  if (er.length >= 2) {
+    const SH = ATL.shared(er.map(r => r.eff), S.cell, S.lat, S.lon, 10);
+    const CP = ATL.complementary(er, S.cell, S.lat, S.lon);
+    h += `<div class="sec"><div class="lbl">5 · Shared and complementary candidates</div>
+      <div class="grid2"><div><div class="meta">Shared — similar to every eligible target (minimum of the per-target scores)</div><ol class="at-rank">${SH.top.map(i => `<li>${esc(candShort(i))} <b>${fmtPct(SH.eff[i])}</b> <span class="meta">${er.map((r, k) => AT_LETTER[res.indexOf(r)] + " " + fmtPct(r.eff[i], 0)).join(" · ")}</span></li>`).join("")}</ol></div>
+      <div><div class="meta">Complementary — one site per target, each ≥ 300 km from the others</div><ol class="at-rank">${CP.map(c => { const k = res.findIndex(r => r.targetId === c.target);
+        return `<li><b>${AT_LETTER[k]}</b> ${c.index == null ? "none" : esc(candShort(c.index)) + " " + fmtPct(c.score)} <span class="meta">${c.scoresForOthers ? c.scoresForOthers.filter(o => o.target !== c.target).map(o => AT_LETTER[res.findIndex(r => r.targetId === o.target)] + " " + fmtPct(o.score, 0)).join(" · ") : ""}</span></li>`; }).join("")}</ol></div></div>
+      <p class="note small">A shared candidate is useful when one field site must serve several targets; a complementary set gives each target its own best site. Scores of targets on different criteria sets (e.g. terrain-only vs full) are not directly comparable.</p></div>`;
+  } else h += `<div class="sec"><div class="lbl">5 · Shared and complementary candidates</div><p class="meta">Needs at least two eligible targets.</p></div>`;
+  // 6 · missing evidence + 7 · discriminating measurements
+  h += `<div class="sec"><div class="lbl">6 · Missing evidence</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Target</th><th>Gaps (status)</th><th class="n">weight share affected</th></tr></thead><tbody>
+    ${ts.map((t, k) => { const m = ATL.missingEvidence(t, S.critIds, atWeights()).filter(x => x.status !== "PROXY"); const ws = m.reduce((a, x) => a + x.weightShare, 0);
+      return `<tr><td>${AT_LETTER[k]} · ${esc(t.name)}</td><td class="meta">${m.length ? m.map(x => `${esc(x.criterion === "heterogeneity" ? "heterogeneity" : shortOf(x.criterion))} (${x.status})`).join(", ") : "none"}</td><td class="n">${pct(ws)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
+  const imp = ts.map(t => A3.stab[atImpactKey(t)]);
+  h += `<div class="sec"><div class="lbl">7 · Discriminating measurements</div>
+    ${imp.some(x => x) ? ts.map((t, k) => { const I = A3.stab[atImpactKey(t)]; if (!I || !I.length) return "";
+      return `<p class="note small"><b>${AT_LETTER[k]} · ${esc(t.name)}</b></p><ul class="lab-ul">${I.map(x => x.blocked ? `<li>${esc(labelOf(x.criterion))}: ${esc(x.blocked)}</li>` :
+        `<li><b>${esc(labelOf(x.criterion))}</b> — ${x.discriminating ? "<b>discriminating</b>" : "weakly discriminating"}: ${x.scenarios.map(s => `if it equalled the ${esc(s.label)} (${atVal(x.criterion, s.value)}), ${pct(s.overlap)} of the current top ${atCands(t).top.length} would remain`).join("; ")}.${x.agreement != null ? ` The scenarios share ${pct(x.agreement)} of their top 20 with each other — ${x.agreement < 0.5 ? "the actual value decides which sites are preferred" : "the preferred sites barely depend on the exact value"}.` : ""}</li>`).join("")}</ul>`; }).join("")
+      + `<p class="note small">Scenario values are values <b>measured at other targets on the same body</b>, used only to show how strongly the candidate list depends on the missing measurement. They are not estimates for this target.</p>`
+      : `<p class="note small">For each missing criterion, re-ranks Earth with scenario values taken from other targets on the same body and reports how much of the candidate list survives. A measurement whose plausible values reorder the list is the one worth making first.</p><button class="btn-sm" data-a3="impact">Evaluate measurement impact</button>`}</div>
+    <div class="sec"><div class="row"><button class="btn-sm" data-a3="cmp-save">Save comparison record</button>${A3.lastRec ? `<span class="meta">Saved ${esc(A3.lastRec)}</span>` : ""}</div></div>`;
+  return h;
+};
+Object.assign(A3_ACTIONS, {
+  stab() { atRunStability(atSelTargets()); },
+  impact() { atRunImpact(atSelTargets()); },
+  async "cmp-save"() {
+    const ts = atSelTargets(), res = ts.map(t => atCands(t, 20));
+    const outputs = { candidates: res.map((r, k) => ({ target: ts[k].id, eligible: r.eligible, mode: r.mode, cells: r.eligible ? r.top.map(i => S.cell[i]) : [], scores: r.eligible ? r.top.map(i => r.eff[i]) : [] })) };
+    const rec = await atMakeRecord("atlas-candidates", { n: 20, sep_km: 300 }, outputs, { targets: ts.map(t => t.id), stage: "candidate" });
+    A3.lastRec = rec.id; atRender();
+  },
+});
+
+/* ===== Phase III · Research workflow (Target → Candidate → Evidence → Robustness → Requirements →
+ * Measurements → Plan → Record) and the shared experiment contract (asterro.experiment/2). ===== */
+const A3_VAULT = "asterro.phase3.vault.v2";
+function atVaultLoad() { try { const s = localStorage.getItem(A3_VAULT); A3.records = s ? JSON.parse(s) : []; } catch (e) { A3.records = []; } }
+function atVaultSave() { try { localStorage.setItem(A3_VAULT, JSON.stringify(A3.records.slice(-80))); return true; } catch (e) { return false; } }
+atVaultLoad();
+function atContext(targets, stage) {
+  return { kind: "atlas", targets, workflow_stage: stage || null,
+    atlas: { version: A3.atlas.version, schema: A3.atlas.schema, built_utc: A3.atlas.built_utc },
+    normalisation: { kind: A3.norm, id: A3.norm === "atlas" ? A3.atlas.normalisation.id : A3.norm,
+      ranges: Object.fromEntries(targets.map(id => [id, atRanges(atT(id))])) },
+    profile: A3.profile, weights: atWeights(), include_proxy: A3.includeProxy,
+    target_vectors: Object.fromEntries(targets.map(id => [id, ATL.targetVector(atT(id), S.critIds, { includeProxy: A3.includeProxy })])),
+    predictor_stack: { sha256: S.app.stack.sha256 }, algorithm_version: S.app.algorithm_version,
+    min_coverage: S.app.thresholds.min_coverage, distinct_sep_km: S.app.thresholds.distinct_sep_km };
+}
+async function atMakeRecord(module, params, outputs, { targets, stage, claims = [], limitations = [], parents = [] } = {}) {
+  const r0 = { schema: ATL.CONTRACT, contract: "2.0.0", module, context: atContext(targets, stage), params };
+  const id = (await LAB.sha256Hex(LAB.canonical(ATL.recordConfigV2(r0)))).slice(0, 16);
+  const rec = { ...r0, id, created_utc: new Date().toISOString(), outputs, outputs_sha256: await LAB.sha256Hex(LAB.canonical(outputs)),
+    claims, limitations, parents, replay: ["atlas-candidates", "atlas-stability"].includes(module) ? "browser + python (scripts/replay_atlas_record.py)" : "browser",
+    software: { app: S.app.algorithm_version, phase2: LAB.VERSION, phase3: ATL.VERSION } };
+  const issues = ATL.validateV2(rec); if (issues.length) throw new Error("record invalid: " + issues.join("; "));
+  A3.records = A3.records.filter(r => r.id !== id); A3.records.push(rec); atVaultSave();
+  return rec;
+}
+function atCandOutputs(t, n) {
+  const r = ATL.candidates({ A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, t: { ...t, values: { ...t.values } }, ranges: atRanges(t), w: atWeights(), n, includeProxy: A3.includeProxy });
+  return { target: t.id, eligible: r.eligible, mode: r.mode, cells: r.eligible ? r.top.map(i => S.cell[i]) : [], scores: r.eligible ? r.top.map(i => r.eff[i]) : [] };
+}
+async function atReplay(r) {
+  if (r.context.predictor_stack.sha256 !== S.app.stack.sha256) return { status: "BLOCKED", text: "Required predictor stack not available." };
+  const saved = { profile: A3.profile, norm: A3.norm, proxy: A3.includeProxy };
+  let out;
+  try {
+    A3.profile = r.context.profile; A3.norm = r.context.normalisation.kind; A3.includeProxy = r.context.include_proxy;
+    const W = r.context.weights, same = Object.keys(W).every(c => +W[c] === +atWeights()[c]);
+    if (!same) return { status: "BLOCKED", text: "The recorded profile weights differ from this build's profile table." };
+    for (const id of r.context.targets) {
+      const tv = ATL.targetVector(atT(id), S.critIds, { includeProxy: A3.includeProxy });
+      if (LAB.canonical(tv) !== LAB.canonical(r.context.target_vectors[id])) return { status: "DIFFERS", text: `Target ${id} has a different fingerprint in this atlas build (${A3.atlas.version}).` };
+    }
+    if (r.module === "atlas-candidates") out = { candidates: r.context.targets.map(id => atCandOutputs(atT(id), r.params.n)) };
+    else if (r.module === "atlas-stability") {
+      const t = atT(r.context.targets[0]), P = ATL.prepareTarget(S.A, S.critIds, t, atRanges(t), { includeProxy: A3.includeProxy }), w = atWeights();
+      const cand = r.params.candidates.map(c => S.index[c]); if (cand.some(i => i < 0)) return { status: "BLOCKED", text: "A candidate cell is not in this stack." };
+      const design = LAB.designFactorial(w, r.params.active, S.critIds, r.params.factors);
+      const run = LAB.runDesignSync({ Ps: [P], cell: S.cell, cand, baseW: w, design });
+      out = { stats: LAB.rankStats(run, { topN: 20, topPct: 1 }).map(s => ({ baseline: s.baseline, min: s.min, max: s.max, median: s.median, cls: s.cls })) };
+    } else return { status: "UNSUPPORTED", text: "Replay not implemented for module " + r.module + "." };
+  } finally { A3.profile = saved.profile; A3.norm = saved.norm; A3.includeProxy = saved.proxy; }
+  const h = await LAB.sha256Hex(LAB.canonical(out));
+  return h === r.outputs_sha256 ? { status: "REPRODUCED", text: "Replay reproduced the stored outputs exactly (SHA-256 " + h.slice(0, 16) + "…)." }
+    : { status: "DIFFERS", text: "Replay outputs differ (" + h.slice(0, 12) + "… vs " + r.outputs_sha256.slice(0, 12) + "…)." };
+}
+
+/* ---------- Phase II connections ---------- */
+const A3_P2_LINKS = [
+  ["Analogue Robustness Laboratory", "Workflow · Robustness and Compare §4: factorial weight perturbation of any eligible atlas target (AsterroLab.runDesign / rankStats)."],
+  ["Multi-Objective Analogue Discovery", "Workflow · Evidence: Pareto front of the candidate's per-criterion similarities among the target's top 50 (AsterroLab.pareto)."],
+  ["Spatial Analogue Microclimate Atlas", "Workflow · Evidence and Lab → Spatial atlas: Earth sub-cell slope distribution (new GMTED 30″ histogram data) for any candidate."],
+  ["Planetary Uncertainty Explorer", "Target view: ring-window heterogeneity, Diviner seasonal split, REMS strict-filter variant, GCP bin spread — measured spreads, not modelled."],
+  ["Analogue Failure-Mode Laboratory", "Mismatch Cartographer and Translator: per-criterion mismatch, missing data and non-equivalences for any atlas target."],
+  ["Planetary Evidence Graph", "Knowledge Constellation: targets, criteria, statuses, datasets and candidates as typed nodes and documented edges."],
+  ["Cross-Planet Evidence Comparator", "Compare §5: shared candidates for any set of eligible targets (the baseline minimum rule)."],
+  ["Planetary Analogue Evolution Observatory", "Workflow · Evidence: Theil–Sen trend and Mann–Kendall test of the candidate's yearly MODIS ΔT (2016–2025)."],
+  ["Mission Requirement Translator", "Workflow · Requirements: the Lab's user-defined requirement set evaluated on the atlas candidate."],
+  ["Observation Value Engine", "Compare §7 and Workflow · Measurements: measurement-impact scenarios for missing target criteria."],
+  ["Analogue Research Mission Planner", "Workflow · Plan and the Expedition Designer: research plan from evidence gaps; no logistics, cost or safety content."],
+  ["Scientific Reproducibility Vault", "Records: contract asterro.experiment/2 records with browser and Python replay; Phase II v1 records shown through the v1→v2 adapter."],
+  ["Scientific Review", "Copilot workspace: the same deterministic guardrails (AsterroLab.reviewText) applied to drafted text."],
+];
+
+A3_VIEWS.workflow = function () {
+  const t = atT(A3.active), w = atWeights();
+  const R = t ? atCands(t, 20) : null, ci = t ? A3.cand[t.id] ?? null : null;
+  const stab = t && A3.stab[atStabKey(t)];
+  const W = A3.workflow[t ? t.id : ""] || {};
+  const gaps = t ? ATL.missingEvidence(t, S.critIds, w).filter(m => m.status !== "PROXY") : [];
+  const st = ATL.workflowState({ target: t, candidate: R && R.eligible ? ci : null, stability: stab, requirements: W.req, gaps, plan: W.plan, record: W.record });
+  let h = `<div class="sec"><h3 class="ttl">Research workflow</h3>${atBanner("guided analysis")}
+    <p class="note">One target and one Earth candidate carried through every analytical stage. Each stage states what it used; the workflow stops where the evidence stops.</p>
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t ? t.id : null)}</label></div>${atControls()}
+    <ol class="at-stages">${st.map(s => `<li class="${s.status.toLowerCase()}"><b>${esc(s.stage)}</b><span>${esc(s.status)}</span><em>${esc(s.why)}</em></li>`).join("")}</ol></div>`;
+  if (!t) return h;
+  if (!R.eligible) return h + `<div class="sec"><div class="callout warn">Analytical boundary: ${esc(R.reason)}</div><p class="note small">What would move this target forward: ${gaps.map(g => esc(labelOf(g.criterion) || g.criterion)).join(", ") || "—"}.</p></div>`;
+  // candidate
+  h += `<div class="sec"><div class="lbl">Candidate · ${esc(R.mode === "full" ? "full comparison" : "partial comparison")} on ${R.P.applicable.filter(c => w[c] > 0).map(shortOf).join(", ")}</div>
+    ${R.saturated ? `<div class="callout warn">${nfmt(R.nNearTop)} cells score within 0.1 pt of the best: the comparison is saturated and the order below is set by the tie-break, not by evidence. Choosing among these needs more comparable criteria.</div>` : ""}
+    <ol class="at-rank">${R.top.slice(0, 10).map(i => `<li class="${i === ci ? "on" : ""}"><button class="lnk" data-a3="cand" data-t="${t.id}" data-i="${i}">${esc(placeStr(i))}</button> <b>${fmtPct(R.eff[i])}</b> <span class="meta">${atFmtLL(S.lat[i], S.lon[i])}</span></li>`).join("")}</ol></div>`;
+  if (ci == null) return h;
+  // evidence
+  const X = ATL.explain(R.P, w, ci, S.A, R.ranges);
+  h += `<div class="sec"><div class="lbl">Evidence · ${esc(placeStr(ci))}</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">Earth</th><th class="n">${esc(t.name)}</th><th class="n">similarity</th><th class="n">contribution</th></tr></thead><tbody>
+    ${X.map(x => `<tr><td>${esc(labelOf(x.criterion))}</td><td class="n">${atVal(x.criterion, x.earth)}</td><td class="n">${atVal(x.criterion, x.target)}</td><td class="n">${x.similarity == null ? '<span class="st st-m">missing on Earth</span>' : x.similarity.toFixed(3)}</td><td class="n">${x.contribution == null ? "—" : (100 * x.contribution).toFixed(1) + " pts"}</td></tr>`).join("")}
+    ${S.critIds.filter(c => !X.some(x => x.criterion === c)).map(c => `<tr class="dim"><td>${esc(labelOf(c))}</td><td class="n">${atVal(c, S.A[c][ci])}</td><td class="n">—</td><td colspan="2">${atStatus(t.status[c])} not scored</td></tr>`).join("")}</tbody></table></div>`;
+  // Pareto among top 50 (Phase II multi-objective)
+  const R50 = atCands(t, 50), act = R.P.applicable.filter(c => w[c] > 0);
+  const pts = R50.top.map(i => ({ id: i, v: act.map(c => R.P.s[c][i]) })), PF = LAB.pareto(pts);
+  h += `<p class="note small">Multi-objective view: among the target's top ${R50.top.length} distinct candidates, this site is ${PF.front.some(p => p.id === ci) ? "<b>on</b>" : "<b>not on</b>"} the Pareto front of per-criterion similarities (${PF.front.length} non-dominated).</p>`;
+  // sub-cell (Phase II spatial atlas completion)
+  if (A3.sub) {
+    const n = atSubVal("n", ci);
+    h += `<div class="lbl">Earth sub-cell slope distribution (GMTED 30″, ${nfmt(n)} pixels)</div><div class="grid2">${[2, 5, 10, 15, 20, 30].map(X2 => `<div class="kv"><span>slope ≤ ${X2}°</span><b>${pct(atSubVal("frac_le_" + X2, ci))}</b></div>`).join("")}
+      <div class="kv"><span>p10 / p50 / p90</span><b>${f1(atSubVal("p10", ci))} / ${f1(atSubVal("p50", ci))} / ${f1(atSubVal("p90", ci))}°</b></div></div>`;
+  } else { h += `<p class="meta">${A3.subErr ? esc(A3.subErr) : "Loading sub-cell data…"}</p>`; if (!A3.subErr) atSubcell(); }
+  // temporal (Phase II evolution)
+  const yrs = S.app.stack.years, ys = yrs.map((_, k) => { const v = S.A.lst_diurnal_range_yearly[k * S.n + ci]; return v === -32768 ? NaN : v / 100; });
+  const okY = ys.map((v, k) => [yrs[k], v]).filter(p => p[1] === p[1]);
+  if (okY.length >= 5) {
+    const ts2 = LAB.theilSen(okY.map(p => p[0]), okY.map(p => p[1])), mk = LAB.mannKendall(okY.map(p => p[1]));
+    h += `<p class="note small">Earth-side temporal check (MODIS yearly ΔT ${okY[0][0]}–${okY[okY.length - 1][0]}, ${okY.length} years): Theil–Sen ${ts2.slope >= 0 ? "+" : ""}${ts2.slope.toFixed(2)} K/yr, Mann–Kendall p = ${mk.p.toFixed(2)}. ${mk.p < 0.05 ? "A monotonic trend is detected; the candidate's thermal match may not be stationary." : "No monotonic trend detected at p < 0.05."}</p>`;
+  }
+  h += `</div>`;
+  // robustness
+  const sk = stab && stab.cand.indexOf(ci);
+  h += `<div class="sec"><div class="lbl">Robustness</div>${stab ? (sk >= 0 ? `<p class="note">${clsTag(stab.stats[sk].cls)} · baseline-configuration rank ${nfmt(stab.stats[sk].baseline)}, range ${nfmt(stab.stats[sk].min)}–${nfmt(stab.stats[sk].max)} over ${stab.design} configurations.</p>` : `<p class="meta">This candidate was not in the analysed set.</p>`)
+    : `<button class="btn-sm" data-a3="wf-stab">Run weight-perturbation stability</button>`}</div>`;
+  // requirements (Phase II translator)
+  const reqs = (typeof L !== "undefined" && L.reqs) || [];
+  h += `<div class="sec"><div class="lbl">Requirements · user-defined</div>${reqs.length ? (W.req ? `<div class="tbl-wrap"><table class="t"><tbody>${W.req.map((r, k) => `<tr><td class="meta">${esc(reqText(reqs[k], registry()[reqs[k].variable]))}</td><td>${statusTag(r.status)}</td><td class="meta">${esc((r.why || []).join(" "))}</td></tr>`).join("")}</tbody></table></div>` : `<button class="btn-sm" data-a3="wf-req">Evaluate the Lab requirement set (${reqs.length})</button>`)
+    : `<p class="meta">No requirement set defined. Define user thresholds in <button class="lnk" data-a3="to-lab" data-mod="reqs">Lab → Requirements</button>; ASTERRO supplies no engineering threshold.</p>`}</div>`;
+  // measurements
+  h += `<div class="sec"><div class="lbl">Measurements needed</div><ul class="lab-ul">${gaps.map(g => `<li><b>${esc(g.criterion === "heterogeneity" ? "Within-feature heterogeneity" : labelOf(g.criterion))}</b> (${g.status}, ${pct(g.weightShare)} of profile weight): ${esc(g.action)}</li>`).join("") || "<li>No target-side gap among the scored criteria.</li>"}
+    ${S.A.modis_coverage[ci] < 0.9 ? `<li>Earth side: MODIS pixel-month coverage at this cell is ${pct(S.A.modis_coverage[ci])}.</li>` : ""}<li>Earth side: every value is a ~55 km cell statistic; site-scale characterisation requires field or high-resolution data.</li></ul></div>`;
+  // plan
+  h += `<div class="sec"><div class="lbl">Plan</div><div class="lab-form"><label class="wide">Research objective (your words)<input type="text" data-a3in="wf-obj" value="${esc(W.obj || "")}" placeholder="e.g. compare diurnal surface thermal cycling"></label><button class="btn-sm" data-a3="wf-plan">Draft plan</button></div>
+    ${W.plan ? `<pre class="code lab-pre">${esc(W.plan)}</pre>` : ""}</div>`;
+  h += `<div class="sec"><div class="lbl">Record</div><div class="row"><button class="btn-sm" data-a3="wf-rec" ${W.plan ? "" : "disabled"}>Save workflow record</button>${W.record ? `<span class="meta">Saved ${esc(W.record)} · <button class="lnk" data-a3="go" data-to="records">Records</button></span>` : ""}</div></div>`;
+  h += `<div class="sec"><details><summary class="lbl">How the 13 Phase II systems connect to atlas targets</summary><div class="tbl-wrap"><table class="t"><tbody>${A3_P2_LINKS.map(([a, b]) => `<tr><td>${esc(a)}</td><td class="meta">${esc(b)}</td></tr>`).join("")}</tbody></table></div></details></div>`;
+  return h;
+};
+function atPlanText(t, ci, W) {
+  const R = atCands(t, 20), w = atWeights(), gaps = ATL.missingEvidence(t, S.critIds, w).filter(m => m.status !== "PROXY");
+  const X = ATL.explain(R.P, w, ci, S.A, R.ranges), stab = A3.stab[atStabKey(t)], k = stab ? stab.cand.indexOf(ci) : -1;
+  return [`RESEARCH PLAN (draft) — exploratory analogue study`, `Objective (user): ${W.obj || "(not stated)"}`,
+    `Target: ${t.name} [${t.id}] · readiness L${t.readiness.level} (${t.readiness.label})`,
+    `Earth candidate: ${placeStr(ci)} · ${atFmtLL(S.lat[ci], S.lon[ci])} · cell ${S.cell[ci]} · atlas comparison score ${fmtPct(R.eff[ci])} (${A3_NORM_LABEL[A3.norm]}; ${S.app.profiles[A3.profile].label})`,
+    `Basis: ${X.map(x => `${shortOf(x.criterion)} s=${x.similarity == null ? "n/a" : x.similarity.toFixed(2)}`).join(", ")}`,
+    `Stability: ${k >= 0 ? LAB.CLASS_LABEL[stab.stats[k].cls] : "not run"}`,
+    `Target-side evidence gaps: ${gaps.length ? gaps.map(g => `${g.criterion} (${g.status})`).join("; ") : "none among scored criteria"}`,
+    `Activities (analytical only): 1) verify the candidate's cell statistics against higher-resolution data; 2) document which target dimensions are not represented; 3) close the gaps above where a compatible product exists.`,
+    `Not included: logistics, travel, cost, permits, access or safety. These must be established by the user from authoritative sources.`,
+    `Generated deterministically by ASTERRO ${ATL.VERSION}; not reviewed, not certified.`].join("\n");
+}
+Object.assign(A3_ACTIONS, {
+  "wf-stab"() { const t = atT(A3.active); if (t) atRunStability([t]); },
+  async "wf-req"() {
+    const t = atT(A3.active), ci = A3.cand[t.id]; if (!L.ctx) await labCtx();
+    const reg = registry(), ctx = reqCtx();
+    (A3.workflow[t.id] = A3.workflow[t.id] || {}).req = L.reqs.map(q => LAB.evaluateRequirement(q, ci, reg, ctx)); atRender();
+  },
+  "wf-plan"() { const t = atT(A3.active), ci = A3.cand[t.id], W = (A3.workflow[t.id] = A3.workflow[t.id] || {}); W.plan = atPlanText(t, ci, W); atRender(); },
+  async "wf-rec"() {
+    const t = atT(A3.active), ci = A3.cand[t.id], W = A3.workflow[t.id];
+    const R = atCands(t, 20), stab = A3.stab[atStabKey(t)];
+    if (stab) await atMakeRecord("atlas-stability", { candidates: stab.cand.map(i => S.cell[i]), active: stab.active, factors: stab.factors },
+      { stats: stab.stats.map(s => ({ baseline: s.baseline, min: s.min, max: s.max, median: s.median, cls: s.cls })) }, { targets: [t.id], stage: "robustness" });
+    const rec = await atMakeRecord("atlas-workflow", { candidate: S.cell[ci], objective: W.obj || "" },
+      { score: R.eff[ci], explanation: ATL.explain(R.P, atWeights(), ci, S.A, R.ranges), plan: W.plan, requirements: W.req ? W.req.map(r => r.status) : null },
+      { targets: [t.id], stage: "record", claims: atClaims(t).map(c => ({ ...c })), limitations: ["Exploratory analysis; not a site certification."] });
+    W.record = rec.id; atRender();
+  },
+  "to-lab"(a) { L.mod = a.dataset.mod; setTab("lab"); },
+});
+A3_INPUTS["wf-obj"] = a => { const t = atT(A3.active); (A3.workflow[t.id] = A3.workflow[t.id] || {}).obj = a.value; };
+
+/* ---------- Records (contract v2 + adapted v1) ---------- */
+A3_VIEWS.records = function () {
+  const v1 = ((typeof L !== "undefined" && L.records) || []).map(r => { try { return ATL.adaptV1(r); } catch (e) { return null; } }).filter(Boolean);
+  const recs = A3.records.slice().reverse();
+  let storeOK = true; try { localStorage.setItem("asterro.p3test", "1"); localStorage.removeItem("asterro.p3test"); } catch (e) { storeOK = false; }
+  let h = `<div class="sec"><h3 class="ttl">Experiment records</h3>${atBanner("contract asterro.experiment/2")}
+    <p class="note">Every Phase III result can be saved as a self-describing record: configuration (targets, fingerprints, normalisation table, weights), outputs, their SHA-256, claims and limitations. The record id is the SHA-256 of the canonical configuration. ${storeOK ? "Stored in this browser only." : "<b>Browser storage is unavailable here: records last for this session only.</b>"}</p></div>
+    <div class="sec"><div class="lbl">Phase III records (${recs.length})</div>${recs.length ? `<div class="tbl-wrap"><table class="t"><thead><tr><th>id</th><th>module</th><th>targets</th><th>created</th><th></th></tr></thead><tbody>
+    ${recs.map(r => `<tr><td class="mono">${r.id}</td><td>${esc(r.module)}</td><td class="meta">${r.context.targets.map(id => esc(atT(id) ? atT(id).name : id)).join(", ")}</td><td class="meta">${esc(r.created_utc.slice(0, 19))}</td>
+      <td>${["atlas-candidates", "atlas-stability"].includes(r.module) ? `<button class="btn-sm" data-a3="rec-replay" data-id="${r.id}">Replay</button>` : `<span class="meta">re-run in Workflow</span>`} <button class="btn-sm" data-a3="rec-export" data-id="${r.id}">Export</button>${A3.replayMsg && A3.replayMsg[r.id] ? `<div class="vault-msg">${esc(A3.replayMsg[r.id])}</div>` : ""}</td></tr>`).join("")}</tbody></table></div>` : `<p class="meta">None yet. Save a comparison or a workflow.</p>`}</div>
+    <div class="sec"><div class="lbl">Phase II records through the v1 → v2 adapter (${v1.length}, read-only)</div>${v1.length ? `<div class="tbl-wrap"><table class="t"><tbody>${v1.map(r => `<tr><td class="mono">${r.id_v1}</td><td>${esc(r.module)}</td><td class="meta">${esc(r.context.targets.join(", "))}</td><td class="meta">replay in Lab → Vault</td></tr>`).join("")}</tbody></table></div>` : `<p class="meta">No Phase II records in this browser.</p>`}
+    <p class="note small">The adapter is lossless: the v1 baseline block becomes context.baseline and the v1 id is kept as id_v1; the v1 record itself is not modified.</p></div>`;
+  return h;
+};
+Object.assign(A3_ACTIONS, {
+  async "rec-replay"(a) { const r = A3.records.find(x => x.id === a.dataset.id); A3.replayMsg = A3.replayMsg || {}; A3.replayMsg[r.id] = "Replaying…"; atRender(); const o = await atReplay(r); A3.replayMsg[r.id] = o.status + " — " + o.text; atRender(); },
+  "rec-export"(a) { const r = A3.records.find(x => x.id === a.dataset.id); showExport("Experiment record " + r.id, JSON.stringify(r, null, 1), `asterro-${r.module}-${r.id}.json`); },
+});
+
+/* ===== Phase III · Global Environmental Extremes Explorer =====
+ * Explainable discovery over the Earth predictor stack: environmental regimes (tercile codes),
+ * robust outliers (median / MAD), single-criterion extremes, target-specific discovery and
+ * diversity. Nothing is assigned by fame or by name: every cell is described by its values only. */
+A3.ext = { crit: ["aridity", "annual_temperature_range", "slope", "surface_roughness", "lst_diurnal_range"], z: 3, sort: "lst_diurnal_range", dir: "max", regime: null };
+function atExtZ() {
+  const k = A3.ext.crit.join(",");
+  if (!A3._extZ || A3._extZ.k !== k) A3._extZ = { k, ...ATL.robustZ(S.A, A3.ext.crit), R: ATL.regimes(S.A, A3.ext.crit) };
+  return A3._extZ;
+}
+A3_VIEWS.extremes = function () {
+  const E = A3.ext, Z = atExtZ();
+  // single-criterion extremes (distinct sites)
+  const c = E.sort, key = new Float64Array(S.n);
+  for (let i = 0; i < S.n; i++) { const v = S.A[c][i]; key[i] = v - v === 0 ? (E.dir === "max" ? v : -v) : -Infinity; }
+  let lo = Infinity; for (const v of key) if (Number.isFinite(v) && v < lo) lo = v;
+  const eff = key.map(v => Number.isFinite(v) ? v - lo : -1);
+  const top = ATL.distinct(eff, S.cell, S.lat, S.lon, 12, 300);
+  // multivariate robust outliers: max |z| over chosen criteria
+  const out = [];
+  for (let i = 0; i < S.n; i++) {
+    let m = 0, arg = null, nOk = 0;
+    for (const cc of E.crit) { const z = Z.Z[cc][i]; if (z !== z) continue; nOk++; if (Math.abs(z) > m) { m = Math.abs(z); arg = cc; } }
+    if (nOk === E.crit.length && m >= E.z) out.push({ i, m, arg });
+  }
+  out.sort((a, b) => b.m - a.m || S.cell[a.i] - S.cell[b.i]);
+  const oEff = new Float64Array(S.n).fill(-1); out.forEach(o => oEff[o.i] = o.m);
+  const oTop = ATL.distinct(oEff, S.cell, S.lat, S.lon, 12, 300);
+  // regimes
+  const counts = [...Z.R.count.entries()].filter(([k]) => !k.includes("?")).sort((a, b) => b[1] - a[1]);
+  const rare = counts.slice().sort((a, b) => a[1] - b[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 8);
+  let h = `<div class="sec"><h3 class="ttl">Global environmental extremes</h3>${atBanner("discovery")}
+    <p class="note">Where on Earth are the environmental extremes and rare combinations, independent of any target? Cells are described only by their values; regimes are tercile codes (L / M / H per criterion), outliers are robust z-scores. No place is selected by reputation.</p>
+    <fieldset class="lab-picks"><legend class="meta">Criteria</legend>${S.critIds.filter(x => x !== "elevation").map(x => `<label class="ck"><input type="checkbox" data-a3in="ext-c" value="${x}" ${E.crit.includes(x) ? "checked" : ""}>${esc(labelOf(x))}</label>`).join("")}</fieldset></div>
+    <div class="sec"><div class="lbl">Single-criterion extremes</div><div class="lab-form"><label>Criterion<select data-a3in="ext-s">${S.critIds.map(x => `<option value="${x}" ${x === c ? "selected" : ""}>${esc(labelOf(x))}</option>`).join("")}</select></label>
+      <span class="toggles">${["max", "min"].map(d => `<button aria-pressed="${E.dir === d}" data-a3="ext-dir" data-d="${d}">${d === "max" ? "highest" : "lowest"}</button>`).join("")}</span></div>
+      ${atEarthMap("at-ext", top.map((i, k) => ({ i, label: k + 1, title: `${placeStr(i)} · ${atVal(c, S.A[c][i])}` })))}
+      <ol class="at-rank">${top.map(i => `<li>${esc(placeStr(i))} <b>${atVal(c, S.A[c][i])}</b> <span class="meta">${atFmtLL(S.lat[i], S.lon[i])}</span></li>`).join("")}</ol>
+      <p class="note small">Distinct sites ≥ 300 km apart. Earth range: ${atVal(c, ATL.earthRange(S.A, c)[0])} … ${atVal(c, ATL.earthRange(S.A, c)[1])}.</p></div>
+    <div class="sec"><div class="lbl">Multivariate outliers · max |robust z| ≥ <input type="number" step="0.5" min="1" max="10" value="${E.z}" data-a3in="ext-z" aria-label="z threshold" style="width:60px"></div>
+      <p class="meta">${nfmt(out.length)} cells (with all chosen criteria present) exceed the threshold. z = (x − median) / (1.4826 · MAD).</p>
+      <ol class="at-rank">${oTop.map(i => { const o = out.find(x => x.i === i); return `<li>${esc(placeStr(i))} <b>|z| ${o.m.toFixed(1)}</b> <span class="meta">driven by ${esc(labelOf(o.arg))} = ${atVal(o.arg, S.A[o.arg][i])}</span></li>`; }).join("")}</ol></div>
+    <div class="sec"><div class="lbl">Environmental regimes · ${counts.length} occupied of ${Math.pow(3, E.crit.length)} possible</div>
+      <p class="note small">Code order: ${E.crit.map(shortOf).join(" · ")}. Tercile cut points: ${E.crit.map(x => `${shortOf(x)} ${atVal(x, Z.R.cuts[x][0])} / ${atVal(x, Z.R.cuts[x][1])}`).join("; ")}.</p>
+      <div class="grid2"><div><div class="meta">Most common</div><ol class="at-rank">${counts.slice(0, 8).map(([k, n]) => `<li><button class="lnk mono" data-a3="ext-r" data-r="${k}">${k}</button> <b>${nfmt(n)}</b> cells</li>`).join("")}</ol></div>
+      <div><div class="meta">Rarest (diversity)</div><ol class="at-rank">${rare.map(([k, n]) => `<li><button class="lnk mono" data-a3="ext-r" data-r="${k}">${k}</button> <b>${nfmt(n)}</b> cells</li>`).join("")}</ol></div></div>
+      ${E.regime ? (() => { const idx = []; for (let i = 0; i < S.n; i++) if (Z.R.code[i] === E.regime) idx.push(i);
+        const ef = new Float64Array(S.n).fill(-1); idx.forEach(i => ef[i] = 1 - S.cell[i] / 1e6); const tp = ATL.distinct(ef, S.cell, S.lat, S.lon, 10, 300);
+        return `<p class="note small">Regime <b class="mono">${esc(E.regime)}</b>: ${nfmt(idx.length)} cells; up to 10 distinct examples (ordered by cell id, not by any quality).</p>${atEarthMap("at-reg", tp.map((i, k) => ({ i, label: k + 1, title: placeStr(i) })))}`; })() : ""}</div>`;
+  // target-specific discovery
+  const t = atT(A3.active);
+  if (t) {
+    const tv = ATL.targetVector(t, S.critIds), off = ATL.outsideEarth(S.A, S.critIds, tv);
+    h += `<div class="sec"><div class="lbl">Target-specific discovery · ${esc(t.name)}</div>${off.length ? `<p class="note">${off.map(o => `${esc(labelOf(o.criterion))}: the target (${atVal(o.criterion, o.target)}) lies ${o.side} Earth's entire range by ${atVal(o.criterion, o.gap)}`).join("; ")}. The Earth cells closest on this criterion are the extremes listed above.</p>`
+      : `<p class="note">Every directly comparable criterion of this target lies inside Earth's range.</p>`}
+      <p class="note small">Change the active target in the Target or Workflow view.</p></div>`;
+  }
+  return h;
+};
+Object.assign(A3_ACTIONS, {
+  "ext-dir"(a) { A3.ext.dir = a.dataset.d; atRender(); },
+  "ext-r"(a) { A3.ext.regime = a.dataset.r; atRender(); },
+});
+Object.assign(A3_INPUTS, {
+  "ext-c"(a) { const s = new Set(A3.ext.crit); a.checked ? s.add(a.value) : s.delete(a.value); A3.ext.crit = S.critIds.filter(c => s.has(c)); if (!A3.ext.crit.length) A3.ext.crit = ["slope"]; A3.ext.regime = null; atRender(); },
+  "ext-s"(a) { A3.ext.sort = a.value; atRender(); },
+  "ext-z"(a) { const v = +a.value; if (v >= 1 && v <= 10) { A3.ext.z = v; atRender(); } },
+});
+
+/* ===== Phase III · Landing-Site Intelligence Explorer =====
+ * Exploratory terrain and environmental assessment of a target's 55.6 km window from the measured
+ * 926.6 m grids. It is NOT a landing-site certification and produces no safety score: thresholds
+ * are user-chosen, every result is labelled with the resolution that limits it. */
+const AT_LS_LABEL = "Exploratory terrain and environmental assessment.";
+A3.ls = { maxSlope: 5, useThermal: false, dtLo: "", dtHi: "" };
+A3_VIEWS.landing = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const G = A3.grids && A3.grids[t.id];
+  let h = `<div class="sec"><h3 class="ttl">Landing-site intelligence explorer</h3><div class="lab-banner"><b>EXPLORATORY</b>${esc(AT_LS_LABEL)} Not a landing-site certification. No safety score is computed.</div>
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id, "at-active", x => !!x.terrain)}</label>
+      <label>Slope threshold (°, your choice)<input type="number" min="0.5" max="45" step="0.5" value="${A3.ls.maxSlope}" data-a3in="ls-slope"></label>
+      ${G && G.dT ? `<label class="ck"><input type="checkbox" data-a3in="ls-th" ${A3.ls.useThermal ? "checked" : ""}> also require ΔT within</label><label>ΔT min (K)<input type="number" value="${esc(A3.ls.dtLo)}" data-a3in="ls-lo"></label><label>ΔT max (K)<input type="number" value="${esc(A3.ls.dtHi)}" data-a3in="ls-hi"></label>` : ""}</div></div>`;
+  if (!G) { if (!A3.gridErr) atGrids(); return h + `<div class="sec"><p class="meta">${A3.gridErr ? esc(A3.gridErr) : "Loading window grids…"}</p></div>`; }
+  let mask = null;
+  if (A3.ls.useThermal && G.dT) {
+    const lo = A3.ls.dtLo === "" ? -Infinity : +A3.ls.dtLo, hi = A3.ls.dtHi === "" ? Infinity : +A3.ls.dtHi;
+    mask = new Uint8Array(3600); for (let k = 0; k < 3600; k++) mask[k] = G.dT[k] === G.dT[k] && G.dT[k] >= lo && G.dT[k] <= hi ? 1 : 0;
+  }
+  const W = ATL.windowClasses(G.slope, { maxSlope: A3.ls.maxSlope, mask });
+  const sel = new Float32Array(3600).fill(NaN); W.largestCells.forEach(k => sel[k] = 1);
+  const okm = new Float32Array(3600); for (let k = 0; k < 3600; k++) okm[k] = G.slope[k] === G.slope[k] ? (G.slope[k] <= A3.ls.maxSlope && (!mask || mask[k]) ? 1 : 0) : NaN;
+  h += `<div class="sec"><div class="lbl">${esc(t.name)} · 60 × 60 bins of 926.6 m</div><div class="hg-row">
+      <figure class="hg">${atRaster("at-ls-hs", G.z, "hill", 2.8)}<figcaption class="meta">Shaded relief</figcaption></figure>
+      <figure class="hg">${atRaster("at-ls-sl", G.slope, "slope", 2.8)}<figcaption class="meta">Slope</figcaption></figure>
+      <figure class="hg">${atRaster("at-ls-ok", okm, "dT", 2.8)}<figcaption class="meta">Bins meeting your condition (bright)</figcaption></figure>
+      <figure class="hg">${atRaster("at-ls-cc", sel, "dT", 2.8)}<figcaption class="meta">Largest connected area</figcaption></figure></div>
+    <div class="grid2">${W.fracLe.map(f => `<div class="kv"><span>bins with slope ≤ ${f.deg}°</span><b>${pct(f.frac)}</b></div>`).join("")}
+      <div class="kv"><span>separate areas meeting the condition</span><b>${W.components}</b></div><div class="kv"><span>largest connected area</span><b>${nfmt(W.largestKm2)} km² (${W.largestCells.length} bins)</b></div></div>
+    <div class="callout">Resolution limit: each bin is 926.6 m, so slopes are averaged over ~1 km baselines; hazards at the scale of a lander (boulders, metre-scale slopes, craters < 1 km) are invisible here. Use this to compare windows, not to choose a landing point.</div></div>`;
+  // compare across targets of the same body
+  const same = A3.atlas.targets.filter(o => o.body === t.body && A3.grids[o.id]);
+  h += `<div class="sec"><div class="lbl">Same threshold across ${t.body} targets</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Target</th><th class="n">bins ≤ ${A3.ls.maxSlope}°</th><th class="n">largest connected km²</th><th class="n">mean slope</th></tr></thead><tbody>
+    ${same.map(o => { const w2 = ATL.windowClasses(A3.grids[o.id].slope, { maxSlope: A3.ls.maxSlope }), f = w2.valid ? w2.fracLe.find(x => x.deg >= A3.ls.maxSlope) : null;
+      let n = 0; for (const v of A3.grids[o.id].slope) if (v === v && v <= A3.ls.maxSlope) n++;
+      return `<tr class="${o.id === t.id ? "hl" : ""}"><td><button class="lnk" data-a3="ls-t" data-id="${o.id}">${esc(o.name)}</button></td><td class="n">${pct(n / w2.valid)}</td><td class="n">${nfmt(w2.largestKm2)}</td><td class="n">${f2(o.values.slope)}°</td></tr>`; }).join("")}</tbody></table></div></div>
+    <div class="sec">${claimsBlock([
+      LAB.claim({ id: "ls.window", category: "DERIVED", text: `Slope classes and connected areas of the ${t.name} window at 926.6 m bins.`, method: "Horn slope of the binned DEM; 4-connected components of bins meeting the user's condition.", provenance: ["dataset:dem_" + t.body.toLowerCase()], limitations: ["~1 km resolution; no lander-scale hazard information."] }),
+      LAB.claim({ id: "ls.notsafety", category: "UNAVAILABLE", text: "Landing safety, certification and hazard probability are not assessed by ASTERRO.", completeness: "none" })])}</div>`;
+  return h;
+};
+A3_ACTIONS["ls-t"] = a => { A3.active = a.dataset.id; atRender(); };
+Object.assign(A3_INPUTS, {
+  "ls-slope"(a) { const v = +a.value; if (v > 0 && v <= 45) { A3.ls.maxSlope = v; atRender(); } },
+  "ls-th"(a) { A3.ls.useThermal = a.checked; atRender(); },
+  "ls-lo"(a) { A3.ls.dtLo = a.value; atRender(); },
+  "ls-hi"(a) { A3.ls.dtHi = a.value; atRender(); },
+});
+
+/* ===== Phase III · Counterfactual Laboratory =====
+ * "What would change if …?" — the same target scored under alternative, explicitly labelled
+ * analytical choices: normalisation table, weighting profile, proxy inclusion, criterion removal.
+ * Each alternative is computed, never assumed; the default configuration is always shown beside it. */
+A3.cf = { alt: "target", drop: null, profile: null, proxy: null };
+function atCfRun(t, { norm, profile, proxy, drop }) {
+  const w = { ...S.app.profiles[profile].weights }; if (drop) w[drop] = 0;
+  const tv = ATL.targetVector(t, S.critIds, { includeProxy: proxy });
+  const ranges = ATL.rangesFor(norm, { A: S.A, critIds: S.critIds, atlas: A3.atlas, baselineRanges: S.app.ranges, tv });
+  try { return ATL.candidates({ A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, t, ranges, w, n: 20, includeProxy: proxy }); }
+  catch (e) { return { eligible: false, reason: e.message }; }
+}
+A3_VIEWS.counter = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const C = A3.cf, base = { norm: A3.norm, profile: A3.profile, proxy: A3.includeProxy, drop: null };
+  const alt = { norm: C.alt === "norm" ? C.normAlt || "target" : base.norm, profile: C.alt === "profile" ? C.profile || "rover" : base.profile,
+    proxy: C.alt === "proxy" ? !base.proxy : base.proxy, drop: C.alt === "drop" ? C.drop || "lst_diurnal_range" : null };
+  if (C.alt === "target") alt.norm = base.norm === "target" ? "atlas" : "target";
+  const A0 = atCfRun(t, base), A1 = atCfRun(t, alt);
+  let h = `<div class="sec"><h3 class="ttl">Counterfactual laboratory</h3>${atBanner("counterfactual")}
+    <p class="note">One change at a time, computed. The left column is the current configuration; the right column is the counterfactual. Rank changes show how much a conclusion depends on an analytical choice rather than on the data.</p>
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id)}</label>
+      <label>Counterfactual<select data-a3in="cf-alt">${[["target", "swap the default table for the catalogue table (or back)"], ["norm", "another normalisation table"], ["profile", "another weighting profile"], ["proxy", "toggle proxy criteria"], ["drop", "remove one criterion"]].map(([k, v]) => `<option value="${k}" ${C.alt === k ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></label>
+      ${C.alt === "norm" ? `<label>Table<select data-a3in="cf-norm">${Object.entries(A3_NORM_LABEL).map(([k, v]) => `<option value="${k}" ${alt.norm === k ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></label>` : ""}
+      ${C.alt === "profile" ? `<label>Profile<select data-a3in="cf-prof">${Object.entries(S.app.profiles).map(([k, p]) => `<option value="${k}" ${alt.profile === k ? "selected" : ""}>${esc(p.label)}</option>`).join("")}</select></label>` : ""}
+      ${C.alt === "drop" ? `<label>Criterion<select data-a3in="cf-drop">${S.critIds.map(c => `<option value="${c}" ${alt.drop === c ? "selected" : ""}>${esc(labelOf(c))}</option>`).join("")}</select></label>` : ""}</div>${atCtxLine()}</div>`;
+  const desc = x => `${A3_NORM_LABEL[x.norm]} · ${S.app.profiles[x.profile].label} · proxies ${x.proxy ? "in" : "out"}${x.drop ? " · without " + labelOf(x.drop) : ""}`;
+  if (!A0.eligible || !A1.eligible) return h + `<div class="sec"><div class="callout warn">${esc(!A0.eligible ? A0.reason : A1.reason)}</div></div>`;
+  const pos = new Map(A0.top.map((i, k) => [i, k]));
+  const kept = A1.top.filter(i => pos.has(i)).length;
+  h += `<div class="sec"><div class="grid2"><div><div class="meta">Current · ${esc(desc(base))}</div><ol class="at-rank">${A0.top.slice(0, 15).map(i => `<li>${esc(candShort(i))} <b>${fmtPct(A0.eff[i])}</b></li>`).join("")}</ol></div>
+    <div><div class="meta">Counterfactual · ${esc(desc(alt))}</div><ol class="at-rank">${A1.top.slice(0, 15).map((i, k) => { const p = pos.get(i);
+      return `<li>${esc(candShort(i))} <b>${fmtPct(A1.eff[i])}</b> <span class="meta">${p == null ? "new" : p === k ? "=" : (p > k ? "▲" : "▼") + Math.abs(p - k)}</span></li>`; }).join("")}</ol></div></div>
+    <div class="grid2"><div class="kv"><span>top-20 sites kept</span><b>${kept} / ${A0.top.length}</b></div><div class="kv"><span>#1 unchanged</span><b>${A0.top[0] === A1.top[0] ? "yes" : "no"}</b></div>
+    <div class="kv"><span>criteria scored (current → counterfactual)</span><b>${A0.active.map(shortOf).join(", ")} → ${A1.active.map(shortOf).join(", ")}</b></div></div>
+    <p class="note small">${kept >= 16 ? "The candidate list is largely insensitive to this choice." : kept >= 8 ? "The candidate list partly depends on this choice; report both." : "The candidate list depends strongly on this choice; a conclusion drawn from one configuration would not be robust."}</p></div>`;
+  if (alt.norm !== base.norm || C.alt === "target") {
+    const r0 = A0.P ? atRangesFor(base, t) : null, r1 = atRangesFor(alt, t);
+    h += `<div class="sec"><div class="lbl">Normalisation tables compared</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">current [min, max]</th><th class="n">counterfactual [min, max]</th></tr></thead><tbody>
+      ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td><td class="n">${f2(r0[c][0])} … ${f2(r0[c][1])}</td><td class="n">${f2(r1[c][0])} … ${f2(r1[c][1])}</td></tr>`).join("")}</tbody></table></div>
+      <p class="note small">A wider span compresses every similarity on that criterion. The catalogue table includes lunar ΔT values (~270–285 K) far above any Earth cell, which compresses the thermal criterion for every target that uses it.</p></div>`;
+  }
+  return h;
+};
+function atRangesFor(x, t) { return ATL.rangesFor(x.norm, { A: S.A, critIds: S.critIds, atlas: A3.atlas, baselineRanges: S.app.ranges, tv: ATL.targetVector(t, S.critIds, { includeProxy: x.proxy }) }); }
+Object.assign(A3_INPUTS, {
+  "cf-alt"(a) { A3.cf.alt = a.value; atRender(); },
+  "cf-norm"(a) { A3.cf.normAlt = a.value; atRender(); },
+  "cf-prof"(a) { A3.cf.profile = a.value; atRender(); },
+  "cf-drop"(a) { A3.cf.drop = a.value; atRender(); },
+});
+
+/* ===== Phase III · Mismatch Cartographer =====
+ * Where on Earth, and on which criterion, does a target fail to be matched — and where is the
+ * question unanswerable because data are missing? Ordinary environmental differences are drawn
+ * on a continuous colour ramp; missing Earth data are drawn as a hatched pattern; a criterion the
+ * target lacks is not drawn at all. A missing value is never shown as a match. */
+A3.mm = { crit: null };
+function atMmDraw(id, t, c, ranges) {
+  A3.draw.push(() => {
+    const img = document.getElementById(id + "-field"); if (!img) return;
+    const cv = document.createElement("canvas"); cv.width = 576; cv.height = 361;
+    const g = cv.getContext("2d"), D = g.createImageData(576, 361), tv = +t.values[c], span = ranges[c][1] - ranges[c][0];
+    for (let i = 0; i < S.n; i++) {
+      const cl = S.cell[i], row = 360 - Math.floor(cl / 576), col = cl % 576, p = (row * 576 + col) * 4, e = S.A[c][i];
+      if (e - e !== 0) {                                     // missing Earth value: hatch (distinct from any difference)
+        const on = (row + col) % 3 === 0; D.data[p] = on ? 200 : 60; D.data[p + 1] = on ? 120 : 40; D.data[p + 2] = on ? 220 : 70; D.data[p + 3] = 220; continue;
+      }
+      const s = Math.max(0, 1 - Math.abs(e - tv) / span);    // criterion similarity (baseline formula)
+      const lo = [217, 112, 95], mid = [216, 180, 91], hi = [140, 192, 143];
+      const [a, b, f] = s < 0.6 ? [lo, mid, s / 0.6] : [mid, hi, (s - 0.6) / 0.4];
+      for (let j = 0; j < 3; j++) D.data[p + j] = Math.round(a[j] + (b[j] - a[j]) * f);
+      D.data[p + 3] = 200;
+    }
+    g.putImageData(D, 0, 0); img.setAttribute("href", cv.toDataURL());
+  });
+}
+A3_VIEWS.mismatch = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const direct = S.critIds.filter(c => t.status[c] === "DIRECT");
+  const c = direct.includes(A3.mm.crit) ? A3.mm.crit : direct[0];
+  const R = atCands(t, 20), ranges = atRanges(t);
+  let h = `<div class="sec"><h3 class="ttl">Mismatch cartographer</h3>${atBanner("diagnostic map")}
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id)}</label>
+    <label>Criterion<select data-a3in="mm-c">${S.critIds.map(x => `<option value="${x}" ${x === c ? "selected" : ""} ${t.status[x] === "DIRECT" ? "" : "disabled"}>${esc(labelOf(x))}${t.status[x] === "DIRECT" ? "" : " — " + t.status[x]}</option>`).join("")}</select></label></div>`;
+  if (!c) return h + `<div class="callout warn">No directly comparable criterion: nothing can be mapped.</div></div>`;
+  let nMiss = 0, nMis = 0, nPart = 0, nMatch = 0; const span = ranges[c][1] - ranges[c][0];
+  for (let i = 0; i < S.n; i++) { const e = S.A[c][i]; if (e - e !== 0) { nMiss++; continue; } const s = Math.max(0, 1 - Math.abs(e - t.values[c]) / span); if (s >= 0.85) nMatch++; else if (s >= 0.6) nPart++; else nMis++; }
+  atMmDraw("at-mm", t, c, ranges);
+  h += `<p class="note small">Colour = criterion similarity s to ${esc(t.name)} on ${esc(labelOf(c))} (${atVal(c, t.values[c])}): red s &lt; 0.60 (mismatch) → amber → green s ≥ 0.85 (match), the baseline thresholds. <b>Hatched violet = no Earth value</b> (a data gap, not a difference).</p></div>
+    <div class="sec">${atEarthMap("at-mm", R.eligible ? R.top.slice(0, 10).map((i, k) => ({ i, label: k + 1, title: placeStr(i) })) : [])}
+    <div class="grid2"><div class="kv"><span>match (s ≥ 0.85)</span><b>${nfmt(nMatch)} cells</b></div><div class="kv"><span>partial (0.60–0.85)</span><b>${nfmt(nPart)}</b></div>
+    <div class="kv"><span>mismatch (s &lt; 0.60)</span><b>${nfmt(nMis)}</b></div><div class="kv"><span>no Earth value (data gap)</span><b>${nfmt(nMiss)}</b></div></div></div>`;
+  // candidate-level mismatch profile with data-quality warnings kept separate
+  if (R.eligible) {
+    const w = atWeights();
+    h += `<div class="sec"><div class="lbl">Top candidates: differences vs data-quality warnings</div><div class="tbl-wrap"><table class="t"><thead><tr><th>#</th><th>Candidate</th>${S.critIds.map(x => `<th class="n">${esc(shortOf(x))}</th>`).join("")}<th>Data-quality warnings</th></tr></thead><tbody>
+      ${R.top.slice(0, 10).map((i, k) => { const X = ATL.explain(R.P, w, i, S.A, R.ranges), byC = Object.fromEntries(X.map(x => [x.criterion, x]));
+        const warn = []; if (S.A.modis_coverage[i] < 0.9) warn.push(`MODIS coverage ${pct(S.A.modis_coverage[i])}`); if (S.A.gmted_land_fraction[i] < 0.5) warn.push(`land fraction ${pct(S.A.gmted_land_fraction[i])}`);
+        X.filter(x => x.similarity == null).forEach(x => warn.push(`no Earth ${shortOf(x.criterion)}`));
+        return `<tr><td>${k + 1}</td><td>${esc(candShort(i))}</td>${S.critIds.map(x => { const v = byC[x]; if (!v) return `<td class="n meta">${t.status[x] === "DIRECT" ? "w=0" : "—"}</td>`;
+          if (v.similarity == null) return `<td class="n"><span class="st st-m">gap</span></td>`;
+          const cls = v.similarity >= 0.85 ? "c-match" : v.similarity >= 0.6 ? "c-partial" : "c-mismatch"; return `<td class="n ${cls}">${v.similarity.toFixed(2)}</td>`; }).join("")}
+          <td>${warn.length ? warn.map(x => `<span class="tag st-u">${esc(x)}</span>`).join(" ") : '<span class="meta">none</span>'}</td></tr>`; }).join("")}</tbody></table></div>
+      <p class="note small">Numbers are criterion similarities (differences). Tags in the last column are data-quality conditions, which are not differences and are never folded into the similarity. "—" = the target has no comparable value on that criterion.</p></div>`;
+  }
+  return h;
+};
+A3_INPUTS["mm-c"] = a => { A3.mm.crit = a.value; atRender(); };
+
+/* ===== Phase III · Earth-to-World Analogue Translator and Analogue Expedition Designer =====
+ * Translator: states, criterion by criterion, in what sense an Earth cell is (and is not) analogous
+ * to a target — a partial analogy, never an equivalence.
+ * Expedition designer: turns chosen candidates into analytical field objectives and measurement
+ * needs. It contains no travel, cost, access, permit or safety information and invents none. */
+const AT_FACTS = {
+  Mars: { src: "NASA NSSDCA Mars Fact Sheet, https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html",
+    items: [["Surface gravity", "3.71 m/s² (0.38 of Earth)"], ["Mean surface pressure", "~6.36 mbar (~0.6 % of Earth's); MEDA median at Jezero 740 Pa (baseline record)"],
+      ["Atmosphere", "~95 % CO₂"], ["Length of day", "24.66 h (sol)"], ["Liquid water", "not stable at the surface under present conditions"]] },
+  Moon: { src: "NASA NSSDCA Moon Fact Sheet, https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+    items: [["Surface gravity", "1.62 m/s² (0.165 of Earth)"], ["Atmosphere", "none (exosphere only)"], ["Length of day", "29.53 Earth days (synodic)"],
+      ["Thermal cycle", "local times 13–14 h and 01–02 h are lunar hours (~29.5 Earth hours each): the lunar ΔT develops over ~2 weeks, the Earth ΔT over ~12 h"],
+      ["Surface", "regolith; no weathering by water or wind"]] },
+};
+function atTranslate(t, i) {
+  const R = atCands(t, 20), w = atWeights(), X = R.eligible ? ATL.explain(R.P, w, i, S.A, R.ranges) : [], by = Object.fromEntries(X.map(x => [x.criterion, x]));
+  return S.critIds.map(c => {
+    const st = t.status[c], x = by[c];
+    if (st === "INCOMPATIBLE") return { c, verdict: "NO COUNTERPART", text: t.status_reason[c] };
+    if (st === "PROXY") return { c, verdict: "PROXY ONLY", text: `Represented by a rule-based proxy (${t.status_reason[c]}); the Earth value ${atVal(c, S.A[c][i])} is not compared with a target measurement.` };
+    if (st !== "DIRECT") return { c, verdict: "NOT COMPARABLE", text: `The target has no ${st === "MISSING" ? "assembled" : "validated"} value: ${t.status_reason[c]}` };
+    if (!x || x.similarity == null) return { c, verdict: "NOT COMPARABLE", text: `No Earth value at this cell for ${labelOf(c)}.` };
+    const v = x.similarity >= 0.85 ? "ANALOGOUS" : x.similarity >= 0.6 ? "PARTIALLY ANALOGOUS" : "NOT ANALOGOUS";
+    const extra = c === "lst_diurnal_range" && t.body === "Moon" ? " The lunar cycle lasts ~29.5 Earth days, so equal ΔT does not mean an equal heating rate." :
+      c === "lst_diurnal_range" ? " Ground temperature from a different instrument and retrieval; compare magnitudes, not absolute calibration." :
+      c === "annual_temperature_range" ? " Mars 'months' are 30° Ls bins (~56 sols)." : " Same algorithm at the same ~1 km baseline.";
+    return { c, verdict: v, s: x.similarity, text: `Earth ${atVal(c, x.earth)} vs ${t.name} ${atVal(c, x.target)} (s = ${x.similarity.toFixed(2)}).${extra}` };
+  });
+}
+const AT_VCLS = { ANALOGOUS: "c-match", "PARTIALLY ANALOGOUS": "c-partial", "NOT ANALOGOUS": "c-mismatch", "NOT COMPARABLE": "st-m", "NO COUNTERPART": "st-x", "PROXY ONLY": "st-p" };
+A3_VIEWS.translate = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const R = atCands(t, 20);
+  let h = `<div class="sec"><h3 class="ttl">Earth-to-world analogue translator</h3>${atBanner("interpretation aid")}
+    <p class="note">An analogue is a partial correspondence on named dimensions, never an equivalence. This view states which dimensions correspond, which do not, and which ASTERRO cannot assess at all.</p>
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id)}</label></div></div>`;
+  if (!R.eligible) return h + `<div class="sec"><div class="callout warn">${esc(R.reason)}</div></div>`;
+  const i = A3.cand[t.id] ?? R.top[0];
+  const T = atTranslate(t, i);
+  h += `<div class="sec"><div class="lbl">${esc(placeStr(i))} → ${esc(t.name)} · atlas comparison score ${fmtPct(R.eff[i])}</div>
+    <div class="row">${R.top.slice(0, 8).map(k => `<button class="btn-sm${k === i ? " on" : ""}" data-a3="cand" data-t="${t.id}" data-i="${k}">${esc(candShort(k))}</button>`).join("")}</div>
+    <div class="tbl-wrap"><table class="t"><thead><tr><th>Dimension</th><th>Correspondence</th><th>Statement</th></tr></thead><tbody>
+    ${T.map(r => `<tr><td>${esc(labelOf(r.c))}</td><td><span class="tag ${AT_VCLS[r.verdict]}">${esc(r.verdict)}</span></td><td class="meta">${esc(r.text)}</td></tr>`).join("")}</tbody></table></div>
+    <p class="note"><b>Translation:</b> ${esc(placeStr(i))} reproduces ${t.name}'s ${T.filter(r => r.verdict === "ANALOGOUS").map(r => labelOf(r.c).toLowerCase()).join(", ") || "no dimension"} closely${T.some(r => r.verdict === "PARTIALLY ANALOGOUS") ? ", " + T.filter(r => r.verdict === "PARTIALLY ANALOGOUS").map(r => labelOf(r.c).toLowerCase()).join(", ") + " partly" : ""}. It is ${T.some(r => r.verdict === "NOT ANALOGOUS") ? "not analogous in " + T.filter(r => r.verdict === "NOT ANALOGOUS").map(r => labelOf(r.c).toLowerCase()).join(", ") + ", and " : ""}not assessed in ${T.filter(r => ["NOT COMPARABLE", "NO COUNTERPART", "PROXY ONLY"].includes(r.verdict)).map(r => labelOf(r.c).toLowerCase()).join(", ") || "no criterion"}.</p></div>
+    <div class="sec"><div class="lbl">Not represented by any ASTERRO criterion · ${t.body}</div><div class="tbl-wrap"><table class="t"><tbody>${AT_FACTS[t.body].items.map(([a, b]) => `<tr><td>${esc(a)}</td><td class="meta">${esc(b)}</td></tr>`).join("")}</tbody></table></div>
+    <p class="note small">Context from ${esc(AT_FACTS[t.body].src)}. These properties are not compared with Earth and no Earth cell reproduces them; any analogue study must account for them separately.</p></div>`;
+  return h;
+};
+
+/* ---------- Expedition designer ---------- */
+A3.exp = { picks: [], title: "" };
+const AT_MEAS = {
+  lst_diurnal_range: "Surface (skin) temperature at ~13:30 and ~01:30 local time, e.g. a thermal-infrared radiometer, over all seasons.",
+  annual_temperature_range: "Near-surface air temperature logged hourly for at least one year.",
+  slope: "Slope at a ~1 km baseline and finer, from a high-resolution DEM (e.g. photogrammetry or lidar).",
+  surface_roughness: "Elevation variability within ~55 km and at sub-km scales from the same DEM.",
+  aridity: "Precipitation and potential evapotranspiration (station or reanalysis) — the target value is a proxy.",
+  elevation: "Surface pressure (the 'thin atmosphere' proxy) — the target value is a proxy.",
+};
+A3_VIEWS.expedition = function () {
+  const t = atT(A3.active); if (!t) return `<div class="sec"><div class="empty">Choose a target.</div></div>`;
+  const R = atCands(t, 20);
+  let h = `<div class="sec"><h3 class="ttl">Analogue expedition designer</h3>${atBanner("research design aid")}
+    <p class="note">Turns chosen Earth candidates into analytical field objectives: what each site can and cannot represent, and which measurements would test the analogy. <b>ASTERRO holds no travel, access, cost, permit or safety information and generates none.</b></p>
+    <div class="lab-form"><label class="wide">Target${atTargetPicker(t.id)}</label></div></div>`;
+  if (!R.eligible) return h + `<div class="sec"><div class="callout warn">${esc(R.reason)}</div></div>`;
+  const picks = A3.exp.picks.filter(i => R.top.includes(i));
+  h += `<div class="sec"><div class="lbl">Choose sites (top 20 candidates)</div><div class="lab-picks">${R.top.map((i, k) => `<label class="ck"><input type="checkbox" data-a3in="exp-p" value="${i}" ${picks.includes(i) ? "checked" : ""}>${k + 1}. ${esc(candShort(i))} (${fmtPct(R.eff[i], 0)})</label>`).join("")}</div></div>`;
+  if (!picks.length) return h + `<div class="sec"><p class="meta">Select one or more sites.</p></div>`;
+  const T = picks.map(i => ({ i, tr: atTranslate(t, i) }));
+  // geographic grouping only (no routes): sites within 1000 km of each other
+  const groups = []; for (const i of picks) { const g = groups.find(G => G.some(j => ATL.haversine(S.lat[i], S.lon[i], S.lat[j], S.lon[j]) < 1000)); g ? g.push(i) : groups.push([i]); }
+  h += `<div class="sec"><div class="lbl">Field objectives per site</div>${T.map(({ i, tr }) => `<div class="fm-card"><div class="fm-h">${esc(placeStr(i))}</div><div class="meta">${atFmtLL(S.lat[i], S.lon[i])} · cell ${S.cell[i]} · ${nfmt(cellArea(i))} km² cell</div>
+      <dl><dt>Represents</dt><dd>${tr.filter(r => r.verdict === "ANALOGOUS").map(r => esc(labelOf(r.c))).join(", ") || "no criterion closely"}</dd>
+      <dt>Partly</dt><dd>${tr.filter(r => r.verdict === "PARTIALLY ANALOGOUS").map(r => esc(labelOf(r.c))).join(", ") || "—"}</dd>
+      <dt>Does not represent</dt><dd>${tr.filter(r => r.verdict === "NOT ANALOGOUS").map(r => esc(labelOf(r.c))).join(", ") || "—"}; and every property listed in the Translator as not represented.</dd>
+      <dt>Measurements to test the analogy</dt><dd><ul class="lab-ul">${tr.filter(r => ["ANALOGOUS", "PARTIALLY ANALOGOUS"].includes(r.verdict)).map(r => `<li>${esc(AT_MEAS[r.c])}</li>`).join("") || "<li>—</li>"}</ul></dd>
+      <dt>Not assessed</dt><dd>Access, travel, cost, permits, land ownership, hazards and safety: to be established by the team from authoritative local sources.</dd></dl></div>`).join("")}
+    <p class="note small">Geographic grouping (sites within 1,000 km of another chosen site): ${groups.map((g, k) => `group ${k + 1}: ${g.map(i => esc(candShort(i))).join(", ")}`).join(" · ")}. Grouping is by great-circle distance only; it is not a route.</p></div>
+    <div class="sec"><div class="lbl">Target-side gaps the expedition cannot close</div><ul class="lab-ul">${ATL.missingEvidence(t, S.critIds, atWeights()).filter(m => m.status !== "PROXY").map(m => `<li>${esc(m.criterion === "heterogeneity" ? "Within-feature heterogeneity" : labelOf(m.criterion))} (${m.status}) — requires planetary data, not fieldwork on Earth.</li>`).join("") || "<li>None among scored criteria.</li>"}</ul>
+    <button class="btn-sm" data-a3="exp-export">Export design (JSON)</button></div>`;
+  return h;
+};
+A3_INPUTS["exp-p"] = a => { const i = +a.value, s = new Set(A3.exp.picks); a.checked ? s.add(i) : s.delete(i); A3.exp.picks = [...s]; atRender(); };
+A3_ACTIONS["exp-export"] = () => {
+  const t = atT(A3.active), R = atCands(t, 20), picks = A3.exp.picks.filter(i => R.top.includes(i));
+  const d = { schema: "asterro.expedition-design/1", created_utc: new Date().toISOString(), target: t.id, atlas_version: A3.atlas.version, profile: A3.profile, normalisation: A3.norm,
+    sites: picks.map(i => ({ cell: S.cell[i], lat: S.lat[i], lon: S.lon[i], place: placeStr(i), score: R.eff[i], translation: atTranslate(t, i).map(r => ({ criterion: r.c, verdict: r.verdict })) })),
+    not_assessed: ["access", "travel", "cost", "permits", "land ownership", "hazards", "safety"] };
+  showExport("Expedition design", JSON.stringify(d, null, 1), "asterro-expedition-design.json");
+};
+
+/* ===== Phase III · Knowledge Constellation =====
+ * Typed nodes (dataset, target, criterion, Earth candidate) and only documented edges:
+ *   dataset —provides→ target·criterion value   (atlas provenance)
+ *   target —has status→ criterion               (atlas status table)
+ *   target —ranks→ candidate                    (top 3 of the atlas comparison)
+ * Layout is deterministic: one column per node type, rows in a fixed order. Position encodes the
+ * node type and order only — distance and proximity carry no meaning. */
+A3.kc = { body: "Mars", show: "status" };
+A3_VIEWS.constellation = function () {
+  const A = A3.atlas, ts = A.targets.filter(t => t.body === A3.kc.body);
+  const ds = Object.keys(A.datasets).filter(d => ts.some(t => Object.values(t.provenance).flat().includes(d)) || (d === "gazetteer"));
+  const cr = S.critIds;
+  const cand = new Map();
+  for (const t of ts) { const R = atCands(t, 3); if (R.eligible) R.top.forEach(i => { if (!cand.has(i)) cand.set(i, []); cand.get(i).push(t.id); }); }
+  const cands = [...cand.keys()].sort((a, b) => S.cell[a] - S.cell[b]);
+  const rowH = 17, W = 760, cols = [20, 210, 470, 600], H = Math.max(ds.length, ts.length, A3.kc.show === "status" ? Math.ceil(cr.length * 2.2) : cands.length) * rowH + 40;
+  const Y = (k, n) => 30 + k * rowH + (H - 40 - n * rowH) / 2;
+  const pos = {};
+  ds.forEach((d, k) => pos["d:" + d] = [cols[0], Y(k, ds.length)]);
+  ts.forEach((t, k) => pos["t:" + t.id] = [cols[1], Y(k, ts.length)]);
+  cr.forEach((c, k) => pos["c:" + c] = [cols[2], Y(k * 2.2, cr.length * 2.2)]);
+  cands.forEach((i, k) => pos["e:" + i] = [cols[3], Y(k, cands.length)]);
+  const ST = { DIRECT: "var(--match)", PROXY: "var(--partial)", MISSING: "var(--ink-3)", INCOMPATIBLE: "var(--mismatch)", UNVALIDATED: "var(--mismatch)", DERIVED: "var(--ink)" };
+  let edges = "";
+  for (const t of ts) {
+    const [x1, y1] = pos["t:" + t.id];
+    if (A3.kc.show === "status") for (const c of cr) { const [x2, y2] = pos["c:" + c]; edges += `<path d="M${x1 + 150},${y1} C${x1 + 210},${y1} ${x2 - 60},${y2} ${x2},${y2}" stroke="${ST[t.status[c]]}" stroke-opacity="${t.status[c] === "DIRECT" ? 0.55 : 0.25}" fill="none" ${t.status[c] === "MISSING" ? 'stroke-dasharray="3 3"' : ""}><title>${esc(t.name)} — ${esc(labelOf(c))}: ${t.status[c]}</title></path>`; }
+    for (const d of new Set(Object.values(t.provenance).flat())) if (pos["d:" + d]) { const [x0, y0] = pos["d:" + d]; edges += `<line x1="${x0 + 150}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="var(--earth)" stroke-opacity=".35"><title>${esc(d)} provides values for ${esc(t.name)}</title></line>`; }
+    if (A3.kc.show === "cand") for (const [i, tids] of cand) if (tids.includes(t.id)) { const [x2, y2] = pos["e:" + i]; edges += `<line x1="${x1 + 150}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--accent)" stroke-opacity=".45"><title>${esc(t.name)} ranks ${esc(placeStr(i))} in its top 3</title></line>`; }
+  }
+  const node = (k, label, cls, title, act = "") => { const [x, y] = pos[k]; return `<g class="kc-n ${cls}" ${act}><circle cx="${x}" cy="${y}" r="4"/><text x="${x + 8}" y="${y + 3}">${esc(label.length > 24 ? label.slice(0, 23) + "…" : label)}</text><title>${esc(title)}</title></g>`; };
+  const nodes = ds.map(d => node("d:" + d, d, "kd", A.datasets[d].dataset)).join("") +
+    ts.map(t => node("t:" + t.id, t.name, "kt lvl-" + t.readiness.level, `${t.name} · L${t.readiness.level}`, `data-a3="pick" data-id="${t.id}" role="button" tabindex="0"`)).join("") +
+    cr.map(c => node("c:" + c, labelOf(c), "kcr", A.compatibility[c].verdict + ": " + A.compatibility[c].why)).join("") +
+    cands.map(i => node("e:" + i, candShort(i), "ke", placeStr(i) + " · top-3 for " + cand.get(i).map(id => atT(id).name).join(", "))).join("");
+  return `<div class="sec"><h3 class="ttl">Knowledge constellation</h3>${atBanner("evidence map")}
+    <p class="note">Every line is a documented relation from the atlas: provenance (dataset → target), criterion status (target → criterion) or ranking (target → Earth candidate, top 3 under the current profile and normalisation). <b>Columns encode node type; rows are a fixed order. Distance means nothing.</b></p>
+    <div class="row"><span class="toggles">${["Mars", "Moon"].map(b => `<button aria-pressed="${A3.kc.body === b}" data-a3="kc-b" data-b="${b}">${b}</button>`).join("")}</span>
+    <span class="toggles">${[["status", "criterion status"], ["cand", "Earth candidates"]].map(([k, v]) => `<button aria-pressed="${A3.kc.show === k}" data-a3="kc-s" data-s="${k}">${v}</button>`).join("")}</span></div></div>
+    <div class="sec"><svg class="kc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Knowledge constellation for ${A3.kc.body}">
+      <text x="${cols[0]}" y="14" class="kc-h">DATASETS</text><text x="${cols[1]}" y="14" class="kc-h">TARGETS</text><text x="${cols[2]}" y="14" class="kc-h">${A3.kc.show === "status" ? "CRITERIA" : ""}</text><text x="${cols[3]}" y="14" class="kc-h">${A3.kc.show === "cand" ? "EARTH CANDIDATES" : ""}</text>
+      ${edges}${nodes.replace(/<g class="kc-n kcr"/g, A3.kc.show === "status" ? '<g class="kc-n kcr"' : '<g class="kc-n kcr" style="display:none"').replace(/<g class="kc-n ke"/g, A3.kc.show === "cand" ? '<g class="kc-n ke"' : '<g class="kc-n ke" style="display:none"')}</svg>
+    <p class="note small">Edge colours: green DIRECT · amber PROXY · dashed grey MISSING · red INCOMPATIBLE / UNVALIDATED. Click a target to open it.</p></div>`;
+};
+Object.assign(A3_ACTIONS, { "kc-b"(a) { A3.kc.body = a.dataset.b; atRender(); }, "kc-s"(a) { A3.kc.show = a.dataset.s; atRender(); } });
+
+/* ===== Phase III · Research Copilot Workspace and Provenance =====
+ * Copilot: the deterministic core answers only questions whose answer is a lookup in the evidence
+ * index built from the atlas (values, statuses, readiness, provenance); anything else returns
+ * "I cannot determine that from the available evidence." An OPTIONAL language-model mode (the
+ * viewer's own Claude, via the artifact `sample` capability) may rephrase evidence; its answer is
+ * shown only if it cites existing evidence ids, is screened by the Phase II guardrails, and is
+ * labelled as drafted text. It never computes or changes a score. */
+function atEvidenceIndex() {
+  if (A3._evi) return A3._evi;
+  const out = [];
+  for (const t of A3.atlas.targets) {
+    const first = t.name.split(" (")[0].split(" — ")[0].split(" / ")[0].toLowerCase(), g = t.anchor.gazetteer;
+    const aliases = [...new Set([t.name.toLowerCase(), first, first.replace(/ crater$| basin$| region$/, ""), g && g.name.toLowerCase(), g && g.clean_name.toLowerCase()].filter(a => a && a.length > 3))];
+    for (const c of S.critIds) {
+      const s = t.status[c];
+      out.push({ id: `${t.id}.${c}`, kind: "value", aliases, target: t.id, targetName: t.name.split(" (")[0], criterion: c, status: s,
+        text: `${t.name}: ${labelOf(c)} ${s === "DIRECT" || s === "PROXY" ? "= " + atVal(c, t.values[c]) + " " : ""}(${s}; ${t.status_reason[c] || ""}).` });
+    }
+    out.push({ id: `${t.id}.readiness`, kind: "readiness", aliases, target: t.id, targetName: t.name.split(" (")[0], criterion: null, status: null,
+      text: `${t.name} has readiness L${t.readiness.level} (${t.readiness.label}): ${t.readiness.direct} directly comparable criteria.` });
+    out.push({ id: `${t.id}.location`, kind: "location", aliases, target: t.id, targetName: t.name.split(" (")[0], criterion: null, status: null,
+      text: `${t.name} is at ${atFmtLL(t.anchor.lat, t.anchor.lon)} (${t.anchor.type}; ${t.anchor.source || "catalogue"}).` });
+  }
+  return (A3._evi = out);
+}
+let atSample;   // undefined = unresolved, null = unavailable
+async function atSampleFn() {
+  if (atSample === undefined) { try { atSample = window.claude && typeof window.claude.use === "function" ? await window.claude.use("sample") : null; } catch (e) { atSample = null; } }
+  return atSample;
+}
+A3_VIEWS.copilot = function () {
+  const C = A3.copilot;
+  if (atSample === undefined) atSampleFn().then(atRender);
+  return `<div class="sec"><h3 class="ttl">Research copilot workspace</h3>${atBanner("evidence-grounded assistant")}
+    <p class="note">Ask about targets, values, statuses, readiness, gaps or locations. The deterministic core answers only from the evidence index (${atEvidenceIndex().length} entries) and cites every entry it used; it cannot compute scores, assess safety, cost or habitability, and says so.</p>
+    <div class="lab-form"><label class="wide">Question<input type="text" data-a3in="cp-q" value="${esc(C.q)}" placeholder="e.g. What thermal evidence exists for Shackleton?"></label>
+      <button class="btn-sm" data-a3="cp-ask">Ask (deterministic)</button>${atSample ? `<button class="btn-sm" data-a3="cp-llm">Ask with Claude (uses your usage)</button>` : ""}</div>
+    <p class="meta">${atSample ? "Optional language-model mode available in this viewer." : "Language-model mode is not available here; the deterministic core is fully functional."}</p>
+    <div class="row">${["What is missing for Elysium Planitia?", "What is the readiness of Gale Crater / Curiosity?", "What thermal evidence exists for Shackleton?", "Is Shackleton safe to land?"].map(q => `<button class="lnk small" data-a3="cp-ex" data-q="${esc(q)}">${esc(q)}</button>`).join(" · ")}</div></div>
+    <div class="sec">${C.log.slice().reverse().map(m => `<div class="cp-turn"><div class="meta"><b>Q</b> ${esc(m.q)} <span class="tag">${esc(m.mode)}</span></div><div class="ev-text">${esc(m.a)}</div>
+      ${m.cites && m.cites.length ? `<div class="meta">Evidence: ${m.cites.map(esc).join(" · ")}</div>` : ""}${m.flags && m.flags.length ? `<div class="meta st-u">Guardrail flags: ${m.flags.map(f => esc(f.match + " → " + f.prefer)).join("; ")}</div>` : ""}</div>`).join("") || `<p class="meta">No questions yet.</p>`}</div>`;
+};
+Object.assign(A3_ACTIONS, {
+  "cp-ex"(a) { A3.copilot.q = a.dataset.q; A3_ACTIONS["cp-ask"](); },
+  "cp-ask"() {
+    const q = A3.copilot.q.trim(); if (!q) return;
+    const r = ATL.copilotAnswer(q, atEvidenceIndex());
+    A3.copilot.log.push({ q, a: r.text, cites: r.cites, mode: "deterministic", flags: LAB.reviewText(r.text) }); atRender();
+  },
+  async "cp-llm"() {
+    const q = A3.copilot.q.trim(); if (!q || !atSample) return;
+    const det = ATL.copilotAnswer(q, atEvidenceIndex());
+    const ev = (det.cites.length ? atEvidenceIndex().filter(e => det.cites.includes(e.id)) : atEvidenceIndex().filter(e => e.kind === "readiness")).slice(0, 60);
+    const entry = { q, a: "Thinking…", cites: [], mode: "language-model draft", flags: [] }; A3.copilot.log.push(entry); atRender();
+    const prompt = `You answer questions about a planetary analogue atlas using ONLY the evidence entries below. Rules: cite the ids you use in square brackets, e.g. [moon_shackleton.slope]; never state a number that is not in an entry; never assess safety, certification, habitability, cost, travel or permits; if the entries do not answer the question, reply exactly: "${ATL.CANNOT}". Keep the answer under 120 words.\n\nQUESTION: ${q}\n\nEVIDENCE:\n${ev.map(e => `[${e.id}] ${e.text}`).join("\n")}`;
+    try {
+      const { text } = await atSample(prompt, { modelTier: "quick" });
+      const ids = [...text.matchAll(/\[([a-z0-9_]+\.[a-z_]+)\]/g)].map(m => m[1]), valid = new Set(atEvidenceIndex().map(e => e.id));
+      const ok = ids.length && ids.every(id => valid.has(id));
+      entry.a = ok || text.trim().startsWith(ATL.CANNOT) ? text.trim() : ATL.CANNOT + " (The drafted answer did not cite valid evidence and was discarded.)";
+      entry.cites = ok ? [...new Set(ids)] : []; entry.flags = LAB.reviewText(entry.a);
+    } catch (e) { entry.a = e && e.code === "not_granted" ? "Language-model mode was not allowed; use the deterministic answer." : "Language-model mode failed (" + (e && e.code || "error") + "); the deterministic answer is unaffected."; if (e && e.code === "not_granted") atSample = null; }
+    atRender();
+  },
+});
+A3_INPUTS["cp-q"] = a => { A3.copilot.q = a.value; };
+
+/* ---------- Provenance, compatibility and normalisation registry ---------- */
+A3_VIEWS.provenance = function () {
+  const A = A3.atlas;
+  const fld = ["dataset", "product_id", "provider", "url", "doi", "version", "retrieved", "period", "crs", "resolution", "units", "processing", "quality_flags", "checksum", "license", "limitations"];
+  const show = v => v == null ? "—" : typeof v === "object" ? JSON.stringify(v).slice(0, 400) : String(v);
+  return `<div class="sec"><h3 class="ttl">Provenance and compatibility</h3>${atBanner("registry")}
+    <p class="note">Atlas ${esc(A.version)} · built ${esc(A.built_utc)} · predictor stack ${esc(A.stack_sha256.slice(0, 16))}… · schema ${esc(A.schema)}</p></div>
+    <div class="sec"><div class="lbl">Datasets (${Object.keys(A.datasets).length})</div>${Object.entries(A.datasets).map(([k, d]) => `<details class="lab-ev"><summary>${esc(k)} · ${esc(d.dataset)}</summary><dl class="at-dl">${fld.map(f => `<dt>${f}</dt><dd>${esc(show(d[f]))}</dd>`).join("")}</dl></details>`).join("")}</div>
+    <div class="sec"><div class="lbl">Variable compatibility registry</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th>Earth definition</th><th>Planetary definition</th><th>Verdict</th></tr></thead><tbody>
+      ${S.critIds.map(c => { const r = A.compatibility[c]; return `<tr><td>${esc(labelOf(c))}</td><td class="meta">${esc(r.earth)}</td><td class="meta">${esc(r.planet)}</td><td><span class="tag">${esc(r.verdict)}</span><div class="meta small">${esc(r.why)}</div></td></tr>`; }).join("")}</tbody></table></div>
+      <div class="lbl">Recorded incompatible products</div><ul class="lab-ul">${A.incompatible_examples.map(x => `<li><b>${esc(x.product)}</b>: ${esc(x.reason)}</li>`).join("")}</ul></div>
+    <div class="sec"><div class="lbl">Fingerprint statuses</div><div class="tbl-wrap"><table class="t"><tbody>${Object.entries(A.statuses).map(([k, v]) => `<tr><td>${atStatus(k)}</td><td class="meta">${esc(v)}</td><td class="n">${A.targets.reduce((n, t) => n + S.critIds.filter(c => t.status[c] === k).length, 0)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="sec"><div class="lbl">Normalisation tables · ${esc(A.normalisation.id)}</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">baseline [min, max]</th><th class="n">atlas [min, max]</th></tr></thead><tbody>
+      ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td><td class="n">${f3(A.normalisation.baseline_ranges[c][0])} … ${f3(A.normalisation.baseline_ranges[c][1])}</td><td class="n">${f3(A.normalisation.ranges[c][0])} … ${f3(A.normalisation.ranges[c][1])}</td></tr>`).join("")}</tbody></table></div>
+      <p class="note small">${esc(A.normalisation.method)}. ${esc(A.normalisation.note)}</p></div>
+    <div class="sec"><div class="lbl">Data files</div><div class="tbl-wrap"><table class="t"><tbody>${Object.entries(A.files).map(([k, f]) => `<tr><td>${esc(k)}</td><td class="mono">${esc(f.file)}</td><td class="mono meta">${esc((f.sha256 || "").slice(0, 16))}…</td><td class="meta">${esc(f.note || f.use || "")}</td></tr>`).join("")}</tbody></table></div>
+      ${A.files.subcell ? `<p class="note small">Sub-cell check: mean slope recomputed from the histogram pass equals the baseline cell slope for ${nfmt(A.files.subcell.check.cells_compared)} cells (max |Δ| ${A.files.subcell.check.max_abs_diff_mean_slope_vs_baseline}).</p>` : ""}</div>`;
+};
 </script>

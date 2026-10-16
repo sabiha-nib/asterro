@@ -116,6 +116,11 @@ def main(repo="."):
     if os.path.isdir(p2):
         app_js += "\n" + "\n".join(open(os.path.join(p2, f)).read() for f in sorted(os.listdir(p2)) if f.endswith(".js"))
         css += "\n" + "\n".join(open(os.path.join(p2, f)).read() for f in sorted(os.listdir(p2)) if f.endswith(".css"))
+    # Phase III (additive): app/frontend/phase3/*.js appended after Phase II, *.css after Phase II css
+    p3 = os.path.join(repo, "app/frontend/phase3")
+    if os.path.isdir(p3):
+        app_js += "\n" + "\n".join(open(os.path.join(p3, f)).read() for f in sorted(os.listdir(p3)) if f.endswith(".js"))
+        css += "\n" + "\n".join(open(os.path.join(p3, f)).read() for f in sorted(os.listdir(p3)) if f.endswith(".css"))
     html = src.replace("/*__CSS__*/", css).replace("/*__ENGINE__*/", eng).replace("/*__APP__*/", app_js)
     open(os.path.join(repo, "public/index.html"), "w").write(html)
     print("ranges", {k: [round(a, 3), round(b, 3)] for k, (a, b) in ranges.items()})

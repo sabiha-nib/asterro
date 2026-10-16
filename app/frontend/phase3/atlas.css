@@ -1,0 +1,78 @@
+/* ---------- Phase III · Planetary research observatory (scoped to new classes only) ---------- */
+.at-ctx{display:flex;flex-wrap:wrap;gap:4px 14px;font:400 10.5px/1.5 var(--f-mono);color:var(--ink-3);margin-top:8px}
+.at-ctx b{color:var(--ink-2);font-weight:500}
+.at-controls{margin-top:6px}
+.st{font:500 9px/1 var(--f-mono);letter-spacing:.1em;padding:3px 5px;border-radius:2px;border:1px solid var(--line-2);white-space:nowrap}
+.st-d{color:var(--match);border-color:#2f4a33}
+.st-v{color:var(--ink);border-color:var(--ink-3)}
+.st-p{color:var(--partial);border-color:#54452a}
+.st-m{color:var(--ink-3);border-style:dashed}
+.st-x{color:var(--mismatch);border-color:#5a2e28}
+.st-u{color:#c9a2e0;border-color:#4a3558}
+.lvl{font:500 9.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 6px;border-radius:2px;white-space:nowrap;border:1px solid var(--line-2);color:var(--ink-2)}
+.lvl-1{color:var(--ink-3);border-style:dashed}
+.lvl-2{color:var(--partial);border-color:#54452a}
+.lvl-3{color:var(--earth);border-color:#2e4a47}
+.lvl-4{color:var(--match);border-color:#2f4a33}
+.at-base{color:var(--accent)}
+figure.at-map{margin:6px 0 0}
+figure.at-map svg{width:100%;height:auto;display:block;background:var(--ground);border:1px solid var(--line);border-radius:var(--r)}
+figure.at-map image[href$=".png"]{filter:brightness(.55) contrast(1.1)}
+figure.at-map .grat{stroke:rgba(255,255,255,.07);stroke-width:1}
+.atmk{cursor:pointer}
+.atmk circle{fill:var(--ink-3);stroke:var(--ground);stroke-width:1.5}
+.atmk.lvl-2 circle{fill:var(--partial)}
+.atmk.lvl-3 circle{fill:var(--earth)}
+.atmk.lvl-4 circle{fill:var(--match)}
+.atmk.on circle{stroke:var(--ink);stroke-width:2.5}
+.atmk.act circle{stroke:var(--accent);stroke-width:3}
+.atmk text{font:500 9px var(--f-mono);fill:var(--ink);paint-order:stroke;stroke:rgba(9,11,14,.85);stroke-width:3px;pointer-events:none}
+.atmk:focus{outline:none}.atmk:focus circle{stroke:var(--accent);stroke-width:3}
+.emk{cursor:pointer}
+.emk circle{fill:var(--panel);stroke:var(--accent);stroke-width:1.6}
+.emk.t1 circle{stroke:var(--moon)}.emk.t2 circle{stroke:var(--cross)}.emk.t3 circle{stroke:var(--earth)}
+.emk text{font:600 8px var(--f-mono);fill:var(--ink);pointer-events:none}
+.at-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.at-card{border:1px solid var(--line-2);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);display:flex;flex-direction:column;gap:6px}
+.at-card.act{border-color:var(--accent)}
+.at-card header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 8px;align-items:flex-start}
+.at-card-t{font:700 14px/1.15 var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.at-card footer{gap:6px;flex-wrap:wrap}
+.at-fpmini{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.at-fpmini div{display:flex;flex-direction:column;gap:2px;padding:4px;border:1px solid var(--line);border-radius:2px;min-width:0}
+.at-fpmini span{font:500 8.5px/1 var(--f-mono);letter-spacing:.1em;color:var(--ink-3)}
+.at-fpmini b{font:500 10px/1.1 var(--f-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.at-fpmini b.st-d{color:var(--ink)}.at-fpmini b.st-p{color:var(--partial)}.at-fpmini b.st-m{color:var(--ink-3)}.at-fpmini b.st-x{color:var(--mismatch)}
+.at-selbar .tag{display:inline-flex;gap:4px;align-items:center}
+table.at-fp td{vertical-align:top}
+.callout.warn{border-color:#5a2e28}
+canvas.at-raster{image-rendering:pixelated;border:1px solid var(--line);border-radius:2px;background:var(--ground);max-width:100%}
+.at-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:10px}
+.at-col-h{font:700 13px/1.2 var(--f-display);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+ol.at-rank{margin:6px 0 0;padding-left:20px;font-size:12px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+ol.at-rank li.on{color:var(--ink)}
+ol.at-rank b{font:500 11px var(--f-mono);color:var(--ink);margin-left:4px}
+ol.at-stages{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+ol.at-stages li{border:1px solid var(--line);border-radius:var(--r);padding:6px 8px;display:flex;flex-direction:column;gap:2px;min-width:0}
+ol.at-stages li b{font:600 11px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+ol.at-stages li span{font:500 9px/1 var(--f-mono);letter-spacing:.14em}
+ol.at-stages li em{font-style:normal;font-size:11px;color:var(--ink-3)}
+ol.at-stages li.done{border-color:#2f4a33}ol.at-stages li.done span{color:var(--match)}
+ol.at-stages li.ready{border-color:var(--line-2)}ol.at-stages li.ready span{color:var(--partial)}
+ol.at-stages li.blocked{border-style:dashed}ol.at-stages li.blocked span{color:var(--ink-3)}
+tr.dim td{color:var(--ink-3)}
+td.c-match{color:var(--match)}td.c-partial{color:var(--partial)}td.c-mismatch{color:var(--mismatch)}
+.tag.c-match{color:var(--match);border-color:#2f4a33}.tag.c-partial{color:var(--partial);border-color:#54452a}.tag.c-mismatch{color:var(--mismatch);border-color:#5a2e28}
+svg.kc{width:100%;height:auto;display:block;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r)}
+.kc-h{font:500 9px var(--f-mono);letter-spacing:.18em;fill:var(--ink-3)}
+.kc-n text{font:400 9.5px var(--f-mono);fill:var(--ink-2)}
+.kc-n circle{fill:var(--ink-3)}
+.kc-n.kd circle{fill:var(--earth)}.kc-n.kcr circle{fill:var(--ink)}.kc-n.ke circle{fill:var(--accent)}
+.kc-n.kt{cursor:pointer}.kc-n.kt.lvl-4 circle{fill:var(--match)}.kc-n.kt.lvl-2 circle{fill:var(--partial)}
+.cp-turn{padding:8px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+dl.at-dl{display:grid;grid-template-columns:120px 1fr;gap:3px 10px;margin:8px 0;font-size:11.5px}
+dl.at-dl dt{font:500 9px/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+dl.at-dl dd{margin:0;color:var(--ink-2);word-break:break-word}
+.mono{font-family:var(--f-mono)}
+@media (max-width:760px){.at-fpmini{grid-template-columns:repeat(3,1fr)}ol.at-stages{grid-template-columns:repeat(2,1fr)}.at-cards{grid-template-columns:1fr}dl.at-dl{grid-template-columns:1fr}}
+.callout.small{font-size:11px;margin-top:6px}

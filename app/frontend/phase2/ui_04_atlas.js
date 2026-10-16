@@ -25,6 +25,15 @@ function histSVG(d, unit, mark, label) {
   g += `<text x="${(m.l + W - m.r) / 2}" y="${H - 3}" font-size="9" text-anchor="middle" fill="var(--ink-2)">${esc(label)} (${unit}) — count of 926.6 m bins</text>`;
   return `<svg class="fp-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)} distribution">${g}</svg>`;
 }
+/* Phase III completion: sub-cell slope distribution (GMTED2010 30″) when the Phase III data are present. */
+function atlasSubcellBlock(i) {
+  if (typeof atSubcell !== "function") return `<div class="callout">${SUBCELL_MSG}</div>`;
+  if (!A3.sub) { if (!A3.subErr) atSubcell().then(labRender); return A3.subErr ? `<div class="callout">${SUBCELL_MSG} (${esc(A3.subErr)})</div>` : `<p class="meta">Loading sub-cell terrain…</p>`; }
+  const n = atSubVal("n", i);
+  return `<div class="grid2">${[2, 5, 10, 15, 20, 30].map(x => `<div class="kv"><span>30″ pixels with slope ≤ ${x}°</span><b>${pct(atSubVal("frac_le_" + x, i))}</b></div>`).join("")}
+    <div class="kv"><span>slope p10 / p50 / p90</span><b>${f1(atSubVal("p10", i))} / ${f1(atSubVal("p50", i))} / ${f1(atSubVal("p90", i))}°</b></div><div class="kv"><span>pixels</span><b>${nfmt(n)}</b></div></div>
+    <p class="note small">Within-cell terrain only (GMTED2010 30″, Horn slope, the baseline pixel-to-cell mapping). ${SUBCELL_MSG.replace("characterization", "characterization of climate and thermal variables")}</p>`;
+}
 LAB_VIEWS.atlas = function () {
   if (!S.res) return `<div class="sec"><div class="empty">Run the search first.</div></div>`;
   const i = labSel(); if (i == null) return `<div class="sec"><div class="empty">Select a site.</div></div>`;
@@ -36,8 +45,8 @@ LAB_VIEWS.atlas = function () {
     <p class="note">Is the candidate's similarity spatially representative, or does it hide variation? <b>${esc(candShort(i))}</b> · ${fmtLat(S.lat[i])} ${fmtLon(S.lon[i])} · cell ${dy.toFixed(0)} × ${dx.toFixed(0)} km.</p>
     <div class="row"><span class="meta">Context window</span><span class="toggles">${[1, 2, 3].map(k => `<button aria-pressed="${k === r}" data-lab="atlas-r" data-r="${k}">${2 * k + 1}×${2 * k + 1}</button>`).join("")}</span>
     ${S.targetId === "cross" ? `<span class="toggles">${TARGET_IDS.map(t => `<button aria-pressed="${t === tid}" data-lab="atlas-t" data-t="${t}">${esc(TNAME[t])}</button>`).join("")}</span>` : ""}</div></div>
-    <div class="sec"><div class="lbl">Sub-cell evidence</div><div class="callout">${SUBCELL_MSG}</div>
-    <p class="note small">Each Earth value is a single cell statistic. The finer source pixels (GMTED2010 30″, MODIS 0.1°) were aggregated during ingestion and are not retained, so no within-cell distribution can be shown. The neighbourhood below uses only other <b>whole cells</b>, which are context: they are not part of this cell's score footprint.</p>
+    <div class="sec"><div class="lbl">Sub-cell evidence</div>${atlasSubcellBlock(i)}
+    <p class="note small">Each Earth value in the score is a single cell statistic. The terrain distribution above (when shown) comes from the Phase III GMTED2010 30″ histogram pass; thermal and climate values have no within-cell distribution. The neighbourhood below uses only other <b>whole cells</b>, which are context: they are not part of this cell's score footprint.</p>
     <div class="grid2"><div class="kv"><span>MODIS pixel-month coverage (this cell)</span><b>${pct(S.A.modis_coverage[i])}</b></div><div class="kv"><span>GMTED land fraction (this cell)</span><b>${pct(S.A.gmted_land_fraction[i])}</b></div></div></div>
     <div class="sec"><div class="lbl">Candidate-vs-target similarity across the ${n}×${n} window · ${esc(TNAME[tid])}</div>
     <div class="hg-row">${act.map(c => heatGrid(WA.window, WA.perCrit[c].sims[tid], r, shortOf(c))).join("")}</div>
@@ -60,7 +69,7 @@ LAB_VIEWS.atlas = function () {
       <div class="callout">A large region having a similar <b>mean</b> environmental fingerprint is not the same as a specific location having been characterised in enough detail for a field activity. ASTERRO supports only the first statement.</div></div>`;
   } else h += `<div class="sec"><p class="meta">${L.ctxErr ? "Phase II context unavailable: " + esc(L.ctxErr) : "Loading target-window distributions…"}</p></div>`;
   const claims = [
-    LAB.claim({ id: "atlas.subcell", category: "UNAVAILABLE", text: SUBCELL_MSG, limitations: ["Source pixels not retained after aggregation."] }),
+    LAB.claim({ id: "atlas.subcell", category: "UNAVAILABLE", text: SUBCELL_MSG.replace("characterization", "characterization of climate and thermal variables"), limitations: ["MODIS and POWER source pixels not retained after aggregation; terrain sub-cell slope distribution available from the Phase III GMTED pass."] }),
     LAB.claim({ id: "atlas.window", category: "DERIVED", text: `Window statistics over ${WA.cellsValid} valid whole cells (${n}×${n}) around the candidate.`, method: "Descriptive statistics and least-squares plane of cell-mean values.", provenance: ["predictor stack"], limitations: ["Neighbours are context only and do not enter the candidate's score."] }),
   ];
   return h + `<div class="sec">${claimsBlock(claims)}</div>`;
