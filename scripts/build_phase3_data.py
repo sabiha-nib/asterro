@@ -384,9 +384,46 @@ def main():
                         "mission_region": "A landing or exploration region anchored at a published mission coordinate",
                         "observation_site": "A single catalogued observation location"},
                  normalisation=norm, reference=ref, datasets=datasets, files=files, targets=targets)
+
+    # ---------------------------------------------------------------- Phase IV: canonical registry + readiness v2
+    from src.registry.build import build as build_registry
+    from src.registry import readiness as RD
+
+    def earth_ranges_fn(tv):
+        """[min, max] over valid Earth cells, extended by this target's DIRECT/PROXY values (explore-target-v1)."""
+        out = {}
+        for c in CRITERION_IDS:
+            lo, hi = float(np.nanmin(E[c])), float(np.nanmax(E[c]))
+            if tv.get(c) is not None:
+                lo, hi = min(lo, float(tv[c])), max(hi, float(tv[c]))
+            out[c] = [lo, hi]
+        return out
+
+    reg, _regen = build_registry(atlas, earth_ranges_fn)
+    rby = {t["id"]: t for t in reg["targets"]}
+    for t in targets:                       # the atlas carries readiness v2; the Phase III rule is kept as readiness_v1
+        r = rby[t["id"]]["readiness"]
+        t["readiness_v1"] = t["readiness"]
+        t["readiness"] = dict(model=r["model"], level=r["level"], label=r["label"], meaning=r["meaning"],
+                              direct=t["readiness_v1"]["direct"], checks=r["checks"])
+        t["registry"] = dict(location=rby[t["id"]]["location"]["id"], region=rby[t["id"]]["region"]["id"],
+                             scoring=rby[t["id"]]["scoring"], thumbnail=rby[t["id"]].get("thumbnail"))
+    atlas["readiness_levels_v1"] = atlas["readiness_levels"]; atlas["readiness_rule_v1"] = atlas["readiness_rule"]
+    atlas["readiness_levels"] = {str(k): dict(label=v[0], meaning=v[1]) for k, v in RD.LEVELS.items()}
+    atlas["readiness_rule"] = ("Readiness model v" + RD.MODEL_VERSION + ": four cumulative levels computed from explicit checks (see each target's check list). "
+                               "L1 catalogued — never ranked; L2 partially characterized — exploratory partial comparison on DIRECT criteria only; "
+                               "L3+ full comparison. Readiness is about data completeness and reproducibility, not scientific validity or mission safety.")
+    rbytes = json.dumps(reg, indent=1, allow_nan=False, ensure_ascii=False).encode("utf-8")
+    open(os.path.join(REPO, "public/data/registry.json"), "wb").write(rbytes)
+    atlas["registry"] = dict(file="../registry.json", schema=reg["schema"], version=reg["registry_version"], sha256=sha(rbytes), bytes=len(rbytes),
+                             note="The browser verifies registry.json against this SHA-256 (the atlas itself is bound to the predictor stack).")
     json.dump(atlas, open(os.path.join(PUB, "atlas.json"), "w"), indent=1, allow_nan=False)
     for t in targets:
-        print(f"{t['id']:30s} L{t['readiness']['level']} " + " ".join(f"{c[:5]}={t['status'][c][:4]}" for c in CRITERION_IDS))
+        print(f"{t['id']:30s} L{t['readiness']['level']} (v1 L{t['readiness_v1']['level']}) " + " ".join(f"{c[:5]}={t['status'][c][:4]}" for c in CRITERION_IDS))
+    from collections import Counter
+    print("targets by readiness level", dict(sorted(Counter(t["readiness"]["level"] for t in targets).items())),
+          "| locations by level", dict(sorted(Counter(l["readiness"]["level"] for l in reg["locations"]).items())),
+          "| locations", len(reg["locations"]), "regions", len(reg["regions"]))
     print("atlas ranges", {k: [round(a, 3), round(b, 3)] for k, (a, b) in atlas_ranges.items()})
 
 

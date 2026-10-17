@@ -121,10 +121,36 @@ def main(repo="."):
     if os.path.isdir(p3):
         app_js += "\n" + "\n".join(open(os.path.join(p3, f)).read() for f in sorted(os.listdir(p3)) if f.endswith(".js"))
         css += "\n" + "\n".join(open(os.path.join(p3, f)).read() for f in sorted(os.listdir(p3)) if f.endswith(".css"))
+    # Phase IV (additive): app/frontend/phase4/*.js appended after Phase III, *.css after Phase III css
+    p4 = os.path.join(repo, "app/frontend/phase4")
+    if os.path.isdir(p4):
+        app_js += "\n" + "\n".join(open(os.path.join(p4, f)).read() for f in sorted(os.listdir(p4)) if f.endswith(".js"))
+        css += "\n" + "\n".join(open(os.path.join(p4, f)).read() for f in sorted(os.listdir(p4)) if f.endswith(".css"))
     html = src.replace("/*__CSS__*/", css).replace("/*__ENGINE__*/", eng).replace("/*__APP__*/", app_js)
     open(os.path.join(repo, "public/index.html"), "w").write(html)
+    write_service_worker(repo)
     print("ranges", {k: [round(a, 3), round(b, 3)] for k, (a, b) in ranges.items()})
     print("index.html", len(html), "bytes")
+
+
+# Phase IV: versioned offline cache. CORE = files needed to start and use every module offline; other
+# published files (Phase II series, stack.bin) are cached on first use. VERSION = SHA-256 over all published files.
+SW_LAZY = {"data/phase2/series.b64.txt", "data/stack.bin"}
+
+
+def write_service_worker(repo):
+    pub = os.path.join(repo, "public")
+    src = os.path.join(repo, "app/frontend/sw.src.js")
+    if not os.path.exists(src):
+        return
+    files = sorted(os.path.relpath(os.path.join(d, f), pub).replace(os.sep, "/") for d, _, fs in os.walk(pub) for f in fs if f != "sw.js")
+    h = hashlib.sha256()
+    for f in files:
+        h.update(f.encode() + b"\0" + hashlib.sha256(open(os.path.join(pub, f), "rb").read()).digest())
+    core = ["./"] + [f for f in files if f not in SW_LAZY]
+    js = open(src).read().replace("__VERSION__", h.hexdigest()[:16]).replace("__CORE__", json.dumps(core))
+    open(os.path.join(pub, "sw.js"), "w").write(js)
+    print("sw.js", h.hexdigest()[:16], len(core), "core files")
 
 
 if __name__ == "__main__":

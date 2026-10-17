@@ -21,9 +21,9 @@ function atCard(t) {
     <div class="meta small">Comparable: ${dir.length ? esc(dir.join(", ")) : "none"}${gaps.length ? " · Gaps: " + esc(gaps.join(", ")) : ""}</div>
     <footer class="row"><button class="btn-sm" data-a3="go" data-to="target" data-id="${t.id}">Open</button>
       <button class="btn-sm${on ? " on" : ""}" data-a3="toggle" data-id="${t.id}" aria-pressed="${on}">${on ? "Selected" : "Select to compare"}</button>
-      ${t.readiness.level >= 2 ? `<button class="btn-sm" data-a3="go" data-to="workflow" data-id="${t.id}">Workflow</button>` : `<span class="meta">Not rankable (L1)</span>`}</footer></article>`;
+      ${ATL.eligibility(t, S.critIds).ok ? `<button class="btn-sm" data-a3="go" data-to="workflow" data-id="${t.id}">Workflow</button>` : `<span class="meta">Not rankable (L${t.readiness.level})</span>`}</footer></article>`;
 }
-A3_VIEWS.catalog = function () {
+A3_VIEWS.catalog = function () {  // Phase IV: readiness model 3 (L1–L4); catalogue-only locations live in the hierarchical atlas
   const A = A3.atlas, all = A.targets.filter(t => t.body === A3.body), shown = A.targets.filter(atMatches);
   const lv = [1, 2, 3, 4].map(l => all.filter(t => t.readiness.level === l).length);
   let h = `<div class="sec"><h3 class="ttl">Planetary target atlas</h3>${atBanner("catalogue")}

@@ -27,12 +27,15 @@
     return tv;
   }
   function eligibility(t, critIds) {
-    const lvl = t.readiness.level;
-    if (lvl < 2) return { ok: false, mode: "none", reason: "Readiness level 1: no directly comparable criterion. Excluded from every ranking." };
+    /* Readiness (Phase IV model 3.0.0, and the Phase III v1 rule — same thresholds): L1 catalogued, never ranked;
+     * L2 partially characterized → partial comparison on DIRECT criteria only; L3+ full. A record carrying the
+     * transitional model 2.0.0 (levels 0–4) is read with its own thresholds (L0 none, L1–L2 partial). */
+    const lvl = t.readiness.level, m2 = t.readiness.model === "2.0.0";
     const direct = critIds.filter(c => SCOREABLE[t.status[c]]);
+    if ((m2 ? lvl < 1 : lvl < 2) || !direct.length) return { ok: false, mode: "none", reason: `Readiness level ${lvl}: no analytical data / no directly comparable criterion. Excluded from every ranking.` };
     const terrainOnly = direct.every(c => c === "slope" || c === "surface_roughness");
-    if (lvl === 2) return { ok: true, mode: terrainOnly ? "partial-terrain" : "partial", direct,
-      reason: `Readiness level 2: only ${direct.length} directly comparable criteria (${direct.join(", ")}). Results are a partial comparison, not a six-variable ranking.` };
+    if (m2 ? lvl <= 2 : lvl === 2) return { ok: true, mode: terrainOnly ? "partial-terrain" : "partial", direct,
+      reason: `Readiness level ${lvl}: only ${direct.length} directly comparable criteria (${direct.join(", ")}). Results are an exploratory partial comparison, not a six-variable ranking.` };
     return { ok: true, mode: "full", direct, reason: `Readiness level ${lvl}: ${direct.length} directly comparable criteria.` };
   }
 
@@ -327,7 +330,7 @@
     const block = (s, why) => out.push({ stage: s, status: "BLOCKED", why });
     if (!t) { STAGES.forEach(s => block(s, "Select a target.")); return out; }
     out.push({ stage: "target", status: "DONE", why: `${t.name} · readiness L${t.readiness.level}` });
-    if (t.readiness.level < 2) { STAGES.slice(1).forEach(s => block(s, "Readiness level 1: no comparable criteria. Stop: assemble target data first.")); return out; }
+    if (!eligibility(t, Object.keys(t.status)).ok) { STAGES.slice(1).forEach(s => block(s, `Readiness level ${t.readiness.level}: no comparable criteria. Stop: assemble target data first.`)); return out; }
     out.push({ stage: "candidate", status: ctx.candidate != null ? "DONE" : "READY", why: ctx.candidate != null ? "Candidate selected." : "Choose an Earth candidate." });
     if (ctx.candidate == null) { STAGES.slice(2).forEach(s => block(s, "Needs a candidate.")); return out; }
     out.push({ stage: "evidence", status: "DONE", why: "Evidence record assembled from statuses and provenance." });

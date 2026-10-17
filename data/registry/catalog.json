@@ -1,0 +1,483 @@
+{
+ "schema": "asterro.catalog-source/1",
+ "note": "CANONICAL, hand-curated catalogue structure. Contains names, groupings, aliases and source references only. Coordinates of named features are NOT typed here: they are resolved at build time from the USGS/IAU Gazetteer export (data/raw/phase4/gazetteer_catalog.json) or, for analysis windows, from the Phase III pipeline (data/raw/phase3/resolved.json). Fingerprints come only from the pipeline outputs.",
+ "bodies": [
+  {
+   "id": "mars",
+   "name": "Mars",
+   "body_type": "planet",
+   "mean_radius_km": 3389.5,
+   "reference": "NASA NSSDCA Mars Fact Sheet, https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html",
+   "coordinate_reference": "planetocentric latitude, east-positive longitude (-180..180 in this registry), IAU/USGS gazetteer convention",
+   "terrain_reference": "MGS MOLA DEM mosaic 463 m (USGS Astrogeology), sphere R = 3396.19 km"
+  },
+  {
+   "id": "moon",
+   "name": "Moon",
+   "body_type": "natural satellite",
+   "mean_radius_km": 1737.4,
+   "reference": "NASA NSSDCA Moon Fact Sheet, https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+   "coordinate_reference": "planetocentric latitude, east-positive longitude (-180..180 in this registry), IAU/USGS gazetteer convention",
+   "terrain_reference": "LRO LOLA LDEM 118 m (USGS Astrogeology), sphere R = 1737.4 km"
+  }
+ ],
+ "regions": [
+  {
+   "id": "region:mars_isidis",
+   "body": "mars",
+   "name": "Jezero / Isidis region",
+   "description": "Western margin of the Isidis basin: Jezero crater, its inlet valley and the Nili Fossae / Syrtis Major area.",
+   "features": [
+    "Jezero",
+    "Neretva Vallis",
+    "Isidis Planitia",
+    "Syrtis Major Planum",
+    "Nili Fossae"
+   ],
+   "targets": [
+    "mars_jezero"
+   ]
+  },
+  {
+   "id": "region:mars_gale",
+   "body": "mars",
+   "name": "Gale / Aeolis region",
+   "description": "Gale crater with its central mound Aeolis Mons (Mount Sharp) and the Aeolis Mensae terrain to the east.",
+   "features": [
+    "Gale",
+    "Aeolis Mons",
+    "Aeolis Mensae"
+   ],
+   "targets": [
+    "mars_gale_curiosity",
+    "mars_gale_aeolis_mons"
+   ]
+  },
+  {
+   "id": "region:mars_elysium",
+   "body": "mars",
+   "name": "Elysium region",
+   "description": "Elysium Planitia lowland plain and the Elysium Mons volcanic rise.",
+   "features": [
+    "Elysium Planitia",
+    "Elysium Mons"
+   ],
+   "targets": [
+    "mars_elysium_planitia"
+   ]
+  },
+  {
+   "id": "region:mars_utopia",
+   "body": "mars",
+   "name": "Utopia Planitia",
+   "description": "Large northern lowland basin plain.",
+   "features": [
+    "Utopia Planitia"
+   ],
+   "targets": [
+    "mars_utopia_planitia"
+   ]
+  },
+  {
+   "id": "region:mars_gusev",
+   "body": "mars",
+   "name": "Gusev / Ma'adim region",
+   "description": "Gusev crater and the Ma'adim Vallis channel that enters it from the south.",
+   "features": [
+    "Gusev",
+    "Ma'adim Vallis"
+   ],
+   "targets": [
+    "mars_gusev"
+   ]
+  },
+  {
+   "id": "region:mars_hellas",
+   "body": "mars",
+   "name": "Hellas basin",
+   "description": "Floor of the Hellas impact basin.",
+   "features": [
+    "Hellas Planitia"
+   ],
+   "targets": [
+    "mars_hellas_planitia"
+   ]
+  },
+  {
+   "id": "region:mars_valles",
+   "body": "mars",
+   "name": "Valles Marineris system",
+   "description": "The Valles Marineris canyon system and Noctis Labyrinthus at its western end.",
+   "features": [
+    "Valles Marineris",
+    "Noctis Labyrinthus"
+   ],
+   "targets": [
+    "mars_valles_marineris",
+    "mars_noctis_labyrinthus"
+   ]
+  },
+  {
+   "id": "region:mars_tharsis",
+   "body": "mars",
+   "name": "Tharsis volcanic province",
+   "description": "Olympus Mons and the Tharsis Montes shield volcanoes.",
+   "features": [
+    "Olympus Mons",
+    "Tharsis Montes",
+    "Arsia Mons",
+    "Pavonis Mons",
+    "Ascraeus Mons"
+   ],
+   "targets": [
+    "mars_olympus_mons_summit",
+    "mars_olympus_mons_flank",
+    "mars_olympus_mons_plains"
+   ]
+  },
+  {
+   "id": "region:mars_amazonis",
+   "body": "mars",
+   "name": "Arcadia–Amazonis plains",
+   "description": "Northern and western lowland plains between Tharsis and Elysium, with the Medusae Fossae formation.",
+   "features": [
+    "Arcadia Planitia",
+    "Amazonis Planitia",
+    "Medusae Fossae"
+   ],
+   "targets": [
+    "mars_arcadia_planitia",
+    "mars_amazonis_planitia"
+   ]
+  },
+  {
+   "id": "region:mars_meridiani",
+   "body": "mars",
+   "name": "Meridiani / Terra Sabaea",
+   "description": "Meridiani Planum, Endeavour crater and the Schiaparelli basin.",
+   "features": [
+    "Meridiani Planum",
+    "Endeavour",
+    "Schiaparelli"
+   ],
+   "targets": [
+    "mars_endeavour",
+    "mars_schiaparelli"
+   ]
+  },
+  {
+   "id": "region:mars_chryse",
+   "body": "mars",
+   "name": "Chryse / Oxia region",
+   "description": "Chryse Planitia, Ares Vallis, Oxia Planum and Mawrth Vallis.",
+   "features": [
+    "Chryse Planitia",
+    "Ares Vallis",
+    "Oxia Planum",
+    "Mawrth Vallis"
+   ],
+   "targets": []
+  },
+  {
+   "id": "region:mars_argyre",
+   "body": "mars",
+   "name": "Argyre basin",
+   "description": "Floor of the Argyre impact basin.",
+   "features": [
+    "Argyre Planitia"
+   ],
+   "targets": []
+  },
+  {
+   "id": "region:mars_north_polar",
+   "body": "mars",
+   "name": "North polar region",
+   "description": "Planum Boreum north polar layered deposits.",
+   "features": [
+    "Planum Boreum"
+   ],
+   "targets": [
+    "mars_planum_boreum"
+   ]
+  },
+  {
+   "id": "region:mars_south_polar",
+   "body": "mars",
+   "name": "South polar region",
+   "description": "Planum Australe south polar layered deposits.",
+   "features": [
+    "Planum Australe"
+   ],
+   "targets": [
+    "mars_planum_australe"
+   ]
+  },
+  {
+   "id": "region:moon_south_polar",
+   "body": "moon",
+   "name": "South polar region",
+   "description": "Polar craters and massifs within ~15° of the south pole, and the Schrödinger basin on the far side.",
+   "features": [
+    "Shackleton",
+    "Cabeus",
+    "Mons Malapert",
+    "de Gerlache",
+    "Haworth",
+    "Faustini",
+    "Nobile",
+    "Schrödinger"
+   ],
+   "targets": [
+    "moon_south_pole",
+    "moon_shackleton",
+    "moon_cabeus",
+    "moon_malapert_massif",
+    "moon_schrodinger"
+   ]
+  },
+  {
+   "id": "region:moon_north_polar",
+   "body": "moon",
+   "name": "North polar region",
+   "description": "Craters around the lunar north pole.",
+   "features": [
+    "Peary",
+    "Hermite"
+   ],
+   "targets": [
+    "moon_north_pole"
+   ]
+  },
+  {
+   "id": "region:moon_procellarum",
+   "body": "moon",
+   "name": "Oceanus Procellarum and volcanic terrains",
+   "description": "The largest lunar mare and the volcanic features within it.",
+   "features": [
+    "Oceanus Procellarum",
+    "Aristarchus",
+    "Marius",
+    "Reiner Gamma"
+   ],
+   "targets": [
+    "moon_oceanus_procellarum",
+    "moon_aristarchus",
+    "moon_marius_hills",
+    "moon_reiner_gamma"
+   ]
+  },
+  {
+   "id": "region:moon_nearside_maria",
+   "body": "moon",
+   "name": "Nearside maria",
+   "description": "Major nearside mare basins.",
+   "features": [
+    "Mare Tranquillitatis",
+    "Mare Imbrium",
+    "Mare Serenitatis",
+    "Mare Crisium",
+    "Mare Frigoris"
+   ],
+   "targets": []
+  },
+  {
+   "id": "region:moon_apollo",
+   "body": "moon",
+   "name": "Apollo exploration sites",
+   "description": "Landing regions of Apollo 14–17, anchored at the NSSDCA LM coordinates.",
+   "features": [
+    "Fra Mauro",
+    "Descartes",
+    "Rima Hadley",
+    "Montes Apenninus",
+    "Littrow"
+   ],
+   "targets": [
+    "moon_apollo14_fra_mauro",
+    "moon_apollo15_hadley",
+    "moon_apollo16_descartes",
+    "moon_apollo17_taurus_littrow"
+   ]
+  },
+  {
+   "id": "region:moon_basins_craters",
+   "body": "moon",
+   "name": "Basins, craters and tectonic terrains",
+   "description": "Orientale basin, young rayed craters and the Ina feature.",
+   "features": [
+    "Mare Orientale",
+    "Copernicus",
+    "Tycho",
+    "Ina"
+   ],
+   "targets": [
+    "moon_orientale"
+   ]
+  }
+ ],
+ "aliases": {
+  "Aeolis Mons": [
+   "Mount Sharp",
+   "Mt Sharp"
+  ],
+  "Gale": [
+   "Gale Crater"
+  ],
+  "Jezero": [
+   "Jezero Crater"
+  ],
+  "Gusev": [
+   "Gusev Crater"
+  ],
+  "Shackleton": [
+   "Shackleton Crater"
+  ],
+  "Cabeus": [
+   "Cabeus Crater"
+  ],
+  "Mons Malapert": [
+   "Malapert Massif",
+   "Malapert Mountain"
+  ],
+  "Schrödinger": [
+   "Schrodinger",
+   "Schrödinger Basin"
+  ],
+  "Mare Orientale": [
+   "Orientale",
+   "Orientale Basin"
+  ],
+  "Oceanus Procellarum": [
+   "Ocean of Storms"
+  ],
+  "Mare Tranquillitatis": [
+   "Sea of Tranquility"
+  ],
+  "Mare Imbrium": [
+   "Sea of Showers"
+  ],
+  "Mare Serenitatis": [
+   "Sea of Serenity"
+  ],
+  "Mare Crisium": [
+   "Sea of Crises"
+  ],
+  "Planum Boreum": [
+   "North polar layered deposits",
+   "Mars north pole"
+  ],
+  "Planum Australe": [
+   "South polar layered deposits",
+   "Mars south pole"
+  ],
+  "Endeavour": [
+   "Endeavour Crater"
+  ],
+  "Schiaparelli": [
+   "Schiaparelli Crater"
+  ],
+  "Valles Marineris": [
+   "Mariner Valley"
+  ]
+ },
+ "missions": [
+  {
+   "id": "mars2020",
+   "name": "Mars 2020 (Perseverance)",
+   "body": "mars",
+   "kind": "rover",
+   "data_used": true,
+   "reference": "PDS Atmospheres Node, Mars 2020 MEDA bundle, https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+  },
+  {
+   "id": "msl",
+   "name": "Mars Science Laboratory (Curiosity)",
+   "body": "mars",
+   "kind": "rover",
+   "data_used": true,
+   "reference": "PDS Atmospheres Node, MSL REMS volume mslrem_1001, https://pds-atmospheres.nmsu.edu/PDS/data/mslrem_1001/"
+  },
+  {
+   "id": "mgs",
+   "name": "Mars Global Surveyor (MOLA)",
+   "body": "mars",
+   "kind": "orbiter",
+   "data_used": true,
+   "reference": "USGS Astrogeology MGS MOLA DEM mosaic 463 m, https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif"
+  },
+  {
+   "id": "lro",
+   "name": "Lunar Reconnaissance Orbiter (LOLA, Diviner)",
+   "body": "moon",
+   "kind": "orbiter",
+   "data_used": true,
+   "reference": "USGS Astrogeology LOLA LDEM 118 m; PDS Geosciences Diviner GCP; Williams et al. 2019 doi:10.1029/2019JE006028"
+  },
+  {
+   "id": "apollo14",
+   "name": "Apollo 14",
+   "body": "moon",
+   "kind": "crewed landing",
+   "data_used": false,
+   "reference": "NASA NSSDCA, https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+  },
+  {
+   "id": "apollo15",
+   "name": "Apollo 15",
+   "body": "moon",
+   "kind": "crewed landing",
+   "data_used": false,
+   "reference": "NASA NSSDCA, https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+  },
+  {
+   "id": "apollo16",
+   "name": "Apollo 16",
+   "body": "moon",
+   "kind": "crewed landing",
+   "data_used": false,
+   "reference": "NASA NSSDCA, https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+  },
+  {
+   "id": "apollo17",
+   "name": "Apollo 17",
+   "body": "moon",
+   "kind": "crewed landing",
+   "data_used": false,
+   "reference": "NASA NSSDCA, https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+  }
+ ],
+ "target_missions": {
+  "mars_jezero": [
+   "mars2020",
+   "mgs"
+  ],
+  "mars_gale_curiosity": [
+   "msl",
+   "mgs"
+  ],
+  "moon_apollo14_fra_mauro": [
+   "apollo14",
+   "lro"
+  ],
+  "moon_apollo15_hadley": [
+   "apollo15",
+   "lro"
+  ],
+  "moon_apollo16_descartes": [
+   "apollo16",
+   "lro"
+  ],
+  "moon_apollo17_taurus_littrow": [
+   "apollo17",
+   "lro"
+  ]
+ },
+ "default_body_missions": {
+  "mars": [
+   "mgs"
+  ],
+  "moon": [
+   "lro"
+  ]
+ }
+}

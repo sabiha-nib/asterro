@@ -24,11 +24,14 @@ TOL = 1e-12
 
 
 def mode_of(t):
+    # readiness model 3.0.0 and the Phase III v1 rule share thresholds: L1 none, L2 partial, L3+ full
+    # (transitional model 2.0.0 used levels 0-4: L0 none, L1-L2 partial).
     lvl = t["readiness"]["level"]
-    if lvl < 2:
-        return False, "none"
+    m2 = t["readiness"].get("model") == "2.0.0"
     direct = [c for c in C if t["status"][c] in ("DIRECT", "DERIVED")]
-    if lvl == 2:
+    if (lvl < 1 if m2 else lvl < 2) or not direct:
+        return False, "none"
+    if (lvl <= 2) if m2 else (lvl == 2):
         return True, "partial-terrain" if all(c in ("slope", "surface_roughness") for c in direct) else "partial"
     return True, "full"
 

@@ -649,10 +649,101 @@ The baseline engine, scores, ranking, targets and data are unchanged; the eviden
 `docs/phase3/CHANGES.md`.
 
 ```bash
-npm test                    # 65 Python + JS parity + 65 Phase II + 126 Phase III checks
+npm test                    # Python + JS parity + Phase II + Phase III + Phase IV checks
 npm run build:phase3        # data/raw/phase3 → public/data/phase3, then rebuild index.html
 python3 scripts/replay_atlas_record.py record.json
 ```
 
 See `docs/phase3/` for README, METHODS, ARCHITECTURE, CHANGES, TEST_REPORT and LIMITATIONS.
 ASTERRO is a research and education tool; it is not NASA-approved and it certifies no site.
+
+## Phase IV — Planetary Atlas and research workspace (additive)
+
+The **Atlas** tab now opens on a hierarchical **Planetary Atlas**:
+body → region → named location → analytical target → datasets → readiness. It holds:
+
+- 69 locations on Mars and the Moon in 20 regions — names and coordinates from the IAU/USGS
+  gazetteer, NSSDCA Apollo sites or the LROC Pits Atlas, plus two ASTERRO-defined polar windows;
+- 33 analytical targets (55.6 km windows with fingerprints).
+
+**Browsing:** alias search (combobox, keyboard), a keyboard tree, region cards, a list and a
+sortable table; filters by readiness, mission, dataset, terrain category and record type;
+breadcrumbs, favourites, recently viewed locations and a quick-switch among active targets. The
+location panel lists the data actually available (value, unit, status, source product,
+resolution, spatial and temporal support), missing measurements, limitations, references and the
+readiness checks. **Actions the data cannot support are shown disabled, with the reason.**
+
+**Readiness (model 3.0.0) has four levels, computed from 12 explicit checks**
+(`src/registry/readiness.py`):
+
+| Level | Name | Requirement |
+|---|---|---|
+| 1 | Catalogued | Source-backed name, valid coordinates, place in the hierarchy. Never scored |
+| 2 | Partially characterised | A complete dataset record and a complete, checksummed measurement window. Exploratory partial comparison (DIRECT criteria only) |
+| 3 | Analytically comparable | No MISSING criterion, ≥ 3 DIRECT, valid values, units and provenance, accepted compatibility |
+| 4 | Reproducible | Versioned fingerprint hash, script checksums, and every DIRECT value regenerated **offline** from retained inputs |
+
+Readiness describes data completeness and reproducibility — not scientific validity, habitability
+or landing safety.
+
+**Current state.**
+
+- **Level 4 — 16 targets (full analysis, Explore, comparison, validation):** Jezero and Gale /
+  Curiosity; the Lunar South Pole, Shackleton, Cabeus, Malapert and the north polar window;
+  Aristarchus, Marius Hills, Oceanus Procellarum, Schrödinger and Orientale; the four Apollo windows.
+- **Level 2 — 17 targets (exploratory partial only):** 16 Mars windows have terrain only (no
+  compatible Mars thermal product was assembled), and Reiner Gamma has no valid Diviner bins.
+- **Level 1 — 38 catalogued locations** with no analytical window.
+
+**Canonical registry.** `data/registry/catalog.json` (curated, no numbers), the gazetteer export and
+the pipeline outputs are the inputs; `src/registry/build.py` generates `public/data/registry.json`
+(`asterro.registry/1`), validated by `src/registry/schema.py` (the build aborts on any error). The
+browser verifies the registry against the SHA-256 recorded in the atlas.
+
+**Scoring configurations.**
+
+| Configuration | Criteria | Normalisation | Use |
+|---|---|---|---|
+| `legacy-baseline-v1` | DIRECT + PROXY | Legacy table | Jezero, South Pole and cross-planet — unchanged |
+| `explore-target-v1` | DIRECT + PROXY | Earth ∪ target | The 14 further L3+ targets in Explore (header quick-switch). Ranges recomputed in the browser; records reproduce with `python -m scripts.reproduce_registry` |
+| `atlas-direct-v1` | DIRECT only | Earth ∪ target | Atlas default and Comparison Lab aggregates |
+| `atlas-catalogue-v1` | DIRECT only | Catalogue table | Alternative |
+
+**Research modules.**
+
+- **Comparison Lab:** side-by-side fingerprints; a compatibility matrix (status, source, spatial and
+  temporal differences); minimum, labelled mean, Pareto and per-criterion aggregates over the
+  criteria DIRECT for every selected target — blocked when there are none; a one-click bitwise
+  regression of the legacy cross-planet field.
+- **Mismatch Explorer:** deterministic per-criterion classes (agreement, partial, mismatch, proxy,
+  missing, N/A, excluded), contributions and stated scale differences.
+- **Scenario Lab:** 1–4 weight / proxy / normalisation scenarios side by side, rank changes, robust
+  candidates, contribution breakdowns; exported sets replay in the browser and in Python
+  (`scripts/replay_scenario.py`).
+- **Expedition objectives:** eight research objectives mapped by a fixed table to criteria, profiles
+  and research questions, with what is measured at the selected target. No safety or suitability claim.
+- **Validation workspace:** researcher-entered, cited reference cases only (none shipped); ranks;
+  Recall@k and labelled precision@k only with ≥ 5 positive (and ≥ 5 negative) cases; weight
+  sensitivity; holdout declared not meaningful (nothing is fitted); records make no validation claim.
+- **Readiness & Provenance centre:** every check, dataset records, per-criterion derivation,
+  regeneration results and a JSON export.
+- **Research collections:** locations, targets, Earth cells, scenario sets, comparisons and
+  references with provenance snapshots; versioned JSON import/export; validated; never overwritten.
+
+The Phase III modules (extremes, counterfactuals, expedition designer, workflow, copilot …) remain,
+under the same view ids.
+
+**Offline.** `public/sw.js` is a versioned cache (network-first; old caches deleted on activation).
+The app starts offline after one online visit — tested. Fonts and external links need the network.
+
+```bash
+npm test                 # 84 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV checks
+npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
+npm run test:ui          # the four browser walk-throughs (Playwright + Chromium)
+```
+
+**Further documentation:** `docs/phase4/` (METHODS, ARCHITECTURE, DATA, TEST_REPORT, LIMITATIONS,
+CHANGES).
+
+**Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
+NASA-approved, and it designates no site as safe.

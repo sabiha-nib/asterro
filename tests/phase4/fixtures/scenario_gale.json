@@ -1,0 +1,561 @@
+{
+ "schema": "asterro.scenario-set/1",
+ "engine": "asterro-phase4-1.0.0",
+ "created_utc": "2026-01-01T00:00:00Z",
+ "algorithm": "tai-sim-1.0.0",
+ "target": "mars_gale_curiosity",
+ "readiness_level": 4,
+ "fingerprint_sha256": "04a09e1f0e810504811cf71ef6656bfe6fbace44b893526ee8356590a59e2e5b",
+ "registry_version": "1.0.0",
+ "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "n": 20,
+ "distinct_sep_km": 300,
+ "scenarios": [
+  {
+   "id": "s1",
+   "label": "General · Earth ∪ target",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "include_proxy": false,
+   "normalisation": "earth_union_target",
+   "target_vector": {
+    "aridity": null,
+    "elevation": null,
+    "slope": 6.081906581270038,
+    "surface_roughness": 1262.4572763979963,
+    "lst_diurnal_range": 69.10945922540964,
+    "annual_temperature_range": 21.820846859752777
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     69.10945922540964
+    ]
+   },
+   "active_criteria": [
+    "annual_temperature_range",
+    "slope",
+    "surface_roughness",
+    "lst_diurnal_range"
+   ],
+   "expected_top": [
+    {
+     "cell": 65265,
+     "score": 0.7985950644038886
+    },
+    {
+     "cell": 146727,
+     "score": 0.7930438724270681
+    },
+    {
+     "cell": 69297,
+     "score": 0.7837392499856235
+    },
+    {
+     "cell": 149622,
+     "score": 0.7835399140488631
+    },
+    {
+     "cell": 139196,
+     "score": 0.7750944849474877
+    },
+    {
+     "cell": 83120,
+     "score": 0.7737106921846045
+    },
+    {
+     "cell": 149039,
+     "score": 0.7694896679957166
+    },
+    {
+     "cell": 72759,
+     "score": 0.7602841812847274
+    },
+    {
+     "cell": 154797,
+     "score": 0.7576283744304603
+    },
+    {
+     "cell": 145570,
+     "score": 0.7574058545255562
+    },
+    {
+     "cell": 145827,
+     "score": 0.7558455621630683
+    },
+    {
+     "cell": 153042,
+     "score": 0.7525967096249341
+    },
+    {
+     "cell": 6899,
+     "score": 0.7491106950593307
+    },
+    {
+     "cell": 147822,
+     "score": 0.7485763310281651
+    },
+    {
+     "cell": 140384,
+     "score": 0.7458078173368058
+    },
+    {
+     "cell": 149055,
+     "score": 0.7431589022055772
+    },
+    {
+     "cell": 146099,
+     "score": 0.7429865289722233
+    },
+    {
+     "cell": 92899,
+     "score": 0.7421272987617942
+    },
+    {
+     "cell": 145595,
+     "score": 0.7417177881954808
+    },
+    {
+     "cell": 149589,
+     "score": 0.7388094015333644
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "label": "Thermal · Earth ∪ target",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 2,
+    "elevation": 1,
+    "slope": 0.5,
+    "surface_roughness": 0.5,
+    "lst_diurnal_range": 3
+   },
+   "include_proxy": false,
+   "normalisation": "earth_union_target",
+   "target_vector": {
+    "aridity": null,
+    "elevation": null,
+    "slope": 6.081906581270038,
+    "surface_roughness": 1262.4572763979963,
+    "lst_diurnal_range": 69.10945922540964,
+    "annual_temperature_range": 21.820846859752777
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     69.10945922540964
+    ]
+   },
+   "active_criteria": [
+    "annual_temperature_range",
+    "slope",
+    "surface_roughness",
+    "lst_diurnal_range"
+   ],
+   "expected_top": [
+    {
+     "cell": 146166,
+     "score": 0.7118361690383663
+    },
+    {
+     "cell": 140384,
+     "score": 0.697898331508625
+    },
+    {
+     "cell": 74484,
+     "score": 0.6952337697972865
+    },
+    {
+     "cell": 138088,
+     "score": 0.6942200492200529
+    },
+    {
+     "cell": 139199,
+     "score": 0.6922756478551743
+    },
+    {
+     "cell": 147307,
+     "score": 0.6887407187390967
+    },
+    {
+     "cell": 144991,
+     "score": 0.6848303926789878
+    },
+    {
+     "cell": 136941,
+     "score": 0.6817193486913825
+    },
+    {
+     "cell": 138618,
+     "score": 0.6805552405893933
+    },
+    {
+     "cell": 147889,
+     "score": 0.678788150900405
+    },
+    {
+     "cell": 80241,
+     "score": 0.6764873514350577
+    },
+    {
+     "cell": 135168,
+     "score": 0.6728685449991972
+    },
+    {
+     "cell": 145596,
+     "score": 0.6702920524353471
+    },
+    {
+     "cell": 138053,
+     "score": 0.6700616861110961
+    },
+    {
+     "cell": 149622,
+     "score": 0.6687445694052542
+    },
+    {
+     "cell": 143525,
+     "score": 0.666713662215915
+    },
+    {
+     "cell": 140647,
+     "score": 0.6666943821829268
+    },
+    {
+     "cell": 142069,
+     "score": 0.664196487936605
+    },
+    {
+     "cell": 136860,
+     "score": 0.6633334513234418
+    },
+    {
+     "cell": 142656,
+     "score": 0.6629285747106932
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "label": "General · with proxies",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "include_proxy": true,
+   "normalisation": "earth_union_target",
+   "target_vector": {
+    "aridity": 0,
+    "elevation": 5701.98876953125,
+    "slope": 6.081906581270038,
+    "surface_roughness": 1262.4572763979963,
+    "lst_diurnal_range": 69.10945922540964,
+    "annual_temperature_range": 21.820846859752777
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     69.10945922540964
+    ]
+   },
+   "active_criteria": [
+    "aridity",
+    "annual_temperature_range",
+    "elevation",
+    "slope",
+    "surface_roughness",
+    "lst_diurnal_range"
+   ],
+   "expected_top": [
+    {
+     "cell": 146728,
+     "score": 0.7888660197978266
+    },
+    {
+     "cell": 145570,
+     "score": 0.7819388850830736
+    },
+    {
+     "cell": 140960,
+     "score": 0.7748668413620585
+    },
+    {
+     "cell": 149622,
+     "score": 0.7637686206483506
+    },
+    {
+     "cell": 69297,
+     "score": 0.7630142176706632
+    },
+    {
+     "cell": 78515,
+     "score": 0.7621786708036945
+    },
+    {
+     "cell": 148463,
+     "score": 0.7546809203216099
+    },
+    {
+     "cell": 84271,
+     "score": 0.7520202167342719
+    },
+    {
+     "cell": 72754,
+     "score": 0.7489634977988512
+    },
+    {
+     "cell": 145595,
+     "score": 0.7464568381918575
+    },
+    {
+     "cell": 146165,
+     "score": 0.7436068338110577
+    },
+    {
+     "cell": 147864,
+     "score": 0.7420998114770665
+    },
+    {
+     "cell": 140966,
+     "score": 0.7379223364955968
+    },
+    {
+     "cell": 65265,
+     "score": 0.7362287008542229
+    },
+    {
+     "cell": 81393,
+     "score": 0.7308376837347973
+    },
+    {
+     "cell": 137516,
+     "score": 0.7274251399162538
+    },
+    {
+     "cell": 145564,
+     "score": 0.727421942361599
+    },
+    {
+     "cell": 138620,
+     "score": 0.7237113910531944
+    },
+    {
+     "cell": 153655,
+     "score": 0.7158012121291435
+    },
+    {
+     "cell": 149629,
+     "score": 0.7152207399517273
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "label": "General · Earth only",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "include_proxy": false,
+   "normalisation": "earth_only",
+   "target_vector": {
+    "aridity": null,
+    "elevation": null,
+    "slope": 6.081906581270038,
+    "surface_roughness": 1262.4572763979963,
+    "lst_diurnal_range": 69.10945922540964,
+    "annual_temperature_range": 21.820846859752777
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     41.85270690917969
+    ]
+   },
+   "active_criteria": [
+    "annual_temperature_range",
+    "slope",
+    "surface_roughness",
+    "lst_diurnal_range"
+   ],
+   "expected_top": [
+    {
+     "cell": 6899,
+     "score": 0.7250615764285658
+    },
+    {
+     "cell": 65265,
+     "score": 0.7109745955369929
+    },
+    {
+     "cell": 146727,
+     "score": 0.7107637438678585
+    },
+    {
+     "cell": 69297,
+     "score": 0.7069465735420215
+    },
+    {
+     "cell": 149622,
+     "score": 0.7046884859969028
+    },
+    {
+     "cell": 83120,
+     "score": 0.703585003345906
+    },
+    {
+     "cell": 139196,
+     "score": 0.6957350715173969
+    },
+    {
+     "cell": 146099,
+     "score": 0.6940285718187237
+    },
+    {
+     "cell": 72759,
+     "score": 0.6920689649777675
+    },
+    {
+     "cell": 149039,
+     "score": 0.6890077869817915
+    },
+    {
+     "cell": 147822,
+     "score": 0.6872399575853574
+    },
+    {
+     "cell": 20140,
+     "score": 0.6809977648152399
+    },
+    {
+     "cell": 154797,
+     "score": 0.6778342840214802
+    },
+    {
+     "cell": 140384,
+     "score": 0.6758315481347912
+    },
+    {
+     "cell": 152420,
+     "score": 0.6727700354813986
+    },
+    {
+     "cell": 145570,
+     "score": 0.6717109285490886
+    },
+    {
+     "cell": 76211,
+     "score": 0.6715283890624253
+    },
+    {
+     "cell": 145826,
+     "score": 0.6675815311019545
+    },
+    {
+     "cell": 4682,
+     "score": 0.6666545592294796
+    },
+    {
+     "cell": 153042,
+     "score": 0.6648409325062421
+    }
+   ]
+  }
+ ]
+}

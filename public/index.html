@@ -441,6 +441,127 @@ dl.at-dl dd{margin:0;color:var(--ink-2);word-break:break-word}
 .mono{font-family:var(--f-mono)}
 @media (max-width:760px){.at-fpmini{grid-template-columns:repeat(3,1fr)}ol.at-stages{grid-template-columns:repeat(2,1fr)}.at-cards{grid-template-columns:1fr}dl.at-dl{grid-template-columns:1fr}}
 .callout.small{font-size:11px;margin-top:6px}
+
+/* ===== Phase IV · Planetary atlas & research workspace (cartographic layer; tokens from styles.css) ===== */
+/* contrast: inside the atlas workspace the tertiary ink is lifted to ≥ 4.5:1 on every panel colour */
+[data-p4]{--ink-3:#8A95A1}
+[data-p4] .meta{color:var(--ink-2)}
+.lab-banner.p4 b{color:var(--earth)}
+.p4-bad{color:var(--mismatch)}
+.lvl-1{color:var(--ink-2);border-style:dotted}
+.p4-nav{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.p4-g1{display:flex;gap:2px;border-bottom:1px solid var(--line)}
+.p4-g1 button{font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;color:var(--ink-2)}
+.p4-g1 button[aria-current="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.p4-g2{display:flex;flex-wrap:wrap;gap:2px}
+.p4-g2 button{font:500 9.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 8px;border-radius:2px;color:var(--ink-2);border:1px solid transparent}
+.p4-g2 button:hover,.p4-g1 button:hover{color:var(--ink)}
+.p4-g2 button[aria-current="page"]{color:var(--ink);border-color:var(--line-2);background:var(--raise)}
+.p4-hero{background:linear-gradient(180deg,rgba(127,179,174,.06),transparent 70%);border-bottom:1px solid var(--line)}
+.p4-h{font:800 44px/0.95 var(--f-display);letter-spacing:.02em;margin:4px 0 8px;text-transform:uppercase}
+.p4-body button{min-width:64px}
+.p4-search{position:relative;max-width:100%;margin:10px 0 6px}
+.p4-search input{width:100%;font:500 14px/1.2 var(--f-body);padding:11px 12px;background:var(--ground);color:var(--ink);border:1px solid var(--line-2);border-radius:var(--r)}
+.p4-search input:focus{border-color:var(--earth);outline:none;box-shadow:0 0 0 2px rgba(127,179,174,.35)}
+.p4-sr{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 2px);list-style:none;margin:0;padding:4px;background:var(--raise);border:1px solid var(--line-2);border-radius:var(--r);max-height:320px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.p4-sr li{padding:7px 8px;border-radius:2px;cursor:pointer}
+.p4-sr li[aria-selected="true"],.p4-sr li:hover{background:var(--panel-2);box-shadow:inset 2px 0 0 var(--earth)}
+.p4-lv{gap:6px;flex-wrap:wrap;margin:6px 0}
+.p4-strip{gap:6px;flex-wrap:wrap;margin:4px 0}.p4-strip .lbl{margin:0 4px 0 0}
+.p4-strip .tag{cursor:pointer}
+.p4-modes{display:flex;gap:2px;margin-top:10px;border-bottom:1px solid var(--line)}
+.p4-modes button{font:600 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:9px 12px;color:var(--ink-2)}
+.p4-modes button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--earth)}
+.p4-split{display:grid;grid-template-columns:minmax(210px,280px) minmax(0,1fr);gap:16px;align-items:start}
+.p4-col-tree,.p4-col-main{min-width:0}
+.p4-col-tree{position:sticky;top:0;max-height:78vh;overflow:auto;border-right:1px solid var(--line);padding-right:8px}
+.p4-tree,.p4-tree ul{list-style:none;margin:0;padding:0}
+.p4-tree ul{padding-left:14px;border-left:1px dotted var(--line-2);margin-left:5px}
+.p4-tree [role=treeitem]{cursor:pointer}
+.p4-tree [role=treeitem]>.p4-tn{display:flex;gap:6px;align-items:center;padding:4px 6px;border-radius:2px;font-size:12.5px;color:var(--ink-2)}
+.p4-tree [role=treeitem]>.p4-tn i{font-style:normal;width:10px;color:var(--ink-3)}
+.p4-tree [role=treeitem]>.p4-tn .lvl{margin-left:auto;padding:2px 4px;font-size:8.5px}
+.p4-tree [role=treeitem][aria-selected="true"]>.p4-tn{background:var(--raise);color:var(--ink);box-shadow:inset 2px 0 0 var(--accent)}
+.p4-tree [role=treeitem]:focus{outline:none}.p4-tree [role=treeitem]:focus>.p4-tn{outline:2px solid var(--earth);outline-offset:-2px}
+.p4mk{cursor:pointer}.p4mk circle{stroke:#0b0e11;stroke-width:1}.p4mk text{font:500 9.5px var(--f-mono);fill:var(--ink);paint-order:stroke;stroke:#000;stroke-width:3px;pointer-events:none}
+.p4mk.lvl-1 circle{fill:none;stroke:var(--ink-2);stroke-width:1.2}
+.p4mk.lvl-2 circle{fill:var(--partial)}.p4mk.lvl-3 circle{fill:var(--earth)}.p4mk.lvl-4 circle{fill:var(--match)}
+.p4mk.act circle{stroke:var(--ink);stroke-width:2.2}
+.p4-summary{border:1px solid var(--line-2);border-radius:var(--r);padding:12px 14px;margin-top:12px;background:var(--panel-2)}
+.p4-summary h3{margin:2px 0 4px;font-size:26px}
+.p4-sh{gap:14px;align-items:flex-start}.grow{flex:1;min-width:0}
+.p4-th{margin:0;display:flex;flex-direction:column;align-items:center;flex:none}
+.p4-th img{display:block;border:1px solid var(--line-2);border-radius:2px;image-rendering:pixelated;background:#000}
+.p4-th figcaption{font:500 8.5px/1.3 var(--f-mono);color:var(--ink-2);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;text-align:center}
+.p4-th.none{border:1px dashed var(--line-2);border-radius:2px;justify-content:center;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(255,255,255,.03) 6px 12px)}
+.p4-th.none span{font:500 9px/1.3 var(--f-mono);color:var(--ink-2);text-align:center;letter-spacing:.06em;text-transform:uppercase}
+.p4-star{font-size:18px;line-height:1;color:var(--ink-2);padding:0 4px;vertical-align:middle}.p4-star[aria-pressed="true"]{color:var(--cross)}
+.p4-qa{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.p4-qa button[disabled]{opacity:.45;cursor:not-allowed;border-style:dashed}
+.p4-checks{list-style:none;margin:6px 0;padding:0;font-size:12px}
+.p4-checks li{padding:4px 0;border-bottom:1px solid var(--line)}
+.p4-checks li.ok b{color:var(--match)}.p4-checks li.no b{color:var(--mismatch)}
+details.p4-checks,details.p4-rec{border:1px solid var(--line);border-radius:var(--r);padding:6px 9px;margin:6px 0;background:var(--panel)}
+details summary{cursor:pointer}
+.p4-regions{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.p4-rc{border:1px solid var(--line-2);border-radius:var(--r);background:var(--panel-2)}
+.p4-rc.act{border-color:var(--earth)}
+.p4-rcb{display:flex;gap:10px;text-align:left;padding:10px;width:100%;color:var(--ink)}
+.p4-rcb img{border-radius:2px;border:1px solid var(--line-2);flex:none;image-rendering:pixelated}
+.p4-rcb>span{display:flex;flex-direction:column;gap:3px;min-width:0}
+.p4-cnt{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}.p4-cnt i{font:500 9.5px/1 var(--f-mono);font-style:normal;color:var(--ink-2);border:1px solid var(--line-2);padding:3px 5px;border-radius:2px}
+.p4-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.p4-card{display:flex;gap:10px;border:1px solid var(--line);border-radius:var(--r);padding:8px;background:var(--panel-2)}
+.p4-card.act{border-color:var(--accent)}
+.p4-ct{font-weight:600;font-size:14px;color:var(--ink)}
+.p4-tbl tr.act td{background:var(--raise)}
+.p4-tbl th button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
+.p4-filters{flex-wrap:wrap}
+.p4-inl{display:inline-flex;align-items:center;gap:6px}
+.p4-cm td{white-space:nowrap}.p4-cm td.small{white-space:normal;max-width:340px}
+.p4-pair td{background:rgba(140,192,143,calc(var(--a,0)*.45));text-align:center}
+.p4-agg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:6px 0 10px}
+.p4-radio{display:flex;flex-direction:column;gap:3px;border:1px solid var(--line-2);border-radius:var(--r);padding:8px 10px;cursor:pointer;background:var(--panel)}
+.p4-radio:has(input:checked){border-color:var(--earth);background:var(--panel-2)}
+.p4-radio.off{opacity:.7;border-style:dashed}
+.p4-file{position:relative;cursor:pointer;display:inline-flex;align-items:center}
+.p4-file:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.p4-caseform{flex-wrap:wrap}
+.p4-dl{display:grid;grid-template-columns:max-content 1fr;gap:3px 12px;font-size:12px;margin:8px 0}.p4-dl dt{font-family:var(--f-mono);color:var(--ink)}.p4-dl dd{margin:0;color:var(--ink-2)}
+.p4-chart svg{width:100%;max-width:420px}.p4-chart .ax{font:500 10px var(--f-mono);fill:var(--ink-2)}
+.p4-chart .bar-t{opacity:.55}
+.lvlf-1{fill:var(--ink-3)}.lvlf-2{fill:var(--partial)}.lvlf-3{fill:var(--earth)}.lvlf-4{fill:var(--match)}
+.p4-focus{border-left:2px solid var(--earth)}
+.p4-col textarea{width:100%;background:var(--ground);color:var(--ink);border:1px solid var(--line-2);border-radius:var(--r);padding:6px;font:13px var(--f-body)}
+.tc-atlas{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:4px 9px;border-left:1px solid var(--line);line-height:1.15}
+.tc-atlas i{font:500 9px/1.3 var(--f-mono);letter-spacing:.2em;font-style:normal;color:var(--ink-3)}
+.tc-atlas select{background:transparent;color:var(--ink-2);border:0;font-size:12.5px;padding:1px 0;max-width:150px}
+.tc-atlas.on{background:var(--panel-2)}.tc-atlas.on i{color:var(--accent)}.tc-atlas.on select{color:var(--ink)}
+#app[data-body4="moon"]{--accent:var(--moon);--accent-dim:#2c3c48}
+@media (max-width:900px){.p4-split{grid-template-columns:minmax(0,1fr)}.p4-col-tree{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:0 0 8px}.p4-h{font-size:34px}}
+@media (max-width:760px){.tc-atlas{display:none}}
+@media (max-width:600px){.p4-sh{flex-direction:column}.p4-h{font-size:30px}.p4-regions,.p4-cards,.p4-agg{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.p4-sr{scroll-behavior:auto}}
+.p4-chart .grat{stroke:var(--line-2);stroke-dasharray:3 3}
+.p4-b-agreement{fill:var(--match)}.p4-b-partial{fill:var(--partial)}.p4-b-mismatch{fill:var(--mismatch)}.p4-b-proxy{fill:var(--partial);opacity:.55}
+.p4-na{fill:rgba(255,255,255,.04);stroke:var(--line-2);stroke-dasharray:4 3}
+.p4-rl polyline{fill:none;stroke:var(--ink-3);stroke-width:1.2;opacity:.7}.p4-rl circle{fill:var(--ink-3)}.p4-rl text{font:500 9.5px var(--f-mono);fill:var(--ink-2)}
+.p4-rl.rob polyline{stroke:var(--earth);stroke-width:2;opacity:1}.p4-rl.rob circle{fill:var(--earth)}.p4-rl.rob text{fill:var(--ink)}
+.p4-scn{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.p4-sc{border:1px solid var(--line-2);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:var(--panel)}
+.p4-sc legend{font:600 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--earth);padding:0 4px}
+.p4-sc input,.p4-sc select,.p4-inl select,.p4-caseform input,.p4-caseform select,.p4-caseform textarea{background:var(--ground);color:var(--ink);border:1px solid var(--line-2);border-radius:2px;padding:4px 6px;font:12.5px var(--f-body)}
+.p4-sc label{display:flex;flex-direction:column;gap:2px;font:500 9.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.p4-sc label.ck{flex-direction:row;align-items:center;gap:6px}
+.p4-w{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.p4-w input{width:100%}
+.p4-scols{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.p4-run{font-size:12px;padding:9px 14px}
+.p4-crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font:500 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-bottom:4px}
+.p4-crumbs button{color:var(--ink-2);letter-spacing:inherit;text-transform:inherit;font:inherit}.p4-crumbs button:hover{color:var(--ink)}.p4-crumbs [aria-current]{color:var(--ink)}
+.p4-crumbs i{font-style:normal;color:var(--ink-3)}
+.p4-obj{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.p4-crit{border:1px solid var(--line-2);border-radius:2px;padding:4px 8px;display:flex;flex-wrap:wrap;gap:4px 10px}.p4-crit legend{font:500 9.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.tag.on{border-color:var(--accent);color:var(--ink)}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -3992,12 +4113,15 @@ LAB_ACTIONS["rv-plan"] = () => { L.reviewText = planMarkdown(L.plan.out); L.rev.
     return tv;
   }
   function eligibility(t, critIds) {
-    const lvl = t.readiness.level;
-    if (lvl < 2) return { ok: false, mode: "none", reason: "Readiness level 1: no directly comparable criterion. Excluded from every ranking." };
+    /* Readiness (Phase IV model 3.0.0, and the Phase III v1 rule — same thresholds): L1 catalogued, never ranked;
+     * L2 partially characterized → partial comparison on DIRECT criteria only; L3+ full. A record carrying the
+     * transitional model 2.0.0 (levels 0–4) is read with its own thresholds (L0 none, L1–L2 partial). */
+    const lvl = t.readiness.level, m2 = t.readiness.model === "2.0.0";
     const direct = critIds.filter(c => SCOREABLE[t.status[c]]);
+    if ((m2 ? lvl < 1 : lvl < 2) || !direct.length) return { ok: false, mode: "none", reason: `Readiness level ${lvl}: no analytical data / no directly comparable criterion. Excluded from every ranking.` };
     const terrainOnly = direct.every(c => c === "slope" || c === "surface_roughness");
-    if (lvl === 2) return { ok: true, mode: terrainOnly ? "partial-terrain" : "partial", direct,
-      reason: `Readiness level 2: only ${direct.length} directly comparable criteria (${direct.join(", ")}). Results are a partial comparison, not a six-variable ranking.` };
+    if (m2 ? lvl <= 2 : lvl === 2) return { ok: true, mode: terrainOnly ? "partial-terrain" : "partial", direct,
+      reason: `Readiness level ${lvl}: only ${direct.length} directly comparable criteria (${direct.join(", ")}). Results are an exploratory partial comparison, not a six-variable ranking.` };
     return { ok: true, mode: "full", direct, reason: `Readiness level ${lvl}: ${direct.length} directly comparable criteria.` };
   }
 
@@ -4292,7 +4416,7 @@ LAB_ACTIONS["rv-plan"] = () => { L.reviewText = planMarkdown(L.plan.out); L.rev.
     const block = (s, why) => out.push({ stage: s, status: "BLOCKED", why });
     if (!t) { STAGES.forEach(s => block(s, "Select a target.")); return out; }
     out.push({ stage: "target", status: "DONE", why: `${t.name} · readiness L${t.readiness.level}` });
-    if (t.readiness.level < 2) { STAGES.slice(1).forEach(s => block(s, "Readiness level 1: no comparable criteria. Stop: assemble target data first.")); return out; }
+    if (!eligibility(t, Object.keys(t.status)).ok) { STAGES.slice(1).forEach(s => block(s, `Readiness level ${t.readiness.level}: no comparable criteria. Stop: assemble target data first.`)); return out; }
     out.push({ stage: "candidate", status: ctx.candidate != null ? "DONE" : "READY", why: ctx.candidate != null ? "Candidate selected." : "Choose an Earth candidate." });
     if (ctx.candidate == null) { STAGES.slice(2).forEach(s => block(s, "Needs a candidate.")); return out; }
     out.push({ stage: "evidence", status: "DONE", why: "Evidence record assembled from statuses and provenance." });
@@ -4655,9 +4779,9 @@ function atCard(t) {
     <div class="meta small">Comparable: ${dir.length ? esc(dir.join(", ")) : "none"}${gaps.length ? " · Gaps: " + esc(gaps.join(", ")) : ""}</div>
     <footer class="row"><button class="btn-sm" data-a3="go" data-to="target" data-id="${t.id}">Open</button>
       <button class="btn-sm${on ? " on" : ""}" data-a3="toggle" data-id="${t.id}" aria-pressed="${on}">${on ? "Selected" : "Select to compare"}</button>
-      ${t.readiness.level >= 2 ? `<button class="btn-sm" data-a3="go" data-to="workflow" data-id="${t.id}">Workflow</button>` : `<span class="meta">Not rankable (L1)</span>`}</footer></article>`;
+      ${ATL.eligibility(t, S.critIds).ok ? `<button class="btn-sm" data-a3="go" data-to="workflow" data-id="${t.id}">Workflow</button>` : `<span class="meta">Not rankable (L${t.readiness.level})</span>`}</footer></article>`;
 }
-A3_VIEWS.catalog = function () {
+A3_VIEWS.catalog = function () {  // Phase IV: readiness model 3 (L1–L4); catalogue-only locations live in the hierarchical atlas
   const A = A3.atlas, all = A.targets.filter(t => t.body === A3.body), shown = A.targets.filter(atMatches);
   const lv = [1, 2, 3, 4].map(l => all.filter(t => t.readiness.level === l).length);
   let h = `<div class="sec"><h3 class="ttl">Planetary target atlas</h3>${atBanner("catalogue")}
@@ -5510,5 +5634,1649 @@ A3_VIEWS.provenance = function () {
       <p class="note small">${esc(A.normalisation.method)}. ${esc(A.normalisation.note)}</p></div>
     <div class="sec"><div class="lbl">Data files</div><div class="tbl-wrap"><table class="t"><tbody>${Object.entries(A.files).map(([k, f]) => `<tr><td>${esc(k)}</td><td class="mono">${esc(f.file)}</td><td class="mono meta">${esc((f.sha256 || "").slice(0, 16))}…</td><td class="meta">${esc(f.note || f.use || "")}</td></tr>`).join("")}</tbody></table></div>
       ${A.files.subcell ? `<p class="note small">Sub-cell check: mean slope recomputed from the histogram pass equals the baseline cell slope for ${nfmt(A.files.subcell.check.cells_compared)} cells (max |Δ| ${A.files.subcell.check.max_abs_diff_mean_slope_vs_baseline}).</p>` : ""}</div>`;
+};
+
+/* ASTERRO Phase IV — registry engine (browser + Node).
+ *
+ * Pure, deterministic functions over the canonical target registry (public/data/registry.json,
+ * schema asterro.registry/1) used by every Phase IV module:
+ *   index / search / filter / sort       hierarchical atlas: body → region → location → target
+ *   quickActions                         what can be done with a location, and why not
+ *   compatibility / aggregatePlan / aggregate   multi-target comparison with explicit blocking
+ *   validationMetrics / weightSensitivity / holdoutCheck   researcher reference cases (never synthetic)
+ *   mismatch                             deterministic per-criterion agreement classes
+ *   collections                          versioned JSON, validated import, conflict-reporting merge
+ *   provenanceExport                     machine-readable readiness / provenance export
+ * Scoring reuses AsterroLab.prepare / fieldScore (the baseline formula). Nothing here changes the baseline
+ * Analogue Score, weights, ranges or ranking. No randomness. No learned or generative model.
+ */
+(function (root) {
+  "use strict";
+  const LAB = root.AsterroLab || (typeof require === "function" ? require("../phase2/lab_engine.js") : null);
+  const VERSION = "asterro-phase4-1.0.0";
+  const SCHEMA = "asterro.registry/1";
+  const COLLECTION_SCHEMA = "asterro.collections/1";
+  const VALIDATION_SCHEMA = "asterro.validation/1";
+  const SCENARIO_SCHEMA = "asterro.scenario-set/1";
+  const ITEM_KINDS = ["location", "target", "earth_cell", "scenario_set", "comparison", "reference"];
+  const EVIDENCE = { field_study: "Peer-reviewed field or laboratory study", mission_doc: "Mission or agency documentation", expert: "Expert judgment (documented)", other: "Other cited source" };
+  const STATUSES = ["DIRECT", "PROXY", "N/A", "MISSING"];
+  const AGGREGATES = {
+    minimum: "Minimum of the per-target effective scores: a cell is high only if it resembles every target.",
+    mean: "Arithmetic mean of the per-target effective scores — a labelled summary, not a physical quantity; a high mean can hide a poor match to one target.",
+    pareto: "Pareto set: cells not dominated on every target's score. No single winner is claimed.",
+    per_criterion: "Per shared DIRECT criterion: the minimum over targets of the criterion similarity. No cross-criterion sum.",
+  };
+  /* minimum label counts for metrics (documented in the UI and in each validation record) */
+  const MIN_POS_RECALL = 5, MIN_POS_PRECISION = 5, MIN_NEG_PRECISION = 5;
+
+  const norm = s => String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+  /* ------------------------------------------------------------------ index */
+  function index(R) {
+    if (!R || R.schema !== SCHEMA) throw new Error("not an " + SCHEMA + " registry");
+    const by = k => Object.fromEntries((R[k] || []).map(x => [x.id, x]));
+    const IX = { R, bodies: by("bodies"), regions: by("regions"), locations: by("locations"), targets: by("targets"),
+      datasets: by("datasets"), missions: by("missions"), configs: by("scoring_configs"), docs: [] };
+    for (const l of R.locations) {
+      const reg = IX.regions[l.region];
+      const ms = (l.missions || []).map(m => IX.missions[m] ? IX.missions[m].name : m);
+      const ts = (l.target_ids || []).map(t => IX.targets[t]).filter(Boolean);
+      IX.docs.push({ kind: "location", id: l.id, body: l.body, name: l.name, n: norm(l.name), aliases: (l.aliases || []).map(norm),
+        extra: norm([l.feature_type, reg && reg.name, ms.join(" "), ts.map(t => t.name).join(" "), l.quadrangle].join(" ")) });
+    }
+    for (const r of R.regions) IX.docs.push({ kind: "region", id: r.id, body: r.body, name: r.name, n: norm(r.name), aliases: [], extra: norm(r.description) });
+    IX.byBodyRegion = {};
+    for (const r of R.regions) (IX.byBodyRegion[r.body] = IX.byBodyRegion[r.body] || []).push(r.id);
+    return IX;
+  }
+
+  /* ------------------------------------------------------------------ search (aliases, prefixes, word matches) */
+  function search(IX, q, { limit = 12, body = null } = {}) {
+    const Q = norm(q); if (!Q) return [];
+    const words = Q.split(" ");
+    const out = [];
+    for (const d of IX.docs) {
+      if (body && d.body !== body) continue;
+      let s = 0, matched = null;
+      if (d.n === Q) { s = 100; matched = "name"; }
+      else if (d.aliases.includes(Q)) { s = 90; matched = "alias"; }
+      else if (d.n.startsWith(Q)) { s = 70; matched = "name prefix"; }
+      else if (d.aliases.some(a => a.startsWith(Q))) { s = 60; matched = "alias prefix"; }
+      else {
+        const hay = [d.n, ...d.aliases, d.extra].join(" ");
+        if (words.every(w => hay.split(" ").some(h => h.startsWith(w)))) { s = 30 + (words.every(w => (d.n + " " + d.aliases.join(" ")).includes(w)) ? 10 : 0); matched = "words"; }
+      }
+      if (s) out.push({ kind: d.kind, id: d.id, name: d.name, body: d.body, score: s + (d.kind === "location" ? 1 : 0), matched });
+    }
+    out.sort((a, b) => (b.score - a.score) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
+    return out.slice(0, limit);
+  }
+
+  /* ------------------------------------------------------------------ filters + sorting */
+  function locLevel(l) { return l.readiness ? l.readiness.level : 0; }
+  function filterLocations(IX, f = {}) {
+    const q = norm(f.q || "");
+    const hit = q ? new Set(search(IX, q, { limit: 1e9 }).filter(h => h.kind === "location").map(h => h.id)) : null;
+    return IX.R.locations.filter(l => {
+      if (f.body && l.body !== f.body) return false;
+      if (f.region && l.region !== f.region) return false;
+      if (f.minLevel != null && locLevel(l) < f.minLevel) return false;
+      if (f.level != null && f.level !== "" && locLevel(l) !== +f.level) return false;
+      if (f.mission && !(l.missions || []).includes(f.mission)) return false;
+      if (f.type && l.record_type !== f.type) return false;
+      if (f.ftype && l.feature_type !== f.ftype) return false;
+      if (f.dataset) {
+        const ds = new Set((l.target_ids || []).flatMap(t => (IX.targets[t] || {}).datasets || []));
+        if (!ds.has(f.dataset)) return false;
+      }
+      if (f.analytical === true && !(l.target_ids || []).length) return false;
+      if (hit && !hit.has(l.id)) return false;
+      return true;
+    });
+  }
+  const SORTS = {
+    name: (a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id),
+    readiness: (a, b) => (locLevel(b) - locLevel(a)) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id),
+    latitude: (a, b) => (b.latitude - a.latitude) || a.id.localeCompare(b.id),
+    longitude: (a, b) => (a.longitude_east - b.longitude_east) || a.id.localeCompare(b.id),
+    targets: (a, b) => ((b.target_ids || []).length - (a.target_ids || []).length) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id),
+    region: (a, b) => a.region.localeCompare(b.region) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id),
+  };
+  function sortLocations(list, key = "name") { return list.slice().sort(SORTS[key] || SORTS.name); }
+
+  function counts(IX, locs = IX.R.locations) {
+    const L = [0, 0, 0, 0, 0];               // indexed by level 1..4 (index 0 unused)
+    for (const l of locs) L[locLevel(l)]++;
+    const tl = locs.flatMap(l => (l.target_ids || []).map(t => IX.targets[t])).filter(Boolean);
+    const T = [0, 0, 0, 0, 0]; for (const t of tl) T[t.readiness.level]++;
+    return { locations: locs.length, byLevel: L, targets: tl.length, targetsByLevel: T,
+      scoring: tl.filter(t => t.scoring.earth_analogue_enabled).length, partial: tl.filter(t => !t.scoring.earth_analogue_enabled && t.readiness.level >= 1).length };
+  }
+
+  /* ------------------------------------------------------------------ quick actions (enabled / disabled with reason) */
+  function quickActions(IX, loc, { exploreIds = [] } = {}) {
+    const ts = (loc.target_ids || []).map(t => IX.targets[t]).filter(Boolean);
+    const best = ts.slice().sort((a, b) => b.readiness.level - a.readiness.level)[0] || null;
+    const lvl = best ? best.readiness.level : 0;
+    const A = (id, label, ok, why) => ({ id, label, enabled: !!ok, reason: ok ? null : why, target: best ? best.id : null });
+    const none = "Catalogued entry (L1): no analytical target has been assembled for this location, so no similarity can be computed.";
+    return [
+      A("target", "Open target analysis", best, none),
+      A("analogues", lvl >= 3 ? "Find Earth analogues" : "Find Earth analogues (partial)", best && lvl >= 2, none),
+      A("explore", "Open in Explore (globe)", best && exploreIds.includes(best.id),
+        best ? `Readiness L${lvl}: Explore runs the six-criterion baseline-style ranking only for readiness ≥ 3 targets.` : none),
+      A("compare", "Add to comparison", best && lvl >= 2, none),
+      A("validation", "Validation workspace", best && lvl >= 3, best ? `Readiness L${lvl}: reference cases are evaluated only against a complete (L3+) fingerprint.` : none),
+      A("collection", "Add to a collection", true, null),
+      A("provenance", "Readiness & provenance", true, null),
+    ];
+  }
+
+  /* ------------------------------------------------------------------ compatibility matrix */
+  function compatibility(targets, critIds) {
+    const per = critIds.map(c => {
+      const st = targets.map(t => t.fingerprint.criterion_status[c]);
+      const allDirect = st.every(s => s === "DIRECT"), allComparable = st.every(s => s === "DIRECT" || s === "PROXY");
+      const cls = allDirect ? "shared-direct" : allComparable ? "proxy-involved" : st.some(s => s === "N/A") ? "not-applicable" : "missing";
+      const ds = targets.map(t => (t.fingerprint.provenance[c] || []).join("+") || "—");
+      const sp = targets.map(t => t.fingerprint.spatial_support[c] || "—");
+      const tp = targets.map(t => t.fingerprint.temporal_support[c] || "—");
+      return { criterion: c, statuses: st, class: cls, datasets: ds, spatial: sp, temporal: tp,
+        sourceDiffers: allDirect && new Set(ds).size > 1, scaleDiffers: allDirect && new Set(sp).size > 1, timeDiffers: allDirect && new Set(tp).size > 1 };
+    });
+    const pair = targets.map(a => targets.map(b => critIds.filter(c => a.fingerprint.criterion_status[c] === "DIRECT" && b.fingerprint.criterion_status[c] === "DIRECT").length));
+    return { criteria: per, sharedDirect: per.filter(p => p.class === "shared-direct").map(p => p.criterion), pairwiseSharedDirect: pair };
+  }
+  /* is an aggregate permitted? returns { ok, reason, criteria, config, legacy } — never silently mixes criteria */
+  function aggregatePlan(IX, targetIds, aggregate, critIds) {
+    const ts = targetIds.map(id => IX.targets[id]);
+    if (ts.length < 2) return { ok: false, reason: "Select at least two analytical targets." };
+    if (ts.some(t => !t)) return { ok: false, reason: "Unknown target in the selection." };
+    if (!AGGREGATES[aggregate]) return { ok: false, reason: `Unsupported aggregate "${aggregate}". Supported: ${Object.keys(AGGREGATES).join(", ")}.` };
+    const low = ts.filter(t => t.readiness.level < 2);
+    if (low.length) return { ok: false, reason: `${low.map(t => t.name).join(", ")}: readiness L1 (catalogued) — no analytical data.` };
+    const legacy = (IX.R.comparison_experiments || []).find(x => x.regression && x.targets.length === ts.length && x.targets.every(t => targetIds.includes(t)));
+    if (legacy && aggregate === legacy.aggregate) {
+      const cfg = IX.configs[legacy.scoring_config];
+      /* legacy rule (unchanged): each target is scored on its OWN DIRECT + PROXY criteria with the legacy table */
+      return { ok: true, legacy: legacy.id, config: cfg.id, ranges: "legacy", includeProxy: true, ownCriteria: true,
+        criteria: critIds.filter(c => ts.some(t => ["DIRECT", "PROXY"].includes(t.fingerprint.criterion_status[c]))),
+        reason: `Legacy experiment "${legacy.label}": ${cfg.label}. ${legacy.meaning}` };
+    }
+    const C = compatibility(ts, critIds);
+    if (!C.sharedDirect.length) return { ok: false, reason: "These targets share no DIRECT criterion. An aggregate would compare incompatible criteria and is blocked.", compat: C };
+    const excluded = critIds.filter(c => !C.sharedDirect.includes(c));
+    return { ok: true, config: "atlas-direct-v1", ranges: "per-target", includeProxy: false, criteria: C.sharedDirect, excluded, compat: C,
+      reason: `Scored on the ${C.sharedDirect.length} criteria DIRECT for every selected target (${C.sharedDirect.join(", ")}); excluded: ${excluded.join(", ") || "none"}. Each target uses its own Earth ∪ target ranges (atlas-direct-v1).` };
+  }
+  /* fingerprint (registry) → the vector restricted to `criteria` */
+  function vectorOn(t, criteria) {
+    const tv = {};
+    for (const c of Object.keys(t.fingerprint.variables)) tv[c] = criteria.includes(c) && t.fingerprint.variables[c] != null ? +t.fingerprint.variables[c] : null;
+    return tv;
+  }
+  function earthRange(A, c) {
+    let lo = Infinity, hi = -Infinity; const e = A[c];
+    for (let i = 0; i < e.length; i++) { const x = e[i]; if (x - x !== 0) continue; if (x < lo) lo = x; if (x > hi) hi = x; }
+    return [lo, hi];
+  }
+  function earthUnionRanges(A, critIds, tv) {
+    const out = {};
+    for (const c of critIds) { const r = earthRange(A, c); if (tv[c] != null) { r[0] = Math.min(r[0], tv[c]); r[1] = Math.max(r[1], tv[c]); } out[c] = r; }
+    return out;
+  }
+  function aggregate({ IX, A, cell, lat, lon, critIds, targetIds, kind, w, legacyRanges, n = 20, sep = 300 }) {
+    const plan = aggregatePlan(IX, targetIds, kind, critIds);
+    if (!plan.ok) return { ok: false, plan };
+    const ts = targetIds.map(id => IX.targets[id]);
+    const Ps = ts.map(t => {
+      const tv = vectorOn(t, plan.ownCriteria ? critIds.filter(c => ["DIRECT", "PROXY"].includes(t.fingerprint.criterion_status[c])) : plan.criteria);
+      const ranges = plan.ranges === "legacy" ? legacyRanges : earthUnionRanges(A, critIds, tv);
+      return Object.assign(LAB.prepare(A, critIds, tv, ranges), { tv, ranges, targetId: t.id });
+    });
+    const F = Ps.map(P => LAB.fieldScore(P, w).eff), N = cell.length;
+    let eff = null, front = null, perCrit = null;
+    if (kind === "minimum") {          // same rule as the baseline cross-planet field: any ineligible → -1, else min
+      eff = new Float64Array(N);
+      for (let i = 0; i < N; i++) { let m = Infinity; for (const f of F) { if (f[i] < 0) { m = -1; break; } if (f[i] < m) m = f[i]; } eff[i] = m; }
+    }
+    else if (kind === "mean") {
+      eff = new Float64Array(N);
+      for (let i = 0; i < N; i++) { let s = 0, bad = false; for (const f of F) { if (f[i] < 0) { bad = true; break; } s += f[i]; } eff[i] = bad ? -1 : s / F.length; }
+    } else if (kind === "pareto") front = pareto(F, cell);
+    else if (kind === "per_criterion") {
+      perCrit = {};
+      for (const c of plan.criteria) {
+        const f = new Float64Array(N);
+        for (let i = 0; i < N; i++) { let m = Infinity; for (const P of Ps) { const s = P.s[c][i]; if (s !== s) { m = -1; break; } if (s < m) m = s; } f[i] = m; }
+        perCrit[c] = { top: distinct(f, cell, lat, lon, Math.min(n, 10), sep).map(i => ({ i, score: f[i] })) };
+      }
+    }
+    const top = eff ? distinct(eff, cell, lat, lon, n, sep).map(i => ({ i, score: eff[i], perTarget: F.map(f => f[i]) })) : null;
+    return { ok: true, plan, kind, eff, top, front, perCrit, perTarget: F, Ps };
+  }
+  function order(eff, cell) {
+    const idx = Array.from({ length: eff.length }, (_, i) => i);
+    idx.sort((a, b) => (eff[b] - eff[a]) || (cell[a] - cell[b]));
+    return idx;
+  }
+  function haversine(la1, lo1, la2, lo2) {
+    const r = Math.PI / 180, p1 = la1 * r, p2 = la2 * r, dp = p2 - p1, dl = (lo2 - lo1) * r;
+    let a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+    a = a < 0 ? 0 : (a > 1 ? 1 : a);
+    return 2 * 6371.0088 * Math.asin(Math.sqrt(a));
+  }
+  function distinct(eff, cell, lat, lon, n = 20, sep = 300) {
+    const o = order(eff, cell), kept = [];
+    for (let k = 0; k < o.length && kept.length < n; k++) {
+      const i = o[k]; if (!(eff[i] >= 0)) break;
+      if (kept.every(j => haversine(lat[i], lon[i], lat[j], lon[j]) >= sep)) kept.push(i);
+    }
+    return kept;
+  }
+  /* non-dominated cells (maximise every target score); cells ineligible for any target are excluded.
+   * Deterministic: cells sorted by first score desc, then by the others, then cell id. */
+  function pareto(F, cell) {
+    const N = cell.length, ids = [];
+    for (let i = 0; i < N; i++) if (F.every(f => f[i] >= 0)) ids.push(i);
+    ids.sort((a, b) => { for (const f of F) if (f[b] !== f[a]) return f[b] - f[a]; return cell[a] - cell[b]; });
+    const front = [];
+    for (const i of ids) {
+      let dom = false;
+      for (const j of front) { if (F.every(f => f[j] >= f[i]) && F.some(f => f[j] > f[i])) { dom = true; break; } }
+      if (!dom && !front.some(j => F.every(f => f[j] === f[i]))) front.push(i);
+    }
+    return front;
+  }
+
+  /* ------------------------------------------------------------------ validation (researcher-entered reference cases only) */
+  function cellIndexOf(lat, lon, idxMap) {
+    if (!(Number.isFinite(lat) && Number.isFinite(lon)) || lat < -90 || lat > 90 || lon < -180 || lon > 180) return -1;
+    const row = Math.round((lat + 90) / 0.5), col = ((Math.round((lon + 180) / 0.625) % 576) + 576) % 576;
+    const v = idxMap[row * 576 + col];
+    return v == null || v < 0 ? -1 : v;
+  }
+  function validateCase(c, idxMap) {
+    const e = [];
+    if (!c || typeof c !== "object") return ["not an object"];
+    if (!["positive", "negative"].includes(c.label)) e.push("label must be positive or negative");
+    if (!String(c.name || "").trim()) e.push("name is required");
+    if (!String(c.citation || "").trim()) e.push("a citation (publication, DOI or URL) is required");
+    if (!(Number.isFinite(+c.lat) && Number.isFinite(+c.lon))) e.push("finite latitude and longitude are required");
+    else if (cellIndexOf(+c.lat, +c.lon, idxMap) < 0) e.push("the coordinate is not on a valid Earth land cell of the stack");
+    if (c.source === "synthetic-fixture") e.push("synthetic fixture: never counted as validation");
+    if (c.evidence_quality != null && !EVIDENCE[c.evidence_quality]) e.push("evidence_quality must be one of " + Object.keys(EVIDENCE).join(", "));
+    if (c.criteria != null && !Array.isArray(c.criteria)) e.push("criteria must be a list");
+    return e;
+  }
+  function ranksOf(eff, cell, cellIdx) {
+    const o = order(eff, cell), r = new Map();
+    o.forEach((i, k) => { if (eff[i] >= 0) r.set(i, k + 1); });
+    return cellIdx.map(i => r.get(i) ?? null);
+  }
+  function validationMetrics({ eff, cell, cases, idxMap, ks = [10, 50, 100, 500] }) {
+    const ok = cases.map(c => ({ c, err: validateCase(c, idxMap) }));
+    const used = ok.filter(x => !x.err.length).map(x => x.c);
+    const idx = used.map(c => cellIndexOf(+c.lat, +c.lon, idxMap));
+    const rk = ranksOf(eff, cell, idx);
+    let nElig = 0; for (let i = 0; i < eff.length; i++) if (eff[i] >= 0) nElig++;
+    const rows = used.map((c, k) => ({ name: c.name, label: c.label, cellIndex: idx[k], rank: rk[k], percentile: rk[k] ? rk[k] / nElig : null }));
+    const pos = rows.filter(r => r.label === "positive"), neg = rows.filter(r => r.label === "negative");
+    const recall = {}, precision = {};
+    for (const k of ks) {
+      recall[k] = pos.length >= MIN_POS_RECALL ? pos.filter(r => r.rank && r.rank <= k).length / pos.length : null;
+      const lab = rows.filter(r => r.rank && r.rank <= k);
+      precision[k] = pos.length >= MIN_POS_PRECISION && neg.length >= MIN_NEG_PRECISION && lab.length ? lab.filter(r => r.label === "positive").length / lab.length : null;
+    }
+    const why = [];
+    if (pos.length < MIN_POS_RECALL) why.push(`Recall@k needs ≥ ${MIN_POS_RECALL} cited positive cases (have ${pos.length}).`);
+    if (pos.length < MIN_POS_PRECISION || neg.length < MIN_NEG_PRECISION) why.push(`Labelled precision@k needs ≥ ${MIN_POS_PRECISION} positive and ≥ ${MIN_NEG_PRECISION} negative cited cases (have ${pos.length} / ${neg.length}); it is computed over labelled cases only, never over unlabelled cells.`);
+    const evidence = {}; for (const c of used) { const k = c.evidence_quality || "unspecified"; evidence[k] = (evidence[k] || 0) + 1; }
+    return { rows, evidence, rejected: ok.filter(x => x.err.length).map(x => ({ name: x.c && x.c.name, errors: x.err })), nEligible: nElig,
+      positives: pos.length, negatives: neg.length, recall, precision, sufficiency: why, ks };
+  }
+  /* weight sensitivity: each active weight × factors; rank of every accepted case under each variant */
+  function weightSensitivity({ P, w, cell, cases, idxMap, factors = [0.5, 2] }) {
+    const used = cases.filter(c => !validateCase(c, idxMap).length), idx = used.map(c => cellIndexOf(+c.lat, +c.lon, idxMap));
+    const base = ranksOf(LAB.fieldScore(P, w).eff, cell, idx);
+    const act = P.applicable.filter(c => w[c] != null && +w[c] > 0), rows = [];
+    for (const c of act) for (const f of factors) {
+      const w2 = { ...w, [c]: +w[c] * f };
+      const r = ranksOf(LAB.fieldScore(P, w2).eff, cell, idx);
+      rows.push({ criterion: c, factor: f, ranks: r, maxShift: Math.max(0, ...r.map((x, k) => x == null || base[k] == null ? 0 : Math.abs(x - base[k]))) });
+    }
+    return { cases: used.map(c => c.name), base, rows };
+  }
+  function holdoutCheck() {
+    return { applicable: false, reason: "Not meaningful here: ASTERRO's score has no parameters fitted to labels (the weights are editorial profiles), so a train/test split would not test a learned relation. Holdout analysis becomes meaningful only if weights are ever fitted to reference cases; it is then required." };
+  }
+  function validationRecord({ target, config, w, profile, ranges, metrics, sensitivity, cases, stackSha, createdUtc }) {
+    const synthetic = cases.some(c => c && c.source === "synthetic-fixture");
+    return { schema: VALIDATION_SCHEMA, engine: VERSION, created_utc: createdUtc, predictor_stack_sha256: stackSha,
+      target, scoring_config: config, profile, weights: w, normalisation_ranges: ranges, cases,
+      label_rules: { recall_min_positive: MIN_POS_RECALL, precision_min_positive: MIN_POS_PRECISION, precision_min_negative: MIN_NEG_PRECISION },
+      evidence_classes: metrics.evidence || {}, evidence_note: "Counts by evidence class. Expert judgment is not empirical validation; software tests and synthetic fixtures are never validation.",
+      metrics: { rows: metrics.rows, recall_at_k: metrics.recall, labelled_precision_at_k: metrics.precision, sufficiency: metrics.sufficiency, rejected: metrics.rejected },
+      weight_sensitivity: sensitivity || null, holdout: holdoutCheck(), synthetic,
+      statement: synthetic ? "TEST FIXTURE — contains synthetic cases; this is not a validation." :
+        "Researcher-entered reference cases evaluated against this configuration. This record is an evaluation input, not a claim of scientific validation." };
+  }
+
+  /* ------------------------------------------------------------------ mismatch explorer */
+  const MM_CLASSES = {
+    agreement: "Similarity ≥ match threshold.", partial: "Similarity between the partial and match thresholds.", mismatch: "Similarity below the partial threshold.",
+    proxy: "Target value is a rule-based PROXY (included only on request).", proxy_excluded: "PROXY criterion not used in this comparison.",
+    missing_target: "No compatible target product (MISSING) — never imputed.", missing_earth: "Earth value missing in this cell.",
+    incompatible: "No physical counterpart at the target (N/A).", excluded_weight: "Weight 0 in the active profile.",
+  };
+  function mismatch({ t, i, A, critIds, w, ranges, includeProxy = false, thresholds, cellKm }) {
+    const fp = t.fingerprint, out = [];
+    for (const c of critIds) {
+      const st = fp.criterion_status[c], tv = fp.variables[c], e = A[c][i];
+      let cls, s = null;
+      if (st === "N/A") cls = "incompatible";
+      else if (st === "MISSING") cls = "missing_target";
+      else if (st === "PROXY" && !includeProxy) cls = "proxy_excluded";
+      else if (!(w[c] > 0)) cls = "excluded_weight";
+      else if (e - e !== 0) cls = "missing_earth";
+      else {
+        const span = ranges[c][1] - ranges[c][0]; s = 1 - Math.abs(e - tv) / span; s = s < 0 ? 0 : (s > 1 ? 1 : s);
+        cls = st === "PROXY" ? "proxy" : s >= thresholds.match ? "agreement" : s >= thresholds.partial ? "partial" : "mismatch";
+      }
+      const scale = st === "DIRECT" ? `Target: ${fp.spatial_support[c]}; ${fp.temporal_support[c]}. Earth: ${cellKm} cell value.` : null;
+      const pointVsCell = st === "DIRECT" && /point/.test(fp.spatial_support[c] || "");
+      const text = {
+        agreement: `Agreement: Earth ${fmt(e)} vs target ${fmt(tv)} (s = ${fmt(s, 3)}).`,
+        partial: `Partial agreement: Earth ${fmt(e)} vs target ${fmt(tv)} (s = ${fmt(s, 3)}).`,
+        mismatch: `Mismatch: Earth ${fmt(e)} vs target ${fmt(tv)} (s = ${fmt(s, 3)}); difference ${fmt(e - tv)}.`,
+        proxy: `Proxy comparison: target value ${fmt(tv)} is a rule, not a measurement (s = ${fmt(s, 3)}).`,
+        proxy_excluded: "Proxy criterion excluded from this comparison.",
+        missing_target: "Target value missing; this criterion is not compared and does not count as a match.",
+        missing_earth: "Earth value missing in this cell; this criterion is not compared.",
+        incompatible: "Not applicable at this target; not compared.",
+        excluded_weight: "Weight 0 in the active profile; excluded.",
+      }[cls];
+      out.push({ criterion: c, status: st, class: cls, similarity: s, earth: e - e === 0 ? +e : null, target: tv, text, scale,
+        scaleWarning: pointVsCell ? "Point measurement compared with a 0.5° × 0.625° cell mean: a scale difference, not an error." : null });
+    }
+    return out;
+  }
+  function fmt(v, d = 2) { return v == null || v !== v ? "—" : (+v).toFixed(d); }
+
+  /* ------------------------------------------------------------------ collections */
+  function newCollection(id, name, createdUtc) {
+    return { id, name, created_utc: createdUtc, updated_utc: createdUtc, version: 1, notes: "", items: [] };
+  }
+  function validateCollections(doc, IX) {
+    const e = [];
+    if (!doc || typeof doc !== "object") return ["not a JSON object"];
+    if (doc.schema !== COLLECTION_SCHEMA) e.push(`schema must be "${COLLECTION_SCHEMA}"`);
+    if (!Array.isArray(doc.collections)) { e.push("collections must be an array"); return e; }
+    const seen = new Set();
+    doc.collections.forEach((c, k) => {
+      const p = `collections[${k}]`;
+      if (!c || typeof c.id !== "string" || !/^[a-z0-9_\-]{1,64}$/.test(c.id)) e.push(`${p}: invalid id`);
+      else if (seen.has(c.id)) e.push(`${p}: duplicate id ${c.id}`); else seen.add(c.id);
+      if (!c || typeof c.name !== "string" || !c.name.trim() || c.name.length > 120) e.push(`${p}: name required (≤ 120 chars)`);
+      if (!c || !Number.isInteger(c.version) || c.version < 1) e.push(`${p}: version must be a positive integer`);
+      if (!c || !Array.isArray(c.items)) { e.push(`${p}: items must be an array`); return; }
+      c.items.forEach((it, j) => {
+        if (!it || !ITEM_KINDS.includes(it.kind)) { e.push(`${p}.items[${j}]: kind must be one of ${ITEM_KINDS.join(", ")}`); return; }
+        const q = `${p}.items[${j}]`;
+        if (it.kind === "location" && IX && !IX.locations[it.id]) e.push(`${q}: unknown location ${it.id}`);
+        if (it.kind === "target" && IX && !IX.targets[it.id]) e.push(`${q}: unknown target ${it.id}`);
+        if (it.kind === "earth_cell" && !(Number.isInteger(it.cell) && it.cell >= 0 && it.cell < 361 * 576 && Number.isFinite(it.lat) && Number.isFinite(it.lon))) e.push(`${q}: earth_cell needs an integer cell id and finite lat/lon`);
+        if (it.kind === "earth_cell" && it.target != null && IX && !IX.targets[it.target]) e.push(`${q}: unknown target ${it.target}`);
+        if (it.kind === "scenario_set" && (!it.config || it.config.schema !== SCENARIO_SCHEMA)) e.push(`${q}: scenario_set must embed an ${SCENARIO_SCHEMA} configuration`);
+        if (it.kind === "comparison" && (!it.config || !Array.isArray(it.config.targets) || !AGGREGATES[it.config.aggregate])) e.push(`${q}: comparison needs targets and a supported aggregate`);
+        if (it.kind === "reference" && !String(it.citation || "").trim()) e.push(`${q}: reference needs a citation`);
+        if (["earth_cell", "scenario_set", "comparison"].includes(it.kind) && !(it.snapshot && it.snapshot.registry_version && it.snapshot.stack_sha256)) e.push(`${q}: ${it.kind} needs a provenance snapshot (registry version, stack SHA-256)`);
+        if (it && it.note != null && (typeof it.note !== "string" || it.note.length > 2000)) e.push(`${p}.items[${j}]: note must be text ≤ 2000 chars`);
+      });
+    });
+    return e;
+  }
+  const canon = x => JSON.stringify(x, Object.keys(x).sort());
+  function sameCollection(a, b) { return a.name === b.name && a.version === b.version && JSON.stringify(a.items) === JSON.stringify(b.items) && (a.notes || "") === (b.notes || ""); }
+  /* merge never overwrites: identical → skipped; same id, different content → conflict (left untouched) */
+  function mergeCollections(existing, incoming) {
+    const out = existing.map(c => ({ ...c, items: c.items.slice() })), by = Object.fromEntries(out.map(c => [c.id, c]));
+    const added = [], skipped = [], conflicts = [];
+    for (const c of incoming) {
+      const cur = by[c.id];
+      if (!cur) { out.push({ ...c, items: c.items.slice() }); by[c.id] = c; added.push(c.id); }
+      else if (sameCollection(cur, c)) skipped.push(c.id);
+      else conflicts.push({ id: c.id, existing: { name: cur.name, version: cur.version, items: cur.items.length }, incoming: { name: c.name, version: c.version, items: c.items.length },
+        reason: "A collection with this id exists with different content. Nothing was overwritten; import it under a new id or keep the existing one." });
+    }
+    return { collections: out, added, skipped, conflicts };
+  }
+  function exportCollections(cols, createdUtc) { return { schema: COLLECTION_SCHEMA, exported_utc: createdUtc, engine: VERSION, collections: cols }; }
+
+  function snapshot(IX, targetIds, extra = {}) {
+    return Object.assign({ registry_version: IX.R.registry_version, registry_schema: IX.R.schema, readiness_model: IX.R.readiness_model.version,
+      stack_sha256: IX.R.stack_sha256, fingerprints: Object.fromEntries(targetIds.filter(t => IX.targets[t]).map(t => [t, IX.targets[t].fingerprint.content_sha256])) }, extra);
+  }
+
+  /* ------------------------------------------------------------------ scenario laboratory (reproducible scenario sets) */
+  /* A scenario = weights + proxy inclusion + normalisation strategy for ONE target. Ranges are computed by the
+   * stated rule and recorded; the expected distinct sites are recorded so the set can be replayed (browser or Python). */
+  function scenarioVector(t, includeProxy) {
+    const fp = t.fingerprint, tv = {};
+    for (const c of Object.keys(fp.variables)) { const s = fp.criterion_status[c]; tv[c] = (s === "DIRECT" || (includeProxy && s === "PROXY")) && fp.variables[c] != null ? +fp.variables[c] : null; }
+    return tv;
+  }
+  function scenarioRanges(A, critIds, tv, normalisation) {
+    if (normalisation === "earth_union_target") return earthUnionRanges(A, critIds, tv);
+    if (normalisation === "earth_only") return Object.fromEntries(critIds.map(c => [c, earthRange(A, c)]));
+    throw new Error("unsupported normalisation " + normalisation);
+  }
+  function runScenarios({ IX, A, cell, lat, lon, critIds, targetId, scenarios, n = 20, sep = 300, algorithm, createdUtc }) {
+    const t = IX.targets[targetId];
+    if (!t) throw new Error("unknown target " + targetId);
+    if (t.readiness.level < 2) throw new Error(`${t.name}: readiness L${t.readiness.level} — no analytical data`);
+    if (!scenarios.length || scenarios.length > 4) throw new Error("1 to 4 scenarios");
+    const runs = scenarios.map(sc => {
+      const tv = scenarioVector(t, !!sc.include_proxy);
+      if (!Object.values(tv).some(v => v != null)) throw new Error(`${sc.label}: no scoreable criterion`);
+      const ranges = scenarioRanges(A, critIds, tv, sc.normalisation);
+      const P = LAB.prepare(A, critIds, tv, ranges), F = LAB.fieldScore(P, sc.weights);
+      const top = distinct(F.eff, cell, lat, lon, n, sep);
+      return { sc, tv, ranges, P, eff: F.eff, top, active: F.active };
+    });
+    const union = Array.from(new Set(runs.flatMap(r => r.top.slice(0, 10))));
+    const ranks = runs.map(r => { const k = ranksOf(r.eff, cell, union); return k; });
+    const robust = union.filter((i, u) => ranks.every(rk => rk[u] != null && rk[u] <= 100));
+    const config = { schema: SCENARIO_SCHEMA, engine: VERSION, created_utc: createdUtc, algorithm, target: targetId, readiness_level: t.readiness.level,
+      fingerprint_sha256: t.fingerprint.content_sha256, registry_version: IX.R.registry_version, stack_sha256: IX.R.stack_sha256, n, distinct_sep_km: sep,
+      scenarios: runs.map(r => ({ id: r.sc.id, label: r.sc.label, weights: r.sc.weights, include_proxy: !!r.sc.include_proxy, normalisation: r.sc.normalisation,
+        target_vector: r.tv, ranges: r.ranges, active_criteria: r.active, expected_top: r.top.map(i => ({ cell: cell[i], score: r.eff[i] })) })) };
+    return { runs, union, ranks, robust, config, partial: t.readiness.level < 3 };
+  }
+  /* per-criterion contribution to the score of cell i: k_c = w_c·s_c / Σ w (criteria with a finite Earth value) */
+  function contributions(P, w, i) {
+    const act = P.applicable.filter(c => w[c] != null && +w[c] > 0);
+    let ws = 0; for (const c of act) if (P.s[c][i] === P.s[c][i]) ws += +w[c];
+    return Object.fromEntries(act.map(c => [c, P.s[c][i] === P.s[c][i] && ws > 0 ? +w[c] * P.s[c][i] / ws : null]));
+  }
+  /* replay a scenario set in the browser: recompute and compare (cells exact, scores to 1e-12) */
+  function replayScenarios({ IX, A, cell, lat, lon, critIds, config }) {
+    const msgs = [], t = IX.targets[config.target];
+    if (config.schema !== SCENARIO_SCHEMA) return { ok: false, msgs: ["not an " + SCENARIO_SCHEMA + " configuration"] };
+    if (!t) return { ok: false, msgs: ["target not in this registry"] };
+    if (config.stack_sha256 !== IX.R.stack_sha256) return { ok: false, msgs: ["recorded for a different predictor stack"] };
+    if (config.fingerprint_sha256 !== t.fingerprint.content_sha256) return { ok: false, msgs: ["target fingerprint differs from this registry"] };
+    let ok = true;
+    for (const s of config.scenarios) {
+      const tv = scenarioVector(t, s.include_proxy), R = scenarioRanges(A, critIds, tv, s.normalisation);
+      const rOK = JSON.stringify(R) === JSON.stringify(s.ranges);
+      const eff = LAB.fieldScore(LAB.prepare(A, critIds, tv, R), s.weights).eff, top = distinct(eff, cell, lat, lon, config.n, config.distinct_sep_km);
+      const same = rOK && top.length === s.expected_top.length && top.every((i, k) => cell[i] === s.expected_top[k].cell && Math.abs(eff[i] - s.expected_top[k].score) <= 1e-12);
+      ok = ok && same; msgs.push(`${same ? "OK" : "FAIL"} ${s.label}${rOK ? "" : " (ranges differ)"}`);
+    }
+    return { ok, msgs };
+  }
+
+  /* ------------------------------------------------------------------ provenance / readiness export */
+  function provenanceExport(IX, { level = null, kind = "all" } = {}) {
+    const keep = r => level == null || level === "" || r.readiness.level === +level;
+    const targets = kind === "locations" ? [] : IX.R.targets.filter(keep).map(t => ({
+      id: t.id, record_type: t.record_type, name: t.name, body: t.body.id, region: t.region.id, location: t.location.id,
+      readiness: { model: t.readiness.model, level: t.readiness.level, label: t.readiness.label, checks: t.readiness.checks.map(c => ({ id: c.id, passed: c.passed, detail: c.detail })) },
+      criterion_status: t.fingerprint.criterion_status, fingerprint_version: t.fingerprint.version, fingerprint_sha256: t.fingerprint.content_sha256,
+      datasets: t.datasets, scripts: t.provenance.scripts, regeneration: { passed: t.validation.regeneration.passed, summary: t.validation.regeneration.summary },
+      scoring: { earth_analogue_enabled: t.scoring.earth_analogue_enabled, configs: t.scoring.configs }, scientific_validation: t.validation.scientific_validation }));
+    const locations = kind === "targets" ? [] : IX.R.locations.filter(keep).map(l => ({
+      id: l.id, record_type: l.record_type, name: l.name, body: l.body, region: l.region, latitude: l.latitude, longitude_east: l.longitude_east,
+      source: l.source, readiness: { level: l.readiness.level, label: l.readiness.label, via_targets: l.readiness.via_targets } }));
+    return { schema: "asterro.provenance-export/1", registry: { schema: IX.R.schema, version: IX.R.registry_version, built_utc: IX.R.built_utc },
+      readiness_model: IX.R.readiness_model.version, filter: { level, kind }, targets, locations,
+      datasets: Array.from(new Set(targets.flatMap(t => t.datasets))).sort().map(d => IX.datasets[d]) };
+  }
+
+  const api = { VERSION, SCHEMA, COLLECTION_SCHEMA, VALIDATION_SCHEMA, SCENARIO_SCHEMA, ITEM_KINDS, EVIDENCE, snapshot, scenarioVector, scenarioRanges, runScenarios, contributions, replayScenarios, STATUSES, AGGREGATES, MM_CLASSES, MIN_POS_RECALL, MIN_POS_PRECISION, MIN_NEG_PRECISION,
+    norm, index, search, filterLocations, sortLocations, counts, quickActions, compatibility, aggregatePlan, aggregate, vectorOn, earthRange, earthUnionRanges,
+    order, distinct, pareto, cellIndexOf, validateCase, validationMetrics, weightSensitivity, holdoutCheck, validationRecord, mismatch,
+    newCollection, validateCollections, mergeCollections, exportCollections, provenanceExport, canon };
+  if (typeof module === "object" && module.exports) module.exports = api;
+  root.AsterroRegistry = api;
+})(typeof window !== "undefined" ? window : globalThis);
+
+/* ===== Phase IV · Planetary Atlas & Research Workspace — core (registry, local state, grouped navigation) =====
+ * Integration with the earlier layers is limited to:
+ *   1. new views registered in the Phase III router (A3_VIEWS) and a grouped module bar (viewAtlas is redefined;
+ *      every Phase III module stays reachable under the same id);
+ *   2. the canonical registry (public/data/registry.json), verified against the SHA-256 recorded in atlas.json;
+ *   3. the Explore adapter (ui_08_explore.js), which registers readiness ≥ 3 targets in the baseline target table.
+ * Baseline scoring, weights, ranges, ranking and the legacy targets are never modified. */
+const RG = window.AsterroRegistry;
+const A4 = {
+  reg: null, ix: null, err: null, loading: false,
+  body: "mars", region: null, loc: null, mode: "browse", q: "", sort: "readiness",
+  f: { level: "", mission: "", dataset: "", type: "", ftype: "", analytical: false },
+  tree: {}, cmp: [], agg: "minimum", aggRes: null, val: { target: "mars_gale_curiosity", cases: [], res: null, sens: null, msg: null },
+  mm: { target: null, cell: null, proxy: false }, prov: { level: "", kind: "all" }, colMsg: null, colPending: null,
+};
+const A4_KEYS = { prefs: "asterro.phase4.prefs.v1", collections: "asterro.collections.v1", cases: "asterro.phase4.cases.v1" };
+
+/* ---------- local storage (per-viewer conveniences; always optional) ---------- */
+function a4Get(k, dflt) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : dflt; } catch (e) { return dflt; } }
+function a4Set(k, v) {
+  try { localStorage.setItem(k, JSON.stringify(v)); return null; }
+  catch (e) { return /quota/i.test(e.name + e.message) ? "Browser storage is full; nothing was saved." : "Browser storage is unavailable here; nothing was saved."; }
+}
+const A4P = Object.assign({ recent: [], fav: [] }, a4Get(A4_KEYS.prefs, {}));
+function a4SavePrefs() { a4Set(A4_KEYS.prefs, { recent: A4P.recent.slice(0, 12), fav: A4P.fav }); }
+function a4Touch(id) { A4P.recent = [id, ...A4P.recent.filter(x => x !== id)].slice(0, 12); a4SavePrefs(); }
+
+/* ---------- registry (lazy, checksummed, bound to the atlas which is bound to the stack) ---------- */
+async function a4Load() {
+  if (A4.reg || A4.err || A4.loading) return A4.reg;
+  const a = await atLoad(); if (!a) return null;
+  A4.loading = true;
+  try {
+    if (!a.registry || !a.registry.sha256) throw new Error("this atlas build carries no registry reference");
+    const r = await fetch("data/registry.json"); if (!r.ok) throw new Error("data/registry.json → HTTP " + r.status);
+    const buf = await r.arrayBuffer();
+    if ((await atSha(buf)) !== a.registry.sha256) throw new Error("registry.json fails its SHA-256 check (stale cache or corrupted file); not used.");
+    const R = JSON.parse(new TextDecoder().decode(buf));
+    if (R.stack_sha256 !== S.app.stack.sha256) throw new Error("the registry was built for a different predictor stack");
+    A4.reg = R; A4.ix = RG.index(R);
+    if (!A4.loc) A4.loc = "mars:gale";
+    if (typeof a4ExploreRegister === "function") a4ExploreRegister();
+  } catch (e) { A4.err = e.message; }
+  A4.loading = false; atRender();
+  return A4.reg;
+}
+function a4Need() {
+  const n = atNeed(); if (n) return n;
+  if (A4.err) return `<div class="sec"><div class="callout">The planetary registry is unavailable: ${esc(A4.err)} The baseline application and the Phase III modules are unaffected.</div></div>`;
+  if (!A4.reg) { a4Load(); return `<div class="sec"><div class="empty">Loading the planetary registry…</div></div>`; }
+  return null;
+}
+const a4L = id => A4.ix && A4.ix.locations[id];
+const a4T = id => A4.ix && A4.ix.targets[id];
+const a4Now = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
+function a4Level(l) {
+  const r = l.readiness, k = r.level;
+  return `<span class="lvl lvl-${k}" title="${esc((A4.reg.readiness_model.levels[k] || {}).definition || "")}">L${k} · ${esc(r.label)}</span>`;
+}
+function a4Download(name, obj) {
+  const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" }), u = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(u), 2000);
+}
+function a4Banner(kind) {
+  return `<div class="lab-banner p4"><b>PHASE IV</b>${esc(kind)} · beside the baseline engine · never changes the baseline Analogue Score, weights, ranges or ranking</div>`;
+}
+
+/* ---------- grouped module bar (every Phase III module keeps its id) ---------- */
+const A4_GROUPS = [
+  { label: "Atlas", items: [["home", "Planetary Atlas"], ["catalog", "Target cards"], ["target", "Target"]] },
+  { label: "Compare", items: [["lab4", "Comparison Lab"], ["compare", "Fingerprints"], ["mmx", "Mismatch Explorer"], ["mismatch", "Mismatch map"], ["constellation", "Constellation"]] },
+  { label: "Research", items: [["scen4", "Scenario Lab"], ["workflow", "Workflow"], ["validation", "Validation"], ["extremes", "Extremes"], ["landing", "Terrain"], ["counter", "Counterfactual"], ["translate", "Translator"], ["expedition", "Expedition"], ["copilot", "Copilot"]] },
+  { label: "Records", items: [["readiness", "Readiness & Provenance"], ["collections", "Collections"], ["records", "Records"], ["provenance", "Sources"]] },
+];
+A3.view = "home";
+viewAtlas = function () {
+  const G = A4_GROUPS.find(g => g.items.some(([id]) => id === A3.view)) || A4_GROUPS[0];
+  const nav = `<nav class="p4-nav" aria-label="Atlas modules"><div class="p4-g1" role="group" aria-label="Module groups">${A4_GROUPS.map(g => `<button data-a3view="${g.items[0][0]}" aria-current="${g === G ? "true" : "false"}">${esc(g.label)}</button>`).join("")}</div>
+    <div class="p4-g2" role="group" aria-label="${esc(G.label)} modules">${G.items.map(([id, label]) => `<button data-a3view="${id}" aria-current="${A3.view === id ? "page" : "false"}">${esc(label)}</button>`).join("")}</div></nav>`;
+  let body = atNeed();
+  if (!body) {
+    const v = A3_VIEWS[A3.view] || A3_VIEWS.home;
+    try { body = v(); } catch (e) { console.error(e); body = `<div class="sec"><div class="callout">This module failed: ${esc(e.message)}. The baseline application is unaffected.</div></div>`; }
+  }
+  const l = A4.reg && a4L(A4.loc), t = A3.atlas && atT(A3.active);
+  const ctx = [l ? "Location " + esc(l.name) : "", t ? "Target " + esc(t.name) + " · L" + t.readiness.level : "", A3.sel.length ? A3.sel.length + " selected" : ""].filter(Boolean).join(" · ");
+  return `<div class="sec lab-head"><div class="lbl">Phase IV · Planetary atlas &amp; research workspace<span class="n">${ctx}</span></div>${nav}</div>${atBusyBar()}<div data-p4>${body}</div>`;
+};
+/* keep Phase III's selected target and the Phase IV location in step (one state for every view) */
+function a4SyncFromTarget(tid) {
+  const t = a4T(tid); if (!t) return;
+  A4.loc = t.location.id; A4.body = t.body.id; A4.region = t.region.id; a4Touch(A4.loc);
+}
+function a4SyncFromLocation(lid) {
+  const l = a4L(lid); if (!l) return;
+  A4.loc = lid; A4.body = l.body; A4.region = l.region; a4Touch(lid);
+  const best = l.target_ids.map(a4T).sort((a, b) => b.readiness.level - a.readiness.level)[0];
+  if (best && atT(best.id)) { A3.active = best.id; A3.body = best.body.name; }
+}
+const _a3Pick = A3_ACTIONS.pick, _a3Go = A3_ACTIONS.go, _a3Active = A3_INPUTS["at-active"];
+A3_ACTIONS.pick = function (a, e) { if (A4.ix) a4SyncFromTarget(a.dataset.id); return _a3Pick(a, e); };
+A3_ACTIONS.go = function (a, e) { if (A4.ix && a.dataset.id) a4SyncFromTarget(a.dataset.id); return _a3Go(a, e); };
+A3_INPUTS["at-active"] = function (a, e) { if (A4.ix) a4SyncFromTarget(a.value); return _a3Active(a, e); };
+/* load the registry in the background once the baseline data are in (the Explore quick-switch needs it) */
+const _p3RenderLeft = renderLeft;
+renderLeft = function () { const r = _p3RenderLeft.apply(this, arguments); if (S.app && S.A && S.A.cell && !A4.reg && !A4.err && !A4.loading) setTimeout(a4Load, 0); return r; };
+
+/* ===== Phase IV · Hierarchical Planetary Atlas =====
+ * body → region → named feature / reference area → analytical target → datasets → readiness.
+ * Every location shows its readiness and the checks behind it; actions that the data cannot support are
+ * shown disabled with the reason. A catalogued entry (L1) never receives a similarity score. */
+const A4_ACTIONS = {}, A4_INPUTS = {};
+const A4_MODES = [["browse", "Browse"], ["regions", "Regions"], ["list", "List"], ["table", "Table"]];
+const A4_SORTS = [["readiness", "Readiness"], ["name", "Name"], ["region", "Region"], ["targets", "Targets"], ["latitude", "Latitude (N→S)"], ["longitude", "Longitude (W→E)"]];
+
+function a4Filter() {
+  const f = A4.f;
+  return RG.sortLocations(RG.filterLocations(A4.ix, { body: A4.body, region: A4.mode === "browse" ? null : A4.region, q: A4.mode === "browse" ? "" : A4.q,
+    level: f.level, mission: f.mission || null, dataset: f.dataset || null, type: f.type || null, ftype: f.ftype || null, analytical: f.analytical || null }), A4.sort);
+}
+function a4Thumb(l, size = 96) {
+  const t = l.target_ids.map(a4T).find(x => x && x.thumbnail);
+  return t ? `<figure class="p4-th" style="width:${size}px"><img src="${esc(t.thumbnail)}" width="${size}" height="${size}" alt="Shaded relief of the 55.6 km analysis window (${esc(t.name)})" loading="lazy"><figcaption>${esc(t.body.id === "mars" ? "MOLA" : "LOLA")} relief · real data</figcaption></figure>`
+    : `<figure class="p4-th none" style="width:${size}px;height:${size}px" aria-label="No imagery in this build"><span>No imagery<br>in this build</span></figure>`;
+}
+function a4Ll(l) { return atFmtLL(l.latitude, l.longitude_east); }
+function a4Star(id) { const on = A4P.fav.includes(id); return `<button class="p4-star" data-a4="fav" data-id="${esc(id)}" aria-pressed="${on}" aria-label="${on ? "Remove from" : "Add to"} favourites" title="Favourite">${on ? "★" : "☆"}</button>`; }
+
+/* ---------- location map (basemap = context only) ---------- */
+function a4LocMap(body, locs, { w = 720, h = 360 } = {}) {
+  const F = A3.atlas.files["basemap_" + body], X = lon => (lon + 180) / 360 * w, Y = lat => (90 - lat) / 180 * h;
+  const mk = locs.map(l => {
+    const x = X(l.longitude_east), y = Y(l.latitude), act = l.id === A4.loc, k = l.readiness.level;
+    return `<g class="p4mk lvl-${k}${act ? " act" : ""}" data-a4="loc" data-id="${esc(l.id)}" tabindex="-1" role="button" aria-label="${esc(l.name)}, readiness L${k}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${act ? 7 : k > 1 ? 4.5 : 3.2}"/>${act || k >= 2 ? `<text x="${(x > w - 140 ? x - 8 : x + 8).toFixed(1)}" y="${(y + 3).toFixed(1)}" text-anchor="${x > w - 140 ? "end" : "start"}">${esc(l.name)}</text>` : ""}<title>${esc(l.name)} · ${a4Ll(l)} · L${k}</title></g>`;
+  }).join("");
+  return `<figure class="at-map p4-map"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${body === "mars" ? "Mars" : "Moon"} map with ${locs.length} locations; marker size and fill show readiness">
+    ${F ? `<image href="data/phase3/${F.file}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" opacity=".85"/>` : `<rect width="${w}" height="${h}" fill="var(--panel-2)"/>`}${mk}</svg>
+    <figcaption class="meta">${F ? `Shaded relief from ${esc(F.source.product_id)} — context only, never compared.` : "Basemap unavailable."} Filled = analytical target (L2–L4), small hollow = catalogued only (L1). Use the tree or the list for keyboard access.</figcaption></figure>`;
+}
+
+/* ---------- keyboard tree ---------- */
+function a4Tree() {
+  const regs = A4.reg.regions.filter(r => r.body === A4.body);
+  const item = (id, label, level, kids, extra = "") => {
+    const open = !!A4.tree[id], has = kids != null;
+    return `<li role="treeitem" id="tr-${esc(id.replace(/[^a-z0-9_-]/gi, "_"))}" data-tid="${esc(id)}" aria-level="${level}" ${has ? `aria-expanded="${open}"` : ""} aria-selected="${A4.loc === id}" tabindex="${A4.loc === id || (!A4.loc && level === 1) ? 0 : -1}"><span class="p4-tn">${has ? `<i aria-hidden="true">${open ? "▾" : "▸"}</i>` : `<i aria-hidden="true">·</i>`}${label}${extra}</span>${has && open ? `<ul role="group">${kids}</ul>` : ""}</li>`;
+  };
+  const html = regs.map(r => item(r.id, esc(r.name), 1, r.location_ids.map(lid => {
+    const l = a4L(lid);
+    const tk = l.target_ids.map(t => { const T = a4T(t); return item("t:" + t, esc(T.name), 3, null, ` <span class="lvl lvl-${T.readiness.level}">L${T.readiness.level}</span>`); }).join("");
+    return item(lid, esc(l.name), 2, l.target_ids.length ? tk : null, ` <span class="lvl lvl-${l.readiness.level}">L${l.readiness.level}</span>`);
+  }).join(""), ` <span class="meta">${r.counts.locations} · ${r.counts.targets}t</span>`)).join("");
+  return `<ul class="p4-tree" role="tree" aria-label="${A4.body === "mars" ? "Mars" : "Moon"}: regions, locations and analytical targets">${html}</ul>`;
+}
+function a4TreeKey(e) {
+  const it = e.target.closest('[role="treeitem"]'); if (!it) return;
+  const all = $$('.p4-tree [role="treeitem"]').filter(x => x.offsetParent !== null), k = all.indexOf(it), id = it.dataset.tid;
+  const focus = x => { if (!x) return; all.forEach(y => y.tabIndex = -1); x.tabIndex = 0; x.focus(); };
+  const exp = it.getAttribute("aria-expanded");
+  if (e.key === "ArrowDown") focus(all[k + 1]);
+  else if (e.key === "ArrowUp") focus(all[k - 1]);
+  else if (e.key === "Home") focus(all[0]);
+  else if (e.key === "End") focus(all[all.length - 1]);
+  else if (e.key === "ArrowRight") { if (exp === "false") { A4.tree[id] = true; a4RenderKeep(id); } else if (exp === "true") focus(all[k + 1]); }
+  else if (e.key === "ArrowLeft") { if (exp === "true") { A4.tree[id] = false; a4RenderKeep(id); } else { const p = it.parentElement.closest('[role="treeitem"]'); focus(p); } }
+  else if (e.key === "Enter" || e.key === " ") a4TreeSelect(id, true);
+  else return;
+  e.preventDefault();
+}
+function a4TreeSelect(id, keep) {
+  if (id.startsWith("t:")) { const t = id.slice(2); a4SyncFromTarget(t); A3.active = t; }
+  else if (id.startsWith("region:")) { A4.tree[id] = !A4.tree[id]; A4.region = id; }
+  else { a4SyncFromLocation(id); if (a4L(id).target_ids.length) A4.tree[id] = true; announce(`${a4L(id).name}: readiness L${a4L(id).readiness.level}.`); }
+  keep ? a4RenderKeep(id) : atRender();
+}
+function a4RenderKeep(id) {
+  atRender();
+  const el = document.querySelector(`.p4-tree [data-tid="${CSS.escape(id)}"]`);
+  if (el) { $$('.p4-tree [role="treeitem"]').forEach(y => y.tabIndex = -1); el.tabIndex = 0; el.focus(); }
+}
+
+/* ---------- search combobox (aliases, prefixes; updates its own listbox without re-rendering the page) ---------- */
+function a4SearchBox() {
+  return `<div class="p4-search" role="search"><label for="a4q" class="sr-only">Search the planetary atlas</label>
+    <input id="a4q" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="a4sr" autocomplete="off" data-a4live="q" value="${esc(A4.q)}" placeholder="Search features, aliases, missions — e.g. Gale Crater, Shackleton, Apollo 15">
+    <ul id="a4sr" role="listbox" class="p4-sr" aria-label="Search results" hidden></ul></div>`;
+}
+function a4SearchUpdate(inp) {
+  A4.q = inp.value;
+  const box = $("#a4sr"), hits = RG.search(A4.ix, A4.q, { limit: 10 });
+  A4._hits = hits; A4._hi = hits.length ? 0 : -1;
+  if (!A4.q.trim()) { box.hidden = true; inp.setAttribute("aria-expanded", "false"); inp.removeAttribute("aria-activedescendant"); return; }
+  box.innerHTML = hits.length ? hits.map((h, k) => {
+    const L = h.kind === "location" ? a4L(h.id) : null;
+    return `<li role="option" id="a4sr-${k}" aria-selected="${k === 0}" data-a4="hit" data-k="${k}"><b>${esc(h.name)}</b> <span class="meta">${h.kind === "region" ? "region" : esc(L.feature_type)} · ${h.body === "mars" ? "Mars" : "Moon"}${L ? " · L" + L.readiness.level : ""} · ${esc(h.matched)}</span></li>`;
+  }).join("") : `<li role="option" aria-disabled="true" class="meta">No catalogued feature matches “${esc(A4.q)}”.</li>`;
+  box.hidden = false; inp.setAttribute("aria-expanded", "true");
+  if (hits.length) inp.setAttribute("aria-activedescendant", "a4sr-0");
+  announce(hits.length ? `${hits.length} results. Use the arrow keys, Enter to open.` : "No results.");
+}
+function a4SearchKey(e) {
+  const hits = A4._hits || []; if (!hits.length) { if (e.key === "Escape") { e.target.value = ""; a4SearchUpdate(e.target); } return; }
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    A4._hi = (A4._hi + (e.key === "ArrowDown" ? 1 : hits.length - 1)) % hits.length;
+    $$("#a4sr [role=option]").forEach((o, k) => o.setAttribute("aria-selected", k === A4._hi));
+    e.target.setAttribute("aria-activedescendant", "a4sr-" + A4._hi); e.preventDefault();
+  } else if (e.key === "Enter") { a4OpenHit(hits[Math.max(0, A4._hi)]); e.preventDefault(); }
+  else if (e.key === "Escape") { $("#a4sr").hidden = true; e.target.setAttribute("aria-expanded", "false"); }
+}
+function a4OpenHit(h) {
+  if (!h) return;
+  A4.q = ""; A4._hits = [];
+  if (h.kind === "region") { A4.body = h.body; A4.region = h.id; A4.tree[h.id] = true; A4.mode = "browse"; }
+  else { a4SyncFromLocation(h.id); A4.tree[a4L(h.id).region] = true; A4.mode = "browse"; }
+  atRender(); const n = $(".p4-summary h3"); if (n) { n.tabIndex = -1; n.focus(); }
+}
+
+/* ---------- selected-location summary ---------- */
+function a4Summary(l) {
+  if (!l) return `<div class="empty">Select a location in the tree, the map or the list.</div>`;
+  const reg = A4.ix.regions[l.region], ts = l.target_ids.map(a4T);
+  const qa = RG.quickActions(A4.ix, l, { exploreIds: a4ExploreIds() });
+  const src = l.source || {};
+  const why = ts.length ? ts.map(t => `<details class="p4-checks"><summary>${esc(t.name)} — ${a4Level(t)} · why</summary><ul>${t.readiness.checks.map(c => `<li class="${c.passed ? "ok" : "no"}"><b>${c.passed ? "✓" : "✗"} ${esc(c.id)}</b> <span class="meta">${esc(c.requirement)}</span><br><span class="small">${esc(c.detail)}</span></li>`).join("")}</ul></details>`).join("")
+    : `<p class="note small">Catalogue entry: name and coordinates from the cited source; no analytical window has been assembled. Checks: ${l.readiness.checks.map(c => `${c.passed ? "✓" : "✗"} ${esc(c.id)}`).join(" · ")}.</p>`;
+  const tsel = ts.find(x => x.id === A3.active) || ts[0];
+  const crumbs = `<nav class="p4-crumbs" aria-label="Location in the hierarchy"><button data-a4="body" data-b="${l.body}">${l.body === "mars" ? "Mars" : "Moon"}</button><i>›</i><button data-a4="region" data-id="${reg.id}">${esc(reg.name)}</button><i>›</i><span ${tsel ? "" : 'aria-current="location"'}>${esc(l.name)}</span>${tsel ? `<i>›</i><span aria-current="location">${esc(tsel.name)}</span>` : ""}</nav>`;
+  return `<article class="p4-summary" aria-label="Selected location">${crumbs}
+    <div class="row p4-sh">${a4Thumb(l, 104)}<div class="grow"><div class="body-tag">${l.body === "mars" ? "MARS" : "MOON"} · ${esc(reg.name)}</div>
+      <h3 class="ttl">${esc(l.name)} ${a4Star(l.id)}</h3>
+      <div class="meta">${esc(l.feature_type)} · ${a4Ll(l)}${l.diameter_km ? ` · Ø ${l.diameter_km.toFixed(1)} km` : ""}${l.quadrangle ? " · " + esc(l.quadrangle) : ""}</div>
+      ${l.aliases.length ? `<div class="meta">Also: ${esc(l.aliases.join(", "))}</div>` : ""}
+      <div class="row">${a4Level(l)}<span class="tag">${esc(l.record_type.replace("_", " "))}</span>${l.approval ? `<span class="tag">${esc(l.approval)}</span>` : ""}</div></div></div>
+    <p class="meta small">Source: ${src.url ? `<a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.type)} record</a>` : esc(src.type || "")}${src.reference ? " · " + esc(src.reference) : ""} · ${esc(l.coordinate_reference)}</p>
+    <div class="p4-qa" role="group" aria-label="Actions for ${esc(l.name)}">${qa.map(a => `<button class="btn-sm" data-a4="qa" data-q="${a.id}" data-t="${esc(a.target || "")}" ${a.enabled ? "" : `disabled aria-describedby="qa-${a.id}"`}>${esc(a.label)}</button>`).join("")}</div>
+    ${qa.filter(a => !a.enabled).map(a => `<p class="meta small" id="qa-${a.id}"><b>${esc(a.label)}:</b> ${esc(a.reason)}</p>`).join("")}
+    ${ts.length ? `<div class="lbl">Analytical targets (${ts.length})</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Target</th><th>Readiness</th>${S.critIds.map(c => `<th title="${esc(labelOf(c))}">${esc(shortOf(c))}</th>`).join("")}<th>Datasets</th></tr></thead><tbody>
+      ${ts.map(t => `<tr><td><button class="lnk" data-a4="tgt" data-id="${t.id}">${esc(t.name)}</button>${t.legacy ? ' <b class="at-base">BASELINE</b>' : ""}</td><td>${a4Level(t)}</td>${S.critIds.map(c => { const s = t.fingerprint.criterion_status[c]; return `<td class="${{ DIRECT: "st-d", PROXY: "st-p", "N/A": "st-x", MISSING: "st-m" }[s]}" title="${esc(s)}">${s === "DIRECT" ? atVal(c, t.fingerprint.variables[c]) : esc(s)}</td>`; }).join("")}<td class="small">${t.datasets.map(d => esc(d)).join(", ")}</td></tr>`).join("")}</tbody></table></div>` : ""}
+    ${ts.length ? a4DataPanel(ts) : `<p class="note small"><b>Analysis support:</b> Earth-analogue analysis — no (catalogued only). Target comparison — no. Needed first: a documented terrain or environmental dataset processed into a complete 55.6 km window (readiness 2), then a complete compatible fingerprint (readiness 3).</p>`}
+    <div class="lbl">Why this readiness level</div>${why}
+    ${l.missions.length ? `<p class="meta small">Missions: ${l.missions.map(m => esc((A4.ix.missions[m] || {}).name || m)).join(" · ")}</p>` : ""}
+    <p class="meta small">Readiness concerns data completeness and reproducibility only — not scientific validity, landing safety or habitability.</p></article>`;
+}
+
+/* ---------- data panel: what is measured, by what, at which support; what is missing; what is supported ---------- */
+function a4DataPanel(ts) {
+  return ts.map(t => {
+    const fp = t.fingerprint, D = A4.ix.datasets;
+    const rows = S.critIds.map(c => {
+      const st = fp.criterion_status[c], ds = (fp.provenance[c] || []).map(d => D[d]).filter(Boolean);
+      return `<tr><td>${esc(labelOf(c))}</td><td class="${{ DIRECT: "st-d", PROXY: "st-p", "N/A": "st-x", MISSING: "st-m" }[st]}">${esc(st)}</td><td class="n">${fp.variables[c] == null ? "—" : atVal(c, fp.variables[c])}</td><td class="small">${esc(fp.units[c])}</td>
+        <td class="small">${ds.length ? ds.map(d => `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.product_id)}</a> · ${esc(d.provider)} · ${esc(d.original_resolution)}`).join("<br>") : st === "PROXY" ? "rule (not a measurement)" : "—"}</td>
+        <td class="small">${esc(fp.spatial_support[c] || fp.missingness[c] || (st === "N/A" ? "no physical counterpart" : "—"))}${fp.temporal_support[c] ? "<br><span class=\"meta\">" + esc(fp.temporal_support[c]) + "</span>" : ""}</td></tr>`;
+    }).join("");
+    const sc = t.scoring, comp = t.readiness.level >= 3 ? "yes — with any target sharing a DIRECT criterion (Comparison Lab)" : "partial — shared DIRECT criteria only, labelled exploratory";
+    return `<details class="p4-checks p4-data" ${t.id === A3.active ? "open" : ""}><summary>Data · ${esc(t.name)}</summary>
+      <p class="small"><b>Earth-analogue analysis:</b> ${sc.earth_analogue_enabled ? `yes — ${esc(sc.default_explore)}${A4X.ids.includes(t.id) || t.legacy ? " (also in Explore)" : ""}` : `partial only — ${esc(sc.reason)}`}<br><b>Comparison with other targets:</b> ${comp}</p>
+      <div class="tbl-wrap"><table class="t"><caption class="sr-only">Criteria, values, sources and support for ${esc(t.name)}</caption><thead><tr><th>Criterion</th><th>Status</th><th class="n">Value</th><th>Unit</th><th>Dataset · provider · resolution</th><th>Spatial / temporal support</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <p class="small"><b>Window:</b> ${t.location.window_km} km centred ${atFmtLL(t.location.latitude, t.location.longitude_east)} · ${esc(t.location.relation)} · terrain ${t.terrain_window.bins_filled}/${t.terrain_window.bins_total} bins</p>
+      ${t.limitations.length ? `<p class="small"><b>Limitations:</b></p><ul class="lab-ul small">${t.limitations.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+      <p class="small"><b>References:</b> ${t.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//, "").slice(0, 60))}</a>`).join(" · ")}</p>
+      <p class="meta small">${esc(t.validation.scientific_validation)}</p></details>`;
+  }).join("");
+}
+
+/* ---------- region cards / list / table ---------- */
+function a4RegionCards() {
+  const regs = A4.reg.regions.filter(r => r.body === A4.body);
+  return `<div class="p4-regions">${regs.map(r => `<article class="p4-rc${A4.region === r.id ? " act" : ""}"><button class="p4-rcb" data-a4="region" data-id="${r.id}" aria-label="${esc(r.name)}: ${r.counts.locations} locations, ${r.counts.targets} analytical targets">
+    ${r.thumbnail ? `<img src="${esc(r.thumbnail)}" alt="" width="64" height="64" loading="lazy">` : `<span class="p4-th none" style="width:64px;height:64px"><span>No imagery</span></span>`}
+    <span><b>${esc(r.name)}</b><span class="meta small">${esc(r.description)}</span>
+    <span class="p4-cnt"><i>${r.counts.locations} locations</i><i>${r.counts.targets} targets</i><i>${r.counts.scoring_enabled} L3+</i>${[4, 3, 2, 1].filter(k => r.counts.by_level[k]).map(k => `<i class="lvl lvl-${k}">L${k}×${r.counts.by_level[k]}</i>`).join("")}</span></span></button></article>`).join("")}</div>`;
+}
+function a4ListCards(locs) {
+  return locs.length ? `<div class="p4-cards">${locs.map(l => `<article class="p4-card${l.id === A4.loc ? " act" : ""}">${a4Thumb(l, 72)}<div class="grow">
+    <button class="lnk p4-ct" data-a4="loc" data-id="${esc(l.id)}">${esc(l.name)}</button> ${a4Star(l.id)}
+    <div class="meta small">${esc(l.feature_type)} · ${a4Ll(l)} · ${esc(A4.ix.regions[l.region].name)}</div>
+    <div class="row">${a4Level(l)}${l.target_ids.length ? `<span class="tag">${l.target_ids.length} target${l.target_ids.length > 1 ? "s" : ""}</span>` : `<span class="tag">catalogue only</span>`}</div></div></article>`).join("")}</div>`
+    : `<div class="empty">No location matches these filters.</div>`;
+}
+function a4Table(locs) {
+  const th = (k, label) => `<th scope="col" aria-sort="${A4.sort === k ? "descending" : "none"}"><button class="lnk" data-a4="sort" data-k="${k}">${esc(label)}</button></th>`;
+  return `<div class="tbl-wrap"><table class="t p4-tbl"><caption class="sr-only">Locations on ${A4.body === "mars" ? "Mars" : "the Moon"}, sorted by ${esc(A4.sort)}</caption><thead><tr>${th("name", "Location")}${th("region", "Region")}<th scope="col">Type</th>${th("latitude", "Lat")}${th("longitude", "Lon")}${th("readiness", "Readiness")}${th("targets", "Targets")}<th scope="col">Datasets</th><th scope="col">Source</th></tr></thead><tbody>
+    ${locs.map(l => `<tr${l.id === A4.loc ? ' class="act"' : ""}><td><button class="lnk" data-a4="loc" data-id="${esc(l.id)}">${esc(l.name)}</button></td><td>${esc(A4.ix.regions[l.region].name)}</td><td class="small">${esc(l.feature_type)}</td><td class="n">${l.latitude.toFixed(2)}</td><td class="n">${l.longitude_east.toFixed(2)}</td><td>${a4Level(l)}</td><td class="n">${l.target_ids.length}</td><td class="small">${Array.from(new Set(l.target_ids.flatMap(t => a4T(t).datasets))).join(", ") || "—"}</td><td class="small">${l.source.url ? `<a href="${esc(l.source.url)}" target="_blank" rel="noopener">${esc(l.source.type)}</a>` : esc(l.source.type)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function a4Filters() {
+  const R = A4.reg, regs = R.regions.filter(r => r.body === A4.body), ms = R.missions.filter(m => m.body === A4.body);
+  const ds = Array.from(new Set(R.targets.filter(t => t.body.id === A4.body).flatMap(t => t.datasets))).sort();
+  const sel = (key, label, opts, cur) => `<label>${esc(label)}<select data-a4in="${key}"><option value="">any</option>${opts.map(([v, t]) => `<option value="${esc(v)}" ${String(cur) === String(v) ? "selected" : ""}>${esc(t)}</option>`).join("")}</select></label>`;
+  return `<div class="lab-form p4-filters">
+    ${A4.mode !== "browse" ? sel("region", "Region", regs.map(r => [r.id, r.name]), A4.region || "") : ""}
+    ${sel("level", "Readiness", [1, 2, 3, 4].map(k => [k, `L${k} · ${R.readiness_model.levels[k].label.toLowerCase()}`]), A4.f.level)}
+    ${sel("mission", "Mission", ms.map(m => [m.id, m.name]), A4.f.mission)}
+    ${sel("dataset", "Dataset", ds.map(d => [d, d]), A4.f.dataset)}
+    ${sel("ftype", "Terrain category", Array.from(new Set(R.locations.filter(l => l.body === A4.body).map(l => l.feature_type))).sort().map(v => [v, v]), A4.f.ftype)}
+    ${sel("type", "Record type", [["catalog_location", "catalogue location"], ["reference_area", "reference area"]], A4.f.type)}
+    ${A4.mode === "list" || A4.mode === "table" ? `<label>Sort<select data-a4in="sort">${A4_SORTS.map(([k, t]) => `<option value="${k}" ${A4.sort === k ? "selected" : ""}>${esc(t)}</option>`).join("")}</select></label>` : ""}
+    <label class="ck"><input type="checkbox" data-a4in="analytical" ${A4.f.analytical ? "checked" : ""}> analytical targets only</label></div>`;
+}
+function a4Strip(title, ids) {
+  const ls = ids.map(a4L).filter(Boolean);
+  if (!ls.length) return "";
+  return `<div class="row p4-strip"><span class="lbl">${esc(title)}</span>${ls.map(l => `<button class="tag" data-a4="loc" data-id="${esc(l.id)}">${esc(l.name)} <span class="meta">L${l.readiness.level}</span></button>`).join("")}</div>`;
+}
+
+function a4ActiveStrip() {
+  const ids = Array.from(new Set([A3.active, ...A4.cmp, ...A3.sel].filter(id => a4T(id))));
+  if (!ids.length) return "";
+  return `<div class="row p4-strip" role="group" aria-label="Active analytical targets"><span class="lbl">Active targets</span>${ids.map(id => { const t = a4T(id); return `<button class="tag${id === A3.active ? " on" : ""}" data-a4="tgtsw" data-id="${id}" aria-pressed="${id === A3.active}">${esc(t.name.split(" (")[0])} <span class="meta">L${t.readiness.level}</span></button>`; }).join("")}</div>`;
+}
+A3_VIEWS.home = function () {
+  const need = a4Need(); if (need) return need;
+  const R = A4.reg, c = RG.counts(A4.ix), cb = RG.counts(A4.ix, R.locations.filter(l => l.body === A4.body));
+  const locs = a4Filter(), l = a4L(A4.loc);
+  const lvRow = cb.byLevel.slice(1).map((n, j) => [n, j + 1]).map(([n, k]) => `<span class="lvl lvl-${k}" title="${esc(R.readiness_model.levels[k].definition)}">L${k} ${n}</span>`).join("");
+  let h = `<div class="sec p4-hero"><div class="row" style="justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+    <div><div class="body-tag">PLANETARY ATLAS · REGISTRY ${esc(R.registry_version)}</div><h2 class="ttl p4-h">${A4.body === "mars" ? "Mars" : "The Moon"}</h2>
+    <p class="note">${c.locations} catalogued locations on Mars and the Moon in ${R.regions.length} regions; ${c.targets} analytical targets, ${c.scoring} of them complete enough (readiness ≥ 3) for Earth-analogue ranking. Names and coordinates come from the IAU/USGS gazetteer or cited mission sources; values only from mission data processed by recorded scripts.</p></div>
+    <span class="toggles p4-body" role="group" aria-label="Body">${[["mars", "Mars"], ["moon", "Moon"]].map(([b, t]) => `<button aria-pressed="${A4.body === b}" data-a4="body" data-b="${b}">${t}</button>`).join("")}</span></div>
+    ${a4Banner("planetary atlas")}${a4SearchBox()}
+    <div class="row meta p4-lv">${A4.body === "mars" ? "Mars" : "Moon"} locations by readiness: ${lvRow}</div>
+    ${a4ActiveStrip()}${a4Strip("Recent", A4P.recent.filter(id => a4L(id) && a4L(id).body === A4.body).slice(0, 6))}${a4Strip("Favourites", A4P.fav.filter(id => a4L(id) && a4L(id).body === A4.body))}
+    <div class="p4-modes" role="tablist" aria-label="Atlas views">${A4_MODES.map(([k, t]) => `<button role="tab" aria-selected="${A4.mode === k}" data-a4="mode" data-m="${k}">${t}</button>`).join("")}</div></div>`;
+  if (A4.mode === "browse") {
+    h += `<div class="sec p4-split"><div class="p4-col-tree"><div class="lbl">Regions → locations → targets</div>${a4Tree()}<p class="meta small">Arrow keys move, → expands, ← collapses, Enter selects.</p></div>
+      <div class="p4-col-main">${a4LocMap(A4.body, R.locations.filter(x => x.body === A4.body))}${a4Summary(l && l.body === A4.body ? l : null)}</div></div>`;
+  } else if (A4.mode === "regions") {
+    h += `<div class="sec">${a4RegionCards()}</div>`;
+    if (A4.region && A4.ix.regions[A4.region] && A4.ix.regions[A4.region].body === A4.body) h += `<div class="sec"><div class="lbl">${esc(A4.ix.regions[A4.region].name)} — locations</div>${a4ListCards(locs)}</div>`;
+  } else {
+    h += `<div class="sec">${a4Filters()}<div class="meta">Showing ${locs.length} of ${cb.locations} ${A4.body === "mars" ? "Mars" : "Moon"} locations.</div></div>
+      <div class="sec">${A4.mode === "table" ? a4Table(locs) : a4ListCards(locs)}</div>`;
+    if (l && l.body === A4.body) h += `<div class="sec">${a4Summary(l)}</div>`;
+  }
+  return h;
+};
+
+/* ---------- quick actions ---------- */
+function a4Quick(q, tid) {
+  const t = tid && atT(tid);
+  if (q === "target" && t) { A3.active = tid; A3.view = "target"; }
+  else if (q === "analogues" && t) { A3.active = tid; A3.view = "workflow"; }
+  else if (q === "explore") { a4ExploreOpen(tid); return; }
+  else if (q === "compare" && tid) { if (!A4.cmp.includes(tid)) A4.cmp.push(tid); if (!A3.sel.includes(tid)) A3.sel.push(tid); A3.view = "lab4"; A4.aggRes = null; }
+  else if (q === "validation" && tid) { A4.val.target = tid; A4.val.res = null; A3.view = "validation"; }
+  else if (q === "collection") { A4.colPending = { kind: "location", id: A4.loc }; A3.view = "collections"; }
+  else if (q === "provenance") { A4.prov.focus = tid || A4.loc; A3.view = "readiness"; }
+  $("#left").scrollTop = 0; atRender();
+}
+
+/* ---------- events (namespaced data-a4* attributes) ---------- */
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-a4]"); if (!a || a.disabled) return;
+  const fn = A4_ACTIONS[a.dataset.a4]; if (fn) { e.preventDefault(); fn(a, e); }
+});
+document.addEventListener("change", e => { const a = e.target.closest("[data-a4in]"); if (a && A4_INPUTS[a.dataset.a4in]) A4_INPUTS[a.dataset.a4in](a, e); });
+document.addEventListener("input", e => { const a = e.target.closest("[data-a4live]"); if (a && A4_INPUTS[a.dataset.a4live]) A4_INPUTS[a.dataset.a4live](a, e); });
+document.addEventListener("keydown", e => {
+  if (e.target && e.target.id === "a4q") return a4SearchKey(e);
+  if (e.target.closest && e.target.closest(".p4-tree")) return a4TreeKey(e);
+  if ((e.key === "Enter" || e.key === " ") && e.target.closest && e.target.closest("g[data-a4]")) { const g = e.target.closest("g[data-a4]"); e.preventDefault(); A4_ACTIONS[g.dataset.a4](g, e); }
+});
+document.addEventListener("click", e => { const t = e.target.closest(".p4-tree [role=treeitem]"); if (t && !e.target.closest("[data-a4]")) { e.stopPropagation(); a4TreeSelect(t.dataset.tid, true); } }, true);
+Object.assign(A4_ACTIONS, {
+  body(a) { A4.body = a.dataset.b; A4.region = null; const l = a4L(A4.loc); if (!l || l.body !== A4.body) A4.loc = A4.body === "mars" ? "mars:gale" : "moon:shackleton"; atRender(); },
+  mode(a) { A4.mode = a.dataset.m; atRender(); },
+  loc(a) { a4SyncFromLocation(a.dataset.id); A4.tree[a4L(a.dataset.id).region] = true; atRender(); announce(`${a4L(a.dataset.id).name} selected.`); },
+  region(a) { A4.region = a.dataset.id; A4.tree[a.dataset.id] = true; atRender(); },
+  tgtsw(a) { const t = a4T(a.dataset.id); a4SyncFromTarget(t.id); A3.active = t.id; A4.tree[t.region.id] = true; A4.tree[t.location.id] = true; A4.mode = "browse"; atRender(); announce(`${t.name} is the active target.`); },
+  tgt(a) { a4SyncFromTarget(a.dataset.id); A3.active = a.dataset.id; A3.view = "target"; $("#left").scrollTop = 0; atRender(); },
+  fav(a) { const id = a.dataset.id, k = A4P.fav.indexOf(id); if (k >= 0) A4P.fav.splice(k, 1); else A4P.fav.push(id); a4SavePrefs(); atRender(); announce(k >= 0 ? "Removed from favourites." : "Added to favourites."); },
+  hit(a) { a4OpenHit((A4._hits || [])[+a.dataset.k]); },
+  qa(a) { a4Quick(a.dataset.q, a.dataset.t); },
+  sort(a) { A4.sort = a.dataset.k; atRender(); },
+});
+Object.assign(A4_INPUTS, {
+  q(a) { a4SearchUpdate(a); },
+  region(a) { A4.region = a.value || null; atRender(); },
+  level(a) { A4.f.level = a.value; atRender(); },
+  mission(a) { A4.f.mission = a.value; atRender(); },
+  dataset(a) { A4.f.dataset = a.value; atRender(); },
+  type(a) { A4.f.type = a.value; atRender(); },
+  ftype(a) { A4.f.ftype = a.value; atRender(); },
+  sort(a) { A4.sort = a.value; atRender(); },
+  analytical(a) { A4.f.analytical = a.checked; atRender(); },
+});
+
+/* ===== Phase IV · Planetary Comparison Lab =====
+ * Side-by-side fingerprints, a criterion compatibility matrix (status, source, spatial and temporal support),
+ * pairwise shared-DIRECT counts, and multi-target aggregates (minimum · labelled mean · Pareto · per-criterion).
+ * An aggregate is blocked when the targets share no DIRECT criterion; criteria outside the shared DIRECT set are
+ * listed as excluded, never silently mixed. Jezero + Lunar South Pole + minimum runs the unchanged legacy
+ * cross-planet configuration, and its regression against the baseline field can be run here. */
+const A4_CLS = { "shared-direct": ["st-d", "shared DIRECT"], "proxy-involved": ["st-p", "PROXY involved — excluded"], "not-applicable": ["st-x", "N/A for a target — excluded"], missing: ["st-m", "MISSING for a target — excluded"] };
+function a4CmpTargets() {
+  if (!A4.cmp.length) A4.cmp = (A3.sel.length >= 2 ? A3.sel : ["mars_gale_curiosity", "moon_shackleton"]).filter(a4T);
+  return A4.cmp.map(a4T).filter(Boolean);
+}
+function a4RunAgg() {
+  const ids = A4.cmp.slice(), t0 = performance.now();
+  try {
+    A4.aggRes = RG.aggregate({ IX: A4.ix, A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, targetIds: ids, kind: A4.agg, w: atWeights(), legacyRanges: S.app.ranges });
+    A4.aggRes.ms = performance.now() - t0; A4.aggRes.ids = ids; A4.aggRes.profile = A3.profile;
+    announce(A4.aggRes.ok ? `${A4.agg} aggregate computed for ${ids.length} targets.` : "Aggregate blocked: " + A4.aggRes.plan.reason);
+  } catch (e) { A4.aggRes = { ok: false, plan: { reason: e.message } }; }
+  atRender();
+}
+function a4LegacyRegression() {
+  const w = S.weights, r = RG.aggregate({ IX: A4.ix, A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, targetIds: TARGET_IDS.slice(), kind: "minimum", w, legacyRanges: S.app.ranges });
+  const base = effectiveFor("cross", w);
+  let d = 0; for (let i = 0; i < S.n; i++) if (!Object.is(base[i], r.eff[i])) d++;
+  const o = ENG.order(base, S.cell), dist = ENG.distinctSites(o, S.lat, S.lon, 20, S.app.thresholds.distinct_sep_km);
+  A4.legacyCheck = { diffs: d, sameTop: JSON.stringify(dist) === JSON.stringify(r.top.map(x => x.i)), profile: currentLabel(), at: a4Now() };
+  announce(d === 0 ? "Legacy cross-planet regression: identical." : `Legacy cross-planet regression: ${d} differences.`);
+  atRender();
+}
+function a4AggResults(R, ts) {
+  if (!R) return `<p class="meta">Choose an aggregate and run it.</p>`;
+  if (!R.ok) return `<div class="callout">Blocked: ${esc(R.plan.reason)}</div>`;
+  const P = R.plan, head = `<p class="note small"><b>${esc(P.legacy ? "Legacy configuration" : P.config)}</b> · ${esc(P.reason)} · profile ${esc(S.app.profiles[R.profile].label)} · ${R.ms.toFixed(0)} ms <button class="btn-sm" data-a4="aggsave">Save to collection</button></p>`;
+  const L = ts.map((t, k) => `<th class="n">${AT_LETTER[k]}</th>`).join("");
+  if (R.kind === "pareto") {
+    const f = R.front.slice().sort((a, b) => (Math.min(...R.perTarget.map(x => x[b])) - Math.min(...R.perTarget.map(x => x[a]))) || (S.cell[a] - S.cell[b]));
+    return head + `<p class="note">${f.length} Pareto-optimal cells: none can be improved for one target without losing for another. Listed by their lowest target score (a display order, not a ranking).</p>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Cell</th>${L}</tr></thead><tbody>${f.slice(0, 25).map(i => `<tr><td><button class="lnk" data-a3="baseline" data-i="${i}">${esc(placeStr(i))}</button></td>${R.perTarget.map(x => `<td class="n">${fmtPct(x[i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  }
+  if (R.kind === "per_criterion") {
+    return head + Object.entries(R.perCrit).map(([c, v]) => `<div class="lbl">${esc(labelOf(c))} — minimum criterion similarity over the targets</div><ol class="lab-ul small">${v.top.map(x => `<li>${esc(placeStr(x.i))} · ${x.score.toFixed(3)}</li>`).join("")}</ol>`).join("") +
+      `<p class="note small">No cross-criterion sum is formed in this mode.</p>`;
+  }
+  return head + (R.kind === "mean" ? `<p class="callout small">Mean of the per-target scores — a labelled summary. A high mean can hide a poor match to one target; check the per-target columns.</p>` : "") +
+    `<div class="tbl-wrap"><table class="t"><thead><tr><th>#</th><th>Earth cell</th><th class="n">${R.kind === "mean" ? "mean" : "min"}</th>${L}</tr></thead><tbody>${R.top.map((x, k) => `<tr><td>${k + 1}</td><td><button class="lnk" data-a3="baseline" data-i="${x.i}">${esc(placeStr(x.i))}</button></td><td class="n"><b>${fmtPct(x.score)}</b></td>${x.perTarget.map(v => `<td class="n">${fmtPct(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+function a4ProfileSel() {
+  return `<div class="lab-form"><label>Weighting profile<select data-a3in="profile">${Object.entries(S.app.profiles).map(([k, p]) => `<option value="${k}" ${k === A3.profile ? "selected" : ""}>${esc(p.label)}</option>`).join("")}</select></label><span class="meta small">${esc(AT_PROFILE_NOTE)} Normalisation is fixed by the scoring configuration shown with each result.</span></div>`;
+}
+A3_VIEWS.lab4 = function () {
+  const need = a4Need(); if (need) return need;
+  const ts = a4CmpTargets(), C = ts.length ? RG.compatibility(ts, S.critIds) : null;
+  const pick = A4.reg.targets.filter(t => t.readiness.level >= 2 && !A4.cmp.includes(t.id));
+  let h = `<div class="sec"><h3 class="ttl">Planetary Comparison Lab</h3>${a4Banner("multi-target comparison")}
+    <p class="note">Compare analytical targets criterion by criterion before any aggregate. Aggregates use only criteria that are DIRECT for every selected target; everything else is listed as excluded.</p>
+    <div class="row">${ts.map((t, k) => `<span class="tag"><b>${AT_LETTER[k]}</b> ${esc(t.name)} · L${t.readiness.level} <button class="lnk" data-a4="cmprm" data-id="${t.id}" aria-label="Remove ${esc(t.name)}">×</button></span>`).join("")}
+      <label class="p4-inl">Add<select data-a4in="cmpadd" aria-label="Add a target"><option value="">target…</option>${["mars", "moon"].map(b => `<optgroup label="${b === "mars" ? "Mars" : "Moon"}">${pick.filter(t => t.body.id === b).map(t => `<option value="${t.id}">${esc(t.name)} — L${t.readiness.level}</option>`).join("")}</optgroup>`).join("")}</select></label>
+      <button class="btn-sm" data-a4="cmpex" data-set="mars_jezero,moon_south_pole">Legacy pair</button><button class="btn-sm" data-a4="cmpex" data-set="mars_gale_curiosity,mars_elysium_planitia,moon_shackleton">Gale · Elysium · Shackleton</button></div></div>`;
+  if (ts.length < 2) return h + `<div class="sec"><div class="empty">Select at least two targets.</div></div>`;
+  h += `<div class="sec"><div class="lbl">1 · Fingerprints side by side</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th>${ts.map((t, k) => `<th>${AT_LETTER[k]} · ${esc(t.name)}<div class="meta">${a4Level(t)}</div></th>`).join("")}</tr></thead><tbody>
+    ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td>${ts.map(t => { const s = t.fingerprint.criterion_status[c], v = t.fingerprint.variables[c]; return `<td class="${{ DIRECT: "st-d", PROXY: "st-p", "N/A": "st-x", MISSING: "st-m" }[s]}">${v == null ? "—" : atVal(c, v)} <span class="small">${esc(s)}</span></td>`; }).join("")}</tr>`).join("")}</tbody></table></div></div>
+  <div class="sec"><div class="lbl">2 · Compatibility matrix</div><div class="tbl-wrap"><table class="t p4-cm"><caption class="sr-only">Per-criterion compatibility of the selected targets</caption><thead><tr><th>Criterion</th>${ts.map((t, k) => `<th>${AT_LETTER[k]}</th>`).join("")}<th>Verdict</th><th>Source / scale / time</th></tr></thead><tbody>
+    ${C.criteria.map(r => `<tr><td>${esc(labelOf(r.criterion))}</td>${r.statuses.map(s => `<td class="${{ DIRECT: "st-d", PROXY: "st-p", "N/A": "st-x", MISSING: "st-m" }[s]}">${esc(s)}</td>`).join("")}<td><span class="tag ${A4_CLS[r.class][0]}">${esc(A4_CLS[r.class][1])}</span></td>
+      <td class="small">${r.class === "shared-direct" ? [r.sourceDiffers ? "different source products: " + r.datasets.join(" · ") : "same source family", r.scaleDiffers ? "different spatial support" : "same spatial support", r.timeDiffers ? "different temporal support" : "same temporal support"].map(esc).join("; ") : "—"}
+      ${r.class === "shared-direct" && (r.scaleDiffers || r.timeDiffers) ? `<details><summary>details</summary>${r.spatial.map((s, k) => `<div>${AT_LETTER[k]}: ${esc(s)} · ${esc(r.temporal[k])}</div>`).join("")}</details>` : ""}</td></tr>`).join("")}</tbody></table></div>
+    <div class="row"><span class="meta">Shared DIRECT criteria: <b>${C.sharedDirect.length}</b> (${esc(C.sharedDirect.map(shortOf).join(", ") || "none")})</span></div>
+    <div class="tbl-wrap"><table class="t p4-pair" aria-label="Pairwise number of shared DIRECT criteria"><thead><tr><th></th>${ts.map((t, k) => `<th>${AT_LETTER[k]}</th>`).join("")}</tr></thead><tbody>${C.pairwiseSharedDirect.map((row, k) => `<tr><th>${AT_LETTER[k]}</th>${row.map((v, j) => `<td class="n" style="--a:${(v / 6).toFixed(2)}">${j === k ? "—" : v}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>`;
+  const plan = RG.aggregatePlan(A4.ix, A4.cmp, A4.agg, S.critIds);
+  h += `<div class="sec"><div class="lbl">3 · Aggregate</div><div class="p4-agg" role="radiogroup" aria-label="Aggregate">${Object.entries(RG.AGGREGATES).map(([k, v]) => {
+      const p = RG.aggregatePlan(A4.ix, A4.cmp, k, S.critIds);
+      return `<label class="p4-radio${p.ok ? "" : " off"}"><input type="radio" name="a4agg" data-a4in="agg" value="${k}" ${A4.agg === k ? "checked" : ""}> <b>${esc(k.replace("_", "-"))}</b><span class="meta small">${esc(v)}</span>${p.ok ? "" : `<span class="small st-m">blocked: ${esc(p.reason)}</span>`}</label>`; }).join("")}</div>
+    ${a4ProfileSel()}
+    <div class="row"><button class="btn-sm" data-a4="aggrun" ${plan.ok ? "" : 'disabled aria-describedby="agg-why"'}>Run ${esc(A4.agg.replace("_", "-"))}</button>${plan.ok ? `<span class="meta small">${esc(plan.reason)}</span>` : `<span class="meta small" id="agg-why">${esc(plan.reason)}</span>`}</div>
+    <div aria-live="polite">${a4AggResults(A4.aggRes && JSON.stringify(A4.aggRes.ids) === JSON.stringify(A4.cmp) && A4.aggRes.kind === A4.agg ? A4.aggRes : (A4.aggRes && !A4.aggRes.ok ? A4.aggRes : null), ts)}</div></div>
+  <div class="sec"><div class="lbl">4 · Legacy cross-planet configuration (regression)</div>
+    <p class="note small">${esc(A4.reg.comparison_experiments[0].meaning)} Configuration legacy-baseline-v1 (legacy normalisation table, DIRECT + PROXY per target). The check recomputes it with the Phase IV aggregate engine and compares it bit for bit with the baseline cross-planet field under the current Explore weights.</p>
+    <div class="row"><button class="btn-sm" data-a4="legacy">Run regression check</button>${A4.legacyCheck ? `<span class="${A4.legacyCheck.diffs === 0 && A4.legacyCheck.sameTop ? "st-d" : "p4-bad"}">${A4.legacyCheck.diffs === 0 && A4.legacyCheck.sameTop ? "IDENTICAL" : "DIFFERS"}: ${A4.legacyCheck.diffs} cell differences; distinct sites ${A4.legacyCheck.sameTop ? "identical" : "differ"} (${esc(A4.legacyCheck.profile)})</span>` : ""}</div></div>`;
+  return h;
+};
+Object.assign(A4_ACTIONS, {
+  cmprm(a) { A4.cmp = A4.cmp.filter(x => x !== a.dataset.id); A4.aggRes = null; atRender(); },
+  cmpex(a) { A4.cmp = a.dataset.set.split(","); A4.aggRes = null; if (A4.cmp.length === 2 && A4.cmp.every(x => TARGET_IDS.includes(x))) A4.agg = "minimum"; atRender(); },
+  aggrun() { a4RunAgg(); },
+  aggsave() {
+    const R = A4.aggRes; if (!R || !R.ok) return;
+    const cfg = { targets: R.ids, aggregate: R.kind, scoring_config: R.plan.config, legacy: R.plan.legacy || null, criteria: R.plan.criteria, excluded: R.plan.excluded || [],
+      profile: R.profile, weights: S.app.profiles[R.profile].weights, algorithm: S.app.algorithm_version,
+      result: R.top ? R.top.slice(0, 10).map(x => ({ cell: S.cell[x.i], score: x.score, per_target: x.perTarget })) : R.front ? { pareto_cells: R.front.map(i => S.cell[i]) } : { per_criterion: Object.fromEntries(Object.entries(R.perCrit).map(([c, v]) => [c, v.top.map(x => ({ cell: S.cell[x.i], score: x.score }))])) } };
+    a4SaveItem({ kind: "comparison", label: `${R.kind.replace("_", "-")} · ${R.ids.map(id => a4T(id).name.split(" (")[0]).join(" + ")}`, config: cfg, snapshot: RG.snapshot(A4.ix, R.ids) });
+  },
+  legacy() { a4LegacyRegression(); },
+});
+Object.assign(A4_INPUTS, {
+  cmpadd(a) { if (a.value && !A4.cmp.includes(a.value)) A4.cmp.push(a.value); A4.aggRes = null; atRender(); },
+  agg(a) { A4.agg = a.value; atRender(); },
+});
+
+/* ===== Phase IV · Scientific Validation workspace =====
+ * Researcher-entered reference cases (cited Earth locations labelled positive / negative analogues for one
+ * target) are ranked under the target's scoring configuration. Recall@k and labelled Precision@k are reported
+ * only when enough cited labels exist; weight sensitivity shows how case ranks move; holdout analysis is
+ * declared not meaningful (no fitted parameters). No reference cases ship with ASTERRO: until a researcher
+ * enters cited cases, nothing here is a validation. Synthetic fixtures are rejected and labelled. */
+function a4ValTargets() { return A4.reg.targets.filter(t => t.scoring.earth_analogue_enabled); }
+function a4ValStoreGet() { return a4Get(A4_KEYS.cases, {}); }
+function a4ValCases(tid) { return (a4ValStoreGet()[tid] || []).slice(); }
+function a4ValSave(tid, cases) { const all = a4ValStoreGet(); all[tid] = cases; return a4Set(A4_KEYS.cases, all); }
+function a4ValPrep(t) {
+  const fp = t.fingerprint, tv = Object.fromEntries(S.critIds.map(c => [c, ["DIRECT", "PROXY"].includes(fp.criterion_status[c]) ? fp.variables[c] : null]));
+  const ranges = t.legacy ? S.app.ranges : t.scoring.explore_ranges;
+  return { P: Object.assign(LAB.prepare(S.A, S.critIds, tv, ranges), { ranges }), config: t.scoring.default_explore, ranges };
+}
+function a4ValRun() {
+  const t = a4T(A4.val.target), cases = a4ValCases(t.id), { P, config, ranges } = a4ValPrep(t), w = atWeights();
+  const eff = LAB.fieldScore(P, w).eff;
+  A4.val.res = { target: t.id, config, ranges, w, profile: A3.profile, metrics: RG.validationMetrics({ eff, cell: S.cell, cases, idxMap: S.index, ks: [10, 50, 100, 500, 1000] }) };
+  A4.val.sens = null; atRender();
+  announce(`Evaluated ${A4.val.res.metrics.rows.length} accepted reference cases.`);
+}
+function a4ValSens() {
+  const t = a4T(A4.val.target), { P } = a4ValPrep(t);
+  A4.val.sens = RG.weightSensitivity({ P, w: atWeights(), cell: S.cell, cases: a4ValCases(t.id), idxMap: S.index });
+  atRender();
+}
+A3_VIEWS.validation = function () {
+  const need = a4Need(); if (need) return need;
+  const ts = a4ValTargets();
+  if (!a4T(A4.val.target) || !a4T(A4.val.target).scoring.earth_analogue_enabled) A4.val.target = "mars_gale_curiosity";
+  const t = a4T(A4.val.target), cases = a4ValCases(t.id), R = A4.val.res && A4.val.res.target === t.id ? A4.val.res : null;
+  const off = A4.reg.targets.filter(x => !x.scoring.earth_analogue_enabled);
+  let h = `<div class="sec"><h3 class="ttl">Validation workspace</h3>${a4Banner("evaluation against researcher reference cases")}
+    <div class="callout"><b>No reference cases are shipped.</b> ASTERRO has not been scientifically validated. This workspace evaluates the ranking against cases <i>you</i> enter, each with a citation; the result is an evaluation record, not a validation claim. Synthetic or uncited cases are rejected.</div>
+    <div class="lab-form"><label>Target (readiness ≥ 3)<select data-a4in="valt">${["mars", "moon"].map(b => `<optgroup label="${b === "mars" ? "Mars" : "Moon"}">${ts.filter(x => x.body.id === b).map(x => `<option value="${x.id}" ${x.id === t.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</optgroup>`).join("")}</select></label>
+      ${a4ProfileSel()}</div>
+    <p class="meta small">Configuration: <b>${esc(t.scoring.default_explore)}</b> · ${off.length} targets below readiness 3 are not offered (incomplete fingerprint).</p></div>
+  <div class="sec"><div class="lbl">Reference cases for ${esc(t.name)} (${cases.length})</div>
+    <form class="lab-form p4-caseform" data-a4form="case" aria-label="Add a reference case">
+      <label>Name<input name="name" required maxlength="120" placeholder="e.g. a published analogue site"></label>
+      <label>Label<select name="label"><option value="positive">positive analogue</option><option value="negative">negative (not an analogue)</option></select></label>
+      <label>Latitude<input name="lat" inputmode="decimal" required placeholder="−90 … 90"></label><label>Longitude (E)<input name="lon" inputmode="decimal" required placeholder="−180 … 180"></label>
+      <label class="wide">Citation (DOI, publication or URL)<input name="citation" required maxlength="400"></label>
+      <label>Evidence class<select name="evidence_quality">${Object.entries(RG.EVIDENCE).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("")}</select></label>
+      <label class="wide">Reason for inclusion<input name="reason" maxlength="400" placeholder="why this site is (or is not) an analogue of the target"></label>
+      <fieldset class="p4-crit"><legend>Relevant criteria</legend>${S.critIds.map(c => `<label class="ck"><input type="checkbox" name="criteria" value="${c}"> ${esc(shortOf(c))}</label>`).join("")}</fieldset>
+      <label class="wide">Evaluation protocol<input name="protocol" maxlength="400" placeholder="how the label was established"></label>
+      <button class="btn-sm" type="submit">Add case</button></form>
+    ${A4.val.msg ? `<p class="small ${A4.val.msg.ok ? "st-d" : "st-m"}" role="status">${esc(A4.val.msg.text)}</p>` : ""}
+    ${cases.length ? `<div class="tbl-wrap"><table class="t"><thead><tr><th>Case</th><th>Label</th><th class="n">Lat</th><th class="n">Lon</th><th>Citation</th><th>Evidence</th><th>Check</th><th></th></tr></thead><tbody>${cases.map((c, k) => { const e = RG.validateCase(c, S.index); return `<tr><td>${esc(c.name)}${c.reason ? `<div class="meta small">${esc(c.reason)}</div>` : ""}</td><td>${esc(c.label)}</td><td class="n">${(+c.lat).toFixed(3)}</td><td class="n">${(+c.lon).toFixed(3)}</td><td class="small">${esc(c.citation)}${c.protocol ? `<div class="meta">protocol: ${esc(c.protocol)}</div>` : ""}</td><td class="small">${esc(RG.EVIDENCE[c.evidence_quality] || "unspecified")}${c.criteria && c.criteria.length ? `<div class="meta">${c.criteria.map(shortOf).join(", ")}</div>` : ""}</td><td class="small ${e.length ? "st-m" : "st-d"}">${e.length ? esc(e.join("; ")) : "accepted"}</td><td><button class="lnk" data-a4="caserm" data-k="${k}" aria-label="Remove ${esc(c.name)}">remove</button></td></tr>`; }).join("")}</tbody></table></div>` : `<p class="meta">No cases yet.</p>`}
+    <div class="row"><label class="btn-sm p4-file">Import cases (JSON)<input type="file" accept="application/json,.json" data-a4in="caseimp" class="sr-only"></label>
+      <button class="btn-sm" data-a4="valrun" ${cases.length ? "" : "disabled"}>Evaluate</button><button class="btn-sm" data-a4="valsens" ${R ? "" : "disabled"}>Weight sensitivity</button>
+      <button class="btn-sm" data-a4="valexp" ${R ? "" : "disabled"}>Export evaluation record</button></div>
+    <p class="meta small">Import format: {"schema":"asterro.reference-cases/1","target":"${esc(t.id)}","cases":[{"name","label","lat","lon","citation"}]}. Imported cases are appended; a case with an existing name is reported, not replaced.</p></div>`;
+  if (R) {
+    const M = R.metrics;
+    h += `<div class="sec"><div class="lbl">Ranks under ${esc(R.config)} · ${esc(S.app.profiles[R.profile].label)}</div>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Case</th><th>Label</th><th class="n">Rank</th><th class="n">of</th><th class="n">Percentile</th><th>Earth cell</th></tr></thead><tbody>${M.rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.label)}</td><td class="n">${r.rank ? r.rank.toLocaleString() : "ineligible"}</td><td class="n">${M.nEligible.toLocaleString()}</td><td class="n">${r.percentile == null ? "—" : (100 * r.percentile).toFixed(2) + " %"}</td><td>${esc(placeStr(r.cellIndex))}</td></tr>`).join("")}</tbody></table></div>
+      ${M.rejected.length ? `<p class="small st-m">Rejected: ${M.rejected.map(x => esc(x.name + ": " + x.errors.join(", "))).join(" · ")}</p>` : ""}
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>k</th>${M.ks.map(k => `<th class="n">${k}</th>`).join("")}</tr></thead><tbody>
+        <tr><td>Recall@k (${M.positives} positive)</td>${M.ks.map(k => `<td class="n">${M.recall[k] == null ? "withheld" : (100 * M.recall[k]).toFixed(0) + " %"}</td>`).join("")}</tr>
+        <tr><td>Labelled precision@k</td>${M.ks.map(k => `<td class="n">${M.precision[k] == null ? "withheld" : (100 * M.precision[k]).toFixed(0) + " %"}</td>`).join("")}</tr></tbody></table></div>
+      ${M.sufficiency.map(s => `<p class="meta small">${esc(s)}</p>`).join("")}
+      <p class="meta small"><b>Evidence classes:</b> ${Object.entries(M.evidence).map(([k, n]) => `${esc(RG.EVIDENCE[k] || k)} × ${n}`).join(" · ") || "—"}. Expert judgment is not empirical validation; software tests and synthetic fixtures are never validation.</p>
+      <p class="meta small"><b>Holdout:</b> ${esc(RG.holdoutCheck().reason)}</p></div>`;
+  }
+  if (A4.val.sens) {
+    const V = A4.val.sens;
+    h += `<div class="sec"><div class="lbl">Weight sensitivity of case ranks</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Weight change</th>${V.cases.map(c => `<th class="n">${esc(c)}</th>`).join("")}<th class="n">max shift</th></tr></thead><tbody>
+      <tr><td>baseline weights</td>${V.base.map(r => `<td class="n">${r ?? "—"}</td>`).join("")}<td></td></tr>
+      ${V.rows.map(r => `<tr><td>${esc(shortOf(r.criterion))} × ${r.factor}</td>${r.ranks.map(x => `<td class="n">${x ?? "—"}</td>`).join("")}<td class="n">${r.maxShift.toLocaleString()}</td></tr>`).join("")}</tbody></table></div></div>`;
+  }
+  return h;
+};
+document.addEventListener("submit", e => {
+  const f = e.target.closest("[data-a4form=case]"); if (!f) return;
+  e.preventDefault();
+  const fd = new FormData(f), d = Object.fromEntries(fd.entries());
+  const c = { name: d.name.trim(), label: d.label, lat: +String(d.lat).replace("−", "-"), lon: +String(d.lon).replace("−", "-"), citation: d.citation.trim(),
+    evidence_quality: d.evidence_quality, reason: (d.reason || "").trim() || null, criteria: fd.getAll("criteria"), protocol: (d.protocol || "").trim() || null, added_utc: a4Now() };
+  const err = RG.validateCase(c, S.index), cases = a4ValCases(A4.val.target);
+  if (err.length) A4.val.msg = { ok: false, text: "Not added: " + err.join("; ") };
+  else if (cases.some(x => x.name === c.name)) A4.val.msg = { ok: false, text: `A case named “${c.name}” exists; nothing was replaced.` };
+  else { cases.push(c); const se = a4ValSave(A4.val.target, cases); A4.val.msg = se ? { ok: false, text: se } : { ok: true, text: `Added “${c.name}”.` }; A4.val.res = null; }
+  atRender(); announce(A4.val.msg.text);
+});
+Object.assign(A4_ACTIONS, {
+  caserm(a) { const cs = a4ValCases(A4.val.target); cs.splice(+a.dataset.k, 1); a4ValSave(A4.val.target, cs); A4.val.res = null; atRender(); },
+  valrun() { a4ValRun(); },
+  valsens() { a4ValSens(); },
+  valexp() {
+    const R = A4.val.res; if (!R) return;
+    const rec = RG.validationRecord({ target: R.target, config: R.config, w: R.w, profile: R.profile, ranges: R.ranges, metrics: R.metrics, sensitivity: A4.val.sens,
+      cases: a4ValCases(R.target), stackSha: S.app.stack.sha256, createdUtc: a4Now() });
+    const t = a4T(R.target);
+    rec.dataset_versions = Object.fromEntries(t.datasets.map(d => [d, (A4.ix.datasets[d] || {}).version || null]).concat(A4.reg.earth_search_configs[0].datasets.map(d => [d, (A4.ix.datasets[d] || {}).version || null])));
+    rec.experiment = { algorithm: S.app.algorithm_version, fingerprint_sha256: t.fingerprint.content_sha256, registry_version: A4.reg.registry_version, readiness_model: A4.reg.readiness_model.version };
+    a4Download(`asterro_evaluation_${R.target}.json`, rec);
+  },
+});
+Object.assign(A4_INPUTS, {
+  valt(a) { A4.val.target = a.value; A4.val.res = null; A4.val.sens = null; A4.val.msg = null; atRender(); },
+  async caseimp(a) {
+    const f = a.files && a.files[0]; if (!f) return;
+    let doc; try { doc = JSON.parse(await f.text()); } catch (e) { A4.val.msg = { ok: false, text: "Not valid JSON: " + e.message }; atRender(); return; }
+    if (!doc || doc.schema !== "asterro.reference-cases/1" || !Array.isArray(doc.cases)) { A4.val.msg = { ok: false, text: 'Expected {"schema":"asterro.reference-cases/1","target":…,"cases":[…]}.' }; atRender(); return; }
+    if (doc.target !== A4.val.target) { A4.val.msg = { ok: false, text: `The file is for target “${doc.target}”, not ${A4.val.target}; nothing imported.` }; atRender(); return; }
+    const cases = a4ValCases(A4.val.target), added = [], refused = [];
+    for (const c of doc.cases) {
+      const e = RG.validateCase(c, S.index);
+      if (e.length) refused.push(`${c && c.name || "?"}: ${e.join(", ")}`);
+      else if (cases.some(x => x.name === c.name)) refused.push(`${c.name}: name exists (not replaced)`);
+      else { cases.push({ name: c.name, label: c.label, lat: +c.lat, lon: +c.lon, citation: c.citation, evidence_quality: c.evidence_quality || null, reason: c.reason || null, criteria: c.criteria || [], protocol: c.protocol || null, added_utc: a4Now() }); added.push(c.name); }
+    }
+    const se = added.length ? a4ValSave(A4.val.target, cases) : null;
+    A4.val.msg = { ok: !refused.length && !se, text: se || `Imported ${added.length}; refused ${refused.length}${refused.length ? " — " + refused.join(" · ") : ""}.` };
+    A4.val.res = null; atRender();
+  },
+});
+
+/* ===== Phase IV · Mismatch Explorer =====
+ * For one target and one Earth cell: every criterion is classified deterministically as agreement, partial
+ * agreement, mismatch, proxy, proxy excluded, missing (target), missing (Earth), not applicable or excluded by
+ * weight, with the values, the similarity, and the scale / temporal difference between the target measurement
+ * and the Earth cell value. Over the target's top candidates, the classes are tabulated per criterion. */
+const A4_MM_ORDER = ["agreement", "partial", "mismatch", "proxy", "proxy_excluded", "missing_target", "missing_earth", "incompatible", "excluded_weight"];
+const A4_MM_CSS = { agreement: "st-d", partial: "st-p", mismatch: "p4-bad", proxy: "st-p", proxy_excluded: "st-x", missing_target: "st-u", missing_earth: "st-u", incompatible: "st-x", excluded_weight: "st-x" };
+function a4MmRanges(t) {
+  const fp = t.fingerprint, tv = Object.fromEntries(S.critIds.map(c => [c, fp.criterion_status[c] === "DIRECT" || (A4.mm.proxy && fp.criterion_status[c] === "PROXY") ? fp.variables[c] : null]));
+  return RG.earthUnionRanges(S.A, S.critIds, tv);
+}
+function a4MmCands(t) {
+  const at = atT(t.id); if (!at) return [];
+  const save = A3.includeProxy, saveN = A3.norm; A3.includeProxy = A4.mm.proxy; A3.norm = "target";
+  try { const r = atCands(at, 20); return r.eligible ? r.top : []; } finally { A3.includeProxy = save; A3.norm = saveN; }
+}
+A3_VIEWS.mmx = function () {
+  const need = a4Need(); if (need) return need;
+  const tid = A4.mm.target && a4T(A4.mm.target) ? A4.mm.target : (a4T(A3.active) ? A3.active : "mars_gale_curiosity");
+  A4.mm.target = tid;
+  const t = a4T(tid), w = atWeights(), ranges = a4MmRanges(t), cands = t.readiness.level >= 2 ? a4MmCands(t) : [];
+  let i = A4.mm.cell; if (i == null || !(i >= 0)) i = cands.length ? cands[0] : (S.selected != null ? S.selected : null);
+  const [dy, dx] = i != null ? cellDims(i) : [55.6, 69.5], cellKm = `0.5° × 0.625° (${dy.toFixed(0)} × ${dx.toFixed(0)} km)`;
+  let h = `<div class="sec"><h3 class="ttl">Mismatch Explorer</h3>${a4Banner("per-criterion agreement")}
+    <p class="note">Why does an Earth cell resemble — or fail to resemble — a target? Every criterion gets one deterministic class. A missing value is never a match, and a criterion the target lacks is never scored.</p>
+    <div class="lab-form"><label>Target${atTargetPicker(tid, "mmt", x => x.readiness.level >= 2)}</label>
+      <label>Earth cell<select data-a4in="mmc"><option value="">choose…</option>${cands.map((k, n) => `<option value="${k}" ${k === i ? "selected" : ""}>#${n + 1} ${esc(placeStr(k))}</option>`).join("")}${S.selected != null && !cands.includes(S.selected) ? `<option value="${S.selected}" ${S.selected === i ? "selected" : ""}>Explore selection: ${esc(placeStr(S.selected))}</option>` : ""}</select></label>
+      <label class="ck"><input type="checkbox" data-a4in="mmp" ${A4.mm.proxy ? "checked" : ""}> include proxy criteria</label>${a4ProfileSel()}</div>
+    <p class="meta small">Ranges: Earth ∪ this target (${A4.mm.proxy ? "DIRECT + PROXY" : "DIRECT only"}) · thresholds: agreement ≥ ${S.app.thresholds.match}, partial ≥ ${S.app.thresholds.partial} (baseline classes).</p></div>`;
+  if (i == null) return h + `<div class="sec"><div class="empty">${t.readiness.level < 2 ? "This target has no analytical data." : "Select an Earth cell."}</div></div>`;
+  const mm = RG.mismatch({ t, i, A: S.A, critIds: S.critIds, w, ranges, includeProxy: A4.mm.proxy, thresholds: S.app.thresholds, cellKm });
+  /* score and per-criterion contributions under the same vector, ranges and weights (traceable to the table) */
+  const tvS = RG.scenarioVector(t, A4.mm.proxy), PS = LAB.prepare(S.A, S.critIds, tvS, ranges), FS = LAB.fieldScore(PS, w), ctb = RG.contributions(PS, w, i);
+  h += `<div class="sec"><div class="row" style="justify-content:space-between;align-items:flex-end"><div><div class="lbl">Score under this configuration</div><div class="big" style="color:var(--accent)">${fmtPct(FS.eff[i])}</div><div class="meta small">coverage ${(100 * FS.coverage[i]).toFixed(0)} % of active weight · atlas comparison score (not the baseline Analogue Score)</div></div>
+    <button class="btn-sm" data-a4="mmsave" data-i="${i}">Save this Earth cell to a collection</button></div>${a4MmChart(mm, ctb)}</div>`;
+  h += `<div class="sec"><div class="lbl">${esc(t.name)} × ${esc(placeStr(i))}</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th>Status</th><th class="n">Earth</th><th class="n">Target</th><th class="n">s</th><th class="n">contribution</th><th>Class</th><th>Explanation</th></tr></thead><tbody>
+    ${mm.map(m => `<tr><td>${esc(labelOf(m.criterion))}</td><td>${esc(m.status)}</td><td class="n">${m.earth == null ? "—" : atVal(m.criterion, m.earth)}</td><td class="n">${m.target == null ? "—" : atVal(m.criterion, m.target)}</td><td class="n">${m.similarity == null ? "—" : m.similarity.toFixed(3)}</td><td class="n">${ctb[m.criterion] == null ? "—" : (100 * ctb[m.criterion]).toFixed(1) + " pts"}</td>
+      <td><span class="tag ${A4_MM_CSS[m.class]}">${esc(m.class.replace(/_/g, " "))}</span></td><td class="small">${esc(m.text)}${m.scale ? `<br><span class="meta">Scale: ${esc(m.scale)}</span>` : ""}${m.scaleWarning ? `<br><b>${esc(m.scaleWarning)}</b>` : ""}</td></tr>`).join("")}</tbody></table></div></div>`;
+  if (cands.length) {
+    const tab = S.critIds.map(c => { const o = {}; for (const k of cands) { const m = RG.mismatch({ t, i: k, A: S.A, critIds: [c], w, ranges, includeProxy: A4.mm.proxy, thresholds: S.app.thresholds, cellKm })[0]; o[m.class] = (o[m.class] || 0) + 1; } return [c, o]; });
+    const used = A4_MM_ORDER.filter(k => tab.some(([, o]) => o[k]));
+    h += `<div class="sec"><div class="lbl">Classes over the top ${cands.length} distinct candidates</div><div class="tbl-wrap"><table class="t"><caption class="sr-only">Count of candidates in each class per criterion</caption><thead><tr><th>Criterion</th>${used.map(k => `<th class="n">${esc(k.replace(/_/g, " "))}</th>`).join("")}</tr></thead><tbody>
+      ${tab.map(([c, o]) => `<tr><td>${esc(labelOf(c))}</td>${used.map(k => `<td class="n ${o[k] ? A4_MM_CSS[k] : ""}">${o[k] || ""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      <dl class="p4-dl">${used.map(k => `<dt>${esc(k.replace(/_/g, " "))}</dt><dd>${esc(RG.MM_CLASSES[k])}</dd>`).join("")}</dl></div>`;
+  }
+  return h;
+};
+function a4MmChart(mm, ctb) {
+  const W = 520, bh = 20, H = mm.length * (bh + 8) + 26, x0 = 150, sx = v => x0 + v * (W - x0 - 70);
+  const th = S.app.thresholds;
+  return `<figure class="p4-chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="mm-t mm-d"><title id="mm-t">Criterion similarity and class</title>
+    <desc id="mm-d">${mm.map(m => `${labelOf(m.criterion)}: ${m.similarity == null ? m.class.replace(/_/g, " ") : "s " + m.similarity.toFixed(2) + ", " + m.class}`).join("; ")}</desc>
+    <line x1="${sx(th.partial)}" x2="${sx(th.partial)}" y1="14" y2="${H - 6}" class="grat"/><line x1="${sx(th.match)}" x2="${sx(th.match)}" y1="14" y2="${H - 6}" class="grat"/>
+    <text x="${sx(th.partial)}" y="10" text-anchor="middle" class="ax">partial ${th.partial}</text><text x="${sx(th.match)}" y="10" text-anchor="middle" class="ax">match ${th.match}</text>
+    ${mm.map((m, k) => { const y = 18 + k * (bh + 8); return `<text x="0" y="${y + 14}" class="ax">${esc(shortOf(m.criterion))}</text>${m.similarity == null
+      ? `<rect x="${x0}" y="${y}" width="${W - x0 - 70}" height="${bh}" class="p4-na"/><text x="${x0 + 6}" y="${y + 14}" class="ax">${esc(m.class.replace(/_/g, " "))} — not compared</text>`
+      : `<rect x="${x0}" y="${y}" width="${(sx(m.similarity) - x0).toFixed(1)}" height="${bh}" class="p4-b-${m.class}"/><text x="${(sx(m.similarity) + 5).toFixed(1)}" y="${y + 14}" class="ax">${m.similarity.toFixed(2)}${ctb[m.criterion] != null ? " · " + (100 * ctb[m.criterion]).toFixed(1) + " pts" : ""}</text>`}`; }).join("")}</svg>
+    <figcaption class="meta small">Bar = criterion similarity s (0–1); label = its contribution to the score. Hatched rows are not compared, and never count as a match.</figcaption></figure>`;
+}
+A4_ACTIONS.mmsave = function (a) {
+  const i = +a.dataset.i, t = a4T(A4.mm.target);
+  a4SaveItem({ kind: "earth_cell", cell: S.cell[i], lat: S.lat[i], lon: S.lon[i], place: placeStr(i), target: t.id, note: `Mismatch Explorer · ${A4.mm.proxy ? "with" : "without"} proxies · profile ${S.app.profiles[A3.profile].label}`,
+    snapshot: RG.snapshot(A4.ix, [t.id], { profile: A3.profile, weights: atWeights(), include_proxy: A4.mm.proxy, algorithm: S.app.algorithm_version }) });
+};
+Object.assign(A4_INPUTS, {
+  mmc(a) { A4.mm.cell = a.value === "" ? null : +a.value; atRender(); },
+  mmp(a) { A4.mm.proxy = a.checked; A4.mm.cell = null; atRender(); },
+});
+A3_INPUTS.mmt = function (a) { A4.mm.target = a.value; A4.mm.cell = null; atRender(); };
+
+/* ===== Phase IV · Readiness & Provenance Center =====
+ * Counts by readiness level (accessible chart + table), every record's checks, dataset records, the offline
+ * regeneration result, and a machine-readable export (asterro.provenance-export/1) for any filter. */
+function a4LevelChart(c) {
+  const max = Math.max(1, ...c.byLevel, ...c.targetsByLevel), W = 360, bh = 16;
+  const rows = [1, 2, 3, 4].map(k => `<g transform="translate(0,${(k - 1) * 2 * (bh + 6)})"><text x="0" y="${bh - 3}" class="ax">L${k}</text>
+    <rect x="28" y="0" width="${(W - 80) * c.byLevel[k] / max}" height="${bh}" class="bar-l lvlf-${k}"/><text x="${34 + (W - 80) * c.byLevel[k] / max}" y="${bh - 3}" class="ax">${c.byLevel[k]} locations</text>
+    <rect x="28" y="${bh + 2}" width="${(W - 80) * c.targetsByLevel[k] / max}" height="${bh}" class="bar-t lvlf-${k}"/><text x="${34 + (W - 80) * c.targetsByLevel[k] / max}" y="${2 * bh - 1}" class="ax">${c.targetsByLevel[k]} targets</text></g>`).join("");
+  return `<figure class="p4-chart"><svg viewBox="0 0 ${W} ${4 * 2 * (bh + 6)}" role="img" aria-labelledby="lc-t lc-d"><title id="lc-t">Readiness levels</title><desc id="lc-d">${[1, 2, 3, 4].map(k => `L${k}: ${c.byLevel[k]} locations, ${c.targetsByLevel[k]} targets`).join("; ")}</desc>${rows}</svg>
+    <figcaption class="meta small">Upper bar: locations (a location takes the best level of its targets). Lower bar: analytical targets. The table below carries the same numbers.</figcaption></figure>`;
+}
+A3_VIEWS.readiness = function () {
+  const need = a4Need(); if (need) return need;
+  const R = A4.reg, c = RG.counts(A4.ix), P = A4.prov;
+  const lv = P.level === "" ? null : +P.level;
+  const ts = R.targets.filter(t => lv == null || t.readiness.level === lv), ls = R.locations.filter(l => lv == null || l.readiness.level === lv);
+  const focus = P.focus && (a4T(P.focus) || a4L(P.focus));
+  let h = `<div class="sec"><h3 class="ttl">Readiness &amp; provenance</h3>${a4Banner("data readiness, checks and sources")}
+    <p class="note">Readiness model ${esc(R.readiness_model.version)}: a record's level is the highest level whose checks — and every lower level's checks — pass. It describes data completeness and reproducibility, never scientific validity or mission safety.</p>
+    <div class="grid2">${a4LevelChart(c)}<div class="tbl-wrap"><table class="t"><thead><tr><th>Level</th><th>Meaning</th><th class="n">Locations</th><th class="n">Targets</th></tr></thead><tbody>
+      ${[1, 2, 3, 4].map(k => `<tr><td><span class="lvl lvl-${k}">L${k}</span></td><td class="small"><b>${esc(R.readiness_model.levels[k].label)}</b><br>${esc(R.readiness_model.levels[k].definition)}</td><td class="n">${c.byLevel[k]}</td><td class="n">${c.targetsByLevel[k]}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="lab-form"><label>Level<select data-a4in="provl"><option value="">all</option>${[1, 2, 3, 4].map(k => `<option value="${k}" ${String(P.level) === String(k) ? "selected" : ""}>L${k}</option>`).join("")}</select></label>
+      <label>Export<select data-a4in="provk">${[["all", "targets + locations"], ["targets", "targets"], ["locations", "locations"]].map(([v, t]) => `<option value="${v}" ${P.kind === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+      <button class="btn-sm" data-a4="provexp">Export JSON (${P.kind === "locations" ? 0 : ts.length} targets, ${P.kind === "targets" ? 0 : ls.length} locations)</button></div></div>`;
+  if (focus) h += `<div class="sec p4-focus"><div class="lbl">Focused record</div>${a4Record(focus, true)}</div>`;
+  h += `<div class="sec"><div class="lbl">Analytical targets${lv == null ? "" : " at L" + lv} (${ts.length})</div>${ts.map(t => a4Record(t, false)).join("") || `<p class="meta">None at this level.</p>`}</div>
+    <div class="sec"><div class="lbl">Checks used by the model</div><div class="tbl-wrap"><table class="t"><tbody>${R.readiness_model.checks.map(x => `<tr><td><span class="lvl lvl-${x.level}">L${x.level}</span></td><td class="mono small">${esc(x.id)}</td><td class="small">${esc(x.requirement)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="sec"><div class="lbl">Dataset records (${R.datasets.length})</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Dataset</th><th>Provider · product · version</th><th>Resolution</th><th>Coverage · units · no-data</th><th>Licence</th><th>Retrieval · checksums</th></tr></thead><tbody>
+      ${R.datasets.map(d => `<tr><td class="mono small">${esc(d.id)}</td><td class="small"><b>${esc(d.provider)}</b><br>${esc(d.product_id)} · ${esc(String(d.version).slice(0, 80))}<br><a href="${esc(d.url)}" target="_blank" rel="noopener">source ↗</a></td><td class="small">${esc(d.original_resolution)}<br><span class="meta">${esc(d.processing_resolution)}</span></td><td class="small">${esc(d.spatial_coverage || "—")}<br>${esc(d.temporal_coverage || "—")}<br><span class="meta">${esc(d.units || "—")} · no-data ${esc(d.nodata || "—")}</span></td><td class="small">${esc(d.license)}</td>
+        <td class="small">${esc(d.retrieval_status)}${d.retrieved ? "<br>" + esc(d.retrieved) : "<br><span class=\"p4-bad\">retrieval date not recorded</span>"}<br><span class="meta">${esc(typeof d.checksums === "string" ? d.checksums : d.checksums ? JSON.stringify(d.checksums).slice(0, 120) : "no checksum recorded")}</span>${d.limitations ? `<br><span class="meta">Limitations: ${esc(String(d.limitations).slice(0, 200))}</span>` : ""}</td></tr>`).join("")}</tbody></table></div></div>
+    ${a4OfflinePanel()}`;
+  return h;
+};
+function a4Record(r, open) {
+  const isT = r.record_type === "analytical_target";
+  const rg = isT ? r.validation.regeneration : null;
+  return `<details class="p4-rec" ${open ? "open" : ""}><summary><b>${esc(r.name)}</b> ${a4Level(r)} <span class="meta">${esc(r.record_type.replace("_", " "))}${isT ? " · " + esc(r.fingerprint.version) : ""}</span></summary>
+    <ul class="p4-checks">${(r.readiness.checks || []).map(c => `<li class="${c.passed ? "ok" : "no"}"><b>${c.passed ? "✓" : "✗"} ${esc(c.id)}</b> — ${esc(c.detail)}</li>`).join("")}</ul>
+    ${isT ? `<p class="small">Datasets: ${r.datasets.map(esc).join(", ")} · fingerprint SHA-256 <span class="mono">${esc(r.fingerprint.content_sha256.slice(0, 16))}…</span></p>
+      <div class="tbl-wrap"><table class="t"><caption class="sr-only">Derivation of each criterion of ${esc(r.name)}</caption><thead><tr><th>Criterion</th><th>Status</th><th class="n">Value</th><th>From</th><th>Support</th><th class="n">regenerated |Δ|</th></tr></thead><tbody>
+        ${S.critIds.map(c => { const fp = r.fingerprint, x = rg.criteria[c]; return `<tr><td>${esc(shortOf(c))}</td><td>${esc(fp.criterion_status[c])}</td><td class="n">${fp.variables[c] == null ? "—" : atVal(c, fp.variables[c])}</td><td class="small">${(fp.provenance[c] || []).map(esc).join(", ") || (fp.criterion_status[c] === "PROXY" ? "rule" : "—")}</td><td class="small">${esc(fp.spatial_support[c] || fp.missingness[c] || "—")}</td><td class="n">${x ? (x.abs_diff == null ? "failed" : x.abs_diff.toExponential(1)) : "—"}</td></tr>`; }).join("")}</tbody></table></div>
+      <p class="small">Offline regeneration: <b class="${rg.passed ? "st-d" : "st-m"}">${esc(rg.summary)}</b>${Object.entries(rg.criteria).map(([c, x]) => ` · ${esc(shortOf(c))} |Δ| ${x.abs_diff == null ? "—" : x.abs_diff.toExponential(1)} (tol ${x.tolerance})`).join("")}</p>
+      <p class="small">Scripts: ${Object.entries(r.provenance.scripts).map(([p, h]) => `<span class="mono">${esc(p)}</span> <span class="meta">${esc(h.slice(0, 10))}…</span>`).join(" · ")}</p>
+      <p class="small">Scoring: ${r.scoring.earth_analogue_enabled ? "enabled — " + esc(r.scoring.configs.join(", ")) : "exploratory partial only — " + esc(r.scoring.reason)}</p>
+      <p class="small meta">${esc(r.validation.scientific_validation)}</p>` : `<p class="small">Source: ${r.source.url ? `<a href="${esc(r.source.url)}" target="_blank" rel="noopener">${esc(r.source.type)}</a>` : esc(r.source.type)} · ${esc(r.source.reference || "")}</p>`}</details>`;
+}
+Object.assign(A4_ACTIONS, {
+  provexp() { const lv = A4.prov.level === "" ? null : +A4.prov.level; a4Download(`asterro_provenance${lv == null ? "" : "_L" + lv}.json`, Object.assign(RG.provenanceExport(A4.ix, { level: lv, kind: A4.prov.kind }), { exported_utc: a4Now() })); },
+});
+Object.assign(A4_INPUTS, {
+  provl(a) { A4.prov.level = a.value; A4.prov.focus = null; atRender(); },
+  provk(a) { A4.prov.kind = a.value; atRender(); },
+});
+
+/* ===== Phase IV · Research collections =====
+ * Named sets of locations and targets with notes, stored in this browser (asterro.collections.v1) and
+ * exchanged as versioned JSON (asterro.collections/1). Imports are validated against the registry; an import
+ * never overwrites: identical collections are skipped, conflicting ones are reported and left untouched. */
+function a4Cols() { const d = a4Get(A4_KEYS.collections, null); return d && Array.isArray(d.collections) ? d.collections : []; }
+function a4ColsSave(cols) { return a4Set(A4_KEYS.collections, RG.exportCollections(cols, a4Now())); }
+function a4ColBump(c) { c.version += 1; c.updated_utc = a4Now(); }
+function a4ItemName(it) {
+  if (it.kind === "location" || it.kind === "target") { const r = it.kind === "location" ? a4L(it.id) : a4T(it.id); return r ? r.name : it.id + " (not in this registry)"; }
+  if (it.kind === "earth_cell") return `Earth cell ${it.cell} · ${it.place || atFmtLL(it.lat, it.lon)}${it.target && a4T(it.target) ? " (for " + a4T(it.target).name + ")" : ""}`;
+  if (it.kind === "scenario_set") return it.label || "Scenario set";
+  if (it.kind === "comparison") return it.label || `Comparison (${it.config.aggregate})`;
+  if (it.kind === "reference") return it.citation;
+  return it.kind;
+}
+function a4ItemKey(it) { return it.kind + ":" + (it.id || it.cell || (it.config && JSON.stringify(it.config).length + ":" + (it.config.created_utc || "")) || it.citation); }
+/* any module can hand an item to the collections view (it never saves silently: the user picks the collection) */
+function a4SaveItem(item) { A4.colPending = item; A3.view = "collections"; $("#left").scrollTop = 0; atRender(); announce("Choose a collection for: " + a4ItemName(item)); }
+A3_VIEWS.collections = function () {
+  const need = a4Need(); if (need) return need;
+  const cols = a4Cols(), pend = A4.colPending;
+  let h = `<div class="sec"><h3 class="ttl">Research collections</h3>${a4Banner("locally stored collections")}
+    <p class="note">Collections are saved in this browser only. Export them to keep or share; import validates every entry against this registry and never overwrites an existing collection.</p>
+    ${pend ? `<div class="callout">Add <b>${esc(a4ItemName(pend))}</b> to: ${cols.map(c => `<button class="btn-sm" data-a4="coladd" data-id="${esc(c.id)}">${esc(c.name)}</button>`).join(" ") || "(no collection yet — create one below)"} <button class="lnk" data-a4="colcancel">cancel</button></div>` : ""}
+    <form class="lab-form" data-a4form="col" aria-label="Create a collection"><label class="wide">New collection<input name="name" required maxlength="120" placeholder="e.g. Polar thermal windows"></label><button class="btn-sm" type="submit">Create</button></form>
+    ${A4.colMsg ? `<p class="small ${A4.colMsg.ok ? "st-d" : "st-m"}" role="status">${esc(A4.colMsg.text)}</p>` : ""}
+    <div class="row"><button class="btn-sm" data-a4="colexp" ${cols.length ? "" : "disabled"}>Export all (JSON)</button><label class="btn-sm p4-file">Import (JSON)<input type="file" accept="application/json,.json" data-a4in="colimp" class="sr-only"></label></div></div>`;
+  if (A4.colConflicts && A4.colConflicts.length) h += `<div class="sec"><div class="lbl">Import conflicts (nothing overwritten)</div><ul class="lab-ul small">${A4.colConflicts.map(c => `<li><b>${esc(c.id)}</b>: existing “${esc(c.existing.name)}” v${c.existing.version} (${c.existing.items} items) vs incoming “${esc(c.incoming.name)}” v${c.incoming.version} (${c.incoming.items} items). ${esc(c.reason)}</li>`).join("")}</ul></div>`;
+  h += cols.map(c => `<div class="sec p4-col"><div class="row" style="justify-content:space-between"><div><b>${esc(c.name)}</b> <span class="meta">id ${esc(c.id)} · v${c.version} · updated ${esc(c.updated_utc)}</span></div>
+      <div class="row"><button class="btn-sm" data-a4="colcmp" data-id="${esc(c.id)}" ${c.items.filter(i => i.kind === "target" || (a4L(i.id) || {}).target_ids?.length).length >= 2 ? "" : "disabled"}>Compare targets</button><button class="btn-sm" data-a4="coldel" data-id="${esc(c.id)}">Delete</button></div></div>
+    ${c.items.length ? `<ul class="lab-ul">${c.items.map((it, k) => `<li><button class="lnk" data-a4="colopen" data-c="${esc(c.id)}" data-k="${k}">${esc(a4ItemName(it))}</button> <span class="meta">${esc(it.kind.replace("_", " "))}${it.kind === "location" && a4L(it.id) ? " · L" + a4L(it.id).readiness.level : it.kind === "target" && a4T(it.id) ? " · L" + a4T(it.id).readiness.level : ""}${it.snapshot ? ` · registry ${esc(it.snapshot.registry_version)}${a4SnapStale(it.snapshot) ? ' · <b class="p4-bad">fingerprint changed since saved</b>' : ""}` : ""}</span>${it.note ? `<div class="small">${esc(it.note)}</div>` : ""} <button class="lnk" data-a4="colrm" data-id="${esc(c.id)}" data-k="${k}" aria-label="Remove from ${esc(c.name)}">remove</button></li>`).join("")}</ul>` : `<p class="meta">Empty. Use “Add to a collection” on a location, or “Save to collection” in the Comparison Lab, Scenario Lab or Mismatch Explorer.</p>`}
+    <form class="lab-form" data-a4form="colref" data-id="${esc(c.id)}" aria-label="Add a source reference to ${esc(c.name)}"><label class="wide">Add a source reference<input name="citation" maxlength="400" placeholder="DOI, publication or URL"></label><label class="wide">Note<input name="note" maxlength="400"></label><button class="btn-sm" type="submit">Add reference</button></form>
+    <label class="wide">Notes<textarea data-a4in="colnote" data-id="${esc(c.id)}" rows="2" maxlength="4000">${esc(c.notes || "")}</textarea></label></div>`).join("");
+  return h;
+};
+document.addEventListener("submit", e => {
+  const f = e.target.closest("[data-a4form=col]"); if (!f) return;
+  e.preventDefault();
+  const name = String(new FormData(f).get("name") || "").trim(); if (!name) return;
+  const cols = a4Cols(); let id = RG.norm(name).replace(/ /g, "_").slice(0, 48) || "collection", k = 2;
+  while (cols.some(c => c.id === id)) id = id.replace(/_\d+$/, "") + "_" + k++;
+  const c = RG.newCollection(id, name, a4Now());
+  if (A4.colPending) { c.items.push({ ...A4.colPending }); A4.colPending = null; }
+  cols.push(c); const se = a4ColsSave(cols);
+  A4.colMsg = se ? { ok: false, text: se } : { ok: true, text: `Created “${name}”.` }; atRender(); announce(A4.colMsg.text);
+});
+Object.assign(A4_ACTIONS, {
+  coladd(a) {
+    const cols = a4Cols(), c = cols.find(x => x.id === a.dataset.id), it = A4.colPending; if (!c || !it) return;
+    if (c.items.some(x => a4ItemKey(x) === a4ItemKey(it))) A4.colMsg = { ok: false, text: "Already in this collection." };
+    else { c.items.push({ ...it }); a4ColBump(c); const se = a4ColsSave(cols); A4.colMsg = se ? { ok: false, text: se } : { ok: true, text: `Added to “${c.name}”.` }; }
+    A4.colPending = null; atRender(); announce(A4.colMsg.text);
+  },
+  colcancel() { A4.colPending = null; atRender(); },
+  colrm(a) { const cols = a4Cols(), c = cols.find(x => x.id === a.dataset.id); if (!c) return; c.items.splice(+a.dataset.k, 1); a4ColBump(c); a4ColsSave(cols); atRender(); },
+  coldel(a) { const cols = a4Cols().filter(x => x.id !== a.dataset.id); a4ColsSave(cols); A4.colMsg = { ok: true, text: `Deleted collection ${a.dataset.id}.` }; atRender(); },
+  colexp() { a4Download("asterro_collections.json", RG.exportCollections(a4Cols(), a4Now())); },
+  colopen(a) {
+    const c = a4Cols().find(x => x.id === a.dataset.c), it = c && c.items[+a.dataset.k]; if (!it) return;
+    if (it.kind === "location" && a4L(it.id)) { a4SyncFromLocation(it.id); A4.mode = "browse"; A3.view = "home"; }
+    else if (it.kind === "target" && a4T(it.id)) { a4SyncFromTarget(it.id); A3.active = it.id; A3.view = "target"; }
+    else if (it.kind === "earth_cell") { const i = S.index[it.cell]; if (i >= 0) { if (it.target && a4T(it.target)) A4.mm.target = it.target; A4.mm.cell = i; A3.view = "mmx"; } }
+    else if (it.kind === "scenario_set") { const r = RG.replayScenarios({ IX: A4.ix, A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, config: it.config });
+      A4.scn.target = it.config.target; A4.scn.list = it.config.scenarios.map(s => ({ id: s.id, label: s.label, profile: "custom", weights: s.weights, include_proxy: s.include_proxy, normalisation: s.normalisation }));
+      A3.view = "scen4"; a4ScnRun(); A4.scn.msg = { ok: r.ok, text: (r.ok ? "Saved set REPRODUCED: " : "Saved set NOT REPRODUCED: ") + r.msgs.join(" · ") }; }
+    else if (it.kind === "comparison") { A4.cmp = it.config.targets.filter(a4T); A4.agg = it.config.aggregate; A4.aggRes = null; A3.view = "lab4"; }
+    else if (it.kind === "reference") { if (/^https?:\/\//.test(it.citation)) window.open(it.citation, "_blank", "noopener"); return; }
+    $("#left").scrollTop = 0; atRender();
+  },
+  colcmp(a) {
+    const c = a4Cols().find(x => x.id === a.dataset.id); if (!c) return;
+    A4.cmp = Array.from(new Set(c.items.flatMap(it => it.kind === "target" ? [it.id] : (a4L(it.id) || { target_ids: [] }).target_ids))).filter(id => a4T(id) && a4T(id).readiness.level >= 2);
+    A4.aggRes = null; A3.view = "lab4"; atRender();
+  },
+});
+Object.assign(A4_INPUTS, {
+  colnote(a) { const cols = a4Cols(), c = cols.find(x => x.id === a.dataset.id); if (!c || c.notes === a.value) return; c.notes = a.value; a4ColBump(c); a4ColsSave(cols); },
+  async colimp(a) {
+    const f = a.files && a.files[0]; if (!f) return;
+    let doc; try { doc = JSON.parse(await f.text()); } catch (e) { A4.colMsg = { ok: false, text: "Not valid JSON: " + e.message }; atRender(); return; }
+    const errs = RG.validateCollections(doc, A4.ix);
+    if (errs.length) { A4.colMsg = { ok: false, text: `Import refused (${errs.length} problem${errs.length > 1 ? "s" : ""}): ${errs.slice(0, 6).join("; ")}${errs.length > 6 ? " …" : ""}` }; A4.colConflicts = []; atRender(); return; }
+    const m = RG.mergeCollections(a4Cols(), doc.collections), se = m.added.length ? a4ColsSave(m.collections) : null;
+    A4.colConflicts = m.conflicts;
+    A4.colMsg = { ok: !se && !m.conflicts.length, text: se || `Imported ${m.added.length}; ${m.skipped.length} identical skipped; ${m.conflicts.length} conflicts left untouched.` };
+    atRender(); announce(A4.colMsg.text);
+  },
+});
+
+function a4SnapStale(sn) { return Object.entries(sn.fingerprints || {}).some(([t, h]) => !a4T(t) || a4T(t).fingerprint.content_sha256 !== h); }
+document.addEventListener("submit", e => {
+  const f = e.target.closest("[data-a4form=colref]"); if (!f) return;
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(f).entries()), cite = String(d.citation || "").trim(); if (!cite) return;
+  const cols = a4Cols(), c = cols.find(x => x.id === f.dataset.id); if (!c) return;
+  c.items.push({ kind: "reference", citation: cite, note: String(d.note || "").trim() || undefined, added_utc: a4Now() }); a4ColBump(c);
+  const se = a4ColsSave(cols); A4.colMsg = se ? { ok: false, text: se } : { ok: true, text: "Reference added." }; atRender();
+});
+
+/* ===== Phase IV · Explore adapter: readiness ≥ 3 registry targets in the baseline globe =====
+ * Scoring configuration explore-target-v1: the unchanged baseline formula, coverage rule, tie-break and
+ * proxy rules, applied to a complete (L3+) fingerprint with ranges [min, max] over valid Earth cells ∪ THIS
+ * target's DIRECT/PROXY values. The registry's ranges are recomputed here from the stack and the target is
+ * registered only if they agree exactly.
+ * Legacy behaviour is untouched: Jezero, the Lunar South Pole and cross-planet always run with the legacy
+ * table (app.json ranges) — the wrappers below pass legacy targets straight to the baseline functions with
+ * S.ranges set to the legacy table. New targets are added to S.T only (never to S.targets / TARGET_IDS), so the
+ * legacy cross-planet experiment and every legacy-only view are unchanged. */
+const A4X = { ranges: {}, ids: [], rejected: {}, legacyRanges: null };
+function a4ExploreIds() { return A4X.ids.slice(); }
+function a4RangesFor(tid) { return A4X.ranges[tid] || A4X.legacyRanges || S.app.ranges; }
+function a4ExploreRegister() {
+  if (A4X.ids.length || !A4.reg) return;
+  A4X.legacyRanges = S.app.ranges;
+  for (const t of A4.reg.targets) {
+    if (t.legacy || !t.scoring.earth_analogue_enabled || t.scoring.default_explore !== "explore-target-v1") continue;
+    const fp = t.fingerprint, tv = Object.fromEntries(S.critIds.map(c => [c, ["DIRECT", "PROXY"].includes(fp.criterion_status[c]) ? fp.variables[c] : null]));
+    const mine = RG.earthUnionRanges(S.A, S.critIds, tv);
+    if (JSON.stringify(mine) !== JSON.stringify(Object.fromEntries(S.critIds.map(c => [c, t.scoring.explore_ranges[c]])))) { A4X.rejected[t.id] = "registry ranges differ from the browser recomputation"; continue; }
+    const body = t.body.id, proxy = Object.fromEntries(S.critIds.map(c => [c, fp.criterion_status[c] === "PROXY"]));
+    const comp = Object.fromEntries(S.critIds.map(c => [c, { DIRECT: "direct", PROXY: "proxy", "N/A": "not applicable", MISSING: "not applicable (missing)" }[fp.criterion_status[c]]]));
+    const meth = Object.fromEntries(S.critIds.map(c => [c, `${fp.criterion_status[c]}. ${fp.spatial_support[c] || fp.missingness[c] || ""}${fp.temporal_support[c] ? "; " + fp.temporal_support[c] : ""}. ${(A4.reg.compatibility[c] || {}).why || ""}`]));
+    S.T[t.id] = { id: t.id, body: t.body.name, name: t.name, registry: true,
+      location: { lat: t.location.latitude, lon_east: t.location.longitude_east, window_km: t.location.window_km, note: t.location.relation },
+      variables: tv, units: fp.units, comparison: comp, proxy_flags: proxy, methodology: meth, status: fp.criterion_status,
+      sources: t.datasets.map(d => (A4.ix.datasets[d] || {}).product_id || d), source_urls: t.datasets.map(d => (A4.ix.datasets[d] || {}).url || ""),
+      limitations: t.limitations.length ? t.limitations : ["See the registry record for this target."], interpretation: S.T.mars_jezero.interpretation,
+      proxy_method: S.T.mars_jezero.proxy_method, scoring_config: "explore-target-v1", fingerprint_sha256: fp.content_sha256 };
+    A4X.ranges[t.id] = mine; A4X.ids.push(t.id);
+    TNAME[t.id] = t.name.replace(/ \(.*\)$/, ""); TBODY[t.id] = body.toUpperCase();
+    THUMB[t.id] = t.thumbnail; THUMB_CAP[t.id] = t.thumbnail_caption;
+    RAMPS[t.id] = RAMPS[body === "mars" ? "mars_jezero" : "moon_south_pole"];
+  }
+  a4ExploreControl();
+}
+function a4IsNew(tid) { return !!A4X.ranges[tid]; }
+/* run a baseline function with the ranges that belong to `tid` (legacy table for legacy targets) */
+function a4With(tid, f) { const keep = S.ranges; S.ranges = a4RangesFor(tid); try { return f(); } finally { S.ranges = keep; } }
+const _b_simFor = simFor, _b_detailFor = detailFor, _b_setTarget = setTarget, _b_reproConfig = reproConfig;
+simFor = function (tid, w) { return a4With(tid, () => _b_simFor(tid, w)); };
+detailFor = function (tid, i, w = S.weights) { return a4With(tid, () => _b_detailFor(tid, i, w)); };
+setTarget = function (tid) {
+  if (!S.T[tid] && tid !== "cross") return;
+  S.ranges = a4IsNew(tid) ? A4X.ranges[tid] : (A4X.legacyRanges || S.app.ranges);
+  $("#app").dataset.body4 = a4IsNew(tid) ? S.T[tid].body.toLowerCase() : "";
+  _b_setTarget(tid);
+  a4ExploreControl();
+};
+reproConfig = function (i) {
+  const o = _b_reproConfig(i);
+  if (a4IsNew(o.target)) {
+    const t = S.T[o.target];
+    o.scoring_config = "explore-target-v1";
+    o.rules.normalization = "min-max over all valid Earth cells union THIS target's DIRECT/PROXY values (explore-target-v1; registry " + A4.reg.registry_version + ")";
+    o.targets_version = "registry.json " + A4.reg.registry_version + " (" + A4.reg.schema + ")";
+    o.target_fingerprint_sha256 = t.fingerprint_sha256;
+    o.reproduce_with = "python -m scripts.reproduce_registry reproduce.json";
+  } else o.scoring_config = "legacy-baseline-v1";
+  return o;
+};
+/* quick-switch control beside the baseline target buttons */
+function a4ExploreControl() {
+  const ctl = $(".target-ctl"); if (!ctl || !A4X.ids.length) return;
+  let box = $("#tc-atlas");
+  const groups = ["Mars", "Moon"].map(b => [b, A4X.ids.filter(id => S.T[id].body === b)]).filter(g => g[1].length);
+  const cur = a4IsNew(S.targetId) ? S.targetId : "";
+  const html = `<i>ATLAS · L3+</i><select id="tc-atlas-sel" aria-label="More analytical targets (readiness 3 or higher)"><option value="">${A4X.ids.length} more targets…</option>${groups.map(([b, ids]) => `<optgroup label="${b}">${ids.map(id => `<option value="${id}" ${id === cur ? "selected" : ""}>${esc(TNAME[id])}</option>`).join("")}</optgroup>`).join("")}</select>`;
+  if (!box) { box = document.createElement("label"); box.id = "tc-atlas"; box.className = "tc-atlas"; ctl.appendChild(box); box.addEventListener("change", e => { if (e.target.value) setTarget(e.target.value); }); }
+  box.innerHTML = html; box.setAttribute("aria-checked", !!cur); box.classList.toggle("on", !!cur);
+}
+function a4ExploreOpen(tid) {
+  if (!a4IsNew(tid) && !TARGET_IDS.includes(tid)) return;
+  setTarget(tid); setTab("explore");
+  announce(`${TNAME[tid]} opened in Explore under ${a4IsNew(tid) ? "explore-target-v1" : "the legacy configuration"}.`);
+}
+/* the Phase II laboratory is defined for the legacy targets; say so rather than run it with other ranges */
+const _p4RenderLeft = renderLeft;
+renderLeft = function () {
+  if (S.tab === "lab" && a4IsNew(S.targetId)) {
+    $("#left").innerHTML = `<div class="sec"><div class="lbl">Phase II · Research laboratory</div><div class="callout">The Phase II laboratory modules are defined for the legacy targets (Jezero Crater, Lunar South Pole, cross-planet) and their legacy normalisation table. ${esc(TNAME[S.targetId])} is scored under explore-target-v1, so the laboratory is not run for it — no result is shown rather than one computed with mismatched ranges.</div>
+      <div class="row"><button class="btn-sm" id="p4-lab-legacy">Switch to Jezero Crater</button><button class="btn-sm" id="p4-lab-atlas">Analyse ${esc(TNAME[S.targetId])} in the Atlas</button></div></div>`;
+    $("#p4-lab-legacy").onclick = () => setTarget("mars_jezero");
+    $("#p4-lab-atlas").onclick = () => { A3.active = S.targetId; A3.view = "target"; setTab("atlas"); };
+    return;
+  }
+  return _p4RenderLeft.apply(this, arguments);
+};
+/* landing entry point: open the atlas directly from the hero */
+(function a4Hero() {
+  const s = $("#hero-science"); if (!s || $("#hero-atlas")) return;
+  const b = document.createElement("button"); b.className = "btn-ghost"; b.id = "hero-atlas"; b.textContent = "Open the planetary atlas";
+  b.title = "Browse Mars and Moon locations, readiness and analytical targets";
+  s.insertAdjacentElement("afterend", b);
+  b.addEventListener("click", () => {
+    A3.view = "home"; setTab("atlas");
+    if (innerWidth <= 760) {      // stacked layout: bring the atlas into view, again once the search reveal has re-laid out the page
+      const go = () => { const l = $("#left"); if (l) l.scrollIntoView({ block: "start" }); return scrollY; };
+      setTimeout(() => { const y = go(); setTimeout(() => { if (Math.abs(scrollY - y) < 2) go(); }, 6800); }, 400);
+    }
+  });
+})();
+
+/* ===== Phase IV · Offline support =====
+ * public/sw.js (generated by scripts/build_web.py) precaches the core files under a cache named after a hash of
+ * every published file, so a new build gets a new cache and old caches are deleted on activation. Requests are
+ * network-first with a cache fallback: online visitors always get the current files; offline visitors get the
+ * last copy cached. The predictor stack, atlas grids, Earth sub-cell data, Phase II series and the registry are
+ * SHA-256-verified on load, and the atlas / registry / Phase II context must name the same stack, so a stale or
+ * corrupted cached copy of those files is refused (with a message) rather than used. Needs the network: web fonts (system fonts are used
+ * offline), external source links, and files never opened online before (e.g. the Phase II series). */
+const A4O = { sw: null, status: null, est: null, err: null };
+function a4SwMsg(msg) {
+  return new Promise(res => {
+    const c = navigator.serviceWorker && navigator.serviceWorker.controller; if (!c) return res(null);
+    const ch = new MessageChannel(); ch.port1.onmessage = e => res(e.data); c.postMessage(msg, [ch.port2]); setTimeout(() => res(null), 3000);
+  });
+}
+async function a4OfflineRefresh() {
+  try { A4O.status = await a4SwMsg({ type: "status" }); } catch (e) { A4O.err = e.message; }
+  try { if (navigator.storage && navigator.storage.estimate) A4O.est = await navigator.storage.estimate(); } catch (e) { }
+  if (S.tab === "atlas" && A3.view === "readiness") atRender();
+}
+function a4OfflinePanel() {
+  const sup = "serviceWorker" in navigator, st = A4O.status;
+  const est = A4O.est ? `${(A4O.est.usage / 1048576).toFixed(1)} MB used of ~${(A4O.est.quota / 1048576).toFixed(0)} MB available to this site` : "storage estimate unavailable";
+  return `<div class="sec" id="offline"><div class="lbl">Offline use</div>
+    ${!sup ? `<p class="note">This browser does not support service workers; the app works online only.</p>` :
+      !A4O.sw ? `<p class="note">Offline support is ${location.protocol === "file:" ? "unavailable from a file:// page" : "not active yet (it registers after the first full load)"}.</p>` :
+      `<p class="note">Service worker ${st ? `active · cache <span class="mono">${esc(st.cache)}</span> · ${st.coreCached}/${st.core} core files cached${st.coreCached < st.core ? " (offline start needs every core file; open the app online once more)" : " — the app can start offline"} · ${st.entries} files in total` : "registered; status pending"} · ${esc(est)}.</p>`}
+    <p class="meta small">Works offline once cached: Explore, Compare, Scenarios, Discover, Data, Method, the Atlas and every Phase IV module. Needs the network: web fonts (system fonts are used offline), external source links, and any file not yet opened online (the Phase II time series loads on first use). The predictor stack, atlas grids, sub-cell data, Phase II series and registry are SHA-256-verified when loaded (app.json, targets and labels are not individually hashed); a stale or damaged copy of a verified file is refused with a message — clear the cache below and reload online.</p>
+    <div class="row"><button class="btn-sm" data-a4="swrefresh" ${A4O.sw ? "" : "disabled"}>Refresh status</button><button class="btn-sm" data-a4="swclear" ${A4O.sw ? "" : "disabled"}>Clear offline cache</button></div>
+    ${A4O.err ? `<p class="small st-m">${esc(A4O.err)}</p>` : ""}</div>`;
+}
+Object.assign(A4_ACTIONS, {
+  swrefresh() { a4OfflineRefresh(); },
+  async swclear() { const r = await a4SwMsg({ type: "clear" }); A4O.status = null; A4O.err = r && r.cleared != null ? `Cleared ${r.cleared} cache(s). Reload while online to re-cache.` : "The service worker did not answer."; atRender(); },
+});
+(function a4Register() {
+  if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").then(reg => { A4O.sw = reg; setTimeout(a4OfflineRefresh, 1500); })
+      .catch(e => { A4O.err = "Service worker registration failed: " + e.message; });
+  });
+})();
+
+/* ===== Phase IV · Scenario Lab (planetary counterfactual laboratory, reproducible) =====
+ * Up to four scenarios for one target — weighting profile or custom weights, proxy inclusion, normalisation rule —
+ * computed side by side: top distinct sites per scenario, a rank-change chart over the union of their top 10,
+ * candidates robust across every scenario (rank ≤ 100 in all), and the per-criterion contribution breakdown of a
+ * chosen cell. Every set is exported as asterro.scenario-set/1 (recorded ranges and expected sites) and replays in
+ * the browser and in Python (scripts/replay_scenario.py). Changing a weight changes the question asked, never the
+ * environment; this is mathematical sensitivity, not real-world uncertainty. */
+A4.scn = { target: null, list: null, res: null, cell: null, msg: null };
+const A4_NORMS = { earth_union_target: "Earth ∪ target (default)", earth_only: "Earth only (target clipped)" };
+function a4ScnDefault() {
+  const P = S.app.profiles;
+  return [
+    { id: "s1", label: P.general.label, profile: "general", weights: { ...P.general.weights }, include_proxy: false, normalisation: "earth_union_target" },
+    { id: "s2", label: P.thermal.label, profile: "thermal", weights: { ...P.thermal.weights }, include_proxy: false, normalisation: "earth_union_target" },
+    { id: "s3", label: P.general.label + " · with proxies", profile: "general", weights: { ...P.general.weights }, include_proxy: true, normalisation: "earth_union_target" },
+  ];
+}
+function a4ScnRun() {
+  const t0 = performance.now();
+  try {
+    A4.scn.res = RG.runScenarios({ IX: A4.ix, A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, targetId: A4.scn.target,
+      scenarios: A4.scn.list.map(s => ({ id: s.id, label: s.label, weights: s.weights, include_proxy: s.include_proxy, normalisation: s.normalisation })),
+      algorithm: S.app.algorithm_version, createdUtc: a4Now() });
+    A4.scn.res.ms = performance.now() - t0; A4.scn.cell = A4.scn.res.runs[0].top[0]; A4.scn.msg = null;
+    announce(`${A4.scn.list.length} scenarios computed; ${A4.scn.res.robust.length} candidates robust across all.`);
+  } catch (e) { A4.scn.res = null; A4.scn.msg = { ok: false, text: e.message }; }
+  atRender();
+}
+function a4RankChart(res) {
+  const R = res, n = R.runs.length, U = R.union, W = 560, H = 24 + U.length * 18, x = k => 150 + k * ((W - 260) / Math.max(1, n - 1)), cap = 200;
+  const y = rk => 16 + (rk == null || rk > cap ? cap : rk - 1) / (cap - 1) * (H - 32);
+  const lines = U.map((i, u) => {
+    const pts = R.ranks.map((rk, k) => [x(k), y(rk[u])]), rob = R.robust.includes(i);
+    return `<g class="p4-rl${rob ? " rob" : ""}"><polyline points="${pts.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}"/>${pts.map((p, k) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6"><title>${esc(placeStr(i))} · ${esc(R.runs[k].sc.label)}: rank ${R.ranks[k][u] ?? "ineligible"}</title></circle>`).join("")}
+      <text x="${(x(n - 1) + 8).toFixed(1)}" y="${(pts[n - 1][1] + 3).toFixed(1)}">${esc(placeStr(i).slice(0, 26))}</text></g>`;
+  }).join("");
+  return `<figure class="p4-chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="rk-t rk-d"><title id="rk-t">Rank of each candidate under each scenario</title><desc id="rk-d">Lines join a candidate's rank across scenarios (top is rank 1; ranks beyond ${cap} drawn at the bottom). The table below gives the same ranks.</desc>
+    ${R.runs.map((r, k) => `<text x="${x(k).toFixed(1)}" y="10" text-anchor="middle" class="ax">${esc(r.sc.id)}</text><line x1="${x(k)}" x2="${x(k)}" y1="14" y2="${H - 14}" class="grat"/>`).join("")}
+    <text x="4" y="20" class="ax">rank 1</text><text x="4" y="${H - 16}" class="ax">≥ ${cap}</text>${lines}</svg>
+    <figcaption class="meta small">Highlighted: robust candidates (rank ≤ 100 in every scenario). Sensitivity of the ranking to analytical choices — not uncertainty in the environment.</figcaption></figure>`;
+}
+A3_VIEWS.scen4 = function () {
+  const need = a4Need(); if (need) return need;
+  const S4 = A4.scn;
+  if (!S4.target || !a4T(S4.target) || a4T(S4.target).readiness.level < 2) S4.target = a4T(A3.active) && a4T(A3.active).readiness.level >= 2 ? A3.active : "mars_gale_curiosity";
+  if (!S4.list) S4.list = a4ScnDefault();
+  const t = a4T(S4.target), R = S4.res && S4.res.config.target === t.id ? S4.res : null;
+  let h = `<div class="sec"><h3 class="ttl">Scenario Lab</h3>${a4Banner("reproducible counterfactual scenarios")}
+    <p class="note">Ask what changes when the analytical question changes: weights, proxy inclusion, normalisation. Every scenario is computed with the unchanged baseline formula; the set can be exported and replayed exactly. Weights express research priorities — they do not change the environment.</p>
+    <div class="lab-form"><label>Target${atTargetPicker(t.id, "scnt", x => x.readiness.level >= 2)}</label><span class="meta small">${a4Level(t)} ${t.readiness.level < 3 ? "· partial comparison (DIRECT criteria only, plus proxies if included)" : ""}</span></div></div>
+  <div class="sec"><div class="lbl">Scenarios (${S4.list.length} of 4)</div><div class="p4-scn">${S4.list.map((s, k) => `<fieldset class="p4-sc"><legend>${esc(s.id)}</legend>
+      <label>Label<input data-a4in="scnlab" data-k="${k}" value="${esc(s.label)}" maxlength="60"></label>
+      <label>Profile<select data-a4in="scnprof" data-k="${k}">${Object.entries(S.app.profiles).map(([p, P]) => `<option value="${p}" ${s.profile === p ? "selected" : ""}>${esc(P.label)}</option>`).join("")}<option value="custom" ${s.profile === "custom" ? "selected" : ""}>custom</option></select></label>
+      <div class="p4-w">${S.critIds.map(c => `<label title="${esc(labelOf(c))}">${esc(shortOf(c))}<input type="number" min="0" max="5" step="0.25" data-a4in="scnw" data-k="${k}" data-c="${c}" value="${(+s.weights[c]).toFixed(2)}" aria-label="${esc(labelOf(c))} weight, scenario ${esc(s.id)}"></label>`).join("")}</div>
+      <label class="ck"><input type="checkbox" data-a4in="scnpx" data-k="${k}" ${s.include_proxy ? "checked" : ""}> include proxies</label>
+      <label>Normalisation<select data-a4in="scnnorm" data-k="${k}">${Object.entries(A4_NORMS).map(([v, l]) => `<option value="${v}" ${s.normalisation === v ? "selected" : ""}>${esc(l)}</option>`).join("")}</select></label>
+      ${S4.list.length > 1 ? `<button class="lnk small" data-a4="scnrm" data-k="${k}">remove</button>` : ""}</fieldset>`).join("")}</div>
+    <div class="row"><button class="btn-sm" data-a4="scnadd" ${S4.list.length >= 4 ? "disabled" : ""}>Add scenario</button><button class="btn-primary p4-run" data-a4="scnrun">Compute scenarios</button>
+      <button class="btn-sm" data-a4="scnexp" ${R ? "" : "disabled"}>Export set (JSON)</button><label class="btn-sm p4-file">Replay a set<input type="file" accept=".json,application/json" data-a4in="scnimp" class="sr-only"></label>
+      <button class="btn-sm" data-a4="scnsave" ${R ? "" : "disabled"}>Save to collection</button></div>
+    ${S4.msg ? `<p class="small ${S4.msg.ok ? "st-d" : "p4-bad"}" role="status">${esc(S4.msg.text)}</p>` : ""}</div>`;
+  if (!R) return h;
+  const top = 10;
+  h += `<div class="sec"><div class="lbl">Top distinct sites per scenario · ${R.ms.toFixed(0)} ms</div><div class="p4-scols">${R.runs.map(r => `<div><b>${esc(r.sc.id)} · ${esc(r.sc.label)}</b><div class="meta small">${r.active.map(shortOf).join(", ")} · ${esc(A4_NORMS[r.sc.normalisation])}</div>
+      <ol class="lab-ul small">${r.top.slice(0, top).map(i => `<li><button class="lnk" data-a4="scncell" data-i="${i}">${esc(placeStr(i))}</button> ${fmtPct(r.eff[i])}${R.robust.includes(i) ? ' <span class="tag st-d">robust</span>' : ""}</li>`).join("")}</ol></div>`).join("")}</div></div>
+    <div class="sec"><div class="lbl">Rank changes across scenarios</div>${a4RankChart(R)}
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Candidate</th>${R.runs.map(r => `<th class="n">${esc(r.sc.id)}</th>`).join("")}<th class="n">spread</th></tr></thead><tbody>${R.union.map((i, u) => { const rk = R.ranks.map(x => x[u]); const f = rk.filter(v => v != null); return `<tr><td>${esc(placeStr(i))}</td>${rk.map(v => `<td class="n">${v ?? "—"}</td>`).join("")}<td class="n">${f.length === rk.length ? Math.max(...f) - Math.min(...f) : "—"}</td></tr>`; }).join("")}</tbody></table></div>
+      <p class="meta small">${R.robust.length} of ${R.union.length} candidates are robust (rank ≤ 100 in every scenario).</p></div>`;
+  const i = S4.cell;
+  if (i != null) {
+    const C = R.runs.map(r => RG.contributions(r.P, r.sc.weights, i));
+    h += `<div class="sec"><div class="lbl">Contribution breakdown · ${esc(placeStr(i))}</div><div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th>${R.runs.map(r => `<th class="n">${esc(r.sc.id)} k = w·s/Σw</th>`).join("")}</tr></thead><tbody>
+      ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td>${C.map(ct => `<td class="n">${ct[c] == null ? (c in ct ? "no Earth value" : "excluded") : (100 * ct[c]).toFixed(1) + " pts"}</td>`).join("")}</tr>`).join("")}
+      <tr><td><b>Score</b></td>${R.runs.map(r => `<td class="n"><b>${fmtPct(r.eff[i])}</b></td>`).join("")}</tr></tbody></table></div>
+      <p class="meta small">Excluded = weight 0, criterion not DIRECT, or proxy not included. A contribution is a share of the similarity score, not a physical quantity.</p></div>`;
+  }
+  return h;
+};
+function a4ScnSet(k, f) { const s = A4.scn.list[+k]; f(s); A4.scn.res = null; }
+Object.assign(A4_ACTIONS, {
+  scnadd() { const n = A4.scn.list.length + 1, P = S.app.profiles.general; A4.scn.list.push({ id: "s" + n, label: "Scenario " + n, profile: "general", weights: { ...P.weights }, include_proxy: false, normalisation: "earth_union_target" }); A4.scn.res = null; atRender(); },
+  scnrm(a) { A4.scn.list.splice(+a.dataset.k, 1); A4.scn.list.forEach((s, k) => s.id = "s" + (k + 1)); A4.scn.res = null; atRender(); },
+  scnrun() { a4ScnRun(); },
+  scncell(a) { A4.scn.cell = +a.dataset.i; atRender(); },
+  scnexp() { a4Download(`asterro_scenarios_${A4.scn.res.config.target}.json`, A4.scn.res.config); },
+  scnsave() { const c = A4.scn.res.config; a4SaveItem({ kind: "scenario_set", label: `${c.scenarios.length} scenarios · ${a4T(c.target).name}`, config: c, snapshot: RG.snapshot(A4.ix, [c.target]) }); },
+});
+Object.assign(A4_INPUTS, {
+  scnlab(a) { A4.scn.list[+a.dataset.k].label = a.value.slice(0, 60); A4.scn.res = null; },
+  scnprof(a) { a4ScnSet(a.dataset.k, s => { s.profile = a.value; if (a.value !== "custom") { s.weights = { ...S.app.profiles[a.value].weights }; s.label = S.app.profiles[a.value].label + (s.include_proxy ? " · with proxies" : ""); } }); atRender(); },
+  scnw(a) { const v = +a.value; if (!(v >= 0 && v <= 5)) { A4.scn.msg = { ok: false, text: "Weights must be between 0 and 5." }; atRender(); return; } a4ScnSet(a.dataset.k, s => { s.weights[a.dataset.c] = v; s.profile = "custom"; }); atRender(); },
+  scnpx(a) { a4ScnSet(a.dataset.k, s => { s.include_proxy = a.checked; }); atRender(); },
+  scnnorm(a) { a4ScnSet(a.dataset.k, s => { s.normalisation = a.value; }); atRender(); },
+  async scnimp(a) {
+    const f = a.files && a.files[0]; if (!f) return;
+    let cfg; try { cfg = JSON.parse(await f.text()); } catch (e) { A4.scn.msg = { ok: false, text: "Not valid JSON: " + e.message }; atRender(); return; }
+    const r = RG.replayScenarios({ IX: A4.ix, A: S.A, cell: S.cell, lat: S.lat, lon: S.lon, critIds: S.critIds, config: cfg });
+    A4.scn.msg = { ok: r.ok, text: (r.ok ? "REPRODUCED in this browser: " : "NOT REPRODUCED: ") + r.msgs.join(" · ") };
+    if (r.ok) { A4.scn.target = cfg.target; A4.scn.list = cfg.scenarios.map(s => ({ id: s.id, label: s.label, profile: "custom", weights: s.weights, include_proxy: s.include_proxy, normalisation: s.normalisation })); const keep = A4.scn.msg; a4ScnRun(); A4.scn.msg = keep; }
+    atRender();
+  },
+});
+A3_INPUTS.scnt = function (a) { A4.scn.target = a.value; A4.scn.res = null; atRender(); };
+
+/* ===== Phase IV · Expedition objectives (extends the Phase III Analogue Expedition Designer) =====
+ * A research objective selects one of the existing editorial weighting profiles (a transparent, fixed rule) and
+ * states which measurable criteria matter for it and why, which criteria the selected target can actually support,
+ * and the research questions the plan should answer. The Phase III designer below then turns chosen candidates into
+ * field objectives and measurement needs. Nothing here is a safety, access or suitability assessment. */
+const A4_OBJECTIVES = {
+  rover_mobility: { label: "Rover mobility research", profile: "rover", key: ["slope", "surface_roughness"],
+    why: "Traversability at the ~1 km baseline is governed mainly by slope and roughness; climate is secondary.",
+    questions: ["Do slope and roughness distributions at metre scale resemble the target's at the scales a rover experiences?", "Which terrain properties not in ASTERRO (rock abundance, soil bearing strength) must be measured on site?"] },
+  terrain_navigation: { label: "Terrain navigation", profile: "rover", key: ["slope", "surface_roughness"],
+    why: "Navigation tests depend on relief and obstacle density; ASTERRO represents relief only through 926.6 m slope and window roughness.",
+    questions: ["Is the relief at the candidate comparable over the navigation test footprint?", "Which visual or lighting conditions (not modelled) differ from the target?"] },
+  thermal: { label: "Thermal-environment investigation", profile: "thermal", key: ["lst_diurnal_range", "annual_temperature_range"],
+    why: "Hardware thermal cycling is dominated by the diurnal surface swing and the seasonal air-temperature range.",
+    questions: ["How does the measured diurnal surface range at the candidate compare with the target's, given the point-vs-cell scale difference?", "Which absolute temperatures (not modelled) bound the test?"] },
+  eva_training: { label: "Astronaut field training", profile: "eva", key: ["aridity", "lst_diurnal_range", "slope"],
+    why: "Crew exposure: dryness, thermal swings and walkable terrain.",
+    questions: ["Which aspects of the target environment can the candidate NOT represent (gravity, atmosphere, radiation)?", "Which training objectives depend only on the represented criteria?"] },
+  instrument: { label: "Instrument testing", profile: "instrument", key: ["aridity", "elevation"],
+    why: "Dry surfaces and thin (high) atmosphere columns matter most for instrument analogues; both target values are PROXY rules.",
+    questions: ["Are the instrument's sensitivities covered by the criteria ASTERRO models?", "Which measured surface properties must be characterised before testing?"] },
+  geology: { label: "Geological fieldwork", profile: "general", key: [],
+    why: "ASTERRO does not model geology, lithology or mineralogy. Equal weights are used and the comparison is environmental only.",
+    questions: ["Which geological evidence (not in ASTERRO) would establish a geological analogy?", "Do the environmental criteria at least match the context of the geological question?"] },
+  habitat: { label: "Habitat-environment studies", profile: "habitat", key: ["lst_diurnal_range", "annual_temperature_range", "slope"],
+    why: "Long-duration stays: thermal environment plus low slope for construction.",
+    questions: ["Which thermal extremes (not modelled) drive habitat design?", "Is low slope available at the construction scale?"] },
+  surface_planning: { label: "Surface exploration planning", profile: "general", key: [],
+    why: "Equal weight on every available criterion; use the Scenario Lab to test how the plan depends on priorities.",
+    questions: ["Which candidates remain competitive across profiles (Scenario Lab, robust candidates)?", "Which target-side measurements would change the plan most (missing evidence below)?"] },
+};
+A4.exp = { obj: null };
+const _p3Expedition = A3_VIEWS.expedition;
+A3_VIEWS.expedition = function () {
+  const base = _p3Expedition();
+  if (!A4.reg) return base;
+  const t = atT(A3.active), rt = t && a4T(t.id), O = A4.exp.obj && A4_OBJECTIVES[A4.exp.obj];
+  let h = `<div class="sec"><div class="lbl">Phase IV · Research objective</div>${a4Banner("objective → criteria (fixed, transparent rules)")}
+    <div class="p4-obj" role="radiogroup" aria-label="Research objective">${Object.entries(A4_OBJECTIVES).map(([k, o]) => `<label class="p4-radio"><input type="radio" name="a4obj" data-a4in="expobj" value="${k}" ${A4.exp.obj === k ? "checked" : ""}> <b>${esc(o.label)}</b><span class="meta small">profile: ${esc(S.app.profiles[o.profile].label)}</span></label>`).join("")}</div>`;
+  if (O && rt) {
+    const P = S.app.profiles[O.profile], fp = rt.fingerprint;
+    h += `<p class="note small"><b>${esc(O.label)}.</b> ${esc(O.why)} Selecting it sets the weighting profile to <b>${esc(P.label)}</b> (${esc(P.rationale || "")}).</p>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Criterion</th><th class="n">weight</th><th>Key for this objective</th><th>${esc(rt.name)}</th></tr></thead><tbody>
+      ${S.critIds.map(c => `<tr><td>${esc(labelOf(c))}</td><td class="n">${(+P.weights[c]).toFixed(1)}</td><td>${O.key.includes(c) ? "yes" : ""}</td><td class="${{ DIRECT: "st-d", PROXY: "st-p", "N/A": "st-x", MISSING: "st-m" }[fp.criterion_status[c]]}">${esc(fp.criterion_status[c])}${O.key.includes(c) && fp.criterion_status[c] !== "DIRECT" ? " — key criterion not measured at the target" : ""}</td></tr>`).join("")}</tbody></table></div>
+      <p class="small"><b>Research questions for the plan</b></p><ul class="lab-ul small">${O.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>
+      <p class="meta small">An environmental analogy is not a training-site certification: access, safety, permits and operational suitability are not assessed.</p>`;
+  } else h += `<p class="meta small">Choose an objective to set the weighting profile and see which criteria matter.</p>`;
+  return h + `</div>` + base;
+};
+A4_INPUTS.expobj = function (a) { A4.exp.obj = a.value; A3.profile = A4_OBJECTIVES[a.value].profile; A3.cache.clear && A3.cache.clear(); atRender(); };
+/* the exported design records the objective */
+const _p3ExpExport = A3_ACTIONS["exp-export"];
+A3_ACTIONS["exp-export"] = function () {
+  const _show = showExport;
+  if (A4.exp.obj) showExport = (title, txt, fn) => { const d = JSON.parse(txt); d.objective = { id: A4.exp.obj, label: A4_OBJECTIVES[A4.exp.obj].label, profile: A4_OBJECTIVES[A4.exp.obj].profile, questions: A4_OBJECTIVES[A4.exp.obj].questions }; _show(title, JSON.stringify(d, null, 1), fn); };
+  try { _p3ExpExport(); } finally { showExport = _show; }
 };
 </script>

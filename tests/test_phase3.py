@@ -180,7 +180,9 @@ def test_p3_no_secrets_or_signed_urls():
 
 def test_p3_readiness_rule_and_level1_exclusion():
     for t in ATLAS["targets"]:
-        assert t["readiness"]["level"] == TC.readiness(t["status"], all(t["status"][c] != "UNVALIDATED" for c in C))
+        assert t["readiness_v1"]["level"] == TC.readiness(t["status"], all(t["status"][c] != "UNVALIDATED" for c in C))
+    assert set(ATLAS["reference"]) == {t["id"] for t in ATLAS["targets"] if t["readiness_v1"]["level"] >= 2}
+    # Phase IV readiness model 3: every rankable target is >= L2 with at least one DIRECT criterion; L1 (catalogued) never ranked
     assert set(ATLAS["reference"]) == {t["id"] for t in ATLAS["targets"] if t["readiness"]["level"] >= 2}
 
 

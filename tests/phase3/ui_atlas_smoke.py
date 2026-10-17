@@ -17,6 +17,14 @@ time.sleep(1.0)
 errors, res = [], {}
 
 
+def nav(pg, v):
+    """Open module v through the two-level module bar (group first, then the module)."""
+    if not pg.query_selector(f".p4-g2 [data-a3view={v}]"):
+        g = pg.evaluate(f"(A4_GROUPS.find(g => g.items.some(i => i[0] === '{v}')) || A4_GROUPS[0]).items[0][0]")
+        pg.click(f".p4-g1 [data-a3view={g}]"); time.sleep(0.3)
+    pg.click(f".p4-g2 [data-a3view={v}]")
+
+
 def wait_idle(pg, timeout=180):
     t0 = time.time()
     while time.time() - t0 < timeout:
@@ -38,7 +46,9 @@ try:
         pg.click("#hero-search"); time.sleep(6.5)
         base_top = pg.inner_text(".site >> nth=0")
         base = pg.evaluate("({eff: Array.from(S.res.eff.slice(0, 200)), w: JSON.stringify(S.weights), t: S.targetId, ranges: JSON.stringify(S.ranges)})")
-        pg.click("#tab-atlas"); pg.wait_for_selector(".at-cards", timeout=30000); time.sleep(0.8)
+        pg.click("#tab-atlas"); time.sleep(0.8)
+        pg.wait_for_selector(".p4-g1", timeout=30000); nav(pg, 'catalog')   # Phase IV: the Atlas opens on the hierarchical atlas
+        pg.wait_for_selector(".at-cards", timeout=30000); time.sleep(0.8)
         res["mars_cards"] = pg.eval_on_selector_all(".at-card", "x => x.length")
         pg.screenshot(path=f"{OUT}/atlas_00_catalog_mars.png")
         pg.click("[data-a3=body][data-b=Moon]"); time.sleep(0.5)
@@ -49,7 +59,7 @@ try:
         pg.fill("[data-a3live=q]", ""); time.sleep(0.6)
 
         def view(v, shot=None, wait=0.8):
-            pg.click(f"[data-a3view={v}]"); time.sleep(wait)
+            nav(pg, v); time.sleep(wait)
             if shot: pg.screenshot(path=f"{OUT}/{shot}.png", full_page=False)
 
         # target detail with terrain previews
@@ -57,7 +67,7 @@ try:
         res["raster_canvases"] = pg.eval_on_selector_all("canvas.at-raster", "x => x.length")
         pg.screenshot(path=f"{OUT}/atlas_02_target_shackleton.png")
         # compare: the user's example
-        pg.click("[data-a3view=catalog]"); time.sleep(0.4); pg.click("[data-a3=selexample]"); time.sleep(2.5)
+        nav(pg, 'catalog'); time.sleep(0.4); pg.click("[data-a3=selexample]"); time.sleep(2.5)
         res["compare_cols"] = pg.eval_on_selector_all(".at-col", "x => x.length")
         pg.screenshot(path=f"{OUT}/atlas_03_compare.png")
         t0 = time.time(); pg.click("[data-a3=stab]"); time.sleep(0.5); wait_idle(pg); res["stability_s"] = round(time.time() - t0, 1)
@@ -77,7 +87,7 @@ try:
         # every other module
         for v in ["extremes", "landing", "counter", "mismatch", "translate", "expedition", "constellation", "copilot", "provenance"]:
             view(v, shot=f"atlas_m_{v}", wait=1.5)
-        pg.click("[data-a3view=copilot]"); time.sleep(0.4)
+        nav(pg, 'copilot'); time.sleep(0.4)
         for q in ["What is missing for Elysium Planitia?", "Is Shackleton safe to land?", "What is the weather on Jupiter?"]:
             pg.fill("[data-a3in=cp-q]", q); pg.dispatch_event("[data-a3in=cp-q]", "change"); pg.click("[data-a3=cp-ask]"); time.sleep(0.4)
         res["copilot"] = pg.evaluate("A3.copilot.log.map(m => m.a.slice(0, 140))")

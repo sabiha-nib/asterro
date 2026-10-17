@@ -19,8 +19,11 @@ check(atlas.targets.length === 33 && atlas.targets.filter(t => t.body === "Mars"
 check(atlas.stack_sha256 === D.app.stack.sha256, "atlas built for this predictor stack");
 check(atlas.targets.every(t => crit.every(c => ATL.STATUS.includes(t.status[c]))), "every criterion of every target has a status from the vocabulary");
 check(atlas.targets.every(t => crit.every(c => (t.status[c] === "DIRECT" || t.status[c] === "PROXY") === (t.values[c] != null))), "a value exists exactly when the status is DIRECT or PROXY (no value behind MISSING/INCOMPATIBLE)");
-check(atlas.targets.every(t => t.readiness.direct === crit.filter(c => t.status[c] === "DIRECT").length), "readiness counts DIRECT criteria only (proxies never count)");
-check(atlas.targets.every(t => t.readiness.level === (t.readiness.direct === 0 ? 1 : t.readiness.direct < 3 ? 2 : (crit.some(c => t.status[c] === "UNVALIDATED") ? 3 : 4))), "readiness level follows the documented rule");
+check(atlas.targets.every(t => t.readiness_v1.direct === crit.filter(c => t.status[c] === "DIRECT").length), "readiness counts DIRECT criteria only (proxies never count)");
+check(atlas.targets.every(t => t.readiness_v1.level === (t.readiness_v1.direct === 0 ? 1 : t.readiness_v1.direct < 3 ? 2 : (crit.some(c => t.status[c] === "UNVALIDATED") ? 3 : 4))), "Phase III readiness v1 level follows the documented rule (kept as readiness_v1)");
+check(atlas.targets.every(t => t.readiness.model === "3.0.0" && t.readiness.checks.length === 12), "Phase IV readiness model 3 carries its 12 explicit checks");
+check(atlas.targets.every(t => { const L = t.readiness.level; return [1, 2, 3, 4].every(k => (k <= L) === t.readiness.checks.filter(c => c.level <= k).every(c => c.passed)); }), "readiness level = highest level whose checks (and all lower checks) pass");
+check(atlas.targets.every(t => t.readiness.level !== 4 || t.readiness.checks.find(c => c.id === "L4.offline_regeneration").passed), "every L4 target passed the offline regeneration at build time");
 for (const id of ["mars_jezero", "moon_south_pole"]) check(crit.every(c => Object.is(T[id].values[c], D.targets[id].variables[c] ?? null)), `${id}: atlas values identical to the unchanged baseline target`);
 const nonBase = atlas.targets.filter(t => !t.baseline);
 check(nonBase.every(t => !crit.every(c => t.values[c] === T.mars_jezero.values[c]) && !crit.every(c => t.values[c] === T.moon_south_pole.values[c])), "no non-baseline fingerprint copies a baseline fingerprint");
@@ -59,7 +62,10 @@ for (const [id, ref] of Object.entries(atlas.reference)) {
   const L1 = { ...T.mars_elysium_planitia, status: Object.fromEntries(crit.map(c => [c, c === "aridity" || c === "elevation" ? "PROXY" : "MISSING"])), readiness: { level: 1 } };
   const r = ATL.candidates({ A: D.A, cell, lat: D.lat, lon: D.lon, critIds: crit, t: L1, ranges: atlas.normalisation.ranges, w: W0 });
   check(!r.eligible && r.mode === "none", "L1 target never enters a ranking");
-  check(ATL.eligibility(T.mars_elysium_planitia, crit).mode === "partial-terrain", "L2 terrain-only target is labelled partial");
+  check(ATL.eligibility(T.mars_elysium_planitia, crit).mode === "partial-terrain", "terrain-only target (L2) is labelled partial");
+  const L0 = { ...T.mars_elysium_planitia, readiness: { model: "3.0.0", level: 1 } };
+  check(!ATL.candidates({ A: D.A, cell, lat: D.lat, lon: D.lon, critIds: crit, t: L0, ranges: atlas.normalisation.ranges, w: W0 }).eligible, "L1 catalogued entry (model 3) never enters a ranking");
+  check(ATL.eligibility(T.moon_shackleton, crit).mode === "full" && T.moon_shackleton.readiness.level === 4, "L4 target: full comparison");
   const tv = ATL.targetVector(T.mars_elysium_planitia, crit);
   check(tv.lst_diurnal_range === null && tv.aridity === null && tv.slope != null, "target vector: MISSING and PROXY are not scored by default");
   check(ATL.targetVector(T.mars_elysium_planitia, crit, { includeProxy: true }).aridity === 0, "proxies only on explicit request");
@@ -131,6 +137,8 @@ for (const [id, ref] of Object.entries(atlas.reference)) {
   const L1 = { ...T.mars_elysium_planitia, readiness: { level: 1 } };
   const st = ATL.workflowState({ target: L1 });
   check(st[0].status === "DONE" && st.slice(1).every(s => s.status === "BLOCKED"), "workflow stops at the analytical boundary for an L1 target");
+  const st0 = ATL.workflowState({ target: { ...T.mars_elysium_planitia, readiness: { model: "3.0.0", level: 1 } } });
+  check(st0.slice(1).every(s => s.status === "BLOCKED"), "workflow stops at the analytical boundary for an L1 catalogued entry");
   const st2 = ATL.workflowState({ target: T.mars_gale_curiosity, candidate: null });
   check(st2[1].status === "READY" && st2.slice(2).every(s => s.status === "BLOCKED"), "workflow waits for a candidate");
   const idx = atlas.targets.flatMap(t => crit.map(c => ({ id: `${t.id}.${c}`, kind: "value", target: t.id, targetName: t.name, aliases: [t.name.split(" (")[0].toLowerCase()], criterion: c, status: t.status[c], text: `${t.name} ${c} ${t.status[c]}` })));

@@ -1,0 +1,53 @@
+{
+ "schema": "asterro.raw-manifest/1",
+ "producer": "src/phase4/pipeline/extract_raw_support.py (network job: gazetteer_export, polar_support, gcp_support)",
+ "transfer": "Delivered as one archive (asterro_phase4_support.zip, SHA-256 e76183e2\u2026 as received); each file below is checksummed individually.",
+ "role": "RAW retained inputs. Derived values live in public/data/ and are regenerated from these by src/registry/verify.py; nothing in this folder is ever rewritten by a build.",
+ "upstream": {
+  "gazetteer": "IAU/USGS Gazetteer of Planetary Nomenclature centre-point exports (zip SHA-256 recorded inside gazetteer_catalog.json)",
+  "polar": "LRO Diviner level-4 polar hourly maps (Williams et al. 2019), window bins only, values as published",
+  "gcp": "LRO Diviner Global Cumulative Product HTTP range reads, raw bytes with per-read SHA-256"
+ },
+ "files": [
+  {
+   "path": "data/raw/phase4/gazetteer_catalog.json",
+   "bytes": 34397,
+   "sha256": "43cbf6b482dc6b910566b64ef31592b156ce1608be0a020dc3755cd1d95004e8"
+  },
+  {
+   "path": "data/raw/phase4/support.log",
+   "bytes": 250,
+   "sha256": "068b6f508b9211e30f14101d6a2e610d9ce3acaf6e8dd43f8897b931b2bda2f7"
+  },
+  {
+   "path": "data/raw/phase4/support/gcp_raw.npz",
+   "bytes": 669792,
+   "sha256": "b9a4ff9c70f6b797f71ede8db50154aa32b676a67565b475f03d4deb15db1447"
+  },
+  {
+   "path": "data/raw/phase4/support/polar_moon_cabeus.npz",
+   "bytes": 846142,
+   "sha256": "ddf3eb2408721a649c3792e722d56d18c3c1eade45c6424b6705eea507a14fcd"
+  },
+  {
+   "path": "data/raw/phase4/support/polar_moon_malapert_massif.npz",
+   "bytes": 841387,
+   "sha256": "d42410532b533f43d9eb492f301052198584ce73c6d8a803ed1bf7f0e14668c2"
+  },
+  {
+   "path": "data/raw/phase4/support/polar_moon_north_pole.npz",
+   "bytes": 831233,
+   "sha256": "4941eb59f10ecca2892ed38404aa2c865fe18bf52f9401740d9e74a9e01f5155"
+  },
+  {
+   "path": "data/raw/phase4/support/polar_moon_shackleton.npz",
+   "bytes": 820706,
+   "sha256": "708a2fe6a53c4b2e419e6893b1c913159d35cbd6f30b7b66d9308fba6a152d0a"
+  },
+  {
+   "path": "data/raw/phase4/support/polar_moon_south_pole.npz",
+   "bytes": 817483,
+   "sha256": "2f727b65d20072ddf2a3e7095fea192149de029f58a3324f02fba8f803f77caa"
+  }
+ ]
+}

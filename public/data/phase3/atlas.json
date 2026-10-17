@@ -1,7 +1,7 @@
 {
  "schema": "asterro.atlas/1",
  "version": "atlas-1.0.0",
- "built_utc": "2026-10-16T06:13:27Z",
+ "built_utc": "2026-10-17T18:42:56Z",
  "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
  "algorithm_version": "tai-sim-1.0.0",
  "criteria": [
@@ -70,23 +70,23 @@
  ],
  "readiness_levels": {
   "1": {
-   "label": "CATALOG VERIFIED",
-   "meaning": "Location identified and verified; required target data not assembled."
+   "label": "CATALOGUED",
+   "meaning": "Verified basic metadata and an authoritative reference. Environmental analysis is not implied; no similarity score is permitted."
   },
   "2": {
-   "label": "PARTIAL DATA AVAILABLE",
-   "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible."
+   "label": "PARTIALLY CHARACTERIZED",
+   "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison."
   },
   "3": {
    "label": "ANALYTICALLY COMPARABLE",
-   "meaning": "At least three directly measured criteria compatible with the Earth stack."
+   "meaning": "Every applicable criterion is DIRECT or PROXY, at least three are DIRECT, with provenance and accepted compatibility."
   },
   "4": {
-   "label": "REPRODUCIBLE TARGET",
-   "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data."
+   "label": "REPRODUCIBLE",
+   "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value."
   }
  },
- "readiness_rule": "L1: no DIRECT criterion; L2: 1-2 DIRECT; L3: >=3 DIRECT; L4: L3 and no UNVALIDATED value (every value produced by a documented script from checksummed source data). PROXY criteria never count. L1 targets never enter any ranking.",
+ "readiness_rule": "Readiness model v3.0.0: four cumulative levels computed from explicit checks (see each target's check list). L1 catalogued \u2014 never ranked; L2 partially characterized \u2014 exploratory partial comparison on DIRECT criteria only; L3+ full comparison. Readiness is about data completeness and reproducibility, not scientific validity or mission safety.",
  "kinds": {
   "named_feature": "IAU-named feature sampled by a 55.6 km window at its gazetteer centre point",
   "defined_region": "A target region defined by ASTERRO (explicit centre / offset / extent)",
@@ -5934,10 +5934,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 4
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 4,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/14300",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "18.38, 77.57999999999998",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_isidis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "mola",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "4 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "legacy-1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "src/data/ingestion/mars_meda.py, src/data/ingestion/moon_diviner.py, src/data/ingestion/terrain.py, src/data/preprocessing/build_targets.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2309.511574074074,
@@ -5968,6 +6055,55 @@
      "recomputed": 263.2045816168411,
      "abs_diff": 0.004581616841107916
     }
+   },
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 4
+   },
+   "registry": {
+    "location": "mars:jezero",
+    "region": "region:mars_isidis",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "legacy-baseline-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "legacy-baseline-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5702.0
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       75.871
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/thumb_jezero_mola.png"
    }
   },
   {
@@ -6034,10 +6170,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/15000",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-5.0834, 137.8453",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_gale",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2081.597013888889,
@@ -6057,7 +6280,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:aeolis_mons",
+    "region": "region:mars_gale",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_gale_aeolis_mons.png"
+   }
   },
   {
    "id": "mars_gale_curiosity",
@@ -6129,10 +6374,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 4
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 4,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/2071",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-4.5894, 137.44169999999997",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_gale",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "4 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/mars_meda.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/pipeline/rems_gale.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -3417.8155555555554,
@@ -6449,7 +6781,56 @@
      1.9057755495267235
     ]
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 4
+   },
+   "registry": {
+    "location": "mars:gale",
+    "region": "region:mars_gale",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       69.10945922540964
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/mars_gale_curiosity.png"
+   }
   },
   {
    "id": "mars_elysium_planitia",
@@ -6515,10 +6896,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/1784",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "2.979, 154.73720000000003",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_elysium",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2713.4939583333335,
@@ -6630,7 +7098,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:elysium_planitia",
+    "region": "region:mars_elysium",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_elysium_planitia.png"
+   }
   },
   {
    "id": "mars_utopia_planitia",
@@ -6696,10 +7186,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/6260",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "46.7363, 117.51679999999999",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_utopia",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -4922.761407407406,
@@ -6811,7 +7388,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:utopia_planitia",
+    "region": "region:mars_utopia",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_utopia_planitia.png"
+   }
   },
   {
    "id": "mars_gusev",
@@ -6877,10 +7476,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/2289",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-14.530800000000001, 175.5244",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_gusev",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1902.2118101851852,
@@ -6900,7 +7586,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:gusev",
+    "region": "region:mars_gusev",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_gusev.png"
+   }
   },
   {
    "id": "mars_hellas_planitia",
@@ -6966,10 +7674,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/2432",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-42.4301, 70.5025",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_hellas",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -6262.8855509259265,
@@ -7081,7 +7876,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:hellas_planitia",
+    "region": "region:mars_hellas",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_hellas_planitia.png"
+   }
   },
   {
    "id": "mars_valles_marineris",
@@ -7147,10 +7964,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/6288",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-14.0059, -58.587699999999984",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_valles",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -3771.904453703704,
@@ -7170,7 +8074,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:valles_marineris",
+    "region": "region:mars_valles",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_valles_marineris.png"
+   }
   },
   {
    "id": "mars_olympus_mons_summit",
@@ -7236,10 +8162,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4453",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "18.6528, -133.8025",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_tharsis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 19242.559910383596,
@@ -7259,7 +8272,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:olympus_mons",
+    "region": "region:mars_tharsis",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_olympus_mons_summit.png"
+   }
   },
   {
    "id": "mars_olympus_mons_flank",
@@ -7325,10 +8360,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4453",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "18.633939559408592, -131.13181656107554",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_tharsis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 14560.225412037038,
@@ -7348,7 +8470,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:olympus_mons",
+    "region": "region:mars_tharsis",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_olympus_mons_flank.png"
+   }
   },
   {
    "id": "mars_olympus_mons_plains",
@@ -7414,10 +8558,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4453",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "18.483351596909756, -125.79517447708568",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_tharsis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 1270.8240416666665,
@@ -7437,7 +8668,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:olympus_mons",
+    "region": "region:mars_tharsis",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_olympus_mons_plains.png"
+   }
   },
   {
    "id": "mars_arcadia_planitia",
@@ -7503,10 +8756,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/348",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "49.02, -171.85000000000002",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_amazonis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -4045.747802579365,
@@ -7618,7 +8958,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:arcadia_planitia",
+    "region": "region:mars_amazonis",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_arcadia_planitia.png"
+   }
   },
   {
    "id": "mars_amazonis_planitia",
@@ -7684,10 +9046,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/220",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "25.746100000000002, -162.9128",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_amazonis",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -3839.9320462962964,
@@ -7799,7 +9248,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:amazonis_planitia",
+    "region": "region:mars_amazonis",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_amazonis_planitia.png"
+   }
   },
   {
    "id": "mars_noctis_labyrinthus",
@@ -7865,10 +9336,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4324",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-6.362500000000001, -101.18889999999999",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_valles",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 6517.334319444445,
@@ -7980,7 +9538,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:noctis_labyrinthus",
+    "region": "region:mars_valles",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_noctis_labyrinthus.png"
+   }
   },
   {
    "id": "mars_schiaparelli",
@@ -8046,10 +9626,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/5366",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-2.7138, 16.771600000000007",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_meridiani",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -370.7911111111111,
@@ -8161,7 +9828,29 @@
     }
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:schiaparelli",
+    "region": "region:mars_meridiani",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_schiaparelli.png"
+   }
   },
   {
    "id": "mars_endeavour",
@@ -8227,10 +9916,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/14501",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-2.2836, -5.195500000000038",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_meridiani",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1465.3190972222221,
@@ -8250,7 +10026,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:endeavour",
+    "region": "region:mars_meridiani",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_endeavour.png"
+   }
   },
   {
    "id": "mars_planum_boreum",
@@ -8316,10 +10114,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4754",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "87.32000000000001, 54.96000000000001",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_north_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2474.2595301845886,
@@ -8339,7 +10224,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:planum_boreum",
+    "region": "region:mars_north_polar",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_planum_boreum.png"
+   }
   },
   {
    "id": "mars_planum_australe",
@@ -8405,10 +10312,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4753",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-83.35000000000001, 157.70000000000005",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "mars / region:mars_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_mars",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: annual_temperature_range, lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 3156.8052536024884,
@@ -8428,7 +10422,29 @@
     "datum_note": "Elevation relative to the product datum; context only, never compared with Earth."
    },
    "thermal": null,
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "mars:planum_australe",
+    "region": "region:mars_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: annual_temperature_range, lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/mars_planum_australe.png"
+   }
   },
   {
    "id": "moon_south_pole",
@@ -8482,10 +10498,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "ASTERRO baseline definition, data/targets.json (window centred on the pole)",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-90.0, 0.0",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "lola",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "legacy-1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "src/data/ingestion/mars_meda.py, src/data/ingestion/moon_diviner.py, src/data/ingestion/terrain.py, src/data/preprocessing/build_targets.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -241.66983857205477,
@@ -8547,6 +10650,55 @@
      "recomputed": 54.68214600690568,
      "abs_diff": 0.00014600690568045138
     }
+   },
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:south_pole_window",
+    "region": "region:moon_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "legacy-baseline-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "legacy-baseline-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5702.0
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       75.871
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/thumb_southpole_lola.png"
    }
   },
   {
@@ -8616,10 +10768,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/5450",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-89.67, 129.77999999999997",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -121.06413575434942,
@@ -8665,7 +10904,56 @@
     "valid_fraction": 0.8681390364364924,
     "grid_sha256": "b828bd8e08e4f904076db5ab87c08ec4a04df23bd193a461c72d227f9b5c7cd1"
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:shackleton",
+    "region": "region:moon_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       60.98146907013738
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_shackleton.png"
+   }
   },
   {
    "id": "moon_cabeus",
@@ -8734,10 +11022,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/953",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-85.33030000000001, -42.1327",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -3298.644889921746,
@@ -8783,7 +11158,56 @@
     "valid_fraction": 1.0,
     "grid_sha256": "7a6f4d583420b0e99fbf3e1cd47a1867114ac3e196926f3acb0ced9a83d8ddee"
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:cabeus",
+    "region": "region:moon_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       63.94423773364419
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_cabeus.png"
+   }
   },
   {
    "id": "moon_malapert_massif",
@@ -8852,10 +11276,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/16338",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-85.98, -1.669999999999959",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 1187.6785545027521,
@@ -8901,7 +11412,56 @@
     "valid_fraction": 1.0,
     "grid_sha256": "6edce68b7192018a4158c6f82fc0f0494764ed8a93d7ff72d2a368b31529e387"
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:mons_malapert",
+    "region": "region:moon_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1570.3411743253812
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       72.95584176995578
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_malapert_massif.png"
+   }
   },
   {
    "id": "moon_aristarchus",
@@ -8970,10 +11530,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/380",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "23.7299, -47.490099999999984",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_procellarum",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1099.6739874109169,
@@ -9008,7 +11655,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:aristarchus",
+    "region": "region:moon_procellarum",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       246.70077592592588
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_aristarchus.png"
+   }
   },
   {
    "id": "moon_marius_hills",
@@ -9062,10 +11758,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "https://lroc.im-ldi.com/atlases/pits/1",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "14.0917, -56.77010000000001",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_procellarum",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1497.650933973487,
@@ -9100,7 +11883,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:marius_hills_pit",
+    "region": "region:moon_procellarum",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       278.95072500000003
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_marius_hills.png"
+   }
   },
   {
    "id": "moon_oceanus_procellarum",
@@ -9169,10 +12001,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4395",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "20.671400000000002, -56.67739999999998",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_procellarum",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2134.842567501014,
@@ -9396,7 +12315,56 @@
      }
     ]
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:oceanus_procellarum",
+    "region": "region:moon_procellarum",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       272.6489083333333
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_oceanus_procellarum.png"
+   }
   },
   {
    "id": "moon_reiner_gamma",
@@ -9465,10 +12433,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 2,
-    "label": "PARTIAL DATA AVAILABLE",
-    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
-    "direct": 2
+    "label": "PARTIALLY CHARACTERIZED",
+    "meaning": "A documented dataset is associated and a complete measurement window exists, but the data do not support a complete, compatible comparison.",
+    "direct": 2,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/4987",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "7.3853, -58.95830000000001",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_procellarum",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": false,
+      "detail": "missing: lst_diurnal_range",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": false,
+      "detail": "2 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1753.108599250195,
@@ -9503,7 +12558,29 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 2,
+    "label": "PARTIAL DATA AVAILABLE",
+    "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible.",
+    "direct": 2
+   },
+   "registry": {
+    "location": "moon:reiner_gamma",
+    "region": "region:moon_procellarum",
+    "scoring": {
+     "earth_analogue_enabled": false,
+     "target_comparison_enabled": false,
+     "configs": [],
+     "default_explore": null,
+     "exploratory_partial": [
+      "atlas-direct-v1"
+     ],
+     "explore_ranges": null,
+     "reason": "Readiness 2: missing: lst_diurnal_range; 2 DIRECT"
+    },
+    "thumbnail": "data/registry/thumbs/moon_reiner_gamma.png"
+   }
   },
   {
    "id": "moon_schrodinger",
@@ -9572,10 +12649,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/5381",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-74.7326, 132.92520000000002",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_south_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -4590.5596850143775,
@@ -9610,7 +12774,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:schrodinger",
+    "region": "region:moon_south_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       185.547108531746
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_schrodinger.png"
+   }
   },
   {
    "id": "moon_orientale",
@@ -9679,10 +12892,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "http://planetarynames.wr.usgs.gov/Feature/3685",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-19.8655, -94.6703",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_basins_craters",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -2815.271159438783,
@@ -9717,7 +13017,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:mare_orientale",
+    "region": "region:moon_basins_craters",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       278.47464583333334
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_orientale.png"
+   }
   },
   {
    "id": "moon_apollo17_taurus_littrow",
@@ -9771,10 +13120,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "20.1911, 30.7723",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_apollo",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1923.744240423713,
@@ -9809,7 +13245,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:apollo17_site",
+    "region": "region:moon_apollo",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       275.9946683333334
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_apollo17_taurus_littrow.png"
+   }
   },
   {
    "id": "moon_apollo14_fra_mauro",
@@ -9878,10 +13363,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-3.64589, -17.47193999999999",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_apollo",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -1089.5014911546987,
@@ -9916,7 +13488,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:apollo14_site",
+    "region": "region:moon_apollo",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       284.8921933333333
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_apollo14_fra_mauro.png"
+   }
   },
   {
    "id": "moon_apollo16_descartes",
@@ -9985,10 +13606,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "-8.9734, 15.501100000000008",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_apollo",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": 262.31673402322724,
@@ -10023,7 +13731,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:apollo16_site",
+    "region": "region:moon_apollo",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       281.17130909090906
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_apollo16_descartes.png"
+   }
   },
   {
    "id": "moon_apollo15_hadley",
@@ -10092,10 +13849,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "26.13239, 3.6332999999999913",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_apollo",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -898.3146117223996,
@@ -10130,7 +13974,56 @@
     },
     "ring": []
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:apollo15_site",
+    "region": "region:moon_apollo",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       272.34995
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_apollo15_hadley.png"
+   }
   },
   {
    "id": "moon_north_pole",
@@ -10184,10 +14077,97 @@
     ]
    },
    "readiness": {
+    "model": "3.0.0",
     "level": 4,
-    "label": "REPRODUCIBLE TARGET",
-    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
-    "direct": 3
+    "label": "REPRODUCIBLE",
+    "meaning": "Versioned fingerprint, recorded scripts and a passing offline regeneration of every DIRECT value.",
+    "direct": 3,
+    "checks": [
+     {
+      "id": "L1.name_source",
+      "level": 1,
+      "passed": true,
+      "detail": "Defined like the baseline south-pole window (src/phase3/target_catalog.py)",
+      "requirement": "The name or definition is backed by a cited source (gazetteer feature link, mission coordinate source or documented ASTERRO definition)."
+     },
+     {
+      "id": "L1.coordinates",
+      "level": 1,
+      "passed": true,
+      "detail": "90.0, 0.0",
+      "requirement": "Latitude in [-90, 90] and longitude in [-180, 180], both finite."
+     },
+     {
+      "id": "L1.hierarchy",
+      "level": 1,
+      "passed": true,
+      "detail": "moon / region:moon_north_polar",
+      "requirement": "Assigned to a body and a documented region."
+     },
+     {
+      "id": "L2.dataset_record",
+      "level": 2,
+      "passed": true,
+      "detail": "dem_moon",
+      "requirement": "A dataset record with id, provider, product, version, URL, licence, resolution, processing and retrieval status for the measured window."
+     },
+     {
+      "id": "L2.measured_window",
+      "level": 2,
+      "passed": true,
+      "detail": "3600/3600 bins",
+      "requirement": "A complete measurement window (all 3600 bins of 926.6 m) with a recorded grid checksum; its criteria are DIRECT."
+     },
+     {
+      "id": "L3.no_missing_applicable",
+      "level": 3,
+      "passed": true,
+      "detail": "missing: none",
+      "requirement": "No applicable criterion is MISSING; every criterion has a valid status (DIRECT / PROXY / N/A)."
+     },
+     {
+      "id": "L3.three_direct",
+      "level": 3,
+      "passed": true,
+      "detail": "3 DIRECT",
+      "requirement": "At least three DIRECT criteria."
+     },
+     {
+      "id": "L3.values_units_provenance",
+      "level": 3,
+      "passed": true,
+      "detail": "ok",
+      "requirement": "Every DIRECT and PROXY value is finite, has a valid unit, and every DIRECT value names its dataset(s)."
+     },
+     {
+      "id": "L3.compatibility",
+      "level": 3,
+      "passed": true,
+      "detail": "all accepted",
+      "requirement": "Every DIRECT criterion has an accepted compatibility verdict in the variable compatibility registry."
+     },
+     {
+      "id": "L4.versioned_fingerprint",
+      "level": 4,
+      "passed": true,
+      "detail": "1.0.0",
+      "requirement": "The fingerprint carries a version and a content hash."
+     },
+     {
+      "id": "L4.processing_documented",
+      "level": 4,
+      "passed": true,
+      "detail": "scripts/build_phase3_data.py, src/data/ingestion/terrain.py, src/phase3/pipeline/build_atlas.py, src/phase3/target_catalog.py, src/phase4/pipeline/extract_raw_support.py",
+      "requirement": "Every script that produced a value is recorded with its checksum."
+     },
+     {
+      "id": "L4.offline_regeneration",
+      "level": 4,
+      "passed": true,
+      "detail": "all DIRECT values regenerated offline",
+      "requirement": "Every DIRECT value was regenerated offline from retained inputs at build time and matched within tolerance."
+     }
+    ]
    },
    "terrain": {
     "elevation_mean_m": -885.3731800817972,
@@ -10233,7 +14213,83 @@
     "valid_fraction": 0.9304923071156838,
     "grid_sha256": "f60703ad085894fd57a1d82ff60db05a68d21e30d5929e3be99b3c9379af7dc4"
    },
-   "reproduce_check": null
+   "reproduce_check": null,
+   "readiness_v1": {
+    "level": 4,
+    "label": "REPRODUCIBLE TARGET",
+    "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data.",
+    "direct": 3
+   },
+   "registry": {
+    "location": "moon:north_pole_window",
+    "region": "region:moon_north_polar",
+    "scoring": {
+     "earth_analogue_enabled": true,
+     "target_comparison_enabled": true,
+     "configs": [
+      "explore-target-v1",
+      "atlas-direct-v1",
+      "atlas-catalogue-v1"
+     ],
+     "default_explore": "explore-target-v1",
+     "exploratory_partial": [],
+     "explore_ranges": {
+      "aridity": [
+       0.0,
+       1.0
+      ],
+      "annual_temperature_range": [
+       0.3400001525878906,
+       59.91999816894531
+      ],
+      "elevation": [
+       -75.2784423828125,
+       5701.98876953125
+      ],
+      "slope": [
+       0.0,
+       20.94510841369629
+      ],
+      "surface_roughness": [
+       0.0,
+       1500.462158203125
+      ],
+      "lst_diurnal_range": [
+       -6.9000091552734375,
+       50.182130502890615
+      ]
+     },
+     "reason": "Readiness \u2265 3: fingerprint complete for its applicable criteria."
+    },
+    "thumbnail": "data/registry/thumbs/moon_north_pole.png"
+   }
   }
- ]
+ ],
+ "readiness_levels_v1": {
+  "1": {
+   "label": "CATALOG VERIFIED",
+   "meaning": "Location identified and verified; required target data not assembled."
+  },
+  "2": {
+   "label": "PARTIAL DATA AVAILABLE",
+   "meaning": "Some measured criteria (typically terrain only); other dimensions missing or incompatible."
+  },
+  "3": {
+   "label": "ANALYTICALLY COMPARABLE",
+   "meaning": "At least three directly measured criteria compatible with the Earth stack."
+  },
+  "4": {
+   "label": "REPRODUCIBLE TARGET",
+   "meaning": "Analytically comparable, and every value is produced by a documented script from checksummed source data."
+  }
+ },
+ "readiness_rule_v1": "L1: no DIRECT criterion; L2: 1-2 DIRECT; L3: >=3 DIRECT; L4: L3 and no UNVALIDATED value (every value produced by a documented script from checksummed source data). PROXY criteria never count. L1 targets never enter any ranking.",
+ "registry": {
+  "file": "../registry.json",
+  "schema": "asterro.registry/1",
+  "version": "1.0.0",
+  "sha256": "a8a045d3b10b13400324aa474bd39627cb9a2f2ccd79a64da77949b72d8e7ec3",
+  "bytes": 481300,
+  "note": "The browser verifies registry.json against this SHA-256 (the atlas itself is bound to the predictor stack)."
+ }
 }
