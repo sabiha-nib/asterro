@@ -13,6 +13,9 @@
 | `public/data/registry.json`, `public/data/registry/thumbs/*.png`, `public/sw.js` | Generated |
 | `scripts/reproduce_registry.py` | Reproduces Explore records for registry targets (`explore-target-v1`) |
 | `scripts/replay_scenario.py` | Replays Scenario Lab sets (`asterro.scenario-set/1`) with the Python reference engine |
+| `app/frontend/phase4/trajectory_engine.js`, `ui_12_trajectory.js`, `p5_trajectory.css` | Discovery Trajectory (signature interaction): engine, Trajectory tab, styles. Also restores keyboard focus to the weight slider after the console re-renders (additive fix of a baseline accessibility defect) |
+| `scripts/replay_trajectory.py` | Replays `asterro.trajectory/1` files with the Python reference engine |
+| `docs/phase4/TRAJECTORY.md` | Method of the Discovery Trajectory |
 | `tests/test_phase4.py`, `tests/phase4/*` | Registry tests (Python), engine tests (Node), UI smoke (Playwright), scenario fixture |
 | `docs/phase4/*` | This documentation |
 

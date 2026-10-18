@@ -211,3 +211,29 @@ def test_p4_scenario_set_replays_in_python():
         assert q.returncode == 1 and "NOT REPRODUCED" in q.stdout
     finally:
         os.remove(bad)
+
+
+def _replay_traj(doc):
+    import subprocess, tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+        json.dump(doc, f); p = f.name
+    return subprocess.run([sys.executable, os.path.join(ROOT, "scripts/replay_trajectory.py"), p, "--repo", ROOT], capture_output=True, text=True)
+
+
+def test_p4_trajectory_fixture_replays_in_python():
+    doc = json.load(open(os.path.join(ROOT, "tests/phase4/fixtures/trajectory_demo.json")))
+    assert {s["target"] for s in doc["states"]} == {"mars_jezero", "moon_shackleton", "cross"}
+    r = _replay_traj(doc)
+    assert r.returncode == 0 and r.stdout.count("[REPRODUCED]") == len(doc["states"]), r.stdout + r.stderr
+
+
+def test_p4_trajectory_replay_detects_tampering_and_wrong_stack():
+    doc = json.load(open(os.path.join(ROOT, "tests/phase4/fixtures/trajectory_demo.json")))
+    bad = copy.deepcopy(doc); bad["states"][1]["weights"]["lst_diurnal_range"] = 2.5
+    r = _replay_traj(bad)
+    assert r.returncode == 1 and "[DIFFERS] state 2" in r.stdout
+    wrong = copy.deepcopy(doc); wrong["predictor_stack_sha256"] = "0" * 64
+    assert _replay_traj(wrong).returncode == 2
+    rng = copy.deepcopy(doc); rng["states"][4]["normalization_ranges"]["slope"] = [0.0, 25.0]
+    r = _replay_traj(rng)
+    assert r.returncode == 1 and "ranges differ from this build" in r.stdout

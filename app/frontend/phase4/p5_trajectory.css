@@ -1,0 +1,46 @@
+/* ===== Discovery Trajectory (signature interaction) ===== */
+.t5-head{background:linear-gradient(180deg,rgba(224,135,79,.07),transparent 75%);border-bottom:1px solid var(--line)}
+.t5-head .meta,.t5-panel .meta,.t5-story .meta{color:var(--ink-2)}
+.t5-h1{font:700 22px/1.1 var(--f-display);letter-spacing:.03em;text-transform:uppercase;margin:4px 0 6px}
+.t5-ctl{flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.t5-ctl label{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
+.t5-ctl select{background:var(--ground);color:var(--ink);border:1px solid var(--line-2);border-radius:var(--r);padding:4px 6px}
+.t5-sum{font-size:14px;line-height:1.55;max-width:70ch;margin:0 0 4px}
+.t5-sum b{color:var(--ink)}
+.t5-fig{margin:10px 0 6px}
+.t5-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:radial-gradient(ellipse at 30% 0%,rgba(127,179,174,.06),transparent 60%),var(--ground)}
+.t5-scroll svg{display:block}
+.t5-grid{stroke:var(--line);stroke-width:1}
+.t5-cut{stroke:var(--line-2);stroke-dasharray:3 4}
+.t5-h{font:600 11px var(--f-mono);fill:var(--ink-2)}
+.t5-ax{font:500 9.5px var(--f-mono);fill:var(--ink-2)}
+.t5-lab{font:500 10.5px var(--f-body);fill:var(--ink-2);pointer-events:none}
+.t5-ln{cursor:pointer;outline:none}
+.t5-ln.transient,.t5-ln.left,.t5-ln.entered{opacity:.62}.t5-ln.transient{opacity:.4}
+.t5-ln.on,.t5-ln:hover,.t5-ln:focus{opacity:1}
+.t5-ln path{transition:stroke-width .15s}
+.t5-ln.on .t5-lab,.t5-ln:focus .t5-lab,.t5-ln:hover .t5-lab{fill:var(--ink);font-weight:600}
+.t5-ln:focus path,.t5-ln:hover path{stroke-width:3.4}
+.t5-ln.on path{filter:drop-shadow(0 0 3px rgba(255,255,255,.18))}
+.t5-trz{fill:transparent;cursor:pointer;outline:none}
+.t5-trz:hover,.t5-trz:focus{fill:rgba(255,255,255,.035)}
+.t5-trz.on{fill:rgba(224,135,79,.08);stroke:rgba(224,135,79,.35);stroke-dasharray:2 3}
+.t5-key{font:500 9.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:2px 5px;border-radius:2px;border:1px solid var(--line-2)}
+.t5-key.stable{color:var(--match);border-color:var(--match)}.t5-key.entered{color:var(--earth);border-color:var(--earth)}
+.t5-key.left{color:var(--mismatch);border-style:dashed;border-color:var(--mismatch)}.t5-key.transient{color:var(--ink-2);border-style:dotted}
+.t5-states{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px 14px;font-size:12px}
+.t5-states b{font-family:var(--f-mono);color:var(--accent);margin-right:4px}
+.t5-panel{border-left:2px solid var(--accent)}
+.t5-bars{display:grid;gap:4px;margin:6px 0}
+.t5-bar{display:grid;grid-template-columns:56px minmax(60px,1fr) 78px minmax(0,1.6fr);align-items:center;gap:8px;font-size:12px}
+.t5-bar i{height:8px;border-radius:1px;display:block}.t5-bar i.pos{background:var(--match)}.t5-bar i.neg{background:var(--mismatch)}
+.t5-bar b{font-family:var(--f-mono);font-weight:500;text-align:right}
+.t5-story{margin-top:12px;border:1px solid var(--line-2);border-radius:var(--r);padding:12px 14px;background:linear-gradient(135deg,rgba(127,179,174,.05),transparent 60%),var(--panel-2)}
+.t5-dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:10px 0;font-size:13px}
+.t5-dl dt{font:600 10px/1.6 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--earth)}
+.t5-dl dd{margin:0;color:var(--ink);line-height:1.5}
+@media (max-width:600px){.t5-dl{grid-template-columns:1fr}.t5-bar{grid-template-columns:48px 1fr 70px}.t5-bar .meta{grid-column:1/-1}.t5-h1{font-size:24px}}
+@media (prefers-reduced-motion:reduce){.t5-ln path{transition:none}}
+
+/* header: room for the Trajectory tab next to Lab and Atlas */
+@media (min-width:761px){.tabs button{padding:9px 6px;letter-spacing:.07em}.tc-atlas select{max-width:112px}}

@@ -26,7 +26,15 @@
 - **Readiness scale.** The scale changed during development, from levels 0–4 (2.0.0) to 1–4
   (3.0.0). Level-3 and level-4 assignments are identical under both, and only 3.0.0 is published.
 
+- **Discovery Trajectory.** Stability is sensitivity to the configurations the user explored (at most 12), not
+  measurement, data-quality or model uncertainty. When several assumptions change in one step their effects are
+  reported jointly. The per-criterion decomposition is available for steps within one single-target
+  configuration (not for target switches or the cross-planet minimum).
+
 ## Software
+
+- **Header width.** To fit the Trajectory tab, tab padding and letter-spacing are reduced on screens wider
+  than 760 px; the baseline header therefore looks slightly tighter than before.
 
 - **Phase II laboratory.** It runs only for the legacy targets; for registry targets it shows a
   notice instead of results.

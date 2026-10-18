@@ -5,17 +5,22 @@ Python 3.11, Node 20, and Playwright Chromium with SwiftShader.
 
 | Suite | Command | Result |
 |---|---|---|
-| Python (baseline, Phase II, III, IV) | `npm run test:py` | **84/84 passed**, including 19 Phase IV registry tests |
+| Python (baseline, Phase II, III, IV) | `npm run test:py` | **86/86 passed**, including 21 Phase IV tests (2 for trajectory replay) |
 | JS ↔ Python parity | `npm run test:js` | ALL PARITY CHECKS PASSED |
 | Phase II engine | `npm run test:phase2` | 65/65 passed |
 | Phase III engine | `npm run test:phase3` | 132/132 passed |
-| Phase IV registry engine | `npm run test:phase4` | **74/74 passed** |
+| Phase IV registry engine | `node tests/phase4/test_registry_engine.mjs` | **74/74 passed** |
+| Discovery Trajectory engine | `node tests/phase4/test_trajectory_engine.mjs` | **26/26 passed** |
 | Stack rebuild from raw inputs | CI step (`build_stack` + `sha256sum`) | `cfbe1bf5…72e63`, identical to the published stack |
 | Baseline UI smoke | `python3 tests/ui_smoke.py` | Exit 0. #1 Altiplano at 85.0 %; mobile overflow 0. The only console error is the Google Fonts request, which the sandbox blocks. |
 | Phase II UI smoke | `python3 tests/phase2/ui_lab_smoke.py` | Exit 0. `baseline_unchanged: true`; no errors; mobile overflow 0. |
 | Phase III UI smoke | `python3 tests/phase3/ui_atlas_smoke.py` | Exit 0. `baseline_unchanged` and `baseline_top_same` true; both records REPRODUCED; no errors; mobile overflow 0. |
 | Phase IV UI smoke | `python3 tests/phase4/ui_phase4_smoke.py` | **75/75 checks passed** |
+| Discovery Trajectory UI smoke | `python3 tests/phase4/ui_trajectory_smoke.py` | **24/24 checks passed** |
+| Trajectory replay (Python) | `python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json` | REPRODUCED (6 configurations: Jezero × 4, Shackleton, cross-planet) |
 | Scenario-set replay | `python3 scripts/replay_scenario.py tests/phase4/fixtures/scenario_gale.json` | REPRODUCED (4 scenarios × 20 sites) |
+
+The baseline, Phase II, Phase III and Phase IV walk-throughs were re-run after the Discovery Trajectory was added (header, `compute`, `commitWeights`, `setTarget`, `endDrag` and `renderConsole` wrappers): all pass, baseline #1 unchanged. The baseline "Why did this move?" panel and the trajectory decomposition give the same thermal 1 → 3 change for Altiplano (+11.1 pts thermal, −7.9 pts overall).
 
 ## What the new suites check
 

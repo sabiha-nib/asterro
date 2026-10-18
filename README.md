@@ -709,6 +709,17 @@ browser verifies the registry against the SHA-256 recorded in the atlas.
 | `atlas-direct-v1` | DIRECT only | Earth ∪ target | Atlas default and Comparison Lab aggregates |
 | `atlas-catalogue-v1` | DIRECT only | Catalogue table | Alternative |
 
+**Signature interaction — Discovery Trajectory** (the *Trajectory* tab). Every configuration you settle on —
+a slider, a profile, a target — is recorded with the engine's own result, and the path is analysed: which Earth
+candidates stay in the leading group under all of your choices, which enter or leave, which disappear only because
+a higher-scoring site lies within 300 km, what each change did (an exact per-criterion decomposition of every score
+change), and which criteria would separate two close competitors. "Add declared profiles" sweeps the six profiles
+without touching Explore. A calibrated, evidence-backed *discovery story* (fixed template, no language model)
+summarises a candidate. Trajectories export as `asterro.trajectory/1` and replay bit for bit in the browser and in
+Python (`scripts/replay_trajectory.py`). Example from the real data: under the general profile Altiplano is #1 for
+Jezero, but across the six declared profiles no candidate stays in the top 10 throughout. Stability here is
+sensitivity to the explored configurations, not uncertainty. Method: `docs/phase4/TRAJECTORY.md`.
+
 **Research modules.**
 
 - **Comparison Lab:** side-by-side fingerprints; a compatibility matrix (status, source, spatial and
@@ -737,13 +748,14 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 84 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV checks
+npm test                 # 86 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
-npm run test:ui          # the four browser walk-throughs (Playwright + Chromium)
+npm run test:ui          # the five browser walk-throughs (Playwright + Chromium)
+python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
 ```
 
-**Further documentation:** `docs/phase4/` (METHODS, ARCHITECTURE, DATA, TEST_REPORT, LIMITATIONS,
-CHANGES).
+**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, ARCHITECTURE, DATA, TEST_REPORT,
+LIMITATIONS, CHANGES).
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
 NASA-approved, and it designates no site as safe.

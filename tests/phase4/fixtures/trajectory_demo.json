@@ -1,0 +1,509 @@
+{
+ "schema": "asterro.trajectory/1",
+ "engine": "asterro-trajectory-1.0.0",
+ "exported_utc": "2026-01-01T00:00:00Z",
+ "algorithm_version": "tai-sim-1.0.0",
+ "predictor_stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "registry_version": "1.0.0",
+ "note": "Sensitivity to the analytical configurations in this trajectory (weights / profile / target). It is not measurement, data-quality or model uncertainty.",
+ "states": [
+  {
+   "id": "s1",
+   "label": "Start",
+   "target": "mars_jezero",
+   "scoring_config": "legacy-baseline-v1",
+   "profile": "general",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 77940,
+     "score": 0.849909092293
+    },
+    {
+     "cell_id": 146152,
+     "score": 0.831245657291
+    },
+    {
+     "cell_id": 82546,
+     "score": 0.831049130807
+    },
+    {
+     "cell_id": 144991,
+     "score": 0.82025612735
+    },
+    {
+     "cell_id": 85422,
+     "score": 0.817110612681
+    },
+    {
+     "cell_id": 143844,
+     "score": 0.816601776686
+    },
+    {
+     "cell_id": 75058,
+     "score": 0.814159601276
+    },
+    {
+     "cell_id": 147310,
+     "score": 0.812900835788
+    },
+    {
+     "cell_id": 140962,
+     "score": 0.802162495244
+    },
+    {
+     "cell_id": 71025,
+     "score": 0.796598436027
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "label": "THERM 1 → 3",
+   "target": "mars_jezero",
+   "scoring_config": "legacy-baseline-v1",
+   "profile": "custom",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 3
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 77940,
+     "score": 0.770616188688
+    },
+    {
+     "cell_id": 82546,
+     "score": 0.75811076387
+    },
+    {
+     "cell_id": 75058,
+     "score": 0.746951111212
+    },
+    {
+     "cell_id": 146152,
+     "score": 0.740522492629
+    },
+    {
+     "cell_id": 144991,
+     "score": 0.737276554852
+    },
+    {
+     "cell_id": 85422,
+     "score": 0.733372086638
+    },
+    {
+     "cell_id": 142116,
+     "score": 0.730419149664
+    },
+    {
+     "cell_id": 147315,
+     "score": 0.716765540283
+    },
+    {
+     "cell_id": 71025,
+     "score": 0.709640916901
+    },
+    {
+     "cell_id": 140959,
+     "score": 0.70325915835
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "label": "ELEV 1 → 0",
+   "target": "mars_jezero",
+   "scoring_config": "legacy-baseline-v1",
+   "profile": "custom",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 0,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 3
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 77937,
+     "score": 0.794657742091
+    },
+    {
+     "cell_id": 73904,
+     "score": 0.769899231572
+    },
+    {
+     "cell_id": 82546,
+     "score": 0.764952425904
+    },
+    {
+     "cell_id": 75193,
+     "score": 0.759658083015
+    },
+    {
+     "cell_id": 87143,
+     "score": 0.755280858494
+    },
+    {
+     "cell_id": 128189,
+     "score": 0.75307452667
+    },
+    {
+     "cell_id": 79669,
+     "score": 0.745972224714
+    },
+    {
+     "cell_id": 139199,
+     "score": 0.745884212272
+    },
+    {
+     "cell_id": 146167,
+     "score": 0.745193404423
+    },
+    {
+     "cell_id": 121322,
+     "score": 0.744573172032
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "label": "Rover profile",
+   "target": "mars_jezero",
+   "scoring_config": "legacy-baseline-v1",
+   "profile": "rover",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 0.5,
+    "elevation": 1,
+    "slope": 3,
+    "surface_roughness": 3,
+    "lst_diurnal_range": 0.5
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 144420,
+     "score": 0.921832653434
+    },
+    {
+     "cell_id": 146730,
+     "score": 0.92176206817
+    },
+    {
+     "cell_id": 79092,
+     "score": 0.915653211824
+    },
+    {
+     "cell_id": 146737,
+     "score": 0.908119311252
+    },
+    {
+     "cell_id": 82546,
+     "score": 0.907556143857
+    },
+    {
+     "cell_id": 141543,
+     "score": 0.901132635376
+    },
+    {
+     "cell_id": 85422,
+     "score": 0.898442967363
+    },
+    {
+     "cell_id": 91174,
+     "score": 0.8957203715
+    },
+    {
+     "cell_id": 148471,
+     "score": 0.892837772979
+    },
+    {
+     "cell_id": 75056,
+     "score": 0.892075175871
+    }
+   ]
+  },
+  {
+   "id": "s7",
+   "label": "Target → Shackleton",
+   "target": "moon_shackleton",
+   "scoring_config": "explore-target-v1",
+   "profile": "general",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     60.98146907013738
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 146728,
+     "score": 0.810819343956
+    },
+    {
+     "cell_id": 90022,
+     "score": 0.809059568706
+    },
+    {
+     "cell_id": 71024,
+     "score": 0.804058474369
+    },
+    {
+     "cell_id": 83696,
+     "score": 0.803461563464
+    },
+    {
+     "cell_id": 78515,
+     "score": 0.801559384667
+    },
+    {
+     "cell_id": 142112,
+     "score": 0.798941871034
+    },
+    {
+     "cell_id": 145569,
+     "score": 0.795206831696
+    },
+    {
+     "cell_id": 85996,
+     "score": 0.783714215483
+    },
+    {
+     "cell_id": 147864,
+     "score": 0.771884090855
+    },
+    {
+     "cell_id": 66992,
+     "score": 0.764249093345
+    }
+   ]
+  },
+  {
+   "id": "s8",
+   "label": "Target → cross-planet",
+   "target": "cross",
+   "scoring_config": "legacy-cross-planet",
+   "profile": "general",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "expected_sites": [
+    {
+     "cell_id": 78515,
+     "score": 0.798833281966
+    },
+    {
+     "cell_id": 144995,
+     "score": 0.778747426375
+    },
+    {
+     "cell_id": 74483,
+     "score": 0.778282675424
+    },
+    {
+     "cell_id": 142113,
+     "score": 0.777870402449
+    },
+    {
+     "cell_id": 82545,
+     "score": 0.774372391138
+    },
+    {
+     "cell_id": 71601,
+     "score": 0.767827715938
+    },
+    {
+     "cell_id": 146729,
+     "score": 0.765718524758
+    },
+    {
+     "cell_id": 145565,
+     "score": 0.760513149433
+    },
+    {
+     "cell_id": 148439,
+     "score": 0.754193593113
+    },
+    {
+     "cell_id": 148463,
+     "score": 0.748030603388
+    }
+   ]
+  }
+ ]
+}
