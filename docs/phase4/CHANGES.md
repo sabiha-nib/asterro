@@ -14,6 +14,9 @@
 | `scripts/reproduce_registry.py` | Reproduces Explore records for registry targets (`explore-target-v1`) |
 | `scripts/replay_scenario.py` | Replays Scenario Lab sets (`asterro.scenario-set/1`) with the Python reference engine |
 | `app/frontend/phase4/trajectory_engine.js`, `ui_12_trajectory.js`, `p5_trajectory.css` | Discovery Trajectory (signature interaction): engine, Trajectory tab, styles. Also restores keyboard focus to the weight slider after the console re-renders (additive fix of a baseline accessibility defect) |
+| `app/frontend/phase4/methods_engine.js`, `ui_13_methods.js`, `p6_methods.css` | Mismatch signatures (families, Earth ceiling, "fails the same way") and Method Arena (3 alternative rules beside the baseline, agreement, method-robust sites, leave-one-source-out). Views appended to the existing Compare and Research groups |
+| `tests/phase4/test_methods_engine.mjs`, `tests/test_methods.py`, `tests/phase4/ui_methods_smoke.py`, `tests/phase4/fixtures/methods_reference.json` | Engine tests, independent numpy re-implementation, browser walk-through, reference fixture |
+| `docs/phase4/METHOD_ARENA.md` | Method of both views |
 | `scripts/replay_trajectory.py` | Replays `asterro.trajectory/1` files with the Python reference engine |
 | `docs/phase4/TRAJECTORY.md` | Method of the Discovery Trajectory |
 | `tests/test_phase4.py`, `tests/phase4/*` | Registry tests (Python), engine tests (Node), UI smoke (Playwright), scenario fixture |

@@ -720,6 +720,15 @@ Python (`scripts/replay_trajectory.py`). Example from the real data: under the g
 Jezero, but across the six declared profiles no candidate stays in the top 10 throughout. Stability here is
 sensitivity to the explored configurations, not uncertainty. Method: `docs/phase4/TRAJECTORY.md`.
 
+**Mismatch signatures and Method Arena** (Atlas → Compare / Research). *Mismatch signatures* classify how every
+Earth cell fails to match a target (signed, range-normalised difference per criterion, coded with the baseline's own
+thresholds) and partition Earth into exact *mismatch families* — sites that fail in the same way — with an *Earth
+ceiling* that flags criteria no weighting can match (for Jezero: the 75.9 K thermal range lies above every Earth
+cell). The *Method Arena* runs the unchanged baseline beside three tested alternative rules (quantile-normalised,
+non-compensatory minimum, strict coverage), reports their agreement and the sites that lead under every rule, and a
+data counterfactual that removes one Earth source at a time (without GMTED2010 none of Jezero's leading 10 survive).
+An independent numpy re-implementation reproduces every method to 1e-12. Method: `docs/phase4/METHOD_ARENA.md`.
+
 **Research modules.**
 
 - **Comparison Lab:** side-by-side fingerprints; a compatibility matrix (status, source, spatial and
@@ -748,14 +757,14 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 86 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory checks
+npm test                 # 90 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
-npm run test:ui          # the five browser walk-throughs (Playwright + Chromium)
+npm run test:ui          # the six browser walk-throughs (Playwright + Chromium)
 python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
 ```
 
-**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, ARCHITECTURE, DATA, TEST_REPORT,
-LIMITATIONS, CHANGES).
+**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, ARCHITECTURE, DATA,
+TEST_REPORT, LIMITATIONS, CHANGES).
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
 NASA-approved, and it designates no site as safe.

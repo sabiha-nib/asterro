@@ -1,0 +1,677 @@
+{
+ "methods": [
+  "baseline",
+  "quantile",
+  "minimum",
+  "strict"
+ ],
+ "cases": {
+  "mars_jezero": {
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "target": {
+    "aridity": 0,
+    "annual_temperature_range": 11.325,
+    "elevation": 5702,
+    "slope": 2.413,
+    "surface_roughness": 263.2,
+    "lst_diurnal_range": 75.871
+   },
+   "methods": {
+    "baseline": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 77940,
+       "score": 0.849909092293
+      },
+      {
+       "cell_id": 146152,
+       "score": 0.831245657291
+      },
+      {
+       "cell_id": 82546,
+       "score": 0.831049130807
+      },
+      {
+       "cell_id": 144991,
+       "score": 0.82025612735
+      },
+      {
+       "cell_id": 85422,
+       "score": 0.817110612681
+      },
+      {
+       "cell_id": 143844,
+       "score": 0.816601776686
+      },
+      {
+       "cell_id": 75058,
+       "score": 0.814159601276
+      },
+      {
+       "cell_id": 147310,
+       "score": 0.812900835788
+      },
+      {
+       "cell_id": 140962,
+       "score": 0.802162495244
+      },
+      {
+       "cell_id": 71025,
+       "score": 0.796598436027
+      }
+     ]
+    },
+    "quantile": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 80243,
+       "score": 0.970799459417
+      },
+      {
+       "cell_id": 76786,
+       "score": 0.961763711481
+      },
+      {
+       "cell_id": 83697,
+       "score": 0.947490172783
+      },
+      {
+       "cell_id": 72753,
+       "score": 0.944059980512
+      },
+      {
+       "cell_id": 128189,
+       "score": 0.942307559309
+      },
+      {
+       "cell_id": 77943,
+       "score": 0.941073573378
+      },
+      {
+       "cell_id": 123623,
+       "score": 0.938759755043
+      },
+      {
+       "cell_id": 146152,
+       "score": 0.934309107754
+      },
+      {
+       "cell_id": 86574,
+       "score": 0.931506623367
+      },
+      {
+       "cell_id": 69296,
+       "score": 0.930781681688
+      }
+     ]
+    },
+    "minimum": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 79093,
+       "score": 0.567756266776
+      },
+      {
+       "cell_id": 82547,
+       "score": 0.56119195197
+      },
+      {
+       "cell_id": 74483,
+       "score": 0.552772667026
+      },
+      {
+       "cell_id": 146166,
+       "score": 0.524185092635
+      },
+      {
+       "cell_id": 144991,
+       "score": 0.488337837356
+      },
+      {
+       "cell_id": 85422,
+       "score": 0.482156508508
+      },
+      {
+       "cell_id": 148464,
+       "score": 0.479885830387
+      },
+      {
+       "cell_id": 142116,
+       "score": 0.477218662711
+      },
+      {
+       "cell_id": 146172,
+       "score": 0.471841558288
+      },
+      {
+       "cell_id": 146152,
+       "score": 0.468352998645
+      }
+     ]
+    },
+    "strict": {
+     "n_eligible": 62031,
+     "top": [
+      {
+       "cell_id": 77940,
+       "score": 0.849909092293
+      },
+      {
+       "cell_id": 146152,
+       "score": 0.831245657291
+      },
+      {
+       "cell_id": 82546,
+       "score": 0.831049130807
+      },
+      {
+       "cell_id": 144991,
+       "score": 0.82025612735
+      },
+      {
+       "cell_id": 85422,
+       "score": 0.817110612681
+      },
+      {
+       "cell_id": 143844,
+       "score": 0.816601776686
+      },
+      {
+       "cell_id": 75058,
+       "score": 0.814159601276
+      },
+      {
+       "cell_id": 147310,
+       "score": 0.812900835788
+      },
+      {
+       "cell_id": 140962,
+       "score": 0.802162495244
+      },
+      {
+       "cell_id": 71025,
+       "score": 0.796598436027
+      }
+     ]
+    }
+   },
+   "pairs": [
+    {
+     "a": "baseline",
+     "b": "quantile",
+     "rho": 0.5824968840284758,
+     "leading_overlap": 1
+    },
+    {
+     "a": "baseline",
+     "b": "minimum",
+     "rho": 0.7395200945117866,
+     "leading_overlap": 3
+    },
+    {
+     "a": "baseline",
+     "b": "strict",
+     "rho": 1,
+     "leading_overlap": 10
+    },
+    {
+     "a": "quantile",
+     "b": "minimum",
+     "rho": 0.49377538389463194,
+     "leading_overlap": 1
+    },
+    {
+     "a": "quantile",
+     "b": "strict",
+     "rho": 0.7973506786058794,
+     "leading_overlap": 1
+    },
+    {
+     "a": "minimum",
+     "b": "strict",
+     "rho": 0.7138026472360584,
+     "leading_overlap": 3
+    }
+   ]
+  },
+  "moon_shackleton": {
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5701.98876953125
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     60.98146907013738
+    ]
+   },
+   "target": {
+    "aridity": 0,
+    "annual_temperature_range": null,
+    "elevation": 5701.98876953125,
+    "slope": 9.944852398277048,
+    "surface_roughness": 893.9141717748432,
+    "lst_diurnal_range": 60.98146907013738
+   },
+   "methods": {
+    "baseline": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 146728,
+       "score": 0.810819343956
+      },
+      {
+       "cell_id": 90022,
+       "score": 0.809059568706
+      },
+      {
+       "cell_id": 71024,
+       "score": 0.804058474369
+      },
+      {
+       "cell_id": 83696,
+       "score": 0.803461563464
+      },
+      {
+       "cell_id": 78515,
+       "score": 0.801559384667
+      },
+      {
+       "cell_id": 142112,
+       "score": 0.798941871034
+      },
+      {
+       "cell_id": 145569,
+       "score": 0.795206831696
+      },
+      {
+       "cell_id": 85996,
+       "score": 0.783714215483
+      },
+      {
+       "cell_id": 147864,
+       "score": 0.771884090855
+      },
+      {
+       "cell_id": 66992,
+       "score": 0.764249093345
+      }
+     ]
+    },
+    "quantile": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 78515,
+       "score": 0.979821624342
+      },
+      {
+       "cell_id": 71024,
+       "score": 0.977110517429
+      },
+      {
+       "cell_id": 83696,
+       "score": 0.976683551136
+      },
+      {
+       "cell_id": 147307,
+       "score": 0.970834315085
+      },
+      {
+       "cell_id": 142112,
+       "score": 0.967608069459
+      },
+      {
+       "cell_id": 90022,
+       "score": 0.96075238775
+      },
+      {
+       "cell_id": 85996,
+       "score": 0.960320331933
+      },
+      {
+       "cell_id": 145592,
+       "score": 0.956920950354
+      },
+      {
+       "cell_id": 75057,
+       "score": 0.955550577282
+      },
+      {
+       "cell_id": 145571,
+       "score": 0.955069756433
+      }
+     ]
+    },
+    "minimum": {
+     "n_eligible": 76781,
+     "top": [
+      {
+       "cell_id": 74483,
+       "score": 0.674021142133
+      },
+      {
+       "cell_id": 79091,
+       "score": 0.653587218223
+      },
+      {
+       "cell_id": 82546,
+       "score": 0.619717375068
+      },
+      {
+       "cell_id": 147315,
+       "score": 0.598295472686
+      },
+      {
+       "cell_id": 85422,
+       "score": 0.575888126007
+      },
+      {
+       "cell_id": 141536,
+       "score": 0.573653180379
+      },
+      {
+       "cell_id": 144991,
+       "score": 0.572919903977
+      },
+      {
+       "cell_id": 71601,
+       "score": 0.570316067315
+      },
+      {
+       "cell_id": 140391,
+       "score": 0.565595642881
+      },
+      {
+       "cell_id": 77367,
+       "score": 0.561342086269
+      }
+     ]
+    },
+    "strict": {
+     "n_eligible": 62031,
+     "top": [
+      {
+       "cell_id": 146728,
+       "score": 0.810819343956
+      },
+      {
+       "cell_id": 90022,
+       "score": 0.809059568706
+      },
+      {
+       "cell_id": 71024,
+       "score": 0.804058474369
+      },
+      {
+       "cell_id": 83696,
+       "score": 0.803461563464
+      },
+      {
+       "cell_id": 78515,
+       "score": 0.801559384667
+      },
+      {
+       "cell_id": 142112,
+       "score": 0.798941871034
+      },
+      {
+       "cell_id": 145569,
+       "score": 0.795206831696
+      },
+      {
+       "cell_id": 85996,
+       "score": 0.783714215483
+      },
+      {
+       "cell_id": 147864,
+       "score": 0.771884090855
+      },
+      {
+       "cell_id": 66992,
+       "score": 0.764249093345
+      }
+     ]
+    }
+   },
+   "pairs": [
+    {
+     "a": "baseline",
+     "b": "quantile",
+     "rho": 0.6629856005569883,
+     "leading_overlap": 6
+    },
+    {
+     "a": "baseline",
+     "b": "minimum",
+     "rho": 0.7588383076513264,
+     "leading_overlap": 0
+    },
+    {
+     "a": "baseline",
+     "b": "strict",
+     "rho": 1,
+     "leading_overlap": 10
+    },
+    {
+     "a": "quantile",
+     "b": "minimum",
+     "rho": 0.4463525856041902,
+     "leading_overlap": 0
+    },
+    {
+     "a": "quantile",
+     "b": "strict",
+     "rho": 0.8511159018134248,
+     "leading_overlap": 6
+    },
+    {
+     "a": "minimum",
+     "b": "strict",
+     "rho": 0.7648203420730446,
+     "leading_overlap": 0
+    }
+   ]
+  }
+ },
+ "signature": {
+  "target": "mars_jezero",
+  "criteria": [
+   "aridity",
+   "annual_temperature_range",
+   "elevation",
+   "slope",
+   "surface_roughness",
+   "lst_diurnal_range"
+  ],
+  "n_eligible": 76781,
+  "n_families": 171,
+  "top": [
+   {
+    "key": "≈|≈|−|≈|≈|−−",
+    "size": 17,
+    "best_cell": 77940,
+    "best": 0.849909092293
+   },
+   {
+    "key": "+|≈|−|≈|≈|−−",
+    "size": 59,
+    "best_cell": 78517,
+    "best": 0.833487424892
+   },
+   {
+    "key": "≈|+|−|≈|≈|−−",
+    "size": 32,
+    "best_cell": 146152,
+    "best": 0.831245657291
+   },
+   {
+    "key": "≈|+|≈|≈|≈|−−",
+    "size": 62,
+    "best_cell": 146730,
+    "best": 0.826833845964
+   },
+   {
+    "key": "≈|≈|−−|≈|≈|−−",
+    "size": 1985,
+    "best_cell": 77362,
+    "best": 0.824591657014
+   }
+  ],
+  "ceiling": [
+   {
+    "criterion": "aridity",
+    "best_s": 1,
+    "cells_match": 8597,
+    "outside": null
+   },
+   {
+    "criterion": "annual_temperature_range",
+    "best_s": 0.999916112512,
+    "cells_match": 25467,
+    "outside": null
+   },
+   {
+    "criterion": "elevation",
+    "best_s": 0.999998056097,
+    "cells_match": 307,
+    "outside": "above"
+   },
+   {
+    "criterion": "slope",
+    "best_s": 0.999995281146,
+    "cells_match": 71964,
+    "outside": null
+   },
+   {
+    "criterion": "surface_roughness",
+    "best_s": 0.999983309993,
+    "cells_match": 38911,
+    "outside": null
+   },
+   {
+    "criterion": "lst_diurnal_range",
+    "best_s": 0.5890071483,
+    "cells_match": 0,
+    "outside": "above"
+   }
+  ]
+ },
+ "drop_source": {
+  "target": "mars_jezero",
+  "results": [
+   {
+    "source": "nasa_power",
+    "kept": 2,
+    "same_top1": false,
+    "top": [
+     143839,
+     143271,
+     77940,
+     138661,
+     143279,
+     146730,
+     139244,
+     83122,
+     85422,
+     140979
+    ]
+   },
+   {
+    "source": "gmted2010",
+    "kept": 0,
+    "same_top1": false,
+    "top": [
+     77363,
+     74481,
+     75193,
+     80241,
+     121897,
+     123031,
+     71165,
+     71024,
+     128188,
+     125349
+    ]
+   },
+   {
+    "source": "modis_aqua_lst",
+    "kept": 3,
+    "same_top1": true,
+    "top": [
+     77940,
+     146730,
+     144420,
+     82546,
+     91174,
+     85422,
+     146737,
+     140963,
+     72178,
+     142697
+    ]
+   }
+  ]
+ }
+}

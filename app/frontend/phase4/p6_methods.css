@@ -1,0 +1,8 @@
+/* ===== Mismatch signatures and Method Arena ===== */
+.m6-chip{display:inline-flex;align-items:baseline;gap:3px;font:600 11px/1 var(--f-mono);padding:3px 5px;margin:1px 2px 1px 0;border:1px solid var(--line-2);border-radius:2px;background:var(--ground)}
+.m6-chip i{font:500 8.5px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;color:var(--ink-2)}
+.m6-chip.st-d{border-color:#2f4a33}.m6-chip.st-p{border-color:#54452a}.m6-chip.p4-bad{border-color:#5a2e28}.m6-chip.st-u{border-style:dashed}
+.m6-sig{display:inline-flex;flex-wrap:wrap;text-align:left;padding:2px;border-radius:3px}
+.m6-sig[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px}
+.m6-fam tr.act td{background:var(--raise)}
+.m6-struct td{background:rgba(217,112,95,.06)}

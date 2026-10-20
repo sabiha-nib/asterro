@@ -31,6 +31,12 @@
   reported jointly. The per-criterion decomposition is available for steps within one single-target
   configuration (not for target switches or the cross-planet minimum).
 
+- **Method Arena.** The alternative rules are analytical counterfactuals, not validated improvements; the baseline
+  stays authoritative. Agreement between rules is robustness to the rule, not correctness. No measurement-uncertainty
+  model exists for the Earth stack, so rule and data-source sensitivity are analysed, not measurement uncertainty.
+- **Mismatch signatures** use the configuration's normalisation ranges and the baseline thresholds; a shared
+  signature is a shared direction and size class of difference, not physical equivalence.
+
 ## Software
 
 - **Header width.** To fit the Trajectory tab, tab padding and letter-spacing are reduced on screens wider
