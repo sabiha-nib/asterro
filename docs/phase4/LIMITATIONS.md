@@ -37,7 +37,20 @@
 - **Mismatch signatures** use the configuration's normalisation ranges and the baseline thresholds; a shared
   signature is a shared direction and size class of difference, not physical equivalence.
 
+- **Discovery Journey.** It explains the baseline; it adds no new science. *Change my mind?* covers declared choices
+  (profiles, Earth sources, target proxies, criteria), not measurement uncertainty. The team of places is a
+  deterministic greedy cover, not a proven minimum. *Through time* has yearly values for one criterion only. No new
+  dataset was integrated: no verified acquisition of a higher-resolution DEM or of further variables was possible in
+  this build environment, so *Missing pieces* names those gaps instead.
+
 ## Software
+
+- **Interface languages.** বাংলা, Español and Français cover the header tabs, target buttons, landing and the whole
+  Discovery Journey. The research views and the weight console are English only (a localised notice says so).
+  The three translations were written by Claude (an AI model) and **have not been reviewed by native speakers**.
+  Place names (Natural Earth) and registry target names stay in English. In Spanish and French the header tabs
+  scroll horizontally on wide screens. Bengali uses Noto Sans Bengali when online, otherwise a system font; it was
+  rendered here with FreeSans, not with the fonts a typical Mac or Windows machine would use.
 
 - **Header width.** To fit the Trajectory tab, tab padding and letter-spacing are reduced on screens wider
   than 760 px; the baseline header therefore looks slightly tighter than before.

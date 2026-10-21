@@ -1,0 +1,477 @@
+{
+ "engine": "asterro-journey-1.0.0",
+ "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+ "target": "mars_jezero",
+ "weights": {
+  "aridity": 1,
+  "annual_temperature_range": 1,
+  "elevation": 1,
+  "slope": 1,
+  "surface_roughness": 1,
+  "lst_diurnal_range": 1
+ },
+ "cell_id": 77940,
+ "passport": {
+  "schema": "asterro.passport/1",
+  "generator": {
+   "journey": "asterro-journey-1.0.0",
+   "algorithm": "tai-sim-1.0.0"
+  },
+  "created": "2026-01-01T00:00:00Z",
+  "place": {
+   "cell_id": 77940,
+   "lat": -22.5,
+   "lon": -67.5,
+   "name": "Altiplano",
+   "country": null,
+   "cell_size_deg": [
+    0.5,
+    0.625
+   ]
+  },
+  "target": {
+   "id": "mars_jezero",
+   "name": null,
+   "body": null,
+   "scoring_config": "legacy-baseline-v1",
+   "fingerprint_sha256": null
+  },
+  "configuration": {
+   "profile": "general",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 1,
+    "elevation": 1,
+    "slope": 1,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 1
+   },
+   "normalization_ranges": {
+    "aridity": [
+     0,
+     1
+    ],
+    "annual_temperature_range": [
+     0.3400001525878906,
+     59.91999816894531
+    ],
+    "elevation": [
+     -75.2784423828125,
+     5702
+    ],
+    "slope": [
+     0,
+     20.94510841369629
+    ],
+    "surface_roughness": [
+     0,
+     1500.462158203125
+    ],
+    "lst_diurnal_range": [
+     -6.9000091552734375,
+     75.871
+    ]
+   },
+   "thresholds": {
+    "match": 0.85,
+    "partial": 0.6,
+    "min_coverage": 0.8,
+    "distinct_sep_km": 300
+   }
+  },
+  "result": {
+   "analogue_score": 0.849909092293,
+   "coverage": 1,
+   "cell_rank": 1,
+   "eligible_cells": 76781,
+   "leading_site_position": 1
+  },
+  "criteria": [
+   {
+    "id": "aridity",
+    "earth": 0.12419386953115463,
+    "target": 0,
+    "target_status": "PROXY",
+    "weight": 1,
+    "similarity": 0.875806130469,
+    "state": "similar",
+    "contribution": 0.145967688411,
+    "earth_sources": [
+     "nasa_power"
+    ]
+   },
+   {
+    "id": "annual_temperature_range",
+    "earth": 8.430000305175781,
+    "target": 11.325,
+    "target_status": "DIRECT",
+    "weight": 1,
+    "similarity": 0.951409872588,
+    "state": "similar",
+    "contribution": 0.158568312098,
+    "earth_sources": [
+     "nasa_power"
+    ]
+   },
+   {
+    "id": "elevation",
+    "earth": 4739.0859375,
+    "target": 5702,
+    "target_status": "PROXY",
+    "weight": 1,
+    "similarity": 0.833327392456,
+    "state": "partial",
+    "contribution": 0.138887898743,
+    "earth_sources": [
+     "gmted2010"
+    ]
+   },
+   {
+    "id": "slope",
+    "earth": 4.1310133934021,
+    "target": 2.413,
+    "target_status": "DIRECT",
+    "weight": 1,
+    "similarity": 0.917975435626,
+    "state": "similar",
+    "contribution": 0.152995905938,
+    "earth_sources": [
+     "gmted2010"
+    ]
+   },
+   {
+    "id": "surface_roughness",
+    "earth": 245.49191284179688,
+    "target": 263.2,
+    "target_status": "DIRECT",
+    "weight": 1,
+    "similarity": 0.988198244747,
+    "state": "similar",
+    "contribution": 0.164699707458,
+    "earth_sources": [
+     "gmted2010"
+    ]
+   },
+   {
+    "id": "lst_diurnal_range",
+    "earth": 37.19520950317383,
+    "target": 75.871,
+    "target_status": "DIRECT",
+    "weight": 1,
+    "similarity": 0.532737477874,
+    "state": "different",
+    "contribution": 0.088789579646,
+    "earth_sources": [
+     "modis_aqua_lst"
+    ]
+   }
+  ],
+  "sensitivity": {
+   "conclusion": "leading",
+   "holds": 7,
+   "alternatives": 14,
+   "breakers": [
+    "profile:rover",
+    "profile:eva",
+    "profile:habitat",
+    "profile:instrument",
+    "drop_source:gmted2010",
+    "drop_proxy:aridity+elevation",
+    "drop_criterion:elevation"
+   ]
+  },
+  "evidence_gaps": [
+   "structural:lst_diurnal_range",
+   "target_proxy:aridity",
+   "target_proxy:elevation",
+   "source_dependence:gmted2010",
+   "proxy_dependence",
+   "resolution",
+   "temporal",
+   "not_measured"
+  ],
+  "sources": {
+   "earth": [],
+   "target": []
+  },
+  "reproducibility": {
+   "predictor_stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
+   "rescore": "score = Σ w·s / Σw over criteria with an Earth value; s = clip(1 − |earth − target| / (max − min), 0, 1); eligible if Σw(with Earth value) / Σw(active) ≥ 0.80"
+  },
+  "disclaimer": "Environmental similarity on the measured criteria only. Not physical, geological, biological or engineering equivalence; not validated against field data; not endorsed by NASA."
+ },
+ "change": [
+  {
+   "kind": "profile",
+   "id": "rover",
+   "changes": [
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 0.5
+    },
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 3
+    },
+    {
+     "c": "surface_roughness",
+     "from": 1,
+     "to": 3
+    },
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 0.5
+    }
+   ],
+   "rank": 22,
+   "lead": null
+  },
+  {
+   "kind": "profile",
+   "id": "eva",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 2
+    },
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 1.5
+    },
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 1.5
+    },
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 2
+    }
+   ],
+   "rank": 4,
+   "lead": null
+  },
+  {
+   "kind": "profile",
+   "id": "thermal",
+   "changes": [
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 2
+    },
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 0.5
+    },
+    {
+     "c": "surface_roughness",
+     "from": 1,
+     "to": 0.5
+    },
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 3
+    }
+   ],
+   "rank": 1,
+   "lead": 1
+  },
+  {
+   "kind": "profile",
+   "id": "habitat",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 1.5
+    },
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 2
+    },
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 2
+    },
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 2
+    }
+   ],
+   "rank": 4,
+   "lead": null
+  },
+  {
+   "kind": "profile",
+   "id": "instrument",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 3
+    },
+    {
+     "c": "elevation",
+     "from": 1,
+     "to": 1.5
+    },
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 1.5
+    }
+   ],
+   "rank": 2,
+   "lead": null
+  },
+  {
+   "kind": "drop_source",
+   "id": "nasa_power",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 0
+    },
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 7,
+   "lead": 3
+  },
+  {
+   "kind": "drop_source",
+   "id": "gmted2010",
+   "changes": [
+    {
+     "c": "elevation",
+     "from": 1,
+     "to": 0
+    },
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 0
+    },
+    {
+     "c": "surface_roughness",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 143,
+   "lead": null
+  },
+  {
+   "kind": "drop_source",
+   "id": "modis_aqua_lst",
+   "changes": [
+    {
+     "c": "lst_diurnal_range",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 1,
+   "lead": 1
+  },
+  {
+   "kind": "drop_proxy",
+   "id": "aridity+elevation",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 0
+    },
+    {
+     "c": "elevation",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 25,
+   "lead": null
+  },
+  {
+   "kind": "drop_criterion",
+   "id": "aridity",
+   "changes": [
+    {
+     "c": "aridity",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 1,
+   "lead": 1
+  },
+  {
+   "kind": "drop_criterion",
+   "id": "annual_temperature_range",
+   "changes": [
+    {
+     "c": "annual_temperature_range",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 7,
+   "lead": 3
+  },
+  {
+   "kind": "drop_criterion",
+   "id": "elevation",
+   "changes": [
+    {
+     "c": "elevation",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 83,
+   "lead": null
+  },
+  {
+   "kind": "drop_criterion",
+   "id": "slope",
+   "changes": [
+    {
+     "c": "slope",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 1,
+   "lead": 1
+  },
+  {
+   "kind": "drop_criterion",
+   "id": "surface_roughness",
+   "changes": [
+    {
+     "c": "surface_roughness",
+     "from": 1,
+     "to": 0
+    }
+   ],
+   "rank": 1,
+   "lead": 1
+  }
+ ]
+}

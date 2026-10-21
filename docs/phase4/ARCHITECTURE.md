@@ -51,6 +51,10 @@ Each link is checked when the file loads:
 | `ui_10_scenarios.js` | Scenario Lab: up to four scenarios, rank-change chart, robust candidates, contributions, export and replay |
 | `ui_11_expedition.js` | Research objectives added to the Phase III expedition designer |
 | `p4.css` | Cartographic layer. Raises `--ink-3` inside the workspace for contrast ≥ 4.5:1 |
+| `trajectory_engine.js`, `ui_12_trajectory.js` | Discovery Trajectory (see TRAJECTORY.md) |
+| `methods_engine.js`, `ui_13_methods.js` | Mismatch signatures and Method Arena (see METHOD_ARENA.md) |
+| `i18n_00_core.js`, `i18n_10_en.js` … `i18n_40_fr.js` | Interface languages. They load first among the Phase IV files (`i18n_` sorts before the others). `tx()` with English fallback, Intl formats, `setLang` / `asterro:lang`. They wrap `renderLeft` (English-only notice), `renderConsole` (language selector) and `a4ExploreControl` (quick-switch prompt). See JOURNEY_I18N.md |
+| `journey_engine.js`, `ui_14_journey.js` | Discovery Journey: a pure engine (`AsterroJourney`) over `TAIEngine` that returns data only, plus the dialog. They wrap `selectedHeader` ("Explain this place"), `viewDiscover` (door) and `a4Load` (refresh when the registry arrives). See JOURNEY_I18N.md |
 
 ## Integration with the earlier layers
 

@@ -618,6 +618,250 @@ details summary{cursor:pointer}
 .m6-sig[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px}
 .m6-fam tr.act td{background:var(--raise)}
 .m6-struct td{background:rgba(217,112,95,.06)}
+
+/* ===== Discovery Journey + interface languages ===== */
+html[lang="bn"]{--f-display:"Big Shoulders Display","Noto Sans Bengali","Bangla Sangam MN","Kohinoor Bangla","Nirmala UI","Vrinda",system-ui,sans-serif;--f-body:"Instrument Sans","Noto Sans Bengali","Bangla Sangam MN","Kohinoor Bangla","Nirmala UI","Vrinda",system-ui,sans-serif}
+html[lang="bn"] .tabs button,html[lang="bn"] .btn-search,html[lang="bn"] .btn-primary,html[lang="bn"] .btn-ghost,html[lang="bn"] .target-ctl i,html[lang="bn"] .hero .eyebrow,html[lang="bn"] .jn-kick,html[lang="bn"] .jn-tabs button{letter-spacing:normal}
+html[lang="bn"] .hero h1{line-height:1.12}
+html[lang="bn"] .tabs button{font-family:var(--f-body);font-size:12.5px}
+html[lang="bn"] .eyebrow,html[lang="bn"] .ht i,html[lang="bn"] .ht em,html[lang="bn"] .hero-facts,html[lang="bn"] .target-ctl i,html[lang="bn"] .jn-kick,html[lang="bn"] .jn-wb{font-family:var(--f-body);letter-spacing:normal}
+html[lang="bn"] .eyebrow{font-size:13px}html[lang="bn"] .ht i{font-size:12px}html[lang="bn"] .ht em{font-size:12.5px}html[lang="bn"] .hero-facts{font-size:13px}
+html[lang="bn"] .target-ctl i{font-size:11px}html[lang="bn"] .jn-kick{font-size:12.5px}html[lang="bn"] .jn-wb{font-size:12px}
+html:not([lang="en"]) .hero h1{font-size:clamp(44px,6.4vw,96px);max-width:13ch}
+html[lang="es"] .tabs button,html[lang="fr"] .tabs button{letter-spacing:.04em}
+#ht-moon em{white-space:nowrap}
+.i18n-bar{flex:none;display:flex;align-items:center}
+.hero-lang{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.hero-lang button{font:500 13px/1 var(--f-body);color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:7px 12px;background:rgba(9,11,14,.55)}
+.hero-lang button:hover{color:var(--ink);border-color:var(--ink-3)}
+.hero-lang button[aria-pressed="true"]{color:#0A0D10;background:var(--ink);border-color:var(--ink)}
+html[lang="bn"] .hero-lang button,.hero-lang button[lang="bn"]{font-family:"Noto Sans Bengali","Bangla Sangam MN","Kohinoor Bangla","Nirmala UI","Vrinda",var(--f-body)}
+.i18n-sel select{font:500 12px/1 var(--f-body);color:var(--ink-2);background:var(--ground);border:1px solid var(--line-2);border-radius:var(--r);padding:7px 6px;max-width:92px}
+.i18n-sel select:hover{color:var(--ink)}
+.i18n-notice{margin:10px 14px 0;padding:8px 10px;border:1px solid var(--line-2);border-left:3px solid var(--earth);border-radius:var(--r);font-size:12.5px;color:var(--ink-2);background:var(--panel-2)}
+.i18n-notice .lnk{color:var(--earth);text-decoration:underline;font-size:12.5px}
+.btn-discover{border-color:var(--accent);color:var(--ink)}
+.btn-discover:hover{background:var(--accent-dim)}
+.jn-door{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.jn-explain{border-color:var(--earth)!important;color:var(--ink)!important}
+
+/* dialog */
+body.jn-on{overflow:hidden}
+.jn{position:fixed;inset:0;z-index:60;display:flex;align-items:stretch;justify-content:center;background:rgba(5,7,9,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:24px}
+.jn-card{width:min(1040px,100%);max-height:100%;display:flex;flex-direction:column;background:linear-gradient(180deg,#0E1216,#0A0D10);border:1px solid var(--line-2);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden}
+.jn-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.jn-htxt{flex:1;min-width:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.jn-head h2{font:600 19px/1.25 var(--f-body);margin:0;color:var(--ink);outline:none;min-width:0;overflow-wrap:anywhere}
+.jn-back{font:500 13px/1 var(--f-body);color:var(--ink-2);padding:8px 10px;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap}
+.jn-back:hover{color:var(--ink)}
+.jn-x{font-size:24px;line-height:1;width:36px;height:36px;border-radius:50%;color:var(--ink-2);flex:none}
+.jn-x:hover{background:var(--raise);color:var(--ink)}
+.jn-langsel select{max-width:110px}
+.jn-badge{font:500 11.5px/1.2 var(--f-body);color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:4px 9px;white-space:nowrap}
+.jn-badge.ok{color:#A9D3AB;border-color:#2f4a33}
+.jn .meta{color:var(--ink-2)}
+.jn-body{overflow:auto;outline:none;overscroll-behavior:contain}
+.jn-pad{padding:22px 26px 26px}
+.jn-eyebrow{font:500 12px/1.3 var(--f-body);color:var(--ink-2);margin:0 0 6px;text-transform:none}
+.jn-lead{font:400 17px/1.55 var(--f-body);color:var(--ink);max-width:62ch;margin:0 0 20px}
+.jn-fine{font-size:12.5px;color:var(--ink-2);max-width:80ch}
+.jn-review{border-top:1px solid var(--line);padding-top:10px;margin-top:14px}
+.jn-note{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.jn-callout{border:1px solid #5a2e28;background:rgba(217,112,95,.06);border-radius:8px;padding:10px 12px}
+.jn-stories{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:16px}
+.jn-story{position:relative;background:var(--panel);border:1px solid var(--line-2);border-radius:12px;padding:18px 18px 16px 20px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.jn-story::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mars)}
+.jn-story.b-moon::before{background:var(--moon)}.jn-story.b-earth::before{background:var(--earth)}
+.jn-story h3{font:600 18px/1.3 var(--f-body);margin:0;color:var(--ink)}
+.jn-story p{margin:0;color:var(--ink-2);line-height:1.5;font-size:14px}
+.jn-kick{font:600 11px/1.3 var(--f-mono);letter-spacing:.12em;color:var(--ink-2);margin:0}
+.jn-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.jn-btn{font:600 13.5px/1 var(--f-body);background:var(--ink);color:#0A0D10;border-radius:999px;padding:10px 16px;transition:filter .15s}
+.jn-btn:hover{filter:brightness(.9)}
+.jn-btn.ghost{background:none;color:var(--ink);border:1px solid var(--line-2)}
+.jn-btn.ghost:hover{border-color:var(--ink-2)}
+.jn-btn[disabled]{opacity:.4;cursor:default}
+.jn-lnk{color:#9CC9C4;text-decoration:underline;text-underline-offset:2px;font-size:13px;padding:2px 0}
+a.jn-lnk{display:inline-block;margin-right:10px}
+.jn-placehead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.jn-where{margin:0 0 10px;color:var(--ink-2);font-size:13px}
+.jn-ctrls{display:flex;gap:10px;flex-wrap:wrap}
+.jn-field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-2)}
+.jn-field select{font:500 13.5px/1.2 var(--f-body);color:var(--ink);background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;max-width:280px}
+.jn-score{display:flex;flex-direction:column;align-items:flex-end}
+.jn-score b{font:700 42px/1 var(--f-display);color:var(--accent);letter-spacing:.02em}
+.jn-score span{font-size:12px;color:var(--ink-2)}
+.jn-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:16px 0 0;border-bottom:1px solid var(--line);padding-bottom:0}
+.jn-tabs button{font:500 13.5px/1 var(--f-body);color:var(--ink-2);padding:10px 12px;border-bottom:2px solid transparent;white-space:nowrap}
+.jn-tabs button:hover{color:var(--ink)}
+.jn-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.jn-panel{padding-top:18px;min-height:280px}
+.jn-panel p{line-height:1.55;max-width:78ch}
+.jn-h{font:600 20px/1.3 var(--f-body);margin:0 0 6px}
+.jn-h4{font:600 15px/1.3 var(--f-body);margin:18px 0 6px}
+.jn-verdict{font:500 16px/1.5 var(--f-body);color:var(--ink);border-left:3px solid var(--accent);padding:4px 0 4px 12px;margin:12px 0}
+.jn-foot{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;border-top:1px solid var(--line);margin-top:22px;padding-top:12px}
+
+/* reveal */
+.jn-dots{display:flex;gap:6px;margin-bottom:14px}
+.jn-dot{width:26px;height:6px;border-radius:3px;background:var(--line-2);padding:0}
+.jn-dot.done{background:var(--ink-3)}.jn-dot.on{background:var(--accent)}
+.jn-stepcard{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;padding:18px 20px;min-height:430px}
+.jn-stepcard h3{font:600 22px/1.25 var(--f-body);margin:2px 0 8px;outline:none}
+.jn-in{animation:jnIn .32s ease-out both}
+@keyframes jnIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.jn-in{animation:none}.jn{backdrop-filter:none;-webkit-backdrop-filter:none}}
+.jn-stepnav{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.jn-stepnav .jn-hint{flex:1;font-size:12px;color:var(--ink-2)}
+.jn-t{border-collapse:collapse;width:100%;max-width:720px;margin:8px 0;font-size:14px}
+.jn-t th,.jn-t td{text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--line);vertical-align:top;font-weight:400}
+.jn-t th[scope="row"]{color:var(--ink);font-weight:500}
+.jn-t th small{display:block;color:var(--ink-2);font-size:12px;font-weight:400}
+.jn-t td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.jn-t thead th{font-size:12px;color:var(--ink-2)}
+.jn-obj tr.on th,.jn-obj tr.on td{background:var(--raise)}
+.jn-leadk{font-size:11px;color:var(--match)}
+.jn-scroll{overflow-x:auto}
+.jn-st{font:500 11.5px/1 var(--f-body);border:1px solid var(--line-2);border-radius:999px;padding:3px 8px;white-space:nowrap;color:var(--ink-2)}
+.jn-st.st-direct{color:#A9D3AB;border-color:#2f4a33}.jn-st.st-proxy{color:#E3C77E;border-color:#54452a;border-style:dashed}.jn-st.st-na,.jn-st.st-missing{color:var(--ink-2)}
+.jn-sc{display:inline-flex;align-items:center;gap:5px;font:500 12px/1 var(--f-body);border-radius:999px;padding:3px 8px 3px 6px;border:1px solid var(--line-2);white-space:nowrap}
+.jn-sc b{font:700 12px/1 var(--f-mono)}
+.s-similar.jn-sc{color:#A9D3AB;border-color:#2f4a33}.s-partial.jn-sc{color:#E3C77E;border-color:#54452a}.s-different.jn-sc{color:#EC9A8C;border-color:#5a2e28}
+.s-unknown.jn-sc,.s-na.jn-sc,.s-off.jn-sc{color:var(--ink-2);border-style:dashed}
+
+/* lens */
+.jn-seg{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.jn-seg button{font:500 13px/1 var(--f-body);color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:8px 12px}
+.jn-seg button[aria-checked="true"]{background:var(--ink);color:#0A0D10;border-color:var(--ink)}
+.jn-fig{margin:10px 0}
+.jn-fig svg{width:100%;max-width:720px;height:auto;display:block}
+.jn-fig .ax{font:500 11px var(--f-body);fill:var(--ink-2)}
+.jn-fig .lab{font:500 13px var(--f-body);fill:var(--ink)}
+.jn-fig .lab .gl{font-family:var(--f-mono);font-weight:700}
+.jn-fig .val{font:500 12px var(--f-mono);fill:var(--ink-2)}
+.jn-fig .trk{stroke:var(--line-2);stroke-width:2}
+.jn-fig .zone{fill:rgba(140,192,143,.16);stroke:rgba(140,192,143,.45);stroke-dasharray:3 3}
+.jn-fig .tm{fill:var(--accent)}
+.jn-fig .em{fill:var(--earth);stroke:#0A0D10;stroke-width:1.5}
+.jn-fig .ln{fill:none;stroke:var(--earth);stroke-width:2}
+.jn-fig .s-different .gl{fill:#EC9A8C}.jn-fig .s-partial .gl{fill:#E3C77E}.jn-fig .s-similar .gl{fill:#A9D3AB}
+.jn-fig figcaption{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-top:4px}
+.jn-fig .lg{display:inline-flex;align-items:center;gap:6px}
+.jn-fig .lg i{display:inline-block;width:12px;height:12px}
+.jn-fig .lg i.em{border-radius:50%;background:var(--earth)}.jn-fig .lg i.tm{background:var(--accent);transform:rotate(45deg) scale(.8)}.jn-fig .lg i.zone{background:rgba(140,192,143,.25);border:1px dashed rgba(140,192,143,.6)}
+.jn-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0}
+.jn-grp{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.jn-grp h4{margin:0 0 4px;font-size:13px;font-weight:500;display:flex;gap:6px;align-items:center}
+.jn-grp p{margin:0;font-size:13.5px}
+.jn-ul{margin:6px 0;padding-left:18px;line-height:1.6}
+
+/* change my mind */
+.jn-concl{background:var(--panel);border:1px solid var(--line-2);border-radius:10px;padding:10px 14px;margin:10px 0}
+.jn-concl p{margin:2px 0 0;font-size:15px}
+.jn-alts{list-style:none;padding:0;margin:6px 0;display:flex;flex-direction:column;gap:6px}
+.jn-alt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.jn-alt>div{flex:1;min-width:0}
+.jn-alt .meta{font-size:12px;color:var(--ink-2);overflow-wrap:anywhere}
+.jn-alt.breaks{border-color:#5a2e28}
+.jn-alt.flash{outline:2px solid var(--accent)}
+.jn-mark{font:700 14px/1.4 var(--f-mono);width:16px;flex:none}
+.jn-alt.holds .jn-mark{color:#A9D3AB}.jn-alt.breaks .jn-mark{color:#EC9A8C}
+.jn-res{font:500 12.5px/1.4 var(--f-body);color:var(--ink-2);text-align:right;max-width:40%}
+.jn-det summary{cursor:pointer;color:var(--ink);font-weight:500;margin:10px 0 4px}
+.jn-busy{color:var(--ink-2)}
+
+/* missing pieces */
+.jn-check{list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:8px}
+.jn-check li{display:flex;gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.jn-check li>div{flex:1;min-width:0}
+.jn-check p{margin:2px 0 4px}
+.jn-sev{font:700 12px/22px var(--f-mono);width:22px;height:22px;border-radius:50%;text-align:center;flex:none;border:1px solid var(--line-2)}
+.sev-gap .jn-sev{color:#EC9A8C;border-color:#5a2e28}.sev-caution .jn-sev{color:#E3C77E;border-color:#54452a}.sev-info .jn-sev{color:var(--ink-2)}
+.jn-sevl{font:600 11px/1 var(--f-body);color:var(--ink-2)}
+.jn-links{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.jn-meth{display:block;flex-basis:100%;font-size:12px;color:var(--ink-2)}
+
+/* trust */
+.jn-trow{border:1px solid var(--line);border-radius:10px;margin:6px 0}
+.jn-trow summary{display:flex;gap:12px;justify-content:space-between;align-items:baseline;padding:11px 14px;cursor:pointer;flex-wrap:wrap}
+.jn-tk{font-weight:600}
+.jn-tv{color:var(--ink-2);font-size:13.5px;text-align:right}
+.jn-tb{padding:0 14px 12px}
+.jn-tb .meta{font-size:12px;color:var(--ink-2)}
+
+/* worlds */
+.jn-worlds{list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:6px}
+.jn-worlds li{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.jn-worlds li.on{border-color:var(--accent)}
+.jn-wbtn{display:grid;grid-template-columns:62px minmax(0,1fr) 120px 64px 76px;gap:10px;align-items:center;width:100%;text-align:left}
+.jn-wb{font:600 10.5px/1 var(--f-mono);letter-spacing:.1em;color:var(--ink-2)}
+.jn-wn{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jn-wbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.jn-wbar i{display:block;height:100%;background:var(--earth)}
+.jn-ws,.jn-wr{font:500 13px var(--f-mono);text-align:right}
+.jn-wmeta{font-size:12px;color:var(--ink-2);margin-top:3px}
+
+/* passport */
+.jn-pass{max-width:620px;border-radius:16px;padding:20px 22px;background:radial-gradient(120% 140% at 100% 0%,rgba(224,135,79,.14),transparent 55%),#0C1014;border:1px solid var(--line-2);margin:12px 0}
+.jn-pass-top{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);gap:10px}
+.jn-pass-brand{font:800 14px/1 var(--f-display);letter-spacing:.2em;color:var(--ink)}
+.jn-pass h4{font:600 24px/1.25 var(--f-body);margin:14px 0 2px}
+.jn-pass-mid{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:10px 0}
+.jn-pass-mid b{display:block;font-size:15px}
+.jn-pass-mid .jn-score b{font-size:36px}
+.jn-pchips{list-style:none;padding:0;margin:8px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.jn-pchips li{border:1px solid var(--line-2);border-radius:8px;padding:6px 8px;display:flex;flex-direction:column;gap:1px}
+.jn-pchips li b{font:700 14px/1 var(--f-mono)}.jn-pchips li span{font-size:12.5px}.jn-pchips li em{font-style:normal;font-size:11.5px;color:var(--ink-2)}
+.jn-pchips li.s-similar{border-color:#2f4a33}.jn-pchips li.s-similar b{color:#A9D3AB}
+.jn-pchips li.s-partial{border-color:#54452a}.jn-pchips li.s-partial b{color:#E3C77E}
+.jn-pchips li.s-different{border-color:#5a2e28}.jn-pchips li.s-different b{color:#EC9A8C}
+.jn-pchips li.s-unknown,.jn-pchips li.s-na,.jn-pchips li.s-off{border-style:dashed}
+.jn-pfine{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;overflow-wrap:anywhere}
+
+/* team */
+.jn-team{padding-left:20px;display:flex;flex-direction:column;gap:10px}
+.jn-team li{padding:4px 0}
+.jn-team li>div{margin-bottom:6px}
+.jn-team .meta{font-size:12.5px;color:var(--ink-2)}
+.jn-team p{margin:4px 0}
+
+@media (max-width:760px){
+  .jn{padding:0}
+  .jn-card{border-radius:0;border:0;max-height:100%;height:100%}
+  .jn-head{padding:10px 12px;gap:8px;flex-wrap:wrap}
+  .jn-back span{display:none}
+  .jn-htxt{order:3;flex-basis:100%}
+  .jn-head h2{font-size:17px}
+  .jn-langsel{margin-left:auto}
+  .jn-pad{padding:16px}
+  .jn-lead{font-size:15.5px}
+  .jn-stories{grid-template-columns:minmax(0,1fr)}
+  .jn-score b{font-size:34px}
+  .jn-placehead{flex-direction:column-reverse}
+  .jn-score{align-items:flex-start}
+  .jn-field select{max-width:100%}
+  .jn-stepcard{padding:14px;min-height:0}
+  .jn-stepcard h3{font-size:19px}
+  .jn-t{font-size:13px}
+  .jn-wbtn{grid-template-columns:minmax(0,1fr) 56px 64px;row-gap:4px}
+  .jn-wb{grid-column:1/-1}
+  .jn-wbar{grid-column:1/-1;grid-row:3}
+  .jn-res{max-width:none;text-align:left}
+  .jn-alt{flex-wrap:wrap}
+  .jn-pchips{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jn-stepnav .jn-hint{display:none}
+  .i18n-sel select{max-width:84px}
+}
+@media print{
+  body.jn-printing #app>*:not(#jn){display:none!important}
+  body.jn-printing .jn{position:static;background:#fff;padding:0;backdrop-filter:none}
+  body.jn-printing .jn-card{border:0;box-shadow:none;background:#fff}
+  body.jn-printing .jn-head,body.jn-printing .jn-tabs,body.jn-printing .jn-act,body.jn-printing .jn-foot,body.jn-printing .jn-placehead,body.jn-printing .jn-panel>:not(.jn-pass){display:none!important}
+  body.jn-printing .jn-pass{color:#000;background:#fff;border:1px solid #000}
+  body.jn-printing .jn-pass *{color:#000!important;border-color:#000!important}
+  body.jn-printing{overflow:visible}
+  html,body{height:auto}
+}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -5692,6 +5936,1363 @@ A3_VIEWS.provenance = function () {
       ${A.files.subcell ? `<p class="note small">Sub-cell check: mean slope recomputed from the histogram pass equals the baseline cell slope for ${nfmt(A.files.subcell.check.cells_compared)} cells (max |Δ| ${A.files.subcell.check.max_abs_diff_mean_slope_vs_baseline}).</p>` : ""}</div>`;
 };
 
+/* ===== ASTERRO · interface languages (English, বাংলা, Español, Français) — core =====
+ * tx(key, vars) looks a key up in the active language and falls back to English; every fallback is recorded in
+ * I18N.missing so tests can prove a screen has no untranslated strings. Placeholders are {name}. Numbers and dates
+ * use Intl with the language's locale (Bengali digits for বাংলা, decimal comma for French and Spanish).
+ * Scientific identifiers stay as they are in every language: dataset and product names, instrument names, units,
+ * algorithm and schema versions, criterion codes, and place names from Natural Earth.
+ * Translation status: the bn / es / fr strings were written by Claude (an AI model) for this project and have NOT
+ * yet been reviewed by native speakers; the interface says so. They are complete, not placeholders.
+ * Language never changes a number: scores, ranks, weights and exports are computed before any text is chosen. */
+const I18N = { lang: "en", langs: {}, dict: {}, missing: new Set(), KEY: "asterro.lang", fontLoaded: false };
+function i18nRegister(lang, meta, dict) { I18N.langs[lang] = meta; I18N.dict[lang] = dict; }
+function i18nFill(s, vars) { return vars ? s.replace(/\{(\w+)\}/g, (m, k) => vars[k] != null ? String(vars[k]) : m) : s; }
+function tx(key, vars) {
+  const d = I18N.dict[I18N.lang], en = I18N.dict.en || {};
+  let s = d && d[key];
+  if (s == null) { if (I18N.lang !== "en") I18N.missing.add(I18N.lang + ":" + key); s = en[key]; }
+  if (s == null) { I18N.missing.add("en:" + key); return key; }
+  return i18nFill(s, vars);
+}
+function txHas(key) { return !!(I18N.dict.en && I18N.dict.en[key] != null); }
+function txLocale() { return (I18N.langs[I18N.lang] || {}).locale || "en-GB"; }
+const _txNF = new Map();
+function txNum(x, d = 0, opt = {}) {
+  if (x == null || x !== x) return "—";
+  const k = txLocale() + "|" + d + "|" + JSON.stringify(opt);
+  if (!_txNF.has(k)) _txNF.set(k, new Intl.NumberFormat(txLocale(), { minimumFractionDigits: d, maximumFractionDigits: d, ...opt }));
+  return _txNF.get(k).format(x);
+}
+function txInt(x) { return x == null || x !== x ? "—" : txNum(x, 0, { useGrouping: true }); }
+function txPct(x, d = 1) { return x == null || x !== x || x < 0 ? "—" : txNum(100 * x, d) + ((I18N.langs[I18N.lang] || {}).pct || "") + "%"; }
+function txRank(r) { return r == null ? "—" : "#" + txInt(r); }
+function txDate(d) { try { return new Intl.DateTimeFormat(txLocale(), { year: "numeric", month: "long", day: "numeric" }).format(d); } catch (e) { return d.toISOString().slice(0, 10); } }
+function txLL(lat, lon) { return `${txNum(Math.abs(lat), 2)}°${tx(lat >= 0 ? "geo.n" : "geo.s")} ${txNum(Math.abs(lon), 2)}°${tx(lon >= 0 ? "geo.e" : "geo.w")}`; }
+function txList(arr) {
+  if (!arr.length) return "";
+  try { return new Intl.ListFormat(txLocale(), { style: "long", type: "conjunction" }).format(arr); } catch (e) { return arr.join(", "); }
+}
+/* translated text with HTML fragments (already escaped / built) substituted for some placeholders */
+function txH(key, vars = {}, html = {}) { return esc(tx(key, vars)).replace(/\{(\w+)\}/g, (m, k) => html[k] != null ? html[k] : m); }
+/* a term kept verbatim in every language (dataset / place / unit names); excluded from the leftover-English test */
+function keep(s) { return `<span class="i18n-keep" translate="no">${esc(s)}</span>`; }
+
+function i18nFont(lang) {
+  if (lang !== "bn" || I18N.fontLoaded) return;
+  I18N.fontLoaded = true;   // Bengali glyphs: Noto Sans Bengali from Google Fonts when online; otherwise the system's Bengali font
+  try {
+    const l = document.createElement("link"); l.rel = "stylesheet"; l.id = "i18n-font-bn";
+    l.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap";
+    document.head.appendChild(l);
+  } catch (e) { /* offline: system font fallback */ }
+}
+function setLang(lang, opts = {}) {
+  if (!I18N.dict[lang]) lang = "en";
+  const changed = lang !== I18N.lang;
+  I18N.lang = lang;
+  document.documentElement.lang = (I18N.langs[lang] || {}).htmlLang || lang;
+  document.documentElement.dataset.lang = lang;
+  i18nFont(lang);
+  if (!opts.noStore) { try { localStorage.setItem(I18N.KEY, lang); } catch (e) { /* storage unavailable: choice lasts this visit */ } }
+  for (const s of document.querySelectorAll("select[data-i18n-lang]")) s.value = lang;
+  i18nChrome();
+  if (changed || opts.force) document.dispatchEvent(new CustomEvent("asterro:lang", { detail: { lang } }));
+}
+function i18nInitial() {
+  let q = null; try { q = new URLSearchParams(location.search).get("lang"); } catch (e) { }
+  if (q && I18N.dict[q]) return q;
+  try { const s = localStorage.getItem(I18N.KEY); if (s && I18N.dict[s]) return s; } catch (e) { }
+  return "en";
+}
+function i18nSelect(id, extraClass = "") {
+  return `<label class="i18n-sel ${extraClass}"><span class="sr-only">${esc(tx("lang.label"))}</span><select id="${id}" data-i18n-lang aria-label="${esc(tx("lang.label"))}">${Object.entries(I18N.langs).map(([k, m]) => `<option value="${k}" lang="${m.htmlLang || k}"${k === I18N.lang ? " selected" : ""}>${esc(m.name)}</option>`).join("")}</select></label>`;
+}
+
+/* ---------- the chrome: header, landing, and the English-only notice for research views ---------- */
+const I18N_TABS = ["explore", "compare", "scenarios", "discover", "data", "method", "lab", "trajectory", "atlas"];
+function i18nChrome() {
+  if (typeof document === "undefined" || !document.getElementById("app")) return;
+  for (const b of document.querySelectorAll(".tabs button[data-tab]")) { const k = "tab." + b.dataset.tab; if (txHas(k)) b.textContent = tx(k); }
+  const tb = (id, body, name) => { const b = document.getElementById(id); if (b) b.innerHTML = `<i>${esc(tx(body))}</i>${esc(tx(name))}`; };
+  tb("tgt-mars", "body.mars", "tname.mars_jezero"); tb("tgt-moon", "body.moon", "tname.moon_south_pole"); tb("tgt-cross", "body.both", "tname.cross");
+  const set = (id, k) => { const e = document.getElementById(id); if (e) e.textContent = tx(k); };
+  set("btn-search", "cta.search"); set("hero-search", "cta.search"); set("hero-science", "cta.science"); set("hero-atlas", "cta.atlas"); set("hero-journey", "cta.journey");
+  const hero = document.getElementById("hero");
+  if (hero) {
+    const q = s => hero.querySelector(s);
+    if (q(".eyebrow")) q(".eyebrow").textContent = tx("hero.eyebrow");
+    if (q("h1")) q("h1").innerHTML = esc(tx("hero.title1")) + "<br>" + esc(tx("hero.title2"));
+    if (q(".sub")) q(".sub").textContent = tx("hero.sub");
+    const ht = (id, body, name, where, alt) => { const b = document.getElementById(id); if (!b) return; const sp = b.querySelector("span"); if (sp) sp.innerHTML = `<i>${esc(tx(body))}</i><b>${esc(tx(name))}</b><em>${where}</em>`; const im = b.querySelector("img"); if (im) im.alt = tx(alt); };
+    ht("ht-mars", "body.mars", "tname.mars_jezero", esc(txLL(18.38, 77.58)), "hero.alt_mars");
+    ht("ht-moon", "body.moon", "tname.moon_south_pole", `${esc(txNum(90, 0))}°${esc(tx("geo.s"))} · ${keep("Shackleton")}`, "hero.alt_moon");
+    const tg = hero.querySelector(".hero-targets"); if (tg) tg.setAttribute("aria-label", tx("hero.choose_world"));
+    i18nFacts();
+  }
+  const nav = document.querySelector("nav.tabs"); if (nav) nav.setAttribute("aria-label", tx("aria.tabs"));
+  const tc = document.querySelector(".target-ctl"); if (tc) tc.setAttribute("aria-label", tx("aria.target"));
+  i18nHeroRow();
+  i18nAtlasCtl();
+  const ls = document.querySelector("#console #lang-sel"); if (ls) { ls.setAttribute("aria-label", tx("lang.label")); const sr = ls.parentElement.querySelector(".sr-only"); if (sr) sr.textContent = tx("lang.label"); }
+  i18nNotice();
+}
+/* the quick-switch beside the target buttons (Phase IV): its prompt and group labels; target names stay as registered */
+function i18nAtlasCtl() {
+  const sel = document.getElementById("tc-atlas-sel"); if (!sel) return;
+  const o = sel.querySelector('option[value=""]'), n = sel.querySelectorAll("option").length - 1;
+  if (o && I18N.lang !== "en") o.textContent = tx("chrome.more_targets", { n: txInt(n) });
+  for (const g of sel.querySelectorAll("optgroup")) { if (!g.dataset.en) g.dataset.en = g.label; g.label = I18N.lang === "en" ? g.dataset.en : tx("chrome.group." + g.dataset.en.toLowerCase()); }
+  sel.setAttribute("aria-label", tx("chrome.more_targets_aria"));
+}
+if (typeof a4ExploreControl === "function") { const _i18nA4C = a4ExploreControl; a4ExploreControl = function () { const r = _i18nA4C.apply(this, arguments); try { i18nAtlasCtl(); } catch (e) { } return r; }; }
+/* the landing facts line is written by the baseline boot after the data load; localise it once it appears
+ * (English output is the baseline sentence, character for character) */
+function i18nFacts() {
+  const f = document.getElementById("hero-facts");
+  if (!f || typeof S === "undefined" || !S.n) return;
+  if (!(f.dataset.i18n || /valid land cells/.test(f.textContent))) return;
+  const s = tx("hero.facts", { n: I18N.lang === "en" ? S.n.toLocaleString() : txInt(S.n) });
+  if (f.textContent !== s) f.textContent = s;
+  f.dataset.i18n = "1";
+}
+(function i18nFactsWatch() {
+  const f = document.getElementById("hero-facts"); if (!f || typeof MutationObserver === "undefined") return;
+  new MutationObserver(() => { if (I18N.lang !== "en" || f.dataset.i18n) i18nFacts(); }).observe(f, { childList: true, characterData: true, subtree: true });
+})();
+/* research views stay in English (their scientific vocabulary is not yet translated); say so in the chosen language */
+function i18nNotice() {
+  const left = document.getElementById("left"); if (!left) return;
+  let n = document.getElementById("i18n-notice");
+  if (I18N.lang === "en" || $("#app").classList.contains("is-hero")) { if (n) n.remove(); return; }
+  if (!n) { n = document.createElement("div"); n.id = "i18n-notice"; n.className = "i18n-notice"; n.setAttribute("role", "note"); }
+  n.innerHTML = `${esc(tx("notice.english_only"))} <button class="lnk" data-jn-open="home">${esc(tx("notice.open_journey"))}</button>`;
+  if (left.firstChild !== n) left.insertBefore(n, left.firstChild);
+}
+const _i18nRenderLeft = renderLeft;
+renderLeft = function () { const r = _i18nRenderLeft.apply(this, arguments); try { i18nNotice(); } catch (e) { } return r; };
+
+/* where the language can be chosen: a row of languages on the landing screen, the weight console's side panel in
+ * the workspace, and the journey dialog's header. (The header bar has no spare width: the tab row needs all of it.) */
+function i18nHeroRow() {
+  const hero = document.getElementById("hero"); if (!hero) return;
+  let r = document.getElementById("hero-lang");
+  if (!r) { r = document.createElement("div"); r.id = "hero-lang"; r.className = "hero-lang"; r.setAttribute("role", "group"); hero.insertBefore(r, hero.firstChild); }
+  r.setAttribute("aria-label", tx("lang.label"));
+  r.innerHTML = Object.entries(I18N.langs).map(([k, m]) => `<button type="button" data-i18n-set="${k}" lang="${m.htmlLang || k}" aria-pressed="${k === I18N.lang}">${esc(m.name)}</button>`).join("");
+}
+const _i18nRenderConsole = renderConsole;
+renderConsole = function () {
+  const r = _i18nRenderConsole.apply(this, arguments);
+  try { const side = document.querySelector("#console .con-side"); if (side && !side.querySelector("#lang-sel")) { const w = document.createElement("div"); w.className = "i18n-bar"; w.innerHTML = i18nSelect("lang-sel"); side.appendChild(w); } } catch (e) { }
+  return r;
+};
+(function i18nBoot() {
+  const go = () => {
+    document.addEventListener("change", e => { if (e.target && e.target.matches && e.target.matches("select[data-i18n-lang]")) setLang(e.target.value); });
+    document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-i18n-set]"); if (b) { setLang(b.dataset.i18nSet); const n = document.querySelector(`[data-i18n-set="${b.dataset.i18nSet}"]`); if (n) n.focus(); } });
+    setLang(i18nInitial(), { noStore: true, force: true });
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
+})();
+
+/* ===== ASTERRO interface text · English (source language) ===== */
+i18nRegister("en", { name: "English", locale: "en-GB", htmlLang: "en", pct: "", status: "source" }, {
+  "lang.label": "Language",
+  "lang.review_note": "The বাংলা, Español and Français texts were written by Claude (an AI model) and have not yet been reviewed by native speakers.",
+  "tab.explore": "Explore", "tab.compare": "Compare", "tab.scenarios": "Scenarios", "tab.discover": "Discover", "tab.data": "Data", "tab.method": "Method",
+  "tab.lab": "Lab", "tab.trajectory": "Trajectory", "tab.atlas": "Atlas",
+  "aria.tabs": "Instrument views", "aria.target": "Planetary target", "aria.sections": "Ways to look at this place",
+  "body.mars": "MARS", "body.moon": "MOON", "body.both": "BOTH",
+  "tname.mars_jezero": "Jezero Crater", "tname.moon_south_pole": "Lunar South Pole", "tname.cross": "Cross-planet", "tname.moon_shackleton": "Shackleton crater",
+  "cta.search": "Search Earth", "cta.science": "Explore the science", "cta.atlas": "Open the planetary atlas", "cta.journey": "Start with a discovery", "cta.explain": "Explain this place",
+  "hero.eyebrow": "ASTERRO · Planetary Analogue Intelligence · NASA Space Apps 2026",
+  "hero.title1": "Find Earth's", "hero.title2": "other worlds.",
+  "hero.sub": "Search Earth's environments for measurable analogues to the Moon and Mars.",
+  "hero.choose_world": "Choose another world",
+  "hero.alt_mars": "Hillshade of MOLA elevation around Jezero Crater", "hero.alt_moon": "Hillshade of LOLA elevation at the lunar south pole",
+  "hero.facts": "{n} valid land cells · 6 criteria from NASA POWER, MODIS & GMTED2010 · targets built from MEDA, MOLA, LOLA & Diviner · every score deterministic and traceable",
+  "notice.english_only": "This research view is in English only. Every number is identical in every language.",
+  "notice.open_journey": "Open the guided discoveries",
+  "door.title": "New here?", "door.p": "Start with a guided discovery: real results from this data, explained step by step.",
+  "geo.n": "N", "geo.s": "S", "geo.e": "E", "geo.w": "W",
+  "val.na": "no value",
+  "badge.verified": "Bundled data · checksum verified", "badge.bundled": "Bundled data", "badge.offline": "Offline copy · checksum verified",
+  "badge.title": "Every result here is computed in your browser from the bundled predictor stack (SHA-256 {sha}…).",
+  "nav.back_home": "Back to all discoveries", "nav.discoveries": "Discoveries", "nav.close": "Close",
+  "err.compute": "This could not be computed.",
+
+  "home.title": "Earth's otherworldly places",
+  "home.eyebrow": "Discoveries computed from the data on this page",
+  "home.lead": "Some places on Earth resemble Mars or the Moon in ways we can measure. Each story below is calculated now, in your browser, from NASA and USGS data. Open one to see why.",
+  "home.fine": "ASTERRO compares six measured environmental conditions. Similar conditions do not mean a place is physically, geologically or biologically the same.",
+  "home.loading_registry": "Loading more targets from the planetary registry…",
+  "story.explore_why": "Explore why", "story.see_team": "Meet the team",
+  "story.top.h": "{place} is Earth's closest match to {target}",
+  "story.top.p": "{similar} of {compared} measured conditions agree within the match threshold. Analogue score {score}, with every condition weighted equally.",
+  "story.shackleton.note": "Target from the planetary registry (explore-target-v1).",
+  "story.thermal.h": "Nowhere on Earth swings like {target}",
+  "story.thermal.p": "The ground at Jezero warms and cools by about {t} K between afternoon and night. The largest swing in any Earth cell is {e} K, at {place}.",
+  "story.thermal.p2": "So even the best Earth match reaches only s = {s} on this condition, whatever the weights.",
+  "story.team.h": "It takes a team of Earth places",
+  "story.team.p": "No single place matches Jezero in all {n} conditions. {k} places, at least 300 km apart, together match {m}.",
+  "story.team.p_none": "No place on Earth matches on {list}.",
+  "story.yours.kick": "The place you selected", "story.yours.p": "See how it compares, step by step.",
+
+  "place.target": "Compared with", "place.objective": "Objective",
+  "place.score_label": "Analogue score", "place.cell": "cell {id}",
+  "place.rank": "rank {r} of {n} cells", "place.not_eligible": "not scored (too little data here)", "place.leading": "leading site {k}",
+  "place.unlabelled": "Unlabelled land cell",
+  "place.show_globe": "Show on the globe",
+  "place.fine": "Similar measured conditions only — not physical, geological or engineering equivalence.",
+  "place.target_set": "Now compared with {target}.",
+  "sec.reveal": "Reveal", "sec.lens": "Lens", "sec.change": "Change my mind?", "sec.missing": "Missing pieces", "sec.trust": "Trust", "sec.worlds": "Other worlds", "sec.time": "Through time", "sec.passport": "Passport",
+
+  "reveal.s1": "The Earth place", "reveal.s2": "The other world", "reveal.s3": "Where they agree", "reveal.s4": "Where they differ",
+  "reveal.s5": "The measurements behind it", "reveal.s6": "A different objective", "reveal.s7": "In summary",
+  "reveal.step_of": "Step {k} of {n}",
+  "reveal.back": "Back", "reveal.next": "Next", "reveal.skip": "Skip to summary", "reveal.again": "Start again",
+  "reveal.keys": "← → to move",
+  "reveal.earth.p": "This is what the data say about this 55-kilometre patch of Earth.",
+  "reveal.target.p": "These are the values for {target}, and how each was obtained.",
+  "reveal.agree.p": "{k} of {n} compared conditions are within the match threshold (s ≥ 0.85).",
+  "reveal.agree.none": "No condition agrees within the match threshold.",
+  "reveal.differ.p": "These conditions differ. The points show how much each one lowers the score.",
+  "reveal.differ.none": "No compared condition differs beyond the match threshold.",
+  "reveal.earth_higher": "Earth is higher", "reveal.earth_lower": "Earth is lower",
+  "reveal.vs": "vs",
+  "reveal.costs": "−{pts} points",
+  "reveal.unknown": "No Earth value here for: {list}. The score uses the remaining conditions.",
+  "reveal.na": "Not compared, because the target has no value: {list}.",
+  "reveal.evidence.p": "Each Earth value comes from a named dataset. Proxy target values are derived rather than measured directly.",
+  "reveal.evidence.target": "Target sources:",
+  "reveal.objective.p": "Under “{profile}” this place ranks {r}.",
+  "reveal.objective.best": "Its best rank is under “{profile}”: {r}.",
+  "reveal.objective.worst": "Its worst is under “{profile}”: {r}.",
+  "reveal.objective.custom": "Each declared objective weights the conditions differently:",
+  "reveal.open_lens": "Compare objectives in the Lens",
+  "summary.level.close": "On the measured conditions, this place is a close analogue: all {compared} compared conditions agree within the match threshold, and the analogue score is {score}.",
+  "summary.level.partial": "On the measured conditions, this place is a partial analogue: {similar} of {compared} agree within the match threshold, and the analogue score is {score}.",
+  "summary.level.weak": "On the measured conditions, this place is a weak analogue: only {similar} of {compared} agree within the match threshold, and the analogue score is {score}.",
+  "summary.level.none": "This place has too little data to be scored against this target.",
+  "summary.robust.all": "Its standing held under every alternative tested in “Change my mind?”.",
+  "summary.robust.most": "Its standing held under most, but not all, of the alternatives tested in “Change my mind?”.",
+  "summary.robust.few": "Its standing changed under most of the alternatives tested in “Change my mind?”, so treat it with care.",
+  "summary.robust.untested": "Open “Change my mind?” to test how much this depends on choices.",
+  "summary.scope": "This compares measured environmental conditions only. It is not a claim of physical, geological, biological or engineering equivalence, and it has not been validated in the field.",
+
+  "lens.title": "Planetary Difference Lens",
+  "lens.p": "Each line shows where this place (circle) and the target (diamond) sit on the same scale. The shaded band is the match zone.",
+  "lens.objective": "Objective", "lens.score": "Score", "lens.rank": "Rank", "lens.costs_most": "Costs it most",
+  "lens.under": "Under “{profile}”: analogue score {score}, rank {r}.",
+  "lens.leading": "lead {k}", "lens.leading_long": "It is leading site {k} for this objective.",
+  "lens.axis_min": "lowest on scale", "lens.axis_max": "highest",
+  "lens.leg_earth": "this place", "lens.leg_target": "target", "lens.leg_zone": "match zone",
+  "lens.svg_label": "Position of this place and of the target on each condition's scale",
+  "lens.matters": "Differences that matter for “{profile}”",
+  "lens.costs": "costs {pts} points (weight {w})",
+  "lens.matters_none": "No compared condition differs beyond the match threshold.",
+  "lens.loss_note": "Points lost add up exactly to the gap between the score and 100%: each condition costs weight × (1 − s) ÷ total weight.",
+  "lens.switched": "Objective: {profile}.",
+
+  "change.title": "What would change my mind?",
+  "change.p": "ASTERRO reruns the same formula under declared alternatives and reports whether the conclusion survives. Nothing is random and no data are invented.",
+  "change.tested": "Conclusion tested",
+  "change.concl.leading": "{place} is leading analogue site {k} for {target}.",
+  "change.concl.rank": "{place} ranks {r} for {target}.",
+  "change.verdict.all": "It holds under all {n} alternatives (rank range {lo}–{hi}).",
+  "change.verdict.some": "It holds under {h} of {n} alternatives (rank range {lo}–{hi}).",
+  "change.would": "These would change it",
+  "change.would_not": "These would not ({n})",
+  "change.none_breaks": "None of the alternatives changes it.",
+  "change.alt.profile": "Objective “{profile}”",
+  "change.alt.drop_source": "Without {source} data",
+  "change.alt.drop_proxy": "Without the target's proxy values ({list})",
+  "change.alt.drop_criterion": "Without {criterion}",
+  "change.weights_changed": "Weights:",
+  "change.res.leading": "leading site {k} · rank {r}", "change.res.rank": "rank {r}, not a leading site", "change.res.ineligible": "not scored",
+  "change.holds_sr": "holds", "change.breaks_sr": "changes the conclusion",
+  "change.running": "Testing the alternatives…", "change.done": "Alternatives tested.",
+  "change.note": "Leaving data out means giving those conditions weight 0; nothing is filled in. A result that holds is robust to these choices, not proven correct.",
+
+  "missing.title": "Find the missing piece",
+  "missing.p": "What would make this comparison stronger, in plain language. Each item links to the dataset or test it comes from.",
+  "missing.sev.gap": "Gap", "missing.sev.caution": "Caution", "missing.sev.info": "Good to know",
+  "missing.target_na": "Not compared: {criterion} (target value: {status}).",
+  "missing.earth_missing": "There is no Earth value for {criterion} in this cell, so the score rests on the other conditions.",
+  "missing.target_proxy": "The target's {criterion} is a proxy, derived rather than measured directly. If the proxy is off, this comparison moves.",
+  "missing.structural.above": "No place on Earth matches on {criterion}: the target ({t} {unit}) is above every Earth value ({lo}–{hi} {unit}). Best possible s = {s}.",
+  "missing.structural.below": "No place on Earth matches on {criterion}: the target ({t} {unit}) is below every Earth value ({lo}–{hi} {unit}). Best possible s = {s}.",
+  "missing.structural.none": "No Earth cell is within the match threshold for {criterion}. Best possible s = {s}.",
+  "missing.thin_coverage": "Few clear-sky MODIS months here ({pct} of months), so the {criterion} value rests on less data.",
+  "missing.partial_coverage": "Only {pct} of the weight could be scored here; the rest has no Earth value.",
+  "missing.source_dependence": "The conclusion depends on {source}: without it this place ranks {r}.",
+  "missing.proxy_dependence": "The conclusion depends on the target's proxy values ({list}): without them this place ranks {r}.",
+  "missing.resolution": "Each Earth cell is about {km} km, similar to the {tkm} km target window. Smaller features, such as dunes, boulders or a single crater floor, are not resolved. Higher-resolution elevation data are not integrated yet.",
+  "missing.resolution.notarget": "Each Earth cell is about {km} km. Smaller features are not resolved. Higher-resolution elevation data are not integrated yet.",
+  "missing.temporal": "The Earth data cover different periods: NASA POWER climate 2001–2020, MODIS surface temperature 2016–2025, and terrain that does not change. The target data come from their own mission periods.",
+  "missing.not_measured": "Not measured at all: radiation, atmosphere, gravity, soil chemistry, dust and ice. Matching six conditions does not cover them.",
+  "missing.see_change": "See the test", "missing.see_rule": "See how the score works",
+  "missing.run_change": "Run “Change my mind?” to check whether the conclusion depends on one data source or on proxy values.",
+
+  "trust.title": "Science Trust View",
+  "trust.p": "The evidence behind this result, one row at a time. Open a row for the details.",
+  "trust.measurements": "Target measurements", "trust.coverage": "Earth data here", "trust.limits": "Structural limits", "trust.robustness": "Robustness",
+  "trust.reproducibility": "Reproducibility", "trust.sources": "Sources", "trust.scope": "What this does not tell you",
+  "trust.measurements.sum": "{d} direct, {p} proxy, of {n} compared",
+  "trust.measurements.body": "How each target value was obtained:",
+  "trust.coverage.sum": "{pct} of the weight scored",
+  "trust.coverage.body": "MODIS months with valid data here: {modis}. Land fraction of the cell: {land}.",
+  "trust.coverage.missing": "Missing here: {list}.",
+  "trust.limits.sum_some": "No Earth match possible for {list}",
+  "trust.limits.sum_none": "None: every compared condition can be matched somewhere on Earth",
+  "trust.limits.body": "A structural limit means no place on Earth falls within the match threshold for that condition, so no weighting can fix it.",
+  "trust.robustness.sum": "Held under {h} of {n} alternatives",
+  "trust.robustness.sum_na": "Not tested yet",
+  "trust.robustness.body": "From “Change my mind?”: declared objectives, leaving out each Earth data source, leaving out proxy target values, and leaving out each condition.",
+  "trust.reproducibility.body": "Deterministic: the same inputs always give the same result. Predictor stack SHA-256 {sha}…",
+  "trust.verified": "verified in this browser", "trust.not_verified": "checksum not verified in this browser",
+  "trust.sources.body": "Earth datasets and target sources used here:",
+  "trust.scope.sum": "Similarity on six conditions, not equivalence",
+  "trust.scope.body": "The analogue score measures how close six environmental conditions are. It does not measure radiation, gravity, atmosphere or chemistry, and it is not a field validation or a mission recommendation. ASTERRO is not endorsed by NASA.",
+  "trust.no_score": "ASTERRO deliberately does not combine these rows into a single trust score.",
+
+  "worlds.title": "One place, many worlds",
+  "worlds.p": "The same Earth place against {n} targets, each with its own scale.",
+  "worlds.compared": "{k} of {n} conditions compared", "worlds.not_compared": "not compared: {list}",
+  "worlds.open": "Compare with {target}",
+  "worlds.note": "Each target uses its own normalisation ranges, so compare ranks rather than raw scores across targets. Rank is this cell's position among all Earth cells for that target.",
+  "worlds.registry_err": "The planetary registry could not be loaded; only the two original targets are shown.",
+
+  "time.title": "Through time",
+  "time.p": "Only the day–night surface temperature swing has yearly values (MODIS, one per year). This is the score with that year's value in place of the average.",
+  "time.svg": "Analogue score in each of {n} years",
+  "time.cls.stable": "Stable: the score varies by {pts} points across {years} years (threshold {thr} points).",
+  "time.cls.variable": "Variable: the score varies by {pts} points across {years} years (threshold {thr} points).",
+  "time.cls.none": "No yearly values are available here.",
+  "time.none": "No yearly values are available for this place.",
+  "time.note": "The other conditions are long-term averages or terrain, so they do not change from year to year here.",
+
+  "passport.title": "Earth Analogue Passport",
+  "passport.p": "A shareable record of this result. The file carries the full configuration, values and sources, so anyone can re-score it.",
+  "passport.kicker": "Earth Analogue Passport",
+  "passport.analogue_of": "Analogue of",
+  "passport.config": "Objective {profile} · rank {rank} of {n}",
+  "passport.disclaimer": "Similar measured conditions only. Not physical, geological or engineering equivalence. Not validated in the field. Not endorsed by NASA.",
+  "passport.disclaimer_short": "Similar measured conditions only · not equivalence · not field-validated · not NASA-endorsed",
+  "passport.rescore_ok": "Check: the passport re-scores to {s} from its own contents.",
+  "passport.rescore_bad": "Check failed: the passport re-scores to {s}.",
+  "passport.json": "Download JSON", "passport.png": "Download image", "passport.print": "Print", "passport.save": "Save to My Research",
+  "passport.saved_json": "Passport saved as JSON.", "passport.saved_png": "Passport saved as an image.",
+  "passport.save_unavailable": "My Research needs the planetary registry, which is not available here.",
+
+  "team.title": "A team of Earth places",
+  "team.p": "The fewest places, at least 300 km apart, that together match every condition of {target}.",
+  "team.verdict": "{k} places together match {m} of {n} conditions.",
+  "team.score": "analogue score {s}",
+  "team.adds": "Adds: {list}.", "team.also": "Also matches: {list}.",
+  "team.unmatchable": "No place on Earth matches on {list}, so no team can cover it.",
+  "team.uncovered": "Some conditions remain uncovered because the places that match them are within 300 km of a team member.",
+  "team.note": "Chosen step by step: each new member adds the most unmatched conditions (ties: higher score, then lower cell id). A team covers conditions; it is not a single analogue.",
+
+  "crit.aridity": "Aridity", "crit.aridity.short": "Aridity", "crit.aridity.plain": "how dry: rainfall ÷ potential evaporation (P/PET)",
+  "crit.annual_temperature_range": "Seasonal temperature range", "crit.annual_temperature_range.short": "Seasons", "crit.annual_temperature_range.plain": "warmest minus coldest month, air temperature",
+  "crit.elevation": "Elevation", "crit.elevation.short": "Elevation", "crit.elevation.plain": "height of the ground",
+  "crit.slope": "Slope", "crit.slope.short": "Slope", "crit.slope.plain": "steepness of the terrain",
+  "crit.surface_roughness": "Surface roughness", "crit.surface_roughness.short": "Roughness", "crit.surface_roughness.plain": "how much the height varies within the cell",
+  "crit.lst_diurnal_range": "Day–night surface temperature swing", "crit.lst_diurnal_range.short": "Day–night", "crit.lst_diurnal_range.plain": "how much the ground warms by day and cools by night",
+  "state.similar": "Similar", "state.partial": "Partly similar", "state.different": "Different", "state.unknown": "Unknown here", "state.na": "Not compared", "state.off": "Not weighted",
+  "status.DIRECT": "Measured", "status.PROXY": "Proxy", "status.N/A": "Not applicable", "status.MISSING": "Missing",
+  "profile.general": "General analogue", "profile.rover": "Rover mobility", "profile.eva": "EVA training", "profile.thermal": "Thermal testing", "profile.habitat": "Habitat operations", "profile.instrument": "Science instrument testing", "profile.custom": "Your current weights",
+  "profile.general.why": "Every available condition counts equally.",
+  "profile.rover.why": "Driving depends mostly on slope and roughness; climate matters less.",
+  "profile.eva.why": "For crews on foot: dryness, temperature swings and walkable ground.",
+  "profile.thermal.why": "For hardware that heats and cools: the day–night swing and the seasonal range matter most.",
+  "profile.habitat.why": "For long stays: the thermal environment and gentle slopes for building.",
+  "profile.instrument.why": "For instruments: dry surfaces and high, thin-air locations matter most.",
+  "missing.method": "How the target value was derived:",
+  "missing.see_target": "See the target measurements",
+  "crit.aridity.s": "aridity", "crit.annual_temperature_range.s": "seasonal temperature range", "crit.elevation.s": "elevation", "crit.slope.s": "slope", "crit.surface_roughness.s": "surface roughness", "crit.lst_diurnal_range.s": "day–night surface temperature swing",
+  "chrome.more_targets": "{n} more targets…", "chrome.group.mars": "Mars", "chrome.group.moon": "Moon", "chrome.more_targets_aria": "More analytical targets (readiness 3 or higher)",
+  "summary.robust.half": "Its standing held under exactly half of the alternatives tested in “Change my mind?”, so it depends on those choices.",
+  "trust.method_en": "Method notes are quoted from the source records, in English.",
+  "badge.offline_plain": "Offline copy"
+});
+
+/* ===== ASTERRO · ইন্টারফেসের লেখা · বাংলা =====
+ * এই প্রকল্পের জন্য Claude (একটি এআই মডেল) লিখেছে; মাতৃভাষী পর্যালোচকের যাচাই এখনও বাকি।
+ * অপরিবর্তিত থাকে: ডেটাসেট ও যন্ত্রের নাম, একক, সংস্করণ এবং Natural Earth-এর স্থাননাম। */
+i18nRegister("bn", { name: "বাংলা", locale: "bn-BD", htmlLang: "bn", pct: "", status: "draft-unreviewed" }, {
+  "lang.label": "ভাষা",
+  "lang.review_note": "বাংলা, Español ও Français লেখাগুলো Claude (একটি এআই মডেল) লিখেছে; মাতৃভাষী কেউ এখনও এগুলো যাচাই করেননি।",
+  "tab.explore": "অন্বেষণ", "tab.compare": "তুলনা", "tab.scenarios": "পরিস্থিতি", "tab.discover": "আবিষ্কার", "tab.data": "ডেটা", "tab.method": "পদ্ধতি",
+  "tab.lab": "ল্যাব", "tab.trajectory": "গতিপথ", "tab.atlas": "অ্যাটলাস",
+  "aria.tabs": "যন্ত্রের দৃশ্যপট", "aria.target": "গ্রহীয় লক্ষ্য", "aria.sections": "এই স্থানটি দেখার নানা উপায়",
+  "body.mars": "মঙ্গল", "body.moon": "চাঁদ", "body.both": "উভয়",
+  "tname.mars_jezero": "জেজেরো খাদ", "tname.moon_south_pole": "চাঁদের দক্ষিণ মেরু", "tname.cross": "দুই গ্রহ একসঙ্গে", "tname.moon_shackleton": "শ্যাকলটন খাদ",
+  "cta.search": "পৃথিবীতে খুঁজুন", "cta.science": "বিজ্ঞানটি দেখুন", "cta.atlas": "গ্রহীয় অ্যাটলাস খুলুন", "cta.journey": "একটি আবিষ্কার দিয়ে শুরু করুন", "cta.explain": "এই স্থানটি ব্যাখ্যা করুন",
+  "hero.eyebrow": "ASTERRO · গ্রহীয় অনুরূপতা বিশ্লেষণ · NASA Space Apps 2026",
+  "hero.title1": "পৃথিবীর বুকে", "hero.title2": "অন্য জগৎ খুঁজুন।",
+  "hero.sub": "চাঁদ ও মঙ্গলের পরিমাপযোগ্য অনুরূপ পরিবেশ পৃথিবীতে খুঁজে দেখুন।",
+  "hero.choose_world": "অন্য একটি জগৎ বেছে নিন",
+  "hero.alt_mars": "জেজেরো খাদের চারপাশের MOLA উচ্চতার ছায়াযুক্ত ভূচিত্র", "hero.alt_moon": "চাঁদের দক্ষিণ মেরুর LOLA উচ্চতার ছায়াযুক্ত ভূচিত্র",
+  "hero.facts": "{n}টি বৈধ স্থলভাগের সেল · NASA POWER, MODIS ও GMTED2010 থেকে ৬টি মানদণ্ড · MEDA, MOLA, LOLA ও Diviner দিয়ে তৈরি লক্ষ্য · প্রতিটি স্কোর নির্ধারিত ও খুঁজে দেখা যায়",
+  "notice.english_only": "এই গবেষণা-দৃশ্যটি কেবল ইংরেজিতে আছে। সব ভাষায় প্রতিটি সংখ্যা হুবহু এক।",
+  "notice.open_journey": "নির্দেশিত আবিষ্কারগুলো খুলুন",
+  "door.title": "প্রথমবার এসেছেন?", "door.p": "একটি নির্দেশিত আবিষ্কার দিয়ে শুরু করুন: এই ডেটা থেকে পাওয়া আসল ফলাফল, ধাপে ধাপে ব্যাখ্যা করা।",
+  "geo.n": "উ", "geo.s": "দ", "geo.e": "পূ", "geo.w": "প",
+  "val.na": "মান নেই",
+  "badge.verified": "সংযুক্ত ডেটা · চেকসাম যাচাই করা হয়েছে", "badge.bundled": "সংযুক্ত ডেটা", "badge.offline": "অফলাইন কপি · চেকসাম যাচাই করা হয়েছে",
+  "badge.title": "এখানকার প্রতিটি ফলাফল সংযুক্ত প্রেডিক্টর স্ট্যাক (SHA-256 {sha}…) থেকে আপনার ব্রাউজারেই হিসাব করা হয়।",
+  "nav.back_home": "সব আবিষ্কারে ফিরে যান", "nav.discoveries": "আবিষ্কার", "nav.close": "বন্ধ করুন",
+  "err.compute": "এটি হিসাব করা যায়নি।",
+
+  "home.title": "পৃথিবীর ভিনগ্রহী স্থানগুলো",
+  "home.eyebrow": "এই পাতার ডেটা থেকে হিসাব করা আবিষ্কার",
+  "home.lead": "পৃথিবীর কিছু স্থান মাপা যায় এমনভাবে মঙ্গল বা চাঁদের মতো। নিচের প্রতিটি গল্প এখনই, আপনার ব্রাউজারে, NASA ও USGS-এর ডেটা থেকে হিসাব করা। কেন, তা দেখতে যেকোনো একটি খুলুন।",
+  "home.fine": "ASTERRO পরিবেশের ছয়টি পরিমাপ করা অবস্থা তুলনা করে। অবস্থা মিলে যাওয়া মানে এই নয় যে স্থানটি ভৌত, ভূতাত্ত্বিক বা জৈবিকভাবে একই।",
+  "home.loading_registry": "গ্রহীয় নিবন্ধন থেকে আরও লক্ষ্য লোড হচ্ছে…",
+  "story.explore_why": "কেন, দেখুন", "story.see_team": "দলটিকে দেখুন",
+  "story.top.h": "{target}-এর সঙ্গে পৃথিবীতে সবচেয়ে বেশি মেলে {place}",
+  "story.top.p": "পরিমাপ করা {compared}টি অবস্থার মধ্যে {similar}টি মিলের সীমার ভেতরে। সব অবস্থাকে সমান ভার দিলে অনুরূপতা স্কোর {score}।",
+  "story.shackleton.note": "গ্রহীয় নিবন্ধনের লক্ষ্য (explore-target-v1)।",
+  "story.thermal.h": "{target}-এর মতো ওঠানামা পৃথিবীর কোথাও নেই",
+  "story.thermal.p": "জেজেরোর মাটি বিকেল থেকে রাতের মধ্যে প্রায় {t} K গরম ও ঠান্ডা হয়। পৃথিবীর কোনো সেলে সবচেয়ে বড় ওঠানামা {e} K, {place}-এ।",
+  "story.thermal.p2": "তাই ভার যেভাবেই দেওয়া হোক, এই অবস্থায় পৃথিবীর সেরা স্থানটিও কেবল s = {s} পর্যন্ত পৌঁছায়।",
+  "story.team.h": "দরকার পৃথিবীর কয়েকটি স্থানের একটি দল",
+  "story.team.p": "কোনো একক স্থান {n}টি অবস্থাতেই জেজেরোর সঙ্গে মেলে না। অন্তত ৩০০ কিমি দূরত্বের {k}টি স্থান মিলে {m}টি অবস্থা মেলায়।",
+  "story.team.p_none": "পৃথিবীর কোনো স্থানই মেলে না: {list}।",
+  "story.yours.kick": "আপনার বেছে নেওয়া স্থান", "story.yours.p": "ধাপে ধাপে দেখুন এটি কীভাবে মেলে।",
+
+  "place.target": "তুলনা করা হচ্ছে", "place.objective": "উদ্দেশ্য",
+  "place.score_label": "অনুরূপতা স্কোর", "place.cell": "সেল {id}",
+  "place.rank": "{n}টি সেলের মধ্যে ক্রম {r}", "place.not_eligible": "স্কোর নেই (এখানে ডেটা খুব কম)", "place.leading": "শীর্ষ স্থান {k}",
+  "place.unlabelled": "নামহীন স্থলভাগের সেল",
+  "place.show_globe": "গ্লোবে দেখান",
+  "place.fine": "কেবল পরিমাপ করা অবস্থার সাদৃশ্য — ভৌত, ভূতাত্ত্বিক বা প্রকৌশলগত সমতা নয়।",
+  "place.target_set": "এখন {target}-এর সঙ্গে তুলনা করা হচ্ছে।",
+  "sec.reveal": "উন্মোচন", "sec.lens": "লেন্স", "sec.change": "মত বদলাবে?", "sec.missing": "যা অনুপস্থিত", "sec.trust": "আস্থা", "sec.worlds": "অন্য জগৎ", "sec.time": "সময়ের সঙ্গে", "sec.passport": "পাসপোর্ট",
+
+  "reveal.s1": "পৃথিবীর স্থানটি", "reveal.s2": "অন্য জগৎটি", "reveal.s3": "যেখানে মেলে", "reveal.s4": "যেখানে মেলে না",
+  "reveal.s5": "এর পেছনের পরিমাপ", "reveal.s6": "অন্য একটি উদ্দেশ্য", "reveal.s7": "সংক্ষেপে",
+  "reveal.step_of": "ধাপ {k} / {n}",
+  "reveal.back": "পেছনে", "reveal.next": "পরের ধাপ", "reveal.skip": "সারাংশে যান", "reveal.again": "আবার শুরু করুন",
+  "reveal.keys": "← → দিয়ে এগোন",
+  "reveal.earth.p": "পৃথিবীর এই প্রায় ৫৫ কিলোমিটারের অংশটি সম্পর্কে ডেটা যা বলে, তা এই।",
+  "reveal.target.p": "{target}-এর মানগুলো এই, আর প্রতিটি কীভাবে পাওয়া গেছে।",
+  "reveal.agree.p": "তুলনা করা {n}টি অবস্থার মধ্যে {k}টি মিলের সীমার ভেতরে (s ≥ ০.৮৫)।",
+  "reveal.agree.none": "কোনো অবস্থাই মিলের সীমার ভেতরে মেলে না।",
+  "reveal.differ.p": "এই অবস্থাগুলো মেলে না। পয়েন্ট দেখায় প্রতিটি স্কোর কতটা কমায়।",
+  "reveal.differ.none": "তুলনা করা কোনো অবস্থাই মিলের সীমার বাইরে যায় না।",
+  "reveal.earth_higher": "পৃথিবীর মান বেশি", "reveal.earth_lower": "পৃথিবীর মান কম",
+  "reveal.vs": "বনাম",
+  "reveal.costs": "−{pts} পয়েন্ট",
+  "reveal.unknown": "এখানে পৃথিবীর কোনো মান নেই: {list}। স্কোর বাকি অবস্থাগুলোর ওপর ভিত্তি করে।",
+  "reveal.na": "তুলনা হয়নি, কারণ লক্ষ্যের কোনো মান নেই: {list}।",
+  "reveal.evidence.p": "পৃথিবীর প্রতিটি মান একটি নির্দিষ্ট ডেটাসেট থেকে আসে। লক্ষ্যের পরোক্ষ মান সরাসরি মাপা নয়, অন্য তথ্য থেকে নির্ণয় করা।",
+  "reveal.evidence.target": "লক্ষ্যের উৎস:",
+  "reveal.objective.p": "“{profile}” উদ্দেশ্যে এই স্থানের ক্রম {r}।",
+  "reveal.objective.best": "এর সবচেয়ে ভালো ক্রম “{profile}” উদ্দেশ্যে: {r}।",
+  "reveal.objective.worst": "সবচেয়ে খারাপ “{profile}” উদ্দেশ্যে: {r}।",
+  "reveal.objective.custom": "ঘোষিত প্রতিটি উদ্দেশ্য অবস্থাগুলোকে আলাদা ভার দেয়:",
+  "reveal.open_lens": "লেন্সে উদ্দেশ্যগুলো তুলনা করুন",
+  "summary.level.close": "পরিমাপ করা অবস্থাগুলোর বিচারে এই স্থানটি একটি ঘনিষ্ঠ অনুরূপ: তুলনা করা {compared}টি অবস্থার সবগুলোই মিলের সীমার ভেতরে, আর অনুরূপতা স্কোর {score}।",
+  "summary.level.partial": "পরিমাপ করা অবস্থাগুলোর বিচারে এই স্থানটি একটি আংশিক অনুরূপ: {compared}টির মধ্যে {similar}টি মিলের সীমার ভেতরে, আর অনুরূপতা স্কোর {score}।",
+  "summary.level.weak": "পরিমাপ করা অবস্থাগুলোর বিচারে এই স্থানটি একটি দুর্বল অনুরূপ: {compared}টির মধ্যে কেবল {similar}টি মিলের সীমার ভেতরে, আর অনুরূপতা স্কোর {score}।",
+  "summary.level.none": "এই লক্ষ্যের বিপরীতে স্কোর দেওয়ার মতো যথেষ্ট ডেটা এই স্থানে নেই।",
+  "summary.robust.all": "“মত বদলাবে?” অংশে পরীক্ষা করা প্রতিটি বিকল্পেই এর অবস্থান টিকে ছিল।",
+  "summary.robust.most": "“মত বদলাবে?” অংশে পরীক্ষা করা বেশির ভাগ বিকল্পে এর অবস্থান টিকে ছিল, তবে সবগুলোতে নয়।",
+  "summary.robust.few": "“মত বদলাবে?” অংশে পরীক্ষা করা বেশির ভাগ বিকল্পে এর অবস্থান বদলে গেছে; তাই সাবধানে বিবেচনা করুন।",
+  "summary.robust.untested": "সিদ্ধান্তটি বিভিন্ন পছন্দের ওপর কতটা নির্ভর করে, তা যাচাই করতে “মত বদলাবে?” খুলুন।",
+  "summary.scope": "এখানে কেবল পরিমাপ করা পরিবেশগত অবস্থার তুলনা করা হয়েছে। এটি ভৌত, ভূতাত্ত্বিক, জৈবিক বা প্রকৌশলগত সমতার দাবি নয়, এবং মাঠপর্যায়ে যাচাই করা হয়নি।",
+
+  "lens.title": "গ্রহীয় পার্থক্যের লেন্স",
+  "lens.p": "প্রতিটি রেখায় একই মাপকাঠিতে এই স্থান (বৃত্ত) আর লক্ষ্য (হীরক) কোথায় আছে, তা দেখানো হয়েছে। ছায়াযুক্ত অংশটি মিলের এলাকা।",
+  "lens.objective": "উদ্দেশ্য", "lens.score": "স্কোর", "lens.rank": "ক্রম", "lens.costs_most": "সবচেয়ে বেশি কমায়",
+  "lens.under": "“{profile}” উদ্দেশ্যে: অনুরূপতা স্কোর {score}, ক্রম {r}।",
+  "lens.leading": "শীর্ষ {k}", "lens.leading_long": "এই উদ্দেশ্যে এটি শীর্ষ স্থান {k}।",
+  "lens.axis_min": "মাপকাঠির সর্বনিম্ন", "lens.axis_max": "সর্বোচ্চ",
+  "lens.leg_earth": "এই স্থান", "lens.leg_target": "লক্ষ্য", "lens.leg_zone": "মিলের এলাকা",
+  "lens.svg_label": "প্রতিটি অবস্থার মাপকাঠিতে এই স্থান ও লক্ষ্যের অবস্থান",
+  "lens.matters": "“{profile}” উদ্দেশ্যে যে পার্থক্যগুলো গুরুত্বপূর্ণ",
+  "lens.costs": "{pts} পয়েন্ট কমায় (ভার {w})",
+  "lens.matters_none": "তুলনা করা কোনো অবস্থাই মিলের সীমার বাইরে যায় না।",
+  "lens.loss_note": "হারানো পয়েন্টগুলোর যোগফল স্কোর আর ১০০%-এর ব্যবধানের ঠিক সমান: প্রতিটি অবস্থা কমায় ভার × (১ − s) ÷ মোট ভার।",
+  "lens.switched": "উদ্দেশ্য: {profile}।",
+
+  "change.title": "কী হলে আমার মত বদলাবে?",
+  "change.p": "ASTERRO ঘোষিত বিকল্পগুলোতে একই সূত্র আবার চালায় এবং জানায় সিদ্ধান্তটি টেকে কি না। এতে কিছুই এলোমেলো নয়, আর কোনো ডেটা বানানো হয় না।",
+  "change.tested": "যে সিদ্ধান্ত যাচাই করা হলো",
+  "change.concl.leading": "{target}-এর জন্য {place} শীর্ষ অনুরূপ স্থান {k}।",
+  "change.concl.rank": "{target}-এর জন্য {place}-এর ক্রম {r}।",
+  "change.verdict.all": "{n}টি বিকল্পের সবগুলোতেই এটি টেকে (ক্রম {lo} থেকে {hi})।",
+  "change.verdict.some": "{n}টি বিকল্পের মধ্যে {h}টিতে এটি টেকে (ক্রম {lo} থেকে {hi})।",
+  "change.would": "যেগুলো সিদ্ধান্ত বদলে দেবে",
+  "change.would_not": "যেগুলো বদলাবে না ({n})",
+  "change.none_breaks": "কোনো বিকল্পই সিদ্ধান্ত বদলায় না।",
+  "change.alt.profile": "উদ্দেশ্য “{profile}”",
+  "change.alt.drop_source": "{source}-এর ডেটা ছাড়া",
+  "change.alt.drop_proxy": "লক্ষ্যের পরোক্ষ মানগুলো ছাড়া ({list})",
+  "change.alt.drop_criterion": "{criterion} ছাড়া",
+  "change.weights_changed": "ভার:",
+  "change.res.leading": "শীর্ষ স্থান {k} · ক্রম {r}", "change.res.rank": "ক্রম {r}, শীর্ষ স্থান নয়", "change.res.ineligible": "স্কোর নেই",
+  "change.holds_sr": "টেকে", "change.breaks_sr": "সিদ্ধান্ত বদলে দেয়",
+  "change.running": "বিকল্পগুলো পরীক্ষা করা হচ্ছে…", "change.done": "বিকল্পগুলো পরীক্ষা করা হয়েছে।",
+  "change.note": "ডেটা বাদ দেওয়া মানে সেই অবস্থাগুলোকে ভার ০ দেওয়া; কোনো ফাঁক পূরণ করা হয় না। যে ফল টেকে, তা এই পছন্দগুলোর বিপরীতে মজবুত — কিন্তু তাতে প্রমাণিত হয় না যে ফলটি সঠিক।",
+
+  "missing.title": "অনুপস্থিত অংশটি খুঁজুন",
+  "missing.p": "এই তুলনা আরও মজবুত হতে কী দরকার, সহজ ভাষায়। প্রতিটি বিষয়ের সঙ্গে তার উৎস ডেটাসেট বা পরীক্ষার লিংক আছে।",
+  "missing.sev.gap": "ঘাটতি", "missing.sev.caution": "সতর্কতা", "missing.sev.info": "জেনে রাখুন",
+  "missing.target_na": "তুলনা হয়নি: {criterion} (লক্ষ্যের মান: {status})।",
+  "missing.earth_missing": "এই সেলে {criterion}-এর কোনো পৃথিবীর মান নেই, তাই স্কোর বাকি অবস্থাগুলোর ওপর নির্ভর করে।",
+  "missing.target_proxy": "লক্ষ্যের {criterion} মানটি পরোক্ষ — সরাসরি মাপা নয়, অন্য তথ্য থেকে নির্ণয় করা। মানটি ভুল হলে এই তুলনাও বদলে যাবে।",
+  "missing.structural.above": "{criterion}-এ পৃথিবীর কোনো স্থানই মেলে না: লক্ষ্যের মান ({t} {unit}) পৃথিবীর সব মানের ({lo}–{hi} {unit}) চেয়ে বেশি। সম্ভাব্য সেরা s = {s}।",
+  "missing.structural.below": "{criterion}-এ পৃথিবীর কোনো স্থানই মেলে না: লক্ষ্যের মান ({t} {unit}) পৃথিবীর সব মানের ({lo}–{hi} {unit}) চেয়ে কম। সম্ভাব্য সেরা s = {s}।",
+  "missing.structural.none": "{criterion}-এ পৃথিবীর কোনো সেলই মিলের সীমার ভেতরে নেই। সম্ভাব্য সেরা s = {s}।",
+  "missing.thin_coverage": "এখানে পরিষ্কার আকাশের MODIS মাস কম ({pct} মাস), তাই {criterion}-এর মান কম ডেটার ওপর নির্ভর করে।",
+  "missing.partial_coverage": "এখানে ভারের কেবল {pct} অংশে স্কোর দেওয়া গেছে; বাকিটার পৃথিবীর মান নেই।",
+  "missing.source_dependence": "সিদ্ধান্তটি {source}-এর ওপর নির্ভর করে: এটি ছাড়া এই স্থানের ক্রম {r}।",
+  "missing.proxy_dependence": "সিদ্ধান্তটি লক্ষ্যের পরোক্ষ মানগুলোর ({list}) ওপর নির্ভর করে: এগুলো ছাড়া এই স্থানের ক্রম {r}।",
+  "missing.resolution": "পৃথিবীর প্রতিটি সেল প্রায় {km} কিমি, লক্ষ্যের {tkm} কিমি জানালার কাছাকাছি। বালিয়াড়ি, বড় পাথর বা একটি খাদের তলদেশের মতো ছোট বৈশিষ্ট্য এতে ধরা পড়ে না। আরও সূক্ষ্ম উচ্চতার ডেটা এখনও যুক্ত করা হয়নি।",
+  "missing.resolution.notarget": "পৃথিবীর প্রতিটি সেল প্রায় {km} কিমি। ছোট বৈশিষ্ট্য এতে ধরা পড়ে না। আরও সূক্ষ্ম উচ্চতার ডেটা এখনও যুক্ত করা হয়নি।",
+  "missing.temporal": "পৃথিবীর ডেটা ভিন্ন ভিন্ন সময়ের: NASA POWER জলবায়ু ২০০১–২০২০, MODIS ভূপৃষ্ঠ তাপমাত্রা ২০১৬–২০২৫, আর ভূমিরূপ যা বদলায় না। লক্ষ্যের ডেটা এসেছে তাদের নিজস্ব অভিযানের সময় থেকে।",
+  "missing.not_measured": "একেবারেই মাপা হয়নি: বিকিরণ, বায়ুমণ্ডল, মাধ্যাকর্ষণ, মাটির রসায়ন, ধুলা ও বরফ। ছয়টি অবস্থা মিললেও এগুলো তার আওতায় পড়ে না।",
+  "missing.see_change": "পরীক্ষাটি দেখুন", "missing.see_rule": "স্কোর কীভাবে হিসাব হয়, দেখুন",
+  "missing.run_change": "সিদ্ধান্তটি একটিমাত্র ডেটা-উৎস বা পরোক্ষ মানের ওপর নির্ভর করে কি না, তা দেখতে “মত বদলাবে?” চালান।",
+
+  "trust.title": "বৈজ্ঞানিক আস্থার দৃশ্য",
+  "trust.p": "এই ফলাফলের পেছনের প্রমাণ, এক সারি করে। বিস্তারিত দেখতে একটি সারি খুলুন।",
+  "trust.measurements": "লক্ষ্যের পরিমাপ", "trust.coverage": "এখানকার পৃথিবীর ডেটা", "trust.limits": "কাঠামোগত সীমা", "trust.robustness": "মজবুতি",
+  "trust.reproducibility": "পুনরুৎপাদনযোগ্যতা", "trust.sources": "উৎস", "trust.scope": "এটি যা বলে না",
+  "trust.measurements.sum": "তুলনা করা {n}টির মধ্যে {d}টি সরাসরি, {p}টি পরোক্ষ",
+  "trust.measurements.body": "লক্ষ্যের প্রতিটি মান কীভাবে পাওয়া গেছে:",
+  "trust.coverage.sum": "ভারের {pct} অংশে স্কোর দেওয়া হয়েছে",
+  "trust.coverage.body": "এখানে বৈধ ডেটাসহ MODIS মাস: {modis}। সেলের স্থলভাগের অংশ: {land}।",
+  "trust.coverage.missing": "এখানে অনুপস্থিত: {list}।",
+  "trust.limits.sum_some": "{list}-এ পৃথিবীতে মিল সম্ভব নয়",
+  "trust.limits.sum_none": "নেই: তুলনা করা প্রতিটি অবস্থা পৃথিবীর কোথাও না কোথাও মেলে",
+  "trust.limits.body": "কাঠামোগত সীমা মানে, ওই অবস্থায় পৃথিবীর কোনো স্থানই মিলের সীমার ভেতরে পড়ে না, তাই ভার বদলে তা ঠিক করা যায় না।",
+  "trust.robustness.sum": "{n}টি বিকল্পের মধ্যে {h}টিতে টিকেছে",
+  "trust.robustness.sum_na": "এখনও পরীক্ষা করা হয়নি",
+  "trust.robustness.body": "“মত বদলাবে?” থেকে নেওয়া: ঘোষিত উদ্দেশ্যগুলো, পৃথিবীর প্রতিটি ডেটা-উৎস বাদ দেওয়া, লক্ষ্যের পরোক্ষ মান বাদ দেওয়া এবং প্রতিটি অবস্থা বাদ দেওয়া।",
+  "trust.reproducibility.body": "নির্ধারিত: একই ইনপুট দিলে সবসময় একই ফল আসে। প্রেডিক্টর স্ট্যাকের SHA-256 {sha}…",
+  "trust.verified": "এই ব্রাউজারে যাচাই করা হয়েছে", "trust.not_verified": "এই ব্রাউজারে চেকসাম যাচাই হয়নি",
+  "trust.sources.body": "এখানে ব্যবহৃত পৃথিবীর ডেটাসেট ও লক্ষ্যের উৎস:",
+  "trust.scope.sum": "ছয়টি অবস্থার সাদৃশ্য, সমতা নয়",
+  "trust.scope.body": "অনুরূপতা স্কোর মাপে পরিবেশের ছয়টি অবস্থা কতটা কাছাকাছি। এটি বিকিরণ, মাধ্যাকর্ষণ, বায়ুমণ্ডল বা রসায়ন মাপে না; এটি মাঠপর্যায়ের যাচাই বা অভিযানের সুপারিশও নয়। ASTERRO-কে NASA অনুমোদন দেয়নি।",
+  "trust.no_score": "ASTERRO ইচ্ছাকৃতভাবেই এই সারিগুলোকে মিলিয়ে একটিমাত্র আস্থা-স্কোর বানায় না।",
+
+  "worlds.title": "একটি স্থান, অনেক জগৎ",
+  "worlds.p": "পৃথিবীর একই স্থান {n}টি লক্ষ্যের বিপরীতে, প্রতিটির নিজস্ব মাপকাঠিতে।",
+  "worlds.compared": "{n}টির মধ্যে {k}টি অবস্থা তুলনা করা হয়েছে", "worlds.not_compared": "তুলনা হয়নি: {list}",
+  "worlds.open": "{target}-এর সঙ্গে তুলনা করুন",
+  "worlds.note": "প্রতিটি লক্ষ্য নিজস্ব স্বাভাবিকীকরণ-পরিসর ব্যবহার করে, তাই ভিন্ন লক্ষ্যের মধ্যে কাঁচা স্কোর নয়, ক্রম তুলনা করুন। ক্রম মানে ওই লক্ষ্যের জন্য পৃথিবীর সব সেলের মধ্যে এই সেলের অবস্থান।",
+  "worlds.registry_err": "গ্রহীয় নিবন্ধন লোড করা যায়নি; কেবল মূল দুটি লক্ষ্য দেখানো হচ্ছে।",
+
+  "time.title": "সময়ের সঙ্গে",
+  "time.p": "কেবল দিন-রাতের ভূপৃষ্ঠ তাপমাত্রার ওঠানামার বছরভিত্তিক মান আছে (MODIS, বছরে একটি)। এখানে গড়ের বদলে প্রতি বছরের মান বসিয়ে স্কোর দেখানো হয়েছে।",
+  "time.svg": "{n}টি বছরের প্রতিটিতে অনুরূপতা স্কোর",
+  "time.cls.stable": "স্থিতিশীল: {years} বছরে স্কোর {pts} পয়েন্ট ওঠানামা করে (সীমা {thr} পয়েন্ট)।",
+  "time.cls.variable": "পরিবর্তনশীল: {years} বছরে স্কোর {pts} পয়েন্ট ওঠানামা করে (সীমা {thr} পয়েন্ট)।",
+  "time.cls.none": "এখানে বছরভিত্তিক কোনো মান নেই।",
+  "time.none": "এই স্থানের জন্য বছরভিত্তিক কোনো মান নেই।",
+  "time.note": "বাকি অবস্থাগুলো দীর্ঘমেয়াদি গড় বা ভূমিরূপ, তাই এখানে বছরে বছরে বদলায় না।",
+
+  "passport.title": "পৃথিবীর অনুরূপতা পাসপোর্ট",
+  "passport.p": "এই ফলাফলের একটি ভাগ করে নেওয়ার মতো রেকর্ড। ফাইলে পুরো কনফিগারেশন, মান ও উৎস থাকে, তাই যে কেউ আবার স্কোর হিসাব করতে পারেন।",
+  "passport.kicker": "পৃথিবীর অনুরূপতা পাসপোর্ট",
+  "passport.analogue_of": "যার অনুরূপ",
+  "passport.config": "উদ্দেশ্য {profile} · {n}টির মধ্যে ক্রম {rank}",
+  "passport.disclaimer": "কেবল পরিমাপ করা অবস্থার সাদৃশ্য। ভৌত, ভূতাত্ত্বিক বা প্রকৌশলগত সমতা নয়। মাঠপর্যায়ে যাচাই করা হয়নি। NASA অনুমোদিত নয়।",
+  "passport.disclaimer_short": "কেবল পরিমাপ করা অবস্থার সাদৃশ্য · সমতা নয় · মাঠে যাচাই হয়নি · NASA অনুমোদিত নয়",
+  "passport.rescore_ok": "যাচাই: পাসপোর্টটি নিজের তথ্য থেকেই আবার {s} স্কোর দেয়।",
+  "passport.rescore_bad": "যাচাই ব্যর্থ: পাসপোর্টটি {s} স্কোর দেয়।",
+  "passport.json": "JSON ডাউনলোড করুন", "passport.png": "ছবি ডাউনলোড করুন", "passport.print": "প্রিন্ট করুন", "passport.save": "আমার গবেষণায় সংরক্ষণ করুন",
+  "passport.saved_json": "পাসপোর্ট JSON হিসেবে সংরক্ষিত হয়েছে।", "passport.saved_png": "পাসপোর্ট ছবি হিসেবে সংরক্ষিত হয়েছে।",
+  "passport.save_unavailable": "“আমার গবেষণা”-র জন্য গ্রহীয় নিবন্ধন দরকার, যা এখানে পাওয়া যাচ্ছে না।",
+
+  "team.title": "পৃথিবীর কয়েকটি স্থানের একটি দল",
+  "team.p": "অন্তত ৩০০ কিমি দূরত্বের সবচেয়ে কম কয়টি স্থান মিলে {target}-এর সব অবস্থা মেলায়।",
+  "team.verdict": "{k}টি স্থান মিলে {n}টির মধ্যে {m}টি অবস্থা মেলায়।",
+  "team.score": "অনুরূপতা স্কোর {s}",
+  "team.adds": "যোগ করে: {list}।", "team.also": "আরও মেলে: {list}।",
+  "team.unmatchable": "{list}-এ পৃথিবীর কোনো স্থানই মেলে না, তাই কোনো দলই তা পূরণ করতে পারে না।",
+  "team.uncovered": "কিছু অবস্থা অপূর্ণ থেকে যায়, কারণ যে স্থানগুলো সেগুলো মেলায় তারা দলের কোনো সদস্যের ৩০০ কিমির মধ্যে।",
+  "team.note": "ধাপে ধাপে বাছাই করা: প্রতিটি নতুন সদস্য সবচেয়ে বেশি না-মেলা অবস্থা যোগ করে (সমান হলে বেশি স্কোর, তারপর ছোট সেল-নম্বর)। দল অবস্থাগুলো পূরণ করে; এটি কোনো একক অনুরূপ স্থান নয়।",
+
+  "crit.aridity": "শুষ্কতা", "crit.aridity.short": "শুষ্কতা", "crit.aridity.plain": "কতটা শুকনো: বৃষ্টিপাত ÷ সম্ভাব্য বাষ্পীভবন (P/PET)",
+  "crit.annual_temperature_range": "ঋতুভিত্তিক তাপমাত্রার পরিসর", "crit.annual_temperature_range.short": "ঋতু", "crit.annual_temperature_range.plain": "সবচেয়ে উষ্ণ মাস বিয়োগ সবচেয়ে শীতল মাস, বায়ুর তাপমাত্রা",
+  "crit.elevation": "উচ্চতা", "crit.elevation.short": "উচ্চতা", "crit.elevation.plain": "ভূমির উচ্চতা",
+  "crit.slope": "ঢাল", "crit.slope.short": "ঢাল", "crit.slope.plain": "ভূমি কতটা খাড়া",
+  "crit.surface_roughness": "ভূপৃষ্ঠের অমসৃণতা", "crit.surface_roughness.short": "অমসৃণতা", "crit.surface_roughness.plain": "সেলের ভেতরে উচ্চতা কতটা ওঠানামা করে",
+  "crit.lst_diurnal_range": "দিন-রাতের ভূপৃষ্ঠ তাপমাত্রার ওঠানামা", "crit.lst_diurnal_range.short": "দিন-রাত", "crit.lst_diurnal_range.plain": "দিনে মাটি কতটা গরম হয় আর রাতে কতটা ঠান্ডা হয়",
+  "state.similar": "সদৃশ", "state.partial": "আংশিক সদৃশ", "state.different": "ভিন্ন", "state.unknown": "এখানে অজানা", "state.na": "তুলনা হয়নি", "state.off": "ভারহীন",
+  "status.DIRECT": "সরাসরি পরিমাপ", "status.PROXY": "পরোক্ষ", "status.N/A": "প্রযোজ্য নয়", "status.MISSING": "অনুপস্থিত",
+  "profile.general": "সাধারণ অনুরূপতা", "profile.rover": "রোভার চলাচল", "profile.eva": "ইভিএ (মহাকাশে হাঁটা) প্রশিক্ষণ", "profile.thermal": "তাপীয় পরীক্ষা", "profile.habitat": "আবাসস্থল পরিচালনা", "profile.instrument": "বৈজ্ঞানিক যন্ত্র পরীক্ষা", "profile.custom": "আপনার বর্তমান ভার",
+  "profile.general.why": "পাওয়া যায় এমন প্রতিটি অবস্থা সমান গুরুত্ব পায়।",
+  "profile.rover.why": "গাড়ি চালানো মূলত ঢাল আর অমসৃণতার ওপর নির্ভর করে; জলবায়ু কম গুরুত্বপূর্ণ।",
+  "profile.eva.why": "হেঁটে চলা নভোচারীদের জন্য: শুষ্কতা, তাপমাত্রার ওঠানামা আর হাঁটার উপযোগী ভূমি।",
+  "profile.thermal.why": "যে যন্ত্র গরম ও ঠান্ডা হয় তার জন্য: দিন-রাতের ওঠানামা আর ঋতুভিত্তিক পরিসর সবচেয়ে গুরুত্বপূর্ণ।",
+  "profile.habitat.why": "দীর্ঘ অবস্থানের জন্য: তাপীয় পরিবেশ আর নির্মাণের উপযোগী মৃদু ঢাল।",
+  "profile.instrument.why": "যন্ত্রের জন্য: শুকনো ভূপৃষ্ঠ আর উঁচু, পাতলা বাতাসের স্থান সবচেয়ে গুরুত্বপূর্ণ।",
+  "missing.method": "লক্ষ্যের মান যেভাবে নির্ণয় করা হয়েছে:",
+  "missing.see_target": "লক্ষ্যের পরিমাপ দেখুন",
+  "crit.aridity.s": "শুষ্কতা", "crit.annual_temperature_range.s": "ঋতুভিত্তিক তাপমাত্রার পরিসর", "crit.elevation.s": "উচ্চতা", "crit.slope.s": "ঢাল", "crit.surface_roughness.s": "ভূপৃষ্ঠের অমসৃণতা", "crit.lst_diurnal_range.s": "দিন-রাতের ভূপৃষ্ঠ তাপমাত্রার ওঠানামা",
+  "chrome.more_targets": "আরও {n}টি লক্ষ্য…", "chrome.group.mars": "মঙ্গল", "chrome.group.moon": "চাঁদ", "chrome.more_targets_aria": "আরও বিশ্লেষণযোগ্য লক্ষ্য (প্রস্তুতি-স্তর ৩ বা তার বেশি)",
+  "summary.robust.half": "“মত বদলাবে?” অংশে পরীক্ষা করা বিকল্পগুলোর ঠিক অর্ধেকে এর অবস্থান টিকে ছিল; তাই এটি ওই পছন্দগুলোর ওপর নির্ভর করে।",
+  "trust.method_en": "পদ্ধতির টীকাগুলো মূল রেকর্ড থেকে ইংরেজিতেই উদ্ধৃত।",
+  "badge.offline_plain": "অফলাইন কপি"
+});
+
+/* ===== ASTERRO · texto de la interfaz · Español =====
+ * Redactado por Claude (modelo de IA) para este proyecto; pendiente de revisión por hablantes nativos.
+ * Se conservan sin traducir: nombres de conjuntos de datos e instrumentos, unidades, versiones y topónimos de Natural Earth. */
+i18nRegister("es", { name: "Español", locale: "es-ES", htmlLang: "es", pct: " ", status: "draft-unreviewed" }, {
+  "lang.label": "Idioma",
+  "lang.review_note": "Los textos en বাংলা, Español y Français los ha redactado Claude (un modelo de IA) y aún no los han revisado hablantes nativos.",
+  "tab.explore": "Explorar", "tab.compare": "Comparar", "tab.scenarios": "Escenarios", "tab.discover": "Descubrir", "tab.data": "Datos", "tab.method": "Método",
+  "tab.lab": "Laboratorio", "tab.trajectory": "Trayectoria", "tab.atlas": "Atlas",
+  "aria.tabs": "Vistas del instrumento", "aria.target": "Objetivo planetario", "aria.sections": "Formas de mirar este lugar",
+  "body.mars": "MARTE", "body.moon": "LUNA", "body.both": "AMBOS",
+  "tname.mars_jezero": "Cráter Jezero", "tname.moon_south_pole": "Polo sur lunar", "tname.cross": "Entre planetas", "tname.moon_shackleton": "Cráter Shackleton",
+  "cta.search": "Buscar en la Tierra", "cta.science": "Explorar la ciencia", "cta.atlas": "Abrir el atlas planetario", "cta.journey": "Empezar con un descubrimiento", "cta.explain": "Explicar este lugar",
+  "hero.eyebrow": "ASTERRO · Inteligencia de análogos planetarios · NASA Space Apps 2026",
+  "hero.title1": "Encuentra los otros", "hero.title2": "mundos de la Tierra.",
+  "hero.sub": "Busca en los ambientes de la Tierra análogos medibles de la Luna y Marte.",
+  "hero.choose_world": "Elige otro mundo",
+  "hero.alt_mars": "Relieve sombreado de la elevación MOLA alrededor del cráter Jezero", "hero.alt_moon": "Relieve sombreado de la elevación LOLA en el polo sur lunar",
+  "hero.facts": "{n} celdas terrestres válidas · 6 criterios de NASA POWER, MODIS y GMTED2010 · objetivos construidos con MEDA, MOLA, LOLA y Diviner · cada puntuación es determinista y trazable",
+  "notice.english_only": "Esta vista de investigación solo está en inglés. Todos los números son idénticos en todos los idiomas.",
+  "notice.open_journey": "Abrir los descubrimientos guiados",
+  "door.title": "¿Primera vez aquí?", "door.p": "Empieza con un descubrimiento guiado: resultados reales de estos datos, explicados paso a paso.",
+  "geo.n": "N", "geo.s": "S", "geo.e": "E", "geo.w": "O",
+  "val.na": "sin valor",
+  "badge.verified": "Datos incluidos · suma de verificación comprobada", "badge.bundled": "Datos incluidos", "badge.offline": "Copia sin conexión · suma comprobada",
+  "badge.title": "Cada resultado se calcula en tu navegador a partir del conjunto de predictores incluido (SHA-256 {sha}…).",
+  "nav.back_home": "Volver a todos los descubrimientos", "nav.discoveries": "Descubrimientos", "nav.close": "Cerrar",
+  "err.compute": "No se ha podido calcular.",
+
+  "home.title": "Los lugares de otro mundo de la Tierra",
+  "home.eyebrow": "Descubrimientos calculados con los datos de esta página",
+  "home.lead": "Algunos lugares de la Tierra se parecen a Marte o a la Luna de formas que podemos medir. Cada historia se calcula ahora, en tu navegador, con datos de la NASA y del USGS. Abre una para ver por qué.",
+  "home.fine": "ASTERRO compara seis condiciones ambientales medidas. Que las condiciones se parezcan no significa que un lugar sea física, geológica o biológicamente igual.",
+  "home.loading_registry": "Cargando más objetivos del registro planetario…",
+  "story.explore_why": "Ver por qué", "story.see_team": "Conocer al equipo",
+  "story.top.h": "{place} es el lugar de la Tierra que más se parece a {target}",
+  "story.top.p": "{similar} de {compared} condiciones medidas coinciden dentro del umbral de coincidencia. Puntuación de análogo: {score}, con todas las condiciones con el mismo peso.",
+  "story.shackleton.note": "Objetivo del registro planetario (explore-target-v1).",
+  "story.thermal.h": "Ningún lugar de la Tierra oscila como {target}",
+  "story.thermal.p": "El suelo de Jezero se calienta y se enfría unos {t} K entre la tarde y la noche. La mayor oscilación de cualquier celda de la Tierra es de {e} K, en {place}.",
+  "story.thermal.p2": "Por eso, incluso el mejor lugar de la Tierra solo alcanza s = {s} en esta condición, con cualquier ponderación.",
+  "story.team.h": "Hace falta un equipo de lugares de la Tierra",
+  "story.team.p": "Ningún lugar coincide con Jezero en las {n} condiciones. {k} lugares, separados al menos 300 km, coinciden juntos en {m}.",
+  "story.team.p_none": "Ningún lugar de la Tierra coincide en: {list}.",
+  "story.yours.kick": "El lugar que has seleccionado", "story.yours.p": "Mira cómo se compara, paso a paso.",
+
+  "place.target": "Comparado con", "place.objective": "Objetivo de uso",
+  "place.score_label": "Puntuación de análogo", "place.cell": "celda {id}",
+  "place.rank": "puesto {r} de {n} celdas", "place.not_eligible": "sin puntuación (pocos datos aquí)", "place.leading": "sitio destacado {k}",
+  "place.unlabelled": "Celda terrestre sin nombre",
+  "place.show_globe": "Mostrar en el globo",
+  "place.fine": "Solo condiciones medidas similares; no es una equivalencia física, geológica ni de ingeniería.",
+  "place.target_set": "Ahora comparado con {target}.",
+  "sec.reveal": "Revelación", "sec.lens": "Lente", "sec.change": "¿Cambiar de opinión?", "sec.missing": "Piezas que faltan", "sec.trust": "Confianza", "sec.worlds": "Otros mundos", "sec.time": "A lo largo del tiempo", "sec.passport": "Pasaporte",
+
+  "reveal.s1": "El lugar de la Tierra", "reveal.s2": "El otro mundo", "reveal.s3": "En qué coinciden", "reveal.s4": "En qué difieren",
+  "reveal.s5": "Las mediciones que lo respaldan", "reveal.s6": "Otro objetivo de uso", "reveal.s7": "En resumen",
+  "reveal.step_of": "Paso {k} de {n}",
+  "reveal.back": "Atrás", "reveal.next": "Siguiente", "reveal.skip": "Ir al resumen", "reveal.again": "Empezar de nuevo",
+  "reveal.keys": "← → para avanzar",
+  "reveal.earth.p": "Esto es lo que dicen los datos sobre esta zona de la Tierra de unos 55 kilómetros.",
+  "reveal.target.p": "Estos son los valores de {target} y cómo se obtuvo cada uno.",
+  "reveal.agree.p": "{k} de {n} condiciones comparadas están dentro del umbral de coincidencia (s ≥ 0,85).",
+  "reveal.agree.none": "Ninguna condición coincide dentro del umbral de coincidencia.",
+  "reveal.differ.p": "Estas condiciones difieren. Los puntos indican cuánto baja cada una la puntuación.",
+  "reveal.differ.none": "Ninguna condición comparada difiere más allá del umbral de coincidencia.",
+  "reveal.earth_higher": "La Tierra es mayor", "reveal.earth_lower": "La Tierra es menor",
+  "reveal.vs": "frente a",
+  "reveal.costs": "−{pts} puntos",
+  "reveal.unknown": "Aquí no hay valor terrestre para: {list}. La puntuación usa las demás condiciones.",
+  "reveal.na": "No se compara porque el objetivo no tiene valor: {list}.",
+  "reveal.evidence.p": "Cada valor terrestre procede de un conjunto de datos con nombre. Los valores indirectos del objetivo se derivan, no se miden directamente.",
+  "reveal.evidence.target": "Fuentes del objetivo:",
+  "reveal.objective.p": "Con «{profile}», este lugar ocupa el puesto {r}.",
+  "reveal.objective.best": "Su mejor puesto es con «{profile}»: {r}.",
+  "reveal.objective.worst": "El peor, con «{profile}»: {r}.",
+  "reveal.objective.custom": "Cada objetivo declarado pondera las condiciones de forma distinta:",
+  "reveal.open_lens": "Comparar objetivos en la Lente",
+  "summary.level.close": "En las condiciones medidas, este lugar es un análogo cercano: las {compared} condiciones comparadas coinciden dentro del umbral y la puntuación de análogo es {score}.",
+  "summary.level.partial": "En las condiciones medidas, este lugar es un análogo parcial: {similar} de {compared} coinciden dentro del umbral y la puntuación de análogo es {score}.",
+  "summary.level.weak": "En las condiciones medidas, este lugar es un análogo débil: solo {similar} de {compared} coinciden dentro del umbral y la puntuación de análogo es {score}.",
+  "summary.level.none": "Este lugar tiene muy pocos datos para puntuarlo frente a este objetivo.",
+  "summary.robust.all": "Su posición se mantuvo en todas las alternativas probadas en «¿Cambiar de opinión?».",
+  "summary.robust.most": "Su posición se mantuvo en la mayoría, aunque no en todas, de las alternativas probadas en «¿Cambiar de opinión?».",
+  "summary.robust.few": "Su posición cambió en la mayoría de las alternativas probadas en «¿Cambiar de opinión?»; tómalo con cautela.",
+  "summary.robust.untested": "Abre «¿Cambiar de opinión?» para comprobar cuánto depende esto de las decisiones tomadas.",
+  "summary.scope": "Esto solo compara condiciones ambientales medidas. No afirma una equivalencia física, geológica, biológica ni de ingeniería, y no se ha validado sobre el terreno.",
+
+  "lens.title": "Lente de diferencias planetarias",
+  "lens.p": "Cada línea muestra dónde se sitúan este lugar (círculo) y el objetivo (rombo) en la misma escala. La franja sombreada es la zona de coincidencia.",
+  "lens.objective": "Objetivo de uso", "lens.score": "Puntuación", "lens.rank": "Puesto", "lens.costs_most": "Lo que más resta",
+  "lens.under": "Con «{profile}»: puntuación de análogo {score}, puesto {r}.",
+  "lens.leading": "destacado {k}", "lens.leading_long": "Es el sitio destacado {k} para este objetivo de uso.",
+  "lens.axis_min": "mínimo de la escala", "lens.axis_max": "máximo",
+  "lens.leg_earth": "este lugar", "lens.leg_target": "objetivo", "lens.leg_zone": "zona de coincidencia",
+  "lens.svg_label": "Posición de este lugar y del objetivo en la escala de cada condición",
+  "lens.matters": "Diferencias que importan para «{profile}»",
+  "lens.costs": "resta {pts} puntos (peso {w})",
+  "lens.matters_none": "Ninguna condición comparada difiere más allá del umbral de coincidencia.",
+  "lens.loss_note": "Los puntos perdidos suman exactamente la distancia entre la puntuación y el 100 %: cada condición resta peso × (1 − s) ÷ peso total.",
+  "lens.switched": "Objetivo de uso: {profile}.",
+
+  "change.title": "¿Qué me haría cambiar de opinión?",
+  "change.p": "ASTERRO vuelve a aplicar la misma fórmula con alternativas declaradas e indica si la conclusión se mantiene. No hay nada aleatorio y no se inventan datos.",
+  "change.tested": "Conclusión puesta a prueba",
+  "change.concl.leading": "{place} es el sitio análogo destacado {k} para {target}.",
+  "change.concl.rank": "{place} ocupa el puesto {r} para {target}.",
+  "change.verdict.all": "Se mantiene en las {n} alternativas (puestos entre {lo} y {hi}).",
+  "change.verdict.some": "Se mantiene en {h} de {n} alternativas (puestos entre {lo} y {hi}).",
+  "change.would": "Esto la cambiaría",
+  "change.would_not": "Esto no la cambiaría ({n})",
+  "change.none_breaks": "Ninguna de las alternativas la cambia.",
+  "change.alt.profile": "Objetivo de uso «{profile}»",
+  "change.alt.drop_source": "Sin los datos de {source}",
+  "change.alt.drop_proxy": "Sin los valores indirectos del objetivo ({list})",
+  "change.alt.drop_criterion": "Sin {criterion}",
+  "change.weights_changed": "Pesos:",
+  "change.res.leading": "sitio destacado {k} · puesto {r}", "change.res.rank": "puesto {r}, no es un sitio destacado", "change.res.ineligible": "sin puntuación",
+  "change.holds_sr": "se mantiene", "change.breaks_sr": "cambia la conclusión",
+  "change.running": "Probando las alternativas…", "change.done": "Alternativas probadas.",
+  "change.note": "Dejar datos fuera significa dar peso 0 a esas condiciones; no se rellena nada. Un resultado que se mantiene es robusto ante estas decisiones, no está demostrado.",
+
+  "missing.title": "Encuentra la pieza que falta",
+  "missing.p": "Qué haría más sólida esta comparación, en lenguaje sencillo. Cada punto enlaza con el conjunto de datos o la prueba de la que procede.",
+  "missing.sev.gap": "Laguna", "missing.sev.caution": "Precaución", "missing.sev.info": "Conviene saberlo",
+  "missing.target_na": "Sin comparar: {criterion} (valor del objetivo: {status}).",
+  "missing.earth_missing": "No hay valor terrestre de {criterion} en esta celda, así que la puntuación se basa en las demás condiciones.",
+  "missing.target_proxy": "El valor de {criterion} del objetivo es indirecto: se deriva, no se mide directamente. Si ese valor no es exacto, esta comparación cambia.",
+  "missing.structural.above": "Ningún lugar de la Tierra coincide en {criterion}: el objetivo ({t} {unit}) está por encima de todos los valores terrestres ({lo}–{hi} {unit}). El mejor s posible es {s}.",
+  "missing.structural.below": "Ningún lugar de la Tierra coincide en {criterion}: el objetivo ({t} {unit}) está por debajo de todos los valores terrestres ({lo}–{hi} {unit}). El mejor s posible es {s}.",
+  "missing.structural.none": "Ninguna celda de la Tierra está dentro del umbral de coincidencia en {criterion}. El mejor s posible es {s}.",
+  "missing.thin_coverage": "Aquí hay pocos meses de MODIS con cielo despejado ({pct} de los meses), así que el valor de {criterion} se apoya en menos datos.",
+  "missing.partial_coverage": "Aquí solo se ha podido puntuar el {pct} del peso; el resto no tiene valor terrestre.",
+  "missing.source_dependence": "La conclusión depende de {source}: sin esos datos, este lugar ocupa el puesto {r}.",
+  "missing.proxy_dependence": "La conclusión depende de los valores indirectos del objetivo ({list}): sin ellos, este lugar ocupa el puesto {r}.",
+  "missing.resolution": "Cada celda terrestre mide unos {km} km, parecido a la ventana de {tkm} km del objetivo. No se distinguen rasgos más pequeños, como dunas, rocas o el fondo de un solo cráter. Aún no se han integrado datos de elevación de mayor resolución.",
+  "missing.resolution.notarget": "Cada celda terrestre mide unos {km} km. No se distinguen rasgos más pequeños. Aún no se han integrado datos de elevación de mayor resolución.",
+  "missing.temporal": "Los datos terrestres cubren periodos distintos: clima de NASA POWER 2001–2020, temperatura de superficie de MODIS 2016–2025 y un relieve que no cambia. Los datos del objetivo proceden de los periodos de sus propias misiones.",
+  "missing.not_measured": "No se mide en absoluto: radiación, atmósfera, gravedad, química del suelo, polvo ni hielo. Coincidir en seis condiciones no los cubre.",
+  "missing.see_change": "Ver la prueba", "missing.see_rule": "Ver cómo se calcula la puntuación",
+  "missing.run_change": "Ejecuta «¿Cambiar de opinión?» para comprobar si la conclusión depende de una sola fuente de datos o de valores indirectos.",
+
+  "trust.title": "Vista de confianza científica",
+  "trust.p": "Las pruebas que respaldan este resultado, fila a fila. Abre una fila para ver los detalles.",
+  "trust.measurements": "Mediciones del objetivo", "trust.coverage": "Datos terrestres aquí", "trust.limits": "Límites estructurales", "trust.robustness": "Robustez",
+  "trust.reproducibility": "Reproducibilidad", "trust.sources": "Fuentes", "trust.scope": "Lo que esto no te dice",
+  "trust.measurements.sum": "{d} directas, {p} indirectas, de {n} comparadas",
+  "trust.measurements.body": "Cómo se obtuvo cada valor del objetivo:",
+  "trust.coverage.sum": "{pct} del peso puntuado",
+  "trust.coverage.body": "Meses de MODIS con datos válidos aquí: {modis}. Fracción de tierra de la celda: {land}.",
+  "trust.coverage.missing": "Falta aquí: {list}.",
+  "trust.limits.sum_some": "Ninguna coincidencia posible en la Tierra para {list}",
+  "trust.limits.sum_none": "Ninguno: cada condición comparada puede coincidir en algún lugar de la Tierra",
+  "trust.limits.body": "Un límite estructural significa que ningún lugar de la Tierra queda dentro del umbral de coincidencia para esa condición, así que ninguna ponderación puede corregirlo.",
+  "trust.robustness.sum": "Se mantuvo en {h} de {n} alternativas",
+  "trust.robustness.sum_na": "Aún no se ha probado",
+  "trust.robustness.body": "Procede de «¿Cambiar de opinión?»: objetivos de uso declarados, quitar cada fuente de datos terrestre, quitar los valores indirectos del objetivo y quitar cada condición.",
+  "trust.reproducibility.body": "Determinista: las mismas entradas dan siempre el mismo resultado. SHA-256 del conjunto de predictores: {sha}…",
+  "trust.verified": "comprobado en este navegador", "trust.not_verified": "suma de verificación no comprobada en este navegador",
+  "trust.sources.body": "Conjuntos de datos terrestres y fuentes del objetivo usados aquí:",
+  "trust.scope.sum": "Similitud en seis condiciones, no equivalencia",
+  "trust.scope.body": "La puntuación de análogo mide lo cerca que están seis condiciones ambientales. No mide radiación, gravedad, atmósfera ni química, y no es una validación sobre el terreno ni una recomendación de misión. ASTERRO no cuenta con el respaldo de la NASA.",
+  "trust.no_score": "ASTERRO no combina estas filas en una única puntuación de confianza, de forma deliberada.",
+
+  "worlds.title": "Un lugar, muchos mundos",
+  "worlds.p": "El mismo lugar de la Tierra frente a {n} objetivos, cada uno con su propia escala.",
+  "worlds.compared": "{k} de {n} condiciones comparadas", "worlds.not_compared": "sin comparar: {list}",
+  "worlds.open": "Comparar con {target}",
+  "worlds.note": "Cada objetivo usa sus propios rangos de normalización, así que entre objetivos conviene comparar puestos y no puntuaciones brutas. El puesto es la posición de esta celda entre todas las celdas de la Tierra para ese objetivo.",
+  "worlds.registry_err": "No se ha podido cargar el registro planetario; solo se muestran los dos objetivos originales.",
+
+  "time.title": "A lo largo del tiempo",
+  "time.p": "Solo la oscilación de temperatura de la superficie entre el día y la noche tiene valores anuales (MODIS, uno por año). Esta es la puntuación con el valor de cada año en lugar del promedio.",
+  "time.svg": "Puntuación de análogo en cada uno de {n} años",
+  "time.cls.stable": "Estable: la puntuación varía {pts} puntos a lo largo de {years} años (umbral: {thr} puntos).",
+  "time.cls.variable": "Variable: la puntuación varía {pts} puntos a lo largo de {years} años (umbral: {thr} puntos).",
+  "time.cls.none": "Aquí no hay valores anuales.",
+  "time.none": "No hay valores anuales para este lugar.",
+  "time.note": "Las demás condiciones son promedios a largo plazo o relieve, así que aquí no cambian de un año a otro.",
+
+  "passport.title": "Pasaporte de análogo terrestre",
+  "passport.p": "Un registro de este resultado para compartir. El archivo incluye toda la configuración, los valores y las fuentes, para que cualquiera pueda volver a puntuarlo.",
+  "passport.kicker": "Pasaporte de análogo terrestre",
+  "passport.analogue_of": "Análogo de",
+  "passport.config": "Objetivo de uso {profile} · puesto {rank} de {n}",
+  "passport.disclaimer": "Solo condiciones medidas similares. No es una equivalencia física, geológica ni de ingeniería. No validado sobre el terreno. Sin respaldo de la NASA.",
+  "passport.disclaimer_short": "Solo condiciones medidas similares · no es equivalencia · no validado sobre el terreno · sin respaldo de la NASA",
+  "passport.rescore_ok": "Comprobación: el pasaporte vuelve a dar {s} a partir de su propio contenido.",
+  "passport.rescore_bad": "Comprobación fallida: el pasaporte da {s}.",
+  "passport.json": "Descargar JSON", "passport.png": "Descargar imagen", "passport.print": "Imprimir", "passport.save": "Guardar en Mi investigación",
+  "passport.saved_json": "Pasaporte guardado como JSON.", "passport.saved_png": "Pasaporte guardado como imagen.",
+  "passport.save_unavailable": "Mi investigación necesita el registro planetario, que aquí no está disponible.",
+
+  "team.title": "Un equipo de lugares de la Tierra",
+  "team.p": "El menor número de lugares, separados al menos 300 km, que juntos coinciden en todas las condiciones de {target}.",
+  "team.verdict": "{k} lugares coinciden juntos en {m} de {n} condiciones.",
+  "team.score": "puntuación de análogo {s}",
+  "team.adds": "Aporta: {list}.", "team.also": "También coincide en: {list}.",
+  "team.unmatchable": "Ningún lugar de la Tierra coincide en {list}, así que ningún equipo puede cubrirlo.",
+  "team.uncovered": "Algunas condiciones quedan sin cubrir porque los lugares que coinciden en ellas están a menos de 300 km de un miembro del equipo.",
+  "team.note": "Se elige paso a paso: cada nuevo miembro aporta el mayor número de condiciones sin cubrir (en caso de empate, mayor puntuación y luego menor identificador de celda). Un equipo cubre condiciones; no es un único análogo.",
+
+  "crit.aridity": "Aridez", "crit.aridity.short": "Aridez", "crit.aridity.plain": "lo seco que es: precipitación ÷ evaporación potencial (P/PET)",
+  "crit.annual_temperature_range": "Amplitud térmica estacional", "crit.annual_temperature_range.short": "Estaciones", "crit.annual_temperature_range.plain": "mes más cálido menos mes más frío, temperatura del aire",
+  "crit.elevation": "Altitud", "crit.elevation.short": "Altitud", "crit.elevation.plain": "altura del terreno",
+  "crit.slope": "Pendiente", "crit.slope.short": "Pendiente", "crit.slope.plain": "inclinación del terreno",
+  "crit.surface_roughness": "Rugosidad del terreno", "crit.surface_roughness.short": "Rugosidad", "crit.surface_roughness.plain": "cuánto varía la altura dentro de la celda",
+  "crit.lst_diurnal_range": "Oscilación de temperatura de la superficie entre el día y la noche", "crit.lst_diurnal_range.short": "Día y noche", "crit.lst_diurnal_range.plain": "cuánto se calienta el suelo de día y se enfría de noche",
+  "state.similar": "Similar", "state.partial": "Parcialmente similar", "state.different": "Diferente", "state.unknown": "Desconocido aquí", "state.na": "Sin comparar", "state.off": "Sin peso",
+  "status.DIRECT": "Medido", "status.PROXY": "Indirecto", "status.N/A": "No aplicable", "status.MISSING": "Ausente",
+  "profile.general": "Análogo general", "profile.rover": "Movilidad de rovers", "profile.eva": "Entrenamiento de EVA", "profile.thermal": "Pruebas térmicas", "profile.habitat": "Operaciones de hábitat", "profile.instrument": "Pruebas de instrumentos científicos", "profile.custom": "Tus pesos actuales",
+  "profile.general.why": "Todas las condiciones disponibles cuentan por igual.",
+  "profile.rover.why": "La conducción depende sobre todo de la pendiente y la rugosidad; el clima importa menos.",
+  "profile.eva.why": "Para tripulaciones a pie: sequedad, oscilaciones de temperatura y terreno transitable.",
+  "profile.thermal.why": "Para equipos que se calientan y se enfrían: lo que más importa es la oscilación entre el día y la noche y la amplitud estacional.",
+  "profile.habitat.why": "Para estancias largas: el ambiente térmico y pendientes suaves para construir.",
+  "profile.instrument.why": "Para instrumentos: lo que más importa son las superficies secas y los lugares altos, con aire poco denso.",
+  "missing.method": "Cómo se derivó el valor del objetivo:",
+  "missing.see_target": "Ver las mediciones del objetivo",
+  "crit.aridity.s": "aridez", "crit.annual_temperature_range.s": "amplitud térmica estacional", "crit.elevation.s": "altitud", "crit.slope.s": "pendiente", "crit.surface_roughness.s": "rugosidad del terreno", "crit.lst_diurnal_range.s": "oscilación de temperatura de la superficie entre el día y la noche",
+  "chrome.more_targets": "{n} objetivos más…", "chrome.group.mars": "Marte", "chrome.group.moon": "Luna", "chrome.more_targets_aria": "Más objetivos analíticos (madurez 3 o superior)",
+  "summary.robust.half": "Su posición se mantuvo exactamente en la mitad de las alternativas probadas en «¿Cambiar de opinión?»; depende de esas decisiones.",
+  "trust.method_en": "Las notas de método se citan de los registros originales, en inglés.",
+  "badge.offline_plain": "Copia sin conexión"
+});
+
+/* ===== ASTERRO · texte de l'interface · Français =====
+ * Rédigé par Claude (modèle d'IA) pour ce projet ; relecture par des locuteurs natifs à faire.
+ * Restent tels quels : noms de jeux de données et d'instruments, unités, versions et toponymes de Natural Earth. */
+i18nRegister("fr", { name: "Français", locale: "fr-FR", htmlLang: "fr", pct: " ", status: "draft-unreviewed" }, {
+  "lang.label": "Langue",
+  "lang.review_note": "Les textes en বাংলা, Español et Français ont été rédigés par Claude (un modèle d'IA) et n'ont pas encore été relus par des locuteurs natifs.",
+  "tab.explore": "Explorer", "tab.compare": "Comparer", "tab.scenarios": "Scénarios", "tab.discover": "Découvrir", "tab.data": "Données", "tab.method": "Méthode",
+  "tab.lab": "Labo", "tab.trajectory": "Trajectoire", "tab.atlas": "Atlas",
+  "aria.tabs": "Vues de l'instrument", "aria.target": "Cible planétaire", "aria.sections": "Façons de regarder ce lieu",
+  "body.mars": "MARS", "body.moon": "LUNE", "body.both": "LES DEUX",
+  "tname.mars_jezero": "Cratère Jezero", "tname.moon_south_pole": "Pôle Sud lunaire", "tname.cross": "Inter-planétaire", "tname.moon_shackleton": "Cratère Shackleton",
+  "cta.search": "Explorer la Terre", "cta.science": "Découvrir la science", "cta.atlas": "Ouvrir l'atlas planétaire", "cta.journey": "Commencer par une découverte", "cta.explain": "Expliquer ce lieu",
+  "hero.eyebrow": "ASTERRO · Intelligence des analogues planétaires · NASA Space Apps 2026",
+  "hero.title1": "Trouvez les autres", "hero.title2": "mondes de la Terre.",
+  "hero.sub": "Cherchez dans les milieux terrestres des analogues mesurables de la Lune et de Mars.",
+  "hero.choose_world": "Choisir un autre monde",
+  "hero.alt_mars": "Relief ombré de l'altitude MOLA autour du cratère Jezero", "hero.alt_moon": "Relief ombré de l'altitude LOLA au pôle Sud lunaire",
+  "hero.facts": "{n} cellules terrestres valides · 6 critères issus de NASA POWER, MODIS et GMTED2010 · cibles construites à partir de MEDA, MOLA, LOLA et Diviner · chaque score est déterministe et traçable",
+  "notice.english_only": "Cette vue de recherche n'existe qu'en anglais. Tous les nombres sont identiques dans toutes les langues.",
+  "notice.open_journey": "Ouvrir les découvertes guidées",
+  "door.title": "Première visite ?", "door.p": "Commencez par une découverte guidée : de vrais résultats issus de ces données, expliqués pas à pas.",
+  "geo.n": "N", "geo.s": "S", "geo.e": "E", "geo.w": "O",
+  "val.na": "aucune valeur",
+  "badge.verified": "Données incluses · somme de contrôle vérifiée", "badge.bundled": "Données incluses", "badge.offline": "Copie hors ligne · somme vérifiée",
+  "badge.title": "Chaque résultat est calculé dans votre navigateur à partir du jeu de prédicteurs inclus (SHA-256 {sha}…).",
+  "nav.back_home": "Retour à toutes les découvertes", "nav.discoveries": "Découvertes", "nav.close": "Fermer",
+  "err.compute": "Le calcul n'a pas pu aboutir.",
+
+  "home.title": "Les lieux d'un autre monde sur Terre",
+  "home.eyebrow": "Découvertes calculées à partir des données de cette page",
+  "home.lead": "Certains lieux sur Terre ressemblent à Mars ou à la Lune, d'une manière que l'on peut mesurer. Chaque histoire est calculée maintenant, dans votre navigateur, à partir de données de la NASA et de l'USGS. Ouvrez-en une pour comprendre pourquoi.",
+  "home.fine": "ASTERRO compare six conditions environnementales mesurées. Des conditions semblables ne signifient pas qu'un lieu est physiquement, géologiquement ou biologiquement identique.",
+  "home.loading_registry": "Chargement d'autres cibles depuis le registre planétaire…",
+  "story.explore_why": "Comprendre pourquoi", "story.see_team": "Découvrir l'équipe",
+  "story.top.h": "{place} est le lieu sur Terre le plus proche de {target}",
+  "story.top.p": "{similar} conditions mesurées sur {compared} concordent dans le seuil de concordance. Score d'analogie : {score}, toutes les conditions ayant le même poids.",
+  "story.shackleton.note": "Cible issue du registre planétaire (explore-target-v1).",
+  "story.thermal.h": "Aucun lieu sur Terre ne varie comme {target}",
+  "story.thermal.p": "À Jezero, le sol se réchauffe et se refroidit d'environ {t} K entre l'après-midi et la nuit. La plus forte amplitude de toutes les cellules terrestres est de {e} K, à {place}.",
+  "story.thermal.p2": "Même le meilleur lieu sur Terre n'atteint donc que s = {s} pour cette condition, quelle que soit la pondération.",
+  "story.team.h": "Il faut une équipe de lieux terrestres",
+  "story.team.p": "Aucun lieu ne concorde avec Jezero pour les {n} conditions. {k} lieux, distants d'au moins 300 km, concordent ensemble pour {m}.",
+  "story.team.p_none": "Aucun lieu sur Terre ne concorde pour : {list}.",
+  "story.yours.kick": "Le lieu que vous avez sélectionné", "story.yours.p": "Voyez comment il se compare, pas à pas.",
+
+  "place.target": "Comparé à", "place.objective": "Objectif",
+  "place.score_label": "Score d'analogie", "place.cell": "cellule {id}",
+  "place.rank": "rang {r} sur {n} cellules", "place.not_eligible": "non noté (trop peu de données ici)", "place.leading": "site de tête {k}",
+  "place.unlabelled": "Cellule terrestre sans nom",
+  "place.show_globe": "Afficher sur le globe",
+  "place.fine": "Conditions mesurées semblables uniquement ; pas d'équivalence physique, géologique ou technique.",
+  "place.target_set": "Désormais comparé à {target}.",
+  "sec.reveal": "Révélation", "sec.lens": "Loupe", "sec.change": "Changer d'avis ?", "sec.missing": "Pièces manquantes", "sec.trust": "Confiance", "sec.worlds": "Autres mondes", "sec.time": "Au fil du temps", "sec.passport": "Passeport",
+
+  "reveal.s1": "Le lieu sur Terre", "reveal.s2": "L'autre monde", "reveal.s3": "Ce qui concorde", "reveal.s4": "Ce qui diffère",
+  "reveal.s5": "Les mesures derrière le résultat", "reveal.s6": "Un autre objectif", "reveal.s7": "En résumé",
+  "reveal.step_of": "Étape {k} sur {n}",
+  "reveal.back": "Retour", "reveal.next": "Suivant", "reveal.skip": "Aller au résumé", "reveal.again": "Recommencer",
+  "reveal.keys": "← → pour avancer",
+  "reveal.earth.p": "Voici ce que disent les données sur cette zone terrestre d'environ 55 kilomètres.",
+  "reveal.target.p": "Voici les valeurs de {target}, et la façon dont chacune a été obtenue.",
+  "reveal.agree.p": "{k} conditions comparées sur {n} sont dans le seuil de concordance (s ≥ 0,85).",
+  "reveal.agree.none": "Aucune condition ne concorde dans le seuil de concordance.",
+  "reveal.differ.p": "Ces conditions diffèrent. Les points indiquent de combien chacune fait baisser le score.",
+  "reveal.differ.none": "Aucune condition comparée ne s'écarte au-delà du seuil de concordance.",
+  "reveal.earth_higher": "La Terre est plus haute", "reveal.earth_lower": "La Terre est plus basse",
+  "reveal.vs": "contre",
+  "reveal.costs": "−{pts} points",
+  "reveal.unknown": "Aucune valeur terrestre ici pour : {list}. Le score repose sur les autres conditions.",
+  "reveal.na": "Non comparé, car la cible n'a pas de valeur : {list}.",
+  "reveal.evidence.p": "Chaque valeur terrestre provient d'un jeu de données nommé. Les valeurs indirectes de la cible sont dérivées, non mesurées directement.",
+  "reveal.evidence.target": "Sources de la cible :",
+  "reveal.objective.p": "Avec « {profile} », ce lieu est au rang {r}.",
+  "reveal.objective.best": "Son meilleur rang est avec « {profile} » : {r}.",
+  "reveal.objective.worst": "Le moins bon, avec « {profile} » : {r}.",
+  "reveal.objective.custom": "Chaque objectif déclaré pondère les conditions différemment :",
+  "reveal.open_lens": "Comparer les objectifs dans la Loupe",
+  "summary.level.close": "Pour les conditions mesurées, ce lieu est un analogue proche : les {compared} conditions comparées concordent dans le seuil, et le score d'analogie est de {score}.",
+  "summary.level.partial": "Pour les conditions mesurées, ce lieu est un analogue partiel : {similar} sur {compared} concordent dans le seuil, et le score d'analogie est de {score}.",
+  "summary.level.weak": "Pour les conditions mesurées, ce lieu est un analogue faible : seulement {similar} sur {compared} concordent dans le seuil, et le score d'analogie est de {score}.",
+  "summary.level.none": "Ce lieu a trop peu de données pour être noté par rapport à cette cible.",
+  "summary.robust.all": "Sa position a tenu face à toutes les variantes testées dans « Changer d'avis ? ».",
+  "summary.robust.most": "Sa position a tenu face à la plupart des variantes testées dans « Changer d'avis ? », mais pas toutes.",
+  "summary.robust.few": "Sa position a changé pour la plupart des variantes testées dans « Changer d'avis ? » : à prendre avec prudence.",
+  "summary.robust.untested": "Ouvrez « Changer d'avis ? » pour vérifier dans quelle mesure ce résultat dépend des choix faits.",
+  "summary.scope": "Il s'agit uniquement d'une comparaison de conditions environnementales mesurées. Ce n'est pas une affirmation d'équivalence physique, géologique, biologique ou technique, et elle n'a pas été validée sur le terrain.",
+
+  "lens.title": "Loupe des différences planétaires",
+  "lens.p": "Chaque ligne montre où se situent ce lieu (cercle) et la cible (losange) sur la même échelle. La bande grisée est la zone de concordance.",
+  "lens.objective": "Objectif", "lens.score": "Score", "lens.rank": "Rang", "lens.costs_most": "Ce qui coûte le plus",
+  "lens.under": "Avec « {profile} » : score d'analogie {score}, rang {r}.",
+  "lens.leading": "tête {k}", "lens.leading_long": "C'est le site de tête {k} pour cet objectif.",
+  "lens.axis_min": "bas de l'échelle", "lens.axis_max": "haut",
+  "lens.leg_earth": "ce lieu", "lens.leg_target": "cible", "lens.leg_zone": "zone de concordance",
+  "lens.svg_label": "Position de ce lieu et de la cible sur l'échelle de chaque condition",
+  "lens.matters": "Les différences qui comptent pour « {profile} »",
+  "lens.costs": "coûte {pts} points (poids {w})",
+  "lens.matters_none": "Aucune condition comparée ne s'écarte au-delà du seuil de concordance.",
+  "lens.loss_note": "Les points perdus s'additionnent exactement à l'écart entre le score et 100 % : chaque condition coûte poids × (1 − s) ÷ poids total.",
+  "lens.switched": "Objectif : {profile}.",
+
+  "change.title": "Qu'est-ce qui me ferait changer d'avis ?",
+  "change.p": "ASTERRO relance la même formule avec des variantes déclarées et indique si la conclusion tient. Rien n'est aléatoire et aucune donnée n'est inventée.",
+  "change.tested": "Conclusion mise à l'épreuve",
+  "change.concl.leading": "{place} est le site analogue de tête {k} pour {target}.",
+  "change.concl.rank": "{place} est au rang {r} pour {target}.",
+  "change.verdict.all": "Elle tient pour les {n} variantes (rangs de {lo} à {hi}).",
+  "change.verdict.some": "Elle tient pour {h} variantes sur {n} (rangs de {lo} à {hi}).",
+  "change.would": "Ce qui la ferait changer",
+  "change.would_not": "Ce qui ne la ferait pas changer ({n})",
+  "change.none_breaks": "Aucune variante ne la fait changer.",
+  "change.alt.profile": "Objectif « {profile} »",
+  "change.alt.drop_source": "Sans les données {source}",
+  "change.alt.drop_proxy": "Sans les valeurs indirectes de la cible ({list})",
+  "change.alt.drop_criterion": "Sans : {criterion}",
+  "change.weights_changed": "Poids :",
+  "change.res.leading": "site de tête {k} · rang {r}", "change.res.rank": "rang {r}, pas un site de tête", "change.res.ineligible": "non noté",
+  "change.holds_sr": "tient", "change.breaks_sr": "change la conclusion",
+  "change.running": "Test des variantes…", "change.done": "Variantes testées.",
+  "change.note": "Écarter des données revient à donner un poids nul à ces conditions ; rien n'est complété. Un résultat qui tient résiste à ces choix ; il n'est pas pour autant démontré.",
+
+  "missing.title": "Trouver la pièce manquante",
+  "missing.p": "Ce qui rendrait cette comparaison plus solide, en termes simples. Chaque point renvoie au jeu de données ou au test dont il provient.",
+  "missing.sev.gap": "Lacune", "missing.sev.caution": "Prudence", "missing.sev.info": "Bon à savoir",
+  "missing.target_na": "Non comparé : {criterion} (valeur de la cible : {status}).",
+  "missing.earth_missing": "Il n'y a pas de valeur terrestre pour {criterion} dans cette cellule ; le score repose donc sur les autres conditions.",
+  "missing.target_proxy": "La valeur de la cible pour {criterion} est indirecte : elle est dérivée, non mesurée directement. Si elle est inexacte, la comparaison change.",
+  "missing.structural.above": "Aucun lieu sur Terre ne concorde pour {criterion} : la cible ({t} {unit}) dépasse toutes les valeurs terrestres ({lo}–{hi} {unit}). Meilleur s possible : {s}.",
+  "missing.structural.below": "Aucun lieu sur Terre ne concorde pour {criterion} : la cible ({t} {unit}) est sous toutes les valeurs terrestres ({lo}–{hi} {unit}). Meilleur s possible : {s}.",
+  "missing.structural.none": "Aucune cellule terrestre n'est dans le seuil de concordance pour {criterion}. Meilleur s possible : {s}.",
+  "missing.thin_coverage": "Peu de mois MODIS par ciel dégagé ici ({pct} des mois) : la valeur de {criterion} repose sur moins de données.",
+  "missing.partial_coverage": "Seuls {pct} du poids ont pu être notés ici ; le reste n'a pas de valeur terrestre.",
+  "missing.source_dependence": "La conclusion dépend de {source} : sans ces données, ce lieu est au rang {r}.",
+  "missing.proxy_dependence": "La conclusion dépend des valeurs indirectes de la cible ({list}) : sans elles, ce lieu est au rang {r}.",
+  "missing.resolution": "Chaque cellule terrestre mesure environ {km} km, comme la fenêtre de {tkm} km de la cible. Les éléments plus petits, comme les dunes, les blocs rocheux ou le fond d'un seul cratère, ne sont pas résolus. Des données d'altitude à plus haute résolution ne sont pas encore intégrées.",
+  "missing.resolution.notarget": "Chaque cellule terrestre mesure environ {km} km. Les éléments plus petits ne sont pas résolus. Des données d'altitude à plus haute résolution ne sont pas encore intégrées.",
+  "missing.temporal": "Les données terrestres couvrent des périodes différentes : climat NASA POWER 2001–2020, température de surface MODIS 2016–2025, et un relief qui ne change pas. Les données de la cible proviennent des périodes de leurs propres missions.",
+  "missing.not_measured": "Pas du tout mesurés : rayonnement, atmosphère, gravité, chimie du sol, poussière et glace. Concorder sur six conditions ne les couvre pas.",
+  "missing.see_change": "Voir le test", "missing.see_rule": "Voir comment le score est calculé",
+  "missing.run_change": "Lancez « Changer d'avis ? » pour vérifier si la conclusion dépend d'une seule source de données ou de valeurs indirectes.",
+
+  "trust.title": "Vue de confiance scientifique",
+  "trust.p": "Les éléments qui fondent ce résultat, ligne par ligne. Ouvrez une ligne pour le détail.",
+  "trust.measurements": "Mesures de la cible", "trust.coverage": "Données terrestres ici", "trust.limits": "Limites structurelles", "trust.robustness": "Robustesse",
+  "trust.reproducibility": "Reproductibilité", "trust.sources": "Sources", "trust.scope": "Ce que cela ne dit pas",
+  "trust.measurements.sum": "{d} directes, {p} indirectes, sur {n} comparées",
+  "trust.measurements.body": "Comment chaque valeur de la cible a été obtenue :",
+  "trust.coverage.sum": "{pct} du poids noté",
+  "trust.coverage.body": "Mois MODIS avec des données valides ici : {modis}. Part de terre dans la cellule : {land}.",
+  "trust.coverage.missing": "Manquant ici : {list}.",
+  "trust.limits.sum_some": "Aucune concordance possible sur Terre pour {list}",
+  "trust.limits.sum_none": "Aucune : chaque condition comparée peut concorder quelque part sur Terre",
+  "trust.limits.body": "Une limite structurelle signifie qu'aucun lieu sur Terre n'entre dans le seuil de concordance pour cette condition ; aucune pondération ne peut donc y remédier.",
+  "trust.robustness.sum": "A tenu pour {h} variantes sur {n}",
+  "trust.robustness.sum_na": "Pas encore testé",
+  "trust.robustness.body": "Issu de « Changer d'avis ? » : objectifs déclarés, retrait de chaque source de données terrestres, retrait des valeurs indirectes de la cible et retrait de chaque condition.",
+  "trust.reproducibility.body": "Déterministe : les mêmes entrées donnent toujours le même résultat. SHA-256 du jeu de prédicteurs : {sha}…",
+  "trust.verified": "vérifiée dans ce navigateur", "trust.not_verified": "somme de contrôle non vérifiée dans ce navigateur",
+  "trust.sources.body": "Jeux de données terrestres et sources de la cible utilisés ici :",
+  "trust.scope.sum": "Une similitude sur six conditions, pas une équivalence",
+  "trust.scope.body": "Le score d'analogie mesure la proximité de six conditions environnementales. Il ne mesure ni le rayonnement, ni la gravité, ni l'atmosphère, ni la chimie, et ce n'est ni une validation sur le terrain ni une recommandation de mission. ASTERRO n'est pas soutenu officiellement par la NASA.",
+  "trust.no_score": "ASTERRO ne combine délibérément pas ces lignes en un score de confiance unique.",
+
+  "worlds.title": "Un lieu, plusieurs mondes",
+  "worlds.p": "Le même lieu terrestre face à {n} cibles, chacune avec sa propre échelle.",
+  "worlds.compared": "{k} conditions comparées sur {n}", "worlds.not_compared": "non comparé : {list}",
+  "worlds.open": "Comparer à {target}",
+  "worlds.note": "Chaque cible utilise ses propres plages de normalisation : d'une cible à l'autre, comparez les rangs plutôt que les scores bruts. Le rang est la position de cette cellule parmi toutes les cellules terrestres pour cette cible.",
+  "worlds.registry_err": "Le registre planétaire n'a pas pu être chargé ; seules les deux cibles d'origine sont affichées.",
+
+  "time.title": "Au fil du temps",
+  "time.p": "Seule l'amplitude jour-nuit de la température de surface a des valeurs annuelles (MODIS, une par an). Voici le score avec la valeur de chaque année à la place de la moyenne.",
+  "time.svg": "Score d'analogie pour chacune des {n} années",
+  "time.cls.stable": "Stable : le score varie de {pts} points sur {years} ans (seuil : {thr} points).",
+  "time.cls.variable": "Variable : le score varie de {pts} points sur {years} ans (seuil : {thr} points).",
+  "time.cls.none": "Aucune valeur annuelle n'est disponible ici.",
+  "time.none": "Aucune valeur annuelle n'est disponible pour ce lieu.",
+  "time.note": "Les autres conditions sont des moyennes de long terme ou du relief : elles ne changent donc pas d'une année à l'autre ici.",
+
+  "passport.title": "Passeport d'analogue terrestre",
+  "passport.p": "Une fiche partageable de ce résultat. Le fichier contient toute la configuration, les valeurs et les sources, pour que chacun puisse recalculer le score.",
+  "passport.kicker": "Passeport d'analogue terrestre",
+  "passport.analogue_of": "Analogue de",
+  "passport.config": "Objectif {profile} · rang {rank} sur {n}",
+  "passport.disclaimer": "Conditions mesurées semblables uniquement. Pas d'équivalence physique, géologique ou technique. Non validé sur le terrain. Non soutenu officiellement par la NASA.",
+  "passport.disclaimer_short": "Conditions mesurées semblables uniquement · pas d'équivalence · non validé sur le terrain · non soutenu par la NASA",
+  "passport.rescore_ok": "Vérification : le passeport redonne {s} à partir de son propre contenu.",
+  "passport.rescore_bad": "Échec de la vérification : le passeport donne {s}.",
+  "passport.json": "Télécharger le JSON", "passport.png": "Télécharger l'image", "passport.print": "Imprimer", "passport.save": "Enregistrer dans Mes recherches",
+  "passport.saved_json": "Passeport enregistré en JSON.", "passport.saved_png": "Passeport enregistré en image.",
+  "passport.save_unavailable": "Mes recherches nécessite le registre planétaire, qui n'est pas disponible ici.",
+
+  "team.title": "Une équipe de lieux terrestres",
+  "team.p": "Le plus petit nombre de lieux, distants d'au moins 300 km, qui concordent ensemble pour toutes les conditions de {target}.",
+  "team.verdict": "{k} lieux concordent ensemble pour {m} conditions sur {n}.",
+  "team.score": "score d'analogie {s}",
+  "team.adds": "Apporte : {list}.", "team.also": "Concorde aussi pour : {list}.",
+  "team.unmatchable": "Aucun lieu sur Terre ne concorde pour {list} : aucune équipe ne peut donc le couvrir.",
+  "team.uncovered": "Certaines conditions restent non couvertes, car les lieux qui y concordent sont à moins de 300 km d'un membre de l'équipe.",
+  "team.note": "Choisie étape par étape : chaque nouveau membre apporte le plus grand nombre de conditions non couvertes (en cas d'égalité : score le plus élevé, puis identifiant de cellule le plus bas). Une équipe couvre des conditions ; ce n'est pas un analogue unique.",
+
+  "crit.aridity": "Aridité", "crit.aridity.short": "Aridité", "crit.aridity.plain": "degré de sécheresse : précipitations ÷ évaporation potentielle (P/PET)",
+  "crit.annual_temperature_range": "Amplitude thermique saisonnière", "crit.annual_temperature_range.short": "Saisons", "crit.annual_temperature_range.plain": "mois le plus chaud moins mois le plus froid, température de l'air",
+  "crit.elevation": "Altitude", "crit.elevation.short": "Altitude", "crit.elevation.plain": "hauteur du sol",
+  "crit.slope": "Pente", "crit.slope.short": "Pente", "crit.slope.plain": "inclinaison du terrain",
+  "crit.surface_roughness": "Rugosité du terrain", "crit.surface_roughness.short": "Rugosité", "crit.surface_roughness.plain": "variation de la hauteur à l'intérieur de la cellule",
+  "crit.lst_diurnal_range": "Amplitude jour-nuit de la température de surface", "crit.lst_diurnal_range.short": "Jour-nuit", "crit.lst_diurnal_range.plain": "à quel point le sol se réchauffe le jour et se refroidit la nuit",
+  "state.similar": "Semblable", "state.partial": "En partie semblable", "state.different": "Différent", "state.unknown": "Inconnu ici", "state.na": "Non comparé", "state.off": "Sans poids",
+  "status.DIRECT": "Mesuré", "status.PROXY": "Indirect", "status.N/A": "Sans objet", "status.MISSING": "Manquant",
+  "profile.general": "Analogue général", "profile.rover": "Mobilité des rovers", "profile.eva": "Entraînement aux EVA", "profile.thermal": "Essais thermiques", "profile.habitat": "Opérations d'habitat", "profile.instrument": "Essais d'instruments scientifiques", "profile.custom": "Vos poids actuels",
+  "profile.general.why": "Chaque condition disponible compte autant que les autres.",
+  "profile.rover.why": "La conduite dépend surtout de la pente et de la rugosité ; le climat compte moins.",
+  "profile.eva.why": "Pour les équipages à pied : sécheresse, écarts de température et sol praticable.",
+  "profile.thermal.why": "Pour le matériel qui chauffe et refroidit : l'amplitude jour-nuit et l'amplitude saisonnière comptent le plus.",
+  "profile.habitat.why": "Pour les longs séjours : l'environnement thermique et des pentes douces pour construire.",
+  "profile.instrument.why": "Pour les instruments : les surfaces sèches et les sites élevés, où l'air est raréfié, comptent le plus.",
+  "missing.method": "Comment la valeur de la cible a été dérivée :",
+  "missing.see_target": "Voir les mesures de la cible",
+  "crit.aridity.s": "aridité", "crit.annual_temperature_range.s": "amplitude thermique saisonnière", "crit.elevation.s": "altitude", "crit.slope.s": "pente", "crit.surface_roughness.s": "rugosité du terrain", "crit.lst_diurnal_range.s": "amplitude jour-nuit de la température de surface",
+  "chrome.more_targets": "{n} autres cibles…", "chrome.group.mars": "Mars", "chrome.group.moon": "Lune", "chrome.more_targets_aria": "Autres cibles analytiques (maturité 3 ou plus)",
+  "summary.robust.half": "Sa position a tenu pour exactement la moitié des variantes testées dans « Changer d'avis ? » : elle dépend de ces choix.",
+  "trust.method_en": "Les notes de méthode sont citées des fiches sources, en anglais.",
+  "badge.offline_plain": "Copie hors ligne"
+});
+
+/* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
+ *
+ * Everything the story-led journey shows is derived here from the unchanged baseline engine (TAIEngine,
+ * tai-sim-1.0.0): the same similarity s_c = clip(1 − |e − t| / (max − min)), the same weighted mean, the same
+ * coverage rule, the same tie-break (score descending, then cell id) and the same 300 km distinct-site rule.
+ * The engine returns DATA ONLY (numbers, ids, keys); the interface turns them into words in the chosen language,
+ * so every language shows the same result.
+ *
+ *   lens         per-criterion state for one Earth cell against one target:
+ *                  similar   s ≥ 0.85 (the baseline MATCH threshold)      partial   0.60 ≤ s < 0.85
+ *                  different s < 0.60                                     unknown   active, but no Earth value here
+ *                  na        the target has no value (not applicable / missing)   off   weight 0 under this objective
+ *                and the points each criterion costs: loss_c = w_c (1 − s_c) / Σw, so Σ loss_c = 1 − S exactly.
+ *   objectives   the same cell under each declared mission profile: score, cell rank, leading-site position, and
+ *                the two criteria that cost it most under that profile.
+ *   changeMind   deterministic sensitivity of ONE conclusion ("this place is among the K leading distinct
+ *                analogues", or its rank when it is not): every declared profile, leave one Earth source out,
+ *                leave the target's proxy values out, leave one criterion out. Each alternative states exactly
+ *                which weights changed. Nothing is sampled; nothing is imputed.
+ *   team         greedy cover: the fewest distinct Earth places (≥ 300 km apart) that together match every active
+ *                criterion (s ≥ 0.85) — and the criteria no place on Earth can match.
+ *   missing      plain-language evidence gaps as typed records, each linked to a dataset or a sensitivity result.
+ *   trust        an evidence summary as separate rows. There is deliberately NO combined trust score.
+ *   passport     asterro.passport/1: a self-contained, re-scorable record of one result.
+ * No function here changes a baseline score, weight, range or ranking. */
+(function (root) {
+  "use strict";
+  const ENG = root.TAIEngine || (typeof require === "function" ? require("../engine.js") : null);
+  const VERSION = "asterro-journey-1.0.0";
+  const STATES = ["similar", "partial", "different", "unknown", "na", "off"];
+
+  /* ---------------------------------------------------------------- fields and ranks (baseline semantics) */
+  function field(ctx, w) {
+    if (ctx.effFor) return ctx.effFor(w);
+    return ENG.similarity(ctx.A, ctx.critIds, ctx.tv, w, ctx.ranges).eff;
+  }
+  function detail(ctx, i, w) { return ENG.detail(ctx.A, ctx.critIds, i, ctx.tv, w, ctx.ranges); }
+  /* 1 + number of cells ordered ahead of i (same tie-break as the baseline sort); null when ineligible */
+  function rank(eff, cell, i) {
+    if (!(eff[i] >= 0)) return null;
+    const e = eff[i], c = cell[i]; let k = 1;
+    for (let j = 0; j < eff.length; j++) { const v = eff[j]; if (v > e || (v === e && cell[j] < c)) k++; }
+    return k;
+  }
+  function nEligible(eff) { let n = 0; for (let j = 0; j < eff.length; j++) if (eff[j] >= 0) n++; return n; }
+  /* cells ordered ahead of i, sorted with the baseline tie-break */
+  function ahead(eff, cell, i) {
+    const e = eff[i], c = cell[i], out = [];
+    for (let j = 0; j < eff.length; j++) { const v = eff[j]; if (v > e || (v === e && cell[j] < c)) out.push(j); }
+    out.sort((a, b) => (eff[b] - eff[a]) || (cell[a] - cell[b]));
+    return out;
+  }
+  /* position of i among the K leading distinct sites (ENG.distinctSites semantics), or null. Cost ∝ rank. */
+  function leadPos(eff, ctx, i, K = 10) {
+    if (!(eff[i] >= 0)) return null;
+    const sep = ctx.sep || 300, kept = [];
+    for (const j of ahead(eff, ctx.cell, i)) {
+      if (kept.length >= K) return null;
+      let ok = true; for (const k of kept) if (ENG.haversine(ctx.lat[j], ctx.lon[j], ctx.lat[k], ctx.lon[k]) < sep) { ok = false; break; }
+      if (ok) kept.push(j);
+    }
+    if (kept.length >= K) return null;
+    for (const k of kept) if (ENG.haversine(ctx.lat[i], ctx.lon[i], ctx.lat[k], ctx.lon[k]) < sep) return null;
+    return kept.length + 1;
+  }
+  function leaders(eff, ctx, K = 10) { return ENG.distinctSites(ENG.order(eff, ctx.cell), ctx.lat, ctx.lon, K, ctx.sep || 300).filter(j => eff[j] >= 0); }
+
+  /* ---------------------------------------------------------------- the lens */
+  function stateOf(row, thr) {
+    if (row.t == null) return "na";
+    if (!(row.w > 0)) return "off";
+    if (row.e == null) return "unknown";
+    return row.s >= thr.match ? "similar" : row.s >= thr.partial ? "partial" : "different";
+  }
+  function lens(ctx, i, w) {
+    const det = detail(ctx, i, w), thr = ctx.thr;
+    const rows = det.rows.map(r => {
+      const st = stateOf(r, thr);
+      return { c: r.c, state: st, s: r.s == null ? null : r.s, e: r.e, t: r.t == null ? null : r.t, w: r.w,
+        contribution: r.k == null ? null : r.k, loss: r.s == null || !(det.wsum > 0) ? null : r.w * (1 - r.s) / det.wsum,
+        dir: r.s == null || r.e == null || r.t == null ? null : (r.e > r.t ? "higher" : r.e < r.t ? "lower" : "equal"),
+        delta: r.s == null ? null : (r.e - r.t) / (r.hi - r.lo), status: (ctx.status || {})[r.c] || null };
+    });
+    const groups = Object.fromEntries(STATES.map(s => [s, rows.filter(r => r.state === s).map(r => r.c)]));
+    const compared = rows.filter(r => r.s != null).length;
+    const matter = rows.filter(r => r.loss != null && r.loss > 0).sort((a, b) => (b.loss - a.loss) || (ctx.critIds.indexOf(a.c) - ctx.critIds.indexOf(b.c)));
+    return { score: det.final, coverage: det.coverage, rows, groups, compared, matter: matter.map(r => r.c), lossTotal: rows.reduce((t, r) => t + (r.loss || 0), 0) };
+  }
+
+  /* ---------------------------------------------------------------- objectives (declared profiles) */
+  function objectives(ctx, i, K = 10) {
+    return Object.entries(ctx.profiles).map(([pid, p]) => {
+      const eff = field(ctx, p.weights), L = lens(ctx, i, p.weights);
+      return { pid, score: eff[i] >= 0 ? eff[i] : null, rank: rank(eff, ctx.cell, i), nEligible: nEligible(eff), lead: leadPos(eff, ctx, i, K),
+        costs: L.matter.slice(0, 2), groups: L.groups };
+    });
+  }
+
+  /* ---------------------------------------------------------------- what would change my mind? */
+  function diffW(a, b, critIds) { return critIds.filter(c => +(a[c] || 0) !== +(b[c] || 0)).map(c => ({ c, from: +(a[c] || 0), to: +(b[c] || 0) })); }
+  function activeCount(ctx, w) { return ctx.critIds.filter(c => ctx.tv[c] != null && +(w[c] || 0) > 0).length; }
+  function alternatives(ctx, w) {
+    const out = [], seen = new Set([JSON.stringify(ctx.critIds.map(c => +(w[c] || 0)))]);
+    const push = (kind, id, w2) => {
+      const key = JSON.stringify(ctx.critIds.map(c => +(w2[c] || 0)));
+      if (seen.has(key) || activeCount(ctx, w2) === 0) return; seen.add(key);
+      out.push({ kind, id, w: w2, changes: diffW(w, w2, ctx.critIds) });
+    };
+    for (const [pid, p] of Object.entries(ctx.profiles)) push("profile", pid, { ...p.weights });
+    for (const [src, cs] of Object.entries(ctx.sources || {})) { const w2 = { ...w }; for (const c of cs) w2[c] = 0; push("drop_source", src, w2); }
+    const prox = ctx.critIds.filter(c => (ctx.status || {})[c] === "PROXY" && +(w[c] || 0) > 0);
+    if (prox.length) { const w2 = { ...w }; for (const c of prox) w2[c] = 0; push("drop_proxy", prox.join("+"), w2); }
+    for (const c of ctx.critIds) if (ctx.tv[c] != null && +(w[c] || 0) > 0) { const w2 = { ...w, [c]: 0 }; push("drop_criterion", c, w2); }
+    return out;
+  }
+  function changeMind(ctx, i, w, K = 10) {
+    const eff0 = field(ctx, w), r0 = rank(eff0, ctx.cell, i), l0 = leadPos(eff0, ctx, i, K);
+    const base = { score: eff0[i] >= 0 ? eff0[i] : null, rank: r0, lead: l0, nEligible: nEligible(eff0) };
+    const conclusion = l0 != null ? "leading" : "rank";
+    const alts = alternatives(ctx, w).map(a => {
+      const eff = field(ctx, a.w), r = rank(eff, ctx.cell, i), l = leadPos(eff, ctx, i, K);
+      const holds = conclusion === "leading" ? l != null : (r != null && r0 != null && r <= r0);
+      return { kind: a.kind, id: a.id, changes: a.changes, score: eff[i] >= 0 ? eff[i] : null, rank: r, lead: l, holds, eligible: r != null };
+    });
+    const ranks = alts.map(a => a.rank).filter(r => r != null);
+    const breakers = alts.filter(a => !a.holds);
+    return { conclusion, K, base, alternatives: alts, nAlternatives: alts.length, nHold: alts.length - breakers.length,
+      breakers: breakers.map(a => a.kind + ":" + a.id), bestRank: ranks.length ? Math.min(r0 ?? Infinity, ...ranks) : r0,
+      worstRank: ranks.length ? Math.max(r0 ?? 0, ...ranks) : r0, ineligibleUnder: alts.filter(a => !a.eligible).map(a => a.kind + ":" + a.id) };
+  }
+
+  /* ---------------------------------------------------------------- a team of Earth places */
+  function team(ctx, w, opts = {}) {
+    const thr = ctx.thr, sep = ctx.sep || 300, eff = opts.eff || field(ctx, w);
+    const act = ctx.critIds.filter(c => ctx.tv[c] != null && +(w[c] || 0) > 0), n = eff.length;
+    const mask = new Uint8Array(n), any = new Array(act.length).fill(false);
+    act.forEach((c, b) => {
+      const e = ctx.A[c], span = ctx.ranges[c][1] - ctx.ranges[c][0], t = +ctx.tv[c];
+      for (let j = 0; j < n; j++) {
+        if (!(eff[j] >= 0)) continue; const x = e[j]; if (x - x !== 0) continue;
+        if (1 - Math.abs(x - t) / span >= thr.match) { mask[j] |= 1 << b; any[b] = true; }
+      }
+    });
+    const pop = m => { let k = 0; while (m) { k += m & 1; m >>= 1; } return k; };
+    const members = []; let covered = 0;
+    const reachable = act.reduce((m, c, b) => any[b] ? m | (1 << b) : m, 0);
+    while ((covered & reachable) !== reachable && members.length < act.length) {
+      let best = -1, bn = 0;
+      for (let j = 0; j < n; j++) {
+        const g = mask[j] & ~covered; if (!g) continue;
+        const k = pop(g);
+        if (k < bn) continue;
+        if (best >= 0 && k === bn && (eff[j] < eff[best] || (eff[j] === eff[best] && ctx.cell[j] > ctx.cell[best]))) continue;
+        let ok = true; for (const m of members) if (ENG.haversine(ctx.lat[j], ctx.lon[j], ctx.lat[m.i], ctx.lon[m.i]) < sep) { ok = false; break; }
+        if (!ok) continue;
+        best = j; bn = k;
+      }
+      if (best < 0) break;
+      const gain = mask[best] & ~covered;
+      members.push({ i: best, cell: ctx.cell[best], score: eff[best], adds: act.filter((c, b) => gain & (1 << b)), matches: act.filter((c, b) => mask[best] & (1 << b)) });
+      covered |= gain;
+    }
+    return { criteria: act, members, covered: act.filter((c, b) => covered & (1 << b)), unmatchable: act.filter((c, b) => !any[b]),
+      uncovered: act.filter((c, b) => !(covered & (1 << b))), bestSingle: (() => { let b = -1, bk = -1; for (let j = 0; j < n; j++) { if (!(eff[j] >= 0)) continue; const k = pop(mask[j]); if (k > bk || (k === bk && (eff[j] > eff[b] || (eff[j] === eff[b] && ctx.cell[j] < ctx.cell[b])))) { b = j; bk = k; } } return { i: b, matches: bk }; })() };
+  }
+
+  /* ---------------------------------------------------------------- Earth ceiling (per criterion, weight independent) */
+  function ceiling(ctx, c) {
+    const e = ctx.A[c], span = ctx.ranges[c][1] - ctx.ranges[c][0], t = +ctx.tv[c];
+    let lo = Infinity, hi = -Infinity, best = -1, nM = 0, arg = -1;
+    for (let j = 0; j < e.length; j++) {
+      const x = e[j]; if (x - x !== 0) continue;
+      if (x < lo) lo = x; if (x > hi) hi = x;
+      const s = Math.max(0, Math.min(1, 1 - Math.abs(x - t) / span));
+      if (s > best || (s === best && ctx.cell[j] < ctx.cell[arg])) { best = s; arg = j; }
+      if (s >= ctx.thr.match) nM++;
+    }
+    return { criterion: c, target: t, earthMin: lo, earthMax: hi, bestS: best, bestCell: arg, cellsMatch: nM, structural: nM === 0, outside: t > hi ? "above" : t < lo ? "below" : null };
+  }
+
+  /* ---------------------------------------------------------------- missing pieces (typed records, no prose) */
+  function missing(ctx, i, w, extra = {}) {
+    const L = extra.lens || lens(ctx, i, w), items = [];
+    for (const r of L.rows) {
+      if (r.state === "na") items.push({ id: "target_na:" + r.c, kind: "target_na", severity: "gap", c: r.c, status: r.status, link: { type: "target_sources" } });
+      if (r.state === "unknown") items.push({ id: "earth_missing:" + r.c, kind: "earth_missing", severity: "gap", c: r.c, link: { type: "dataset", ids: (ctx.earthSource || {})[r.c] || [] } });
+      if (r.status === "PROXY" && r.w > 0) items.push({ id: "target_proxy:" + r.c, kind: "target_proxy", severity: "caution", c: r.c, link: { type: "target_sources" } });
+    }
+    for (const r of L.rows) {
+      if (r.t == null || !(r.w > 0)) continue;
+      const C = ceiling(ctx, r.c);
+      if (C.structural) items.push({ id: "structural:" + r.c, kind: "structural", severity: "gap", c: r.c, target: C.target, earthMin: C.earthMin, earthMax: C.earthMax, bestS: C.bestS, outside: C.outside, link: { type: "dataset", ids: (ctx.earthSource || {})[r.c] || [] } });
+    }
+    if (extra.modisCoverage != null && extra.modisCoverage < 0.5 && L.rows.some(r => r.c === "lst_diurnal_range" && r.w > 0 && r.e != null))
+      items.push({ id: "modis_coverage", kind: "thin_coverage", severity: "caution", c: "lst_diurnal_range", value: extra.modisCoverage, link: { type: "dataset", ids: ["modis_aqua_lst"] } });
+    if (L.coverage < 1 - 1e-12) items.push({ id: "partial_coverage", kind: "partial_coverage", severity: "caution", value: L.coverage, link: { type: "rule" } });
+    if (extra.change) {
+      for (const a of extra.change.alternatives) if (!a.holds && a.kind === "drop_source") items.push({ id: "source_dependence:" + a.id, kind: "source_dependence", severity: "caution", source: a.id, rank: a.rank, link: { type: "sensitivity", alternative: a.kind + ":" + a.id } });
+      for (const a of extra.change.alternatives) if (!a.holds && a.kind === "drop_proxy") items.push({ id: "proxy_dependence", kind: "proxy_dependence", severity: "caution", criteria: a.id.split("+"), rank: a.rank, link: { type: "sensitivity", alternative: a.kind + ":" + a.id } });
+    }
+    items.push({ id: "resolution", kind: "resolution", severity: "info", km: extra.cellKm || null, targetKm: extra.targetWindowKm || null, link: { type: "dataset", ids: ["gmted2010", "nasa_power"] } });
+    items.push({ id: "temporal", kind: "temporal", severity: "info", link: { type: "dataset", ids: ["nasa_power", "modis_aqua_lst", "gmted2010"] } });
+    items.push({ id: "not_measured", kind: "not_measured", severity: "info", link: { type: "rule" } });
+    const order = { gap: 0, caution: 1, info: 2 };
+    return items.sort((a, b) => order[a.severity] - order[b.severity]);
+  }
+
+  /* ---------------------------------------------------------------- trust view: evidence rows, never a single score */
+  function trust(ctx, i, w, extra = {}) {
+    const L = extra.lens || lens(ctx, i, w), st = ctx.status || {};
+    const act = L.rows.filter(r => r.t != null && r.w > 0);
+    const rows = [
+      { id: "measurements", direct: act.filter(r => r.status === "DIRECT").length, proxy: act.filter(r => r.status === "PROXY").length, compared: L.compared, active: act.length },
+      { id: "coverage", value: L.coverage, missing: L.groups.unknown, modis: extra.modisCoverage ?? null, land: extra.landFraction ?? null },
+      { id: "limits", structural: act.filter(r => ceiling(ctx, r.c).structural).map(r => r.c) },
+      { id: "robustness", available: !!extra.change, hold: extra.change ? extra.change.nHold : null, total: extra.change ? extra.change.nAlternatives : null, conclusion: extra.change ? extra.change.conclusion : null },
+      { id: "reproducibility", algorithm: ENG.ALGORITHM_VERSION, stack: extra.stackSha || null, verified: extra.stackVerified ?? null, config: ctx.config || null },
+      { id: "sources", earth: Array.from(new Set(act.flatMap(r => (ctx.earthSource || {})[r.c] || []))), target: (extra.targetSources || []).slice() },
+      { id: "scope" },
+    ];
+    void st;
+    return { rows, note: "no_single_score" };
+  }
+
+  /* ---------------------------------------------------------------- calibrated summary (keys, not prose) */
+  function summary(L, change, thr) {
+    /* levels count agreeing criteria (s ≥ match threshold), so the words never claim more than the per-criterion test */
+    const sim = L.groups.similar.length, comp = L.compared;
+    const level = !(L.score >= 0) || !comp ? "none" : sim === comp ? "close" : 2 * sim >= comp ? "partial" : "weak";
+    const robust = !change ? null : change.nHold === change.nAlternatives ? "all" : 2 * change.nHold > change.nAlternatives ? "most" : 2 * change.nHold === change.nAlternatives ? "half" : "few";
+    return { level, robust, similar: L.groups.similar.length, compared: L.compared, different: L.groups.different.length, unknown: L.groups.unknown.length, na: L.groups.na.length };
+  }
+
+  /* ---------------------------------------------------------------- reveal: 7 steps of data */
+  function reveal(ctx, i, w, extra = {}) {
+    const L = extra.lens || lens(ctx, i, w), obj = extra.objectives || null;
+    let alt = null;
+    if (obj) {
+      const cur = obj.find(o => o.pid === extra.profile) || null;
+      const others = obj.filter(o => o.pid !== extra.profile && o.rank != null).sort((a, b) => (a.rank - b.rank) || (a.pid < b.pid ? -1 : 1));
+      alt = { current: cur, best: others[0] || null, worst: others.length ? others[others.length - 1] : null };
+    }
+    return [
+      { id: "earth", values: L.rows.map(r => ({ c: r.c, e: r.e })) },
+      { id: "target", values: L.rows.map(r => ({ c: r.c, t: r.t, status: r.status })) },
+      { id: "agree", criteria: L.groups.similar, rows: L.rows.filter(r => r.state === "similar") },
+      { id: "differ", criteria: L.groups.partial.concat(L.groups.different), rows: L.rows.filter(r => r.state === "partial" || r.state === "different").sort((a, b) => b.loss - a.loss), unknown: L.groups.unknown, na: L.groups.na },
+      { id: "evidence", earth: L.rows.filter(r => r.s != null).map(r => ({ c: r.c, sources: (ctx.earthSource || {})[r.c] || [], status: r.status })) },
+      { id: "objective", alt },
+      { id: "summary", summary: summary(L, extra.change || null, ctx.thr), score: L.score },
+    ];
+  }
+
+  /* ---------------------------------------------------------------- one place against several worlds */
+  function multiWorld(ctxs, i, w) {
+    return ctxs.map(c => {
+      const L = lens(c, i, w);
+      const eligible = L.coverage >= 0.8 - 1e-12 && L.compared > 0;
+      return { tid: c.tid, config: c.config || null, score: eligible ? L.score : null, compared: L.compared, na: L.groups.na, unknown: L.groups.unknown, similar: L.groups.similar, different: L.groups.different, coverage: L.coverage };
+    });
+  }
+
+  /* ---------------------------------------------------------------- Analogue Passport */
+  function passport(ctx, i, w, meta = {}) {
+    const L = meta.lens || lens(ctx, i, w);
+    const r6 = x => x == null ? null : Math.round(x * 1e12) / 1e12;
+    return {
+      schema: "asterro.passport/1",
+      generator: { journey: VERSION, algorithm: ENG.ALGORITHM_VERSION },
+      created: meta.created || null,
+      place: { cell_id: ctx.cell[i], lat: ctx.lat[i], lon: ctx.lon[i], name: meta.place || null, country: meta.country || null, cell_size_deg: [0.5, 0.625] },
+      target: { id: ctx.tid, name: meta.targetName || null, body: meta.body || null, scoring_config: ctx.config || null, fingerprint_sha256: meta.fingerprint || null },
+      configuration: { profile: meta.profile || null, weights: Object.fromEntries(ctx.critIds.map(c => [c, +(w[c] || 0)])), normalization_ranges: Object.fromEntries(ctx.critIds.map(c => [c, ctx.ranges[c].slice()])), thresholds: { match: ctx.thr.match, partial: ctx.thr.partial, min_coverage: 0.8, distinct_sep_km: ctx.sep || 300 } },
+      result: { analogue_score: r6(L.score), coverage: r6(L.coverage), cell_rank: meta.rank ?? null, eligible_cells: meta.nEligible ?? null, leading_site_position: meta.lead ?? null },
+      criteria: L.rows.map(r => ({ id: r.c, earth: r.e, target: r.t, target_status: r.status, weight: r.w, similarity: r6(r.s), state: r.state, contribution: r6(r.contribution), earth_sources: (ctx.earthSource || {})[r.c] || [] })),
+      sensitivity: meta.change ? { conclusion: meta.change.conclusion, holds: meta.change.nHold, alternatives: meta.change.nAlternatives, breakers: meta.change.breakers } : null,
+      evidence_gaps: (meta.missing || []).map(m => m.id),
+      sources: { earth: meta.earthDatasets || [], target: meta.targetSources || [] },
+      reproducibility: { predictor_stack_sha256: meta.stackSha || null, rescore: "score = Σ w·s / Σw over criteria with an Earth value; s = clip(1 − |earth − target| / (max − min), 0, 1); eligible if Σw(with Earth value) / Σw(active) ≥ 0.80" },
+      disclaimer: "Environmental similarity on the measured criteria only. Not physical, geological, biological or engineering equivalence; not validated against field data; not endorsed by NASA.",
+    };
+  }
+  /* re-score a passport from its own contents (used by tests and by anyone holding only the JSON) */
+  function rescore(p) {
+    let num = 0, ws = 0, tot = 0;
+    for (const r of p.criteria) {
+      if (r.target == null || !(r.weight > 0)) continue; tot += r.weight;
+      if (r.earth == null) continue;
+      const R = p.configuration.normalization_ranges[r.id], s = Math.max(0, Math.min(1, 1 - Math.abs(r.earth - r.target) / (R[1] - R[0])));
+      num += r.weight * s; ws += r.weight;
+    }
+    return ws > 0 && ws / tot >= 0.8 - 1e-12 ? num / ws : null;
+  }
+
+  const api = { VERSION, STATES, field, detail, rank, nEligible, leadPos, leaders, lens, stateOf, objectives, alternatives, changeMind, team, ceiling, missing, trust, summary, reveal, multiWorld, passport, rescore };
+  if (typeof module === "object" && module.exports) module.exports = api;
+  root.AsterroJourney = api;
+})(typeof window !== "undefined" ? window : globalThis);
+
 /* ASTERRO — Mismatch Signature engine and Method Arena (browser + Node).
  *
  * MISMATCH SIGNATURES. For a target vector t, weights w and normalisation ranges R, every Earth cell gets a signed,
@@ -8159,4 +9760,549 @@ document.addEventListener("change", e => {
   const a = e.target.closest("[data-m6in]"); if (!a) return;
   if (a.dataset.m6in === "tid") { M6.tid = a.value; M6.fam = null; M6.cell = null; atRender(); }
 });
+
+/* ===== ASTERRO · Discovery Journey — a story-led way in, for people who are not planetary scientists =====
+ * One accessible full-screen dialog (focus trap, Esc returns focus) with:
+ *   Discoveries   story cards computed live from the bundled, checksum-verified data (never pre-written results)
+ *   Reveal        a staged 7-step explanation of one Earth place against one target
+ *   Lens          similar / partly similar / different / unknown / not compared, for a switchable objective
+ *   Change my mind, Missing pieces, Trust, Other worlds, Through time, Passport, Team of places
+ * All numbers come from AsterroJourney (journey_engine.js) over the unchanged baseline engine; this file only
+ * chooses words (via tx) and draws. Nothing here alters a baseline score, weight, range, ranking or view. */
+const JE = window.AsterroJourney;
+const JN = { open: false, view: "home", i: null, tid: "mars_jezero", pid: "general", w: null, sec: "reveal", step: 0, opener: null,
+  cm: new Map(), stories: null, storyKey: null, busy: false, lastFocus: null };
+const JN_SECS = ["reveal", "lens", "change", "missing", "trust", "worlds", "time", "passport"];
+const JN_GLYPH = { similar: "≈", partial: "~", different: "✕", unknown: "?", na: "—", off: "○" };
+
+/* ---------------------------------------------------------------- context and cached computations */
+function jnEarthSource() { return Object.fromEntries(S.app.criteria.map(c => [c.id, c.earth_source.slice()])); }
+function jnSources() { const o = {}; for (const c of S.app.criteria) for (const s of c.earth_source) (o[s] = o[s] || []).push(c.id); return o; }
+function jnCtx(tid) {
+  const T = S.T[tid];
+  return { tid, A: S.A, critIds: S.critIds, cell: S.cell, lat: S.lat, lon: S.lon, tv: T.variables, status: T.status || {}, ranges: a4RangesFor(tid),
+    thr: S.app.thresholds, profiles: S.app.profiles, sources: jnSources(), earthSource: jnEarthSource(), sep: S.app.thresholds.distinct_sep_km,
+    config: a4IsNew(tid) ? "explore-target-v1" : "legacy-baseline-v1", effFor: w => simFor(tid, w).eff };
+}
+function jnTargets() { return TARGET_IDS.concat(typeof A4X !== "undefined" ? A4X.ids : []).filter(id => S.T[id]); }
+function jnTName(tid) { return txHas("tname." + tid) ? esc(tx("tname." + tid)) : keep(TNAME[tid] || S.T[tid].name); }
+function jnTNameText(tid) { return txHas("tname." + tid) ? tx("tname." + tid) : (TNAME[tid] || S.T[tid].name); }
+function jnBody(tid) { const b = (S.T[tid].body || "").toLowerCase(); return tx("body." + (b === "moon" ? "moon" : "mars")); }
+function jnPlace(i) { const p = placeName(i); return p.primary === "Unlabelled land cell" ? esc(tx("place.unlabelled")) : keep(p.primary) + (p.secondary ? ", " + keep(p.secondary) : ""); }
+function jnPlaceText(i) { const p = placeName(i); return p.primary === "Unlabelled land cell" ? tx("place.unlabelled") : placeStr(i); }
+function jnCrit(c) { return esc(tx("crit." + c)); }
+function jnVal(c, v) { if (v == null || v !== v) return esc(tx("val.na")); const cr = S.crit.find(x => x.id === c); const u = unitOf(c); return esc(txNum(+v, cr ? cr.fmt : 2)) + (u ? " " + keep(u) : ""); }
+function jnPts(x) { return esc(txNum(100 * x, 1)); }
+function jnProfileName(pid) { return pid === "custom" ? esc(tx("profile.custom")) : esc(tx("profile." + pid)); }
+function jnDataset(id) { const d = S.app.datasets.find(x => x.id === id); return d ? d : { id, dataset: id, url: "" }; }
+function jnDsName(id) { return keep({ nasa_power: "NASA POWER", modis_aqua_lst: "MODIS Aqua LST (MYD11C3)", gmted2010: "USGS GMTED2010" }[id] || jnDataset(id).dataset); }
+function jnW() { return JN.pid === "custom" ? { ...JN.w } : { ...S.app.profiles[JN.pid].weights }; }
+function jnKey(...a) { return a.join("|"); }
+
+/* ---------------------------------------------------------------- open / close / focus */
+function jnShell() {
+  let d = $("#jn"); if (d) return d;
+  d = document.createElement("div"); d.id = "jn"; d.className = "jn"; d.hidden = true;
+  d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "jn-title");
+  d.innerHTML = `<div class="jn-card"><div class="jn-head" id="jn-head"></div><div class="jn-body" id="jn-body" tabindex="-1"></div></div><div class="sr-only" aria-live="polite" id="jn-live"></div>`;
+  $("#app").appendChild(d);
+  d.addEventListener("click", jnClick);
+  d.addEventListener("change", jnChange);
+
+  return d;
+}
+function jnOpen(view = "home", o = {}) {
+  if (!S.A || !S.A.cell) return;
+  const d = jnShell();
+  if (!JN.open) JN.opener = document.activeElement;
+  JN.open = true; JN.view = view;
+  if (o.i != null) JN.i = o.i;
+  if (o.tid) JN.tid = o.tid;
+  if (o.pid) { JN.pid = o.pid; if (o.pid === "custom") JN.w = { ...S.weights }; }
+  if (o.sec) JN.sec = o.sec;
+  if (o.step != null) JN.step = o.step;
+  if (!d.dataset.rot && window.GLOBE) { d.dataset.rot = GLOBE.autoRotate ? "1" : "0"; GLOBE.autoRotate = false; }   // a still globe behind the dialog: no redraw per frame
+  d.hidden = false; document.body.classList.add("jn-on");
+  jnRender();
+  setTimeout(() => { const t = $("#jn-title"); (t || $("#jn-body")).focus(); }, 0);
+}
+function jnClose() {
+  const d = $("#jn"); if (!d || d.hidden) return;
+  d.hidden = true; JN.open = false; document.body.classList.remove("jn-on");
+  if (window.GLOBE && d.dataset.rot === "1" && !S.searched) GLOBE.autoRotate = true;
+  delete d.dataset.rot;
+  const o = JN.opener; JN.opener = null;
+  if (o && document.contains(o) && o.focus) o.focus();
+}
+function jnFocusables() { return $$("#jn button:not([disabled]), #jn select, #jn a[href], #jn [tabindex]:not([tabindex='-1']), #jn summary").filter(e => e.offsetParent !== null || e === document.activeElement); }
+function jnKeys(e) {
+  if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); jnClose(); return; }
+  if (e.key === "Tab") {
+    const f = jnFocusables(); if (!f.length) return;
+    const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && (document.activeElement === a || !$("#jn").contains(document.activeElement))) { e.preventDefault(); z.focus(); }
+    else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    return;
+  }
+  if (JN.view === "place" && JN.sec === "reveal" && (e.key === "ArrowRight" || e.key === "ArrowLeft")) {
+    const tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (tag === "SELECT" || tag === "INPUT" || tag === "TEXTAREA") return;
+    e.preventDefault(); jnStep(e.key === "ArrowRight" ? 1 : -1);
+  }
+}
+function jnLive(msg) { const a = $("#jn-live"); if (a) { a.textContent = ""; setTimeout(() => a.textContent = msg, 30); } }
+
+/* ---------------------------------------------------------------- rendering */
+function jnBadge() {
+  const off = typeof navigator !== "undefined" && navigator.onLine === false;
+  const ok = S.hashOK === true;
+  return `<span class="jn-badge ${ok ? "ok" : ""}" title="${esc(tx("badge.title", { sha: S.app.stack.sha256.slice(0, 12) }))}">${ok ? "✓ " : ""}${esc(tx(off ? (ok ? "badge.offline" : "badge.offline_plain") : ok ? "badge.verified" : "badge.bundled"))}</span>`;
+}
+function jnHead() {
+  const back = JN.view === "home" ? "" : `<button class="jn-back" data-jn="home" aria-label="${esc(tx("nav.back_home"))}">‹ <span>${esc(tx("nav.discoveries"))}</span></button>`;
+  const title = JN.view === "home" ? tx("home.title") : JN.view === "team" ? tx("team.title") : null;
+  return `${back}<div class="jn-htxt">${title ? `<h2 id="jn-title" tabindex="-1">${esc(title)}</h2>` : `<h2 id="jn-title" tabindex="-1">${jnPlace(JN.i)}</h2>`}${jnBadge()}</div>
+    ${i18nSelect("jn-lang", "jn-langsel")}<button class="jn-x" data-jn="close" aria-label="${esc(tx("nav.close"))}">×</button>`;
+}
+/* re-rendering replaces the dialog's content (registry arrival, finished tests, language switch): keep keyboard
+ * focus on the same control, or on the title when that control no longer exists */
+function jnFocusKey() {
+  const a = document.activeElement, d = $("#jn"); if (!a || !d || !d.contains(a)) return null;
+  if (a.id) return "#" + CSS.escape(a.id);
+  for (const n of ["data-jn", "data-jnsec", "data-jnstep", "data-jnpid", "data-jnin"]) {
+    const v = a.getAttribute(n); if (v == null) continue;
+    const i = a.getAttribute("data-i");
+    return `[${n}="${CSS.escape(v)}"]` + (i != null ? `[data-i="${CSS.escape(i)}"]` : "");
+  }
+  return "#jn-title";
+}
+function jnRender() {
+  const d = $("#jn"); if (!d || d.hidden) return;
+  const fk = jnFocusKey();
+  try { jnRenderInner(d); }
+  finally {
+    if (fk) { let t = null; try { t = d.querySelector(fk); } catch (e) { t = null; } (t || $("#jn-title") || $("#jn-body")).focus({ preventScroll: true }); }
+  }
+}
+function jnRenderInner(d) {
+  d.dataset.view = JN.view;
+  if (JN.liveLang !== I18N.lang) { const lv = $("#jn-live"); if (lv) lv.textContent = ""; JN.liveLang = I18N.lang; }
+  $("#jn-head").innerHTML = jnHead();
+  let h = "";
+  try { h = JN.view === "home" ? jnHome() : JN.view === "team" ? jnTeamView() : jnPlaceView(); }
+  catch (err) { console.error(err); h = `<div class="jn-pad"><p class="jn-callout">${esc(tx("err.compute"))} <span class="meta">${esc(err.message)}</span></p></div>`; }
+  $("#jn-body").innerHTML = h;
+  if (JN.view === "place" && JN.sec === "change" && !JN.cm.has(jnCmKey())) jnRunChange();
+}
+
+/* ---------------------------------------------------------------- Discoveries (home) */
+function jnStories() {
+  const key = jnKey(S.app.stack.sha256, typeof A4X !== "undefined" ? A4X.ids.length : 0);
+  if (JN.stories && JN.storyKey === key) return JN.stories;
+  const W = S.app.profiles.general.weights, out = [];
+  const top = tid => { const c = jnCtx(tid), eff = c.effFor(W), L = JE.leaders(eff, c, 1)[0], ln = JE.lens(c, L, W); return { tid, i: L, score: eff[L], ln }; };
+  out.push({ id: "mars_top", ...top("mars_jezero") });
+  out.push({ id: "moon_top", ...top("moon_south_pole") });
+  const cj = jnCtx("mars_jezero"), C = JE.ceiling(cj, "lst_diurnal_range");
+  out.push({ id: "thermal", tid: "mars_jezero", i: C.bestCell, C });
+  const tm = JE.team(cj, W);
+  out.push({ id: "team", tid: "mars_jezero", team: tm, i: tm.members.length ? tm.members[0].i : null });
+  if (typeof A4X !== "undefined" && A4X.ids.includes("moon_shackleton")) out.push({ id: "shackleton", ...top("moon_shackleton") });
+  JN.stories = out; JN.storyKey = key;
+  return out;
+}
+function jnCard(s) {
+  const body = (S.T[s.tid].body || "").toLowerCase() === "moon" ? "moon" : "mars";
+  const kick = `${esc(jnBody(s.tid))} · ${jnTName(s.tid)}`;
+  let h = "", p = "", act = `<button class="jn-btn" data-jn="why" data-i="${s.i}" data-tid="${s.tid}" data-pid="general">${esc(tx("story.explore_why"))}</button>`;
+  if (s.id === "mars_top" || s.id === "moon_top" || s.id === "shackleton") {
+    h = txH("story.top.h", {}, { place: jnPlace(s.i), target: jnTName(s.tid) });
+    p = esc(tx("story.top.p", { similar: txInt(s.ln.groups.similar.length), compared: txInt(s.ln.compared), score: txPct(s.score) }));
+    if (s.id === "shackleton") p += ` <span class="jn-note">${esc(tx("story.shackleton.note"))}</span>`;
+  } else if (s.id === "thermal") {
+    h = esc(tx("story.thermal.h", { target: jnTNameText(s.tid) }));
+    p = txH("story.thermal.p", { t: txNum(s.C.target, 1), e: txNum(s.C.earthMax, 1) }, { place: jnPlace(s.i) }) + " " + esc(tx("story.thermal.p2", { s: txNum(s.C.bestS, 2) }));
+  } else if (s.id === "team") {
+    const T = s.team;
+    h = esc(tx("story.team.h"));
+    p = esc(tx("story.team.p", { n: txInt(T.criteria.length), k: txInt(T.members.length), m: txInt(T.covered.length) }));
+    if (T.unmatchable.length) p += " " + esc(tx("story.team.p_none", { list: txList(T.unmatchable.map(c => tx("crit." + c + ".s"))) }));
+    act = `<button class="jn-btn" data-jn="team" data-tid="${s.tid}">${esc(tx("story.see_team"))}</button>`;
+  }
+  return `<article class="jn-story b-${body}" data-story="${s.id}"><p class="jn-kick">${kick}</p><h3>${h}</h3><p>${p}</p><div class="jn-act">${act}</div></article>`;
+}
+function jnHome() {
+  const st = jnStories();
+  const sel = S.selected ?? S.picked;
+  const yours = sel != null ? `<article class="jn-story b-earth" data-story="yours"><p class="jn-kick">${esc(tx("story.yours.kick"))}</p><h3>${jnPlace(sel)}</h3><p>${esc(tx("story.yours.p"))}</p><div class="jn-act"><button class="jn-btn" data-jn="why" data-i="${sel}" data-tid="${S.targetId === "cross" ? "mars_jezero" : S.targetId}" data-pid="${S.profile === "custom" ? "custom" : S.profile}">${esc(tx("story.explore_why"))}</button></div></article>` : "";
+  const regNote = (typeof A4 !== "undefined" && !A4.reg && !A4.err) ? `<p class="jn-note">${esc(tx("home.loading_registry"))}</p>` : "";
+  return `<div class="jn-pad jn-home"><p class="jn-eyebrow">${esc(tx("home.eyebrow"))}</p><p class="jn-lead">${esc(tx("home.lead"))}</p>
+    <div class="jn-stories">${yours}${st.map(jnCard).join("")}</div>${regNote}
+    <p class="jn-fine">${esc(tx("home.fine"))}</p>${jnReviewNote()}</div>`;
+}
+function jnReviewNote() { return I18N.lang === "en" ? "" : `<p class="jn-fine jn-review">${esc(tx("lang.review_note"))}</p>`; }
+
+/* ---------------------------------------------------------------- one place */
+function jnLens(tid = JN.tid, w = jnW()) { return JE.lens(jnCtx(tid), JN.i, w); }
+function jnPlaceView() {
+  const i = JN.i, tid = JN.tid, w = jnW(), ctx = jnCtx(tid), eff = ctx.effFor(w), L = JE.lens(ctx, i, w);
+  const r = JE.rank(eff, S.cell, i), lead = JE.leadPos(eff, ctx, i, 10), n = JE.nEligible(eff);
+  const tsel = `<label class="jn-field"><span>${esc(tx("place.target"))}</span><select data-jnin="tid">${jnTargets().map(id => `<option value="${id}"${id === tid ? " selected" : ""}>${esc(jnBody(id))} · ${esc(jnTNameText(id))}</option>`).join("")}</select></label>`;
+  const psel = `<label class="jn-field"><span>${esc(tx("place.objective"))}</span><select data-jnin="pid">${Object.keys(S.app.profiles).map(p => `<option value="${p}"${p === JN.pid ? " selected" : ""}>${jnProfileName(p)}</option>`).join("")}${JN.w ? `<option value="custom"${JN.pid === "custom" ? " selected" : ""}>${jnProfileName("custom")}</option>` : ""}</select></label>`;
+  const score = `<div class="jn-score"><b>${esc(txPct(eff[i]))}</b><span>${esc(tx("place.score_label"))}</span></div>`;
+  const where = `<p class="jn-where">${esc(txLL(S.lat[i], S.lon[i]))} · ${esc(tx("place.cell", { id: txInt(S.cell[i]) }))} · ${esc(r == null ? tx("place.not_eligible") : tx("place.rank", { r: txInt(r), n: txInt(n) }))}${lead ? " · " + esc(tx("place.leading", { k: txInt(lead) })) : ""}</p>`;
+  const nav = `<div class="jn-tabs" role="tablist" aria-label="${esc(tx("aria.sections"))}">${JN_SECS.map(s => `<button role="tab" id="jn-tab-${s}" aria-selected="${s === JN.sec}" aria-controls="jn-panel" data-jnsec="${s}">${esc(tx("sec." + s))}</button>`).join("")}</div>`;
+  const panel = { reveal: jnReveal, lens: jnLensView, change: jnChangeView, missing: jnMissingView, trust: jnTrustView, worlds: jnWorldsView, time: jnTimeView, passport: jnPassportView }[JN.sec](ctx, L, eff);
+  return `<div class="jn-pad"><div class="jn-placehead"><div>${where}<div class="jn-ctrls">${tsel}${psel}</div></div>${score}</div>${nav}
+    <section id="jn-panel" role="tabpanel" aria-labelledby="jn-tab-${JN.sec}" class="jn-panel">${panel}</section>
+    <div class="jn-foot"><button class="jn-lnk" data-jn="globe">${esc(tx("place.show_globe"))}</button><span class="jn-fine">${esc(tx("place.fine"))}</span></div>${jnReviewNote()}</div>`;
+}
+
+/* ---------- Reveal: 7 steps ---------- */
+function jnStep(d) {
+  const k = clamp(JN.step + d, 0, 6); if (k === JN.step) return;
+  JN.step = k; jnRender();
+  const h = $("#jn-step-h"); if (h) h.focus();
+  jnLive(tx("reveal.step_of", { k: txInt(k + 1), n: txInt(7) }) + ": " + tx("reveal.s" + (k + 1)));
+}
+function jnRowsTable(rows, cols) {
+  return `<table class="jn-t"><tbody>${rows.map(r => `<tr>${cols.map(f => f(r)).join("")}</tr>`).join("")}</tbody></table>`;
+}
+function jnStatusChip(st) { return st ? `<span class="jn-st st-${esc(st.toLowerCase().replace(/[^a-z]/g, ""))}">${esc(tx("status." + st))}</span>` : ""; }
+function jnStateChip(st) { return `<span class="jn-sc s-${st}"><b aria-hidden="true">${JN_GLYPH[st]}</b>${esc(tx("state." + st))}</span>`; }
+function jnReveal(ctx, L) {
+  const w = jnW(), obj = JE.objectives(ctx, JN.i, 10), steps = JE.reveal(ctx, JN.i, w, { lens: L, objectives: obj, profile: JN.pid, change: JN.cm.get(jnCmKey()) || null });
+  const k = JN.step, s = steps[k];
+  let body = "";
+  if (s.id === "earth") {
+    body = `<p>${esc(tx("reveal.earth.p"))}</p>` + jnRowsTable(L.rows, [r => `<th scope="row">${jnCrit(r.c)}<small>${esc(tx("crit." + r.c + ".plain"))}</small></th>`, r => `<td class="n">${jnVal(r.c, r.e)}</td>`]);
+  } else if (s.id === "target") {
+    body = `<p>${esc(tx("reveal.target.p", { target: jnTNameText(JN.tid) }))}</p>` + jnRowsTable(L.rows, [r => `<th scope="row">${jnCrit(r.c)}</th>`, r => `<td class="n">${jnVal(r.c, r.t)}</td>`, r => `<td>${jnStatusChip(r.status)}</td>`]);
+  } else if (s.id === "agree") {
+    body = s.rows.length ? `<p>${esc(tx("reveal.agree.p", { k: txInt(s.rows.length), n: txInt(L.compared) }))}</p>` + jnRowsTable(s.rows, [r => `<th scope="row">${jnStateChip(r.state)} ${jnCrit(r.c)}</th>`, r => `<td class="n">${jnVal(r.c, r.e)} <span class="meta">${esc(tx("reveal.vs"))}</span> ${jnVal(r.c, r.t)}</td>`, r => `<td class="n">s = ${esc(txNum(r.s, 2))}</td>`])
+      : `<p>${esc(tx("reveal.agree.none"))}</p>`;
+  } else if (s.id === "differ") {
+    body = s.rows.length ? `<p>${esc(tx("reveal.differ.p"))}</p>` + jnRowsTable(s.rows, [r => `<th scope="row">${jnStateChip(r.state)} ${jnCrit(r.c)}</th>`, r => `<td>${esc(tx(r.dir === "higher" ? "reveal.earth_higher" : "reveal.earth_lower"))}: ${jnVal(r.c, r.e)} <span class="meta">${esc(tx("reveal.vs"))}</span> ${jnVal(r.c, r.t)}</td>`, r => `<td class="n">${esc(tx("reveal.costs", { pts: txNum(100 * r.loss, 1) }))}</td>`])
+      : `<p>${esc(tx("reveal.differ.none"))}</p>`;
+    if (s.unknown.length) body += `<p class="jn-note">${esc(tx("reveal.unknown", { list: txList(s.unknown.map(c => tx("crit." + c + ".s"))) }))}</p>`;
+    if (s.na.length) body += `<p class="jn-note">${esc(tx("reveal.na", { list: txList(s.na.map(c => tx("crit." + c + ".s"))) }))}</p>`;
+  } else if (s.id === "evidence") {
+    const T = S.T[JN.tid];
+    body = `<p>${esc(tx("reveal.evidence.p"))}</p>` + jnRowsTable(s.earth, [r => `<th scope="row">${jnCrit(r.c)}</th>`, r => `<td>${r.sources.map(jnDsName).join(", ")}</td>`, r => `<td>${jnStatusChip(r.status)}</td>`]) +
+      `<p class="jn-note">${esc(tx("reveal.evidence.target"))} ${T.sources.map((x, k) => T.source_urls[k] ? `<a href="${esc(T.source_urls[k])}" target="_blank" rel="noopener">${keep(x)}</a>` : keep(x)).join(" · ")}</p>`;
+  } else if (s.id === "objective") {
+    const a = s.alt;
+    if (a && a.current && a.best) {
+      body = `<p>${esc(tx("reveal.objective.p", { profile: tx("profile." + JN.pid), r: txInt(a.current.rank) }))}</p>`;
+      body += `<p>${esc(tx("reveal.objective.best", { profile: tx("profile." + a.best.pid), r: txInt(a.best.rank) }))} ${a.worst && a.worst.pid !== a.best.pid ? esc(tx("reveal.objective.worst", { profile: tx("profile." + a.worst.pid), r: txInt(a.worst.rank) })) : ""}</p>`;
+    } else body = `<p>${esc(tx("reveal.objective.custom"))}</p>`;
+    body += jnObjTable(obj) + `<p><button class="jn-lnk" data-jnsec="lens">${esc(tx("reveal.open_lens"))}</button></p>`;
+  } else if (s.id === "summary") {
+    body = `<p class="jn-verdict">${jnSummaryText(s.summary, L)}</p><p class="jn-note">${esc(tx("summary.scope"))}</p>
+      <div class="jn-act"><button class="jn-btn" data-jnsec="passport">${esc(tx("sec.passport"))}</button><button class="jn-btn ghost" data-jnsec="change">${esc(tx("sec.change"))}</button><button class="jn-btn ghost" data-jnsec="missing">${esc(tx("sec.missing"))}</button></div>`;
+  }
+  const dots = steps.map((x, j) => `<button class="jn-dot${j === k ? " on" : ""}${j < k ? " done" : ""}" data-jnstep="${j}" aria-label="${esc(tx("reveal.step_of", { k: txInt(j + 1), n: txInt(7) }) + ": " + tx("reveal.s" + (j + 1)))}"${j === k ? ' aria-current="step"' : ""}></button>`).join("");
+  return `<div class="jn-reveal"><div class="jn-dots">${dots}</div>
+    <div class="jn-stepcard jn-in" data-step="${s.id}"><p class="jn-kick">${esc(tx("reveal.step_of", { k: txInt(k + 1), n: txInt(7) }))}</p><h3 id="jn-step-h" tabindex="-1">${esc(tx("reveal.s" + (k + 1)))}</h3>${body}</div>
+    <div class="jn-stepnav"><button class="jn-btn ghost" data-jn="prev"${k === 0 ? " disabled" : ""}>‹ ${esc(tx("reveal.back"))}</button>
+    <span class="jn-hint">${esc(tx("reveal.keys"))}</span>
+    ${k < 6 ? `<button class="jn-lnk" data-jn="skip">${esc(tx("reveal.skip"))}</button><button class="jn-btn" data-jn="next">${esc(tx("reveal.next"))} ›</button>` : `<button class="jn-btn" data-jnstep="0">${esc(tx("reveal.again"))}</button>`}</div></div>`;
+}
+function jnSummaryText(sm, L) {
+  const lvl = tx("summary.level." + sm.level, { similar: txInt(sm.similar), compared: txInt(sm.compared), score: txPct(L.score) });
+  const rob = sm.robust ? " " + tx("summary.robust." + sm.robust) : " " + tx("summary.robust.untested");
+  return esc(lvl + rob);
+}
+function jnObjTable(obj) {
+  return `<div class="jn-scroll"><table class="jn-t jn-obj"><thead><tr><th>${esc(tx("lens.objective"))}</th><th class="n">${esc(tx("lens.score"))}</th><th class="n">${esc(tx("lens.rank"))}</th><th>${esc(tx("lens.costs_most"))}</th></tr></thead><tbody>${obj.map(o => `<tr${o.pid === JN.pid ? ' class="on"' : ""}><th scope="row">${jnProfileName(o.pid)}</th><td class="n">${esc(txPct(o.score))}</td><td class="n">${esc(txRank(o.rank))}${o.lead ? ` <span class="jn-leadk">${esc(tx("lens.leading", { k: txInt(o.lead) }))}</span>` : ""}</td><td>${o.costs.map(c => jnCrit(c)).join(", ") || "—"}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+/* ---------- Planetary Difference Lens ---------- */
+function jnLensSVG(L) {
+  const narrow = innerWidth < 600, rows = L.rows, W = narrow ? 360 : 640, rh = narrow ? 40 : 46, x0 = narrow ? 104 : 210, x1 = W - (narrow ? 52 : 70), H = rows.length * rh + 26, thr = S.app.thresholds;   // phone: a narrower drawing keeps the labels at reading size
+  const sx = v => x0 + (x1 - x0) * clamp(v, 0, 1);
+  let g = `<text x="${x0}" y="14" class="ax">${esc(tx("lens.axis_min"))}</text><text x="${x1}" y="14" class="ax" text-anchor="end">${esc(tx("lens.axis_max"))}</text>`;
+  rows.forEach((r, k) => {
+    const y = 26 + k * rh, cy = y + 18, R = ctxRange(r.c), tn = r.t == null ? null : (r.t - R[0]) / (R[1] - R[0]), en = r.e == null ? null : (r.e - R[0]) / (R[1] - R[0]);
+    g += `<g class="lr s-${r.state}"><text x="0" y="${cy + 4}" class="lab"><tspan class="gl">${JN_GLYPH[r.state]}</tspan> ${esc(tx("crit." + r.c + ".short"))}</text>`;
+    g += `<line x1="${x0}" x2="${x1}" y1="${cy}" y2="${cy}" class="trk"/>`;
+    if (tn != null && r.w > 0) { const a = sx(tn - (1 - thr.match)), b = sx(tn + (1 - thr.match)); g += `<rect x="${a.toFixed(1)}" y="${cy - 7}" width="${(b - a).toFixed(1)}" height="14" class="zone"/>`; }
+    if (tn != null) g += `<path d="M${sx(tn).toFixed(1)} ${cy - 8} l7 8 l-7 8 l-7 -8z" class="tm"/>`;
+    if (en != null) g += `<circle cx="${sx(en).toFixed(1)}" cy="${cy}" r="6" class="em"/>`;
+    g += `<text x="${W}" y="${cy + 4}" class="val" text-anchor="end">${r.s == null ? esc(tx("state." + r.state)) : "s " + esc(txNum(r.s, 2))}</text></g>`;
+  });
+  return `<figure class="jn-fig"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(tx("lens.svg_label"))}">${g}</svg>
+    <figcaption><span class="lg"><i class="em"></i>${esc(tx("lens.leg_earth"))}</span><span class="lg"><i class="tm"></i>${esc(tx("lens.leg_target"))}</span><span class="lg"><i class="zone"></i>${esc(tx("lens.leg_zone"))}</span></figcaption></figure>`;
+}
+function ctxRange(c) { return a4RangesFor(JN.tid)[c]; }
+function jnLensView(ctx, L, eff) {
+  const groups = ["similar", "partial", "different", "unknown", "na", "off"].filter(g => L.groups[g].length);
+  const matter = L.matter.filter(c => L.rows.find(r => r.c === c).state !== "similar").slice(0, 2);
+  const r = JE.rank(eff, S.cell, JN.i), lead = JE.leadPos(eff, ctx, JN.i, 10);
+  const pick = `<div class="jn-seg" role="radiogroup" aria-label="${esc(tx("lens.objective"))}">${Object.keys(S.app.profiles).map(p => `<button role="radio" aria-checked="${p === JN.pid}" data-jnpid="${p}">${jnProfileName(p)}</button>`).join("")}</div>`;
+  const rationale = JN.pid !== "custom" ? `<p class="jn-note">${esc(tx("profile." + JN.pid + ".why"))}</p>` : "";
+  return `<h3 class="jn-h">${esc(tx("lens.title"))}</h3><p>${esc(tx("lens.p"))}</p>${pick}${rationale}
+    <p class="jn-verdict">${esc(tx("lens.under", { profile: tx(JN.pid === "custom" ? "profile.custom" : "profile." + JN.pid), score: txPct(L.score), r: r == null ? "—" : txInt(r) }))}${lead ? " " + esc(tx("lens.leading_long", { k: txInt(lead) })) : ""}</p>
+    ${jnLensSVG(L)}
+    <div class="jn-groups">${groups.map(g => `<div class="jn-grp g-${g}"><h4>${jnStateChip(g)} <span class="meta">${esc(txInt(L.groups[g].length))}</span></h4><p>${L.groups[g].map(c => jnCrit(c)).join(", ")}</p></div>`).join("")}</div>
+    <h4 class="jn-h4">${esc(tx("lens.matters", { profile: tx(JN.pid === "custom" ? "profile.custom" : "profile." + JN.pid) }))}</h4>
+    ${matter.length ? `<ul class="jn-ul">${matter.map(c => { const row = L.rows.find(x => x.c === c); return `<li>${jnCrit(c)}: ${esc(tx("lens.costs", { pts: txNum(100 * row.loss, 1), w: txNum(row.w, 1) }))}</li>`; }).join("")}</ul>` : `<p>${esc(tx("lens.matters_none"))}</p>`}
+    <p class="jn-note">${esc(tx("lens.loss_note"))}</p>`;
+}
+
+/* ---------- What would change my mind? ---------- */
+function jnCmKey() { return jnKey(JN.tid, JN.i, JSON.stringify(jnW())); }
+function jnRunChange() {
+  if (JN.busy) return; JN.busy = true;
+  const key = jnCmKey(), tid = JN.tid, i = JN.i, w = jnW();
+  setTimeout(() => {
+    try { JN.cm.set(key, JE.changeMind(jnCtx(tid), i, w, 10)); if (JN.cm.size > 12) JN.cm.delete(JN.cm.keys().next().value); }
+    catch (e) { console.error(e); JN.cm.set(key, { error: e.message }); }
+    JN.busy = false;
+    if (JN.open && JN.view === "place" && jnCmKey() === key) { jnRender(); jnLive(tx("change.done")); }
+  }, 30);
+}
+function jnAltLabel(a) {
+  if (a.kind === "profile") return tx("change.alt.profile", { profile: tx("profile." + a.id) });
+  if (a.kind === "drop_source") return tx("change.alt.drop_source");
+  if (a.kind === "drop_proxy") return tx("change.alt.drop_proxy", { list: txList(a.id.split("+").map(c => tx("crit." + c + ".s"))) });
+  return tx("change.alt.drop_criterion", { criterion: tx("crit." + a.id + ".s") });
+}
+function jnAltLabelHTML(a) { return a.kind === "drop_source" ? txH("change.alt.drop_source", {}, { source: jnDsName(a.id) }) : esc(jnAltLabel(a)); }
+function jnChanges(a) { return a.changes.map(x => `${esc(tx("crit." + x.c + ".short"))} ${esc(txNum(x.from, 1))} → ${esc(txNum(x.to, 1))}`).join(" · "); }
+function jnAltRow(a) {
+  const res = !a.eligible ? tx("change.res.ineligible") : a.lead ? tx("change.res.leading", { k: txInt(a.lead), r: txInt(a.rank) }) : tx("change.res.rank", { r: txInt(a.rank) });
+  return `<li class="jn-alt ${a.holds ? "holds" : "breaks"}" data-alt="${esc(a.kind + ":" + a.id)}"><span class="jn-mark" aria-hidden="true">${a.holds ? "✓" : "✕"}</span><div><b>${jnAltLabelHTML(a)}</b><span class="sr-only">${esc(tx(a.holds ? "change.holds_sr" : "change.breaks_sr"))}</span><div class="meta">${esc(tx("change.weights_changed"))} ${jnChanges(a)}</div></div><span class="jn-res">${esc(res)}</span></li>`;
+}
+function jnChangeView() {
+  const R = JN.cm.get(jnCmKey());
+  if (!R) return `<h3 class="jn-h">${esc(tx("change.title"))}</h3><p class="jn-busy" role="status">${esc(tx("change.running"))}</p>`;
+  if (R.error) return `<p class="jn-callout">${esc(tx("err.compute"))} ${esc(R.error)}</p>`;
+  const b = R.base, br = R.alternatives.filter(a => !a.holds), ok = R.alternatives.filter(a => a.holds);
+  const concl = txH(R.conclusion === "leading" ? "change.concl.leading" : "change.concl.rank", { k: txInt(b.lead), r: txInt(b.rank), target: jnTNameText(JN.tid) }, { place: jnPlace(JN.i) });
+  return `<h3 class="jn-h">${esc(tx("change.title"))}</h3><p>${esc(tx("change.p"))}</p>
+    <div class="jn-concl"><span class="meta">${esc(tx("change.tested"))}</span><p>${concl}</p></div>
+    <p class="jn-verdict">${esc(tx(R.nHold === R.nAlternatives ? "change.verdict.all" : "change.verdict.some", { h: txInt(R.nHold), n: txInt(R.nAlternatives), lo: txInt(R.bestRank), hi: txInt(R.worstRank) }))}</p>
+    ${br.length ? `<h4 class="jn-h4">${esc(tx("change.would"))}</h4><ul class="jn-alts">${br.map(jnAltRow).join("")}</ul>` : `<p>${esc(tx("change.none_breaks"))}</p>`}
+    ${ok.length ? `<details class="jn-det"><summary>${esc(tx("change.would_not", { n: txInt(ok.length) }))}</summary><ul class="jn-alts">${ok.map(jnAltRow).join("")}</ul></details>` : ""}
+    <p class="jn-note">${esc(tx("change.note"))}</p>`;
+}
+
+/* ---------- Find the missing piece ---------- */
+function jnMissingItems(ctx, L) {
+  const i = JN.i, [dy, dx] = cellDims(i);
+  return JE.missing(ctx, i, jnW(), { lens: L, change: JN.cm.get(jnCmKey()) || null, modisCoverage: S.A.modis_coverage ? S.A.modis_coverage[i] : null, cellKm: [dy, dx], targetWindowKm: (S.T[JN.tid].location || {}).window_km || null });
+}
+function jnMissingText(m) {
+  const v = { criterion: m.c ? tx("crit." + m.c + ".s") : "", status: m.status ? tx("status." + m.status) : "", t: m.target != null ? txNum(m.target, 1) : "", lo: m.earthMin != null ? txNum(m.earthMin, 1) : "", hi: m.earthMax != null ? txNum(m.earthMax, 1) : "", s: m.bestS != null ? txNum(m.bestS, 2) : "",
+    pct: m.value != null ? txPct(m.value, 0) : "", r: m.rank != null ? txInt(m.rank) : "—", list: m.criteria ? txList(m.criteria.map(c => tx("crit." + c + ".s"))) : "",
+    km: m.km ? txNum(m.km[0], 0) + " × " + txNum(m.km[1], 0) : "", tkm: m.targetKm ? txNum(m.targetKm, 1) : "", unit: m.c ? unitOf(m.c) : "" };
+  let key = "missing." + m.kind; if (m.kind === "structural") key += m.outside ? "." + m.outside : ".none";
+  if (m.kind === "resolution" && !m.targetKm) key += ".notarget";
+  return txH(key, v, { source: m.source ? jnDsName(m.source) : "" });
+}
+function jnMissingLink(m) {
+  const L = m.link || {};
+  if (L.type === "dataset") return L.ids.map(id => { const d = jnDataset(id); return d.url ? `<a class="jn-lnk" href="${esc(d.url)}" target="_blank" rel="noopener">${jnDsName(id)} ↗</a>` : jnDsName(id); }).join(" ");
+  if (L.type === "sensitivity") return `<button class="jn-lnk" data-jnsec="change" data-alt="${esc(L.alternative)}">${esc(tx("missing.see_change"))}</button>`;
+  if (L.type === "target_sources") { const meth = m.c ? String((S.T[JN.tid].methodology || {})[m.c] || "") : ""; return `${meth ? `<span class="jn-meth">${esc(tx("missing.method"))} ${keep(meth.length > 220 ? meth.slice(0, 217) + "…" : meth)}</span>` : ""}<button class="jn-lnk" data-jnsec="trust">${esc(tx("missing.see_target"))}</button>`; }
+  return `<button class="jn-lnk" data-jnsec="trust">${esc(tx("missing.see_rule"))}</button>`;
+}
+function jnMissingView(ctx, L) {
+  const items = jnMissingItems(ctx, L), cmDone = JN.cm.has(jnCmKey());
+  const sev = { gap: "✕", caution: "!", info: "i" };
+  return `<h3 class="jn-h">${esc(tx("missing.title"))}</h3><p>${esc(tx("missing.p"))}</p>
+    <ul class="jn-check">${items.map(m => `<li class="sev-${m.severity}" data-miss="${esc(m.id)}"><span class="jn-sev" aria-hidden="true">${sev[m.severity]}</span><div><span class="jn-sevl">${esc(tx("missing.sev." + m.severity))}</span><p>${jnMissingText(m)}</p><div class="jn-links">${jnMissingLink(m)}</div></div></li>`).join("")}</ul>
+    ${cmDone ? "" : `<p class="jn-note">${esc(tx("missing.run_change"))} <button class="jn-lnk" data-jnsec="change">${esc(tx("sec.change"))}</button></p>`}`;
+}
+
+/* ---------- Science Trust View ---------- */
+function jnTrustView(ctx, L) {
+  const i = JN.i, T = S.T[JN.tid], cm = JN.cm.get(jnCmKey()) || null;
+  const tr = JE.trust(ctx, i, jnW(), { lens: L, change: cm && !cm.error ? cm : null, modisCoverage: S.A.modis_coverage ? S.A.modis_coverage[i] : null, landFraction: S.A.gmted_land_fraction ? S.A.gmted_land_fraction[i] : null, stackSha: S.app.stack.sha256, stackVerified: S.hashOK === true, targetSources: T.sources });
+  const row = (id, sum, body) => `<details class="jn-trow" data-trust="${id}"><summary><span class="jn-tk">${esc(tx("trust." + id))}</span><span class="jn-tv">${sum}</span></summary><div class="jn-tb">${body}</div></details>`;
+  const R = Object.fromEntries(tr.rows.map(r => [r.id, r]));
+  const m = R.measurements, c = R.coverage, l = R.limits, rb = R.robustness, rp = R.reproducibility, so = R.sources;
+  return `<h3 class="jn-h">${esc(tx("trust.title"))}</h3><p>${esc(tx("trust.p"))}</p>
+    ${row("measurements", esc(tx("trust.measurements.sum", { d: txInt(m.direct), p: txInt(m.proxy), n: txInt(m.active) })), `<p>${esc(tx("trust.measurements.body"))}</p>${jnRowsTable(L.rows.filter(r => r.t != null), [r => `<th scope="row">${jnCrit(r.c)}</th>`, r => `<td>${jnStatusChip(r.status)}</td>`, r => `<td class="meta">${keep(String((T.methodology || {})[r.c] || "").slice(0, 160))}</td>`])}<p class="jn-note">${esc(tx("trust.method_en"))}</p>`)}
+    ${row("coverage", esc(tx("trust.coverage.sum", { pct: txPct(c.value, 0) })), `<p>${esc(tx("trust.coverage.body", { modis: txPct(c.modis, 0), land: txPct(c.land, 0) }))}</p>${c.missing.length ? `<p>${esc(tx("trust.coverage.missing", { list: txList(c.missing.map(x => tx("crit." + x + ".s"))) }))}</p>` : ""}`)}
+    ${row("limits", esc(l.structural.length ? tx("trust.limits.sum_some", { list: txList(l.structural.map(x => tx("crit." + x + ".s"))) }) : tx("trust.limits.sum_none")), `<p>${esc(tx("trust.limits.body"))}</p>`)}
+    ${row("robustness", esc(rb.available ? tx("trust.robustness.sum", { h: txInt(rb.hold), n: txInt(rb.total) }) : tx("trust.robustness.sum_na")), `<p>${esc(tx("trust.robustness.body"))}</p>${rb.available ? "" : `<button class="jn-lnk" data-jnsec="change">${esc(tx("sec.change"))}</button>`}`)}
+    ${row("reproducibility", `${keep(rp.algorithm)} · ${keep(rp.config || "")}`, `<p>${esc(tx("trust.reproducibility.body", { sha: rp.stack.slice(0, 16) }))} ${rp.verified ? "✓ " + esc(tx("trust.verified")) : esc(tx("trust.not_verified"))}</p>`)}
+    ${row("sources", so.earth.map(jnDsName).join(", "), `<p>${esc(tx("trust.sources.body"))}</p><ul class="jn-ul">${so.earth.map(id => { const d = jnDataset(id); return `<li>${jnDsName(id)} — ${keep(d.version || "")} ${d.url ? `<a class="jn-lnk" href="${esc(d.url)}" target="_blank" rel="noopener">↗</a>` : ""}</li>`; }).join("")}${T.sources.map((x, k) => `<li>${keep(x)} ${T.source_urls[k] ? `<a class="jn-lnk" href="${esc(T.source_urls[k])}" target="_blank" rel="noopener">↗</a>` : ""}</li>`).join("")}</ul>`)}
+    ${row("scope", esc(tx("trust.scope.sum")), `<p>${esc(tx("trust.scope.body"))}</p>`)}
+    <p class="jn-note">${esc(tx("trust.no_score"))}</p>`;
+}
+
+/* ---------- Other worlds: one Earth place against every scoring target ---------- */
+function jnWorldsView() {
+  const w = jnW(), ids = jnTargets();
+  const rows = ids.map(tid => { const c = jnCtx(tid), eff = c.effFor(w), L = JE.lens(c, JN.i, w); return { tid, score: eff[JN.i] >= 0 ? eff[JN.i] : null, rank: JE.rank(eff, S.cell, JN.i), n: JE.nEligible(eff), L, config: c.config }; })
+    .sort((a, b) => ((a.rank ?? 1e9) - (b.rank ?? 1e9)) || (a.tid < b.tid ? -1 : 1));
+  const regMsg = typeof A4 !== "undefined" && !A4.reg ? `<p class="jn-note">${esc(tx(A4.err ? "worlds.registry_err" : "home.loading_registry"))}</p>` : "";
+  return `<h3 class="jn-h">${esc(tx("worlds.title"))}</h3><p>${esc(tx("worlds.p", { n: txInt(rows.length) }))}</p>${regMsg}
+    <ul class="jn-worlds">${rows.map(r => `<li${r.tid === JN.tid ? ' class="on"' : ""}><button class="jn-wbtn" data-jn="settid" data-tid="${r.tid}" aria-label="${esc(tx("worlds.open", { target: jnTNameText(r.tid) }))}"><span class="jn-wb">${esc(jnBody(r.tid))}</span><span class="jn-wn">${jnTName(r.tid)}</span>
+      <span class="jn-wbar"><i style="width:${(100 * clamp(r.score || 0, 0, 1)).toFixed(1)}%"></i></span><span class="jn-ws">${esc(txPct(r.score))}</span><span class="jn-wr">${esc(txRank(r.rank))}</span></button>
+      <div class="jn-wmeta">${esc(tx("worlds.compared", { k: txInt(r.L.compared), n: txInt(S.critIds.length) }))}${r.L.groups.na.length ? " · " + esc(tx("worlds.not_compared", { list: txList(r.L.groups.na.map(c => tx("crit." + c + ".s"))) })) : ""} · ${keep(r.config)}</div></li>`).join("")}</ul>
+    <p class="jn-note">${esc(tx("worlds.note"))}</p>`;
+}
+
+/* ---------- Through time (where yearly data exist) ---------- */
+function jnTimeView() {
+  const tid = JN.tid, w = jnW();
+  const ev = a4With(tid, () => evolution(tid, JN.i, w));
+  const pts = ev.series.filter(o => o.score != null && o.score >= 0);
+  if (!pts.length) return `<h3 class="jn-h">${esc(tx("time.title"))}</h3><p>${esc(tx("time.none"))}</p>`;
+  const W = innerWidth < 600 ? 360 : 620, H = 200, x0 = 46, x1 = W - 12, y0 = 20, y1 = H - 34, sc = pts.map(p => p.score), lo = Math.min(...sc), hi = Math.max(...sc), pad = Math.max(0.01, (hi - lo) * 0.25);
+  const a = lo - pad, b = hi + pad, n = ev.series.length;
+  const sx = k => x0 + (x1 - x0) * (n === 1 ? 0.5 : k / (n - 1)), sy = v => y1 - (y1 - y0) * (v - a) / (b - a);
+  let g = `<line x1="${x0}" x2="${x1}" y1="${y1}" y2="${y1}" class="trk"/>`, d = "";
+  ev.series.forEach((o, k) => { g += `<text x="${sx(k).toFixed(1)}" y="${H - 14}" class="ax" text-anchor="middle">${esc(txNum(o.year, 0, { useGrouping: false }))}</text>`; if (o.score != null && o.score >= 0) { d += (d ? "L" : "M") + sx(k).toFixed(1) + " " + sy(o.score).toFixed(1); g += `<circle cx="${sx(k).toFixed(1)}" cy="${sy(o.score).toFixed(1)}" r="3.5" class="em"><title>${esc(txNum(o.year, 0, { useGrouping: false }))}: ${esc(txPct(o.score))} · ${esc(txNum(o.lst, 1))} K</title></circle>`; } });
+  g += `<text x="${x0 - 6}" y="${sy(hi).toFixed(1)}" class="ax" text-anchor="end">${esc(txPct(hi))}</text><text x="${x0 - 6}" y="${(sy(lo) + 4).toFixed(1)}" class="ax" text-anchor="end">${esc(txPct(lo))}</text>`;
+  const cls = ev.cls === "STABLE ANALOGUE" ? "stable" : ev.cls === "VARIABLE ANALOGUE" ? "variable" : "none";
+  return `<h3 class="jn-h">${esc(tx("time.title"))}</h3><p>${esc(tx("time.p"))}</p>
+    <figure class="jn-fig"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(tx("time.svg", { n: txInt(pts.length) }))}"><path d="${d}" class="ln"/>${g}</svg></figure>
+    <p class="jn-verdict">${esc(tx("time.cls." + cls, { pts: ev.rangePts == null ? "—" : txNum(ev.rangePts, 1), thr: txNum(S.app.thresholds.evolution_stable_pts, 1), years: txInt(ev.years) }))}</p>
+    <p class="jn-note">${esc(tx("time.note"))}</p>`;
+}
+
+/* ---------- Earth Analogue Passport ---------- */
+function jnPassportData(ctx, L) {
+  const i = JN.i, w = jnW(), eff = ctx.effFor(w), T = S.T[JN.tid], cm = JN.cm.get(jnCmKey()) || null, p = placeName(i);
+  return JE.passport(ctx, i, w, { lens: L, created: new Date().toISOString(), place: p.primary, country: p.secondary, targetName: T.name, body: T.body, fingerprint: T.fingerprint_sha256 || null,
+    profile: JN.pid, rank: JE.rank(eff, S.cell, i), nEligible: JE.nEligible(eff), lead: JE.leadPos(eff, ctx, i, 10), change: cm && !cm.error ? cm : null,
+    missing: jnMissingItems(ctx, L), earthDatasets: Array.from(new Set(L.rows.flatMap(r => ctx.earthSource[r.c]))).map(id => { const d = jnDataset(id); return { id, dataset: d.dataset, version: d.version, url: d.url }; }),
+    targetSources: T.sources.map((s, k) => ({ name: s, url: T.source_urls[k] || null })), stackSha: S.app.stack.sha256 });
+}
+function jnPassportView(ctx, L) {
+  const P = jnPassportData(ctx, L), re = JE.rescore(P), same = re != null && Math.abs(re - P.result.analogue_score) < 1e-9;
+  JN.passport = P;
+  const chips = L.rows.map(r => `<li class="s-${r.state}"><b aria-hidden="true">${JN_GLYPH[r.state]}</b><span>${esc(tx("crit." + r.c + ".short"))}</span><em>${esc(tx("state." + r.state))}</em></li>`).join("");
+  return `<h3 class="jn-h">${esc(tx("passport.title"))}</h3><p>${esc(tx("passport.p"))}</p>
+    <div class="jn-pass" id="jn-pass"><div class="jn-pass-top"><span class="jn-pass-brand">ASTERRO</span><span>${esc(tx("passport.kicker"))}</span></div>
+      <h4>${jnPlace(JN.i)}</h4><p class="jn-where">${esc(txLL(S.lat[JN.i], S.lon[JN.i]))} · ${esc(tx("place.cell", { id: txInt(S.cell[JN.i]) }))}</p>
+      <div class="jn-pass-mid"><div><span class="meta">${esc(tx("passport.analogue_of"))}</span><b>${esc(jnBody(JN.tid))} · ${jnTName(JN.tid)}</b></div><div class="jn-score"><b>${esc(txPct(P.result.analogue_score))}</b><span>${esc(tx("place.score_label"))}</span></div></div>
+      <ul class="jn-pchips">${chips}</ul>
+      <p class="jn-pfine">${esc(tx("passport.config", { profile: tx(JN.pid === "custom" ? "profile.custom" : "profile." + JN.pid), rank: P.result.cell_rank == null ? "—" : txInt(P.result.cell_rank), n: txInt(P.result.eligible_cells) }))} · ${keep(P.target.scoring_config)} · ${keep(P.generator.algorithm)} · ${keep("stack " + P.reproducibility.predictor_stack_sha256.slice(0, 12))}</p>
+      <p class="jn-pfine">${esc(tx("passport.disclaimer"))}</p></div>
+    <p class="jn-note">${esc(tx(same ? "passport.rescore_ok" : "passport.rescore_bad", { s: txPct(re, 4) }))}</p>
+    <div class="jn-act"><button class="jn-btn" data-jn="pjson">${esc(tx("passport.json"))}</button><button class="jn-btn ghost" data-jn="ppng">${esc(tx("passport.png"))}</button><button class="jn-btn ghost" data-jn="pprint">${esc(tx("passport.print"))}</button><button class="jn-btn ghost" data-jn="psave">${esc(tx("passport.save"))}</button></div>
+    <p class="jn-note" id="jn-pmsg" role="status"></p>`;
+}
+function jnDownload(name, blob) {
+  const u = URL.createObjectURL(blob), a = document.createElement("a"); a.href = u; a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(u); a.remove(); }, 1500);
+}
+function jnFileBase() { return `asterro-passport-${S.cell[JN.i]}-${JN.tid}`; }
+function jnPassportJSON() { const P = JN.passport; if (!P) return; jnDownload(jnFileBase() + ".json", new Blob([JSON.stringify(P, null, 2)], { type: "application/json" })); jnMsg(tx("passport.saved_json")); }
+function jnPassportPNG() {
+  const P = JN.passport; if (!P) return;
+  const c = document.createElement("canvas"), W = 1200, H = 675; c.width = W; c.height = H;
+  const g = c.getContext("2d"), css = getComputedStyle(document.documentElement);
+  const col = n => (css.getPropertyValue(n) || "").trim() || "#E6E9EC";
+  const F = (wgt, px) => `${wgt} ${px}px "Instrument Sans", "Noto Sans Bengali", system-ui, sans-serif`;
+  const accent = (S.T[JN.tid].body || "").toLowerCase() === "moon" ? col("--moon") : col("--mars");
+  g.fillStyle = "#090B0E"; g.fillRect(0, 0, W, H);
+  g.fillStyle = accent; g.fillRect(0, 0, 10, H);
+  g.fillStyle = "#A4AEB9"; g.font = F(600, 22); g.fillText("ASTERRO · " + tx("passport.kicker"), 60, 70);
+  g.fillStyle = "#E6E9EC"; g.font = F(700, 56); g.fillText(jnPlaceText(JN.i).slice(0, 44), 60, 160);
+  g.fillStyle = "#A4AEB9"; g.font = F(500, 24); g.fillText(`${txLL(S.lat[JN.i], S.lon[JN.i])} · ${tx("place.cell", { id: txInt(S.cell[JN.i]) })}`, 60, 205);
+  g.fillStyle = "#A4AEB9"; g.font = F(500, 22); g.fillText(tx("passport.analogue_of"), 60, 280);
+  g.fillStyle = "#E6E9EC"; g.font = F(700, 34); g.fillText(`${jnBody(JN.tid)} · ${jnTNameText(JN.tid)}`.slice(0, 48), 60, 325);
+  g.fillStyle = accent; g.font = F(700, 96); g.textAlign = "right"; g.fillText(txPct(P.result.analogue_score), W - 60, 330);
+  g.fillStyle = "#A4AEB9"; g.font = F(500, 20); g.fillText(tx("place.score_label"), W - 60, 365); g.textAlign = "left";
+  const sc = { similar: "#8CC08F", partial: "#D8B45B", different: "#D9705F", unknown: "#A4AEB9", na: "#6C7783", off: "#6C7783" };
+  P.criteria.forEach((r, k) => {
+    const x = 60 + k * 182, y = 420;
+    g.strokeStyle = sc[r.state]; g.lineWidth = 2; g.strokeRect(x, y, 168, 96);
+    g.fillStyle = sc[r.state]; g.font = F(700, 30); g.fillText(JN_GLYPH[r.state], x + 14, y + 40);
+    g.fillStyle = "#E6E9EC"; g.font = F(600, 19); g.fillText(tx("crit." + r.id + ".short").slice(0, 16), x + 14, y + 66);
+    g.fillStyle = "#A4AEB9"; g.font = F(500, 16); g.fillText(tx("state." + r.state).slice(0, 20), x + 14, y + 86);
+  });
+  g.fillStyle = "#A4AEB9"; g.font = F(500, 17);
+  g.fillText(`${tx("passport.config", { profile: tx(JN.pid === "custom" ? "profile.custom" : "profile." + JN.pid), rank: P.result.cell_rank == null ? "—" : txInt(P.result.cell_rank), n: txInt(P.result.eligible_cells) })} · ${P.target.scoring_config} · ${P.generator.algorithm}`.slice(0, 120), 60, 570);
+  g.fillText(`${P.schema} · stack ${P.reproducibility.predictor_stack_sha256.slice(0, 16)} · ${P.created.slice(0, 10)}`, 60, 600);
+  g.fillStyle = "#6C7783"; g.font = F(500, 15); g.fillText(tx("passport.disclaimer_short"), 60, 635);
+  c.toBlob(b => { if (b) { jnDownload(jnFileBase() + ".png", b); jnMsg(tx("passport.saved_png")); } }, "image/png");
+}
+function jnPassportPrint() { document.body.classList.add("jn-printing"); const done = () => { document.body.classList.remove("jn-printing"); window.removeEventListener("afterprint", done); }; window.addEventListener("afterprint", done); try { window.print(); } catch (e) { } setTimeout(done, 1500); }
+async function jnPassportSave() {
+  const P = JN.passport; if (!P) return;
+  const reg = await a4Load();
+  if (!reg || !A4.ix) { jnMsg(tx("passport.save_unavailable")); return; }
+  const i = JN.i, tid = JN.tid, w = jnW();
+  jnClose();
+  a4SaveItem({ kind: "earth_cell", cell: S.cell[i], lat: S.lat[i], lon: S.lon[i], place: placeStr(i), target: A4.ix.targets[tid] ? tid : undefined,
+    note: `Analogue Passport · ${S.app.profiles[JN.pid] ? S.app.profiles[JN.pid].label : "custom weights"} · score ${(100 * P.result.analogue_score).toFixed(1)}%`,
+    snapshot: RG.snapshot(A4.ix, A4.ix.targets[tid] ? [tid] : [], { profile: JN.pid, weights: w, algorithm: S.app.algorithm_version, scoring_config: P.target.scoring_config, passport_schema: P.schema }) });
+  setTab("atlas");
+}
+function jnMsg(m) { const e = $("#jn-pmsg"); if (e) e.textContent = m; jnLive(m); }
+
+/* ---------- Team of Earth places ---------- */
+function jnTeamView() {
+  const tid = JN.tid, w = jnW(), ctx = jnCtx(tid), T = JE.team(ctx, w);
+  const tsel = `<label class="jn-field"><span>${esc(tx("place.target"))}</span><select data-jnin="tid">${jnTargets().map(id => `<option value="${id}"${id === tid ? " selected" : ""}>${esc(jnBody(id))} · ${esc(jnTNameText(id))}</option>`).join("")}</select></label>`;
+  return `<div class="jn-pad"><p class="jn-lead">${esc(tx("team.p", { target: jnTNameText(tid) }))}</p><div class="jn-ctrls">${tsel}</div>
+    <p class="jn-verdict">${esc(tx("team.verdict", { k: txInt(T.members.length), m: txInt(T.covered.length), n: txInt(T.criteria.length) }))}</p>
+    <ol class="jn-team">${T.members.map(m => `<li><div><b>${jnPlace(m.i)}</b><div class="meta">${esc(txLL(S.lat[m.i], S.lon[m.i]))} · ${esc(tx("team.score", { s: txPct(m.score) }))}</div>
+      <p>${esc(tx("team.adds", { list: txList(m.adds.map(c => tx("crit." + c + ".s"))) }))}${m.matches.length > m.adds.length ? " " + esc(tx("team.also", { list: txList(m.matches.filter(c => !m.adds.includes(c)).map(c => tx("crit." + c + ".s"))) })) : ""}</p></div>
+      <button class="jn-btn ghost" data-jn="why" data-i="${m.i}" data-tid="${tid}" data-pid="${JN.pid}">${esc(tx("story.explore_why"))}</button></li>`).join("")}</ol>
+    ${T.unmatchable.length ? `<p class="jn-callout">${esc(tx("team.unmatchable", { list: txList(T.unmatchable.map(c => tx("crit." + c + ".s"))) }))}</p>` : ""}
+    ${T.uncovered.filter(c => !T.unmatchable.includes(c)).length ? `<p class="jn-note">${esc(tx("team.uncovered"))}</p>` : ""}
+    <p class="jn-note">${esc(tx("team.note"))}</p>${jnReviewNote()}</div>`;
+}
+
+/* ---------------------------------------------------------------- events */
+function jnClick(e) {
+  const b = e.target.closest("[data-jn],[data-jnsec],[data-jnstep],[data-jnpid]"); if (!b || b.disabled) return;
+  if (b.dataset.jnsec) { JN.sec = b.dataset.jnsec; if (JN.sec === "reveal" && b.closest(".jn-tabs")) JN.step = JN.step || 0; jnRender(); const t = $("#jn-tab-" + JN.sec); if (t) t.focus(); if (b.dataset.alt) { const r = $(`[data-alt="${CSS.escape(b.dataset.alt)}"]`); if (r) r.classList.add("flash"); } return; }
+  if (b.dataset.jnstep != null) { JN.step = +b.dataset.jnstep; jnRender(); const h = $("#jn-step-h"); if (h) h.focus(); return; }
+  if (b.dataset.jnpid) { JN.pid = b.dataset.jnpid; jnRender(); const r = $(`[data-jnpid="${JN.pid}"]`); if (r) r.focus(); jnLive(tx("lens.switched", { profile: tx("profile." + JN.pid) })); return; }
+  const a = b.dataset.jn;
+  if (a === "close") jnClose();
+  else if (a === "home") { JN.view = "home"; jnRender(); $("#jn-title").focus(); }
+  else if (a === "why") { jnOpen("place", { i: +b.dataset.i, tid: b.dataset.tid, pid: b.dataset.pid || "general", sec: "reveal", step: 0 }); }
+  else if (a === "team") { JN.tid = b.dataset.tid || JN.tid; JN.pid = "general"; JN.view = "team"; jnRender(); $("#jn-title").focus(); }
+  else if (a === "next") jnStep(1); else if (a === "prev") jnStep(-1);
+  else if (a === "skip") { JN.step = 6; jnRender(); const h = $("#jn-step-h"); if (h) h.focus(); }
+  else if (a === "settid") { JN.tid = b.dataset.tid; jnRender(); jnLive(tx("place.target_set", { target: jnTNameText(JN.tid) })); }
+  else if (a === "globe") jnShowOnGlobe();
+  else if (a === "pjson") jnPassportJSON(); else if (a === "ppng") jnPassportPNG(); else if (a === "pprint") jnPassportPrint(); else if (a === "psave") jnPassportSave();
+}
+function jnChange(e) {
+  const s = e.target.closest("[data-jnin]"); if (!s) return;
+  if (s.dataset.jnin === "tid") { JN.tid = s.value; jnRender(); const n = $(`[data-jnin="tid"]`); if (n) n.focus(); jnLive(tx("place.target_set", { target: jnTNameText(JN.tid) })); }
+  else if (s.dataset.jnin === "pid") { JN.pid = s.value; jnRender(); const n = $(`[data-jnin="pid"]`); if (n) n.focus(); jnLive(tx("lens.switched", { profile: tx(JN.pid === "custom" ? "profile.custom" : "profile." + JN.pid) })); }
+}
+function jnShowOnGlobe() {
+  const i = JN.i, tid = JN.tid; jnClose();
+  if (S.targetId !== tid) setTarget(tid);
+  const go = () => { setTab("explore"); select(i, true); };
+  if (!S.searched) runSearch().then(go); else go();
+}
+document.addEventListener("click", e => { const o = e.target.closest("[data-jn-open]"); if (!o) return; const v = o.dataset.jnOpen;
+  if (v === "home") jnOpen("home"); else if (v === "place") { const i = S.selected ?? S.picked; if (i != null) jnOpen("place", { i, tid: S.targetId === "cross" ? "mars_jezero" : S.targetId, pid: S.profile === "custom" ? "custom" : S.profile, sec: "reveal", step: 0 }); } });
+document.addEventListener("keydown", e => { if (JN.open) jnKeys(e); }, true);
+document.addEventListener("asterro:lang", () => { if (JN.open) { const f = document.activeElement && document.activeElement.id; jnRender(); const t = f && document.getElementById(f); (t || $("#jn-title")).focus(); } });
+/* a registry load adds targets (Shackleton story, Other worlds); refresh an open journey */
+if (typeof a4Load === "function") { const _jnA4Load = a4Load; a4Load = async function () { const r = await _jnA4Load.apply(this, arguments); if (JN.open) { JN.stories = null; jnRender(); } return r; }; }
+
+/* ---------------------------------------------------------------- entry points (additive) */
+(function jnEntry() {
+  const hs = $("#hero-search");
+  if (hs && !$("#hero-journey")) {
+    const b = document.createElement("button"); b.className = "btn-ghost btn-discover"; b.id = "hero-journey"; b.textContent = tx("cta.journey");
+    b.setAttribute("data-jn-open", "home"); hs.insertAdjacentElement("beforebegin", b);
+  }
+})();
+/* right panel: "Explain this place" beside Trace / Report for a selected cell */
+const _jnSelectedHeader = selectedHeader;
+selectedHeader = function (i) {
+  const h = _jnSelectedHeader.apply(this, arguments);
+  return h.replace(`<button class="btn-sm" data-act="trace">Trace result</button>`, `<button class="btn-sm jn-explain" data-jn-open="place">${esc(tx("cta.explain"))}</button><button class="btn-sm" data-act="trace">Trace result</button>`);
+};
+/* Discover tab: a door into the guided discoveries */
+const _jnViewDiscover = viewDiscover;
+viewDiscover = function () { return `<div class="sec"><div class="callout jn-door"><b>${esc(tx("door.title"))}</b> ${esc(tx("door.p"))} <button class="btn-sm" data-jn-open="home">${esc(tx("cta.journey"))}</button></div></div>` + _jnViewDiscover.apply(this, arguments); };
 </script>

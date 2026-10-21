@@ -729,6 +729,24 @@ non-compensatory minimum, strict coverage), reports their agreement and the site
 data counterfactual that removes one Earth source at a time (without GMTED2010 none of Jezero's leading 10 survive).
 An independent numpy re-implementation reproduces every method to 1e-12. Method: `docs/phase4/METHOD_ARENA.md`.
 
+**Discovery Journey and four interface languages** (landing: *Start with a discovery*; *Explain this place* beside
+Trace result). A story-led way in for non-specialists, in an accessible full-screen dialog. Five discoveries are
+computed live from the bundled, checksum-verified data — e.g. "the Altiplano is Earth's closest match to Jezero",
+"nowhere on Earth swings like Jezero" (75.9 K vs Earth's maximum 41.9 K), "it takes a team of Earth places". For any
+place and target: a 7-step **Reveal**; a **Planetary Difference Lens** (similar / partly similar / different /
+unknown / not compared, with glyphs as well as colours, and a switchable objective); **Change my mind?** (the stated
+conclusion re-tested under every declared profile, without each Earth source, without the target's proxies and without
+each criterion — each with its exact weight changes; Altiplano holds under 7 of 14); **Missing pieces** (typed,
+linked evidence gaps); a **Trust view** of evidence rows with deliberately no combined trust score; **Other worlds**
+(one place against all 16 scoring targets); **Through time** (yearly MODIS); a **team of places** that together match
+every matchable criterion; and an **Earth Analogue Passport** (`asterro.passport/1`: JSON, 1200 × 675 PNG, print,
+Save to My Research) that re-scores from its own contents. The engine (`journey_engine.js`) returns data only, over
+the unchanged baseline; the words come from the interface language — **English, বাংলা, Español, Français** (landing
+row, console, journey header or `?lang=`), with locale number formats, `html lang`, Bengali font support and
+preserved scientific names. Results are tested identical in every language. The research views remain English
+(a localised notice says so). The বাংলা, Español and Français texts were written by Claude (an AI model) and **have
+not yet been reviewed by native speakers**. Method and tests: `docs/phase4/JOURNEY_I18N.md`.
+
 **Research modules.**
 
 - **Comparison Lab:** side-by-side fingerprints; a compatibility matrix (status, source, spatial and
@@ -757,13 +775,13 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 90 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method checks
+npm test                 # 93 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 40 journey + 40 language checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
-npm run test:ui          # the six browser walk-throughs (Playwright + Chromium)
+npm run test:ui          # the seven browser walk-throughs (Playwright + Chromium)
 python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
 ```
 
-**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, ARCHITECTURE, DATA,
+**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, JOURNEY_I18N, ARCHITECTURE, DATA,
 TEST_REPORT, LIMITATIONS, CHANGES).
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
