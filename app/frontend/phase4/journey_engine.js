@@ -113,6 +113,23 @@
     for (const c of ctx.critIds) if (ctx.tv[c] != null && +(w[c] || 0) > 0) { const w2 = { ...w, [c]: 0 }; push("drop_criterion", c, w2); }
     return out;
   }
+  /* Robustness label — documented rule over the declared mission profiles only (the weighting assumptions):
+   *   insufficient  the place is not scored (coverage < 80 %), or fewer than 2 profile alternatives were tested
+   *   stable        the conclusion holds under every tested profile
+   *   sensitive     it holds under at least half of them, but not all
+   *   changes       it holds under fewer than half
+   * Data-source and proxy dependence are reported separately (they are not weighting assumptions). */
+  function robustnessLabel(alts, r0) {
+    const P = alts.filter(a => a.kind === "profile");
+    if (r0 == null || P.length < 2) return { label: "insufficient", hold: P.filter(a => a.holds).length, tested: P.length };
+    const h = P.filter(a => a.holds).length;
+    return { label: h === P.length ? "stable" : 2 * h >= P.length ? "sensitive" : "changes", hold: h, tested: P.length };
+  }
+  /* other leading distinct sites whose score is within `tol` (default 1 point) of this place's */
+  function nearTies(eff, ctx, i, K = 20, tol = 0.01) {
+    if (!(eff[i] >= 0)) return [];
+    return leaders(eff, ctx, K).filter(j => j !== i && Math.abs(eff[j] - eff[i]) <= tol + 1e-12).map(j => ({ i: j, cell: ctx.cell[j], score: eff[j], delta: eff[j] - eff[i] }));
+  }
   function changeMind(ctx, i, w, K = 10) {
     const eff0 = field(ctx, w), r0 = rank(eff0, ctx.cell, i), l0 = leadPos(eff0, ctx, i, K);
     const base = { score: eff0[i] >= 0 ? eff0[i] : null, rank: r0, lead: l0, nEligible: nEligible(eff0) };
@@ -124,7 +141,9 @@
     });
     const ranks = alts.map(a => a.rank).filter(r => r != null);
     const breakers = alts.filter(a => !a.holds);
+    const ties = r0 == null ? [] : nearTies(eff0, ctx, i, 20, 0.01);
     return { conclusion, K, base, alternatives: alts, nAlternatives: alts.length, nHold: alts.length - breakers.length,
+      robustness: robustnessLabel(alts, r0), nearTies: ties,
       breakers: breakers.map(a => a.kind + ":" + a.id), bestRank: ranks.length ? Math.min(r0 ?? Infinity, ...ranks) : r0,
       worstRank: ranks.length ? Math.max(r0 ?? 0, ...ranks) : r0, ineligibleUnder: alts.filter(a => !a.eligible).map(a => a.kind + ":" + a.id) };
   }
@@ -292,7 +311,79 @@
     return ws > 0 && ws / tot >= 0.8 - 1e-12 ? num / ws : null;
   }
 
-  const api = { VERSION, STATES, field, detail, rank, nEligible, leadPos, leaders, lens, stateOf, objectives, alternatives, changeMind, team, ceiling, missing, trust, summary, reveal, multiWorld, passport, rescore };
+  /* ---------------------------------------------------------------- the score, written out (Trust view)
+   * exactly the engine's rule: d = |e − t| / (max − min); s = clip(1 − d, 0, 1); over criteria that are active
+   * (weight > 0 and a target value) AND have an Earth value: k = w·s / Σw(those), S = Σk. Coverage =
+   * Σw(with Earth value) / Σw(active); the cell is ranked only if coverage ≥ 0.80. */
+  function calculation(ctx, i, w) {
+    const det = detail(ctx, i, w);
+    const rows = det.rows.map(r => ({ c: r.c, e: r.e, t: r.t == null ? null : r.t, lo: r.lo, hi: r.hi, w: r.w, active: r.active, d: r.d ?? null, s: r.s ?? null, k: r.k ?? null }));
+    const sumK = rows.reduce((t, r) => t + (r.k || 0), 0);
+    return { rows, wsum: det.wsum, totalW: det.totalW, coverage: det.coverage, score: det.final, sumK, ranked: det.coverage >= 0.8 - 1e-12, minCoverage: 0.8 };
+  }
+
+  /* ---------------------------------------------------------------- Same Earth, different mission
+   * the K leading distinct sites under two declared profiles; which stay, enter, leave; and, for one site, the exact
+   * per-criterion change of its contribution (Σ Δk = ΔS). */
+  function missions(ctx, wA, wB, K = 10, focus = null) {
+    const eA = field(ctx, wA), eB = field(ctx, wB), LA = leaders(eA, ctx, K), LB = leaders(eB, ctx, K);
+    const row = (i, own, other, eff2) => ({ i, cell: ctx.cell[i], score: own[i], rankOther: rank(eff2, ctx.cell, i), leadOther: leadPos(eff2, ctx, i, K), scoreOther: eff2[i] >= 0 ? eff2[i] : null });
+    const A = LA.map(i => row(i, eA, eB, eB)), B = LB.map(i => row(i, eB, eA, eA));
+    const both = LA.filter(i => LB.includes(i));
+    const f = focus != null ? focus : LA[0];
+    const dA = detail(ctx, f, wA), dB = detail(ctx, f, wB);
+    const contrib = dA.rows.map((r, k) => ({ c: r.c, kA: r.k ?? 0, kB: dB.rows[k].k ?? 0, delta: (dB.rows[k].k ?? 0) - (r.k ?? 0), wA: r.w, wB: dB.rows[k].w, s: r.s ?? null }));
+    return { K, A, B, both, onlyA: LA.filter(i => !LB.includes(i)), onlyB: LB.filter(i => !LA.includes(i)), changes: diffW(wA, wB, ctx.critIds),
+      focus: { i: f, scoreA: eA[f] >= 0 ? eA[f] : null, scoreB: eB[f] >= 0 ? eB[f] : null, rankA: rank(eA, ctx.cell, f), rankB: rank(eB, ctx.cell, f), leadA: leadPos(eA, ctx, f, K), leadB: leadPos(eB, ctx, f, K), contrib,
+        sumDelta: contrib.reduce((t, x) => t + x.delta, 0) } };
+  }
+
+  /* ---------------------------------------------------------------- a portfolio the user assembles
+   * per site and criterion: s and its state; per criterion: the best site and how many sites match (s ≥ 0.85);
+   * pairwise great-circle distances. It is a comparison, not an optimisation: nothing is labelled optimal. */
+  function portfolio(ctx, cells, w) {
+    const sites = cells.map(i => { const L = lens(ctx, i, w); return { i, cell: ctx.cell[i], score: L.score, coverage: L.coverage, rows: L.rows }; });
+    const crit = ctx.critIds.filter(c => ctx.tv[c] != null && +(w[c] || 0) > 0);
+    const per = crit.map(c => {
+      const v = sites.map(s => ({ i: s.i, s: s.rows.find(r => r.c === c).s }));
+      const best = v.filter(x => x.s != null).sort((a, b) => (b.s - a.s) || (ctx.cell[a.i] - ctx.cell[b.i]))[0] || null;
+      const matching = v.filter(x => x.s != null && x.s >= ctx.thr.match).map(x => x.i);
+      return { c, best: best ? best.i : null, bestS: best ? best.s : null, matching, covered: matching.length > 0, overlap: matching.length > 1, unique: matching.length === 1 ? matching[0] : null };
+    });
+    const dist = [];
+    for (let a = 0; a < sites.length; a++) for (let b = a + 1; b < sites.length; b++) dist.push({ a: sites[a].i, b: sites[b].i, km: ENG.haversine(ctx.lat[sites[a].i], ctx.lon[sites[a].i], ctx.lat[sites[b].i], ctx.lon[sites[b].i]) });
+    return { sites, criteria: crit, per, covered: per.filter(p => p.covered).map(p => p.c), uncovered: per.filter(p => !p.covered).map(p => p.c),
+      overlap: per.filter(p => p.overlap).map(p => p.c), dist, minKm: dist.length ? Math.min(...dist.map(d => d.km)) : null,
+      contributions: sites.map(s => ({ i: s.i, unique: per.filter(p => p.unique === s.i).map(p => p.c) })) };
+  }
+
+  /* ---------------------------------------------------------------- challenges: answers derived from the data
+   *   stronger_on   leading sites (top K distinct) with a higher s on criterion c than the #1 site
+   *   costs_most    the criterion that costs the #1 site the most points
+   *   excluded      a place with an Earth value missing whose weight coverage falls below 80 % under profile w
+   *   same_score    pairs of leading sites within tol points whose largest cost is a different criterion */
+  function challenges(ctx, w, opts = {}) {
+    const K = opts.K || 20, eff = field(ctx, w), L = leaders(eff, ctx, K), top = L[0], c = opts.criterion || "lst_diurnal_range";
+    const sOf = (i, cc) => { const r = detail(ctx, i, w).rows.find(x => x.c === cc); return r.s ?? null; };
+    const s0 = sOf(top, c);
+    const stronger = L.slice(1).filter(i => { const s = sOf(i, c); return s != null && s0 != null && s > s0 + 1e-12; });
+    const Ltop = lens(ctx, top, w);
+    const out = { leaders: L, top, criterion: c, s0, stronger, costsMost: Ltop.matter[0] || null };
+    if (opts.wExcl) {
+      /* the highest-scoring place under w that the other weighting cannot rank (ties: lower cell id) */
+      const e2 = field(ctx, opts.wExcl); let ex = null;
+      for (let j = 0; j < eff.length; j++) if (eff[j] >= 0 && !(e2[j] >= 0) && (ex == null || eff[j] > eff[ex] || (eff[j] === eff[ex] && ctx.cell[j] < ctx.cell[ex]))) ex = j;
+      out.excluded = ex == null ? null : { i: ex, cell: ctx.cell[ex], coverage: detail(ctx, ex, opts.wExcl).coverage, missing: detail(ctx, ex, opts.wExcl).rows.filter(r => r.active && r.e == null).map(r => r.c) };
+    }
+    const tol = opts.tol ?? 0.01, pairs = [];
+    const top1 = L.map(i => ({ i, m: lens(ctx, i, w).matter[0] || null }));
+    for (let a = 0; a < top1.length; a++) for (let b = a + 1; b < top1.length; b++)
+      if (Math.abs(eff[top1[a].i] - eff[top1[b].i]) <= tol + 1e-12 && top1[a].m && top1[b].m && top1[a].m !== top1[b].m) pairs.push([top1[a].i, top1[b].i]);
+    out.sameScore = pairs; out.mainCost = Object.fromEntries(top1.map(x => [x.i, x.m]));
+    return out;
+  }
+
+  const api = { VERSION, STATES, robustnessLabel, nearTies, calculation, missions, portfolio, challenges, field, detail, rank, nEligible, leadPos, leaders, lens, stateOf, objectives, alternatives, changeMind, team, ceiling, missing, trust, summary, reveal, multiWorld, passport, rescore };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.AsterroJourney = api;
 })(typeof window !== "undefined" ? window : globalThis);

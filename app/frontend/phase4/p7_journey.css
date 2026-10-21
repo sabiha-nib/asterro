@@ -7,7 +7,7 @@ html[lang="bn"] .eyebrow,html[lang="bn"] .ht i,html[lang="bn"] .ht em,html[lang=
 html[lang="bn"] .eyebrow{font-size:13px}html[lang="bn"] .ht i{font-size:12px}html[lang="bn"] .ht em{font-size:12.5px}html[lang="bn"] .hero-facts{font-size:13px}
 html[lang="bn"] .target-ctl i{font-size:11px}html[lang="bn"] .jn-kick{font-size:12.5px}html[lang="bn"] .jn-wb{font-size:12px}
 html:not([lang="en"]) .hero h1{font-size:clamp(44px,6.4vw,96px);max-width:13ch}
-html[lang="es"] .tabs button,html[lang="fr"] .tabs button{letter-spacing:.04em}
+html[lang="es"] .tabs button,html[lang="fr"] .tabs button,html[lang="de"] .tabs button{letter-spacing:.04em}
 #ht-moon em{white-space:nowrap}
 .i18n-bar{flex:none;display:flex;align-items:center}
 .hero-lang{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}

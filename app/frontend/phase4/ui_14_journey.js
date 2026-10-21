@@ -10,6 +10,8 @@ const JE = window.AsterroJourney;
 const JN = { open: false, view: "home", i: null, tid: "mars_jezero", pid: "general", w: null, sec: "reveal", step: 0, opener: null,
   cm: new Map(), stories: null, storyKey: null, busy: false, lastFocus: null };
 const JN_SECS = ["reveal", "lens", "change", "missing", "trust", "worlds", "time", "passport"];
+/* journey screens; later modules (missions, portfolio, journal) register theirs here */
+const JN_VIEWS = { home: { title: "home.title", render: () => jnHome() }, team: { title: "team.title", render: () => jnTeamView() }, place: { title: null, render: () => jnPlaceView() } };
 const JN_GLYPH = { similar: "≈", partial: "~", different: "✕", unknown: "?", na: "—", off: "○" };
 
 /* ---------------------------------------------------------------- context and cached computations */
@@ -97,7 +99,7 @@ function jnBadge() {
 }
 function jnHead() {
   const back = JN.view === "home" ? "" : `<button class="jn-back" data-jn="home" aria-label="${esc(tx("nav.back_home"))}">‹ <span>${esc(tx("nav.discoveries"))}</span></button>`;
-  const title = JN.view === "home" ? tx("home.title") : JN.view === "team" ? tx("team.title") : null;
+  const title = JN.view === "place" ? null : tx((JN_VIEWS[JN.view] || {}).title || "home.title");
   return `${back}<div class="jn-htxt">${title ? `<h2 id="jn-title" tabindex="-1">${esc(title)}</h2>` : `<h2 id="jn-title" tabindex="-1">${jnPlace(JN.i)}</h2>`}${jnBadge()}</div>
     ${i18nSelect("jn-lang", "jn-langsel")}<button class="jn-x" data-jn="close" aria-label="${esc(tx("nav.close"))}">×</button>`;
 }
@@ -126,7 +128,7 @@ function jnRenderInner(d) {
   if (JN.liveLang !== I18N.lang) { const lv = $("#jn-live"); if (lv) lv.textContent = ""; JN.liveLang = I18N.lang; }
   $("#jn-head").innerHTML = jnHead();
   let h = "";
-  try { h = JN.view === "home" ? jnHome() : JN.view === "team" ? jnTeamView() : jnPlaceView(); }
+  try { h = (JN_VIEWS[JN.view] || JN_VIEWS.home).render(); }
   catch (err) { console.error(err); h = `<div class="jn-pad"><p class="jn-callout">${esc(tx("err.compute"))} <span class="meta">${esc(err.message)}</span></p></div>`; }
   $("#jn-body").innerHTML = h;
   if (JN.view === "place" && JN.sec === "change" && !JN.cm.has(jnCmKey())) jnRunChange();
@@ -175,6 +177,8 @@ function jnHome() {
   const regNote = (typeof A4 !== "undefined" && !A4.reg && !A4.err) ? `<p class="jn-note">${esc(tx("home.loading_registry"))}</p>` : "";
   return `<div class="jn-pad jn-home"><p class="jn-eyebrow">${esc(tx("home.eyebrow"))}</p><p class="jn-lead">${esc(tx("home.lead"))}</p>
     <div class="jn-stories">${yours}${st.map(jnCard).join("")}</div>${regNote}
+    <h3 class="jn-h jn-further">${esc(tx("home.further"))}</h3>
+    <div class="jn-tiles">${["missions", "portfolio", "journal"].map(v => `<button class="jn-tile" data-jn="view" data-view="${v}"><b>${esc(tx(v + ".title"))}</b><span>${esc(tx(v + ".tile"))}</span></button>`).join("")}</div>
     <p class="jn-fine">${esc(tx("home.fine"))}</p>${jnReviewNote()}</div>`;
 }
 function jnReviewNote() { return I18N.lang === "en" ? "" : `<p class="jn-fine jn-review">${esc(tx("lang.review_note"))}</p>`; }
@@ -319,7 +323,10 @@ function jnChangeView() {
   const concl = txH(R.conclusion === "leading" ? "change.concl.leading" : "change.concl.rank", { k: txInt(b.lead), r: txInt(b.rank), target: jnTNameText(JN.tid) }, { place: jnPlace(JN.i) });
   return `<h3 class="jn-h">${esc(tx("change.title"))}</h3><p>${esc(tx("change.p"))}</p>
     <div class="jn-concl"><span class="meta">${esc(tx("change.tested"))}</span><p>${concl}</p></div>
+    <div class="jn-robust rb-${R.robustness.label}" data-robust="${R.robustness.label}"><b>${esc(tx("robust." + R.robustness.label))}</b><span>${esc(tx("robust.detail", { h: txInt(R.robustness.hold), n: txInt(R.robustness.tested) }))}</span></div>
+    <details class="jn-det"><summary>${esc(tx("robust.rule_t"))}</summary><p class="jn-note">${esc(tx("robust.rule"))}</p></details>
     <p class="jn-verdict">${esc(tx(R.nHold === R.nAlternatives ? "change.verdict.all" : "change.verdict.some", { h: txInt(R.nHold), n: txInt(R.nAlternatives), lo: txInt(R.bestRank), hi: txInt(R.worstRank) }))}</p>
+    <p class="jn-note" data-ties="${R.nearTies.length}">${R.nearTies.length ? txH("robust.ties", { k: txInt(R.nearTies.length) }, { list: R.nearTies.slice(0, 4).map(t => jnPlace(t.i) + " (" + esc((t.delta >= 0 ? "+" : "−") + txNum(Math.abs(100 * t.delta), 2)) + ")").join(", ") }) : esc(tx("robust.no_ties"))}</p>
     ${br.length ? `<h4 class="jn-h4">${esc(tx("change.would"))}</h4><ul class="jn-alts">${br.map(jnAltRow).join("")}</ul>` : `<p>${esc(tx("change.none_breaks"))}</p>`}
     ${ok.length ? `<details class="jn-det"><summary>${esc(tx("change.would_not", { n: txInt(ok.length) }))}</summary><ul class="jn-alts">${ok.map(jnAltRow).join("")}</ul></details>` : ""}
     <p class="jn-note">${esc(tx("change.note"))}</p>`;
@@ -348,11 +355,21 @@ function jnMissingLink(m) {
 function jnMissingView(ctx, L) {
   const items = jnMissingItems(ctx, L), cmDone = JN.cm.has(jnCmKey());
   const sev = { gap: "✕", caution: "!", info: "i" };
-  return `<h3 class="jn-h">${esc(tx("missing.title"))}</h3><p>${esc(tx("missing.p"))}</p>
+  return `<h3 class="jn-h">${esc(tx("missing.title"))}</h3><p>${esc(tx("missing.p"))}</p>${jnCoverageMeter(ctx, L)}
     <ul class="jn-check">${items.map(m => `<li class="sev-${m.severity}" data-miss="${esc(m.id)}"><span class="jn-sev" aria-hidden="true">${sev[m.severity]}</span><div><span class="jn-sevl">${esc(tx("missing.sev." + m.severity))}</span><p>${jnMissingText(m)}</p><div class="jn-links">${jnMissingLink(m)}</div></div></li>`).join("")}</ul>
     ${cmDone ? "" : `<p class="jn-note">${esc(tx("missing.run_change"))} <button class="jn-lnk" data-jnsec="change">${esc(tx("sec.change"))}</button></p>`}`;
 }
 
+/* the share of the active weight that has an Earth value here, against the 80 % ranking rule; and the same for the
+ * leading sites, so poor similarity and "cannot be evaluated" are never confused */
+function jnCoverageMeter(ctx, L) {
+  const act = L.rows.filter(r => r.t != null && r.w > 0), tot = act.reduce((t, r) => t + r.w, 0), cov = L.coverage, ok = cov >= 0.8 - 1e-12;
+  const eff = ctx.effFor(jnW()), lead = JE.leaders(eff, ctx, 10), full = lead.filter(j => JE.lens(ctx, j, jnW()).coverage >= 1 - 1e-12).length;
+  return `<div class="jn-cov" data-cov="${cov.toFixed(4)}"><div class="jn-covh"><b>${esc(tx("cov.title"))}</b><span class="${ok ? "ok" : "no"}">${esc(tx(ok ? "cov.ranked" : "cov.not_ranked", { p: txPct(cov, 0) }))}</span></div>
+    <div class="jn-covbar" role="img" aria-label="${esc(tx("cov.aria", { p: txPct(cov, 0) }))}"><i style="width:${(100 * clamp(cov, 0, 1)).toFixed(1)}%"></i><b style="left:80%" title="${esc(tx("cov.rule"))}"></b></div>
+    <ul class="jn-covl">${act.map(r => `<li class="${r.e == null ? "gap" : ""}"><span aria-hidden="true">${r.e == null ? "✕" : "✓"}</span>${jnCrit(r.c)} <span class="meta">${esc(txPct(r.w / tot, 0))} ${esc(tx("cov.of_weight"))}${r.e == null ? " · " + esc(tx("cov.missing")) : ""}</span></li>`).join("")}</ul>
+    <p class="jn-note">${esc(tx(ok ? "cov.note_ok" : "cov.note_no"))} ${esc(tx("cov.leaders", { k: txInt(full), n: txInt(lead.length) }))}</p></div>`;
+}
 /* ---------- Science Trust View ---------- */
 function jnTrustView(ctx, L) {
   const i = JN.i, T = S.T[JN.tid], cm = JN.cm.get(jnCmKey()) || null;
@@ -367,10 +384,19 @@ function jnTrustView(ctx, L) {
     ${row("robustness", esc(rb.available ? tx("trust.robustness.sum", { h: txInt(rb.hold), n: txInt(rb.total) }) : tx("trust.robustness.sum_na")), `<p>${esc(tx("trust.robustness.body"))}</p>${rb.available ? "" : `<button class="jn-lnk" data-jnsec="change">${esc(tx("sec.change"))}</button>`}`)}
     ${row("reproducibility", `${keep(rp.algorithm)} · ${keep(rp.config || "")}`, `<p>${esc(tx("trust.reproducibility.body", { sha: rp.stack.slice(0, 16) }))} ${rp.verified ? "✓ " + esc(tx("trust.verified")) : esc(tx("trust.not_verified"))}</p>`)}
     ${row("sources", so.earth.map(jnDsName).join(", "), `<p>${esc(tx("trust.sources.body"))}</p><ul class="jn-ul">${so.earth.map(id => { const d = jnDataset(id); return `<li>${jnDsName(id)} — ${keep(d.version || "")} ${d.url ? `<a class="jn-lnk" href="${esc(d.url)}" target="_blank" rel="noopener">↗</a>` : ""}</li>`; }).join("")}${T.sources.map((x, k) => `<li>${keep(x)} ${T.source_urls[k] ? `<a class="jn-lnk" href="${esc(T.source_urls[k])}" target="_blank" rel="noopener">↗</a>` : ""}</li>`).join("")}</ul>`)}
+    ${row("calculation", esc(tx("trust.calc.sum", { s: txPct(JE.calculation(ctx, i, jnW()).score, 2) })), jnCalcTable(ctx, i))}
     ${row("scope", esc(tx("trust.scope.sum")), `<p>${esc(tx("trust.scope.body"))}</p>`)}
     <p class="jn-note">${esc(tx("trust.no_score"))}</p>`;
 }
 
+function jnCalcTable(ctx, i) {
+  const C = JE.calculation(ctx, i, jnW()), f = (x, d) => x == null ? "—" : esc(txNum(x, d));
+  return `<p class="jn-formula i18n-keep" translate="no">d<sub>c</sub> = |e<sub>c</sub> − t<sub>c</sub>| / (max<sub>c</sub> − min<sub>c</sub>) · s<sub>c</sub> = clip(1 − d<sub>c</sub>, 0, 1) · k<sub>c</sub> = w<sub>c</sub>·s<sub>c</sub> / Σw · S = Σk<sub>c</sub></p>
+    <div class="jn-scroll"><table class="jn-t jn-calc"><thead><tr><th>${esc(tx("calc.c"))}</th><th class="n i18n-keep">e</th><th class="n i18n-keep">t</th><th class="n i18n-keep">d</th><th class="n i18n-keep">s</th><th class="n i18n-keep">w</th><th class="n i18n-keep">k</th></tr></thead><tbody>
+    ${C.rows.map(r => `<tr${r.k == null ? ' class="off"' : ""}><th scope="row">${esc(tx("crit." + r.c + ".short"))}</th><td class="n">${r.e == null ? esc(tx("val.na")) : f(r.e, 3)}</td><td class="n">${r.t == null ? "N/A" : f(r.t, 3)}</td><td class="n">${f(r.d, 4)}</td><td class="n">${f(r.s, 4)}</td><td class="n">${f(r.w, 2)}</td><td class="n">${f(r.k, 4)}</td></tr>`).join("")}
+    <tr class="sum"><th scope="row">Σ</th><td></td><td></td><td></td><td></td><td class="n">${f(C.wsum, 2)}</td><td class="n">${f(C.sumK, 4)}</td></tr></tbody></table></div>
+    <p class="jn-note">${esc(tx("calc.notes", { cov: txPct(C.coverage, 0), tot: txNum(C.totalW, 2), ws: txNum(C.wsum, 2) }))}</p>`;
+}
 /* ---------- Other worlds: one Earth place against every scoring target ---------- */
 function jnWorldsView() {
   const w = jnW(), ids = jnTargets();
@@ -500,6 +526,7 @@ function jnClick(e) {
   if (a === "close") jnClose();
   else if (a === "home") { JN.view = "home"; jnRender(); $("#jn-title").focus(); }
   else if (a === "why") { jnOpen("place", { i: +b.dataset.i, tid: b.dataset.tid, pid: b.dataset.pid || "general", sec: "reveal", step: 0 }); }
+  else if (a === "view") { JN.view = b.dataset.view; if (b.dataset.tid) JN.tid = b.dataset.tid; jnRender(); $("#jn-title").focus(); if (typeof jlMark === "function") jlMark("view:" + JN.view); }
   else if (a === "team") { JN.tid = b.dataset.tid || JN.tid; JN.pid = "general"; JN.view = "team"; jnRender(); $("#jn-title").focus(); }
   else if (a === "next") jnStep(1); else if (a === "prev") jnStep(-1);
   else if (a === "skip") { JN.step = 6; jnRender(); const h = $("#jn-step-h"); if (h) h.focus(); }

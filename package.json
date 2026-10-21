@@ -16,7 +16,7 @@
     "build:phase3": "python3 scripts/build_phase3_data.py && python3 scripts/build_web.py .",
     "test:phase4": "node tests/phase4/test_registry_engine.mjs && node tests/phase4/test_trajectory_engine.mjs && node tests/phase4/test_methods_engine.mjs && node tests/phase4/test_journey_engine.mjs && node tests/phase4/test_i18n.mjs",
     "build:phase4": "python3 scripts/build_phase3_data.py && python3 scripts/build_web.py .",
-    "test:ui": "python3 tests/ui_smoke.py && python3 tests/phase2/ui_lab_smoke.py && python3 tests/phase3/ui_atlas_smoke.py && python3 tests/phase4/ui_phase4_smoke.py && python3 tests/phase4/ui_trajectory_smoke.py && python3 tests/phase4/ui_methods_smoke.py && python3 tests/phase4/ui_journey_smoke.py",
+    "test:ui": "python3 tests/ui_smoke.py && python3 tests/phase2/ui_lab_smoke.py && python3 tests/phase3/ui_atlas_smoke.py && python3 tests/phase4/ui_phase4_smoke.py && python3 tests/phase4/ui_trajectory_smoke.py && python3 tests/phase4/ui_methods_smoke.py && python3 tests/phase4/ui_journey_smoke.py && python3 tests/phase4/ui_global_smoke.py",
     "test": "npm run test:py && npm run test:js && npm run test:phase2 && npm run test:phase3 && npm run test:phase4",
     "start": "python3 -m http.server ${PORT:-8080} -d public"
   }

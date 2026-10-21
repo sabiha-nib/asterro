@@ -11,8 +11,9 @@ reached from:
 The journey opens in an accessible full-screen dialog. Focus is trapped inside it, Esc closes it and returns focus,
 and the arrow keys move through the Reveal.
 
-The interface can be shown in **English, বাংলা (Bengali), Español and Français**. Choose the language from the row on
-the landing screen, the weight console or the journey header. A `?lang=bn|es|fr` URL parameter also works.
+The interface can be shown in **English, বাংলা (Bengali), Español, Français and Deutsch**. Choose the language in the
+header (globe icon), on the landing screen or in the journey header. A `?lang=bn|es|fr|de` URL parameter also works.
+(German and the translation of the globe workspace were added in the next step: see GLOBE_WORKSPACE.md.)
 
 Every number in the journey comes from `app/frontend/phase4/journey_engine.js` (`asterro-journey-1.0.0`), which runs
 on the unchanged baseline engine:

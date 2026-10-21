@@ -7,16 +7,16 @@ const root = new URL("../..", import.meta.url).pathname, P = root + "app/fronten
 let fails = 0, n = 0;
 const check = (ok, msg) => { n++; console.log((ok ? "PASS " : "FAIL ") + msg); if (!ok) fails++; };
 
-const reg = {}, meta = {};
+const reg = {}, meta = {}; let I18N_PH;
 const ctx = vm.createContext({ i18nRegister: (l, m, d) => { reg[l] = d; meta[l] = m; } });
 const files = fs.readdirSync(P).filter(f => /^i18n_\d\d_[a-z]{2}\.js$/.test(f)).sort();
 for (const f of files) vm.runInContext(fs.readFileSync(P + f, "utf8"), ctx, { filename: f });
 const langs = Object.keys(reg);
-check(JSON.stringify(langs.sort()) === JSON.stringify(["bn", "en", "es", "fr"]), `four languages registered: ${langs.join(", ")}`);
+check(JSON.stringify(langs.sort()) === JSON.stringify(["bn", "de", "en", "es", "fr"]), `five languages registered: ${langs.join(", ")}`);
 const EN = reg.en, keys = Object.keys(EN);
 check(keys.length > 250, `English source has ${keys.length} keys`);
 const ph = s => (s.match(/\{\w+\}/g) || []).sort().join(",");
-for (const l of ["bn", "es", "fr"]) {
+for (const l of ["bn", "es", "fr", "de"]) {
   const d = reg[l], k2 = Object.keys(d);
   const miss = keys.filter(k => !(k in d)), extra = k2.filter(k => !(k in EN));
   check(!miss.length && !extra.length, `${l}: same key set as English (missing ${miss.slice(0, 4)}, extra ${extra.slice(0, 4)})`);
@@ -25,7 +25,7 @@ for (const l of ["bn", "es", "fr"]) {
   const empty = k2.filter(k => !String(d[k]).trim());
   check(!empty.length, `${l}: no empty strings (${empty.slice(0, 4)})`);
   // identical to English is allowed only for codes, names and terms that are the same in that language
-  const SAME = /^(tab\.atlas|chrome\.group\.mars|geo\.[nse]|body\.mars|tab\.data|tname\.cross|state\.similar|tab\.lab|crit\.(slope|elevation)(\.short|\.s)?|passport\.json|crit\.\w+\.short|lens\.score|sec\.lens|trust\.sources|reveal\.costs|tab\.(explore|trajectory)|sec\.passport|.*\.s)$/;
+  const SAME = /^(calc\.c|missions\.(lost|gained|dk)|journal\.chip|ui\.(radial|th_norm|th_dnorm|desc\.compose|globe|constellations|projection|direct)|trust\.calc\.sum|rv\.pause|globe\.layer_dim|tab\.atlas|chrome\.group\.mars|geo\.[nse]|body\.mars|tab\.data|tname\.cross|state\.similar|tab\.lab|crit\.(slope|elevation)(\.short|\.s)?|passport\.json|crit\.\w+\.short|lens\.score|sec\.lens|trust\.sources|reveal\.costs|tab\.(explore|trajectory)|sec\.passport|.*\.s)$/;
   const same = keys.filter(k => d[k] === EN[k] && EN[k].length > 3 && !SAME.test(k) && !/^[A-Z0-9 ·.\-–/()]+$/.test(EN[k]));
   check(!same.length, `${l}: no string left in English (${same.slice(0, 6)})`);
   check(meta[l].status === "draft-unreviewed" && /Claude/.test(d["lang.review_note"]), `${l}: marked as not yet reviewed by native speakers, and the interface says so`);
@@ -80,5 +80,15 @@ check(meta.fr.pct === " " && meta.es.pct === " " && meta.bn.pct === "" && met
 // French typography: a (narrow) no-break space before ? ! : ;
 const frBad = Object.entries(reg.fr).filter(([k, v]) => / [?!:;]/.test(v));
 check(!frBad.length, `French: no ordinary space before ? ! : ; (${frBad.slice(0, 3).map(x => x[0])})`);
+// the workspace catalogue: every "ui.*" English phrase is the baseline's own text (so the match is exact), and the
+// baseline sources it translates are unchanged; templates and element phrases are checked by the browser test
+const FE = root + "app/frontend/";
+const built = [FE + "index.src.html", ...["js", "phase2", "phase3", "phase4"].flatMap(d => fs.readdirSync(FE + d).filter(f => f.endsWith(".js") && !/^i18n_|^ui_99_i18n/.test(f)).map(f => FE + d + "/" + f))].map(f => fs.readFileSync(f, "utf8")).join("\n") + JSON.stringify(app) + fs.readFileSync(root + "public/data/registry.json", "utf8");
+const uiKeys = keys.filter(k => k.startsWith("ui.") && !/^ui\.(rx|ann|desc|el|lab|why)\./.test(k) && !["ui.weights", "ui.fp_sel", "ui.fp_radius", "ui.target_level", "ui.no_land", "ui.similarity_l", "ui.rank_l", "ui.b_both", "ui.pfp_vs"].includes(k));
+const notFound = uiKeys.filter(k => !built.includes(EN[k].replace(/&/g, "&amp;")) && !built.includes(EN[k]));
+check(uiKeys.length > 70 && !notFound.length, `all ${uiKeys.length} workspace phrases are verbatim baseline text (${notFound.slice(0, 4)})`);
+check(app.criteria.every(c => EN["ui.lab." + c.id] === c.label) && Object.entries(app.profiles).every(([p, x]) => EN["ui.why." + p] === x.rationale && EN["profile." + p] === x.label), "criterion labels, profile labels and rationales equal the baseline registry text");
+check(f(meta.de.locale, 84.99, 1) === "85,0" && new Intl.NumberFormat(meta.de.locale).format(76781) === "76.781" && meta.de.pct === "\u00a0", "German: decimal comma, dot grouping, no-break space before %");
+check(Object.values(I18N_PH = Object.fromEntries(langs.map(l => [l, (reg[l]["ui.desc.compose"].match(/\{\w\}/g) || []).sort().join()]))).every(v => v === "{a},{h},{r},{t}"), "constellation names compose from the same four parts in every language");
 console.log(`\n${n - fails}/${n} i18n checks passed`);
 process.exit(fails ? 1 : 0);

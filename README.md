@@ -741,11 +741,26 @@ linked evidence gaps); a **Trust view** of evidence rows with deliberately no co
 (one place against all 16 scoring targets); **Through time** (yearly MODIS); a **team of places** that together match
 every matchable criterion; and an **Earth Analogue Passport** (`asterro.passport/1`: JSON, 1200 × 675 PNG, print,
 Save to My Research) that re-scores from its own contents. The engine (`journey_engine.js`) returns data only, over
-the unchanged baseline; the words come from the interface language — **English, বাংলা, Español, Français** (landing
-row, console, journey header or `?lang=`), with locale number formats, `html lang`, Bengali font support and
+the unchanged baseline; the words come from the interface language — **English, বাংলা, Español, Français, Deutsch** (header,
+landing row, journey header or `?lang=`), with locale number formats, `html lang`, Bengali font support and
 preserved scientific names. Results are tested identical in every language. The research views remain English
 (a localised notice says so). The বাংলা, Español and Français texts were written by Claude (an AI model) and **have
 not yet been reviewed by native speakers**. Method and tests: `docs/phase4/JOURNEY_I18N.md`.
+
+**Globe-first workspace and five languages.** The landing globe responds at once (drag, zoom, click a land cell to
+open it). **"Where on Earth should we look?"** narrates the real search over the globe in eight steps (target,
+fingerprint, qualifying cells, strongest candidate, score and coverage, closest matches, largest differences, why it
+ranked there). Two new globe layers: **Coverage** (share of the weight with an Earth value; under Science instrument
+testing 14,750 cells fall below the 80 % rule and are not ranked) and **Dimension** (similarity s on one chosen
+criterion). The **six-dimension panel** explains each slider in place (plain-language line, unit, target and selected
+place on one scale, ⓘ with the engine's s and contribution). "Change my mind?" adds a rule-based **robustness label**
+(stable / sensitive / ranking changes / insufficient) and near-ties; Missing pieces adds a **coverage meter**; Trust adds
+**the calculation** written out. New journey screens: **Same Earth, different mission** (leaders under two profiles;
+Σ Δcontribution = ΔS), a user-built **portfolio**, and an **Exploration Journal** whose achievements unlock only on
+real actions and whose challenges are answered from the data. Languages: **English, বাংলা, Español, Français,
+Deutsch**, chosen in the header; the whole globe workspace and the journey switch, numbers are locale-formatted, and
+switching keeps target, selection, weights and layer. Translations were written by Claude and are **not yet reviewed by
+native speakers**. Details: `docs/phase4/GLOBE_WORKSPACE.md`.
 
 **Research modules.**
 
@@ -775,13 +790,13 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 93 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 40 journey + 40 language checks
+npm test                 # 93 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 53 journey + 52 language checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
-npm run test:ui          # the seven browser walk-throughs (Playwright + Chromium)
+npm run test:ui          # the eight browser walk-throughs (Playwright + Chromium)
 python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
 ```
 
-**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, JOURNEY_I18N, ARCHITECTURE, DATA,
+**Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, JOURNEY_I18N, GLOBE_WORKSPACE, ARCHITECTURE, DATA,
 TEST_REPORT, LIMITATIONS, CHANGES).
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not

@@ -75,7 +75,8 @@ function i18nSelect(id, extraClass = "") {
 const I18N_TABS = ["explore", "compare", "scenarios", "discover", "data", "method", "lab", "trajectory", "atlas"];
 function i18nChrome() {
   if (typeof document === "undefined" || !document.getElementById("app")) return;
-  for (const b of document.querySelectorAll(".tabs button[data-tab]")) { const k = "tab." + b.dataset.tab; if (txHas(k)) b.textContent = tx(k); }
+  for (const b of document.querySelectorAll(".tabs button[data-tab]")) { const k = "tab." + b.dataset.tab; if (txHas(k)) b.textContent = tx(k); if (b.title && txHas(k + ".t")) b.title = tx(k + ".t"); }
+  const br = document.querySelector(".brand"); if (br) br.setAttribute("aria-label", tx("aria.brand"));
   const tb = (id, body, name) => { const b = document.getElementById(id); if (b) b.innerHTML = `<i>${esc(tx(body))}</i>${esc(tx(name))}`; };
   tb("tgt-mars", "body.mars", "tname.mars_jezero"); tb("tgt-moon", "body.moon", "tname.moon_south_pole"); tb("tgt-cross", "body.both", "tname.cross");
   const set = (id, k) => { const e = document.getElementById(id); if (e) e.textContent = tx(k); };
@@ -96,7 +97,7 @@ function i18nChrome() {
   const tc = document.querySelector(".target-ctl"); if (tc) tc.setAttribute("aria-label", tx("aria.target"));
   i18nHeroRow();
   i18nAtlasCtl();
-  const ls = document.querySelector("#console #lang-sel"); if (ls) { ls.setAttribute("aria-label", tx("lang.label")); const sr = ls.parentElement.querySelector(".sr-only"); if (sr) sr.textContent = tx("lang.label"); }
+  i18nHeader();
   i18nNotice();
 }
 /* the quick-switch beside the target buttons (Phase IV): its prompt and group labels; target names stay as registered */
@@ -126,7 +127,7 @@ function i18nFacts() {
 function i18nNotice() {
   const left = document.getElementById("left"); if (!left) return;
   let n = document.getElementById("i18n-notice");
-  if (I18N.lang === "en" || $("#app").classList.contains("is-hero")) { if (n) n.remove(); return; }
+  if (I18N.lang === "en" || $("#app").classList.contains("is-hero") || (typeof S !== "undefined" && S.tab === "explore")) { if (n) n.remove(); return; }   // Explore is translated
   if (!n) { n = document.createElement("div"); n.id = "i18n-notice"; n.className = "i18n-notice"; n.setAttribute("role", "note"); }
   n.innerHTML = `${esc(tx("notice.english_only"))} <button class="lnk" data-jn-open="home">${esc(tx("notice.open_journey"))}</button>`;
   if (left.firstChild !== n) left.insertBefore(n, left.firstChild);
@@ -134,8 +135,8 @@ function i18nNotice() {
 const _i18nRenderLeft = renderLeft;
 renderLeft = function () { const r = _i18nRenderLeft.apply(this, arguments); try { i18nNotice(); } catch (e) { } return r; };
 
-/* where the language can be chosen: a row of languages on the landing screen, the weight console's side panel in
- * the workspace, and the journey dialog's header. (The header bar has no spare width: the tab row needs all of it.) */
+/* where the language can be chosen: a compact control in the header (always visible), a row of languages on the
+ * landing screen, and the journey dialog's header. The weight console carries no language control. */
 function i18nHeroRow() {
   const hero = document.getElementById("hero"); if (!hero) return;
   let r = document.getElementById("hero-lang");
@@ -143,15 +144,18 @@ function i18nHeroRow() {
   r.setAttribute("aria-label", tx("lang.label"));
   r.innerHTML = Object.entries(I18N.langs).map(([k, m]) => `<button type="button" data-i18n-set="${k}" lang="${m.htmlLang || k}" aria-pressed="${k === I18N.lang}">${esc(m.name)}</button>`).join("");
 }
-const _i18nRenderConsole = renderConsole;
-renderConsole = function () {
-  const r = _i18nRenderConsole.apply(this, arguments);
-  try { const side = document.querySelector("#console .con-side"); if (side && !side.querySelector("#lang-sel")) { const w = document.createElement("div"); w.className = "i18n-bar"; w.innerHTML = i18nSelect("lang-sel"); side.appendChild(w); } } catch (e) { }
-  return r;
-};
+const I18N_GLOBE = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.2"/><ellipse cx="8" cy="8" rx="2.7" ry="6.4" fill="none" stroke="currentColor" stroke-width="1"/><path d="M1.8 6h12.4M1.8 10h12.4" stroke="currentColor" stroke-width="1" fill="none"/></svg>`;
+function i18nHeader() {
+  const sb = document.getElementById("btn-search"); if (!sb) return;
+  let w = document.getElementById("i18n-hdr");
+  if (!w) { w = document.createElement("label"); w.id = "i18n-hdr"; w.className = "i18n-hdr"; sb.insertAdjacentElement("beforebegin", w); }
+  const m = I18N.langs[I18N.lang] || {};
+  w.title = tx("lang.label") + ": " + (m.name || "");
+  w.innerHTML = `${I18N_GLOBE}<span class="i18n-code" aria-hidden="true">${esc(m.code || I18N.lang.toUpperCase())}</span><select id="lang-sel" data-i18n-lang aria-label="${esc(tx("lang.label"))}">${Object.entries(I18N.langs).map(([k, x]) => `<option value="${k}" lang="${x.htmlLang || k}"${k === I18N.lang ? " selected" : ""}>${esc(x.name)}</option>`).join("")}</select>`;
+}
 (function i18nBoot() {
   const go = () => {
-    document.addEventListener("change", e => { if (e.target && e.target.matches && e.target.matches("select[data-i18n-lang]")) setLang(e.target.value); });
+    document.addEventListener("change", e => { if (e.target && e.target.matches && e.target.matches("select[data-i18n-lang]")) { const id = e.target.id; setLang(e.target.value); const n = id && document.getElementById(id); if (n) n.focus(); } });
     document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-i18n-set]"); if (b) { setLang(b.dataset.i18nSet); const n = document.querySelector(`[data-i18n-set="${b.dataset.i18nSet}"]`); if (n) n.focus(); } });
     setLang(i18nInitial(), { noStore: true, force: true });
   };

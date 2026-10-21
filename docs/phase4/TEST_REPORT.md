@@ -12,8 +12,8 @@ Python 3.11, Node 20, and Playwright Chromium with SwiftShader.
 | Phase IV registry engine | `node tests/phase4/test_registry_engine.mjs` | **74/74 passed** |
 | Discovery Trajectory engine | `node tests/phase4/test_trajectory_engine.mjs` | **26/26 passed** |
 | Mismatch signatures + Method Arena engine | `node tests/phase4/test_methods_engine.mjs` | **37/37 passed** |
-| Discovery Journey engine | `node tests/phase4/test_journey_engine.mjs` | **40/40 passed** |
-| Interface languages | `node tests/phase4/test_i18n.mjs` | **40/40 passed** |
+| Discovery Journey engine | `node tests/phase4/test_journey_engine.mjs` | **53/53 passed** |
+| Interface languages (five) | `node tests/phase4/test_i18n.mjs` | **52/52 passed** |
 | Stack rebuild from raw inputs | CI step (`build_stack` + `sha256sum`) | `cfbe1bf5…72e63`, identical to the published stack |
 | Baseline UI smoke | `python3 tests/ui_smoke.py` | Exit 0. #1 Altiplano at 85.0 %; mobile overflow 0. The only console error is the Google Fonts request, which the sandbox blocks. |
 | Phase II UI smoke | `python3 tests/phase2/ui_lab_smoke.py` | Exit 0. `baseline_unchanged: true`; no errors; mobile overflow 0. |
@@ -21,7 +21,8 @@ Python 3.11, Node 20, and Playwright Chromium with SwiftShader.
 | Phase IV UI smoke | `python3 tests/phase4/ui_phase4_smoke.py` | **75/75 checks passed** |
 | Discovery Trajectory UI smoke | `python3 tests/phase4/ui_trajectory_smoke.py` | **24/24 checks passed** |
 | Mismatch signatures + Method Arena UI smoke | `python3 tests/phase4/ui_methods_smoke.py` | **19/19 checks passed** (incl. Python re-scoring of an exported arena report) |
-| Discovery Journey + languages UI smoke | `python3 tests/phase4/ui_journey_smoke.py` | **63/63 checks passed** (four languages, 390 px phone, reduced motion, Python re-scoring of an exported passport) |
+| Discovery Journey + languages UI smoke | `python3 tests/phase4/ui_journey_smoke.py` | **70/70 checks passed** (five languages incl. Missions, Portfolio and Journal screens; 390 px phone, reduced motion, Python re-scoring of an exported passport) |
+| Globe-first workspace UI smoke | `python3 tests/phase4/ui_global_smoke.py` | **39/39 checks passed** (header language control; landing globe; narrated reveal vs engine; Coverage and Dimension layers vs engine; dimension panel; state kept across five languages; no English left in the workspace in bn / es / fr / de; journal unlocks only on real actions; challenges, missions and portfolio vs engine; phone width) |
 | Trajectory replay (Python) | `python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json` | REPRODUCED (6 configurations: Jezero × 4, Shackleton, cross-planet) |
 | Scenario-set replay | `python3 scripts/replay_scenario.py tests/phase4/fixtures/scenario_gale.json` | REPRODUCED (4 scenarios × 20 sites) |
 
@@ -30,6 +31,8 @@ The baseline, Phase II, Phase III and Phase IV walk-throughs were re-run after t
 After the Mismatch Signatures and Method Arena were added, all six browser walk-throughs were re-run and pass. When four ran concurrently on one machine, the Phase IV suite hit a 30 s screenshot timeout and one trajectory timing check failed; both pass when run alone (75/75, 24/24). Run the suites sequentially (`npm run test:ui` does).
 
 After the Discovery Journey and the interface languages were added, all seven browser walk-throughs were re-run sequentially on the final build and pass; the English interface is unchanged (the trajectory suite still finds all tabs fully visible at 1512 px, and the baseline suite still finds Altiplano #1 at 85.0 %). Once more, a trajectory keyboard-timing check failed while `npm test` was running on the same machine and passed when re-run alone. The journey suite found and drove two real fixes during development: focus was lost when the dialog re-rendered asynchronously (now restored to the same control), and the English-only "methods" notes in the Trust view are now marked as preserved source text. The Bengali screenshots were rendered with FreeSans (the only Bengali-capable font in the build machine); Noto Sans Bengali from Google Fonts could not be loaded there.
+
+After the globe-first workspace (header language control, German, workspace translation, dimension panel, narrated reveal, Coverage / Dimension layers, robustness label, coverage meter, calculation trace, missions, portfolio, journal) was added, `npm test` and all eight browser walk-throughs were run sequentially on the final build and pass: baseline Altiplano #1 at 85.0 %, `baseline_unchanged` true in the Phase II and III suites, Phase IV 75/75, trajectory 24/24 (all nine tabs fully visible at 1512 px), methods 19/19, journey 70/70, globe workspace 39/39. The new suites drove fixes during development: a crash when the Dimension layer met the cross-planet target, a closed reveal card that kept stale English, untranslated static globe controls, an untranslated "Earth cell" label, and a 6 px tab overflow at 1512 px (header gap reduced).
 
 ## What the new suites check
 

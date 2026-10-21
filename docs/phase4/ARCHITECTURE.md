@@ -54,6 +54,8 @@ Each link is checked when the file loads:
 | `trajectory_engine.js`, `ui_12_trajectory.js` | Discovery Trajectory (see TRAJECTORY.md) |
 | `methods_engine.js`, `ui_13_methods.js` | Mismatch signatures and Method Arena (see METHOD_ARENA.md) |
 | `i18n_00_core.js`, `i18n_10_en.js` … `i18n_40_fr.js` | Interface languages. They load first among the Phase IV files (`i18n_` sorts before the others). `tx()` with English fallback, Intl formats, `setLang` / `asterro:lang`. They wrap `renderLeft` (English-only notice), `renderConsole` (language selector) and `a4ExploreControl` (quick-switch prompt). See JOURNEY_I18N.md |
+| `ui_15_dimensions.js`, `ui_16_globe.js`, `ui_17_journal.js` | Six-dimension panel (wraps `renderConsole`, `updateConsoleNumbers`, `select`); landing globe, narrated reveal and the Coverage / Dimension layers (wraps `pick`, `paintField`, `setLayer`, `renderLegend`); missions, portfolio and journal (wraps `runSearch`, `setTarget`, `applyProfile`, `select`, `jnRender` and the passport exports to record real actions). See GLOBE_WORKSPACE.md |
+| `ui_99_i18n_dom.js` | Loads last, so its wrappers are outermost: re-translates the baseline views after every render (`renderRight`, `renderLeft` on Explore, `renderLegend`, `renderStatus`, `renderConsole`, `updateConsoleNumbers`, `hover`, `announce`) |
 | `journey_engine.js`, `ui_14_journey.js` | Discovery Journey: a pure engine (`AsterroJourney`) over `TAIEngine` that returns data only, plus the dialog. They wrap `selectedHeader` ("Explain this place"), `viewDiscover` (door) and `a4Load` (refresh when the registry arrives). See JOURNEY_I18N.md |
 
 ## Integration with the earlier layers

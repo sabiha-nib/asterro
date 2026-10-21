@@ -135,6 +135,51 @@ const PS = J.passport(cj, alti, W0, { change: CM, missing: J.missing(cj, alti, W
   check(Math.abs(J.rescore(P2) - e2) < 1e-12, "re-scoring follows edited weights exactly (an edited passport is detectable)");
   check(/not endorsed by NASA/.test(PS.disclaimer) && /not validated/.test(PS.disclaimer), "passport carries the no-equivalence / not-validated / no-endorsement statement");
 }
+// ---------------------------------------------------------------- 9 robustness label, near ties, the calculation trace
+{
+  const R = CM.robustness, P = CM.alternatives.filter(a => a.kind === "profile"), h = P.filter(a => a.holds).length;
+  const want = h === P.length ? "stable" : 2 * h >= P.length ? "sensitive" : "changes";
+  check(R.tested === P.length && R.hold === h && R.label === want, `robustness label follows the documented rule over the ${P.length} other profiles: ${h} hold → '${R.label}'`);
+  check(J.robustnessLabel([{ kind: "profile", holds: true }, { kind: "profile", holds: true }], 1).label === "stable" && J.robustnessLabel([{ kind: "profile", holds: true }, { kind: "profile", holds: false }], 1).label === "sensitive"
+    && J.robustnessLabel([{ kind: "profile", holds: false }, { kind: "profile", holds: false }, { kind: "profile", holds: true }], 1).label === "changes" && J.robustnessLabel([{ kind: "profile", holds: true }], 1).label === "insufficient"
+    && J.robustnessLabel([{ kind: "profile", holds: true }, { kind: "profile", holds: true }], null).label === "insufficient", "robustness label known answers: stable / sensitive / changes / insufficient (one profile, or not ranked)");
+  const L20 = J.leaders(effJ, cj, 20), ties = J.nearTies(effJ, cj, L20[1], 20, 0.01);
+  check(ties.every(t => Math.abs(t.score - effJ[L20[1]]) <= 0.01 + 1e-12 && t.i !== L20[1]) && ties.length === L20.filter(j => j !== L20[1] && Math.abs(effJ[j] - effJ[L20[1]]) <= 0.01 + 1e-12).length, `near ties of leading site 2: ${ties.length} leading sites within 1 point`);
+  let bad = 0;
+  for (const i of L20) { const C = J.calculation(cj, i, W0); if (Math.abs(C.sumK - effJ[i]) > 1e-12 || Math.abs(C.score - effJ[i]) > 1e-15 || !C.ranked) bad++;
+    for (const r of C.rows) if (r.s != null && Math.abs(r.s - Math.max(0, Math.min(1, 1 - Math.abs(r.e - r.t) / (r.hi - r.lo)))) > 1e-12) bad++; }
+  let miss = -1; for (let i = 0; i < D.n; i++) if (D.A.aridity[i] !== D.A.aridity[i] && effJ[i] >= 0) { miss = i; break; }
+  const Cm = J.calculation(cj, miss, W0);
+  check(bad === 0 && Math.abs(Cm.coverage - 5 / 6) < 1e-12 && Cm.rows.find(r => r.c === "aridity").k == null && Math.abs(Cm.sumK - effJ[miss]) < 1e-12, "calculation trace: Σk = S for the 20 leaders; d, s by the formula; a missing value has no k and the coverage is 5/6");
+}
+// ---------------------------------------------------------------- 10 same Earth, different mission
+{
+  const M = J.missions(cj, P.general.weights, P.rover.weights, 10);
+  const eB = ENG.similarity(D.A, crit, cj.tv, P.rover.weights, D.ranges).eff, LB = ENG.distinctSites(ENG.order(eB, D.A.cell), D.lat, D.lon, 10, 300);
+  check(JSON.stringify(M.B.map(r => r.i)) === JSON.stringify(LB) && M.A[0].i === alti, "missions: both leader lists equal the baseline ranking under each profile");
+  check(Math.abs(M.focus.sumDelta - (M.focus.scoreB - M.focus.scoreA)) < 1e-12 && M.focus.rankB === J.rank(eB, D.A.cell, alti), `Σ Δcontribution = ΔS exactly for the focus site (${(100 * M.focus.sumDelta).toFixed(2)} points; rank ${M.focus.rankA} → ${M.focus.rankB})`);
+  check(M.changes.map(x => x.c).join() === crit.filter(c => P.general.weights[c] !== P.rover.weights[c]).join() && M.both.length + M.onlyA.length === 10, "missions: the stated weight changes and the stay / leave sets are exact");
+}
+// ---------------------------------------------------------------- 11 portfolio
+{
+  const L20 = J.leaders(effJ, cj, 20), pf = J.portfolio(cj, L20.slice(0, 3), W0);
+  let ok = true;
+  for (const p of pf.per) { const sv = pf.sites.map(s => s.rows.find(r => r.c === p.c).s); const m = pf.sites.filter((s, k) => sv[k] != null && sv[k] >= thr.match).map(s => s.i);
+    if (JSON.stringify(m) !== JSON.stringify(p.matching)) ok = false; if (p.covered !== (m.length > 0)) ok = false; }
+  const d01 = ENG.haversine(D.lat[L20[0]], D.lon[L20[0]], D.lat[L20[1]], D.lon[L20[1]]);
+  check(ok && pf.dist.length === 3 && Math.abs(pf.dist[0].km - d01) < 1e-9 && pf.minKm >= 300 - 1e-9, "portfolio: per-criterion matches recomputed; pairwise distances; leaders are ≥ 300 km apart");
+  check(!JSON.stringify(pf).includes("optimal"), "portfolio: nothing is labelled optimal");
+}
+// ---------------------------------------------------------------- 12 challenges: answers derived from the data
+{
+  const C = J.challenges(cj, W0, { wExcl: P.instrument.weights, K: 20 });
+  const sL = i => J.lens(cj, i, W0).rows.find(r => r.c === "lst_diurnal_range").s;
+  check(C.top === alti && C.stronger.every(i => sL(i) > C.s0) && C.leaders.slice(1).filter(i => !C.stronger.includes(i)).every(i => sL(i) <= C.s0 + 1e-12), `challenge 'stronger thermal match': ${C.stronger.length} leading sites are closer than #1 (s0 = ${C.s0.toFixed(3)})`);
+  check(C.costsMost === "lst_diurnal_range", "challenge 'costs most': the thermal criterion");
+  const eI = ENG.similarity(D.A, crit, cj.tv, P.instrument.weights, D.ranges).eff, X = C.excluded;
+  check(X && effJ[X.i] >= 0 && !(eI[X.i] >= 0) && X.coverage < 0.8 && X.missing.join() === "aridity", `challenge 'excluded': cell ${X && X.cell} is ranked under General but not under Science instrument testing (coverage ${X && (100 * X.coverage).toFixed(0)}%, aridity missing)`);
+  check(C.sameScore.every(([a, b]) => Math.abs(effJ[a] - effJ[b]) <= 0.01 + 1e-12 && C.mainCost[a] !== C.mainCost[b]), `challenge 'same score, different reasons': ${C.sameScore.length} valid pairs`);
+}
 if (process.argv.includes("--write-fixture")) {
   fs.writeFileSync(root + "tests/phase4/fixtures/journey_reference.json", JSON.stringify({ engine: J.VERSION, stack_sha256: D.app.stack.sha256, target: "mars_jezero", weights: W0, cell_id: D.A.cell[alti], passport: PS,
     change: CM.alternatives.map(a => ({ kind: a.kind, id: a.id, changes: a.changes, rank: a.rank, lead: a.lead })) }, null, 1));

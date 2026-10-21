@@ -18,9 +18,15 @@
 | `tests/phase4/test_methods_engine.mjs`, `tests/test_methods.py`, `tests/phase4/ui_methods_smoke.py`, `tests/phase4/fixtures/methods_reference.json` | Engine tests, independent numpy re-implementation, browser walk-through, reference fixture |
 | `docs/phase4/METHOD_ARENA.md` | Method of both views |
 | `app/frontend/phase4/journey_engine.js`, `ui_14_journey.js`, `p7_journey.css` | Discovery Journey: live discoveries, 7-step Reveal, Difference Lens, Change my mind?, Missing pieces, Trust view (no combined score), Other worlds, Through time, Team of places, Earth Analogue Passport (JSON / PNG / print / collections). Entry points added beside the existing ones (landing button, "Explain this place", Discover door); the globe pauses its idle rotation while the dialog is open |
-| `app/frontend/phase4/i18n_00_core.js`, `i18n_10_en.js`, `i18n_20_bn.js`, `i18n_30_es.js`, `i18n_40_fr.js` | Interface languages: core (fallback, Intl formats, `html lang`, Bengali font) and four dictionaries. Translates the header tabs, target buttons, landing and the journey; research views show a localised English-only notice. bn / es / fr drafted by Claude, not yet reviewed by native speakers |
+| `app/frontend/phase4/i18n_00_core.js`, `i18n_10_en.js`, `i18n_20_bn.js`, `i18n_30_es.js`, `i18n_40_fr.js` | Interface languages: core (fallback, Intl formats, `html lang`, Bengali font, header language control) and the dictionaries. bn / es / fr / de drafted by Claude, not yet reviewed by native speakers |
 | `tests/phase4/test_journey_engine.mjs`, `tests/test_journey.py`, `tests/phase4/test_i18n.mjs`, `tests/phase4/ui_journey_smoke.py`, `tests/phase4/fixtures/journey_reference.json` | Journey engine tests, independent numpy re-scoring, language completeness, browser walk-through in four languages, fixture |
 | `docs/phase4/JOURNEY_I18N.md` | Method, translation status and tests of the journey and the languages |
+| `app/frontend/phase4/ui_15_dimensions.js` | Six-dimension panel: plain-language line, unit, target / place scale, active state and an ⓘ explanation with the engine's numbers (additive DOM layer over the baseline console) |
+| `app/frontend/phase4/ui_16_globe.js` | Explorable landing globe (click on land opens that place), the narrated "Where on Earth should we look?" reveal, Coverage and Dimension layers |
+| `app/frontend/phase4/ui_17_journal.js` | Same Earth / Different Mission, the user portfolio, the Exploration Journal (steps, achievements, challenges) |
+| `app/frontend/phase4/ui_99_i18n_dom.js`, `i18n_50_de.js`, `p8_global.css` | Workspace translation over the baseline views (exact phrase catalogue + templates), German, styles |
+| `tests/phase4/ui_global_smoke.py` | Browser walk-through of the globe-first workspace in five languages |
+| `docs/phase4/GLOBE_WORKSPACE.md` | Method, rules and tests of this step |
 | `scripts/replay_trajectory.py` | Replays `asterro.trajectory/1` files with the Python reference engine |
 | `docs/phase4/TRAJECTORY.md` | Method of the Discovery Trajectory |
 | `tests/test_phase4.py`, `tests/phase4/*` | Registry tests (Python), engine tests (Node), UI smoke (Playwright), scenario fixture |
@@ -36,7 +42,7 @@
 | `app/frontend/phase3/atlas_engine.js` | `eligibility()` documents model 3.0.0 (L1 none, L2 partial, L3+ full, as in v1); the workflow boundary uses it |
 | `app/frontend/phase3/ui_02_catalog.js` | "Not rankable" uses the engine's eligibility |
 | `tests/test_phase3.py`, `tests/phase3/test_atlas_engine.mjs`, `tests/phase3/ui_atlas_smoke.py` | See TEST_REPORT.md |
-| `package.json` | Adds `test:phase4`, `build:phase4` and `test:ui`; `test` now includes Phase IV (and the journey and language checks); `test:ui` includes the journey walk-through |
+| `package.json` | Adds `test:phase4`, `build:phase4` and `test:ui`; `test` now includes Phase IV (and the journey and language checks); `test:ui` includes the journey and globe-workspace walk-throughs |
 | `.github/workflows/ci.yml` | Validates the published registry schema |
 | `public/data/phase3/atlas.json`, `public/index.html` | Regenerated |
 | `README.md` | Phase IV section |

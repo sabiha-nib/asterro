@@ -57,8 +57,8 @@ TEXT = r"""() => { const c = document.querySelector('#jn').cloneNode(true);
   c.querySelectorAll('.i18n-keep, option, script, style, .sr-only:empty, select[data-i18n-lang]').forEach(e => e.remove());
   return c.textContent.replace(/\s+/g, ' '); }"""
 EN_WORDS = re.compile(r"\b(the|and|of|is|are|with|this|that|from|for|by|without|which|under|place|places|weights?|target|objective|conditions?|matches?|compared|Earth|data|step|rank|leading|similar|different|unknown|summary|missing|trust|sources?|download|print|save|discoveries|close|back|next)\b", re.I)
-SAME_WORD = {"es": {"similar"}, "fr": {"conditions", "condition", "sources", "source", "place"}}   # words spelled the same in that language
-ALLOWED_LATIN = {"ASTERRO", "JSON", "SHA", "NASA", "USGS", "MODIS", "POWER", "GMTED2010", "MEDA", "MOLA", "LOLA", "Diviner", "explore", "target", "v1", "legacy", "baseline", "tai", "sim", "stack",
+SAME_WORD = {"es": {"similar"}, "fr": {"conditions", "condition", "sources", "source", "place"}, "de": {"data"}}   # words spelled the same in that language
+ALLOWED_LATIN = {"Deutsch", "Σw", "N/A", "min", "max", "clip", "ASTERRO", "JSON", "SHA", "NASA", "USGS", "MODIS", "POWER", "GMTED2010", "MEDA", "MOLA", "LOLA", "Diviner", "explore", "target", "v1", "legacy", "baseline", "tai", "sim", "stack",
                  "P", "PET", "K", "s", "km", "m", "EVA", "Space", "Apps", "Claude", "Español", "Français", "English", "LST", "Aqua", "MYD11C3", "Analogue", "Passport", "schema", "passport"}
 
 
@@ -83,8 +83,8 @@ try:
         # ---------------------------------------------------------------- default interface unchanged
         d = pg.evaluate("({lang: document.documentElement.lang, tabs: [...document.querySelectorAll('.tabs button')].slice(0, 6).map(b => b.textContent), search: document.querySelector('#hero-search').textContent, h1: document.querySelector('#hero h1').innerText.replace(/\\s+/g, ' '), cta: [...document.querySelectorAll('.hero-cta button')].map(b => b.id), row: [...document.querySelectorAll('#hero-lang button')].map(b => [b.textContent, b.getAttribute('lang'), b.getAttribute('aria-pressed')])})")
         check(d["lang"] == "en" and d["tabs"] == ["Explore", "Compare", "Scenarios", "Discover", "Data", "Method"] and d["search"] == "Search Earth" and d["h1"].upper() == "FIND EARTH'S OTHER WORLDS.", "English is the default and the baseline labels are unchanged")
-        check(d["cta"][:2] == ["hero-journey", "hero-search"] and "hero-science" in d["cta"] and "hero-atlas" in d["cta"], f"landing: 'Start with a discovery' added beside the existing actions ({d['cta']})")
-        check([r[0] for r in d["row"]] == ["English", "বাংলা", "Español", "Français"] and d["row"][1][1] == "bn" and d["row"][0][2] == "true", "landing: language row with native names and lang attributes")
+        check(d["cta"][:3] == ["hero-reveal", "hero-journey", "hero-search"] and "hero-science" in d["cta"] and "hero-atlas" in d["cta"], f"landing: 'Where on Earth should we look?' and 'Start with a discovery' added beside the existing actions ({d['cta']})")
+        check([r[0] for r in d["row"]] == ["English", "বাংলা", "Español", "Français", "Deutsch"] and d["row"][1][1] == "bn" and d["row"][0][2] == "true", "landing: language row with native names and lang attributes")
         base0 = pg.evaluate("({w: JSON.stringify(S.weights), tid: S.targetId, top: S.res.distinct[0], score: S.res.eff[S.res.distinct[0]]})")
         # ---------------------------------------------------------------- open, stories = recomputed results
         pg.click("#hero-journey"); pg.wait_for_selector("#jn:not([hidden]) .jn-story")
@@ -146,7 +146,7 @@ try:
         check(pg.evaluate("JN.sec") == "change" and pg.evaluate("!!document.querySelector('[data-alt=\"drop_source:gmted2010\"].flash')"), "a dependence item opens the exact sensitivity result")
         pg.click("#jn-tab-trust"); time.sleep(0.2)
         tr = pg.evaluate("({rows: [...document.querySelectorAll('[data-trust]')].map(e => e.dataset.trust), txt: document.querySelector('#jn-panel').textContent})")
-        check(len(tr["rows"]) == 7 and "does not combine these rows into a single trust score" in tr["txt"] and not re.search(r"trust score[^.]*\d", tr["txt"]), "Trust View: seven evidence rows, no combined trust score")
+        check(len(tr["rows"]) == 8 and "does not combine these rows into a single trust score" in tr["txt"] and not re.search(r"trust score[^.]*\d", tr["txt"]), "Trust View: eight evidence rows (incl. the calculation), no combined trust score")
         # ---------------------------------------------------------------- other worlds, time
         pg.click("#jn-tab-worlds"); time.sleep(0.4)
         wd = pg.evaluate("""(() => { const rows = [...document.querySelectorAll('.jn-worlds li')]; const ids = jnTargets();
@@ -192,7 +192,7 @@ try:
         check(pg.locator("#left .jn-door [data-jn-open=home]").count() == 1, "Discover tab: a door into the guided discoveries")
         # ---------------------------------------------------------------- languages
         ref = None
-        for L in ["en", "bn", "es", "fr"]:
+        for L in ["en", "bn", "es", "fr", "de"]:
             pg.evaluate(f"setLang('{L}'); I18N.missing.clear(); jnOpen('home')"); time.sleep(0.3)
             texts = [pg.evaluate(TEXT)]
             pg.evaluate("jnOpen('place', {i: JN.stories[0].i, tid: 'mars_jezero', pid: 'general', sec: 'reveal', step: 0})")
@@ -201,6 +201,8 @@ try:
             for s in nav_all(pg):
                 texts.append(pg.evaluate(TEXT))
             pg.evaluate("JN.view = 'team'; jnRender()"); texts.append(pg.evaluate(TEXT))
+            for v in ["missions", "portfolio", "journal"]:
+                pg.evaluate(f"JN.view = '{v}'; PF.sel = S.res.distinct.slice(0, 3); jnRender()"); texts.append(pg.evaluate(TEXT))
             res = pg.evaluate("(() => { JN.view = 'place'; JN.sec = 'passport'; jnRender(); const P = JN.passport; return { s: P.result, crit: P.criteria.map(c => [c.state, c.similarity]), cm: JN.cm.get(jnCmKey()).alternatives.map(a => a.rank), missing: [...I18N.missing], lang: document.documentElement.lang, big: document.querySelector('.jn-placehead .jn-score b').textContent, chrome: [document.querySelector('#tab-explore').textContent, document.querySelector('#hero-search').textContent] }; })()")
             if L == "en":
                 ref = res
@@ -214,7 +216,7 @@ try:
                 check(not latin, f"bn: no Latin-script words except preserved names, units and codes ({latin[:10]})")
             check(res["lang"] == L, f"{L}: html lang attribute follows the language")
             check(res["s"] == ref["s"] and res["crit"] == ref["crit"] and res["cm"] == ref["cm"], f"{L}: score, rank, per-criterion states and every sensitivity result identical to English")
-            want_big = {"bn": "৮৫.০%", "es": "85,0 %", "fr": "85,0 %"}[L]
+            want_big = {"bn": "৮৫.০%", "es": "85,0\u00a0%", "fr": "85,0\u202f%", "de": "85,0\u00a0%"}[L]
             check(res["big"] == want_big, f"{L}: locale number format on the score ({res['big']!r})")
             check(res["chrome"][0] != "Explore" and res["chrome"][1] != "Search Earth", f"{L}: header tabs and landing buttons translated ({res['chrome']})")
             if L == "bn":
@@ -236,7 +238,7 @@ try:
         m.on("pageerror", lambda e: errors.append("mobile pageerror: " + str(e)))
         m.goto(URL); m.wait_for_function("S.res && S.res.distinct", timeout=90000)
         anim = None
-        for L in ["en", "bn", "es", "fr"]:
+        for L in ["en", "bn", "es", "fr", "de"]:
             m.evaluate(f"setLang('{L}'); jnOpen('home')"); time.sleep(0.3)
             worst = m.evaluate("Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth")
             m.evaluate("jnOpen('place', {i: JN.stories[0].i, tid: 'mars_jezero', pid: 'general', sec: 'reveal', step: 3})")

@@ -43,13 +43,19 @@
   dataset was integrated: no verified acquisition of a higher-resolution DEM or of further variables was possible in
   this build environment, so *Missing pieces* names those gaps instead.
 
+- **Globe-first workspace.** The robustness label is a rule over the declared profiles, not a statistical confidence.
+  The landing globe is interactive only on screens wider than 760 px. The journal's progress is kept per browser.
+  Tablets were not tested as a separate size (desktop 1512 px and phone 390 px were).
+
 ## Software
 
-- **Interface languages.** বাংলা, Español and Français cover the header tabs, target buttons, landing and the whole
-  Discovery Journey. The research views and the weight console are English only (a localised notice says so).
-  The three translations were written by Claude (an AI model) and **have not been reviewed by native speakers**.
-  Place names (Natural Earth) and registry target names stay in English. In Spanish and French the header tabs
-  scroll horizontally on wide screens. Bengali uses Noto Sans Bengali when online, otherwise a system font; it was
+- **Interface languages.** বাংলা, Español, Français and Deutsch cover the header, the landing, the whole globe
+  workspace (globe controls and legends, ranking rail, Explore panel, weight console, reveal card) and the whole
+  Discovery Journey. The other research tabs (Compare, Scenarios, Discover, Data, Method, Lab, Trajectory, Atlas)
+  remain English only (a localised notice says so); target method notes are quoted from source records in English.
+  The four translations were written by Claude (an AI model) and **have not been reviewed by native speakers**.
+  Place names (Natural Earth) and registry target names stay in English. In Spanish, French and German the header tabs
+  scroll horizontally on wide screens (in English all nine fit at 1512 px). Bengali uses Noto Sans Bengali when online, otherwise a system font; it was
   rendered here with FreeSans, not with the fonts a typical Mac or Windows machine would use.
 
 - **Header width.** To fit the Trajectory tab, tab padding and letter-spacing are reduced on screens wider
