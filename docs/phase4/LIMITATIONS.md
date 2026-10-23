@@ -49,14 +49,27 @@
 
 ## Software
 
-- **Interface languages.** বাংলা, Español, Français and Deutsch cover the header, the landing, the whole globe
-  workspace (globe controls and legends, ranking rail, Explore panel, weight console, reveal card) and the whole
-  Discovery Journey. The other research tabs (Compare, Scenarios, Discover, Data, Method, Lab, Trajectory, Atlas)
-  remain English only (a localised notice says so); target method notes are quoted from source records in English.
-  The four translations were written by Claude (an AI model) and **have not been reviewed by native speakers**.
-  Place names (Natural Earth) and registry target names stay in English. In Spanish, French and German the header tabs
-  scroll horizontally on wide screens (in English all nine fit at 1512 px). Bengali uses Noto Sans Bengali when online, otherwise a system font; it was
-  rendered here with FreeSans, not with the fonts a typical Mac or Windows machine would use.
+- **Interface languages.** বাংলা, Español, Français and Deutsch now cover every route:
+  - the header, the landing and the globe workspace;
+  - the Discovery Journey and the journal;
+  - Compare, Scenarios, Discover, Data and Method;
+  - the 14 Lab modules, Trajectory and the 23 Atlas modules;
+  - the Trace, Reproduce and Report sheets, and the Markdown report.
+
+  See `COMPLETION_QA.md`. What remains:
+  - **No native-speaker review.** The four translations were written by Claude (an AI model) and **have not been
+    reviewed by native speakers**. `docs/i18n/TRANSLATION_REGISTER.md` keeps the status and the review workflow.
+  - **Strings in states the harvest never reached** fall back to English. The harvest is a sweep of every route,
+    module and target, plus every browser suite.
+  - **Source-record text** (method notes, dataset notes) is shown translated, with its English original beside it.
+  - **Place names.** Physical-region and planetary feature names stay as their sources write them. Only country
+    names are localised, through CLDR.
+  - **Bengali font.** Bengali uses Noto Sans Bengali when Google Fonts is reachable, otherwise the platform's
+    Bengali font. No font file is bundled, because none could be obtained legitimately in the build environment.
+    Shaping and coverage were verified with that environment's fallback face (FreeSans). Noto Sans Bengali itself
+    was not rendered there (see TEST_REPORT.md).
+  - **Header.** In Spanish, French and German at desktop widths, the tab bar takes its own row under the header
+    instead of scrolling (`ui_18_nav.js`).
 
 - **Header width.** To fit the Trajectory tab, tab padding and letter-spacing are reduced on screens wider
   than 760 px; the baseline header therefore looks slightly tighter than before.

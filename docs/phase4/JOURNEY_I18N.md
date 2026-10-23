@@ -97,7 +97,7 @@ endorsed by NASA.
   whole journey (every screen above, including the downloaded PNG).
 - **What is not translated.** The research views (Explore panel, Compare, Scenarios, Discover, Data, Method, Lab,
   Trajectory, Atlas) and the weight console are not translated yet. In another language they show a localised notice
-  saying so, with a link to the journey. Their numbers are the same in every language.
+  saying so, with a link to the journey. Their numbers are the same in every language. *(Superseded by the completion pass: every research view is now translated — see `COMPLETION_QA.md`.)*
 - **Preserved in every language.** Dataset and product names (NASA POWER, MODIS Aqua LST (MYD11C3), USGS GMTED2010,
   MOLA, LOLA, Diviner, MEDA), units, configuration and schema ids, algorithm versions, Natural Earth place names and
   registry target names. They are marked `translate="no"`. Target method notes are quoted from the source records in
@@ -156,7 +156,8 @@ endorsed by NASA.
 
 ## Limitations
 
-- The research views and the weight console are English only.
+- ~~The research views and the weight console are English only.~~ Translated since the globe-workspace and
+  completion passes (`GLOBE_WORKSPACE.md`, `COMPLETION_QA.md`).
 - The translations have not been reviewed by native speakers.
 - Natural Earth place names and registry target names stay in English.
 - No new dataset was integrated in this step. No verified acquisition of a higher-resolution DEM or of other

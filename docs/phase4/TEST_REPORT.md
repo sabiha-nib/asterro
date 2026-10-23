@@ -34,6 +34,60 @@ After the Discovery Journey and the interface languages were added, all seven br
 
 After the globe-first workspace (header language control, German, workspace translation, dimension panel, narrated reveal, Coverage / Dimension layers, robustness label, coverage meter, calculation trace, missions, portfolio, journal) was added, `npm test` and all eight browser walk-throughs were run sequentially on the final build and pass: baseline Altiplano #1 at 85.0 %, `baseline_unchanged` true in the Phase II and III suites, Phase IV 75/75, trajectory 24/24 (all nine tabs fully visible at 1512 px), methods 19/19, journey 70/70, globe workspace 39/39. The new suites drove fixes during development: a crash when the Dimension layer met the cross-planet target, a closed reveal card that kept stale English, untranslated static globe controls, an untranslated "Earth cell" label, and a 6 px tab overflow at 1512 px (header gap reduced).
 
+## Completion pass (five languages on every route, header, tablets, data inventory, journal)
+
+Run in the build environment on the final build: Linux, Python 3.11, Node 22, Playwright Chromium with SwiftShader.
+
+| Suite | Result |
+|---|---|
+| `npm test` (Python, JS parity, Phase II, III, IV engines, journey, interface languages, route catalogues) | Python **101/101** (including 8 new data-inventory tests); parity passed; Phase II 65/65; Phase III 132/132 (protected baseline files unchanged); registry 74/74; trajectory 26/26; methods 37/37; journey 53/53; i18n **52/52**; route catalogues **63/63** |
+| `tests/ui_smoke.py`, `phase2/ui_lab_smoke.py`, `phase3/ui_atlas_smoke.py` | Exit 0. Altiplano #1 at 85.0 %; `baseline_unchanged` true; mobile overflow 0 |
+| `ui_phase4_smoke.py` · `ui_trajectory_smoke.py` · `ui_methods_smoke.py` · `ui_global_smoke.py` | 75/75 · 24/24 · 19/19 · 39/39 |
+| `ui_journey_smoke.py` | **70/70** — see note 1 |
+| `ui_routes_i18n_smoke.py` | **27/27**: every route and module in বাংলা, Español, Français and Deutsch for three targets. 0 segments without a catalogue entry and 0 routes with an English sentence left in any of the four languages. English is restored exactly, state and numbers are unchanged, and source quotations carry their originals. Missing pieces and the Data view show the inventory statuses. |
+| `ui_journal_persist_smoke.py` | **16/16** |
+| `ui_responsive_smoke.py` (6 simulated viewports, touch emulation on phones and tablets) | **113/113** — see note 2 |
+| `scripts/i18n_terms_check.mjs` | glossary term used: bn 100 %, es 99 %, fr 100 %, de 99 % of 557 route entries |
+
+**Notes.**
+
+1. The first sequential run of `ui_journey_smoke.py` failed 4 checks:
+   - two were real overflows at 390 px in es, fr and de, caused by long dataset names in the new inventory rows of
+     Missing pieces;
+   - one was four dataset acronyms (API, GIBS, MERRA, NASADEM) missing from the suite's list of names kept in
+     Latin script.
+
+   After the fix (wrapping in `p9_complete.css`, names added to the list) the suite was re-run alone and passed
+   70/70. The earlier suites in that run had already passed on the build before this CSS-only change.
+2. `ui_responsive_smoke.py` was re-run once with `ASTERRO_VP=1512 ASTERRO_LANGS=bn`, after its Noto-detection probe
+   was corrected. It had used `document.fonts.check`, which also answers true when the face is absent. In this
+   environment the corrected probe reports Noto Sans Bengali as **not available**, and `fc-match` resolves it to
+   FreeSans.
+
+**Real defects these suites found and drove fixes for.**
+
+- The German Trace sheet pushed its close button off-screen on phones. Its header now wraps.
+- Atlas module groups, comparison tags and selects pushed the page 18–35 px sideways on phones in German.
+- Long German section labels did not wrap.
+- Globe-control segments cut off their last buttons on phones and tablets. The expedition chip overlapped them at
+  768 and 1,280 px.
+- Thumbnail captions were 8.5 px; they are now at least 10 px.
+- Bare numbers in the research routes were not locale-formatted (`84.99%` → `84,99 %`).
+- Text the user typed (collection names, validation cases) had entered the translation catalogue. It is now kept
+  verbatim as a name.
+- `Loading…` was treated as a truncated identifier.
+- Lists of criteria composed at run time were not translated.
+
+**Not run, or not possible.**
+
+- **Physical phones and tablets.** All viewport checks are simulated in headless Chromium.
+- **Noto Sans Bengali rendering.** The font is unreachable here (`data/inventory/probe.json`), and no font file is
+  bundled. Bengali shaping was verified with FreeSans. A check in the desktop app's built-in browser on the user's
+  computer was attempted, but that computer was not connected.
+- **Native-speaker review.** None (`docs/i18n/TRANSLATION_REGISTER.md`).
+- **New datasets.** Every candidate endpoint refused from this environment. Probes ran on 2026-10-21 and on
+  2026-10-23.
+
 ## What the new suites check
 
 ### `tests/test_phase4.py` (registry)

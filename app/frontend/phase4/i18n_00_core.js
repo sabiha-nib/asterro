@@ -1,11 +1,11 @@
-/* ===== ASTERRO · interface languages (English, বাংলা, Español, Français) — core =====
+/* ===== ASTERRO · interface languages (English, বাংলা, Español, Français, Deutsch) — core =====
  * tx(key, vars) looks a key up in the active language and falls back to English; every fallback is recorded in
  * I18N.missing so tests can prove a screen has no untranslated strings. Placeholders are {name}. Numbers and dates
  * use Intl with the language's locale (Bengali digits for বাংলা, decimal comma for French and Spanish).
  * Scientific identifiers stay as they are in every language: dataset and product names, instrument names, units,
  * algorithm and schema versions, criterion codes, and place names from Natural Earth.
  * Translation status: the bn / es / fr strings were written by Claude (an AI model) for this project and have NOT
- * yet been reviewed by native speakers; the interface says so. They are complete, not placeholders.
+ * yet been reviewed by native speakers (status: docs/i18n/TRANSLATION_REGISTER.md). They are complete, not placeholders.
  * Language never changes a number: scores, ranks, weights and exports are computed before any text is chosen. */
 const I18N = { lang: "en", langs: {}, dict: {}, missing: new Set(), KEY: "asterro.lang", fontLoaded: false };
 function i18nRegister(lang, meta, dict) { I18N.langs[lang] = meta; I18N.dict[lang] = dict; }
@@ -123,15 +123,10 @@ function i18nFacts() {
   const f = document.getElementById("hero-facts"); if (!f || typeof MutationObserver === "undefined") return;
   new MutationObserver(() => { if (I18N.lang !== "en" || f.dataset.i18n) i18nFacts(); }).observe(f, { childList: true, characterData: true, subtree: true });
 })();
-/* research views stay in English (their scientific vocabulary is not yet translated); say so in the chosen language */
-function i18nNotice() {
-  const left = document.getElementById("left"); if (!left) return;
-  let n = document.getElementById("i18n-notice");
-  if (I18N.lang === "en" || $("#app").classList.contains("is-hero") || (typeof S !== "undefined" && S.tab === "explore")) { if (n) n.remove(); return; }   // Explore is translated
-  if (!n) { n = document.createElement("div"); n.id = "i18n-notice"; n.className = "i18n-notice"; n.setAttribute("role", "note"); }
-  n.innerHTML = `${esc(tx("notice.english_only"))} <button class="lnk" data-jn-open="home">${esc(tx("notice.open_journey"))}</button>`;
-  if (left.firstChild !== n) left.insertBefore(n, left.firstChild);
-}
+/* The research views used to stay in English behind a localised notice. They are now translated (i18n_60_seg.js with
+ * the route catalogues i18n_7x_routes_*.js), so the notice is gone; the function remains so older callers keep working
+ * and removes any notice left in the page. */
+function i18nNotice() { const n = document.getElementById("i18n-notice"); if (n) n.remove(); }
 const _i18nRenderLeft = renderLeft;
 renderLeft = function () { const r = _i18nRenderLeft.apply(this, arguments); try { i18nNotice(); } catch (e) { } return r; };
 

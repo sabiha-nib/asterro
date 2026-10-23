@@ -29,6 +29,8 @@ function i18dLL(s) {                       // "22.50°S 67.50°W"
   const m = /^(\d+(?:\.\d+)?)°([NS]) (\d+(?:\.\d+)?)°([EW])$/.exec(s); if (!m) return null;
   return txLL((m[2] === "S" ? -1 : 1) * +m[1], (m[4] === "W" ? -1 : 1) * +m[3]);
 }
+/* "Region, Country" → the country through CLDR when its ISO code is recorded (i18n_65_places.js); regions stay */
+function i18dPlaceStr(s) { return typeof i18gPlace === "function" ? s.split(", ").map(x => i18gPlace(x)).join(", ") : s; }
 function i18dT(s) { const k = I18D.phrase.get(s); return k ? tx(k) : null; }
 function i18dName(s) { return i18dT(s) ?? s; }          // a profile / target / criterion label, or a proper name kept as is
 function i18dDesc(s) {                    // constellation names from TAIEngine.describe
@@ -40,8 +42,8 @@ function i18dRx(s) {
   let m;
   if ((m = /^(\d+) distinct sites ≥ (\d+) km apart · ([\d,]+) ranked · under (.+)$/.exec(s))) return tx("ui.rx.rail_meta", { d: txInt(+m[1]), km: txInt(+m[2]), n: txInt(+m[3].replace(/,/g, "")), p: i18dName(m[4]) });
   if ((m = /^Top (\d+) distinct sites \(≥ (\d+) km apart\) of ([\d,]+) ranked cells; Analogue Score under (.+)$/.exec(s))) return tx("ui.rx.rail_title", { d: txInt(+m[1]), km: txInt(+m[2]), n: txInt(+m[3].replace(/,/g, "")), p: i18dName(m[4]) });
-  if ((m = /^(.*?)\s*·\s*(\d+\.\d+°[NS] \d+\.\d+°[EW]) · cell #(\d+)$/.exec(s))) return (m[1] ? m[1] + " · " : "· ") + i18dLL(m[2]) + " · " + tx("ui.rx.cell_rank", { r: txInt(+m[3]) });
-  if ((m = /^(.*?)\s*·\s*(\d+\.\d+°[NS] \d+\.\d+°[EW]) · under (.+)$/.exec(s))) return (m[1] ? m[1] + " · " : "· ") + i18dLL(m[2]) + " · " + tx("ui.rx.under", { p: i18dName(m[3]) });
+  if ((m = /^(.*?)\s*·\s*(\d+\.\d+°[NS] \d+\.\d+°[EW]) · cell #(\d+)$/.exec(s))) return (m[1] ? i18dPlaceStr(m[1]) + " · " : "· ") + i18dLL(m[2]) + " · " + tx("ui.rx.cell_rank", { r: txInt(+m[3]) });
+  if ((m = /^(.*?)\s*·\s*(\d+\.\d+°[NS] \d+\.\d+°[EW]) · under (.+)$/.exec(s))) return (m[1] ? i18dPlaceStr(m[1]) + " · " : "· ") + i18dLL(m[2]) + " · " + tx("ui.rx.under", { p: i18dName(m[3]) });
   if ((m = /^(\d+\.\d+°[NS] \d+\.\d+°[EW]) · ([\d.]+) km window$/.exec(s))) return i18dLL(m[1]) + " · " + tx("ui.rx.window", { km: txNum(+m[2], 1) });
   if ((m = /^([\d,]+) valid Earth cells · 0\.5° × 0\.625° · field computed in this browser in (\d+) ms · (\S+)(.*)$/.exec(s))) return tx("ui.rx.status", { n: txInt(+m[1].replace(/,/g, "")), ms: txInt(+m[2]), alg: m[3] }) + i18dStatusExtra(m[4]);
   if ((m = /^Comparing ([\d,]+) Earth cells…$/.exec(s))) return tx("ui.rx.comparing", { n: txInt(+m[1].replace(/,/g, "")) });
@@ -94,7 +96,7 @@ function i18nDom(root) {
     const p = x.parentElement; if (!p || p.closest(".i18n-keep,script,style,#jn,select[data-i18n-lang]")) continue;
     if (en) { if (x.__en != null) { x.nodeValue = x.__en; x.__en = null; } continue; }
     const src = x.__en != null ? x.__en : x.nodeValue, out = i18dString(src);
-    if (out == null) continue;
+    if (out == null) { if (x.__en != null) { x.nodeValue = x.__en; x.__en = null; } continue; }   // same as English here (e.g. "Globe" in French): put the English back, never keep another language's text
     if (x.__en == null) x.__en = src;
     x.nodeValue = out;
   }
@@ -106,7 +108,7 @@ function i18nDom(root) {
       if (!e.hasAttribute(a)) continue;
       if (en) { if (e.__enA[a] != null) { e.setAttribute(a, e.__enA[a]); delete e.__enA[a]; } continue; }
       const src = e.__enA[a] != null ? e.__enA[a] : e.getAttribute(a), out = i18dString(src);
-      if (out == null) continue;
+      if (out == null) { if (e.__enA[a] != null) { e.setAttribute(a, e.__enA[a]); delete e.__enA[a]; } continue; }
       if (e.__enA[a] == null) e.__enA[a] = src;
       e.setAttribute(a, out);
     }
@@ -138,7 +140,7 @@ function i18dReadout(x, y) {
   const ll = GLOBE.unproject(x, y); if (!ll) return;
   const i = nearestCell(ll.lat, ll.lon);
   if (i < 0 || ENG.haversine(ll.lat, ll.lon, S.lat[i], S.lon[i]) > 60) { r.innerHTML = `${esc(txLL(ll.lat, ll.lon))} · ${esc(tx("ui.no_land"))}`; return; }
-  r.innerHTML = `<b>${keep(placeStr(i))}</b><br>${esc(txLL(S.lat[i], S.lon[i]))} · ${esc(tx("ui.similarity_l"))} <b>${esc(txPct(S.res.eff[i]))}</b> · ${esc(tx("ui.rank_l"))} ${esc(txRank(S.res.rank[i] || null))}`;
+  r.innerHTML = `<b>${keep(i18dPlaceStr(placeStr(i)))}</b><br>${esc(txLL(S.lat[i], S.lon[i]))} · ${esc(tx("ui.similarity_l"))} <b>${esc(txPct(S.res.eff[i]))}</b> · ${esc(tx("ui.rank_l"))} ${esc(txRank(S.res.rank[i] || null))}`;
 }
 { const f = announce; announce = function (msg) { let m, s = msg;
   if (I18N.lang !== "en" && typeof msg === "string") {

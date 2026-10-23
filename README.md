@@ -743,8 +743,8 @@ every matchable criterion; and an **Earth Analogue Passport** (`asterro.passport
 Save to My Research) that re-scores from its own contents. The engine (`journey_engine.js`) returns data only, over
 the unchanged baseline; the words come from the interface language — **English, বাংলা, Español, Français, Deutsch** (header,
 landing row, journey header or `?lang=`), with locale number formats, `html lang`, Bengali font support and
-preserved scientific names. Results are tested identical in every language. The research views remain English
-(a localised notice says so). The বাংলা, Español and Français texts were written by Claude (an AI model) and **have
+preserved scientific names. Results are tested identical in every language. The research views were still English
+at that stage (they are translated since the completion pass, below). The বাংলা, Español and Français texts were written by Claude (an AI model) and **have
 not yet been reviewed by native speakers**. Method and tests: `docs/phase4/JOURNEY_I18N.md`.
 
 **Globe-first workspace and five languages.** The landing globe responds at once (drag, zoom, click a land cell to
@@ -761,6 +761,37 @@ real actions and whose challenges are answered from the data. Languages: **Engli
 Deutsch**, chosen in the header; the whole globe workspace and the journey switch, numbers are locale-formatted, and
 switching keeps target, selection, weights and layer. Translations were written by Claude and are **not yet reviewed by
 native speakers**. Details: `docs/phase4/GLOBE_WORKSPACE.md`.
+
+**Completion pass: every route in five languages, header, tablets, data inventory, journal.**
+
+- **Translation.** Every research route is translated into বাংলা, Español, Français and Deutsch:
+  - Compare, Scenarios, Discover, Data and Method;
+  - the 14 Lab modules, Trajectory and the 23 Atlas modules;
+  - the Trace / Reproduce / Report sheets and the Markdown report.
+
+  An in-place segment translator (`i18n_60_seg.js`) uses harvested catalogues of 2,571 keys per language. Numbers
+  are locale-formatted and identifiers are kept. Source-record notes are shown translated, with the English
+  original beside them, labelled. Text the user wrote is never translated. Country names are localised through
+  CLDR. The "English only" notices are gone.
+- **Review status.** No native-speaker review has taken place. `docs/i18n/TRANSLATION_REGISTER.md` records it,
+  together with the glossary and the terminology check.
+- **Header.** In long-label languages the tab bar takes its own row instead of scrolling. All nine tabs stay
+  visible.
+- **Bengali.** Bengali has its own font stack (Noto Sans Bengali first; no font file bundled, because none could be
+  obtained here) and Bengali-specific typography. Shaping and coverage are verified.
+- **Responsive layout.** Six simulated viewports (phones, tablets portrait and landscape, laptop, desktop) are
+  tested with touch.
+- **Data inventory** (`docs/data/DATA_INVENTORY.md`):
+  - 16 sources are integrated;
+  - 9 known limitations are recorded;
+  - 15 candidate sources are blocked, because every endpoint was refused from the build environment. Nothing new
+    was downloaded or integrated, and the six-dimension score is unchanged.
+
+  Missing pieces and the Data view show these statuses.
+- **Journal.** It keeps the existing local progress and merges across tabs. It handles corrupt values, confirms a
+  reset, and offers export and import. It is local only; there is no account or server.
+
+Details: `docs/phase4/COMPLETION_QA.md`.
 
 **Research modules.**
 

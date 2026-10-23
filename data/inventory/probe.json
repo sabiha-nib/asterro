@@ -1,0 +1,152 @@
+{
+ "schema": "asterro.probe/1",
+ "probed_utc": "2026-10-23T06:33:37Z",
+ "environment": "build sandbox (egress through an allow-listing proxy)",
+ "note": "HEAD/ranged GET only; nothing was downloaded.",
+ "results": {
+  "nasa_power": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M&community=AG&longitude=0&latitude=0&format=JSON"
+  },
+  "merra2": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2_MONTHLY/"
+  },
+  "era5": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://cds.climate.copernicus.eu/api/catalogue/v1/collections/reanalysis-era5-single-levels-monthly-means"
+  },
+  "terraclimate": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://climate.northwestknowledge.net/TERRACLIMATE-DATA/"
+  },
+  "nasadem": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://e4ftl01.cr.usgs.gov/MEASURES/NASADEM_HGT.001/"
+  },
+  "srtm": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://e4ftl01.cr.usgs.gov/MEASURES/SRTMGL1.003/"
+  },
+  "copernicus_dem": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://copernicus-dem-30m.s3.amazonaws.com/readme.html"
+  },
+  "modis_lst_hdf": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.061/"
+  },
+  "gibs": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetCapabilities"
+  },
+  "landsat": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://landsatlook.usgs.gov/stac-server/"
+  },
+  "ecostress": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://e4ftl01.cr.usgs.gov/ECOB/ECOSTRESS/"
+  },
+  "viirs": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://e4ftl01.cr.usgs.gov/VIIRS/"
+  },
+  "esa_worldcover": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/"
+  },
+  "soilgrids": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://files.isric.org/soilgrids/latest/data/"
+  },
+  "jrc_gsw": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://global-surface-water.appspot.com/"
+  },
+  "pds_geosciences": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://pds-geosciences.wustl.edu/"
+  },
+  "usgs_astro_mosaics": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/"
+  },
+  "themis": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://www.mars.asu.edu/data/"
+  },
+  "meda_pds": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+  },
+  "diviner": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/"
+  },
+  "lroc": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://wms.lroc.asu.edu/lroc/"
+  },
+  "natural_earth": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://naciscdn.org/naturalearth/50m/cultural/ne_50m_admin_0_countries.zip"
+  },
+  "noto_sans_bengali": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://fonts.gstatic.com/s/notosansbengali/"
+  },
+  "google_fonts_css": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali"
+  }
+ }
+}

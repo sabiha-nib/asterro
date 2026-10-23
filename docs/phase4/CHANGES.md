@@ -59,3 +59,21 @@
 - **Legacy results.**
   - The Jezero, Lunar South Pole and cross-planet fields are bit-identical (Node and browser).
   - The baseline #1 for Jezero is still Altiplano, at 85.0 %.
+
+## Completion pass (five languages on every route, header, tablets, data inventory, journal)
+
+| Path | Change |
+|---|---|
+| `app/frontend/phase4/i18n_60_seg.js`, `i18n_65_places.js`, `i18n_71`–`74_routes_*.js` | Added: research-route translator, CLDR country table, route catalogues (2,571 keys × 4) |
+| `app/frontend/phase4/ui_18_nav.js`, `ui_19_inventory.js`, `ui_20_journal_store.js`, `ui_97_i18n_report.js`, `ui_98_i18n_routes.js`, `data_inventory.js`, `p9_complete.css` | Added (see ARCHITECTURE.md) |
+| `app/frontend/phase4/i18n_00_core.js` … `i18n_50_de.js` | New keys (header, inventory, journal store, quotation label, language section) in all five languages; the English-only notice retired |
+| `app/frontend/phase4/ui_99_i18n_dom.js`, `ui_14_journey.js` | Country names through CLDR in the workspace; the per-screen review note retired (status kept in the Method view) |
+| `scripts/i18n_harvest.py`, `i18n_catalogue.mjs`, `i18n_build_routes.mjs`, `i18n_check_routes.mjs`, `i18n_seg_node.mjs`, `i18n_terms_check.mjs` | Added: harvest, catalogue and checking tools |
+| `scripts/build_inventory.py`, `scripts/probe_data_sources.py`, `data/inventory/*`, `docs/data/DATA_INVENTORY.md` | Added: data inventory from project state and a recorded reachability probe |
+| `docs/i18n/TRANSLATION_REGISTER.md`, `glossary.json`, `TRANSLATOR_BRIEF.md`; `docs/phase4/COMPLETION_QA.md` | Added |
+| `tests/phase4/test_routes_i18n.mjs`, `ui_routes_i18n_smoke.py`, `ui_journal_persist_smoke.py`, `ui_responsive_smoke.py`, `tests/test_inventory.py`, fixtures | Added |
+| `tests/phase4/ui_journey_smoke.py` | The "English only notice" assertion now asserts the translated research view and the notice's absence (the requirement changed) |
+| `package.json` | `test:phase4` adds the route-catalogue test; `test:ui` adds the routes, journal and responsive walk-throughs |
+| `public/index.html`, `public/sw.js` | Regenerated |
+
+Unchanged: the protected baseline files, the predictor stack, `tai-sim-1.0.0`, the six criteria, every score.

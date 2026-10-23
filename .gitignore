@@ -9,3 +9,4 @@ venv/
 *.log
 *.tmp
 # raw ingestion outputs (data/raw/) ARE committed: they are the checksummed scientific inputs
+build/

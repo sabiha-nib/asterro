@@ -58,7 +58,8 @@ TEXT = r"""() => { const c = document.querySelector('#jn').cloneNode(true);
   return c.textContent.replace(/\s+/g, ' '); }"""
 EN_WORDS = re.compile(r"\b(the|and|of|is|are|with|this|that|from|for|by|without|which|under|place|places|weights?|target|objective|conditions?|matches?|compared|Earth|data|step|rank|leading|similar|different|unknown|summary|missing|trust|sources?|download|print|save|discoveries|close|back|next)\b", re.I)
 SAME_WORD = {"es": {"similar"}, "fr": {"conditions", "condition", "sources", "source", "place"}, "de": {"data"}}   # words spelled the same in that language
-ALLOWED_LATIN = {"Deutsch", "Σw", "N/A", "min", "max", "clip", "ASTERRO", "JSON", "SHA", "NASA", "USGS", "MODIS", "POWER", "GMTED2010", "MEDA", "MOLA", "LOLA", "Diviner", "explore", "target", "v1", "legacy", "baseline", "tai", "sim", "stack",
+# dataset, product and service names (API … TerraClimate: data-inventory rows in Missing pieces) are kept as written
+ALLOWED_LATIN = {"API", "GIBS", "MERRA", "NASADEM", "ERA5", "Earthdata", "CDS", "HDF", "VIIRS", "ECOSTRESS", "SRTM", "Copernicus", "TerraClimate", "Deutsch", "Σw", "N/A", "min", "max", "clip", "ASTERRO", "JSON", "SHA", "NASA", "USGS", "MODIS", "POWER", "GMTED2010", "MEDA", "MOLA", "LOLA", "Diviner", "explore", "target", "v1", "legacy", "baseline", "tai", "sim", "stack",
                  "P", "PET", "K", "s", "km", "m", "EVA", "Space", "Apps", "Claude", "Español", "Français", "English", "LST", "Aqua", "MYD11C3", "Analogue", "Passport", "schema", "passport"}
 
 
@@ -224,7 +225,9 @@ try:
         pg.evaluate("setLang('en'); jnClose()")
         check(pg.evaluate("document.querySelector('#tab-explore').textContent") == "Explore" and pg.evaluate("document.documentElement.lang") == "en", "switching back to English restores the original labels")
         pg.evaluate("setLang('fr'); setTab('compare')"); time.sleep(0.4)
-        check(pg.locator("#i18n-notice").count() == 1 and "anglais" in pg.evaluate("document.querySelector('#i18n-notice').textContent"), "research views show a localised 'English only' notice")
+        time.sleep(0.6)
+        fr = pg.evaluate("document.querySelector('#left').textContent")
+        check(pg.locator("#i18n-notice").count() == 0 and ("critère" in fr.lower() or "cible" in fr.lower()), "research views are translated (French Compare view), with no 'English only' notice")
         pg.evaluate("setLang('en')")
         check(pg.locator("#i18n-notice").count() == 0, "no notice in English")
         # ---------------------------------------------------------------- baseline untouched

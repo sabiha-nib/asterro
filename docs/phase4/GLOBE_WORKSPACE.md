@@ -147,7 +147,7 @@ A small chip on the globe shows expedition progress and opens the journal.
   - formulas.
 
   The other research tabs (Compare, Scenarios, Discover, Data, Method, Lab, Trajectory, Atlas) remain English and
-  show a localised notice.
+  show a localised notice. *(Superseded by the completion pass: every research view is now translated — see `COMPLETION_QA.md`.)*
 - **Switching language keeps the state.** Target, selection, weights, tab and layer are kept, and no number
   changes. The browser suite checks this through all five languages.
 - **Translation status.** The বাংলা, Español, Français and Deutsch texts were **written by Claude (an AI model) and
@@ -167,10 +167,9 @@ A small chip on the globe shows expedition progress and opens the journal.
 - No new datasets were integrated. No verified acquisition (download, licence check, regridding onto the
   0.5° × 0.625° stack, validation) was possible in this build environment. The interface names those gaps rather
   than implying them.
-- The other research tabs are English only.
-- The translations are unreviewed.
-- The suites run in English and in the four languages on a 1512 px desktop and a 390 px phone. Tablets were not
-  tested separately.
+- ~~The other research tabs are English only.~~ Translated in the completion pass (`COMPLETION_QA.md`).
+- The translations are unreviewed (`docs/i18n/TRANSLATION_REGISTER.md`).
+- ~~Tablets were not tested separately.~~ Six simulated viewports, tablets included, since the completion pass.
 - The landing globe is not draggable on phones, where the landing text scrolls.
 - The journal's progress is per browser, with no account or server.
 - The robustness label is about the declared profiles. It is not a statistical confidence.

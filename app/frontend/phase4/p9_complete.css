@@ -1,0 +1,64 @@
+/* ===== Completion pass: header overflow menu, Bengali typography, quoted source text ===== */
+/* header: the tab bar takes its own full-width row when the active language's labels do not fit beside the rest */
+@media (min-width:1181px){
+  .bar.nav-row{flex-wrap:wrap;row-gap:0;padding-block:6px 0}
+  .bar.nav-row>.tabs{order:3;flex:1 1 100%;flex-wrap:wrap;overflow:visible;border-top:1px solid var(--line);padding:4px 0}
+  .bar.nav-row>.target-ctl{margin-left:auto}
+  #app.nav-row2{grid-template-rows:auto minmax(0,1fr) auto}
+  .bar.nav-row .brand-txt span{white-space:nowrap}.bar.nav-row .tc-atlas select{max-width:150px}
+}
+@media (max-width:1180px){.tabs{flex-wrap:wrap;overflow:visible;row-gap:2px}}
+@media (max-width:760px){.tabs button{padding:9px 9px}}
+.i18n-hdr .i18n-code{white-space:nowrap}
+html:not([lang="en"]) .i18n-hdr .i18n-code{letter-spacing:.02em;text-transform:none;font-family:var(--f-body);font-size:12.5px;font-weight:500}
+
+/* Bengali: a real Bengali face first, then platform Bengali faces, then any Unicode font with Bengali shaping.
+ * Noto Sans Bengali (SIL Open Font License 1.1) is requested from Google Fonts when online; no font file is bundled. */
+:root{--f-bn:"Noto Sans Bengali","Hind Siliguri","Kohinoor Bangla","Bangla Sangam MN","Nirmala UI","Vrinda","Shonar Bangla","Lohit Bengali","Mukti","FreeSans",sans-serif}
+html[lang="bn"]{--f-body:"Instrument Sans","Noto Sans Bengali","Hind Siliguri","Kohinoor Bangla","Bangla Sangam MN","Nirmala UI","Vrinda","Shonar Bangla","Lohit Bengali","Mukti","FreeSans",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono","Noto Sans Bengali","Kohinoor Bangla","Bangla Sangam MN","Nirmala UI","Vrinda","Lohit Bengali","FreeSans",ui-monospace,Menlo,Consolas,monospace;
+  --f-display:"Big Shoulders Display","Noto Sans Bengali","Kohinoor Bangla","Bangla Sangam MN","Nirmala UI","Vrinda","Lohit Bengali","FreeSans",system-ui,sans-serif}
+html[lang="bn"] p,html[lang="bn"] li,html[lang="bn"] .note,html[lang="bn"] td,html[lang="bn"] th{line-height:1.62}
+html[lang="bn"] .lbl,html[lang="bn"] .lab-banner,html[lang="bn"] .p4-nav button,html[lang="bn"] .lab-nav button,html[lang="bn"] th{letter-spacing:normal;text-transform:none}
+
+/* text quoted from a source record: the translation is shown; the English original sits beside it, labelled */
+.i18g-q{display:inline;margin-left:.35em}
+.i18g-q>summary{display:inline;cursor:pointer;list-style:none;font:500 10.5px/1 var(--f-mono);letter-spacing:.06em;color:var(--ink-3);border:1px solid var(--line-2);border-radius:3px;padding:1px 5px;white-space:nowrap}
+.i18g-q>summary::-webkit-details-marker{display:none}
+.i18g-q>summary:hover{color:var(--ink)}
+.i18g-q[open]>span{display:block;margin:4px 0 2px;padding:6px 8px;border-left:2px solid var(--line-2);color:var(--ink-2);font-style:italic;background:var(--panel-2)}
+html[lang="bn"] .i18g-q>summary{font-family:var(--f-bn);letter-spacing:normal;font-size:11.5px}
+
+/* data inventory: statuses from ASTERRO_INVENTORY */
+.inv-st{display:inline-block;font:600 10px/1.5 var(--f-mono);letter-spacing:.05em;padding:0 6px;border-radius:3px;border:1px solid currentColor;white-space:nowrap;vertical-align:1px}
+html[lang="bn"] .inv-st{font-family:var(--f-body);letter-spacing:normal;font-size:11px}
+.inv-integrated{color:#6fcf97}.inv-verified_not_integrated{color:#8fd3c8}.inv-downloaded_not_validated{color:#e0c36a}
+.inv-known_limitation{color:#e8a05c}.inv-blocked{color:#ef8a8a}.inv-unavailable{color:#c99}.inv-not_investigated{color:var(--ink-3)}
+.inv-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--ink-2)}
+.inv-list .meta{color:var(--ink-3)}
+.inv-sum{margin:14px 0 0;border:1px solid var(--line);border-radius:var(--r);padding:8px 10px}
+.inv-sum>summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:600}
+.inv-h{font:600 12px/1.3 var(--f-body);margin:12px 0 4px;color:var(--ink)}
+.inv-counts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* globe controls: a segment wraps its buttons instead of cutting them off when the labels are long (phones, German) */
+.vp-top .seg{flex-wrap:wrap;max-width:100%}
+/* phones: the expedition chip sits in the free top-right corner, clear of the legend */
+@media (max-width:1180px){.vp-top .jl-chip{position:static;pointer-events:auto;margin-left:auto;align-self:flex-start}}
+/* section labels: long labels (German compounds, letter-spaced capitals) wrap instead of pushing the page sideways */
+.lbl{flex-wrap:wrap;overflow-wrap:anywhere}.lbl>*{min-width:0;overflow-wrap:anywhere}
+/* thumbnail captions: at least 10 px */
+.p4-th figcaption{font-size:10px}
+/* Atlas module groups and mode bars wrap on narrow screens (long labels in German, Spanish, French); long words in
+ * panel text break rather than push the page sideways */
+.p4-g1,.p4-modes{flex-wrap:wrap}
+.panel,#sheet-body,.jn{overflow-wrap:break-word}
+.vp-top .jl-chip.in-row{position:static;pointer-events:auto;margin-left:auto;align-self:flex-start}
+/* rows of controls in the research panels wrap on narrow screens */
+.panel .row{flex-wrap:wrap}
+.panel .tag{white-space:normal;max-width:100%}
+.panel select,.panel .p4-inl,.panel label{max-width:100%;min-width:0}
+/* sheet header: on narrow screens the actions wrap under the title and the close button stays in the corner */
+.sheet-head{flex-wrap:wrap}.sheet-head h2{min-width:0;overflow-wrap:anywhere}
+@media (max-width:760px){.sheet-head h2{flex:1 1 calc(100% - 50px);order:1}#sheet-close{order:2}.sheet-actions{order:3;flex-wrap:wrap}}
+.inv-list li{min-width:0;overflow-wrap:anywhere}.inv-list .i18n-keep{white-space:normal}

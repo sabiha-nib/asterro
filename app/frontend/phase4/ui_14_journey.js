@@ -568,4 +568,4 @@ selectedHeader = function (i) {
 };
 /* Discover tab: a door into the guided discoveries */
 const _jnViewDiscover = viewDiscover;
-viewDiscover = function () { return `<div class="sec"><div class="callout jn-door"><b>${esc(tx("door.title"))}</b> ${esc(tx("door.p"))} <button class="btn-sm" data-jn-open="home">${esc(tx("cta.journey"))}</button></div></div>` + _jnViewDiscover.apply(this, arguments); };
+viewDiscover = function () { return `<div class="sec" data-i18n-done><div class="callout jn-door"><b>${esc(tx("door.title"))}</b> ${esc(tx("door.p"))} <button class="btn-sm" data-jn-open="home">${esc(tx("cta.journey"))}</button></div></div>` + _jnViewDiscover.apply(this, arguments); };
