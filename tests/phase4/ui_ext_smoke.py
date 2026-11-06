@@ -94,17 +94,25 @@ try:
         # --- Processes
         hub(pg, "processes")
         procs = pg.evaluate("[...document.querySelectorAll('[data-xproc]')].map(b => b.dataset.xproc)")
-        check(len(procs) == 12, f"12 processes listed ({len(procs)})")
+        check(len(procs) == 17 and {"sedimentation", "dust_storms", "aeolian", "volcanic", "impact", "thermal_cycling", "water_alteration", "glacial", "permafrost", "evaporites", "fluvial", "surface_erosion"} <= set(procs),
+              f"17 processes, including the twelve the challenge names ({len(procs)})")
+        pg.click("[data-xproc=dust_storms]"); time.sleep(1.5)
+        ds = pg.evaluate("({n: +((document.querySelector('[data-xproccount]') || {dataset: {}}).dataset.xproccount || -1), ind: !!document.querySelector('[data-xprocindirect]'), needs: !!document.querySelector('[data-xprocneeds]')})")
+        check(ds["n"] > 0 and ds["ind"] and ds["needs"], f"dust storms: an indirect indicator ({ds['n']} cells), labelled indirect, naming the data that would observe the process")
         pg.click("[data-xproc=thermal_cycling]"); time.sleep(1.5)
         cnt = pg.evaluate("(document.querySelector('[data-xproccount]') || {dataset: {}}).dataset.xproccount")
         check(cnt is not None and int(cnt) > 100 and pg.evaluate("!!document.querySelector('[data-xprule]')"), f"thermal cycling: rule applied to every cell, {cnt} cells match")
-        pg.click("[data-xproc=aeolian]"); time.sleep(0.8)
-        check(pg.evaluate("!!document.querySelector('[data-xprocnodata]') && !document.querySelector('[data-xproccount]')"), "aeolian processes: described only, missing data named, no fabricated count")
+        pg.click("[data-xproc=volcanic]"); time.sleep(0.8)
+        check(pg.evaluate("!!document.querySelector('[data-xprocnodata]') && !document.querySelector('[data-xproccount]')"), "volcanism and lava tubes: described only, missing data named, no fabricated count")
 
         # --- Beyond the familiar
         hub(pg, "beyond")
         check(pg.evaluate("!!document.querySelector('[data-xbfhonest]')") and pg.evaluate("!/novelty score\\s*[:=]|newly discovered/i.test(document.querySelector('[data-xbfhonest]').closest('.sec').innerText.replace(/No novelty score is shown/, ''))"),
               "beyond the familiar: honesty note shown, no novelty score")
+        pg.select_option("[data-xbfenv]", "desert"); time.sleep(1.2)
+        envs = pg.evaluate("[...document.querySelectorAll('[data-xbf]')].map(r => xcEnv(S.cell.indexOf(+r.dataset.xbf)))")
+        check(len(envs) > 0 and all(e == "Desert" for e in envs), f"environment filter: every listed place is in a named desert ({len(envs)} rows)")
+        pg.select_option("[data-xbfenv]", "all"); time.sleep(1.2)
         bf = pg.evaluate("+document.querySelector('[data-xbfcount]').dataset.xbfcount")
         check(bf > 0 and pg.evaluate("document.querySelectorAll('[data-xbf]').length") > 0, f"{bf} leading places outside the frequently cited list are shown")
 
@@ -127,6 +135,11 @@ try:
         i = pg.evaluate("S.res.distinct[0]")
         pg.evaluate(f"jnOpen('place', {{i: {i}, tid: 'mars_jezero', pid: 'general', sec: 'lens', step: 0}})"); time.sleep(0.8)
         check(pg.evaluate("document.querySelectorAll('#jn [data-xtrow]').length") == 3, "the Lens shows the three absolute temperatures")
+        cx = pg.evaluate("(() => { const b = document.querySelector('#jn [data-xc]'); if (!b) return null; return {kg: b.querySelector('[data-xckg]').dataset.xckg, env: b.querySelector('[data-xcenv]').dataset.xcenv, pf: b.querySelector('[data-xcpf]').dataset.xcpf, ops: [...b.querySelectorAll('[data-xcop]')].map(r => r.dataset.xcopk), breaks: b.querySelectorAll('[data-xcbreaks] li').length, sun: !!b.querySelector('[data-xcsun]')}; })()")
+        check(cx and cx["kg"] == pg.evaluate(f"xcKoppen({i})") and cx["env"] == pg.evaluate(f"xcEnv({i}) || ''") and cx["sun"] and cx["breaks"] >= 4,
+              f"site profile: climate class {cx and cx['kg']}, environment {cx and cx['env']}, illumination geometry, where the analogy breaks down")
+        check(cx and len(cx["ops"]) == 11 and cx["ops"].count("cannot") == 3 and set(cx["ops"]) <= {"similar", "partial", "different", "cannot"},
+              f"exploration operations: 11, three that need unmeasured data marked 'cannot be assessed' ({cx and cx['ops']})")
         pg.click("#jn [data-rq=add]"); time.sleep(0.4)
         i2 = pg.evaluate("S.res.distinct[3]")
         pg.evaluate(f"jnOpen('place', {{i: {i2}, tid: 'mars_jezero', pid: 'general', sec: 'reveal', step: 0}})"); time.sleep(0.5)
@@ -170,7 +183,7 @@ try:
         nd = pg.evaluate("document.querySelectorAll('[data-xdim]').length")
         labs = pg.evaluate("[...document.querySelectorAll('[data-xlab]')].map(e => [e.dataset.xlab, e.dataset.xlabk])")
         lk = dict(labs)
-        check(nd == 28, f"Data view: all {nd} dimensions with their status")
+        check(nd == len(json.load(open(os.path.join(ROOT, "data", "ext", "dimensions.json")))["dimensions"]) == 30, f"Data view: all {nd} dimensions with their status")
         check(lk.get("nasa_power") == "pending" and lk.get("modis_aqua_lst") == "pending" and lk.get("mola") == "verified" and lk.get("hirise") == "future",
               f"challenge labels follow the inventory rule ({len(labs)} sources)")
         check(set(lk.values()) <= {"verified", "pending", "future", "unsuitable", "unavailable"}, "only the challenge's five labels are used")

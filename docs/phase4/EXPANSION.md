@@ -146,3 +146,17 @@ Rule counts for the six searchable processes:
 3. Add a globe layer for the extended score.
 4. Arrange native-speaker review of the bn, es, fr and de extension catalogues.
 5. Add a per-dimension method, resolution and quality grade for the 19 dimensions that are not scored.
+
+## 6. Update: challenge-compliance and design pass
+
+This pass supersedes the matching rows above. The full matrix is in `CHALLENGE_COMPLIANCE.md`.
+
+- **Planetary Process Explorer.** Now 17 processes, covering the twelve the brief names. 14 are searchable: 6 observed
+  and 8 indirect indicators. 3 are described only. Status: **partially implemented**, because volcanic, impact and
+  water-driven alteration need data not in ASTERRO.
+- **Fingerprint.** Now 30 dimensions. Two context dimensions were added (climate class, environment type).
+  Illumination, ice / permafrost and landing terrain moved from "no data" to "context" or "evidence". The text was
+  corrected where the data changed.
+- **Exploration operations.** Added for 11 operations: 8 are assessable from measured conditions and 3 are marked
+  "cannot be assessed".
+- **Design layer.** Added: see `DESIGN.md`.

@@ -821,7 +821,7 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 108 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 53 journey + 52 language + 63 route-language + 39 extension + 36 extension-language checks
+npm test                 # 116 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 53 journey + 52 language + 63 route-language + 39 extension + 36 extension-language checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
 npm run test:ui          # the eight browser walk-throughs (Playwright + Chromium)
 python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
@@ -860,6 +860,32 @@ Elsewhere in the app:
 
 Everything is translated into the five interface languages. These translations are not reviewed by native speakers.
 Implementation report with per-feature status: `docs/phase4/EXPANSION.md`.
+
+## Challenge-compliance and design pass (additive)
+
+- **A welcoming surface.**
+  - The landing states one promise, "Find Earth's environmental analogues for worlds beyond Earth.", and offers three
+    ways in: Explore Earth, Discover an analogue, Compare with the Moon or Mars.
+  - A plain-language card explains the selected place: how similar it is, its strongest similarities, its important
+    differences, and what Earth cannot reproduce.
+  - The navigation is grouped into Explore · Discover · Compare · Learn · My research.
+  - A Simple / Advanced switch hides technical detail around the weight sliders.
+  - Calm typography, glass surfaces, focus rings and reduced-motion support.
+  - See `docs/phase4/DESIGN.md`.
+- **Site profile** (`tai-ext-context-1.0.0`, never scored), for every place:
+  - environment type (Natural Earth region class);
+  - Köppen–Geiger climate class (from the NASA POWER climatology);
+  - a permafrost climatic indicator (indirect, never a resource claim);
+  - noon-sun geometry and polar night;
+  - kilometre-scale slope shares compared with the target window;
+  - how 11 exploration operations relate to the measured conditions;
+  - the kind of evidence behind each line, and where the analogy breaks down.
+- **Process Explorer**: 17 processes, covering all twelve the brief names. Six are observed, eight are indirect
+  indicators with rules applied to every cell, and three are described with the data they need.
+- **Environment filter** in Beyond the familiar: deserts, dry climates, polar and tundra, mountains, plateaus, basins,
+  valleys, coasts.
+
+Requirement-by-requirement status: `docs/phase4/CHALLENGE_COMPLIANCE.md`.
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
 NASA-approved, and it designates no site as safe.

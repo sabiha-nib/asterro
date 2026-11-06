@@ -1,0 +1,123 @@
+/* ===== ASTERRO design system (additive, loads last) =====
+ * A calm, premium visual layer over the existing interface. It redefines the shared tokens, softens the typography
+ * (sentence case, system font), rounds and lifts surfaces, and adds a Simple / Advanced view mode. No element is
+ * removed; every original control stays reachable. Bengali keeps its own font stacks (html[lang="bn"] rules are more
+ * specific than :root). Motion respects prefers-reduced-motion. */
+:root{
+  --ds-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --ds-mono:ui-monospace,"SF Mono","SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
+  --ds-navy:#070B1A; --ds-navy-2:#0C1230; --ds-blue:#4C8DFF; --ds-violet:#9B7BFF; --ds-coral:#FF7A59; --ds-lav:#C9C3FF;
+  --ds-glass:rgba(17,23,48,.66); --ds-glass-2:rgba(25,32,64,.72); --ds-stroke:rgba(255,255,255,.09); --ds-stroke-2:rgba(255,255,255,.16);
+  --ds-shadow:0 10px 30px rgba(3,6,20,.45),0 2px 6px rgba(3,6,20,.35); --ds-r:14px; --ds-r-lg:22px;
+  --ground:var(--ds-navy); --panel:#0D1330; --panel-2:#131A3B; --raise:#1A2248;
+  --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.15);
+  --ink:#F4F6FF; --ink-2:#BCC4E0; --ink-3:#98A1C4;
+  --mars:var(--ds-coral); --moon:#A9C4FF; --cross:var(--ds-violet); --earth:#7FD1C3;
+  --accent:var(--mars); --accent-dim:#5a2a20;
+  --match:#5FD4A0; --partial:#F2C85B; --mismatch:#FF7A7A;
+  --f-display:var(--ds-font); --f-body:var(--ds-font); --f-mono:var(--ds-mono);
+  --r:10px;
+}
+#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#26365c}
+#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#33285c}
+html,body{background:radial-gradient(1200px 700px at 85% -10%,rgba(155,123,255,.16),transparent 60%),radial-gradient(900px 600px at -10% 110%,rgba(76,141,255,.14),transparent 60%),var(--ds-navy);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--f-body);font-size:14.5px;letter-spacing:-.003em}
+
+/* --- typography: sentence case, no tracking, numbers in tabular figures --- */
+.lbl,.eyebrow,.brand-txt span,.target-ctl i,.ht i,.site .rk,.vp-top button,.proj button,.fp-tabs button,.hero-facts,.sl .tag,.tag,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs button,.legend,.legend *,.status,.n{text-transform:none;letter-spacing:0}
+.lbl{font:600 12.5px/1.35 var(--f-body);color:var(--ink-2)}
+.eyebrow{font:600 12.5px/1.4 var(--f-body);color:var(--ds-lav)}
+.brand-txt b{font:700 17px/1.1 var(--f-body);letter-spacing:.06em}
+.brand-txt span{font:500 11px/1.3 var(--f-body);color:var(--ink-3)}
+b,strong{font-weight:650}
+.num,.score,.site .sc,td.n{font-variant-numeric:tabular-nums}
+
+/* --- surfaces: glass, rounded, soft depth --- */
+header.bar{background:linear-gradient(180deg,rgba(9,13,34,.86),rgba(9,13,34,.62));backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);border-bottom:1px solid var(--ds-stroke)}
+#left,#right{background:var(--ds-glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.console{background:linear-gradient(0deg,rgba(9,13,34,.92),rgba(9,13,34,.78));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ds-stroke)}
+.sec{border-color:var(--ds-stroke)}
+.sheet-card,.jn-card,#jn .jn-dlg,.dm-info{border-radius:var(--ds-r-lg)!important;box-shadow:var(--ds-shadow)}
+.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.ht,.empty{border-radius:var(--ds-r)}
+.site{border-radius:12px;transition:background .18s ease,transform .18s ease}
+.site:hover{background:rgba(255,255,255,.04)}
+.site[aria-current="true"]{background:linear-gradient(90deg,rgba(76,141,255,.16),rgba(155,123,255,.08));box-shadow:inset 3px 0 0 var(--accent)}
+
+/* --- controls: pills, clear focus, gentle feedback --- */
+.btn-primary,.btn-search{background-color:var(--ds-coral);background-image:linear-gradient(135deg,var(--ds-coral),#FF9A6B);color:#1A0E0A;border:0;border-radius:999px;font:650 14px/1 var(--f-body);box-shadow:0 6px 18px rgba(255,122,89,.28)}
+.btn-ghost{border-radius:999px;border:1px solid var(--ds-stroke-2);background:rgba(255,255,255,.04);color:var(--ink);font:550 14px/1 var(--f-body)}
+.btn-sm{border-radius:999px;font:550 12.5px/1 var(--f-body)}
+.btn-sm.on,.btn-sm[aria-pressed="true"]{background:var(--ink);color:var(--ds-navy);border-color:var(--ink)}
+.tabs button{font:550 13px/1 var(--f-body);color:var(--ink-2);border-radius:999px}
+.tabs button[aria-selected="true"]{color:var(--ink);background:rgba(255,255,255,.09);box-shadow:none}
+.tabs button[aria-selected="true"]::after{display:none}
+.target-ctl{border-radius:14px;overflow:hidden;border-color:var(--ds-stroke-2)}
+.target-ctl i,.ht i{font:650 10.5px/1.2 var(--f-body);letter-spacing:.04em}
+button,a,select,input{transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .12s ease}
+button:active{transform:scale(.98)}
+:focus-visible{outline:2px solid var(--ds-blue)!important;outline-offset:2px;border-radius:8px}
+input[type=range]{accent-color:var(--ds-blue)}
+
+/* --- navigation grouped into five areas (Explore · Discover · Compare · Learn · My research); every view stays one click away --- */
+nav.tabs{display:flex;align-items:center}
+#tab-explore{order:1} #tab-discover{order:2} #tab-atlas{order:3} #tab-compare{order:4} #tab-scenarios{order:5} #tab-trajectory{order:6} #tab-method{order:7} #tab-data{order:8} #tab-lab{order:9}
+#tab-discover,#tab-compare,#tab-method,#tab-lab{margin-left:10px;position:relative}
+#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{content:"";position:absolute;left:-6px;top:25%;bottom:25%;width:1px;background:var(--ds-stroke-2)}
+
+/* --- landing --- */
+.hero{background:radial-gradient(800px 520px at 72% 46%,rgba(76,141,255,.10),transparent 60%),linear-gradient(90deg,rgba(7,11,26,.92) 0%,rgba(7,11,26,.62) 46%,rgba(7,11,26,.10) 78%)}
+.hero h1{font:760 clamp(44px,6.2vw,92px)/1.0 var(--f-display);letter-spacing:-.025em;text-transform:none;max-width:11ch;background:linear-gradient(120deg,#FFFFFF 10%,var(--ds-lav) 55%,var(--ds-coral) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+html:not([lang="en"]) .hero h1{font-size:clamp(40px,5.4vw,80px);max-width:14ch}
+.hero .sub{font-size:18px;line-height:1.5;color:var(--ink-2)}
+.ds-lede{font:600 clamp(17px,1.5vw,21px)/1.4 var(--f-body);color:var(--ink);max-width:36ch;margin:14px 0 0}
+.ds-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:640px;margin:4px 0 14px}
+.ds-act{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:16px 18px;border-radius:var(--ds-r-lg);border:1px solid var(--ds-stroke-2);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--ink);box-shadow:var(--ds-shadow);min-height:96px}
+.ds-act:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28)}
+.ds-act .ds-ico{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,var(--ds-blue),var(--ds-violet));color:#fff}
+.ds-act:nth-child(2) .ds-ico{background:linear-gradient(135deg,var(--ds-violet),var(--ds-coral))}
+.ds-act:nth-child(3) .ds-ico{background:linear-gradient(135deg,var(--ds-coral),#FFC36B)}
+.ds-act b{font:650 16px/1.25 var(--f-body)}
+.ds-act span{font:400 13px/1.4 var(--f-body);color:var(--ink-2)}
+.hero-cta{gap:8px}
+.hero-cta .btn-ghost{font-size:13px;padding:9px 14px;background:transparent}
+.ht{background:rgba(13,19,48,.78);border-color:var(--ds-stroke-2)}
+.ht[aria-checked="true"]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,122,89,.18)}
+.hero-facts{font:400 12px/1.6 var(--f-body);color:var(--ink-3)}
+@media (max-width:760px){.ds-actions{grid-template-columns:1fr}.ds-act{min-height:0;flex-direction:row;align-items:center}.ds-act span{display:none}}
+
+/* --- plain-language summary --- */
+.ds-sum{margin:10px 0 2px;padding:14px 16px;border-radius:var(--ds-r-lg);background:linear-gradient(150deg,rgba(76,141,255,.14),rgba(155,123,255,.08) 60%,rgba(255,122,89,.06));border:1px solid var(--ds-stroke-2)}
+.ds-sum h3{font:650 12.5px/1.3 var(--f-body);color:var(--ds-lav);margin:0 0 6px}
+.ds-sum .ds-big{font:700 17px/1.35 var(--f-body);color:var(--ink);margin:0}
+.ds-sum p{font:400 13.5px/1.5 var(--f-body);color:var(--ink-2);margin:6px 0 0}
+.ds-sum .ds-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ds-pill{font:550 12px/1 var(--f-body);padding:6px 10px;border-radius:999px;border:1px solid currentColor}
+.ds-pill.s{color:var(--match)} .ds-pill.d{color:var(--mismatch)}
+.ds-sum .ds-more{margin-top:10px}
+
+/* --- Simple / Advanced view --- */
+.ds-mode{display:inline-flex;border:1px solid var(--ds-stroke-2);border-radius:999px;padding:2px;background:rgba(255,255,255,.04)}
+.ds-mode button{font:550 12px/1 var(--f-body);padding:6px 10px;border-radius:999px;color:var(--ink-2)}
+.ds-mode button[aria-pressed="true"]{background:var(--ink);color:var(--ds-navy)}
+/* Simple keeps every slider in place (it is the baseline control) and hides only the technical detail around it:
+   status tags, the share-of-weight text and the target / Earth position track. The ⓘ explanation stays. */
+html.ds-simple .sl .foot>:not(.dm-i){display:none}
+html.ds-simple .sl .dm-et{display:none}
+html.ds-simple .ds-adv{display:none!important}
+
+/* --- motion --- */
+@keyframes ds-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#left>.sec,.ds-sum,.ds-act,.site{animation:ds-in .36s ease both}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* refinements */
+:root{--f-mono:var(--ds-font)}
+code,pre,kbd,samp,.xt-cfg code,.mono,.hash{font-family:var(--ds-mono)}
+.vp-top button,.proj button,.fp-tabs button,.legend,.legend *,.sl .tag{text-transform:none;letter-spacing:0;font-family:var(--f-body)}
+.hero .ds-lede~.sub{display:none}
+.hero h1{font-size:clamp(40px,5.4vw,80px)}
+.hero-targets{margin-bottom:14px}
+.ht b{text-transform:none;letter-spacing:-.01em;font:650 17px/1.2 var(--f-body)}
+.ht em{font:400 12px/1.4 var(--f-body);color:var(--ink-3)}
+.ht img{border-radius:10px}
+@media (pointer:coarse){.ds-mode button{min-height:36px;padding:8px 13px}.ds-act{min-height:56px}}
+@media (max-width:760px){#tab-discover,#tab-compare,#tab-method,#tab-lab{margin-left:0}#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{display:none}}

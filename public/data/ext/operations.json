@@ -1,0 +1,17 @@
+{
+ "schema": "asterro.operations/1",
+ "note": "Exploration operations and the measured conditions each one depends on (a fixed, published table; the weights are equal). The site profile reports the mean per-condition similarity s of the conditions ASTERRO measures, labelled with the baseline thresholds (similar >= 0.85, partial >= 0.60), and lists the conditions it cannot assess. Environmental similarity only: never a safety, suitability or certification statement. Text lives in ext.op.<id>.*.",
+ "operations": [
+  {"id": "landing", "conditions": ["slope", "surface_roughness"], "km_slope": 5, "needs": []},
+  {"id": "rover_mobility", "conditions": ["slope", "surface_roughness", "lst_diurnal_range"], "km_slope": 15, "needs": []},
+  {"id": "navigation", "conditions": ["slope", "surface_roughness"], "km_slope": 15, "needs": ["surface_materials"]},
+  {"id": "robotic_operations", "conditions": ["slope", "surface_temp_day", "surface_temp_night"], "needs": ["wind_dust"]},
+  {"id": "instrument_deployment", "conditions": ["aridity", "lst_diurnal_range", "surface_temp_day", "surface_temp_night"], "needs": []},
+  {"id": "eva_training", "conditions": ["slope", "aridity", "lst_diurnal_range", "mean_air_temperature"], "needs": ["gravity_vacuum_radiation"]},
+  {"id": "habitat_operations", "conditions": ["annual_temperature_range", "lst_diurnal_range", "surface_temp_night", "mean_air_temperature"], "needs": ["gravity_vacuum_radiation"]},
+  {"id": "construction", "conditions": ["slope", "surface_temp_day", "surface_temp_night"], "needs": ["surface_materials"]},
+  {"id": "resource_prospecting", "conditions": [], "needs": ["ice_permafrost", "mineralogy"]},
+  {"id": "geological_fieldwork", "conditions": [], "needs": ["mineralogy", "surface_materials", "impact_structures"]},
+  {"id": "subsurface_exploration", "conditions": [], "needs": ["caves_lava_tubes"]}
+ ]
+}

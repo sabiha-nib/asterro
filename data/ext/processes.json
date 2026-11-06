@@ -1,6 +1,6 @@
 {
  "schema": "asterro.processes/1",
- "note": "Planetary Process Explorer. A process is 'data-backed' only when ASTERRO holds an Earth variable that measures the condition behind it; the rule is applied to every valid Earth cell in the browser. Other processes are described with the data they would need. Text lives in ext.proc.<id>.*.",
+ "note": "Planetary Process Explorer. status: data = ASTERRO holds an Earth variable that measures the condition behind the process, and the rule is applied to every valid Earth cell; indirect = the rule finds settings that favour the process (climate class, named environment type, terrain and climate thresholds) while the process itself is not observed; no_data = described with the data it would need. Rules run in the browser over the 76,781 valid cells. Text lives in ext.proc.<id>.*.",
  "processes": [
   {
    "id": "thermal_cycling",
@@ -42,6 +42,59 @@
    ]
   },
   {
+   "id": "permafrost",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "var": "t2m_mean_c",
+      "op": "<=",
+      "value": -1
+     },
+     {
+      "koppen_not": [
+       "EF"
+      ]
+     }
+    ]
+   },
+   "order_var": "t2m_mean_c",
+   "order": "asc",
+   "planet": {
+    "var": "mean_air_temperature"
+   },
+   "datasets": [
+    "nasa_power"
+   ],
+   "partial": "ice_permafrost",
+   "needs": [
+    "ice_permafrost"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "glacial",
+   "status": "indirect",
+   "rule": {
+    "koppen": [
+     "EF"
+    ]
+   },
+   "order_var": "t2m_mean_c",
+   "order": "asc",
+   "planet": {
+    "var": "mean_air_temperature"
+   },
+   "datasets": [
+    "nasa_power"
+   ],
+   "partial": "ice_permafrost",
+   "needs": [
+    "ice_permafrost"
+   ],
+   "candidates": []
+  },
+  {
    "id": "hyper_arid",
    "status": "data",
    "rule": {
@@ -58,6 +111,228 @@
     "nasa_power"
    ],
    "partial": "wind_dust"
+  },
+  {
+   "id": "dust_storms",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "koppen": [
+       "BWh",
+       "BWk"
+      ]
+     },
+     {
+      "var": "surface_roughness",
+      "op": "<=",
+      "pct": 25
+     }
+    ]
+   },
+   "order_var": "aridity_index_raw",
+   "order": "asc",
+   "planet": {
+    "var": "aridity"
+   },
+   "datasets": [
+    "nasa_power",
+    "gmted2010"
+   ],
+   "partial": "wind_dust",
+   "needs": [
+    "wind_dust"
+   ],
+   "candidates": [
+    "merra2",
+    "era5"
+   ]
+  },
+  {
+   "id": "aeolian",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "env": [
+       "Desert"
+      ]
+     },
+     {
+      "var": "aridity_index_raw",
+      "op": "<",
+      "value": 0.2
+     }
+    ]
+   },
+   "order_var": "surface_roughness",
+   "order": "asc",
+   "planet": {
+    "var": "aridity"
+   },
+   "datasets": [
+    "natural_earth",
+    "nasa_power",
+    "gmted2010"
+   ],
+   "partial": "wind_dust",
+   "needs": [
+    "wind_dust",
+    "dunes"
+   ],
+   "candidates": [
+    "merra2",
+    "era5",
+    "landsat"
+   ]
+  },
+  {
+   "id": "evaporites",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "env": [
+       "Basin",
+       "Lake"
+      ]
+     },
+     {
+      "var": "aridity_index_raw",
+      "op": "<",
+      "value": 0.2
+     }
+    ]
+   },
+   "order_var": "aridity_index_raw",
+   "order": "asc",
+   "datasets": [
+    "natural_earth",
+    "nasa_power"
+   ],
+   "partial": "evaporites",
+   "needs": [
+    "evaporites"
+   ],
+   "candidates": [
+    "landsat"
+   ]
+  },
+  {
+   "id": "sedimentation",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "env": [
+       "Basin",
+       "Delta",
+       "Lowland",
+       "Plain",
+       "Wetlands"
+      ]
+     },
+     {
+      "var": "slope",
+      "op": "<=",
+      "value": 1
+     }
+    ]
+   },
+   "order_var": "slope",
+   "order": "asc",
+   "planet": {
+    "var": "slope"
+   },
+   "datasets": [
+    "natural_earth",
+    "gmted2010"
+   ],
+   "partial": "surface_materials",
+   "needs": [
+    "surface_materials"
+   ],
+   "candidates": [
+    "soilgrids",
+    "esa_worldcover"
+   ]
+  },
+  {
+   "id": "fluvial",
+   "status": "indirect",
+   "rule": {
+    "env": [
+     "Valley",
+     "Delta",
+     "Gorge"
+    ]
+   },
+   "order_var": "slope",
+   "order": "desc",
+   "datasets": [
+    "natural_earth",
+    "gmted2010"
+   ],
+   "partial": "fluvial_landforms",
+   "needs": [
+    "fluvial_landforms",
+    "surface_water"
+   ],
+   "candidates": [
+    "jrc_gsw",
+    "srtm"
+   ]
+  },
+  {
+   "id": "surface_erosion",
+   "status": "indirect",
+   "rule": {
+    "all": [
+     {
+      "var": "slope",
+      "op": ">=",
+      "pct": 90
+     },
+     {
+      "var": "precip_mm_yr",
+      "op": ">=",
+      "value": 1000
+     }
+    ]
+   },
+   "order_var": "slope",
+   "order": "desc",
+   "planet": {
+    "var": "slope"
+   },
+   "datasets": [
+    "gmted2010",
+    "nasa_power"
+   ],
+   "partial": "surface_materials",
+   "needs": [
+    "surface_materials"
+   ],
+   "candidates": [
+    "soilgrids"
+   ]
+  },
+  {
+   "id": "rugged_terrain",
+   "status": "data",
+   "rule": {
+    "var": "slope",
+    "op": ">=",
+    "pct": 99
+   },
+   "order_var": "surface_roughness",
+   "order": "desc",
+   "planet": {
+    "var": "slope"
+   },
+   "datasets": [
+    "gmted2010"
+   ]
   },
   {
    "id": "cold_high_desert",
@@ -107,46 +382,6 @@
    ]
   },
   {
-   "id": "rugged_terrain",
-   "status": "data",
-   "rule": {
-    "var": "slope",
-    "op": ">=",
-    "pct": 99
-   },
-   "order_var": "surface_roughness",
-   "order": "desc",
-   "planet": {
-    "var": "slope"
-   },
-   "datasets": [
-    "gmted2010"
-   ]
-  },
-  {
-   "id": "aeolian",
-   "status": "no_data",
-   "needs": [
-    "wind_dust",
-    "dunes"
-   ],
-   "candidates": [
-    "merra2",
-    "era5",
-    "landsat"
-   ]
-  },
-  {
-   "id": "evaporites",
-   "status": "no_data",
-   "needs": [
-    "evaporites"
-   ],
-   "candidates": [
-    "landsat"
-   ]
-  },
-  {
    "id": "volcanic",
    "status": "no_data",
    "needs": [
@@ -164,24 +399,22 @@
    "candidates": []
   },
   {
-   "id": "glacial",
+   "id": "water_alteration",
    "status": "no_data",
    "needs": [
-    "ice_permafrost"
-   ],
-   "candidates": []
-  },
-  {
-   "id": "fluvial",
-   "status": "no_data",
-   "needs": [
-    "fluvial_landforms",
-    "surface_water"
+    "mineralogy",
+    "surface_materials"
    ],
    "candidates": [
-    "nasadem",
-    "jrc_gsw"
+    "crism",
+    "landsat",
+    "sentinel2"
    ]
   }
+ ],
+ "statuses": [
+  "data",
+  "indirect",
+  "no_data"
  ]
 }

@@ -111,3 +111,25 @@
 - **Translations.** The 495 extension keys in bn, es, fr and de are machine-assisted and not reviewed by native
   speakers.
 - **Research queue.** It is stored in this browser only. There is no account, server or sync.
+
+## Challenge-compliance and design pass
+
+- **Indirect indicators are not observations.** Permafrost, ice-cap climate, dust-storm, aeolian, salt, sedimentation,
+  fluvial and erosion settings come from climate classes, named regions and terrain or climate thresholds. They say
+  where a process is expected, not that it occurs, and never that a resource exists.
+- **Köppen–Geiger** is computed from a ~50 km reanalysis climatology (NASA POWER, MERRA-2, 2001–2020). Alpine tundra
+  (ET) in high mountains counts as "polar and tundra" in the environment filter.
+- **Environment type** is the label of a named Natural Earth region polygon. A large desert contains many terrains,
+  and cells outside named regions have no type.
+- **Illumination** is noon solar-elevation geometry only: no atmosphere, terrain shadowing or measured irradiance.
+- **Still missing: geology, mineralogy, surface materials, caves and lava tubes, wind and aerosols, surface water,
+  biology, thermal inertia, impact structures on Earth.** No dataset could be retrieved (network refused). These are
+  labelled "no data" everywhere and never approximated.
+- **Navigation.** The nine views are grouped visually (Explore · Discover · Compare · Learn · My research) but stay
+  individually visible. Two protected baseline tests address them directly, and a five-item menu that hides views
+  would break that contract.
+- **Simple view** hides technical tags around the weight sliders but not the sliders themselves, because the protected
+  baseline test sets a weight directly.
+- **Design** was checked in headless Chromium (SwiftShader) at 390, 820, 1180 and 1440 px. It was not checked on
+  physical devices, with a screen reader, or with the real SF / Instrument Sans fonts (web fonts are unreachable here,
+  so fallback fonts were used).

@@ -96,3 +96,20 @@ See `docs/phase4/EXPANSION.md` for the feature-by-feature implementation report.
 | `public/index.html`, `public/sw.js`, `public/data/ext/*` | Regenerated |
 
 Unchanged: the protected baseline files, `tai-sim-1.0.0`, the six criteria, thresholds, the seven profiles and every score.
+
+## Challenge-compliance and design pass (after `c15fb5b`)
+
+See `docs/phase4/CHALLENGE_COMPLIANCE.md` (one row per brief item) and `docs/phase4/DESIGN.md`.
+
+| Path | Change |
+|---|---|
+| `src/ext/context.py`, `public/data/ext/context_ext.json` | Added `tai-ext-context-1.0.0`, computed from retained inputs and never scored: Köppen–Geiger class per cell (Peel et al. 2007, NASA POWER climatology), Natural Earth environment type, noon solar-elevation geometry, kilometre-scale slope shares for Earth and targets |
+| `data/ext/processes.json` | 17 processes (6 observed, 8 indirect indicators, 3 described). This covers the twelve the brief names: sedimentation, dust storms, aeolian erosion, volcanic, impact, thermal weathering, water-driven alteration, glacial, permafrost, salt deposition, fluvial, surface erosion |
+| `data/ext/dimensions.json`, `data/ext/operations.json` | Added climate class and environment type; new "context" status; 11 exploration operations with their measured conditions |
+| `app/frontend/phase4/ui_25_context.js` | Added: the site profile in the place view (location, environment, climate class, permafrost indicator, illumination geometry, slope shares, operations, kinds of evidence, where the analogy breaks down); process rules by environment and climate class; environment filter in Beyond the familiar |
+| `app/frontend/phase4/q1_design.css`, `ui_26_design.js` | Added the design layer: tokens, typography, glass surfaces, grouped navigation, landing promise with three ways in, plain-language summary card, Simple / Advanced view, focus rings, reduced motion |
+| `app/frontend/phase4/i18n_80`–`84_ext_*.js` | 206 new keys in each language, plus 16 updated where the data changed (701 extension keys per language) |
+| `tests/test_ext_context.py`, `tests/phase4/ui_design_smoke.py`; `tests/phase4/ui_ext_smoke.py`, `test_ext_i18n.mjs` | Added; extended for the site profile, the environment filter, the indirect processes and `ui_25` / `ui_26` keys |
+| `package.json` | `test:ui` adds the design walk-through |
+
+Unchanged: the protected baseline files (including `tests/ui_smoke.py` and `tests/phase2/ui_lab_smoke.py`), `tai-sim-1.0.0`, the thresholds, the seven profiles and every score.

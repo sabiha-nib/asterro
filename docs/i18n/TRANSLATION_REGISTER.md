@@ -110,3 +110,12 @@ Notes:
 - Place names follow the rules above.
 - Bengali coinages a reviewer should check: শতমক (percentile), চরমজীবী (extremophile), বাষ্পীভবনজাত শিলা (evaporite),
   তুহিন-ক্ষয় (frost weathering).
+
+**Update (challenge-compliance and design pass).**
+
+- Each of the five extension catalogues now holds 701 keys.
+- The new keys cover: site profile, operations, environment and Köppen–Geiger class names, new processes and
+  dimensions, the landing, the summary card, and the Simple / Advanced view.
+- Automated checks pass.
+- **No native-speaker review has taken place.**
+- Bengali Köppen names (e.g. উপমেরু, তৃণভূমি) and the coined phrase চিরহিমায়িত মাটি (permafrost) need review.

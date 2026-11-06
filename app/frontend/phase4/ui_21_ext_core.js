@@ -4,7 +4,7 @@
  * near-surface air temperature) and scores them with the SAME formula in a separately named configuration,
  * explore-ext-thermal-v1, whose every run carries a configuration identifier and can be exported and replayed.
  * Values come from ASTERRO_EXT (data_ext.js, generated from retained inputs by scripts/build_ext.py). */
-const XT = { stack: null, earth: null, cache: new Map(), hub: "constellations", proc: null, prof: "landing_site", profW: {}, w3: { surface_temp_day: 1, surface_temp_night: 1, mean_air_temperature: 1 }, tid: null, sweep: false, bfN: 100 };
+const XT = { stack: null, earth: null, cache: new Map(), hub: "constellations", proc: null, prof: "landing_site", profW: {}, w3: { surface_temp_day: 1, surface_temp_night: 1, mean_air_temperature: 1 }, tid: null, sweep: false, bfN: 100, bfEnv: "all" };
 const XD = typeof ASTERRO_EXT !== "undefined" ? ASTERRO_EXT : null;
 const XC = () => (typeof AsterroExt !== "undefined" ? AsterroExt : null);
 

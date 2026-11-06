@@ -1,9 +1,10 @@
 {
  "schema": "asterro.dimensions/1",
- "note": "Every dimension the challenge asks about, with what ASTERRO can and cannot measure. Structure only: every text (name, definition, planetary side, resolution, missing-data policy, limitation) is in the interface catalogues under ext.dim.<id>.* in five languages. status: scored = in the baseline score (tai-sim-1.0.0); extension = scored only in the versioned extended fingerprint (explore-ext-thermal-v1); evidence = Earth value computed and shown, not compared with targets; no_data = no dataset in ASTERRO (the data inventory says why).",
+ "note": "Every dimension the challenge asks about, with what ASTERRO can and cannot measure. Structure only: every text (name, definition, planetary side, resolution, missing-data policy, limitation) is in the interface catalogues under ext.dim.<id>.* in five languages. status: scored = in the baseline score (tai-sim-1.0.0); extension = scored only in the versioned extended fingerprint (explore-ext-thermal-v1); context = computed for Earth and the target and shown side by side in the site profile, never scored; evidence = Earth value computed and shown, not compared with targets; no_data = no dataset in ASTERRO (the data inventory says why).",
  "statuses": [
   "scored",
   "extension",
+  "context",
   "evidence",
   "no_data"
  ],
@@ -26,7 +27,8 @@
    "earth": [
     "nasa_power"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "derived"
   },
   {
    "id": "annual_temperature_range",
@@ -36,7 +38,8 @@
    "earth": [
     "nasa_power"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "elevation",
@@ -46,7 +49,8 @@
    "earth": [
     "gmted2010"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "slope",
@@ -56,7 +60,8 @@
    "earth": [
     "gmted2010"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "surface_roughness",
@@ -66,7 +71,8 @@
    "earth": [
     "gmted2010"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "lst_diurnal_range",
@@ -76,7 +82,8 @@
    "earth": [
     "modis_aqua_lst"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "surface_temp_day",
@@ -86,7 +93,8 @@
    "earth": [
     "modis_aqua_lst"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "surface_temp_night",
@@ -96,7 +104,8 @@
    "earth": [
     "modis_aqua_lst"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "mean_air_temperature",
@@ -106,7 +115,8 @@
    "earth": [
     "nasa_power"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "precipitation",
@@ -116,7 +126,8 @@
    "earth": [
     "nasa_power"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "measured"
   },
   {
    "id": "freeze_thaw",
@@ -126,7 +137,8 @@
    "earth": [
     "modis_aqua_lst"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "derived"
   },
   {
    "id": "thermal_inertia",
@@ -136,17 +148,31 @@
    "earth": [],
    "candidates": [
     "themis"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "illumination",
    "family": "thermal",
-   "status": "no_data",
-   "unit": "W/m² or % of time lit",
+   "status": "context",
+   "unit": "noon solar elevation (°)",
    "earth": [],
    "candidates": [
+    "nasa_power",
+    "lola"
+   ],
+   "evidence": "geometry"
+  },
+  {
+   "id": "climate_class",
+   "family": "thermal",
+   "status": "evidence",
+   "unit": "Köppen–Geiger class",
+   "earth": [
     "nasa_power"
-   ]
+   ],
+   "candidates": [],
+   "evidence": "derived"
   },
   {
    "id": "surface_materials",
@@ -157,7 +183,8 @@
    "candidates": [
     "soilgrids",
     "esa_worldcover"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "mineralogy",
@@ -165,7 +192,8 @@
    "status": "no_data",
    "unit": "abundances",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "volcanic_terrain",
@@ -173,7 +201,8 @@
    "status": "no_data",
    "unit": "classes",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "evaporites",
@@ -183,7 +212,8 @@
    "earth": [],
    "candidates": [
     "landsat"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "impact_structures",
@@ -191,7 +221,8 @@
    "status": "no_data",
    "unit": "count / km²",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "dunes",
@@ -201,7 +232,8 @@
    "earth": [],
    "candidates": [
     "landsat"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "fluvial_landforms",
@@ -212,7 +244,19 @@
    "candidates": [
     "nasadem",
     "copernicus_dem"
-   ]
+   ],
+   "evidence": "none"
+  },
+  {
+   "id": "environment_type",
+   "family": "geomorphology",
+   "status": "evidence",
+   "unit": "Natural Earth region class",
+   "earth": [
+    "natural_earth"
+   ],
+   "candidates": [],
+   "evidence": "indirect"
   },
   {
    "id": "surface_water",
@@ -222,15 +266,19 @@
    "earth": [],
    "candidates": [
     "jrc_gsw"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "ice_permafrost",
    "family": "water",
-   "status": "no_data",
-   "unit": "presence",
-   "earth": [],
-   "candidates": []
+   "status": "evidence",
+   "unit": "climatic indicator (class)",
+   "earth": [
+    "nasa_power"
+   ],
+   "candidates": [],
+   "evidence": "indirect"
   },
   {
    "id": "wind_dust",
@@ -241,7 +289,8 @@
    "candidates": [
     "merra2",
     "era5"
-   ]
+   ],
+   "evidence": "none"
   },
   {
    "id": "pressure",
@@ -249,7 +298,8 @@
    "status": "no_data",
    "unit": "Pa",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "extremophile_habitats",
@@ -257,7 +307,8 @@
    "status": "no_data",
    "unit": "—",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "caves_lava_tubes",
@@ -265,17 +316,19 @@
    "status": "no_data",
    "unit": "presence",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   },
   {
    "id": "landing_hazard",
    "family": "operations",
-   "status": "evidence",
-   "unit": "derived from slope and roughness",
+   "status": "context",
+   "unit": "share of ~1 km pixels at or below 2–30°",
    "earth": [
-    "gmted2010"
+    "gmted_subcell"
    ],
-   "candidates": []
+   "candidates": [],
+   "evidence": "derived"
   },
   {
    "id": "gravity_vacuum_radiation",
@@ -283,7 +336,15 @@
    "status": "no_data",
    "unit": "—",
    "earth": [],
-   "candidates": []
+   "candidates": [],
+   "evidence": "none"
   }
+ ],
+ "evidence_classes": [
+  "measured",
+  "derived",
+  "geometry",
+  "indirect",
+  "none"
  ]
 }

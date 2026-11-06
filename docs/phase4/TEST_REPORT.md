@@ -289,3 +289,54 @@ Two failures appeared in the first re-run and were fixed (no assertion was chang
 - **`ui_global_smoke.py`.** The ninth header tab ended 1.27 px past its row at 1,512 px. The same failure was
   reproduced with the committed `60e0c16` build in this environment, so it is a font-metric issue: the web font is
   unreachable and fallback fonts are used. `p10_ext.css` now gives tabs 1 px less side padding at widths ≥ 761 px.
+
+## Challenge-compliance and design pass (2026-11-06, final build)
+
+`npm test` passes in full:
+
+- Python: 116/116, including the new `tests/test_ext_context.py` (8 checks): offline rebuild, Köppen–Geiger textbook
+  cases, per-cell completeness, Natural Earth classes, noon-sun geometry, slope-share bounds, process and operations
+  tables, baseline untouched.
+- JS parity: passing.
+- Phase II: passing.
+- Phase III: 132/132.
+- Phase IV: 74/74.
+- Trajectory: 26/26.
+- Methods: 37/37.
+- Journey: 53/53.
+- i18n: 52/52.
+- Routes: 63/63.
+- Extension engine: 39/39.
+- Extension languages: 36/36 (701 keys × 5 languages).
+
+All 14 browser walk-throughs (Chromium, SwiftShader) pass in one sequential run on the final build:
+
+| Suite | Result |
+|---|---|
+| `ui_smoke.py` (protected baseline, unchanged) | passing (exit 0) |
+| `ui_lab_smoke.py` (protected baseline, unchanged) | passing (exit 0) |
+| `ui_atlas_smoke.py` | passing (exit 0) |
+| `ui_phase4_smoke.py` | 75 |
+| `ui_trajectory_smoke.py` | 24 |
+| `ui_methods_smoke.py` | 19 |
+| `ui_journey_smoke.py` | 70 |
+| `ui_global_smoke.py` | 39 |
+| `ui_routes_i18n_smoke.py` | 27 |
+| `ui_journal_persist_smoke.py` | 16 |
+| `ui_responsive_smoke.py` | 113 |
+| `ui_ext_smoke.py` | 45 (+4: dust storms indirect, site profile, operations, environment filter) |
+| `ui_design_smoke.py` (new) | 23 |
+
+Failures found during this pass and how they were fixed (no assertion was weakened):
+
+- **The protected baseline test sets a weight slider directly.** Simple view therefore keeps every slider visible and
+  hides only the tags around it.
+- **The phase IV contrast audit.** It read the gradient primary button as dark-on-dark. The button now also has a solid
+  coral background colour: text contrast about 8 : 1.
+- **The global walk-through clicks the globe through the landing.** The three new cards were narrowed so they no
+  longer cover the globe.
+- **The journey language check.** It found dataset and author names (Natural Earth, Peel et al., CO₂) inside
+  translated sentences. They are now marked as preserved terms, and the German compound "Natural-Earth-Region" was
+  reworded so the name stays intact.
+- **`ui_ext_smoke.py` expectations.** Two were updated because the data changed: aeolian processes are now an indirect
+  indicator, so the described-only check uses volcanism; there are now 30 dimensions instead of 28.

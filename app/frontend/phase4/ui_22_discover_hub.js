@@ -96,14 +96,15 @@ function xtFmtVar(v, x) {
 }
 function xtHubProcesses() {
   const L = XD.processes.processes, cur = L.find(p => p.id === XT.proc);
-  const list = `<ul class="xt-procs">${L.map(p => `<li><button type="button" data-xproc="${p.id}" aria-pressed="${XT.proc === p.id}"><b>${esc(tx("ext.proc." + p.id + ".name"))}</b><span class="xt-st ${p.status === "data" ? "data" : "nodata"}">${esc(tx("ext.proc.st." + p.status))}</span></button></li>`).join("")}</ul>`;
+  const list = `<ul class="xt-procs">${L.map(p => `<li><button type="button" data-xproc="${p.id}" aria-pressed="${XT.proc === p.id}"><b>${esc(tx("ext.proc." + p.id + ".name"))}</b><span class="xt-st ${p.status === "data" ? "data" : p.status === "indirect" ? "partial" : "nodata"}">${esc(tx("ext.proc.st." + p.status))}</span></button></li>`).join("")}</ul>`;
   let det = "";
   if (cur) {
     const fld = k => `<dt>${esc(tx("ext.proc.f." + k))}</dt><dd>${esc(tx("ext.proc." + cur.id + "." + k))}</dd>`;
     det = `<div class="xt-proc" data-xprocdet="${cur.id}"><h4 class="xt-h">${esc(tx("ext.proc." + cur.id + ".name"))}</h4><dl class="xt-dl">${["earth", "planet", "mech", "sim", "diff", "use", "lim"].map(fld).join("")}
       <dt>${esc(tx("ext.proc.f.data"))}</dt><dd>${(cur.datasets || []).map(id => keep(jnDataset(id).dataset || id)).join(", ") || esc(tx("ext.proc.none"))}</dd></dl>`;
-    if (cur.status === "data") {
-      const r = xtProcEval(cur), rule = (cur.rule.all || [cur.rule]).map(x => `${keep(x.var)} ${x.op} ${x.pct != null ? esc(tx("ext.proc.pct", { p: txInt(x.pct) })) + " (" + xtFmtVar(x.var, r.thr[x.var + ":" + x.pct]) + ")" : xtFmtVar(x.var, x.value)}`).join(" · ");
+    if (cur.status === "data" || cur.status === "indirect") {
+      const r = xtProcEval(cur), rule = (cur.rule.all || [cur.rule]).map(x => typeof xcRuleText === "function" ? xcRuleText(x, r.thr) : `${keep(x.var)} ${x.op} ${x.pct != null ? esc(tx("ext.proc.pct", { p: txInt(x.pct) })) + " (" + xtFmtVar(x.var, r.thr[x.var + ":" + x.pct]) + ")" : xtFmtVar(x.var, x.value)}`).join(" · ");
+      if (cur.status === "indirect") det += `<p class="jn-note" data-xprocindirect>${esc(tx("ext.proc.indirect_note"))}</p>`;
       det += `<p class="note small" data-xprule>${esc(tx("ext.proc.rule"))} ${rule}</p>
         <p class="xt-stat" data-xproccount="${r.n}">${esc(tx("ext.proc.count", { n: txInt(r.n), a: txInt(Math.round(r.area)), p: txPct(r.share, 1) }))}</p>
         <p class="note small">${esc(tx("ext.proc.where"))} ${r.top.map(([c, k]) => `${keep(c)} (${esc(txInt(k))})`).join(", ") || "—"}</p>
@@ -115,6 +116,7 @@ function xtHubProcesses() {
         det += `<h4 class="xt-h">${esc(tx("ext.proc.planet_vals"))}</h4><ul class="xt-list">${vals.map(x => `<li>${x}</li>`).join("") || `<li>${esc(tx("ext.proc.none"))}</li>`}</ul>`;
       }
       if (cur.partial) det += `<p class="jn-note">${esc(tx("ext.proc.partial", { d: tx("ext.dim." + cur.partial + ".name") }))}</p>`;
+      if (cur.status === "indirect" && cur.needs) det += `<p class="note small" data-xprocneeds>${esc(tx("ext.proc.needs_full", { list: txList(cur.needs.map(d => tx("ext.dim." + d + ".name"))) }))}${(cur.candidates || []).length ? " " + esc(tx("ext.proc.cands")) + " " + cur.candidates.map(id => { const it = (typeof INV_BY !== "undefined" && INV_BY[id]) || null; return keep(it ? it.name : id) + (it ? " " + invChip(it.status) : ""); }).join(" · ") : ""}</p>`;
     } else {
       det += `<p class="jn-note" data-xprocnodata>${esc(tx("ext.proc.nodata", { list: txList(cur.needs.map(d => tx("ext.dim." + d + ".name"))) }))}</p>`;
       if (cur.candidates.length) det += `<p class="note small">${esc(tx("ext.proc.cands"))} ${cur.candidates.map(id => { const it = (typeof INV_BY !== "undefined" && INV_BY[id]) || null; return keep(it ? it.name : id) + (it ? " " + invChip(it.status) : ""); }).join(" · ")}</p>`;
@@ -127,7 +129,8 @@ function xtHubProcesses() {
 /* ---------------------------------------------------------------- Beyond the familiar */
 function xtHubBeyond() {
   const R = S.res; if (!R) return "";
-  const K = XD.known_analogues, sep = S.app.thresholds.distinct_sep_km, sites = ENG.distinctSites(R.order, S.lat, S.lon, XT.bfN, sep);
+  const K = XD.known_analogues, sep = S.app.thresholds.distinct_sep_km, envOk = i => xcEnvGroupOk(XT.bfEnv, i);
+  const ord = XT.bfEnv === "all" ? R.order : Int32Array.from(Array.from(R.order).filter(envOk)), sites = ENG.distinctSites(ord, S.lat, S.lon, XT.bfN, sep);
   const near = i => { let best = null; for (const s of K.sites) { const d = ENG.haversine(S.lat[i], S.lon[i], s.lat, s.lon); if (!best || d < best.d) best = { s, d }; } return best; };
   const w = S.weights, single = S.T[S.targetId] && S.targetId !== "cross", tv = single ? S.T[S.targetId].variables : null;
   const rows = [], familiar = [];
@@ -135,16 +138,17 @@ function xtHubBeyond() {
     const nb = near(i);
     if (nb.d < K.radius_km) { familiar.push([i, k, nb]); return; }
     const on = single ? ENG.detail(S.A, S.critIds, i, tv, w, a4RangesFor(S.targetId)).rows.filter(r => r.s != null).sort((a, b) => b.s - a.s || (a.c < b.c ? -1 : 1)) : [];
-    rows.push(`<tr data-xbf="${S.cell[i]}"><td>${esc(txInt(k + 1))}</td><td>${xtPlaceBtn(i)}<div class="meta">${esc(tx("ext.bf.nearest", { name: nb.s.name, km: txInt(Math.round(nb.d)) }))}</div></td><td>${esc(txPct(R.eff[i]))}</td><td><div><span class="meta">${esc(tx("ext.bf.col_strong"))}:</span> ${on.length ? esc(tx("crit." + on[0].c + ".s")) : "—"}</div><div><span class="meta">${esc(tx("ext.bf.col_weak"))}:</span> ${on.length ? esc(tx("crit." + on[on.length - 1].c + ".s")) + " (s = " + esc(txNum(on[on.length - 1].s, 2)) + ")" : "—"}</div></td></tr>`);
+    rows.push(`<tr data-xbf="${S.cell[i]}"><td>${esc(txInt(k + 1))}</td><td>${xtPlaceBtn(i)}<div class="meta">${xcEnvName(xcEnv(i))} · ${keep(xcKoppen(i) || "—")}</div><div class="meta">${esc(tx("ext.bf.nearest", { name: nb.s.name, km: txInt(Math.round(nb.d)) }))}</div><span class="xt-st lab-future" data-xbfclass="review">${esc(tx("ext.bf.cls_review"))}</span></td><td>${esc(txPct(R.eff[i]))}</td><td><div><span class="meta">${esc(tx("ext.bf.col_strong"))}:</span> ${on.length ? esc(tx("crit." + on[0].c + ".s")) : "—"}</div><div><span class="meta">${esc(tx("ext.bf.col_weak"))}:</span> ${on.length ? esc(tx("crit." + on[on.length - 1].c + ".s")) + " (s = " + esc(txNum(on[on.length - 1].s, 2)) + ")" : "—"}</div></td></tr>`);
   });
   return `<div class="sec"><div class="lbl">${esc(tx("ext.bf.title"))}</div>
     <p class="note">${esc(tx("ext.bf.p", { n: txInt(sites.length), km: txInt(K.radius_km) }))}</p>
     <p class="jn-note" data-xbfhonest>${esc(tx("ext.bf.honest"))}</p>
+    <div class="xt-row"><label class="xt-field"><span>${esc(tx("ext.bf.env"))}</span><select data-xbfenv>${XC_ENV_GROUPS.map(g => `<option value="${g}"${XT.bfEnv === g ? " selected" : ""}>${esc(tx("ext.envg." + g))}</option>`).join("")}</select></label></div>
     <p class="xt-stat" data-xbfcount="${rows.length}">${esc(tx("ext.bf.count", { k: txInt(rows.length), n: txInt(sites.length), f: txInt(familiar.length) }))}</p>
     <div class="tbl-wrap"><table class="xt-t"><thead><tr><th scope="col">${esc(tx("ext.bf.col_rank"))}</th><th scope="col">${esc(tx("ext.col.place"))}</th><th scope="col">${esc(tx("ext.bf.col_score"))}</th><th scope="col">${esc(tx("ext.bf.col_strong"))} / ${esc(tx("ext.bf.col_weak"))}</th></tr></thead><tbody>${rows.slice(0, 25).join("")}</tbody></table></div>
     <p class="note small">${esc(tx("ext.bf.research"))}</p>
     <details class="xt-det"><summary>${esc(tx("ext.bf.list", { n: txInt(K.sites.length) }))}</summary><p class="note small">${esc(tx("ext.bf.list_p"))}</p><ul class="xt-list">${K.sites.map(s => `<li>${keep(s.name)} <span class="meta">${esc(txLL(s.lat, s.lon))}</span></li>`).join("")}</ul></details>
-    ${familiar.length ? `<details class="xt-det"><summary>${esc(tx("ext.bf.familiar", { n: txInt(familiar.length) }))}</summary><ul class="xt-list">${familiar.map(([i, k, nb]) => `<li>#${esc(txInt(k + 1))} ${xtPlaceBtn(i)} <span class="meta">${esc(tx("ext.bf.near", { name: nb.s.name, km: txInt(Math.round(nb.d)) }))}</span></li>`).join("")}</ul></details>` : ""}</div>`;
+    ${familiar.length ? `<details class="xt-det"><summary>${esc(tx("ext.bf.familiar", { n: txInt(familiar.length) }))}</summary><ul class="xt-list">${familiar.map(([i, k, nb]) => `<li>#${esc(txInt(k + 1))} ${xtPlaceBtn(i)} <span class="meta">${esc(tx("ext.bf.near", { name: nb.s.name, km: txInt(Math.round(nb.d)) }))}</span> <span class="xt-st lab-verified" data-xbfclass="known">${esc(tx("ext.bf.cls_known"))}</span></li>`).join("")}</ul></details>` : ""}</div>`;
 }
 
 /* ---------------------------------------------------------------- Mission profiles (extended) */
@@ -186,6 +190,7 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("change", e => {
   const t = e.target; if (!t.dataset) return;
+  if (t.dataset.xbfenv != null) { XT.bfEnv = t.value; xtRerender(); const n = document.querySelector("[data-xbfenv]"); if (n) n.focus(); return; }
   if (t.dataset.xtin === "tid") { XT.tid = t.value; XT.sweep = false; xtRerender(); const n = document.querySelector('[data-xtin="tid"]'); if (n) n.focus(); }
   else if (t.dataset.xtw) { XT.w3 = { ...XT.w3, [t.dataset.xtw]: +t.value }; XT.sweep = false; xtRerender(); const n = document.querySelector(`[data-xtw="${t.dataset.xtw}"]`); if (n) n.focus(); }
   else if (t.dataset.xtpw) { const P = XD.profiles_ext.profiles.find(p => p.id === XT.prof); XT.profW[P.id] = { ...(XT.profW[P.id] || P.weights), [t.dataset.xtpw]: +t.value }; xtRerender(); const n = document.querySelector(`[data-xtpw="${t.dataset.xtpw}"]`); if (n) n.focus(); }
