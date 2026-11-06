@@ -1,0 +1,144 @@
+{
+ "schema": "asterro.profiles-ext/1",
+ "config": "explore-ext-thermal-v1",
+ "note": "Mission profiles of the extended fingerprint. The seven baseline profiles are unchanged and stay in the baseline (tai-sim-1.0.0). Weights are ASTERRO-authored defaults with a written rationale (ext.prof.<id>.why), not validated mission requirements; every profile is editable. A profile whose key conditions have no data is listed as unavailable, with what it would need — it is never approximated.",
+ "profiles": [
+  {
+   "id": "landing_site",
+   "status": "available",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 0,
+    "elevation": 0,
+    "slope": 3,
+    "surface_roughness": 3,
+    "lst_diurnal_range": 1,
+    "surface_temp_day": 0,
+    "surface_temp_night": 0,
+    "mean_air_temperature": 0
+   }
+  },
+  {
+   "id": "autonomous_navigation",
+   "status": "available",
+   "weights": {
+    "aridity": 0,
+    "annual_temperature_range": 0,
+    "elevation": 0,
+    "slope": 2,
+    "surface_roughness": 3,
+    "lst_diurnal_range": 0,
+    "surface_temp_day": 0,
+    "surface_temp_night": 0,
+    "mean_air_temperature": 0
+   }
+  },
+  {
+   "id": "environmental_monitoring",
+   "status": "available",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 2,
+    "elevation": 0,
+    "slope": 0.5,
+    "surface_roughness": 0.5,
+    "lst_diurnal_range": 2,
+    "surface_temp_day": 2,
+    "surface_temp_night": 2,
+    "mean_air_temperature": 2
+   }
+  },
+  {
+   "id": "construction_testing",
+   "status": "available",
+   "weights": {
+    "aridity": 1,
+    "annual_temperature_range": 0,
+    "elevation": 0,
+    "slope": 2,
+    "surface_roughness": 1,
+    "lst_diurnal_range": 2,
+    "surface_temp_day": 2,
+    "surface_temp_night": 2,
+    "mean_air_temperature": 0
+   }
+  },
+  {
+   "id": "cold_night_testing",
+   "status": "available",
+   "weights": {
+    "aridity": 0,
+    "annual_temperature_range": 0,
+    "elevation": 0,
+    "slope": 0,
+    "surface_roughness": 0,
+    "lst_diurnal_range": 1,
+    "surface_temp_day": 2,
+    "surface_temp_night": 3,
+    "mean_air_temperature": 1
+   }
+  },
+  {
+   "id": "geological_field_research",
+   "status": "unavailable",
+   "needs": [
+    "surface_materials",
+    "mineralogy",
+    "impact_structures"
+   ]
+  },
+  {
+   "id": "dust_aeolian",
+   "status": "unavailable",
+   "needs": [
+    "wind_dust",
+    "dunes"
+   ]
+  },
+  {
+   "id": "resource_prospecting",
+   "status": "unavailable",
+   "needs": [
+    "ice_permafrost",
+    "mineralogy"
+   ]
+  },
+  {
+   "id": "subsurface_exploration",
+   "status": "unavailable",
+   "needs": [
+    "caves_lava_tubes"
+   ]
+  },
+  {
+   "id": "lava_tube_research",
+   "status": "unavailable",
+   "needs": [
+    "caves_lava_tubes",
+    "volcanic_terrain"
+   ]
+  },
+  {
+   "id": "ice_volatile_research",
+   "status": "unavailable",
+   "needs": [
+    "ice_permafrost"
+   ]
+  },
+  {
+   "id": "robotic_sampling",
+   "status": "unavailable",
+   "needs": [
+    "surface_materials",
+    "mineralogy"
+   ]
+  },
+  {
+   "id": "human_factors",
+   "status": "unavailable",
+   "needs": [
+    "gravity_vacuum_radiation"
+   ]
+  }
+ ]
+}

@@ -156,7 +156,12 @@ def test_p4_explore_ranges_rule():
 
 def test_p4_offline_regeneration_and_manifest():
     man = json.load(open(os.path.join(ROOT, "data/raw/phase4/MANIFEST.json")))
+    lost = {x["path"]: x for x in json.load(open(os.path.join(ROOT, "data/raw/phase4/RETENTION.json")))["not_retained"]}
+    for p, x in lost.items():   # a file recorded as not retained must be a non-input, keep its manifest checksum, and be truly absent
+        assert any(f["path"] == p and f["sha256"] == x["sha256"] for f in man["files"]) and "not an input" in x["role"], p
     for f in man["files"]:
+        if f["path"] in lost and not os.path.exists(os.path.join(ROOT, f["path"])):
+            continue
         b = open(os.path.join(ROOT, f["path"]), "rb").read()
         assert len(b) == f["bytes"] and hashlib.sha256(b).hexdigest() == f["sha256"], f["path"]
     at = {t["id"]: t for t in ATLAS["targets"]}

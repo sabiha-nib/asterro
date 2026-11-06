@@ -821,7 +821,7 @@ under the same view ids.
 The app starts offline after one online visit — tested. Fonts and external links need the network.
 
 ```bash
-npm test                 # 93 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 53 journey + 52 language checks
+npm test                 # 108 Python + JS parity + 65 Phase II + 132 Phase III + 74 Phase IV + 26 trajectory + 37 method + 53 journey + 52 language + 63 route-language + 39 extension + 36 extension-language checks
 npm run build:phase4     # registry + atlas + index.html + sw.js from committed inputs
 npm run test:ui          # the eight browser walk-throughs (Playwright + Chromium)
 python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
@@ -829,6 +829,37 @@ python3 scripts/replay_trajectory.py tests/phase4/fixtures/trajectory_demo.json
 
 **Further documentation:** `docs/phase4/` (METHODS, TRAJECTORY, METHOD_ARENA, JOURNEY_I18N, GLOBE_WORKSPACE, ARCHITECTURE, DATA,
 TEST_REPORT, LIMITATIONS, CHANGES).
+
+## Planetary Analogue Intelligence expansion (additive)
+
+The **Discover** tab gains a hub. **Constellations**, the original view, opens first and is unchanged. The other views:
+
+- **Temperature extremes.** Surface temperature by day and by night, plus mean air temperature, for the 16 targets
+  with direct thermal data (`tai-ext-thermal-1.0.0`). They are scored with the unchanged `tai-sim-1.0.0` formula over
+  nine conditions in a separate configuration, `explore-ext-thermal-v1`, with a `cfg-…` id. With the new weights at 0
+  the ranking is the baseline ranking. The view says where Earth stops: Jezero's nights are 16.1 K colder than any
+  Earth cell, and every lunar value lies outside Earth's range. A coverage-threshold sweep sits beside the standard
+  80 % rule.
+- **Processes.** 12 planetary processes. Six are searchable with a rule applied to every Earth cell. The other six are
+  described, with the data they would need.
+- **Beyond the familiar.** Leading places more than 300 km from 17 frequently cited analogue sites. It makes no novelty
+  claim and shows no novelty score.
+- **Mission profiles.** Five extended profiles with editable weights. Eight more are listed with the conditions they
+  lack.
+- **Learn.** Seven short modules.
+
+Elsewhere in the app:
+
+- The **place view** shows the three absolute temperatures.
+- A **research queue** (statuses, notes, questions, history; stored in this browser only) feeds a **multi-site
+  report**.
+- The **Passport** offers concise, detailed, comparative and mission-profile **report editions** in the interface
+  language.
+- The **Data** view lists all 28 dimensions by family with their status, and every data source with the challenge's
+  five labels.
+
+Everything is translated into the five interface languages. These translations are not reviewed by native speakers.
+Implementation report with per-feature status: `docs/phase4/EXPANSION.md`.
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
 NASA-approved, and it designates no site as safe.

@@ -1,0 +1,321 @@
+{
+ "dims": [
+  "surface_temp_day",
+  "surface_temp_night",
+  "mean_air_temperature"
+ ],
+ "earth_range": {
+  "mean_air_temperature": {
+   "max": 306.7916664123535,
+   "min": 218.60000076293943,
+   "n_finite": 76781,
+   "n_valid": 76781,
+   "p01": 220.57833328247068,
+   "p99": 301.8108333587646
+  },
+  "surface_temp_day": {
+   "max": 327.1575012207031,
+   "min": 216.6583709716797,
+   "n_finite": 76781,
+   "n_valid": 76781,
+   "p01": 218.36448364257814,
+   "p99": 320.1400146484375
+  },
+  "surface_temp_night": {
+   "max": 302.18255615234375,
+   "min": 212.89462280273438,
+   "n_finite": 76781,
+   "n_valid": 76781,
+   "p01": 215.4187225341797,
+   "p99": 296.5026062011719
+  }
+ },
+ "inputs": {
+  "mars": "data/raw/mars_meda.json; data/raw/phase3/rems/*.json",
+  "moon": "data/raw/phase4/support/polar_*.npz, gcp_raw.npz",
+  "stack": "data/predictor_stack.npz (lst_day_k, lst_night_k, t2m_mean_c)",
+  "stack_sha256": "89f1ca766e2292765d01485f54117389b3e13f28c1278dee44e733de5a752883"
+ },
+ "limits": "MODIS LST is clear-sky only and an emissivity-corrected skin temperature; MEDA/REMS\nare point measurements by one rover in one Mars year; Diviner values are window means of bolometric brightness\ntemperature; the Earth air temperature is a reanalysis at 2 m, the Mars air temperature an in-situ sensor at\n~1.5 m. Local time, not season, is matched; seasonal sampling differs between bodies.",
+ "method": "(each identical in construction to the baseline difference it decomposes):\n  surface_temp_day    [K]  surface (ground / skin / bolometric) temperature at ~13:30 local solar time\n      Earth : MODIS Aqua monthly daytime LST climatology 2016-2025 (overpass ~13:30)   -> stack auxiliary lst_day_k\n      Mars  : Mars 2020 MEDA TIRS (Jezero) / MSL REMS GTS (Gale) ground temperature, 13-14 LTST hour bin\n              per sol -> mean per 30-deg Ls bin -> mean over Ls bins; only sols that also have the 01-02 bin,\n              exactly the sols behind the baseline difference\n      Moon  : LRO Diviner bolometric temperature, hour 14 (polar level-4 maps: mean of the summer and winter window\n              means; GCP: window mean of per-bin 13-14 h means), over the bins that also have hour 02\n  surface_temp_night  [K]  the same at ~01:30 (MODIS Aqua night; MEDA/REMS 01-02 LTST; Diviner hour 02)\n      By construction day - night reproduces each target's published lst_diurnal_range (tested).\n  mean_air_temperature [K] mean near-surface air temperature\n      Earth : NASA POWER T2M (2 m), mean of the 12 monthly climatology values 2001-2020 -> stack t2m_mean_c + 273.15\n      Mars  : MEDA ATS (~1.45 m) / REMS ATS boom, mean of the 12 Ls-bin diurnal means (the baseline's own bins)\n      Moon  : NOT APPLICABLE \u2014 no atmosphere, no air temperature (never 0, never estimated)",
+ "normalisation": "per target: [min, max] over valid Earth cells and this target's value (the explore-target-v1 rule)",
+ "schema": "asterro.ext.thermal/1",
+ "targets": {
+  "mars_gale_curiosity": {
+   "body": "mars",
+   "check_dr": 69.10945922540964,
+   "inputs": "306 retained REMS per-sol files (data/raw/phase3/rems)",
+   "ls_bins_air": 12,
+   "ls_bins_ground": 12,
+   "mean_air_temperature": 222.83747419953366,
+   "published_lst_diurnal_range": 69.10945922540964,
+   "status": {
+    "mean_air_temperature": "DIRECT",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 268.8414651980574,
+   "surface_temp_night": 199.73200597264773
+  },
+  "mars_jezero": {
+   "body": "mars",
+   "check_dr": 75.87138950567591,
+   "inputs": "335 retained MEDA per-sol records (data/raw/mars_meda.json)",
+   "ls_bins_air": 12,
+   "ls_bins_ground": 12,
+   "mean_air_temperature": 218.57414595518608,
+   "published_lst_diurnal_range": 75.871,
+   "status": {
+    "mean_air_temperature": "DIRECT",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 272.63862809761366,
+   "surface_temp_night": 196.7672385919378
+  },
+  "moon_apollo14_fra_mauro": {
+   "body": "moon",
+   "check_dr": 284.8921933333333,
+   "inputs": "5 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 284.8921933333333,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 384.0284,
+   "surface_temp_night": 99.13620666666668
+  },
+  "moon_apollo15_hadley": {
+   "body": "moon",
+   "check_dr": 272.34995,
+   "inputs": "8 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 272.34995,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 369.76296875,
+   "surface_temp_night": 97.41301875
+  },
+  "moon_apollo16_descartes": {
+   "body": "moon",
+   "check_dr": 281.17130909090906,
+   "inputs": "11 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 281.17130909090906,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 379.577506060606,
+   "surface_temp_night": 98.40619696969696
+  },
+  "moon_apollo17_taurus_littrow": {
+   "body": "moon",
+   "check_dr": 275.9946683333334,
+   "inputs": "10 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 275.9946683333334,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 375.11881666666665,
+   "surface_temp_night": 99.12414833333334
+  },
+  "moon_aristarchus": {
+   "body": "moon",
+   "check_dr": 246.70077592592588,
+   "inputs": "9 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 246.70077592592588,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 363.76689444444446,
+   "surface_temp_night": 117.06611851851851
+  },
+  "moon_cabeus": {
+   "body": "moon",
+   "check_dr": 63.94423773364419,
+   "inputs": "53831 retained Diviner polar bins x 4 maps (data/raw/phase4/support/polar_moon_cabeus.npz)",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 63.94423773364419,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 112.62489510305335,
+   "surface_temp_night": 48.68065736940917
+  },
+  "moon_malapert_massif": {
+   "body": "moon",
+   "check_dr": 72.95584176995578,
+   "inputs": "53780 retained Diviner polar bins x 4 maps (data/raw/phase4/support/polar_moon_malapert_massif.npz)",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 72.95584176995578,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 157.48248379176414,
+   "surface_temp_night": 84.52664202180836
+  },
+  "moon_marius_hills": {
+   "body": "moon",
+   "check_dr": 278.95072500000003,
+   "inputs": "4 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 278.95072500000003,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 378.041875,
+   "surface_temp_night": 99.09115
+  },
+  "moon_north_pole": {
+   "body": "moon",
+   "check_dr": 50.182130502890615,
+   "inputs": "53361 retained Diviner polar bins x 4 maps (data/raw/phase4/support/polar_moon_north_pole.npz)",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 50.182130502890615,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 107.52527058339804,
+   "surface_temp_night": 57.34314008050743
+  },
+  "moon_oceanus_procellarum": {
+   "body": "moon",
+   "check_dr": 272.6489083333333,
+   "inputs": "3 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 272.6489083333333,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 372.50495,
+   "surface_temp_night": 99.85604166666667
+  },
+  "moon_orientale": {
+   "body": "moon",
+   "check_dr": 278.47464583333334,
+   "inputs": "14 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 278.47464583333334,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 376.36651250000006,
+   "surface_temp_night": 97.89186666666667
+  },
+  "moon_schrodinger": {
+   "body": "moon",
+   "check_dr": 185.547108531746,
+   "inputs": "42 Diviner GCP bins from retained, checksum-verified reads",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 185.547108531746,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 262.9685626984127,
+   "surface_temp_night": 77.42145416666668
+  },
+  "moon_shackleton": {
+   "body": "moon",
+   "check_dr": 60.98146907013738,
+   "inputs": "53655 retained Diviner polar bins x 4 maps (data/raw/phase4/support/polar_moon_shackleton.npz)",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 60.98146907013738,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 124.40833529051226,
+   "surface_temp_night": 63.426866220374876
+  },
+  "moon_south_pole": {
+   "body": "moon",
+   "check_dr": 54.68214600690568,
+   "inputs": "53361 retained Diviner polar bins x 4 maps (data/raw/phase4/support/polar_moon_south_pole.npz)",
+   "mean_air_temperature": null,
+   "na_reason": {
+    "mean_air_temperature": "The Moon has no atmosphere: there is no air temperature to compare (not zero, not estimated)."
+   },
+   "published_lst_diurnal_range": 54.682,
+   "status": {
+    "mean_air_temperature": "N/A",
+    "surface_temp_day": "DIRECT",
+    "surface_temp_night": "DIRECT"
+   },
+   "surface_temp_day": 119.5804987084608,
+   "surface_temp_night": 64.89835270155511
+  }
+ },
+ "units": {
+  "mean_air_temperature": "K",
+  "surface_temp_day": "K",
+  "surface_temp_night": "K"
+ },
+ "version": "tai-ext-thermal-1.0.0"
+}

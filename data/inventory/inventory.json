@@ -1,7 +1,7 @@
 {
  "schema": "asterro.data-inventory/1",
  "generated_by": "scripts/build_inventory.py",
- "probed_utc": "2026-10-23T06:33:37Z",
+ "probed_utc": "2026-11-06T08:28:14Z",
  "statuses": {
   "integrated": "Integrated: obtained, checksum-verified and used by the application",
   "verified_not_integrated": "Verified, not integrated: obtained and validated, not yet used",
@@ -14,8 +14,7 @@
  "stack_sha256": "cfbe1bf5fab5497b3d16bfc368eb4202ffaf2b5a1257bfd85f6834e735f72e63",
  "counts": {
   "integrated": 16,
-  "blocked": 15,
-  "not_investigated": 1,
+  "blocked": 20,
   "known_limitation": 9
  },
  "items": [
@@ -384,7 +383,7 @@
    "variables": "PET, precipitation, aridity at 1/24°",
    "value": "High: an independent aridity source; could fill the 14,750 cells where NASA POWER leaves P/PET undefined. Same variable (P/PET) → a versioned source option, not a new dimension.",
    "license": "CC0",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://climate.northwestknowledge.net/TERRACLIMATE-DATA/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://climate.northwestknowledge.net/TERRACLIMATE-DATA/).",
    "use": "none"
   },
   {
@@ -396,7 +395,7 @@
    "variables": "2 m temperature, precipitation (0.25°)",
    "value": "Medium: a second reanalysis for the seasons and aridity criteria (source-dependence tests). Needs a CDS account.",
    "license": "Copernicus licence",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://cds.climate.copernicus.eu/api/catalogue/v1/collections/reanalysis-era5-single-levels-monthly-means). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://cds.climate.copernicus.eu/api/catalogue/v1/collections/reanalysis-era5-single-levels-monthly-means). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -408,7 +407,7 @@
    "variables": "T2M, PRECTOTCORR (native 0.5° × 0.625°)",
    "value": "Medium: cross-check of the NASA POWER values (listed as unverified in the provenance manifest). Needs an Earthdata login.",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2_MONTHLY/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2_MONTHLY/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -420,7 +419,7 @@
    "variables": "LST day / night (0.05°)",
    "value": "High: replaces the LST decoded from GIBS imagery (listed as unverified) with the science values; same variable. Needs an Earthdata login.",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.061/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.061/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -432,7 +431,7 @@
    "variables": "elevation (1 arc-second)",
    "value": "Medium: finer slope and roughness than GMTED2010 30″; would change terrain criteria → versioned extension only. 60°N–56°S.",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MEASURES/NASADEM_HGT.001/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MEASURES/NASADEM_HGT.001/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -444,7 +443,7 @@
    "variables": "elevation (1 arc-second)",
    "value": "Medium: as NASADEM (NASADEM supersedes it).",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MEASURES/SRTMGL1.003/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/MEASURES/SRTMGL1.003/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -456,7 +455,7 @@
    "variables": "elevation (30 m), global",
    "value": "Medium: global fine DEM for roughness; terrain criteria → versioned extension only.",
    "license": "Copernicus DEM licence",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://copernicus-dem-30m.s3.amazonaws.com/readme.html).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://copernicus-dem-30m.s3.amazonaws.com/readme.html).",
    "use": "none"
   },
   {
@@ -468,7 +467,7 @@
    "variables": "LST at varied times of day (70 m)",
    "value": "Medium: evidence on diurnal sampling bias of the thermal criterion; evidence layer.",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/ECOB/ECOSTRESS/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/ECOB/ECOSTRESS/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -480,7 +479,7 @@
    "variables": "LST day / night",
    "value": "Medium: an independent LST source for the thermal criterion.",
    "license": "NASA open data",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/VIIRS/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://e4ftl01.cr.usgs.gov/VIIRS/). The provider also requires a registered account (Earthdata or CDS); no credentials are used by this project.",
    "use": "none"
   },
   {
@@ -492,7 +491,7 @@
    "variables": "land cover (10 m)",
    "value": "Low for scoring (no planetary counterpart); useful as an evidence layer (vegetation, built-up).",
    "license": "CC BY 4.0",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/).",
    "use": "none"
   },
   {
@@ -504,7 +503,7 @@
    "variables": "soil properties (250 m)",
    "value": "Low for scoring (no comparable target measurement); evidence layer only.",
    "license": "CC BY 4.0",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://files.isric.org/soilgrids/latest/data/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://files.isric.org/soilgrids/latest/data/).",
    "use": "none"
   },
   {
@@ -516,7 +515,7 @@
    "variables": "surface-water occurrence (30 m)",
    "value": "Low/medium: evidence for interpreting aridity; not a target variable.",
    "license": "open (JRC)",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://global-surface-water.appspot.com/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://global-surface-water.appspot.com/).",
    "use": "none"
   },
   {
@@ -528,7 +527,7 @@
    "variables": "multispectral imagery",
    "value": "Low at this grid: imagery, not a gridded variable comparable with targets.",
    "license": "public domain",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://landsatlook.usgs.gov/stac-server/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://landsatlook.usgs.gov/stac-server/).",
    "use": "none"
   },
   {
@@ -540,7 +539,7 @@
    "variables": "thermal inertia (Mars)",
    "value": "Medium: target-side thermal context; no Earth counterpart integrated → evidence layer.",
    "license": "NASA PDS",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://www.mars.asu.edu/data/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://www.mars.asu.edu/data/).",
    "use": "none"
   },
   {
@@ -552,19 +551,67 @@
    "variables": "imagery (Moon)",
    "value": "Low: context imagery.",
    "license": "NASA PDS",
-   "reason": "Access attempt from the build environment on 2026-10-23T06:33:37Z failed: Tunnel connection failed: 403 Forbidden (https://wms.lroc.asu.edu/lroc/).",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://wms.lroc.asu.edu/lroc/).",
    "use": "none"
   },
   {
    "id": "hirise",
    "class": "referenced_only",
-   "status": "not_investigated",
+   "status": "blocked",
    "name": "MRO HiRISE DTMs",
    "provider": "University of Arizona / NASA PDS",
    "variables": "metre-scale elevation (Mars, sparse)",
    "value": "Medium for single sites; sparse coverage.",
    "license": "NASA PDS",
-   "reason": null,
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://www.uahirise.org/dtm/).",
+   "use": "none"
+  },
+  {
+   "id": "ctx",
+   "class": "referenced_only",
+   "status": "blocked",
+   "name": "MRO CTX global mosaic",
+   "provider": "Caltech Murray Lab / NASA PDS",
+   "variables": "6 m/pixel imagery (Mars)",
+   "value": "Low for scoring: imagery, not a gridded variable; context for geomorphology (dunes, channels).",
+   "license": "NASA PDS (mosaic: attribution)",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://murray-lab.caltech.edu/CTX/).",
+   "use": "none"
+  },
+  {
+   "id": "crism",
+   "class": "referenced_only",
+   "status": "blocked",
+   "name": "MRO CRISM spectral products",
+   "provider": "JHU APL / NASA PDS",
+   "variables": "mineral indicators (Mars)",
+   "value": "Medium: target-side mineralogy; no Earth counterpart integrated → evidence layer.",
+   "license": "NASA PDS",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://pds-geosciences.wustl.edu/missions/mro/crism.htm).",
+   "use": "none"
+  },
+  {
+   "id": "mcs",
+   "class": "candidate",
+   "status": "blocked",
+   "name": "MRO Mars Climate Sounder",
+   "provider": "JPL / NASA PDS Atmospheres",
+   "variables": "atmospheric temperature, dust and ice profiles (Mars)",
+   "value": "Medium: atmospheric context; not comparable with Earth surface variables without a model.",
+   "license": "NASA PDS",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://atmos.nmsu.edu/data_and_services/atmospheres_data/MARS/mcs.html).",
+   "use": "none"
+  },
+  {
+   "id": "sentinel2",
+   "class": "referenced_only",
+   "status": "blocked",
+   "name": "Copernicus Sentinel-2 Level-2A",
+   "provider": "ESA / Copernicus Data Space",
+   "variables": "multispectral surface reflectance (10–60 m)",
+   "value": "Low at this grid: imagery; potential surface-material evidence layer.",
+   "license": "Copernicus free and open",
+   "reason": "Access attempt from the build environment on 2026-11-06T08:28:14Z failed: Tunnel connection failed: 403 Forbidden (https://dataspace.copernicus.eu/).",
    "use": "none"
   },
   {

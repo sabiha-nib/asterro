@@ -93,3 +93,32 @@ Phase IV is additive. It touches the earlier layers only in the ways listed here
 - Untouched; every file in `tests/phase3/fixtures/protected_sha256.json` keeps its hash. Records for
   registry targets are reproduced by the new `scripts/reproduce_registry.py`.
 - `scripts/build_web.py` appends the Phase IV assets and writes `sw.js`.
+
+## Planetary Analogue Intelligence expansion
+
+**Data and Python.**
+
+- `scripts/build_ext.py` regenerates `public/data/ext/thermal_ext.json` from retained inputs, through
+  `src/ext/thermal_absolute.py`.
+- It also copies the four structure records (`data/ext/*.json`) and writes `app/frontend/phase4/data_ext.js`
+  (`ASTERRO_EXT`, with the SHA-256 of each input).
+- `src/ext/engine.py` is the Python reference of the extended field.
+- `scripts/export_ext_reference.py` writes the parity fixture.
+
+**Browser modules** (they load after `ui_20`, in alphabetical order with the other Phase IV files):
+
+- `ext_engine.js` (`AsterroExt`): stack assembly, Earth ∪ target ranges, the unchanged `ENG.similarity` over nine
+  criteria, distinct sites, closest cell, coverage sweep, canonical JSON and `configId`.
+- `ui_21_ext_core.js`: extension state `XT`, the cached `xtField` (with its configuration record and id), the thermal
+  block appended to `jnLensView`, and export.
+- `ui_22_discover_hub.js`: wraps `viewDiscover` with the hub. Constellations returns the original view unchanged.
+- `ui_23_research.js`: the research queue (`localStorage "asterro.research.v1"`, `JN_VIEWS.queue`), wrappers adding
+  buttons to `jnPlaceView`, `jnPassportView` and `jlView`, and the report editions.
+- `ui_24_datacenter.js`: wraps `viewData` with the dimension and status-label tables.
+- `i18n_79_extend.js`: `i18nExtend(lang, dict)` adds keys and records any clash in `I18N.clash` instead of overwriting.
+  The extension sections are marked `data-i18n-done`, so the route segment translator leaves them alone.
+
+**Engine use.**
+
+- The extension calls `ENG.similarity` unchanged. The baseline `S.res`, `S.weights` and `S.ranges` are never written.
+- `simFor` is only read, to compare with the baseline.

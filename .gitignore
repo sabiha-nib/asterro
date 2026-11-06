@@ -10,3 +10,6 @@ venv/
 *.tmp
 # raw ingestion outputs (data/raw/) ARE committed: they are the checksummed scientific inputs
 build/
+
+# raw inputs are retained in full, logs included (a '*.log' rule once kept data/raw/phase4/support.log out of the repository)
+!data/raw/**/*.log

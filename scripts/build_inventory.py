@@ -96,11 +96,16 @@ CAND = [
     ("themis", "Mars Odyssey THEMIS thermal inertia", "ASU / NASA PDS", "thermal inertia (Mars)", "Medium: target-side thermal context; no Earth counterpart integrated → evidence layer.", "NASA PDS"),
     ("lroc", "LRO LROC mosaics", "ASU / NASA PDS", "imagery (Moon)", "Low: context imagery.", "NASA PDS"),
     ("hirise", "MRO HiRISE DTMs", "University of Arizona / NASA PDS", "metre-scale elevation (Mars, sparse)", "Medium for single sites; sparse coverage.", "NASA PDS"),
+    ("ctx", "MRO CTX global mosaic", "Caltech Murray Lab / NASA PDS", "6 m/pixel imagery (Mars)", "Low for scoring: imagery, not a gridded variable; context for geomorphology (dunes, channels).", "NASA PDS (mosaic: attribution)"),
+    ("crism", "MRO CRISM spectral products", "JHU APL / NASA PDS", "mineral indicators (Mars)", "Medium: target-side mineralogy; no Earth counterpart integrated → evidence layer.", "NASA PDS"),
+    ("mcs", "MRO Mars Climate Sounder", "JPL / NASA PDS Atmospheres", "atmospheric temperature, dust and ice profiles (Mars)", "Medium: atmospheric context; not comparable with Earth surface variables without a model.", "NASA PDS"),
+    ("sentinel2", "Copernicus Sentinel-2 Level-2A", "ESA / Copernicus Data Space", "multispectral surface reflectance (10–60 m)", "Low at this grid: imagery; potential surface-material evidence layer.", "Copernicus free and open"),
 ]
 probed = PROBE.get("results", {})
 DOC_TOKEN = {"terraclimate": "TerraClimate", "era5": "ERA5", "merra2": "MERRA-2", "modis_lst_hdf": "HDF", "nasadem": "NASADEM", "srtm": "SRTM",
              "copernicus_dem": "Copernicus DEM", "ecostress": "ECOSTRESS", "viirs": "VIIRS", "esa_worldcover": "WorldCover", "soilgrids": "SoilGrids",
-             "jrc_gsw": "Global Surface Water", "landsat": "Landsat", "themis": "THEMIS", "lroc": "LROC", "hirise": "HiRISE"}
+             "jrc_gsw": "Global Surface Water", "landsat": "Landsat", "themis": "THEMIS", "lroc": "LROC", "hirise": "HiRISE",
+             "ctx": "CTX", "crism": "CRISM", "mcs": "Mars Climate Sounder", "sentinel2": "Sentinel-2"}
 for cid, name, prov, var, value, lic in CAND:
     pr = probed.get(cid)
     mentioned = bool(re.search(r"\b" + re.escape(DOC_TOKEN[cid]) + r"\b", DOCS))

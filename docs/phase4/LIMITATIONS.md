@@ -93,3 +93,21 @@
   can be blank. No physical-GPU or touch-device test was run.
 - **Registry build time.** The registry `built_utc` timestamp changes at every build, so the
   registry SHA-256 recorded in the atlas changes too. This is expected.
+
+## Planetary Analogue Intelligence expansion
+
+- **No new external dataset.** Every data-provider host refused the build environment's connections (re-probed
+  2026-11-06), so the 20 sources labelled "Available for future integration" were not ingested. The extension uses
+  only data already retained in the repository.
+- **Absolute temperatures.** Earth values are clear-sky MODIS monthly means and NASA POWER 2 m air. Mars values come
+  from one rover per target over one Mars year. Moon values are Diviner window means at hours 14 and 2. Mars air
+  pressure is about a hundredth of Earth's, so "air temperature" is the same quantity in a very different medium.
+- **Processes.** Thresholds (99th percentiles, 3,000 m, 250 mm, 5 °C, −30 °C) are ASTERRO's choices. They find
+  conditions, not the processes themselves. Six processes are described only.
+- **Frequently cited analogue sites.** The 17 sites were compiled from general knowledge, with approximate centres
+  (±50 km). This is not a literature review, and "beyond the familiar" means only "outside this list".
+- **Extended profiles.** The weights are design choices, not fitted or validated. The 8 profiles that need unmeasured
+  conditions are not built.
+- **Translations.** The 495 extension keys in bn, es, fr and de are machine-assisted and not reviewed by native
+  speakers.
+- **Research queue.** It is stored in this browser only. There is no account, server or sync.

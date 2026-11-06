@@ -264,3 +264,28 @@ duplicate ids or positive tabindex, and text contrast ≥ 4.5:1 (3:1 for large t
   in-page audit above was used instead.
 - **Screen reader:** no real screen-reader session.
 - **Devices:** no physical mobile, touch or GPU device.
+
+## Planetary Analogue Intelligence expansion
+
+| Suite | Result |
+|---|---|
+| `tests/test_ext.py` (in `npm run test:py`, 108/108 overall) | 7/7: thermal values reproduce the retained MEDA / REMS / Diviner inputs; zero new weights equal the baseline; Moon air is N/A; fixture current |
+| `tests/phase4/test_ext_engine.mjs` | 39/39: JS engine equals the Python reference on 4 targets (sites, scores, eligibility); zero-weight equivalence; config ids stable and order-independent; coverage sweep |
+| `tests/phase4/test_ext_i18n.mjs` | 36/36: five catalogues, identical keys and placeholders, no clash with original keys, nothing left in English, every key the code uses, every dimension / process / profile key, dataset names kept, French spacing, Bengali script |
+| `tests/phase4/ui_ext_smoke.py` | 41/41 in Chromium: hub, Jezero limits, browser = Python reference, zero-weight leaders = baseline leaders, sweep, processes (rule / described only), beyond the familiar (honesty note, no novelty score), profiles (5 + 8, config id on edit, reset), Learn, Lens rows, research queue (add, reload, status history, no "confirmed"), four report editions + French + multi-site record, Data view (28 dimensions, five labels), five languages without raw keys, phone width without page scroll, baseline result unchanged, no page error |
+
+**Re-run of every earlier suite after the expansion** (Chromium, SwiftShader, 2026-11-06):
+
+| Suite | Result |
+|---|---|
+| `npm test` | Python 108/108, JS parity, Phase II, Phase III 132/132, Phase IV 74/74, trajectory 26/26, methods 37/37, journey 53/53, i18n 52/52, routes 63/63: all passing |
+| `ui_smoke.py`, `ui_lab_smoke.py`, `ui_atlas_smoke.py` | passing (exit 0) |
+| `ui_phase4_smoke.py` 75 · `ui_trajectory_smoke.py` 24 · `ui_methods_smoke.py` 19 · `ui_journey_smoke.py` 70 · `ui_global_smoke.py` 39 · `ui_routes_i18n_smoke.py` 27 · `ui_journal_persist_smoke.py` 16 · `ui_responsive_smoke.py` 113 | all checks passing |
+
+Two failures appeared in the first re-run and were fixed (no assertion was changed):
+
+- **`ui_journey_smoke.py`.** The Bengali report-edition text contained the Latin word "Markdown". It is now
+  "মার্কডাউন".
+- **`ui_global_smoke.py`.** The ninth header tab ended 1.27 px past its row at 1,512 px. The same failure was
+  reproduced with the committed `60e0c16` build in this environment, so it is a font-metric issue: the web font is
+  unreachable and fallback fonts are used. `p10_ext.css` now gives tabs 1 px less side padding at widths ≥ 761 px.

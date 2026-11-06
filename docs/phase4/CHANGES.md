@@ -77,3 +77,22 @@
 | `public/index.html`, `public/sw.js` | Regenerated |
 
 Unchanged: the protected baseline files, the predictor stack, `tai-sim-1.0.0`, the six criteria, every score.
+
+## Planetary Analogue Intelligence expansion (after Phase IX)
+
+See `docs/phase4/EXPANSION.md` for the feature-by-feature implementation report.
+
+| Path | Change |
+|---|---|
+| `src/ext/thermal_absolute.py`, `src/ext/engine.py`, `src/ext/__init__.py` | Added: absolute day / night / air temperatures for Earth and the 16 targets with direct thermal data (`tai-ext-thermal-1.0.0`); Python reference of the extended field (`explore-ext-thermal-v1`) |
+| `data/ext/dimensions.json`, `processes.json`, `known_analogues.json`, `profiles_ext.json` | Added: dimension registry (28), processes (12), frequently cited analogue sites (17), extended profiles (13: 5 buildable) |
+| `scripts/build_ext.py`, `scripts/export_ext_reference.py` | Added: generate `public/data/ext/*` and `app/frontend/phase4/data_ext.js`; write `tests/fixtures/ext_reference.json` |
+| `app/frontend/phase4/ext_engine.js`, `ui_21_ext_core.js`, `ui_22_discover_hub.js`, `ui_23_research.js`, `ui_24_datacenter.js`, `p10_ext.css` | Added: extension engine (UMD), Discover hub, Lens thermal rows, research queue, report editions, Data-view tables |
+| `app/frontend/phase4/i18n_79_extend.js`, `i18n_80_ext_en.js` … `i18n_84_ext_de.js` | Added: catalogue extension mechanism (never overwrites a key) and 495 keys in each of five languages |
+| `scripts/probe_data_sources.py`, `scripts/build_inventory.py`, `data/inventory/*`, `docs/data/DATA_INVENTORY.md` | HiRISE, CTX, CRISM, MCS and Sentinel-2 added to the probe (all refused on 2026-11-06); inventory rebuilt |
+| `data/raw/phase4/RETENTION.json`, `tests/test_phase4.py`, `.gitignore` | A non-input log that `*.log` kept out of git is recorded as not retained; the regeneration test reads that record instead of failing on a fresh clone |
+| `tests/test_ext.py`, `tests/phase4/test_ext_engine.mjs`, `tests/phase4/test_ext_i18n.mjs`, `tests/phase4/ui_ext_smoke.py` | Added |
+| `package.json` | `test:phase4` adds the two extension Node suites; `test:ui` adds the extension walk-through |
+| `public/index.html`, `public/sw.js`, `public/data/ext/*` | Regenerated |
+
+Unchanged: the protected baseline files, `tai-sim-1.0.0`, the six criteria, thresholds, the seven profiles and every score.

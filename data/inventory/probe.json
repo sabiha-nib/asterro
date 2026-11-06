@@ -1,6 +1,6 @@
 {
  "schema": "asterro.probe/1",
- "probed_utc": "2026-10-23T06:33:37Z",
+ "probed_utc": "2026-11-06T08:28:14Z",
  "environment": "build sandbox (egress through an allow-listing proxy)",
  "note": "HEAD/ranged GET only; nothing was downloaded.",
  "results": {
@@ -129,6 +129,36 @@
    "error": "Tunnel connection failed: 403 Forbidden",
    "method": "HEAD",
    "url": "https://wms.lroc.asu.edu/lroc/"
+  },
+  "hirise": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://www.uahirise.org/dtm/"
+  },
+  "ctx": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://murray-lab.caltech.edu/CTX/"
+  },
+  "crism": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://pds-geosciences.wustl.edu/missions/mro/crism.htm"
+  },
+  "mcs": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://atmos.nmsu.edu/data_and_services/atmospheres_data/MARS/mcs.html"
+  },
+  "sentinel2": {
+   "reachable": false,
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "method": "HEAD",
+   "url": "https://dataspace.copernicus.eu/"
   },
   "natural_earth": {
    "reachable": false,

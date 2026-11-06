@@ -93,3 +93,20 @@ catalogue. In production such a string falls back to English (see "Fallback").
 | Español | — | — | — | not reviewed |
 | Français | — | — | — | not reviewed |
 | Deutsch | — | — | — | not reviewed |
+
+## Extension catalogues (Planetary Analogue Intelligence expansion)
+
+| | English | বাংলা (bn) | Español (es) | Français (fr) | Deutsch (de) |
+|---|---|---|---|---|---|
+| Extension keys (`i18n_80`–`84_ext_*`) | 495 (source) | 495 / 495 | 495 / 495 | 495 / 495 | 495 / 495 |
+| Automated validation (`tests/phase4/test_ext_i18n.mjs`, `ui_ext_smoke.py`) | — | passing | passing | passing | passing |
+| Native-speaker review | n/a | **not reviewed** | **not reviewed** | **not reviewed** | **not reviewed** |
+
+Notes:
+
+- These keys are added by `i18nExtend`, which never overwrites an original key (any clash fails the tests).
+- Dataset and instrument names, configuration ids, units such as K, Pa and W/m², and CO₂ are kept as written.
+- Units written in words are translated (`ext.dim.<id>.unit`).
+- Place names follow the rules above.
+- Bengali coinages a reviewer should check: শতমক (percentile), চরমজীবী (extremophile), বাষ্পীভবনজাত শিলা (evaporite),
+  তুহিন-ক্ষয় (frost weathering).

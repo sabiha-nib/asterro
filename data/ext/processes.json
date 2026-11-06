@@ -1,0 +1,187 @@
+{
+ "schema": "asterro.processes/1",
+ "note": "Planetary Process Explorer. A process is 'data-backed' only when ASTERRO holds an Earth variable that measures the condition behind it; the rule is applied to every valid Earth cell in the browser. Other processes are described with the data they would need. Text lives in ext.proc.<id>.*.",
+ "processes": [
+  {
+   "id": "thermal_cycling",
+   "status": "data",
+   "rule": {
+    "var": "lst_diurnal_range",
+    "op": ">=",
+    "pct": 99
+   },
+   "order": "desc",
+   "planet": {
+    "var": "lst_diurnal_range"
+   },
+   "datasets": [
+    "modis_aqua_lst"
+   ]
+  },
+  {
+   "id": "freeze_thaw",
+   "status": "data",
+   "rule": {
+    "all": [
+     {
+      "var": "lst_day_k",
+      "op": ">",
+      "value": 273.15
+     },
+     {
+      "var": "lst_night_k",
+      "op": "<",
+      "value": 273.15
+     }
+    ]
+   },
+   "order_var": "lst_diurnal_range",
+   "order": "desc",
+   "datasets": [
+    "modis_aqua_lst"
+   ]
+  },
+  {
+   "id": "hyper_arid",
+   "status": "data",
+   "rule": {
+    "var": "aridity_index_raw",
+    "op": "<",
+    "value": 0.05
+   },
+   "order_var": "aridity_index_raw",
+   "order": "asc",
+   "planet": {
+    "var": "aridity"
+   },
+   "datasets": [
+    "nasa_power"
+   ],
+   "partial": "wind_dust"
+  },
+  {
+   "id": "cold_high_desert",
+   "status": "data",
+   "rule": {
+    "all": [
+     {
+      "var": "elevation",
+      "op": ">=",
+      "value": 3000
+     },
+     {
+      "var": "precip_mm_yr",
+      "op": "<",
+      "value": 250
+     },
+     {
+      "var": "t2m_mean_c",
+      "op": "<",
+      "value": 5
+     }
+    ]
+   },
+   "order_var": "elevation",
+   "order": "desc",
+   "datasets": [
+    "gmted2010",
+    "nasa_power"
+   ]
+  },
+  {
+   "id": "extreme_cold",
+   "status": "data",
+   "rule": {
+    "var": "t2m_mean_c",
+    "op": "<=",
+    "value": -30
+   },
+   "order_var": "t2m_mean_c",
+   "order": "asc",
+   "planet": {
+    "var": "mean_air_temperature"
+   },
+   "datasets": [
+    "nasa_power",
+    "modis_aqua_lst"
+   ]
+  },
+  {
+   "id": "rugged_terrain",
+   "status": "data",
+   "rule": {
+    "var": "slope",
+    "op": ">=",
+    "pct": 99
+   },
+   "order_var": "surface_roughness",
+   "order": "desc",
+   "planet": {
+    "var": "slope"
+   },
+   "datasets": [
+    "gmted2010"
+   ]
+  },
+  {
+   "id": "aeolian",
+   "status": "no_data",
+   "needs": [
+    "wind_dust",
+    "dunes"
+   ],
+   "candidates": [
+    "merra2",
+    "era5",
+    "landsat"
+   ]
+  },
+  {
+   "id": "evaporites",
+   "status": "no_data",
+   "needs": [
+    "evaporites"
+   ],
+   "candidates": [
+    "landsat"
+   ]
+  },
+  {
+   "id": "volcanic",
+   "status": "no_data",
+   "needs": [
+    "volcanic_terrain",
+    "caves_lava_tubes"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "impact",
+   "status": "no_data",
+   "needs": [
+    "impact_structures"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "glacial",
+   "status": "no_data",
+   "needs": [
+    "ice_permafrost"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "fluvial",
+   "status": "no_data",
+   "needs": [
+    "fluvial_landforms",
+    "surface_water"
+   ],
+   "candidates": [
+    "nasadem",
+    "jrc_gsw"
+   ]
+  }
+ ]
+}

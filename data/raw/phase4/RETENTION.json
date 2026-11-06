@@ -1,0 +1,13 @@
+{
+ "schema": "asterro.raw-retention/1",
+ "note": "Files listed in MANIFEST.json that are not present in the published repository. The MANIFEST entry (path, size, SHA-256) is kept unchanged as the record of what existed; nothing was recreated.",
+ "not_retained": [
+  {
+   "path": "data/raw/phase4/support.log",
+   "sha256": "068b6f508b9211e30f14101d6a2e610d9ce3acaf6e8dd43f8897b931b2bda2f7",
+   "role": "plain-text log of the Phase IV network job (250 bytes); not an input to any calculation or regeneration",
+   "reason": "excluded from version control by the repository's '*.log' ignore rule, so it never reached GitHub; the build machine that held it no longer exists",
+   "found": "2026-11-06, when the suite was run on a fresh clone of github.com/sabiha-nib/asterro"
+  }
+ ]
+}

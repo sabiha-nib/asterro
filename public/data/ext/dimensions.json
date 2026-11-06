@@ -1,0 +1,289 @@
+{
+ "schema": "asterro.dimensions/1",
+ "note": "Every dimension the challenge asks about, with what ASTERRO can and cannot measure. Structure only: every text (name, definition, planetary side, resolution, missing-data policy, limitation) is in the interface catalogues under ext.dim.<id>.* in five languages. status: scored = in the baseline score (tai-sim-1.0.0); extension = scored only in the versioned extended fingerprint (explore-ext-thermal-v1); evidence = Earth value computed and shown, not compared with targets; no_data = no dataset in ASTERRO (the data inventory says why).",
+ "statuses": [
+  "scored",
+  "extension",
+  "evidence",
+  "no_data"
+ ],
+ "families": [
+  "geology",
+  "geomorphology",
+  "thermal",
+  "water",
+  "atmosphere",
+  "biology",
+  "subsurface",
+  "operations"
+ ],
+ "dimensions": [
+  {
+   "id": "aridity",
+   "family": "water",
+   "status": "scored",
+   "unit": "index (P/PET, 0–1)",
+   "earth": [
+    "nasa_power"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "annual_temperature_range",
+   "family": "thermal",
+   "status": "scored",
+   "unit": "K",
+   "earth": [
+    "nasa_power"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "elevation",
+   "family": "operations",
+   "status": "scored",
+   "unit": "m",
+   "earth": [
+    "gmted2010"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "slope",
+   "family": "operations",
+   "status": "scored",
+   "unit": "°",
+   "earth": [
+    "gmted2010"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "surface_roughness",
+   "family": "geomorphology",
+   "status": "scored",
+   "unit": "m (SD of elevation)",
+   "earth": [
+    "gmted2010"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "lst_diurnal_range",
+   "family": "thermal",
+   "status": "scored",
+   "unit": "K",
+   "earth": [
+    "modis_aqua_lst"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "surface_temp_day",
+   "family": "thermal",
+   "status": "extension",
+   "unit": "K",
+   "earth": [
+    "modis_aqua_lst"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "surface_temp_night",
+   "family": "thermal",
+   "status": "extension",
+   "unit": "K",
+   "earth": [
+    "modis_aqua_lst"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "mean_air_temperature",
+   "family": "thermal",
+   "status": "extension",
+   "unit": "K",
+   "earth": [
+    "nasa_power"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "precipitation",
+   "family": "water",
+   "status": "evidence",
+   "unit": "mm/yr",
+   "earth": [
+    "nasa_power"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "freeze_thaw",
+   "family": "thermal",
+   "status": "evidence",
+   "unit": "day above / night below 0 °C (yes/no)",
+   "earth": [
+    "modis_aqua_lst"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "thermal_inertia",
+   "family": "thermal",
+   "status": "no_data",
+   "unit": "J m⁻² K⁻¹ s⁻½",
+   "earth": [],
+   "candidates": [
+    "themis"
+   ]
+  },
+  {
+   "id": "illumination",
+   "family": "thermal",
+   "status": "no_data",
+   "unit": "W/m² or % of time lit",
+   "earth": [],
+   "candidates": [
+    "nasa_power"
+   ]
+  },
+  {
+   "id": "surface_materials",
+   "family": "geology",
+   "status": "no_data",
+   "unit": "classes",
+   "earth": [],
+   "candidates": [
+    "soilgrids",
+    "esa_worldcover"
+   ]
+  },
+  {
+   "id": "mineralogy",
+   "family": "geology",
+   "status": "no_data",
+   "unit": "abundances",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "volcanic_terrain",
+   "family": "geology",
+   "status": "no_data",
+   "unit": "classes",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "evaporites",
+   "family": "geology",
+   "status": "no_data",
+   "unit": "presence",
+   "earth": [],
+   "candidates": [
+    "landsat"
+   ]
+  },
+  {
+   "id": "impact_structures",
+   "family": "geomorphology",
+   "status": "no_data",
+   "unit": "count / km²",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "dunes",
+   "family": "geomorphology",
+   "status": "no_data",
+   "unit": "classes",
+   "earth": [],
+   "candidates": [
+    "landsat"
+   ]
+  },
+  {
+   "id": "fluvial_landforms",
+   "family": "geomorphology",
+   "status": "no_data",
+   "unit": "classes",
+   "earth": [],
+   "candidates": [
+    "nasadem",
+    "copernicus_dem"
+   ]
+  },
+  {
+   "id": "surface_water",
+   "family": "water",
+   "status": "no_data",
+   "unit": "% of time",
+   "earth": [],
+   "candidates": [
+    "jrc_gsw"
+   ]
+  },
+  {
+   "id": "ice_permafrost",
+   "family": "water",
+   "status": "no_data",
+   "unit": "presence",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "wind_dust",
+   "family": "atmosphere",
+   "status": "no_data",
+   "unit": "m/s; aerosol optical depth",
+   "earth": [],
+   "candidates": [
+    "merra2",
+    "era5"
+   ]
+  },
+  {
+   "id": "pressure",
+   "family": "atmosphere",
+   "status": "no_data",
+   "unit": "Pa",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "extremophile_habitats",
+   "family": "biology",
+   "status": "no_data",
+   "unit": "—",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "caves_lava_tubes",
+   "family": "subsurface",
+   "status": "no_data",
+   "unit": "presence",
+   "earth": [],
+   "candidates": []
+  },
+  {
+   "id": "landing_hazard",
+   "family": "operations",
+   "status": "evidence",
+   "unit": "derived from slope and roughness",
+   "earth": [
+    "gmted2010"
+   ],
+   "candidates": []
+  },
+  {
+   "id": "gravity_vacuum_radiation",
+   "family": "operations",
+   "status": "no_data",
+   "unit": "—",
+   "earth": [],
+   "candidates": []
+  }
+ ]
+}

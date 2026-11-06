@@ -1,0 +1,109 @@
+{
+ "schema": "asterro.known-analogues/1",
+ "note": "Frequently cited terrestrial analogue sites, compiled from general knowledge for the 'Beyond the familiar' filter. Coordinates are approximate centres (about ±50 km). This is NOT a literature or database review: a candidate far from every site here is 'outside this list', not 'newly discovered'.",
+ "radius_km": 300,
+ "sites": [
+  {
+   "id": "atacama",
+   "name": "Atacama Desert (Yungay)",
+   "lat": -24.08,
+   "lon": -69.93
+  },
+  {
+   "id": "licancabur",
+   "name": "Licancabur / Altiplano lakes",
+   "lat": -22.83,
+   "lon": -67.88
+  },
+  {
+   "id": "death_valley",
+   "name": "Death Valley",
+   "lat": 36.5,
+   "lon": -117.0
+  },
+  {
+   "id": "mojave",
+   "name": "Mojave Desert",
+   "lat": 35.0,
+   "lon": -116.0
+  },
+  {
+   "id": "mdrs",
+   "name": "Hanksville, Utah (MDRS)",
+   "lat": 38.41,
+   "lon": -110.79
+  },
+  {
+   "id": "meteor_crater",
+   "name": "Meteor Crater, Arizona",
+   "lat": 35.03,
+   "lon": -111.02
+  },
+  {
+   "id": "haughton",
+   "name": "Haughton Crater, Devon Island",
+   "lat": 75.38,
+   "lon": -89.68
+  },
+  {
+   "id": "dry_valleys",
+   "name": "McMurdo Dry Valleys",
+   "lat": -77.5,
+   "lon": 162.0
+  },
+  {
+   "id": "svalbard",
+   "name": "Svalbard (Bockfjorden)",
+   "lat": 79.4,
+   "lon": 13.3
+  },
+  {
+   "id": "iceland",
+   "name": "Iceland highlands",
+   "lat": 64.9,
+   "lon": -16.7
+  },
+  {
+   "id": "hawaii",
+   "name": "Hawaiʻi (Mauna Kea, Kīlauea)",
+   "lat": 19.8,
+   "lon": -155.5
+  },
+  {
+   "id": "lanzarote",
+   "name": "Lanzarote",
+   "lat": 29.0,
+   "lon": -13.6
+  },
+  {
+   "id": "rio_tinto",
+   "name": "Río Tinto",
+   "lat": 37.7,
+   "lon": -6.6
+  },
+  {
+   "id": "pilbara",
+   "name": "Pilbara",
+   "lat": -21.0,
+   "lon": 119.5
+  },
+  {
+   "id": "arkaroola",
+   "name": "Arkaroola",
+   "lat": -30.3,
+   "lon": 139.3
+  },
+  {
+   "id": "ladakh",
+   "name": "Ladakh (Tso Kar)",
+   "lat": 33.3,
+   "lon": 77.8
+  },
+  {
+   "id": "qaidam",
+   "name": "Qaidam Basin",
+   "lat": 37.5,
+   "lon": 94.0
+  }
+ ]
+}
