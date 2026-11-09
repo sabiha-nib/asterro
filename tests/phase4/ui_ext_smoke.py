@@ -61,7 +61,8 @@ try:
         # --- Discover hub
         pg.evaluate("setTab('discover')"); time.sleep(0.6)
         btns = pg.evaluate("[...document.querySelectorAll('[data-xhub]')].map(b => b.dataset.xhub)")
-        check(btns == ["constellations", "thermal", "processes", "beyond", "profiles", "learn"], f"Discover has the six-view hub ({btns})")
+        # the six Phase IV views, in order, plus the four V17 views (Surprise me, Science domains, Novelty and diversity, Patterns) before Learn
+        check(btns == ["constellations", "thermal", "processes", "beyond", "profiles", "surprise", "domains", "novelty", "patterns", "learn"], f"Discover has the six Phase IV views and the four V17 views ({btns})")
         check(pg.evaluate("document.querySelector('[data-xhub=constellations]').getAttribute('aria-pressed')") == "true" and pg.evaluate("!document.querySelector('[data-xtleaders]')"),
               "the original constellations view is the first view")
 

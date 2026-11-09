@@ -125,8 +125,9 @@ if (document.readyState === "loading") document.addEventListener("DOMContentLoad
 { const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { document.getElementById("app").dataset.tab = S.tab; } catch (e) { } return r; }; }
 
 /* ---------------------------------------------------------------- no em dash in the rendered interface */
-const DS_DASH = /\s*\u2014\s*/g, DS_TICK = /[\u2713\u2714\u2611]\uFE0F?/g, DS_BAD = /[\u2014\u2713\u2714\u2611]/;
-function dsDash(t) { return t.replace(DS_DASH, (m) => (/^\s/.test(m) || /\s$/.test(m)) ? " \u2013 " : "\u2013").replace(DS_TICK, "\u25CF"); }
+const DS_DASH = /\s*\u2014\s*/g, DS_TICK = /[\u2713\u2714\u2611]\uFE0F?/g, DS_ARROW = /\s*\u2197\uFE0F?/g, DS_BAD = /[\u2014\u2713\u2714\u2611\u2197]/;
+/* em dash -> en dash; checkmark -> filled dot; the pictographic link arrow (\u2197) is dropped: the link text says "source" */
+function dsDash(t) { return t.replace(DS_DASH, (m) => (/^\s/.test(m) || /\s$/.test(m)) ? " \u2013 " : "\u2013").replace(DS_TICK, "\u25CF").replace(DS_ARROW, ""); }
 function dsNoEmDash(root) {
   if (!root) return;
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;

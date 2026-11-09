@@ -147,7 +147,7 @@ html.ds-simple .ds-adv{display:none!important}
 html.ds-layers-open #app[data-tab="atlas"] .vp-top .seg:nth-of-type(2){display:flex}
 .ds-layers{display:none;font:500 12.5px/1 var(--f-body);padding:7px 11px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink)}
 #app[data-tab="atlas"] .ds-layers{display:inline-block}
-.ds-acard{position:absolute;left:16px;bottom:44px;z-index:4;width:min(340px,calc(100% - 32px));background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:14px 16px}
+.ds-acard{position:absolute;left:16px;bottom:44px;z-index:4;width:min(400px,calc(100% - 32px));background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:14px 16px}
 .ds-acard[hidden]{display:none}
 .ds-acard h3{font:600 17px/1.3 var(--f-body);color:var(--ink);margin:0}
 .ds-acard p{font:400 13px/1.5 var(--f-body);color:var(--ink-2);margin:4px 0 0}
@@ -296,3 +296,57 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
   .ds-cmp th,.ds-cmp td{padding-left:4px;padding-right:4px}
   .ds-cmp th[scope=row]{font-size:13px}
 }
+
+/* ===== V17: science domains, registry, Surprise me ===== */
+.v7-row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:flex-end}
+.v7-kind,.v7-st,.v7-ms{display:inline-block;font:500 11.5px/1.35 var(--f-body);padding:1px 7px;border:1px solid var(--line-2);border-radius:6px;color:var(--ink-2);background:var(--panel-2);white-space:normal}
+.v7-kind.direct{color:var(--match);border-color:var(--match)}
+.v7-kind.derived{color:var(--earth);border-color:var(--earth)}
+.v7-kind.model,.v7-kind.geometry{color:var(--moon);border-color:var(--moon)}
+.v7-kind.proxy{color:var(--partial);border-color:var(--partial)}
+.v7-st.integrated_validated{color:var(--match);border-color:var(--match)}
+.v7-st.integrated_validation_incomplete{color:var(--partial);border-color:var(--partial)}
+.v7-st.endpoint_unavailable,.v7-st.access_restricted{color:var(--mismatch);border-color:var(--mismatch)}
+.v7-ms.available{color:var(--match);border-color:var(--match)}
+.v7-ms.partial{color:var(--partial);border-color:var(--partial)}
+.v7-ms.blocked{color:var(--mismatch);border-color:var(--mismatch)}
+.v7-mods{display:flex;flex-direction:column;gap:6px}
+.v7-mod{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--panel)}
+.v7-mod summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;color:var(--ink)}
+.v7-mod[data-v7status="blocked"]{background:var(--panel-2)}
+.v7-sep th[scope=row]{width:38%}
+.v7-card{border:1px solid var(--line-2);border-radius:8px;padding:14px 16px;margin-top:12px;background:var(--panel)}
+.v7-h{font:600 18px/1.3 var(--f-body);color:var(--ink);margin:2px 0}
+.v7-quiz{border-top:1px solid var(--line);margin-top:12px;padding-top:8px}
+.v7-q textarea{width:100%;font:400 14px/1.4 var(--f-body);padding:8px;border:1px solid var(--line-2);border-radius:6px;background:var(--panel-2);color:var(--ink)}
+.v7-off{color:var(--ink-3)}
+.v7-ch{padding-left:20px;display:flex;flex-direction:column;gap:10px}
+.v7-ch li{line-height:1.45}
+.v7-link{margin-top:10px}
+.v7-ticks{flex-wrap:wrap;gap:4px 10px}
+.v7-reg th[scope=row]{min-width:180px}
+.v7-cardwrap .ds-seg{margin:8px 0}
+/* Atlas: the legend sits at the right so the candidate card (bottom left) never covers it */
+@media (min-width:761px){#app[data-tab="atlas"] .legend{left:auto;right:14px}}
+/* tablets: the candidate card is a full-width panel under the globe (moved there by ui_28) */
+@media (min-width:761px) and (max-width:1180px){
+  .stage>.ds-acard{position:static;grid-column:1/-1;grid-row:2;width:auto;max-height:none;overflow:visible;border-radius:0;border-width:1px 0 0;padding:14px 20px}
+  #app.ds-card-below .stage{grid-template-rows:62vh auto auto}
+  #app.ds-card-below .left{grid-row:3}
+  .stage>.ds-acard:not([data-dsacard="hint"]){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-auto-flow:row dense;column-gap:24px;align-content:start}
+  .stage>.ds-acard>*{grid-column:1}
+  .stage>.ds-acard>.dsa-l,.stage>.ds-acard>.dsa-note{grid-column:2}
+}
+/* Atlas overlays share the globe: a bounded legend, a compact card on short screens, the ranking toggle below an open layer row */
+#app[data-tab="atlas"] .legend{max-width:250px}
+@media (min-width:1181px){.ds-acard{width:min(370px,calc(100% - 300px))}}
+@media (min-width:1181px) and (max-height:860px){
+  .ds-acard{padding:10px 14px;bottom:36px}
+  .ds-acard h3{font-size:15px}
+  .ds-acard p{font-size:12.5px;line-height:1.4;margin-top:2px}
+  .ds-acard .dsa-score b{font-size:17px}
+  .ds-acard .dsa-note{margin-top:4px}
+  .ds-acard .dsa-act{margin-top:8px;gap:6px}
+  .ds-acard .dsa-act .btn-sm{padding:5px 9px;font-size:12px}
+}
+@media (max-width:1180px){html.ds-layers-open .ds-paneltog[data-dspanel="right"]{top:148px}}

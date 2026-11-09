@@ -5,7 +5,8 @@
  * and the important differences, with the full analysis one click away. The analysis layer buttons (Similarity,
  * Constellations, Change, Coverage, Dimension) are behind a single "Layers" button in this view. Nothing is computed
  * here that the engine does not already provide. */
-const DSA_PHONE = matchMedia("(max-width:760px)");
+/* phones and tablets (stacked layout): the card sits under the globe; desktop: over the globe */
+const DSA_PHONE = matchMedia("(max-width:1180px)");
 try { DSA_PHONE.addEventListener("change", () => { try { dsaCard(); } catch (e) { console.error(e); } }); } catch (e) { }
 function dsaCard() {
   const vp = document.getElementById("viewport"); if (!vp) return;
@@ -14,7 +15,7 @@ function dsaCard() {
   if (S.tab !== "atlas" || !S.res) { if (c) c.hidden = true; if (app) app.classList.remove("ds-card-below"); return; }
   if (!c) { c = document.createElement("section"); c.id = "ds-acard"; c.className = "ds-acard"; c.setAttribute("aria-live", "polite"); c.setAttribute("data-i18n-done", ""); vp.appendChild(c); }
   c.hidden = false;
-  // phones: the card sits under the globe instead of over it, so the globe stays fully visible and the card never scrolls
+  // phones and tablets: the card sits under the globe instead of over it, so the globe stays fully visible and the card never scrolls
   const below = DSA_PHONE.matches;
   if (below && c.previousElementSibling !== vp) vp.after(c); else if (!below && c.parentElement !== vp) vp.appendChild(c);
   if (app) app.classList.toggle("ds-card-below", below);

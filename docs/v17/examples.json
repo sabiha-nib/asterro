@@ -1,0 +1,645 @@
+[
+ {
+  "mode": "mars_unexpected",
+  "target": "mars_jezero",
+  "target_name": "Jezero Crater",
+  "status": {
+   "aridity": "PROXY",
+   "annual_temperature_range": "DIRECT",
+   "elevation": "PROXY",
+   "slope": "DIRECT",
+   "surface_roughness": "DIRECT",
+   "lst_diurnal_range": "DIRECT"
+  },
+  "cell": 146152,
+  "place": "KUNLUN MOUNTAINS, China",
+  "lat": 36.5,
+  "lon": 85,
+  "eff": 0.8312456572909239,
+  "coverage": 1,
+  "pool": 40,
+  "rows": [
+   {
+    "c": "aridity",
+    "e": 0.07476436346769333,
+    "t": 0,
+    "s": 0.9252356365323067
+   },
+   {
+    "c": "annual_temperature_range",
+    "e": 22.94999885559082,
+    "t": 11.325,
+    "s": 0.8048842020370791
+   },
+   {
+    "c": "elevation",
+    "e": 4749.00439453125,
+    "t": 5702,
+    "s": 0.8350441968527155
+   },
+   {
+    "c": "slope",
+    "e": 2.800041675567627,
+    "t": 2.413,
+    "s": 0.9815211424107724
+   },
+   {
+    "c": "surface_roughness",
+    "e": 221.84091186523438,
+    "t": 263.2,
+    "s": 0.9724357672676697
+   },
+   {
+    "c": "lst_diurnal_range",
+    "e": 31.86604118347168,
+    "t": 75.871,
+    "s": 0.4683529986450007
+   }
+  ],
+  "match": [
+   "slope",
+   "surface_roughness",
+   "aridity"
+  ],
+  "part": [
+   "annual_temperature_range",
+   "elevation"
+  ],
+  "diff": [
+   "lst_diurnal_range"
+  ],
+  "missing": [],
+  "novelty": {
+   "cls": "outside_rare",
+   "uniq": 95,
+   "env": 92,
+   "km": 760
+  },
+  "pattern": {
+   "cluster": 0,
+   "name": [
+    "cold",
+    "semi_arid",
+    "high_relief"
+   ],
+   "anomaly": 100,
+   "hidden": false
+  },
+  "modules": [
+   {
+    "id": "terrain",
+    "values": {
+     "elevation": 4749.00439453125,
+     "slope": 2.800041675567627,
+     "surface_roughness": 221.84091186523438,
+     "gentle_le5": null,
+     "landform_class": "high_mountains"
+    },
+    "evidence": {
+     "direct": 1,
+     "derived": 3
+    }
+   },
+   {
+    "id": "thermal",
+    "values": {
+     "lst_day_k": 289.6460266113281,
+     "lst_night_k": 257.7799987792969,
+     "lst_diurnal_range": 31.86604118347168,
+     "lst_dr_iav_k": 1.6,
+     "t2m_mean_c": -6.179166793823242
+    },
+    "evidence": {
+     "direct": 2,
+     "derived": 2,
+     "model": 1
+    }
+   },
+   {
+    "id": "illumination",
+    "values": {
+     "toa_annual_wm2": 342,
+     "polar_night_months": 0,
+     "noon_solar_elevation": null
+    },
+    "evidence": {
+     "geometry": 2
+    }
+   },
+   {
+    "id": "hydro_cryo",
+    "values": {
+     "aridity_class": "arid",
+     "dry_months": 1,
+     "precip_cv": 0.98,
+     "freeze_months": 8,
+     "ft_air_months": 9,
+     "maat_below_zero": 1
+    },
+    "evidence": {
+     "derived": 3,
+     "model": 1,
+     "proxy": 2
+    }
+   },
+   {
+    "id": "subsurface",
+    "values": {},
+    "evidence": {}
+   },
+   {
+    "id": "operations",
+    "values": {
+     "exploration_operations": null,
+     "gentle_le5": null
+    },
+    "evidence": {}
+   }
+  ],
+  "blocked": [
+   "geology",
+   "mineralogy",
+   "atmosphere_dust",
+   "biology"
+  ]
+ },
+ {
+  "mode": "polar",
+  "target": "moon_south_pole",
+  "target_name": "Lunar South Pole",
+  "status": {
+   "aridity": "PROXY",
+   "annual_temperature_range": "N/A",
+   "elevation": "PROXY",
+   "slope": "DIRECT",
+   "surface_roughness": "DIRECT",
+   "lst_diurnal_range": "DIRECT"
+  },
+  "cell": 6900,
+  "place": "Queen Maud Mountains, Antarctica",
+  "lat": -84.5,
+  "lon": 172.5,
+  "eff": 0.6453910425085639,
+  "coverage": 0.8,
+  "pool": 50,
+  "rows": [
+   {
+    "c": "aridity",
+    "e": null,
+    "t": 0,
+    "s": null
+   },
+   {
+    "c": "annual_temperature_range",
+    "e": 22.549999237060547,
+    "t": null,
+    "s": null
+   },
+   {
+    "c": "elevation",
+    "e": 2253.062744140625,
+    "t": 5702,
+    "s": 0.4030169585461634
+   },
+   {
+    "c": "slope",
+    "e": 9.710424423217773,
+    "t": 10.292,
+    "s": 0.9722333460732089
+   },
+   {
+    "c": "surface_roughness",
+    "e": 748.1148681640625,
+    "t": 958,
+    "s": 0.8601196766686305
+   },
+   {
+    "c": "lst_diurnal_range",
+    "e": 0.5658332109451294,
+    "t": 54.682,
+    "s": 0.34619418874625296
+   }
+  ],
+  "match": [
+   "slope",
+   "surface_roughness"
+  ],
+  "part": [],
+  "diff": [
+   "lst_diurnal_range",
+   "elevation"
+  ],
+  "missing": [
+   "aridity",
+   "annual_temperature_range"
+  ],
+  "novelty": {
+   "cls": "insufficient"
+  },
+  "pattern": null,
+  "modules": [
+   {
+    "id": "terrain",
+    "values": {
+     "elevation": 2253.062744140625,
+     "slope": 9.710424423217773,
+     "surface_roughness": 748.1148681640625,
+     "gentle_le5": null,
+     "landform_class": "mountains"
+    },
+    "evidence": {
+     "direct": 1,
+     "derived": 3
+    }
+   },
+   {
+    "id": "thermal",
+    "values": {
+     "lst_day_k": 236.64382934570312,
+     "lst_night_k": 236.0780029296875,
+     "lst_diurnal_range": 0.5658332109451294,
+     "lst_dr_iav_k": 0.30000000000000004,
+     "t2m_mean_c": -31.78583335876465
+    },
+    "evidence": {
+     "direct": 2,
+     "derived": 2,
+     "model": 1
+    }
+   },
+   {
+    "id": "illumination",
+    "values": {
+     "toa_annual_wm2": 174,
+     "polar_night_months": 5,
+     "noon_solar_elevation": null
+    },
+    "evidence": {
+     "geometry": 2
+    }
+   },
+   {
+    "id": "hydro_cryo",
+    "values": {
+     "aridity_class": null,
+     "dry_months": 0,
+     "precip_cv": 0.24,
+     "freeze_months": 12,
+     "ft_air_months": 0,
+     "maat_below_zero": 1
+    },
+    "evidence": {
+     "derived": 2,
+     "model": 1,
+     "proxy": 2
+    }
+   },
+   {
+    "id": "subsurface",
+    "values": {},
+    "evidence": {}
+   },
+   {
+    "id": "operations",
+    "values": {
+     "exploration_operations": null,
+     "gentle_le5": null
+    },
+    "evidence": {}
+   }
+  ],
+  "blocked": [
+   "geology",
+   "mineralogy",
+   "atmosphere_dust",
+   "biology"
+  ]
+ },
+ {
+  "mode": "one_dimension",
+  "target": "mars_jezero",
+  "target_name": "Jezero Crater",
+  "status": {
+   "aridity": "PROXY",
+   "annual_temperature_range": "DIRECT",
+   "elevation": "PROXY",
+   "slope": "DIRECT",
+   "surface_roughness": "DIRECT",
+   "lst_diurnal_range": "DIRECT"
+  },
+  "cell": 86002,
+  "place": "ALTIPLANO, Bolivia",
+  "lat": -15.5,
+  "lon": -68.75,
+  "eff": 0.5058502770232646,
+  "coverage": 1,
+  "pool": 18,
+  "rows": [
+   {
+    "c": "aridity",
+    "e": 0.7809435129165649,
+    "t": 0,
+    "s": 0.21905648708343506
+   },
+   {
+    "c": "annual_temperature_range",
+    "e": 2.8400001525878906,
+    "t": 11.325,
+    "s": 0.8575864362217235
+   },
+   {
+    "c": "elevation",
+    "e": 3272.896484375,
+    "t": 5702,
+    "s": 0.5795419002475624
+   },
+   {
+    "c": "slope",
+    "e": 13.025500297546387,
+    "t": 2.413,
+    "s": 0.4933184356015685
+   },
+   {
+    "c": "surface_roughness",
+    "e": 881.9826049804688,
+    "t": 263.2,
+    "s": 0.5876053244011896
+   },
+   {
+    "c": "lst_diurnal_range",
+    "e": 17.765178680419922,
+    "t": 75.871,
+    "s": 0.2979930785841085
+   }
+  ],
+  "match": [
+   "annual_temperature_range"
+  ],
+  "part": [],
+  "diff": [
+   "aridity",
+   "lst_diurnal_range",
+   "slope",
+   "elevation",
+   "surface_roughness"
+  ],
+  "missing": [],
+  "novelty": {
+   "cls": "outside_rare",
+   "uniq": 100,
+   "env": 100,
+   "km": 840
+  },
+  "pattern": {
+   "cluster": 0,
+   "name": [
+    "cold",
+    "semi_arid",
+    "high_relief"
+   ],
+   "anomaly": 100,
+   "hidden": false
+  },
+  "modules": [
+   {
+    "id": "terrain",
+    "values": {
+     "elevation": 3272.896484375,
+     "slope": 13.025500297546387,
+     "surface_roughness": 881.9826049804688,
+     "gentle_le5": null,
+     "landform_class": "high_mountains"
+    },
+    "evidence": {
+     "direct": 1,
+     "derived": 3
+    }
+   },
+   {
+    "id": "thermal",
+    "values": {
+     "lst_day_k": 294.302490234375,
+     "lst_night_k": 276.5373229980469,
+     "lst_diurnal_range": 17.765178680419922,
+     "lst_dr_iav_k": 1.5,
+     "t2m_mean_c": 10.220000267028809
+    },
+    "evidence": {
+     "direct": 2,
+     "derived": 2,
+     "model": 1
+    }
+   },
+   {
+    "id": "illumination",
+    "values": {
+     "toa_annual_wm2": 402,
+     "polar_night_months": 0,
+     "noon_solar_elevation": null
+    },
+    "evidence": {
+     "geometry": 2
+    }
+   },
+   {
+    "id": "hydro_cryo",
+    "values": {
+     "aridity_class": "humid",
+     "dry_months": 0,
+     "precip_cv": 0.6,
+     "freeze_months": 0,
+     "ft_air_months": 0,
+     "maat_below_zero": 0
+    },
+    "evidence": {
+     "derived": 3,
+     "model": 1,
+     "proxy": 2
+    }
+   },
+   {
+    "id": "subsurface",
+    "values": {},
+    "evidence": {}
+   },
+   {
+    "id": "operations",
+    "values": {
+     "exploration_operations": null,
+     "gentle_le5": null
+    },
+    "evidence": {}
+   }
+  ],
+  "blocked": [
+   "geology",
+   "mineralogy",
+   "atmosphere_dust",
+   "biology"
+  ]
+ },
+ {
+  "mode": "hidden",
+  "target": "mars_jezero",
+  "target_name": "Jezero Crater",
+  "status": {
+   "aridity": "PROXY",
+   "annual_temperature_range": "DIRECT",
+   "elevation": "PROXY",
+   "slope": "DIRECT",
+   "surface_roughness": "DIRECT",
+   "lst_diurnal_range": "DIRECT"
+  },
+  "cell": 14950,
+  "place": "Antarctica",
+  "lat": -77.5,
+  "lon": 163.75,
+  "eff": 0.5932449063863464,
+  "coverage": 1,
+  "pool": 6,
+  "rows": [
+   {
+    "c": "aridity",
+    "e": 0.36316075921058655,
+    "t": 0,
+    "s": 0.6368392407894135
+   },
+   {
+    "c": "annual_temperature_range",
+    "e": 22.770000457763672,
+    "t": 11.325,
+    "s": 0.8079053232827987
+   },
+   {
+    "c": "elevation",
+    "e": 142.64378356933594,
+    "t": 5702,
+    "s": 0.03772056827890524
+   },
+   {
+    "c": "slope",
+    "e": 2.780508041381836,
+    "t": 2.413,
+    "s": 0.9824537532046614
+   },
+   {
+    "c": "surface_roughness",
+    "e": 227.52239990234375,
+    "t": 263.2,
+    "s": 0.9762222593201672
+   },
+   {
+    "c": "lst_diurnal_range",
+    "e": 2.8941431045532227,
+    "t": 75.871,
+    "s": 0.1183282934421328
+   }
+  ],
+  "match": [
+   "slope",
+   "surface_roughness"
+  ],
+  "part": [
+   "aridity",
+   "annual_temperature_range"
+  ],
+  "diff": [
+   "elevation",
+   "lst_diurnal_range"
+  ],
+  "missing": [],
+  "novelty": {
+   "cls": "near_listed",
+   "uniq": 99,
+   "env": 62,
+   "km": 40
+  },
+  "pattern": {
+   "cluster": 4,
+   "name": [
+    "polar",
+    "humid",
+    "moderate_relief"
+   ],
+   "anomaly": 98,
+   "hidden": true
+  },
+  "modules": [
+   {
+    "id": "terrain",
+    "values": {
+     "elevation": 142.64378356933594,
+     "slope": 2.780508041381836,
+     "surface_roughness": 227.52239990234375,
+     "gentle_le5": null,
+     "landform_class": "mountains"
+    },
+    "evidence": {
+     "direct": 1,
+     "derived": 3
+    }
+   },
+   {
+    "id": "thermal",
+    "values": {
+     "lst_day_k": 249.0070037841797,
+     "lst_night_k": 246.11285400390625,
+     "lst_diurnal_range": 2.8941431045532227,
+     "lst_dr_iav_k": 0.30000000000000004,
+     "t2m_mean_c": -19.1875
+    },
+    "evidence": {
+     "direct": 2,
+     "derived": 2,
+     "model": 1
+    }
+   },
+   {
+    "id": "illumination",
+    "values": {
+     "toa_annual_wm2": 182,
+     "polar_night_months": 4,
+     "noon_solar_elevation": null
+    },
+    "evidence": {
+     "geometry": 2
+    }
+   },
+   {
+    "id": "hydro_cryo",
+    "values": {
+     "aridity_class": "semi_arid",
+     "dry_months": 0,
+     "precip_cv": 0.42,
+     "freeze_months": 12,
+     "ft_air_months": 0,
+     "maat_below_zero": 1
+    },
+    "evidence": {
+     "derived": 3,
+     "model": 1,
+     "proxy": 2
+    }
+   },
+   {
+    "id": "subsurface",
+    "values": {},
+    "evidence": {}
+   },
+   {
+    "id": "operations",
+    "values": {
+     "exploration_operations": null,
+     "gentle_le5": null
+    },
+    "evidence": {}
+   }
+  ],
+  "blocked": [
+   "geology",
+   "mineralogy",
+   "atmosphere_dust",
+   "biology"
+  ]
+ }
+]

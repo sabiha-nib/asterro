@@ -160,3 +160,20 @@
   were also inspected by eye.
 - **Panel colour.** To pass the pastel check, the stone panels were made slightly less warm. Colour now comes from
   the semantic accents rather than the panel surface.
+
+## V17
+
+See `docs/v17/README.md` (section 14) and `docs/v17/DATA_REGISTRY.md`.
+
+- **No new dataset.** 0 of 47 provider endpoints and neither package registry were reachable from the build
+  environment. Every new V17 variable is derived from data already retained (NASA POWER, MODIS LST, GMTED2010).
+- **Four domain modules are blocked** (geology, mineralogy, dust and atmosphere, biology) and give no result; the Earth
+  side of caves and subsurface has no data.
+- **Proxies.** Freeze–thaw months use monthly means of daily air-temperature extremes; permafrost climate is mean
+  air temperature below 0 °C. Neither observes ground ice.
+- **Novelty** is relative to a short list of sites compiled from general knowledge; it is not importance or discovery.
+- **Unsupervised groups** are statistical groupings of twelve coarse variables, reproducible only with the recorded
+  scikit-learn version.
+- **Reference constants** (gravity, composition, day length) were transcribed from the NASA NSSDCA fact sheets and not
+  re-retrieved.
+- **Translations** of the V17 strings are machine-assisted and have not been reviewed by native speakers.

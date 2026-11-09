@@ -112,6 +112,13 @@ modelled:
   * Trace Result: from dataset to raw value to normalisation to weight to contribution to score.
   * Reproduce This Result: exports a JSON record that `scripts/reproduce.py` checks.
   * Data view: provenance, licence and resolution of every dataset.
+* **V17 discovery layer** (beside the engine, never inside it; see [docs/v17/README.md](docs/v17/README.md))
+  * Science domains: ten domain modules per place with evidence kinds, completeness and what is blocked.
+  * Novelty and diversity: a novelty indicator that never comes from missing data; three extra diversity rules.
+  * Patterns: environment groups and rare combinations by unsupervised learning, compared with Köppen–Geiger.
+  * Surprise me: discovery modes on real data, three explanation levels, challenges and a journal that rewards
+    careful reading, never a high score.
+  * Data Integration Registry with eight explicit states; Science globe layer; 20-section research report.
 
 ## 5. Architecture
 

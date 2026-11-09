@@ -145,3 +145,13 @@ See `docs/phase4/DESIGN.md`, section "Version 15".
 
 No engine file, dataset, threshold, profile, fingerprint, report format or route changed. The 79 protected files are
 byte-identical.
+
+## V17: global discovery layer
+
+See `docs/v17/README.md`. Added: `src/v17/` (features, novelty, ml, registry, modules, limits), `scripts/build_v17.py`,
+`scripts/probe_v17.py`, `scripts/v17_baseline.py`, `scripts/v17_examples.mjs`, `data/v17/` (sources, probe,
+baseline), `public/data/v17/`, `app/frontend/phase4/{data_v17.js, engine_v17.js, ui_29_v17.js, ui_30_surprise.js,
+i18n_85–89_v17_*.js}`, `tests/test_v17.py`, `tests/phase4/{test_v17_engine.mjs, test_v17_i18n.mjs, ui_v17_smoke.py}`.
+Changed: `ui_28_atlas.js` (card under the globe on tablets too), `ui_26_design.js` (the pictographic link arrow is
+dropped from rendered text), `q1_design.css` (V17 styles, Atlas overlays), `tests/phase4/ui_layout_sweep.py` (V17 views),
+`package.json` (V17 tests and builds), `README.md`. Unchanged: the engine, all 79 protected files, datasets, routes.
