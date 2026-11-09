@@ -29,7 +29,7 @@ check(keys.length > 450, `English extension source has ${keys.length} keys`);
 const newKeys = keys.filter(k => !coreKeys.en.has(k));
 check(newKeys.length === keys.length, `every extension key is new to the original catalogues (${keys.filter(k => coreKeys.en.has(k)).slice(0, 4)})`);
 const ph = s => (s.match(/\{\w+\}/g) || []).sort().join(",");
-const SAME = /^(ext\.bf\.nearest|ext\.hub\.constellations|ext\.(th|dc)\.col_(dim|status|label|source)|ext\.rob\.standard|ext\.bf\.col_score|ext\.rq\.(notes|ev\.status)|ext\.rep\.(h\.dims|c\.crit)|ext\.dim\.(surface_materials|volcanic_terrain|dunes|fluvial_landforms)\.unit|ext\.env\.(tundra|delta|continent|plateau|gorge)|ext\.kg\.ET|ext\.op\.navigation\.name|ext\.proc\.sedimentation\.name|ds\.mode\.simple)$/;
+const SAME = /^(ext\.bf\.nearest|ext\.hub\.constellations|ext\.(th|dc)\.col_(dim|status|label|source)|ext\.rob\.standard|ext\.bf\.col_score|ext\.rq\.(notes|ev\.status)|ext\.rep\.(h\.dims|c\.crit)|ext\.dim\.(surface_materials|volcanic_terrain|dunes|fluvial_landforms)\.unit|ext\.env\.(tundra|delta|continent|plateau|gorge)|ext\.kg\.ET|ext\.op\.navigation\.name|ext\.proc\.sedimentation\.name|ds\.mode\.simple|ds\.tos\.s6\.h|ds\.pp\.s7\.h|ds\.pp\.s5\.h)$/;
 for (const l of ["bn", "es", "fr", "de"]) {
   const d = ext[l], k2 = Object.keys(d);
   const miss = keys.filter(k => !(k in d)), extra = k2.filter(k => !(k in EN));
@@ -47,13 +47,13 @@ for (const l of ["bn", "es", "fr", "de"]) {
 for (const l of Object.keys(ext)) for (const k of ["ext.th.not_prob", "ext.bf.honest", "ext.prof.not_approval", "ext.rq.p", "ext.dc.labels_p", "ext.dim.gravity_vacuum_radiation.lim", "ext.dim.extremophile_habitats.lim", "ext.dim.ice_permafrost.lim"])
   if (!(ext[l][k] && ext[l][k].length > 20)) check(false, `${l}: honesty statement ${k} present`);
 check(true, "honesty statements present in every language (similarity ≠ probability, no novelty claim, no approval, no validation, no life or resource claim)");
-check(/\p{Script=Bengali}/u.test(Object.values(ext.bn).join("")) && Object.values(ext.bn).filter(v => /[a-z]{4}/.test(v.replace(/ASTERRO|NASA POWER|JRC Global Surface Water|tai-[a-z0-9.\-]+|explore-[a-z0-9\-]+|Valles Marineris|\{\w+\}|[A-Z][A-Za-z]+/g, ""))).length === 0, "Bengali catalogue is in Bengali script (only names, codes and placeholders in Latin)");
+check(/\p{Script=Bengali}/u.test(Object.values(ext.bn).join("")) && Object.values(ext.bn).filter(v => /[a-z]{4}/.test(v.replace(/ASTERRO|NASA POWER|JRC Global Surface Water|tai-[a-z0-9.\-]+|explore-[a-z0-9\-]+|Valles Marineris|\{\w+\}|[a-z0-9.-]+\.(?:com|org)(?:\/[\w./-]*)?|[A-Z][A-Za-z]+/g, ""))).length === 0, "Bengali catalogue is in Bengali script (only names, codes and placeholders in Latin)");
 const frBad = Object.entries(ext.fr).filter(([k, v]) => / [?!:;»]|\d %|« /.test(v));
 check(!frBad.length, `French: no ordinary space before ? ! : ; % » or after « (${frBad.slice(0, 3).map(x => x[0])})`);
 
 // every literal key the extension code uses exists (in the extension or the original English catalogue)
 const ALL = { ...I18N.dict.en };
-const code = ["ui_21_ext_core.js", "ui_22_discover_hub.js", "ui_23_research.js", "ui_24_datacenter.js", "ui_25_context.js"].map(f => fs.readFileSync(P + f, "utf8")).join("\n");
+const code = ["ui_21_ext_core.js", "ui_22_discover_hub.js", "ui_23_research.js", "ui_24_datacenter.js", "ui_25_context.js", "ui_26_design.js", "ui_27_lab_flow.js", "ui_28_atlas.js"].map(f => fs.readFileSync(P + f, "utf8")).join("\n");
 const lit = [...new Set([...code.matchAll(/tx(?:Has)?\("([a-z_0-9]+(?:\.[A-Za-z_0-9]+)+)"\s*(?=[,)])/g)].map(m => m[1]))];
 const absent = lit.filter(k => !(k in ALL));
 check(lit.length > 120 && !absent.length, `all ${lit.length} literal keys used by the extension code exist (${absent.slice(0, 5)})`);

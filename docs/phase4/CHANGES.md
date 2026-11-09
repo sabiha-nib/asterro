@@ -113,3 +113,17 @@ See `docs/phase4/CHALLENGE_COMPLIANCE.md` (one row per brief item) and `docs/pha
 | `package.json` | `test:ui` adds the design walk-through |
 
 Unchanged: the protected baseline files (including `tests/ui_smoke.py` and `tests/phase2/ui_lab_smoke.py`), `tai-sim-1.0.0`, the thresholds, the seven profiles and every score.
+
+## Atlas and Research Laboratory redesign
+
+See `docs/phase4/DESIGN.md`.
+
+| Path | Change |
+|---|---|
+| `app/frontend/phase4/q1_design.css` | Rewritten as a restrained design system. The previous pass's gradients, shadows, translucent surfaces, violet accents, 14–22 px radii and hover motion are removed. Additions: Atlas layout, Laboratory workflow, legal dialog |
+| `app/frontend/phase4/ui_26_design.js` | Landing entries are a numbered list (no symbols). Adds Terms of Service and Privacy Policy (links, dialog, `#terms` / `#privacy`), `#app[data-tab]`, and em-dash and checkmark normalisation of rendered text |
+| `app/frontend/phase4/ui_27_lab_flow.js` | Added: the seven-step Research Laboratory workflow |
+| `app/frontend/phase4/ui_28_atlas.js` | Added: Atlas context card, Layers button, 3D globe on entering the Atlas |
+| `app/frontend/phase4/p10_ext.css` | Status colours use the palette tokens |
+| `app/frontend/phase4/i18n_80`–`84_ext_*.js` | 91 keys added in each language; `ext.proc.p` reworded |
+| `tests/phase4/ui_design_audit.py`, `tests/phase4/test_ext_i18n.mjs`, `package.json` | New audit and walk-through; key checks extended to `ui_26`–`ui_28`; `test:ui` runs the audit |

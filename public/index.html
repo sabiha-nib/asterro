@@ -459,11 +459,11 @@ dl.at-dl dd{margin:0;color:var(--ink-2);word-break:break-word}
 .xt-t tr.ref td{background:var(--panel-2)}
 .xt-t .xdc-fam th{font:600 12px/1.3 var(--f-body);color:var(--accent);padding-top:12px}
 .xt-st{display:inline-block;font:600 11px/1.5 var(--f-body);padding:0 6px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
-.xt-st.similar,.xt-st.data,.xt-st.lab-verified,.xt-st.dim-scored{color:#6fcf97}
-.xt-st.partial,.xt-st.lab-pending,.xt-st.dim-extension{color:#e0c36a}
-.xt-st.different,.xt-st.lab-unavailable{color:#ef8a8a}
+.xt-st.similar,.xt-st.data,.xt-st.lab-verified,.xt-st.dim-scored{color:var(--match)}
+.xt-st.partial,.xt-st.lab-pending,.xt-st.dim-extension{color:var(--partial)}
+.xt-st.different,.xt-st.lab-unavailable{color:var(--mismatch)}
 .xt-st.na,.xt-st.unknown,.xt-st.nodata,.xt-st.dim-no_data,.xt-st.lab-unsuitable{color:var(--ink-3)}
-.xt-st.dim-evidence,.xt-st.lab-future{color:#8fbfe8}
+.xt-st.dim-evidence,.xt-st.lab-future{color:var(--moon)}
 .xt-note{font-size:12px;color:var(--ink-2);margin-top:3px}
 .xt-box{margin:16px 0 0;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel-2)}
 .xt-list{margin:6px 0;padding-left:18px;font-size:13px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
@@ -1129,128 +1129,184 @@ html[lang="bn"] .inv-st{font-family:var(--f-body);letter-spacing:normal;font-siz
 .inv-list li{min-width:0;overflow-wrap:anywhere}.inv-list .i18n-keep{white-space:normal}
 
 /* ===== ASTERRO design system (additive, loads last) =====
- * A calm, premium visual layer over the existing interface. It redefines the shared tokens, softens the typography
- * (sentence case, system font), rounds and lifts surfaces, and adds a Simple / Advanced view mode. No element is
- * removed; every original control stays reachable. Bengali keeps its own font stacks (html[lang="bn"] rules are more
- * specific than :root). Motion respects prefers-reduced-motion. */
+ * A restrained, structured visual layer over the existing interface. Rules this layer keeps (audited in the browser by
+ * tests/phase4/ui_design_audit.py): no decorative gradients (the only colour ramps are data scales), no shadows, no
+ * translucent "glass", no hover animation or transition, corner radii of 4 to 8 px, no purple, no neon or pastel
+ * colours, no coloured left stripes, no pure white surfaces, sentence-case labels, a system font stack (no Inter,
+ * Geist or Space Grotesk) and monospace only for code, hashes and identifiers. Bengali keeps its own font stacks
+ * (html[lang="bn"] rules are more specific than :root). No element is removed. */
 :root{
-  --ds-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
-  --ds-mono:ui-monospace,"SF Mono","SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
-  --ds-navy:#070B1A; --ds-navy-2:#0C1230; --ds-blue:#4C8DFF; --ds-violet:#9B7BFF; --ds-coral:#FF7A59; --ds-lav:#C9C3FF;
-  --ds-glass:rgba(17,23,48,.66); --ds-glass-2:rgba(25,32,64,.72); --ds-stroke:rgba(255,255,255,.09); --ds-stroke-2:rgba(255,255,255,.16);
-  --ds-shadow:0 10px 30px rgba(3,6,20,.45),0 2px 6px rgba(3,6,20,.35); --ds-r:14px; --ds-r-lg:22px;
-  --ground:var(--ds-navy); --panel:#0D1330; --panel-2:#131A3B; --raise:#1A2248;
-  --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.15);
-  --ink:#F4F6FF; --ink-2:#BCC4E0; --ink-3:#98A1C4;
-  --mars:var(--ds-coral); --moon:#A9C4FF; --cross:var(--ds-violet); --earth:#7FD1C3;
-  --accent:var(--mars); --accent-dim:#5a2a20;
-  --match:#5FD4A0; --partial:#F2C85B; --mismatch:#FF7A7A;
-  --f-display:var(--ds-font); --f-body:var(--ds-font); --f-mono:var(--ds-mono);
-  --r:10px;
+  --ds-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
+  --ds-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
+  --ds-mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
+  --ground:#0D1014; --panel:#12161B; --panel-2:#171C22; --raise:#1D232A;
+  --line:#242A31; --line-2:#323A43;
+  --ink:#E9ECEF; --ink-2:#AEB6BF; --ink-3:#8D96A0;
+  --mars:#C9784F; --moon:#9FB3C8; --cross:#B9A274; --earth:#8DAF9B;
+  --accent:var(--mars); --accent-dim:#3A2419;
+  --match:#7FB08A; --partial:#C9A55A; --mismatch:#C8695B;
+  --ds-focus:#9FB3C8; --ds-sel:#1E252D;
+  --f-display:var(--ds-display); --f-body:var(--ds-font); --f-mono:var(--ds-font);
+  --r:6px;
 }
-#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#26365c}
-#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#33285c}
-html,body{background:radial-gradient(1200px 700px at 85% -10%,rgba(155,123,255,.16),transparent 60%),radial-gradient(900px 600px at -10% 110%,rgba(76,141,255,.14),transparent 60%),var(--ds-navy);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{font-family:var(--f-body);font-size:14.5px;letter-spacing:-.003em}
+#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#1F2A35}
+#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#2E2918}
+html,body{background:var(--ground);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--f-body);font-size:14.5px}
 
-/* --- typography: sentence case, no tracking, numbers in tabular figures --- */
-.lbl,.eyebrow,.brand-txt span,.target-ctl i,.ht i,.site .rk,.vp-top button,.proj button,.fp-tabs button,.hero-facts,.sl .tag,.tag,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs button,.legend,.legend *,.status,.n{text-transform:none;letter-spacing:0}
+/* --- global rules: no shadows, no glass, no motion, no decorative tracking or capitals --- */
+*,*::before,*::after{box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:none!important;animation:none!important}
+body *:not(.brand-txt b):not(.ht i):not(.target-ctl i){text-transform:none!important;letter-spacing:normal!important}
+code,pre,kbd,samp,.mono,.hash,.xt-cfg code{font-family:var(--ds-mono)!important}
+b,strong{font-weight:600}
+
+/* --- surfaces: flat, one border colour, small radii --- */
+header.bar{background:var(--ground);border-bottom:1px solid var(--line)}
+.panel,#left,#right{background:var(--panel)}
+.console{background:var(--panel);border-top:1px solid var(--line)}
+.viewport{background:var(--ground)}
+.hero{background:rgba(13,16,20,.62)}
+.sheet-card,.jn-card,#jn .jn-dlg,.dm-info,.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.ht,.empty,.ds-sum,.ds-flow,.ds-legal-box{border-radius:8px!important}
+button,select,input,textarea,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs button,.site,.ds-mode,.ds-mode button,.xt-hub button,.xt-procs button,.xt-chip,.xt-st,.tag,.vp-top,.vp-top button,.proj,.proj button,.target-ctl,.hero-lang button{border-radius:6px!important}
+.site{border-left:0!important}
+.site[aria-current="true"]{background:var(--ds-sel)}
+.site:hover{background:var(--panel-2)}
+.sec{border-color:var(--line)}
+
+/* --- typography --- */
 .lbl{font:600 12.5px/1.35 var(--f-body);color:var(--ink-2)}
-.eyebrow{font:600 12.5px/1.4 var(--f-body);color:var(--ds-lav)}
-.brand-txt b{font:700 17px/1.1 var(--f-body);letter-spacing:.06em}
+.eyebrow{font:500 13px/1.4 var(--f-body);color:var(--ink-3)}
+.brand-txt b{font:700 17px/1.1 var(--f-display);letter-spacing:.08em}
 .brand-txt span{font:500 11px/1.3 var(--f-body);color:var(--ink-3)}
-b,strong{font-weight:650}
+.target-ctl i,.ht i{font:600 10.5px/1.2 var(--f-body);letter-spacing:.06em}
 .num,.score,.site .sc,td.n{font-variant-numeric:tabular-nums}
 
-/* --- surfaces: glass, rounded, soft depth --- */
-header.bar{background:linear-gradient(180deg,rgba(9,13,34,.86),rgba(9,13,34,.62));backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);border-bottom:1px solid var(--ds-stroke)}
-#left,#right{background:var(--ds-glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.console{background:linear-gradient(0deg,rgba(9,13,34,.92),rgba(9,13,34,.78));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ds-stroke)}
-.sec{border-color:var(--ds-stroke)}
-.sheet-card,.jn-card,#jn .jn-dlg,.dm-info{border-radius:var(--ds-r-lg)!important;box-shadow:var(--ds-shadow)}
-.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.ht,.empty{border-radius:var(--ds-r)}
-.site{border-radius:12px;transition:background .18s ease,transform .18s ease}
-.site:hover{background:rgba(255,255,255,.04)}
-.site[aria-current="true"]{background:linear-gradient(90deg,rgba(76,141,255,.16),rgba(155,123,255,.08));box-shadow:inset 3px 0 0 var(--accent)}
-
-/* --- controls: pills, clear focus, gentle feedback --- */
-.btn-primary,.btn-search{background-color:var(--ds-coral);background-image:linear-gradient(135deg,var(--ds-coral),#FF9A6B);color:#1A0E0A;border:0;border-radius:999px;font:650 14px/1 var(--f-body);box-shadow:0 6px 18px rgba(255,122,89,.28)}
-.btn-ghost{border-radius:999px;border:1px solid var(--ds-stroke-2);background:rgba(255,255,255,.04);color:var(--ink);font:550 14px/1 var(--f-body)}
-.btn-sm{border-radius:999px;font:550 12.5px/1 var(--f-body)}
-.btn-sm.on,.btn-sm[aria-pressed="true"]{background:var(--ink);color:var(--ds-navy);border-color:var(--ink)}
-.tabs button{font:550 13px/1 var(--f-body);color:var(--ink-2);border-radius:999px}
-.tabs button[aria-selected="true"]{color:var(--ink);background:rgba(255,255,255,.09);box-shadow:none}
+/* --- controls: one visual language --- */
+.btn-primary,.btn-search{background:var(--mars);color:#14100D;border:1px solid var(--mars);font:600 14px/1 var(--f-body)}
+.btn-primary:hover,.btn-search:hover{background:#D3865F;border-color:#D3865F}
+.btn-ghost{border:1px solid var(--line-2);background:transparent;color:var(--ink);font:500 14px/1 var(--f-body)}
+.btn-ghost:hover,.btn-sm:hover{background:var(--panel-2)}
+.btn-sm{font:500 12.5px/1 var(--f-body);border:1px solid var(--line-2);background:transparent;color:var(--ink-2)}
+.btn-sm.on,.btn-sm[aria-pressed="true"]{background:var(--raise);color:var(--ink);border-color:var(--ink-3)}
+.tabs button{font:500 13px/1 var(--f-body);color:var(--ink-2)}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);background:var(--raise)}
 .tabs button[aria-selected="true"]::after{display:none}
-.target-ctl{border-radius:14px;overflow:hidden;border-color:var(--ds-stroke-2)}
-.target-ctl i,.ht i{font:650 10.5px/1.2 var(--f-body);letter-spacing:.04em}
-button,a,select,input{transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .12s ease}
-button:active{transform:scale(.98)}
-:focus-visible{outline:2px solid var(--ds-blue)!important;outline-offset:2px;border-radius:8px}
-input[type=range]{accent-color:var(--ds-blue)}
+.target-ctl{border-color:var(--line-2)}
+.hero-lang button[aria-pressed="true"]{background:var(--raise);color:var(--ink);border-color:var(--ink-3)}
+:focus-visible{outline:2px solid var(--ds-focus)!important;outline-offset:2px}
+input[type=range]{accent-color:var(--mars)}
 
-/* --- navigation grouped into five areas (Explore · Discover · Compare · Learn · My research); every view stays one click away --- */
+/* --- navigation grouped into five areas (Explore · Discover · Compare · Learn · My research) --- */
 nav.tabs{display:flex;align-items:center}
 #tab-explore{order:1} #tab-discover{order:2} #tab-atlas{order:3} #tab-compare{order:4} #tab-scenarios{order:5} #tab-trajectory{order:6} #tab-method{order:7} #tab-data{order:8} #tab-lab{order:9}
 #tab-discover,#tab-compare,#tab-method,#tab-lab{margin-left:10px;position:relative}
-#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{content:"";position:absolute;left:-6px;top:25%;bottom:25%;width:1px;background:var(--ds-stroke-2)}
+#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{content:"";position:absolute;left:-6px;top:28%;bottom:28%;width:1px;background:var(--line-2)}
+@media (max-width:760px){#tab-discover,#tab-compare,#tab-method,#tab-lab{margin-left:0}#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{display:none}}
 
 /* --- landing --- */
-.hero{background:radial-gradient(800px 520px at 72% 46%,rgba(76,141,255,.10),transparent 60%),linear-gradient(90deg,rgba(7,11,26,.92) 0%,rgba(7,11,26,.62) 46%,rgba(7,11,26,.10) 78%)}
-.hero h1{font:760 clamp(44px,6.2vw,92px)/1.0 var(--f-display);letter-spacing:-.025em;text-transform:none;max-width:11ch;background:linear-gradient(120deg,#FFFFFF 10%,var(--ds-lav) 55%,var(--ds-coral) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-html:not([lang="en"]) .hero h1{font-size:clamp(40px,5.4vw,80px);max-width:14ch}
-.hero .sub{font-size:18px;line-height:1.5;color:var(--ink-2)}
-.ds-lede{font:600 clamp(17px,1.5vw,21px)/1.4 var(--f-body);color:var(--ink);max-width:36ch;margin:14px 0 0}
-.ds-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:640px;margin:4px 0 14px}
-.ds-act{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:16px 18px;border-radius:var(--ds-r-lg);border:1px solid var(--ds-stroke-2);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--ink);box-shadow:var(--ds-shadow);min-height:96px}
-.ds-act:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28)}
-.ds-act .ds-ico{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,var(--ds-blue),var(--ds-violet));color:#fff}
-.ds-act:nth-child(2) .ds-ico{background:linear-gradient(135deg,var(--ds-violet),var(--ds-coral))}
-.ds-act:nth-child(3) .ds-ico{background:linear-gradient(135deg,var(--ds-coral),#FFC36B)}
-.ds-act b{font:650 16px/1.25 var(--f-body)}
-.ds-act span{font:400 13px/1.4 var(--f-body);color:var(--ink-2)}
+.hero h1{font:700 clamp(40px,5.2vw,76px)/1.02 var(--f-display);text-transform:none;max-width:12ch;color:var(--ink)}
+html:not([lang="en"]) .hero h1{font-size:clamp(36px,4.6vw,68px);max-width:15ch}
+.hero .ds-lede~.sub{display:none}
+.ds-lede{font:500 clamp(17px,1.4vw,20px)/1.45 var(--f-body);color:var(--ink-2);max-width:38ch;margin:14px 0 18px}
+.ds-actions{display:flex;flex-direction:column;max-width:460px;margin:0 0 18px;border-top:1px solid var(--line-2)}
+.ds-act{display:grid;grid-template-columns:28px 1fr;column-gap:12px;align-items:baseline;text-align:left;padding:12px 2px;border:0;border-bottom:1px solid var(--line-2);border-radius:0!important;background:transparent;color:var(--ink)}
+.ds-act:hover{background:var(--panel-2)}
+.ds-act .ds-num{font:600 13px/1 var(--f-body);color:var(--mars);font-variant-numeric:tabular-nums}
+.ds-act b{font:600 16px/1.3 var(--f-body)}
+.ds-act span:not(.ds-num){grid-column:2;font:400 13px/1.45 var(--f-body);color:var(--ink-2)}
+.hero-targets{margin-bottom:14px}
+.ht{background:var(--panel);border-color:var(--line-2)}
+.ht[aria-checked="true"]{border-color:var(--accent)}
+.ht b{text-transform:none!important;font:600 17px/1.2 var(--f-body)}
+.ht em{font:400 12px/1.4 var(--f-body);color:var(--ink-3)}
+.ht img{border-radius:4px}
 .hero-cta{gap:8px}
-.hero-cta .btn-ghost{font-size:13px;padding:9px 14px;background:transparent}
-.ht{background:rgba(13,19,48,.78);border-color:var(--ds-stroke-2)}
-.ht[aria-checked="true"]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,122,89,.18)}
+.hero-cta .btn-ghost{font-size:13px;padding:9px 12px}
 .hero-facts{font:400 12px/1.6 var(--f-body);color:var(--ink-3)}
-@media (max-width:760px){.ds-actions{grid-template-columns:1fr}.ds-act{min-height:0;flex-direction:row;align-items:center}.ds-act span{display:none}}
+@media (max-width:760px){.ds-act span:not(.ds-num){display:none}}
 
 /* --- plain-language summary --- */
-.ds-sum{margin:10px 0 2px;padding:14px 16px;border-radius:var(--ds-r-lg);background:linear-gradient(150deg,rgba(76,141,255,.14),rgba(155,123,255,.08) 60%,rgba(255,122,89,.06));border:1px solid var(--ds-stroke-2)}
-.ds-sum h3{font:650 12.5px/1.3 var(--f-body);color:var(--ds-lav);margin:0 0 6px}
-.ds-sum .ds-big{font:700 17px/1.35 var(--f-body);color:var(--ink);margin:0}
+.ds-sum{margin:10px 0 2px;padding:14px 16px;background:var(--panel-2);border:1px solid var(--line-2)}
+.ds-sum h3{font:600 12.5px/1.3 var(--f-body);color:var(--ink-3);margin:0 0 6px}
+.ds-sum .ds-big{font:600 17px/1.35 var(--f-body);color:var(--ink);margin:0}
 .ds-sum p{font:400 13.5px/1.5 var(--f-body);color:var(--ink-2);margin:6px 0 0}
 .ds-sum .ds-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.ds-pill{font:550 12px/1 var(--f-body);padding:6px 10px;border-radius:999px;border:1px solid currentColor}
+.ds-pill{font:500 12px/1 var(--f-body);padding:5px 8px;border-radius:4px;border:1px solid currentColor}
 .ds-pill.s{color:var(--match)} .ds-pill.d{color:var(--mismatch)}
 .ds-sum .ds-more{margin-top:10px}
 
 /* --- Simple / Advanced view --- */
-.ds-mode{display:inline-flex;border:1px solid var(--ds-stroke-2);border-radius:999px;padding:2px;background:rgba(255,255,255,.04)}
-.ds-mode button{font:550 12px/1 var(--f-body);padding:6px 10px;border-radius:999px;color:var(--ink-2)}
-.ds-mode button[aria-pressed="true"]{background:var(--ink);color:var(--ds-navy)}
-/* Simple keeps every slider in place (it is the baseline control) and hides only the technical detail around it:
-   status tags, the share-of-weight text and the target / Earth position track. The ⓘ explanation stays. */
+.ds-mode{display:inline-flex;border:1px solid var(--line-2);padding:2px;background:transparent}
+.ds-mode button{font:500 12px/1 var(--f-body);padding:6px 10px;color:var(--ink-2);border:0;background:transparent}
+.ds-mode button[aria-pressed="true"]{background:var(--raise);color:var(--ink)}
 html.ds-simple .sl .foot>:not(.dm-i){display:none}
 html.ds-simple .sl .dm-et{display:none}
 html.ds-simple .ds-adv{display:none!important}
+@media (pointer:coarse){.ds-mode button{min-height:36px;padding:8px 13px}.ds-act{min-height:48px}}
 
-/* --- motion --- */
-@keyframes ds-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-#left>.sec,.ds-sum,.ds-act,.site{animation:ds-in .36s ease both}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-/* refinements */
-:root{--f-mono:var(--ds-font)}
-code,pre,kbd,samp,.xt-cfg code,.mono,.hash{font-family:var(--ds-mono)}
-.vp-top button,.proj button,.fp-tabs button,.legend,.legend *,.sl .tag{text-transform:none;letter-spacing:0;font-family:var(--f-body)}
-.hero .ds-lede~.sub{display:none}
-.hero h1{font-size:clamp(40px,5.4vw,80px)}
-.hero-targets{margin-bottom:14px}
-.ht b{text-transform:none;letter-spacing:-.01em;font:650 17px/1.2 var(--f-body)}
-.ht em{font:400 12px/1.4 var(--f-body);color:var(--ink-3)}
-.ht img{border-radius:10px}
-@media (pointer:coarse){.ds-mode button{min-height:36px;padding:8px 13px}.ds-act{min-height:56px}}
-@media (max-width:760px){#tab-discover,#tab-compare,#tab-method,#tab-lab{margin-left:0}#tab-discover::before,#tab-compare::before,#tab-method::before,#tab-lab::before{display:none}}
+/* --- legal links and pages --- */
+.ds-legal{display:flex;gap:14px;flex-wrap:wrap;font:400 12px/1.4 var(--f-body);color:var(--ink-3);margin:14px 0 4px}
+.ds-legal a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
+.ds-legal a:hover{color:var(--ink)}
+.hero .ds-legal{margin-top:10px}
+#ds-legal-dlg{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(13,16,20,.86)}
+#ds-legal-dlg[hidden]{display:none}
+.ds-legal-box{width:min(720px,100%);max-height:min(86vh,900px);overflow:auto;background:var(--panel);border:1px solid var(--line-2);padding:22px 24px}
+.ds-legal-box h2{font:700 22px/1.25 var(--f-display);margin:0 0 4px;color:var(--ink)}
+.ds-legal-box h3{font:600 14.5px/1.35 var(--f-body);margin:18px 0 4px;color:var(--ink)}
+.ds-legal-box p{font:400 14px/1.6 var(--f-body);color:var(--ink-2);margin:6px 0}
+.ds-legal-box .meta{font-size:12.5px;color:var(--ink-3)}
+.ds-legal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+
+/* --- Atlas: the globe in the centre, the planetary atlas in a side panel, layers on request --- */
+@media (min-width:1181px){#app.wide[data-tab="atlas"] .stage{grid-template-columns:minmax(340px,410px) minmax(0,1fr) minmax(260px,300px)}}
+#app[data-tab="atlas"] .vp-top .seg:nth-of-type(2){display:none}
+html.ds-layers-open #app[data-tab="atlas"] .vp-top .seg:nth-of-type(2){display:flex}
+.ds-layers{display:none;font:500 12.5px/1 var(--f-body);padding:7px 11px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink)}
+#app[data-tab="atlas"] .ds-layers{display:inline-block}
+.ds-acard{position:absolute;left:16px;bottom:44px;z-index:4;width:min(340px,calc(100% - 32px));background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:14px 16px}
+.ds-acard[hidden]{display:none}
+.ds-acard h3{font:600 17px/1.3 var(--f-body);color:var(--ink);margin:0}
+.ds-acard p{font:400 13px/1.5 var(--f-body);color:var(--ink-2);margin:4px 0 0}
+.ds-acard .dsa-k{font:500 12px/1.3 var(--f-body);color:var(--ink-3);margin:0 0 4px}
+.ds-acard .dsa-score b{font:600 20px/1.2 var(--f-body);color:var(--ink);font-variant-numeric:tabular-nums}
+.ds-acard .dsa-l span{color:var(--ink-3)}
+.ds-acard .dsa-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media (max-width:760px){.ds-acard{left:8px;right:8px;bottom:8px;width:auto;max-height:46%;overflow:auto;padding:10px 12px}.ds-acard h3{font-size:15px}}
+
+/* --- Research Laboratory: one numbered workflow, one step open at a time --- */
+.ds-flow{padding-top:18px}
+.ds-flow-title{font:700 21px/1.25 var(--f-display);color:var(--ink);margin:0}
+.ds-flow-title.ds-mods{font-size:17px;margin-top:22px}
+.ds-flow-intro{font:400 14px/1.55 var(--f-body);color:var(--ink-2);margin:6px 0 12px;max-width:62ch}
+.ds-steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ds-step{border-bottom:1px solid var(--line)}
+.ds-step-h{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,auto);gap:10px;align-items:baseline;width:100%;padding:11px 2px;border:0;background:transparent;color:var(--ink);text-align:left}
+.ds-step-h:hover{background:var(--panel-2)}
+.ds-step-n{font:600 13px/1 var(--f-body);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.ds-step.on .ds-step-n{color:var(--mars)}
+.ds-step-t{font:600 14.5px/1.3 var(--f-body)}
+.ds-step-s{font:400 12.5px/1.3 var(--f-body);color:var(--ink-3);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:28ch}
+.ds-step-b{padding:2px 2px 16px 42px}
+.ds-step-b .note{max-width:62ch}
+.ds-step-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.ds-seg{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ds-seg button{font:500 13px/1.2 var(--f-body);padding:8px 11px;border:1px solid var(--line-2);background:transparent;color:var(--ink-2)}
+.ds-seg button:hover{background:var(--panel-2);color:var(--ink)}
+.ds-seg button[aria-pressed="true"]{background:var(--raise);color:var(--ink);border-color:var(--ink-3)}
+.ds-state{font:500 12px/1.3 var(--f-body)}
+.ds-state.similar{color:var(--match)} .ds-state.partial{color:var(--partial)} .ds-state.different{color:var(--mismatch)} .ds-state.na{color:var(--ink-3)}
+.ds-pre{font:12px/1.5 var(--ds-mono);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:10px 12px;color:var(--ink-2);white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto}
+html.ds-simple .ds-adv-field{display:none}
+@media (max-width:760px){.ds-step-b{padding-left:2px}.ds-step-h{grid-template-columns:26px minmax(0,1fr)}.ds-step-s{display:none}}
+.ds-layers{pointer-events:auto;position:relative;z-index:2}
+.p4-hero{background-image:none!important;background-color:var(--panel-2)!important}
+html[lang]{--f-mono:var(--f-body)}
+.jl-toast{border-radius:8px!important}
+.btn-primary.btn-sm{background:var(--mars);color:#14100D;border-color:var(--mars)}
+.btn-primary.btn-sm:hover{background:#D3865F;border-color:#D3865F}
+.ds-cmp th[scope=row]::first-letter,.ds-acard .dsa-l::first-letter{text-transform:uppercase}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -20687,7 +20743,7 @@ i18nExtend("en", {
   "ext.dim.landing_hazard.unit": "share of ~1 km pixels at or below 2–30°",
 
   "ext.proc.title": "Planetary Process Explorer",
-  "ext.proc.p": "Processes, not only places. Each process says where on Earth it can be studied and how that relates to the Moon or Mars. Where ASTERRO holds a variable that measures the condition, the rule is applied to every Earth cell; otherwise the process is described with the data it would need.",
+  "ext.proc.p": "Processes as well as places. Each process shows where on Earth it can be studied and how that relates to the Moon or Mars. Where ASTERRO holds a variable that measures the condition, the rule is applied to every Earth cell; otherwise the process is described with the data it would need.",
   "ext.proc.st.data": "Searchable in ASTERRO",
   "ext.proc.st.no_data": "Described only",
   "ext.proc.f.earth": "On Earth",
@@ -21181,7 +21237,99 @@ i18nExtend("en", {
   "ds.sum.no_weak": "No measured condition falls below the partial threshold.",
   "ds.sum.limits.mars": "Like every place on Earth, it cannot reproduce Mars's low gravity, thin CO₂ atmosphere or radiation.",
   "ds.sum.limits.moon": "Like every place on Earth, it cannot reproduce the Moon's low gravity, vacuum or radiation.",
-  "ds.sum.why": "See why, step by step"
+  "ds.sum.why": "See why, step by step",
+
+  "ds.legal.nav": "Legal",
+  "ds.legal.terms": "Terms of Service",
+  "ds.legal.privacy": "Privacy Policy",
+  "ds.legal.updated": "Last updated 9 November 2026",
+  "ds.legal.close": "Close",
+  "ds.legal.other": "See also:",
+  "ds.tos.title": "Terms of Service",
+  "ds.tos.s1.h": "What ASTERRO is",
+  "ds.tos.s1.p": "ASTERRO is a free, open research and education tool made for the NASA Space Apps Challenge 2026. It compares measured environmental conditions on Earth with places on the Moon and Mars. It is not a NASA product and is not endorsed or approved by NASA.",
+  "ds.tos.s2.h": "Using ASTERRO",
+  "ds.tos.s2.p": "You may use ASTERRO, its results and its reports for any lawful purpose, including teaching and research. When you share results, keep the dataset credits and the stated limitations with them.",
+  "ds.tos.s3.h": "No warranty",
+  "ds.tos.s3.p": "Results are similarity scores computed from public datasets with known resolution limits and gaps. They are provided as they are, without warranty of any kind. They are not a safety assessment, a landing-site certification or a basis for operational decisions.",
+  "ds.tos.s4.h": "Data and code",
+  "ds.tos.s4.p": "Each dataset belongs to its provider (NASA, USGS, Natural Earth and others) and keeps its own licence, listed in the Data view. The ASTERRO source code is published under the Apache License 2.0 in the public repository github.com/sabiha-nib/asterro.",
+  "ds.tos.s5.h": "Changes",
+  "ds.tos.s5.p": "These terms may change with new versions of ASTERRO. The date above shows the version in force.",
+  "ds.tos.s6.h": "Contact",
+  "ds.tos.s6.p": "Questions and reports go to the issue tracker of the public repository.",
+  "ds.pp.title": "Privacy Policy",
+  "ds.pp.s1.h": "Summary",
+  "ds.pp.s1.p": "ASTERRO has no accounts, no server-side storage, no cookies and no analytics. What you do in ASTERRO stays in your browser.",
+  "ds.pp.s2.h": "Stored on your device",
+  "ds.pp.s2.p": "Your language, your view (Simple or Advanced), your exploration journal and your research queue are kept in this browser's local storage so they survive a reload. A service worker keeps a copy of the application files for offline use. Clearing this site's data in your browser removes all of it.",
+  "ds.pp.s3.h": "Sent over the network",
+  "ds.pp.s3.p": "The application loads its own files from the address you opened. The page also requests fonts from Google Fonts (fonts.googleapis.com and fonts.gstatic.com); like any web request, this shares your IP address and browser details with Google under Google's own policy. Links to data providers open their websites only when you follow them.",
+  "ds.pp.s4.h": "Downloads and exports",
+  "ds.pp.s4.p": "Reports, records and exported queues are files saved on your device. ASTERRO does not upload them.",
+  "ds.pp.s5.h": "Hosting",
+  "ds.pp.s5.p": "The website that serves ASTERRO may keep standard request logs, such as IP address and time, under its own policy.",
+  "ds.pp.s6.h": "Changes",
+  "ds.pp.s6.p": "This policy may change with new versions of ASTERRO. The date above shows the version in force.",
+  "ds.pp.s7.h": "Contact",
+  "ds.pp.s7.p": "Questions go to the issue tracker of the public repository github.com/sabiha-nib/asterro.",
+  "dsf.title": "Research laboratory",
+  "dsf.intro": "Work through one comparison in seven steps. Each step shows the essentials first; detailed controls stay one click away.",
+  "dsf.modules": "Research modules",
+  "dsf.modules_p": "Fourteen deeper analyses that sit beside the baseline score and never change it.",
+  "dsf.prev": "Back",
+  "dsf.next": "Next",
+  "dsf.search_first": "Search Earth first: every valid land cell is then compared with the target.",
+  "dsf.target.t": "Choose a Moon or Mars target",
+  "dsf.target.p": "The target is the planetary place whose measured conditions every Earth cell is compared with.",
+  "dsf.target.quick": "Main targets",
+  "dsf.target.all": "All analytical targets",
+  "dsf.target.cross": "Both worlds",
+  "dsf.target.cross_note": "Cross-planet mode compares each place with both worlds. Choose one target to follow the workflow.",
+  "dsf.candidate.t": "Choose an Earth candidate",
+  "dsf.candidate.p": "The leading distinct places, at least 300 km apart. You can also select any place on the globe.",
+  "dsf.candidate.label": "Earth candidate",
+  "dsf.candidate.globe": "Selecting a place on the globe or in the list changes the candidate here.",
+  "dsf.candidate.none": "No place selected yet",
+  "dsf.compare.t": "Compare the environmental dimensions",
+  "dsf.compare.sum": "Measured values side by side",
+  "dsf.compare.p": "Each condition: the Earth value, the target value, the similarity s from 0 to 1, and its reading.",
+  "dsf.compare.thr": "Readings: similar at s ≥ 0.85, partly similar at s ≥ 0.60, different below.",
+  "dsf.compare.ext": "The three absolute temperatures belong to the versioned extension and are not part of the baseline score.",
+  "dsf.weights.t": "Adjust analytical weights",
+  "dsf.weights.custom": "Custom weights",
+  "dsf.weights.p": "Weights say how much each condition counts for your objective. A mission profile sets them in one step.",
+  "dsf.weights.profiles": "Mission profiles",
+  "dsf.weights.console": "Every weight can be set individually with the sliders below the globe. The original analysis is never overwritten: each change is a new configuration.",
+  "dsf.weights.show": "Show all weights",
+  "dsf.gaps.t": "Explore differences and missing data",
+  "dsf.gaps.sum": "Where the analogy breaks down",
+  "dsf.gaps.diff": "Conditions that differ",
+  "dsf.gaps.missing": "Missing or uncertain evidence",
+  "dsf.gaps.none": "No missing evidence is recorded for this comparison.",
+  "dsf.gaps.never_zero": "Missing data never counts as zero: a condition without a value is left out and the weight coverage says how much was compared.",
+  "dsf.evidence.t": "Examine the scientific evidence",
+  "dsf.evidence.sum": "Datasets and target sources",
+  "dsf.evidence.p": "Every number comes from these records. The trace shows each step of the calculation for this place.",
+  "dsf.evidence.earth": "Earth datasets",
+  "dsf.evidence.target": "Target sources",
+  "dsf.evidence.trace": "Trace this result",
+  "dsf.evidence.graph": "Open the evidence graph",
+  "dsf.reproduce.t": "Reproduce the result",
+  "dsf.reproduce.sum": "Configuration and report",
+  "dsf.repro.p": "The record below fixes the algorithm, target, place, weights and data version. The same record gives the same result in the browser and in the Python reference.",
+  "dsf.repro.open": "Reproduce this result",
+  "dsf.repro.report": "Download the detailed report",
+  "dsa.hint.t": "Earth candidates for {target}",
+  "dsa.hint.p": "The marked places are the most similar on the conditions ASTERRO measures. Select one on the globe or in the list to see why.",
+  "dsa.selected": "Selected place",
+  "dsa.similar_to": "similar to {target}",
+  "dsa.alike": "Alike in:",
+  "dsa.differs": "Differs in:",
+  "dsa.open": "Full analysis",
+  "dsa.lab": "Compare in the laboratory",
+  "dsa.layers": "Layers",
+  "dsa.layers_hide": "Hide layers"
 });
 
 /* ===== Extension catalogue · বাংলা =====
@@ -21408,7 +21556,7 @@ i18nExtend("bn", {
   "ext.dim.landing_hazard.unit": "২–৩০° বা তার কম ঢালের প্রায় ১ কিমি পিক্সেলের অনুপাত",
 
   "ext.proc.title": "গ্রহীয় প্রক্রিয়া অন্বেষক",
-  "ext.proc.p": "কেবল স্থান নয়, প্রক্রিয়াও। প্রতিটি প্রক্রিয়া বলে পৃথিবীর কোথায় তা নিয়ে গবেষণা করা যায় এবং তা চাঁদ বা মঙ্গলের সঙ্গে কীভাবে সম্পর্কিত। যেখানে ASTERRO-র কাছে অবস্থাটি মাপার মতো একটি চলক আছে, সেখানে নিয়মটি পৃথিবীর প্রতিটি সেলে প্রয়োগ করা হয়; না থাকলে প্রক্রিয়াটিকে প্রয়োজনীয় ডেটাসহ বর্ণনা করা হয়।",
+  "ext.proc.p": "স্থানের পাশাপাশি প্রক্রিয়াও। প্রতিটি প্রক্রিয়া দেখায় পৃথিবীর কোথায় তা নিয়ে গবেষণা করা যায় এবং তা চাঁদ বা মঙ্গলের সঙ্গে কীভাবে সম্পর্কিত। যেখানে ASTERRO-র কাছে অবস্থাটি মাপার মতো একটি চলক আছে, সেখানে নিয়মটি পৃথিবীর প্রতিটি সেলে প্রয়োগ করা হয়; না থাকলে প্রক্রিয়াটিকে প্রয়োজনীয় ডেটাসহ বর্ণনা করা হয়।",
   "ext.proc.st.data": "ASTERRO-তে খোঁজা যায়",
   "ext.proc.st.no_data": "কেবল বর্ণনা",
   "ext.proc.f.earth": "পৃথিবীতে",
@@ -21902,7 +22050,99 @@ i18nExtend("bn", {
   "ds.sum.no_weak": "মাপা কোনো অবস্থাই আংশিক সীমার নিচে নয়।",
   "ds.sum.limits.mars": "পৃথিবীর সব স্থানের মতো এটিও মঙ্গলের কম মাধ্যাকর্ষণ, পাতলা CO₂ বায়ুমণ্ডল বা বিকিরণ তৈরি করতে পারে না।",
   "ds.sum.limits.moon": "পৃথিবীর সব স্থানের মতো এটিও চাঁদের কম মাধ্যাকর্ষণ, শূন্যতা বা বিকিরণ তৈরি করতে পারে না।",
-  "ds.sum.why": "ধাপে ধাপে কারণ দেখুন"
+  "ds.sum.why": "ধাপে ধাপে কারণ দেখুন",
+
+  "ds.legal.nav": "আইনি তথ্য",
+  "ds.legal.terms": "ব্যবহারের শর্তাবলি",
+  "ds.legal.privacy": "গোপনীয়তা নীতি",
+  "ds.legal.updated": "সর্বশেষ হালনাগাদ: ৯ নভেম্বর ২০২৬",
+  "ds.legal.close": "বন্ধ করুন",
+  "ds.legal.other": "আরও দেখুন:",
+  "ds.tos.title": "ব্যবহারের শর্তাবলি",
+  "ds.tos.s1.h": "ASTERRO কী",
+  "ds.tos.s1.p": "ASTERRO হলো NASA Space Apps Challenge ২০২৬-এর জন্য তৈরি একটি বিনামূল্যের, উন্মুক্ত গবেষণা ও শিক্ষার সরঞ্জাম। এটি পৃথিবীর মাপা পরিবেশগত অবস্থাকে চাঁদ ও মঙ্গলের স্থানের সঙ্গে তুলনা করে। এটি NASA-র পণ্য নয় এবং NASA এটিকে সমর্থন বা অনুমোদন করেনি।",
+  "ds.tos.s2.h": "ASTERRO-র ব্যবহার",
+  "ds.tos.s2.p": "শিক্ষা ও গবেষণাসহ যেকোনো আইনসম্মত কাজে আপনি ASTERRO, এর ফলাফল ও প্রতিবেদন ব্যবহার করতে পারেন। ফলাফল ভাগ করার সময় ডেটার স্বীকৃতি ও উল্লিখিত সীমাবদ্ধতা সঙ্গে রাখুন।",
+  "ds.tos.s3.h": "কোনো নিশ্চয়তা নেই",
+  "ds.tos.s3.p": "ফলাফলগুলো জানা রেজোলিউশন-সীমা ও ঘাটতিসহ সর্বজনীন ডেটা থেকে হিসাব করা সাদৃশ্য স্কোর। এগুলো যেমন আছে তেমনই দেওয়া হয়, কোনো ধরনের নিশ্চয়তা ছাড়া। এগুলো নিরাপত্তা মূল্যায়ন, অবতরণস্থলের সনদ বা কার্যক্রমের সিদ্ধান্তের ভিত্তি নয়।",
+  "ds.tos.s4.h": "ডেটা ও কোড",
+  "ds.tos.s4.p": "প্রতিটি ডেটাসেট তার প্রদানকারীর (NASA, USGS, Natural Earth ও অন্যান্য) এবং নিজস্ব লাইসেন্স বজায় রাখে, যা ডেটা দৃশ্যে তালিকাভুক্ত। ASTERRO-র উৎস কোড Apache License 2.0-এর অধীনে সর্বজনীন রিপোজিটরি github.com/sabiha-nib/asterro-তে প্রকাশিত।",
+  "ds.tos.s5.h": "পরিবর্তন",
+  "ds.tos.s5.p": "ASTERRO-র নতুন সংস্করণের সঙ্গে এই শর্তাবলি বদলাতে পারে। ওপরের তারিখটি বর্তমানে কার্যকর সংস্করণ দেখায়।",
+  "ds.tos.s6.h": "যোগাযোগ",
+  "ds.tos.s6.p": "প্রশ্ন ও সমস্যার খবর সর্বজনীন রিপোজিটরির ইস্যু ট্র্যাকারে জানান।",
+  "ds.pp.title": "গোপনীয়তা নীতি",
+  "ds.pp.s1.h": "সংক্ষেপে",
+  "ds.pp.s1.p": "ASTERRO-তে কোনো অ্যাকাউন্ট, সার্ভারে সংরক্ষণ, কুকি বা ব্যবহার-বিশ্লেষণ নেই। ASTERRO-তে আপনি যা করেন তা আপনার ব্রাউজারেই থাকে।",
+  "ds.pp.s2.h": "আপনার ডিভাইসে সংরক্ষিত",
+  "ds.pp.s2.p": "আপনার ভাষা, দৃশ্য (সহজ বা উন্নত), অন্বেষণের দিনলিপি ও গবেষণার তালিকা এই ব্রাউজারের লোকাল স্টোরেজে রাখা হয়, যাতে পুনরায় লোড করলেও থাকে। অফলাইনে ব্যবহারের জন্য একটি সার্ভিস ওয়ার্কার অ্যাপের ফাইলের একটি কপি রাখে। ব্রাউজারে এই সাইটের ডেটা মুছে ফেললে এর সবই মুছে যায়।",
+  "ds.pp.s3.h": "নেটওয়ার্কে যা পাঠানো হয়",
+  "ds.pp.s3.p": "অ্যাপটি আপনার খোলা ঠিকানা থেকেই নিজের ফাইল লোড করে। পাতাটি Google Fonts (fonts.googleapis.com ও fonts.gstatic.com) থেকে ফন্টও চায়; যেকোনো ওয়েব অনুরোধের মতো এতে আপনার IP ঠিকানা ও ব্রাউজারের তথ্য Google-এর নিজস্ব নীতির অধীনে Google-এর কাছে যায়। ডেটা প্রদানকারীদের লিংক কেবল আপনি অনুসরণ করলেই তাদের সাইট খোলে।",
+  "ds.pp.s4.h": "ডাউনলোড ও রপ্তানি",
+  "ds.pp.s4.p": "প্রতিবেদন, রেকর্ড ও রপ্তানি করা তালিকা আপনার ডিভাইসে সংরক্ষিত ফাইল। ASTERRO এগুলো কোথাও আপলোড করে না।",
+  "ds.pp.s5.h": "হোস্টিং",
+  "ds.pp.s5.p": "যে ওয়েবসাইট ASTERRO পরিবেশন করে, সেটি নিজস্ব নীতির অধীনে IP ঠিকানা ও সময়ের মতো সাধারণ অনুরোধ-লগ রাখতে পারে।",
+  "ds.pp.s6.h": "পরিবর্তন",
+  "ds.pp.s6.p": "ASTERRO-র নতুন সংস্করণের সঙ্গে এই নীতি বদলাতে পারে। ওপরের তারিখটি বর্তমানে কার্যকর সংস্করণ দেখায়।",
+  "ds.pp.s7.h": "যোগাযোগ",
+  "ds.pp.s7.p": "প্রশ্ন সর্বজনীন রিপোজিটরি github.com/sabiha-nib/asterro-র ইস্যু ট্র্যাকারে জানান।",
+  "dsf.title": "গবেষণাগার",
+  "dsf.intro": "সাতটি ধাপে একটি তুলনা সম্পন্ন করুন। প্রতিটি ধাপে আগে মূল বিষয় দেখানো হয়; বিস্তারিত নিয়ন্ত্রণ এক ক্লিক দূরে থাকে।",
+  "dsf.modules": "গবেষণা মডিউল",
+  "dsf.modules_p": "মূল স্কোরের পাশে থাকা চোদ্দটি গভীর বিশ্লেষণ, যা স্কোরটি কখনও বদলায় না।",
+  "dsf.prev": "পেছনে",
+  "dsf.next": "পরবর্তী",
+  "dsf.search_first": "আগে পৃথিবী খুঁজুন: তারপর প্রতিটি বৈধ স্থল-সেলকে লক্ষ্যের সঙ্গে তুলনা করা হবে।",
+  "dsf.target.t": "চাঁদ বা মঙ্গলের একটি লক্ষ্য বেছে নিন",
+  "dsf.target.p": "লক্ষ্য হলো সেই গ্রহীয় স্থান, যার মাপা অবস্থার সঙ্গে পৃথিবীর প্রতিটি সেল তুলনা করা হয়।",
+  "dsf.target.quick": "প্রধান লক্ষ্য",
+  "dsf.target.all": "সব বিশ্লেষণযোগ্য লক্ষ্য",
+  "dsf.target.cross": "দুই জগৎ",
+  "dsf.target.cross_note": "আন্তঃগ্রহ মোড প্রতিটি স্থানকে দুই জগতের সঙ্গেই তুলনা করে। ধাপগুলো অনুসরণ করতে একটি লক্ষ্য বেছে নিন।",
+  "dsf.candidate.t": "পৃথিবীর একটি সম্ভাব্য স্থান বেছে নিন",
+  "dsf.candidate.p": "শীর্ষ পৃথক স্থানগুলো, পরস্পর অন্তত ৩০০ কিমি দূরে। গ্লোবে যেকোনো স্থানও বেছে নিতে পারেন।",
+  "dsf.candidate.label": "পৃথিবীর সম্ভাব্য স্থান",
+  "dsf.candidate.globe": "গ্লোবে বা তালিকায় কোনো স্থান বাছলে এখানকার স্থানটিও বদলে যায়।",
+  "dsf.candidate.none": "এখনও কোনো স্থান বাছা হয়নি",
+  "dsf.compare.t": "পরিবেশগত মাত্রাগুলো তুলনা করুন",
+  "dsf.compare.sum": "মাপা মান পাশাপাশি",
+  "dsf.compare.p": "প্রতিটি অবস্থা: পৃথিবীর মান, লক্ষ্যের মান, ০ থেকে ১-এর সাদৃশ্য s এবং তার পাঠ।",
+  "dsf.compare.thr": "পাঠ: s ≥ ০.৮৫ হলে সদৃশ, s ≥ ০.৬০ হলে আংশিক সদৃশ, তার নিচে ভিন্ন।",
+  "dsf.compare.ext": "তিনটি প্রকৃত তাপমাত্রা সংস্করণযুক্ত সম্প্রসারণের অংশ, মূল স্কোরের নয়।",
+  "dsf.weights.t": "বিশ্লেষণের ভার ঠিক করুন",
+  "dsf.weights.custom": "নিজস্ব ভার",
+  "dsf.weights.p": "ভার ঠিক করে আপনার উদ্দেশ্যে প্রতিটি অবস্থা কতটা গুরুত্ব পাবে। একটি মিশন প্রোফাইল এক ধাপেই সেগুলো ঠিক করে দেয়।",
+  "dsf.weights.profiles": "মিশন প্রোফাইল",
+  "dsf.weights.console": "গ্লোবের নিচের স্লাইডার দিয়ে প্রতিটি ভার আলাদাভাবে ঠিক করা যায়। মূল বিশ্লেষণ কখনও মুছে লেখা হয় না: প্রতিটি পরিবর্তন একটি নতুন কনফিগারেশন।",
+  "dsf.weights.show": "সব ভার দেখান",
+  "dsf.gaps.t": "পার্থক্য ও অনুপস্থিত ডেটা দেখুন",
+  "dsf.gaps.sum": "যেখানে সাদৃশ্য ভেঙে পড়ে",
+  "dsf.gaps.diff": "যে অবস্থাগুলো ভিন্ন",
+  "dsf.gaps.missing": "অনুপস্থিত বা অনিশ্চিত প্রমাণ",
+  "dsf.gaps.none": "এই তুলনার জন্য কোনো অনুপস্থিত প্রমাণ লিপিবদ্ধ নেই।",
+  "dsf.gaps.never_zero": "অনুপস্থিত ডেটা কখনও শূন্য ধরা হয় না: মানহীন অবস্থা বাদ পড়ে, আর ভারের আওতা জানায় কতটা তুলনা করা হয়েছে।",
+  "dsf.evidence.t": "বৈজ্ঞানিক প্রমাণ পরীক্ষা করুন",
+  "dsf.evidence.sum": "ডেটাসেট ও লক্ষ্যের উৎস",
+  "dsf.evidence.p": "প্রতিটি সংখ্যা এই রেকর্ডগুলো থেকে আসে। ট্রেস এই স্থানের হিসাবের প্রতিটি ধাপ দেখায়।",
+  "dsf.evidence.earth": "পৃথিবীর ডেটাসেট",
+  "dsf.evidence.target": "লক্ষ্যের উৎস",
+  "dsf.evidence.trace": "এই ফলাফলের ট্রেস দেখুন",
+  "dsf.evidence.graph": "প্রমাণ-গ্রাফ খুলুন",
+  "dsf.reproduce.t": "ফলাফল পুনরুৎপাদন করুন",
+  "dsf.reproduce.sum": "কনফিগারেশন ও প্রতিবেদন",
+  "dsf.repro.p": "নিচের রেকর্ডে অ্যালগরিদম, লক্ষ্য, স্থান, ভার ও ডেটার সংস্করণ নির্দিষ্ট থাকে। একই রেকর্ড ব্রাউজারে ও Python রেফারেন্সে একই ফল দেয়।",
+  "dsf.repro.open": "এই ফলাফল পুনরুৎপাদন করুন",
+  "dsf.repro.report": "বিস্তারিত প্রতিবেদন ডাউনলোড করুন",
+  "dsa.hint.t": "{target}-এর জন্য পৃথিবীর সম্ভাব্য স্থান",
+  "dsa.hint.p": "চিহ্নিত স্থানগুলো ASTERRO-র মাপা অবস্থায় সবচেয়ে বেশি সদৃশ। কেন, তা দেখতে গ্লোবে বা তালিকায় একটি বেছে নিন।",
+  "dsa.selected": "বাছাই করা স্থান",
+  "dsa.similar_to": "{target}-এর সঙ্গে সদৃশ",
+  "dsa.alike": "মিল:",
+  "dsa.differs": "পার্থক্য:",
+  "dsa.open": "পূর্ণ বিশ্লেষণ",
+  "dsa.lab": "গবেষণাগারে তুলনা করুন",
+  "dsa.layers": "স্তর",
+  "dsa.layers_hide": "স্তর লুকান"
 });
 
 /* ===== Extension catalogue · Español =====
@@ -22129,7 +22369,7 @@ i18nExtend("es", {
   "ext.dim.landing_hazard.unit": "fracción de píxeles de ~1 km con 2–30° o menos",
 
   "ext.proc.title": "Explorador de procesos planetarios",
-  "ext.proc.p": "Procesos, no solo lugares. Cada proceso indica dónde puede estudiarse en la Tierra y cómo se relaciona con la Luna o Marte. Cuando ASTERRO tiene una variable que mide la condición, la regla se aplica a cada celda terrestre; si no, el proceso se describe con los datos que necesitaría.",
+  "ext.proc.p": "Procesos además de lugares. Cada proceso muestra dónde puede estudiarse en la Tierra y cómo se relaciona con la Luna o Marte. Cuando ASTERRO tiene una variable que mide la condición, la regla se aplica a cada celda terrestre; si no, el proceso se describe con los datos que necesitaría.",
   "ext.proc.st.data": "Se puede buscar en ASTERRO",
   "ext.proc.st.no_data": "Solo descrito",
   "ext.proc.f.earth": "En la Tierra",
@@ -22623,7 +22863,99 @@ i18nExtend("es", {
   "ds.sum.no_weak": "Ninguna condición medida queda por debajo del umbral parcial.",
   "ds.sum.limits.mars": "Como todo lugar de la Tierra, no puede reproducir la baja gravedad de Marte, su tenue atmósfera de CO₂ ni su radiación.",
   "ds.sum.limits.moon": "Como todo lugar de la Tierra, no puede reproducir la baja gravedad de la Luna, su vacío ni su radiación.",
-  "ds.sum.why": "Ver por qué, paso a paso"
+  "ds.sum.why": "Ver por qué, paso a paso",
+
+  "ds.legal.nav": "Aviso legal",
+  "ds.legal.terms": "Condiciones de uso",
+  "ds.legal.privacy": "Política de privacidad",
+  "ds.legal.updated": "Última actualización: 9 de noviembre de 2026",
+  "ds.legal.close": "Cerrar",
+  "ds.legal.other": "Véase también:",
+  "ds.tos.title": "Condiciones de uso",
+  "ds.tos.s1.h": "Qué es ASTERRO",
+  "ds.tos.s1.p": "ASTERRO es una herramienta abierta y gratuita de investigación y educación creada para el NASA Space Apps Challenge 2026. Compara condiciones ambientales medidas en la Tierra con lugares de la Luna y Marte. No es un producto de la NASA ni está respaldada o aprobada por la NASA.",
+  "ds.tos.s2.h": "Uso de ASTERRO",
+  "ds.tos.s2.p": "Puedes usar ASTERRO, sus resultados y sus informes con cualquier fin lícito, incluida la enseñanza y la investigación. Al compartir resultados, conserva los créditos de los datos y las limitaciones indicadas.",
+  "ds.tos.s3.h": "Sin garantía",
+  "ds.tos.s3.p": "Los resultados son puntuaciones de similitud calculadas a partir de datos públicos con límites de resolución y lagunas conocidos. Se ofrecen tal cual, sin garantía de ningún tipo. No son una evaluación de seguridad, una certificación de sitio de aterrizaje ni una base para decisiones operativas.",
+  "ds.tos.s4.h": "Datos y código",
+  "ds.tos.s4.p": "Cada conjunto de datos pertenece a su proveedor (NASA, USGS, Natural Earth y otros) y conserva su propia licencia, indicada en la vista Datos. El código fuente de ASTERRO se publica con la licencia Apache 2.0 en el repositorio público github.com/sabiha-nib/asterro.",
+  "ds.tos.s5.h": "Cambios",
+  "ds.tos.s5.p": "Estas condiciones pueden cambiar con nuevas versiones de ASTERRO. La fecha de arriba indica la versión vigente.",
+  "ds.tos.s6.h": "Contacto",
+  "ds.tos.s6.p": "Las preguntas y los avisos se dirigen al gestor de incidencias del repositorio público.",
+  "ds.pp.title": "Política de privacidad",
+  "ds.pp.s1.h": "Resumen",
+  "ds.pp.s1.p": "ASTERRO no tiene cuentas, almacenamiento en servidor, cookies ni analítica. Lo que haces en ASTERRO se queda en tu navegador.",
+  "ds.pp.s2.h": "Guardado en tu dispositivo",
+  "ds.pp.s2.p": "Tu idioma, tu vista (sencilla o avanzada), tu diario de exploración y tu cola de investigación se guardan en el almacenamiento local de este navegador para que sobrevivan a una recarga. Un service worker guarda una copia de los archivos de la aplicación para usarla sin conexión. Borrar los datos de este sitio en el navegador lo elimina todo.",
+  "ds.pp.s3.h": "Enviado por la red",
+  "ds.pp.s3.p": "La aplicación carga sus propios archivos desde la dirección que abriste. La página también solicita fuentes a Google Fonts (fonts.googleapis.com y fonts.gstatic.com); como cualquier petición web, esto comparte tu dirección IP y datos del navegador con Google según su propia política. Los enlaces a los proveedores de datos solo abren sus sitios si los sigues.",
+  "ds.pp.s4.h": "Descargas y exportaciones",
+  "ds.pp.s4.p": "Los informes, registros y colas exportados son archivos guardados en tu dispositivo. ASTERRO no los sube a ningún sitio.",
+  "ds.pp.s5.h": "Alojamiento",
+  "ds.pp.s5.p": "El sitio web que sirve ASTERRO puede conservar registros estándar de peticiones, como la dirección IP y la hora, según su propia política.",
+  "ds.pp.s6.h": "Cambios",
+  "ds.pp.s6.p": "Esta política puede cambiar con nuevas versiones de ASTERRO. La fecha de arriba indica la versión vigente.",
+  "ds.pp.s7.h": "Contacto",
+  "ds.pp.s7.p": "Las preguntas se dirigen al gestor de incidencias del repositorio público github.com/sabiha-nib/asterro.",
+  "dsf.title": "Laboratorio de investigación",
+  "dsf.intro": "Recorre una comparación en siete pasos. Cada paso muestra primero lo esencial; los controles detallados quedan a un clic.",
+  "dsf.modules": "Módulos de investigación",
+  "dsf.modules_p": "Catorce análisis más profundos que acompañan a la puntuación de base y nunca la cambian.",
+  "dsf.prev": "Atrás",
+  "dsf.next": "Siguiente",
+  "dsf.search_first": "Busca primero en la Tierra: entonces cada celda de tierra válida se compara con el objetivo.",
+  "dsf.target.t": "Elige un objetivo en la Luna o Marte",
+  "dsf.target.p": "El objetivo es el lugar planetario con cuyas condiciones medidas se compara cada celda terrestre.",
+  "dsf.target.quick": "Objetivos principales",
+  "dsf.target.all": "Todos los objetivos analíticos",
+  "dsf.target.cross": "Ambos mundos",
+  "dsf.target.cross_note": "El modo interplanetario compara cada lugar con ambos mundos. Elige un objetivo para seguir el flujo de trabajo.",
+  "dsf.candidate.t": "Elige un candidato terrestre",
+  "dsf.candidate.p": "Los lugares distintos destacados, a 300 km como mínimo entre sí. También puedes seleccionar cualquier lugar en el globo.",
+  "dsf.candidate.label": "Candidato terrestre",
+  "dsf.candidate.globe": "Seleccionar un lugar en el globo o en la lista cambia aquí el candidato.",
+  "dsf.candidate.none": "Aún no hay ningún lugar seleccionado",
+  "dsf.compare.t": "Compara las dimensiones ambientales",
+  "dsf.compare.sum": "Valores medidos uno junto al otro",
+  "dsf.compare.p": "Cada condición: el valor terrestre, el del objetivo, la similitud s de 0 a 1 y su lectura.",
+  "dsf.compare.thr": "Lecturas: similar con s ≥ 0,85, parcialmente similar con s ≥ 0,60, diferente por debajo.",
+  "dsf.compare.ext": "Las tres temperaturas absolutas pertenecen a la extensión versionada y no forman parte de la puntuación de base.",
+  "dsf.weights.t": "Ajusta los pesos analíticos",
+  "dsf.weights.custom": "Pesos personalizados",
+  "dsf.weights.p": "Los pesos indican cuánto cuenta cada condición para tu objetivo. Un perfil de misión los fija de una vez.",
+  "dsf.weights.profiles": "Perfiles de misión",
+  "dsf.weights.console": "Cada peso puede ajustarse por separado con los controles bajo el globo. El análisis original nunca se sobrescribe: cada cambio es una configuración nueva.",
+  "dsf.weights.show": "Mostrar todos los pesos",
+  "dsf.gaps.t": "Explora diferencias y datos ausentes",
+  "dsf.gaps.sum": "Dónde falla la analogía",
+  "dsf.gaps.diff": "Condiciones que difieren",
+  "dsf.gaps.missing": "Evidencia ausente o incierta",
+  "dsf.gaps.none": "No consta evidencia ausente para esta comparación.",
+  "dsf.gaps.never_zero": "Los datos ausentes nunca cuentan como cero: una condición sin valor se deja fuera y la cobertura de peso indica cuánto se comparó.",
+  "dsf.evidence.t": "Examina la evidencia científica",
+  "dsf.evidence.sum": "Conjuntos de datos y fuentes del objetivo",
+  "dsf.evidence.p": "Cada número procede de estos registros. La traza muestra cada paso del cálculo para este lugar.",
+  "dsf.evidence.earth": "Conjuntos de datos terrestres",
+  "dsf.evidence.target": "Fuentes del objetivo",
+  "dsf.evidence.trace": "Trazar este resultado",
+  "dsf.evidence.graph": "Abrir el grafo de evidencia",
+  "dsf.reproduce.t": "Reproduce el resultado",
+  "dsf.reproduce.sum": "Configuración e informe",
+  "dsf.repro.p": "El registro de abajo fija el algoritmo, el objetivo, el lugar, los pesos y la versión de los datos. El mismo registro da el mismo resultado en el navegador y en la referencia en Python.",
+  "dsf.repro.open": "Reproducir este resultado",
+  "dsf.repro.report": "Descargar el informe detallado",
+  "dsa.hint.t": "Candidatos terrestres para {target}",
+  "dsa.hint.p": "Los lugares marcados son los más parecidos en las condiciones que mide ASTERRO. Selecciona uno en el globo o en la lista para ver por qué.",
+  "dsa.selected": "Lugar seleccionado",
+  "dsa.similar_to": "de similitud con {target}",
+  "dsa.alike": "Se parece en:",
+  "dsa.differs": "Difiere en:",
+  "dsa.open": "Análisis completo",
+  "dsa.lab": "Comparar en el laboratorio",
+  "dsa.layers": "Capas",
+  "dsa.layers_hide": "Ocultar capas"
 });
 
 /* ===== Extension catalogue · Français =====
@@ -22850,7 +23182,7 @@ i18nExtend("fr", {
   "ext.dim.landing_hazard.unit": "part des pixels d'environ 1 km de pente ≤ 2–30°",
 
   "ext.proc.title": "Explorateur de processus planétaires",
-  "ext.proc.p": "Des processus, pas seulement des lieux. Chaque processus indique où il peut être étudié sur Terre et son lien avec la Lune ou Mars. Quand ASTERRO dispose d'une variable qui mesure la condition, la règle est appliquée à chaque cellule terrestre ; sinon, le processus est décrit avec les données qu'il faudrait.",
+  "ext.proc.p": "Des processus autant que des lieux. Chaque processus indique où il peut être étudié sur Terre et son lien avec la Lune ou Mars. Quand ASTERRO dispose d'une variable qui mesure la condition, la règle est appliquée à chaque cellule terrestre ; sinon, le processus est décrit avec les données qu'il faudrait.",
   "ext.proc.st.data": "Recherchable dans ASTERRO",
   "ext.proc.st.no_data": "Décrit seulement",
   "ext.proc.f.earth": "Sur Terre",
@@ -23344,7 +23676,99 @@ i18nExtend("fr", {
   "ds.sum.no_weak": "Aucune condition mesurée ne passe sous le seuil partiel.",
   "ds.sum.limits.mars": "Comme tout lieu sur Terre, il ne peut reproduire ni la faible gravité de Mars, ni son atmosphère ténue de CO₂, ni son rayonnement.",
   "ds.sum.limits.moon": "Comme tout lieu sur Terre, il ne peut reproduire ni la faible gravité de la Lune, ni son vide, ni son rayonnement.",
-  "ds.sum.why": "Comprendre pourquoi, pas à pas"
+  "ds.sum.why": "Comprendre pourquoi, pas à pas",
+
+  "ds.legal.nav": "Mentions légales",
+  "ds.legal.terms": "Conditions d'utilisation",
+  "ds.legal.privacy": "Politique de confidentialité",
+  "ds.legal.updated": "Dernière mise à jour : 9 novembre 2026",
+  "ds.legal.close": "Fermer",
+  "ds.legal.other": "Voir aussi :",
+  "ds.tos.title": "Conditions d'utilisation",
+  "ds.tos.s1.h": "Ce qu'est ASTERRO",
+  "ds.tos.s1.p": "ASTERRO est un outil ouvert et gratuit de recherche et d'enseignement réalisé pour le NASA Space Apps Challenge 2026. Il compare des conditions environnementales mesurées sur Terre avec des lieux de la Lune et de Mars. Ce n'est pas un produit de la NASA et il n'est ni soutenu ni approuvé par la NASA.",
+  "ds.tos.s2.h": "Utiliser ASTERRO",
+  "ds.tos.s2.p": "Vous pouvez utiliser ASTERRO, ses résultats et ses rapports à toute fin licite, y compris l'enseignement et la recherche. Quand vous partagez des résultats, gardez les crédits des données et les limites indiquées.",
+  "ds.tos.s3.h": "Aucune garantie",
+  "ds.tos.s3.p": "Les résultats sont des scores de similarité calculés à partir de données publiques aux limites de résolution et aux lacunes connues. Ils sont fournis en l'état, sans garantie d'aucune sorte. Ce ne sont ni une évaluation de sécurité, ni une certification de site d'atterrissage, ni une base de décision opérationnelle.",
+  "ds.tos.s4.h": "Données et code",
+  "ds.tos.s4.p": "Chaque jeu de données appartient à son fournisseur (NASA, USGS, Natural Earth et d'autres) et garde sa propre licence, indiquée dans la vue Données. Le code source d'ASTERRO est publié sous licence Apache 2.0 dans le dépôt public github.com/sabiha-nib/asterro.",
+  "ds.tos.s5.h": "Modifications",
+  "ds.tos.s5.p": "Ces conditions peuvent changer avec de nouvelles versions d'ASTERRO. La date ci-dessus indique la version en vigueur.",
+  "ds.tos.s6.h": "Contact",
+  "ds.tos.s6.p": "Les questions et signalements vont au gestionnaire de tickets du dépôt public.",
+  "ds.pp.title": "Politique de confidentialité",
+  "ds.pp.s1.h": "En bref",
+  "ds.pp.s1.p": "ASTERRO n'a ni comptes, ni stockage côté serveur, ni cookies, ni mesure d'audience. Ce que vous faites dans ASTERRO reste dans votre navigateur.",
+  "ds.pp.s2.h": "Enregistré sur votre appareil",
+  "ds.pp.s2.p": "Votre langue, votre affichage (simple ou avancé), votre journal d'exploration et votre file de recherche sont conservés dans le stockage local de ce navigateur pour survivre à un rechargement. Un service worker garde une copie des fichiers de l'application pour l'utilisation hors ligne. Effacer les données de ce site dans votre navigateur supprime tout cela.",
+  "ds.pp.s3.h": "Envoyé sur le réseau",
+  "ds.pp.s3.p": "L'application charge ses propres fichiers depuis l'adresse que vous avez ouverte. La page demande aussi des polices à Google Fonts (fonts.googleapis.com et fonts.gstatic.com) ; comme toute requête web, cela transmet votre adresse IP et des informations sur le navigateur à Google, selon sa propre politique. Les liens vers les fournisseurs de données n'ouvrent leurs sites que si vous les suivez.",
+  "ds.pp.s4.h": "Téléchargements et exports",
+  "ds.pp.s4.p": "Les rapports, fiches et files exportés sont des fichiers enregistrés sur votre appareil. ASTERRO ne les envoie nulle part.",
+  "ds.pp.s5.h": "Hébergement",
+  "ds.pp.s5.p": "Le site qui diffuse ASTERRO peut conserver des journaux de requêtes habituels, comme l'adresse IP et l'heure, selon sa propre politique.",
+  "ds.pp.s6.h": "Modifications",
+  "ds.pp.s6.p": "Cette politique peut changer avec de nouvelles versions d'ASTERRO. La date ci-dessus indique la version en vigueur.",
+  "ds.pp.s7.h": "Contact",
+  "ds.pp.s7.p": "Les questions vont au gestionnaire de tickets du dépôt public github.com/sabiha-nib/asterro.",
+  "dsf.title": "Laboratoire de recherche",
+  "dsf.intro": "Suivez une comparaison en sept étapes. Chaque étape montre d'abord l'essentiel ; les réglages détaillés restent à un clic.",
+  "dsf.modules": "Modules de recherche",
+  "dsf.modules_p": "Quatorze analyses approfondies qui accompagnent le score de base sans jamais le modifier.",
+  "dsf.prev": "Retour",
+  "dsf.next": "Suivant",
+  "dsf.search_first": "Lancez d'abord la recherche sur Terre : chaque cellule terrestre valide est alors comparée à la cible.",
+  "dsf.target.t": "Choisir une cible sur la Lune ou Mars",
+  "dsf.target.p": "La cible est le lieu planétaire dont les conditions mesurées sont comparées à chaque cellule terrestre.",
+  "dsf.target.quick": "Cibles principales",
+  "dsf.target.all": "Toutes les cibles analytiques",
+  "dsf.target.cross": "Les deux mondes",
+  "dsf.target.cross_note": "Le mode interplanétaire compare chaque lieu aux deux mondes. Choisissez une cible pour suivre les étapes.",
+  "dsf.candidate.t": "Choisir un candidat terrestre",
+  "dsf.candidate.p": "Les lieux distincts en tête, à au moins 300 km les uns des autres. Vous pouvez aussi sélectionner n'importe quel lieu sur le globe.",
+  "dsf.candidate.label": "Candidat terrestre",
+  "dsf.candidate.globe": "Sélectionner un lieu sur le globe ou dans la liste change le candidat ici.",
+  "dsf.candidate.none": "Aucun lieu sélectionné pour l'instant",
+  "dsf.compare.t": "Comparer les dimensions environnementales",
+  "dsf.compare.sum": "Valeurs mesurées côte à côte",
+  "dsf.compare.p": "Pour chaque condition : la valeur terrestre, celle de la cible, la similarité s de 0 à 1 et sa lecture.",
+  "dsf.compare.thr": "Lectures : semblable si s ≥ 0,85, en partie semblable si s ≥ 0,60, différent en dessous.",
+  "dsf.compare.ext": "Les trois températures absolues relèvent de l'extension versionnée et ne font pas partie du score de base.",
+  "dsf.weights.t": "Ajuster les poids analytiques",
+  "dsf.weights.custom": "Poids personnalisés",
+  "dsf.weights.p": "Les poids disent combien chaque condition compte pour votre objectif. Un profil de mission les fixe en une fois.",
+  "dsf.weights.profiles": "Profils de mission",
+  "dsf.weights.console": "Chaque poids se règle séparément avec les curseurs sous le globe. L'analyse d'origine n'est jamais écrasée : chaque changement est une nouvelle configuration.",
+  "dsf.weights.show": "Afficher tous les poids",
+  "dsf.gaps.t": "Explorer les différences et les données manquantes",
+  "dsf.gaps.sum": "Là où l'analogie s'arrête",
+  "dsf.gaps.diff": "Conditions qui diffèrent",
+  "dsf.gaps.missing": "Données manquantes ou incertaines",
+  "dsf.gaps.none": "Aucune donnée manquante n'est consignée pour cette comparaison.",
+  "dsf.gaps.never_zero": "Une donnée manquante ne compte jamais pour zéro : une condition sans valeur est laissée de côté et la couverture du poids indique ce qui a été comparé.",
+  "dsf.evidence.t": "Examiner les données scientifiques",
+  "dsf.evidence.sum": "Jeux de données et sources de la cible",
+  "dsf.evidence.p": "Chaque nombre provient de ces fiches. La trace montre chaque étape du calcul pour ce lieu.",
+  "dsf.evidence.earth": "Jeux de données terrestres",
+  "dsf.evidence.target": "Sources de la cible",
+  "dsf.evidence.trace": "Tracer ce résultat",
+  "dsf.evidence.graph": "Ouvrir le graphe des données",
+  "dsf.reproduce.t": "Reproduire le résultat",
+  "dsf.reproduce.sum": "Configuration et rapport",
+  "dsf.repro.p": "La fiche ci-dessous fixe l'algorithme, la cible, le lieu, les poids et la version des données. La même fiche donne le même résultat dans le navigateur et dans la référence Python.",
+  "dsf.repro.open": "Reproduire ce résultat",
+  "dsf.repro.report": "Télécharger le rapport détaillé",
+  "dsa.hint.t": "Candidats terrestres pour {target}",
+  "dsa.hint.p": "Les lieux marqués sont les plus semblables sur les conditions mesurées par ASTERRO. Sélectionnez-en un sur le globe ou dans la liste pour comprendre pourquoi.",
+  "dsa.selected": "Lieu sélectionné",
+  "dsa.similar_to": "de similarité avec {target}",
+  "dsa.alike": "Semblable par :",
+  "dsa.differs": "Diffère par :",
+  "dsa.open": "Analyse complète",
+  "dsa.lab": "Comparer au laboratoire",
+  "dsa.layers": "Calques",
+  "dsa.layers_hide": "Masquer les calques"
 });
 
 /* ===== Extension catalogue · Deutsch =====
@@ -23571,7 +23995,7 @@ i18nExtend("de", {
   "ext.dim.landing_hazard.unit": "Anteil der ~1-km-Pixel mit höchstens 2–30°",
 
   "ext.proc.title": "Explorer planetarer Prozesse",
-  "ext.proc.p": "Prozesse, nicht nur Orte. Jeder Prozess zeigt, wo er auf der Erde untersucht werden kann und wie er mit Mond oder Mars zusammenhängt. Wo ASTERRO eine Variable besitzt, die die Bedingung misst, wird die Regel auf jede Erdzelle angewandt; sonst wird der Prozess mit den Daten beschrieben, die er bräuchte.",
+  "ext.proc.p": "Prozesse ebenso wie Orte. Jeder Prozess zeigt, wo er auf der Erde untersucht werden kann und wie er mit Mond oder Mars zusammenhängt. Wo ASTERRO eine Variable besitzt, die die Bedingung misst, wird die Regel auf jede Erdzelle angewandt; sonst wird der Prozess mit den Daten beschrieben, die er bräuchte.",
   "ext.proc.st.data": "In ASTERRO durchsuchbar",
   "ext.proc.st.no_data": "Nur beschrieben",
   "ext.proc.f.earth": "Auf der Erde",
@@ -24065,7 +24489,99 @@ i18nExtend("de", {
   "ds.sum.no_weak": "Keine gemessene Bedingung liegt unter der Teilschwelle.",
   "ds.sum.limits.mars": "Wie jeder Ort auf der Erde kann er die geringe Schwerkraft des Mars, seine dünne CO₂-Atmosphäre und seine Strahlung nicht nachbilden.",
   "ds.sum.limits.moon": "Wie jeder Ort auf der Erde kann er die geringe Schwerkraft des Mondes, sein Vakuum und seine Strahlung nicht nachbilden.",
-  "ds.sum.why": "Schritt für Schritt verstehen, warum"
+  "ds.sum.why": "Schritt für Schritt verstehen, warum",
+
+  "ds.legal.nav": "Rechtliches",
+  "ds.legal.terms": "Nutzungsbedingungen",
+  "ds.legal.privacy": "Datenschutzerklärung",
+  "ds.legal.updated": "Zuletzt aktualisiert am 9. November 2026",
+  "ds.legal.close": "Schließen",
+  "ds.legal.other": "Siehe auch:",
+  "ds.tos.title": "Nutzungsbedingungen",
+  "ds.tos.s1.h": "Was ASTERRO ist",
+  "ds.tos.s1.p": "ASTERRO ist ein freies, offenes Werkzeug für Forschung und Lehre, entwickelt für die NASA Space Apps Challenge 2026. Es vergleicht gemessene Umweltbedingungen auf der Erde mit Orten auf Mond und Mars. Es ist kein Produkt der NASA und wird von der NASA weder unterstützt noch genehmigt.",
+  "ds.tos.s2.h": "Nutzung",
+  "ds.tos.s2.p": "Sie dürfen ASTERRO, seine Ergebnisse und Berichte für jeden rechtmäßigen Zweck nutzen, auch für Lehre und Forschung. Wenn Sie Ergebnisse weitergeben, behalten Sie die Datennachweise und die genannten Einschränkungen bei.",
+  "ds.tos.s3.h": "Keine Gewährleistung",
+  "ds.tos.s3.p": "Die Ergebnisse sind Ähnlichkeitswerte aus öffentlichen Datensätzen mit bekannten Auflösungsgrenzen und Lücken. Sie werden ohne jede Gewährleistung bereitgestellt. Sie sind keine Sicherheitsbewertung, keine Zertifizierung eines Landeplatzes und keine Grundlage für betriebliche Entscheidungen.",
+  "ds.tos.s4.h": "Daten und Code",
+  "ds.tos.s4.p": "Jeder Datensatz gehört seinem Anbieter (NASA, USGS, Natural Earth und andere) und behält seine eigene Lizenz, aufgeführt in der Datenansicht. Der Quellcode von ASTERRO ist unter der Apache-Lizenz 2.0 im öffentlichen Repository github.com/sabiha-nib/asterro veröffentlicht.",
+  "ds.tos.s5.h": "Änderungen",
+  "ds.tos.s5.p": "Diese Bedingungen können sich mit neuen Versionen von ASTERRO ändern. Das Datum oben nennt die gültige Fassung.",
+  "ds.tos.s6.h": "Kontakt",
+  "ds.tos.s6.p": "Fragen und Meldungen richten Sie an den Issue-Tracker des öffentlichen Repositorys.",
+  "ds.pp.title": "Datenschutzerklärung",
+  "ds.pp.s1.h": "Kurzfassung",
+  "ds.pp.s1.p": "ASTERRO hat keine Konten, keine serverseitige Speicherung, keine Cookies und keine Nutzungsanalyse. Was Sie in ASTERRO tun, bleibt in Ihrem Browser.",
+  "ds.pp.s2.h": "Auf Ihrem Gerät gespeichert",
+  "ds.pp.s2.p": "Ihre Sprache, Ihre Ansicht (einfach oder erweitert), Ihr Expeditionstagebuch und Ihre Forschungsliste liegen im lokalen Speicher dieses Browsers, damit sie ein Neuladen überstehen. Ein Service Worker hält eine Kopie der Anwendungsdateien für die Offline-Nutzung. Wenn Sie die Daten dieser Website im Browser löschen, wird all das entfernt.",
+  "ds.pp.s3.h": "Über das Netz übertragen",
+  "ds.pp.s3.p": "Die Anwendung lädt ihre eigenen Dateien von der Adresse, die Sie geöffnet haben. Die Seite fordert außerdem Schriften von Google Fonts an (fonts.googleapis.com und fonts.gstatic.com); wie jede Webanfrage übermittelt das Ihre IP-Adresse und Browserangaben an Google nach dessen eigener Richtlinie. Links zu Datenanbietern öffnen deren Websites nur, wenn Sie ihnen folgen.",
+  "ds.pp.s4.h": "Downloads und Exporte",
+  "ds.pp.s4.p": "Berichte, Einträge und exportierte Listen sind Dateien auf Ihrem Gerät. ASTERRO lädt sie nirgendwohin hoch.",
+  "ds.pp.s5.h": "Hosting",
+  "ds.pp.s5.p": "Die Website, die ASTERRO ausliefert, kann übliche Anfrageprotokolle wie IP-Adresse und Uhrzeit nach ihrer eigenen Richtlinie speichern.",
+  "ds.pp.s6.h": "Änderungen",
+  "ds.pp.s6.p": "Diese Erklärung kann sich mit neuen Versionen von ASTERRO ändern. Das Datum oben nennt die gültige Fassung.",
+  "ds.pp.s7.h": "Kontakt",
+  "ds.pp.s7.p": "Fragen richten Sie an den Issue-Tracker des öffentlichen Repositorys github.com/sabiha-nib/asterro.",
+  "dsf.title": "Forschungslabor",
+  "dsf.intro": "Führen Sie einen Vergleich in sieben Schritten durch. Jeder Schritt zeigt zuerst das Wesentliche; detaillierte Regler sind einen Klick entfernt.",
+  "dsf.modules": "Forschungsmodule",
+  "dsf.modules_p": "Vierzehn vertiefende Analysen neben dem Basiswert, die ihn nie verändern.",
+  "dsf.prev": "Zurück",
+  "dsf.next": "Weiter",
+  "dsf.search_first": "Durchsuchen Sie zuerst die Erde: Dann wird jede gültige Landzelle mit dem Ziel verglichen.",
+  "dsf.target.t": "Ein Ziel auf Mond oder Mars wählen",
+  "dsf.target.p": "Das Ziel ist der planetare Ort, mit dessen gemessenen Bedingungen jede Erdzelle verglichen wird.",
+  "dsf.target.quick": "Hauptziele",
+  "dsf.target.all": "Alle analytischen Ziele",
+  "dsf.target.cross": "Beide Welten",
+  "dsf.target.cross_note": "Der planetenübergreifende Modus vergleicht jeden Ort mit beiden Welten. Wählen Sie ein Ziel, um den Schritten zu folgen.",
+  "dsf.candidate.t": "Einen Erdkandidaten wählen",
+  "dsf.candidate.p": "Die führenden unterschiedlichen Orte, mindestens 300 km voneinander entfernt. Sie können auch jeden Ort auf dem Globus auswählen.",
+  "dsf.candidate.label": "Erdkandidat",
+  "dsf.candidate.globe": "Wenn Sie einen Ort auf dem Globus oder in der Liste auswählen, ändert sich hier der Kandidat.",
+  "dsf.candidate.none": "Noch kein Ort ausgewählt",
+  "dsf.compare.t": "Die Umweltdimensionen vergleichen",
+  "dsf.compare.sum": "Gemessene Werte nebeneinander",
+  "dsf.compare.p": "Für jede Bedingung: der Erdwert, der Zielwert, die Ähnlichkeit s von 0 bis 1 und ihre Einordnung.",
+  "dsf.compare.thr": "Einordnung: ähnlich ab s ≥ 0,85, teilweise ähnlich ab s ≥ 0,60, darunter verschieden.",
+  "dsf.compare.ext": "Die drei absoluten Temperaturen gehören zur versionierten Erweiterung und nicht zum Basiswert.",
+  "dsf.weights.t": "Analytische Gewichte anpassen",
+  "dsf.weights.custom": "Eigene Gewichte",
+  "dsf.weights.p": "Gewichte legen fest, wie stark jede Bedingung für Ihr Ziel zählt. Ein Missionsprofil setzt sie in einem Schritt.",
+  "dsf.weights.profiles": "Missionsprofile",
+  "dsf.weights.console": "Jedes Gewicht lässt sich einzeln mit den Reglern unter dem Globus einstellen. Die ursprüngliche Analyse wird nie überschrieben: Jede Änderung ist eine neue Konfiguration.",
+  "dsf.weights.show": "Alle Gewichte zeigen",
+  "dsf.gaps.t": "Unterschiede und fehlende Daten erkunden",
+  "dsf.gaps.sum": "Wo die Analogie endet",
+  "dsf.gaps.diff": "Bedingungen, die sich unterscheiden",
+  "dsf.gaps.missing": "Fehlende oder unsichere Belege",
+  "dsf.gaps.none": "Für diesen Vergleich sind keine fehlenden Belege vermerkt.",
+  "dsf.gaps.never_zero": "Fehlende Daten zählen nie als null: Eine Bedingung ohne Wert bleibt außen vor, und die Gewichtsabdeckung zeigt, wie viel verglichen wurde.",
+  "dsf.evidence.t": "Die wissenschaftlichen Belege prüfen",
+  "dsf.evidence.sum": "Datensätze und Zielquellen",
+  "dsf.evidence.p": "Jede Zahl stammt aus diesen Einträgen. Die Nachverfolgung zeigt jeden Rechenschritt für diesen Ort.",
+  "dsf.evidence.earth": "Erddatensätze",
+  "dsf.evidence.target": "Zielquellen",
+  "dsf.evidence.trace": "Dieses Ergebnis nachverfolgen",
+  "dsf.evidence.graph": "Den Belegegraphen öffnen",
+  "dsf.reproduce.t": "Das Ergebnis reproduzieren",
+  "dsf.reproduce.sum": "Konfiguration und Bericht",
+  "dsf.repro.p": "Der Eintrag unten legt Algorithmus, Ziel, Ort, Gewichte und Datenversion fest. Derselbe Eintrag liefert im Browser und in der Python-Referenz dasselbe Ergebnis.",
+  "dsf.repro.open": "Dieses Ergebnis reproduzieren",
+  "dsf.repro.report": "Ausführlichen Bericht herunterladen",
+  "dsa.hint.t": "Erdkandidaten für {target}",
+  "dsa.hint.p": "Die markierten Orte sind bei den von ASTERRO gemessenen Bedingungen am ähnlichsten. Wählen Sie einen auf dem Globus oder in der Liste, um zu sehen, warum.",
+  "dsa.selected": "Ausgewählter Ort",
+  "dsa.similar_to": "Ähnlichkeit mit {target}",
+  "dsa.alike": "Ähnlich bei:",
+  "dsa.differs": "Verschieden bei:",
+  "dsa.open": "Vollständige Analyse",
+  "dsa.lab": "Im Labor vergleichen",
+  "dsa.layers": "Ebenen",
+  "dsa.layers_hide": "Ebenen ausblenden"
 });
 
 /* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
@@ -28786,7 +29302,11 @@ function xcEnvGroupOk(g, i) {
  *     differences, where every Earth analogue falls short), with the full analysis one click away.
  *   - Simple / Advanced: Simple (the default) keeps every weight slider but hides the technical detail around it
  *     (status tags, share of weight, target / Earth position track); Advanced shows everything, as before. The choice
- *     is remembered in this browser. */
+ *     is remembered in this browser.
+ *   - Terms of Service and Privacy Policy: linked from the landing, the weight console (every view), the Atlas and the
+ *     Research Laboratory; they open in a dialog and by address (#terms, #privacy).
+ *   - Typography rules: the interface uses no em dash and no checkmark (a filled dot marks a passed check). Rendered text, placeholders, titles and labels are normalised to
+ *     an en dash when they are drawn (catalogues and protected baseline sources keep their text). */
 const DS = { KEY: "asterro.view.v1", mode: "simple" };
 try { const m = localStorage.getItem(DS.KEY); if (m === "advanced" || m === "simple") DS.mode = m; } catch (e) { /* storage unavailable: default view */ }
 function dsApplyMode() { document.documentElement.classList.toggle("ds-simple", DS.mode === "simple"); document.documentElement.classList.toggle("ds-advanced", DS.mode === "advanced"); }
@@ -28815,8 +29335,9 @@ function dsHero() {
   let acts = hero.querySelector(".ds-actions");
   if (!acts) { acts = document.createElement("div"); acts.className = "ds-actions"; acts.setAttribute("role", "group"); acts.setAttribute("data-i18n-done", ""); tgt.insertAdjacentElement("beforebegin", acts); }
   acts.setAttribute("aria-label", tx("ds.hero.ways"));
-  const ico = { explore: "◐", discover: "✦", compare: "⇄" };
-  acts.innerHTML = ["explore", "discover", "compare"].map(a => `<button type="button" class="ds-act" data-dsact="${a}"><span class="ds-ico" aria-hidden="true">${ico[a]}</span><b>${esc(tx("ds.hero." + a))}</b><span>${esc(tx("ds.hero." + a + "_d"))}</span></button>`).join("");
+  acts.innerHTML = ["explore", "discover", "compare"].map((a, k) => `<button type="button" class="ds-act" data-dsact="${a}"><span class="ds-num" aria-hidden="true">${esc(txInt(k + 1))}</span><b>${esc(tx("ds.hero." + a))}</b><span>${esc(tx("ds.hero." + a + "_d"))}</span></button>`).join("");
+  let lg = hero.querySelector(".ds-legal"); if (lg) lg.remove();
+  const facts = hero.querySelector(".hero-facts"); if (facts) facts.insertAdjacentHTML("afterend", dsLegalLinks());
 }
 function dsAfterSearch(fn) { if (S.searched) return fn(); const t0 = Date.now(), iv = setInterval(() => { if (S.searched || Date.now() - t0 > 60000) { clearInterval(iv); if (S.searched) fn(); } }, 120); }
 document.addEventListener("click", e => {
@@ -28856,6 +29377,226 @@ function dsSummary(i, tid) {
   try { const card = dsSummary(S.selected, S.targetId); if (card) { const k = h.indexOf('<div class="sec">'); h = k >= 0 ? h.slice(0, k) + `<div class="sec">${card}</div>` + h.slice(k) : card + h; } } catch (e) { console.error(e); }
   return h;
 }; }
+
+/* ---------------------------------------------------------------- Terms of Service and Privacy Policy */
+const DS_LEGAL = { terms: ["s1", "s2", "s3", "s4", "s5", "s6"], privacy: ["s1", "s2", "s3", "s4", "s5", "s6", "s7"] };
+function dsLegalLinks() {
+  return `<nav class="ds-legal" aria-label="${esc(tx("ds.legal.nav"))}" data-i18n-done><a href="#terms" data-dslegal="terms">${esc(tx("ds.legal.terms"))}</a><a href="#privacy" data-dslegal="privacy">${esc(tx("ds.legal.privacy"))}</a></nav>`;
+}
+function dsLegalOpen(kind) {
+  if (!DS_LEGAL[kind]) return;
+  let d = document.getElementById("ds-legal-dlg");
+  if (!d) { d = document.createElement("div"); d.id = "ds-legal-dlg"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "ds-legal-title"); d.setAttribute("data-i18n-done", ""); document.body.appendChild(d); }
+  DS.legalOpener = DS.legalOpener || document.activeElement; DS.legal = kind;
+  const pre = kind === "terms" ? "ds.tos." : "ds.pp.";
+  d.innerHTML = `<div class="ds-legal-box" data-dslegalbox="${kind}"><div class="ds-legal-head"><div><h2 id="ds-legal-title" tabindex="-1">${esc(tx(pre + "title"))}</h2><p class="meta">${esc(tx("ds.legal.updated"))}</p></div>
+    <button type="button" class="btn-ghost btn-sm" data-dslegalclose>${esc(tx("ds.legal.close"))}</button></div>
+    ${DS_LEGAL[kind].map(k => `<h3>${esc(tx(pre + k + ".h"))}</h3><p>${esc(tx(pre + k + ".p"))}</p>`).join("")}
+    <p class="meta">${esc(tx("ds.legal.other"))} <a href="#${kind === "terms" ? "privacy" : "terms"}" data-dslegal="${kind === "terms" ? "privacy" : "terms"}">${esc(tx(kind === "terms" ? "ds.legal.privacy" : "ds.legal.terms"))}</a></p></div>`;
+  d.hidden = false; dsNoEmDash(d);
+  setTimeout(() => { const t = document.getElementById("ds-legal-title"); if (t) t.focus(); }, 0);
+}
+function dsLegalClose() {
+  const d = document.getElementById("ds-legal-dlg"); if (!d || d.hidden) return;
+  d.hidden = true; DS.legal = null;
+  if (/^#(terms|privacy)$/.test(location.hash)) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { } }
+  const o = DS.legalOpener; DS.legalOpener = null; if (o && o.focus) o.focus();
+}
+document.addEventListener("click", e => {
+  const l = e.target.closest && e.target.closest("[data-dslegal]"); if (l) { e.preventDefault(); try { history.replaceState(null, "", "#" + l.dataset.dslegal); } catch (err) { } dsLegalOpen(l.dataset.dslegal); return; }
+  if (e.target.closest && (e.target.closest("[data-dslegalclose]") || e.target.id === "ds-legal-dlg")) dsLegalClose();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && DS.legal) { e.stopPropagation(); dsLegalClose(); } }, true);
+function dsLegalFromHash() { const m = /^#(terms|privacy)$/.exec(location.hash); if (m) dsLegalOpen(m[1]); }
+window.addEventListener("hashchange", dsLegalFromHash);
+document.addEventListener("asterro:lang", () => { if (DS.legal) dsLegalOpen(DS.legal); });
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(dsLegalFromHash, 300)); else setTimeout(dsLegalFromHash, 300);
+/* links in the weight console (present on every view) */
+{ const f = renderConsole; renderConsole = function () {
+  const r = f.apply(this, arguments);
+  try { const side = document.querySelector("#console .con-side"); if (side && !side.querySelector(".ds-legal")) side.insertAdjacentHTML("beforeend", dsLegalLinks()); } catch (e) { console.error(e); }
+  return r;
+}; }
+/* the current view on #app, for view-specific layout (Atlas: globe in the centre) */
+{ const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { document.getElementById("app").dataset.tab = S.tab; } catch (e) { } return r; }; }
+
+/* ---------------------------------------------------------------- no em dash in the rendered interface */
+const DS_DASH = /\s*\u2014\s*/g, DS_TICK = /[\u2713\u2714\u2611]\uFE0F?/g, DS_BAD = /[\u2014\u2713\u2714\u2611]/;
+function dsDash(t) { return t.replace(DS_DASH, (m) => (/^\s/.test(m) || /\s$/.test(m)) ? " \u2013 " : "\u2013").replace(DS_TICK, "\u25CF"); }
+function dsNoEmDash(root) {
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) { if (DS_BAD.test(n.nodeValue) && !(n.parentNode && /^(SCRIPT|STYLE|CODE|PRE)$/.test(n.parentNode.nodeName))) n.nodeValue = dsDash(n.nodeValue); }
+  if (root.querySelectorAll) for (const el of [root, ...root.querySelectorAll("[placeholder],[title],[aria-label]")]) for (const a of ["placeholder", "title", "aria-label"]) { const v = el.getAttribute && el.getAttribute(a); if (v && DS_BAD.test(v)) el.setAttribute(a, dsDash(v)); }
+}
+(function () {
+  // created after the route translator's observer (ui_98), so translation always sees the original text first;
+  // our own edits are then taken back from the translator's queue
+  const start = () => { document.title = dsDash(document.title); dsNoEmDash(document.body); new MutationObserver(ms => { for (const m of ms) { if (m.type === "attributes") { const v = m.target.getAttribute(m.attributeName); if (v && DS_BAD.test(v)) m.target.setAttribute(m.attributeName, dsDash(v)); } else if (m.type === "characterData") { const n = m.target; if (n.nodeValue && DS_BAD.test(n.nodeValue)) n.nodeValue = dsDash(n.nodeValue); } else for (const x of m.addedNodes) { if (x.nodeType === 3) { if (DS_BAD.test(x.nodeValue)) x.nodeValue = dsDash(x.nodeValue); } else if (x.nodeType === 1) dsNoEmDash(x); } } if (typeof I18R !== "undefined" && I18R.obs) I18R.obs.takeRecords(); }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["placeholder", "title", "aria-label"] }); };
+  const run = () => setTimeout(start, 0);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+/* ===== Research Laboratory: a seven-step workflow above the existing modules =====
+ * 1 target (Moon or Mars) · 2 Earth candidate · 3 compare the environmental dimensions · 4 weights · 5 differences
+ * and missing data · 6 scientific evidence · 7 reproduce. One step is open at a time (progressive disclosure). Every
+ * value comes from the existing engine and records (ENG.detail, S.res, jnMissingItems, S.app.datasets, the target
+ * record); every action calls an existing function (setTarget, select, applyProfile, showTrace, showReproduce,
+ * xtRepDownload). The fourteen research modules stay below, unchanged and always visible. */
+const DSF = { step: 1, steps: ["target", "candidate", "compare", "weights", "gaps", "evidence", "reproduce"] };
+function dsfCand() { if (!S.res) return null; const i = S.selected != null ? S.selected : (S.picked != null ? S.picked : S.res.distinct[0]); return i == null ? null : i; }
+function dsfTargets() {
+  const ids = Object.keys(S.T).filter(t => t !== "cross" && S.T[t] && S.T[t].variables);
+  const body = t => String(S.T[t].body || "").toLowerCase() === "moon" ? "moon" : "mars";
+  return { mars: ids.filter(t => body(t) === "mars").sort((a, b) => jnTNameText(a).localeCompare(jnTNameText(b))), moon: ids.filter(t => body(t) === "moon").sort((a, b) => jnTNameText(a).localeCompare(jnTNameText(b))) };
+}
+function dsfSummary(k) {
+  const tid = S.targetId, i = dsfCand();
+  if (k === "target") return tid === "cross" ? tx("dsf.target.cross") : `${jnBody(tid)} · ${jnTNameText(tid)}`;
+  if (k === "candidate") return i == null ? tx("dsf.candidate.none") : `${jnPlaceText(i)} · ${S.res.eff[i] >= 0 ? txPct(S.res.eff[i]) : tx("val.na")}`;
+  if (k === "weights") return S.profile === "custom" ? tx("dsf.weights.custom") : tx("profile." + S.profile);
+  return tx("dsf." + k + ".sum");
+}
+function dsfRows(tid, i) {
+  const ctx = jnCtx(tid), D = ENG.detail(S.A, S.critIds, i, ctx.tv, S.weights, ctx.ranges), th = S.app.thresholds;
+  const st = s => s == null || s !== s ? "na" : s >= th.match ? "similar" : s >= th.partial ? "partial" : "different";
+  return D.rows.map(r => ({ c: r.c, e: r.e, t: r.t, s: r.s == null ? null : r.s, w: r.w, k: st(r.s) }));
+}
+function dsfStep(k) {
+  const tid = S.targetId, i = dsfCand();
+  if (k === "target") {
+    const T = dsfTargets(), opt = t => `<option value="${esc(t)}"${t === tid ? " selected" : ""}>${esc(jnTNameText(t))}</option>`;
+    return `<p class="note">${esc(tx("dsf.target.p"))}</p>
+      <div class="ds-seg" role="group" aria-label="${esc(tx("dsf.target.quick"))}"><button type="button" data-dsftgt="mars_jezero" aria-pressed="${tid === "mars_jezero"}">${esc(tx("body.mars"))} · ${esc(jnTNameText("mars_jezero"))}</button><button type="button" data-dsftgt="moon_south_pole" aria-pressed="${tid === "moon_south_pole"}">${esc(tx("body.moon"))} · ${esc(jnTNameText("moon_south_pole"))}</button></div>
+      <label class="xt-field ds-adv-field"><span>${esc(tx("dsf.target.all"))}</span><select data-dsftgtsel><optgroup label="${esc(tx("body.mars"))}">${T.mars.map(opt).join("")}</optgroup><optgroup label="${esc(tx("body.moon"))}">${T.moon.map(opt).join("")}</optgroup></select></label>
+      ${tid === "cross" ? `<p class="jn-note">${esc(tx("dsf.target.cross_note"))}</p>` : ""}`;
+  }
+  if (tid === "cross") return `<p class="jn-note">${esc(tx("dsf.target.cross_note"))}</p>`;
+  if (!S.res) return `<p class="note">${esc(tx("dsf.search_first"))}</p><button type="button" class="btn-primary" data-dsfsearch>${esc(tx("ds.hero.explore"))}</button>`;
+  if (k === "candidate") {
+    const top = Array.from(S.res.distinct.slice(0, 20));
+    if (i != null && !top.includes(i)) top.unshift(i);
+    return `<p class="note">${esc(tx("dsf.candidate.p"))}</p>
+      <label class="xt-field"><span>${esc(tx("dsf.candidate.label"))}</span><select data-dsfcand>${top.map((c, k2) => `<option value="${c}"${c === i ? " selected" : ""}>${esc(txInt(k2 + 1))}. ${esc(jnPlaceText(c))} · ${esc(S.res.eff[c] >= 0 ? txPct(S.res.eff[c]) : tx("val.na"))}</option>`).join("")}</select></label>
+      <p class="note small">${esc(tx("dsf.candidate.globe"))}</p>`;
+  }
+  if (i == null) return `<p class="note">${esc(tx("dsf.candidate.none"))}</p>`;
+  if (k === "compare") {
+    const rows = dsfRows(tid, i);
+    let ext = "";
+    if (typeof xtHas === "function" && xtHas(tid)) { const T = xtTarget(tid); ext = XC().rows(xtStack(), i, T.tv, T.ranges, XT.earth).map(r => `<tr class="ds-adv"><th scope="row">${xtDimName(r.c)}</th><td class="n">${r.e == null ? "–" : xtK(r.e)}</td><td class="n">${r.t == null ? esc(tx("ext.th.na")) : xtK(r.t)}</td><td class="n">${r.s == null || r.state === "na" || r.state === "unknown" ? "–" : esc(txNum(r.s, 2))}</td><td>${esc(r.state === "na" ? tx("ext.th.na") : r.state === "unknown" ? tx("ext.th.unknown") : tx("state." + xtState(r.s)))}</td></tr>`).join(""); }
+    return `<p class="note">${esc(tx("dsf.compare.p"))}</p>
+      <div class="tbl-wrap"><table class="t xt-t ds-cmp" data-dsfcmp><thead><tr><th scope="col">${esc(tx("ext.rep.c.crit"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.earth"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.target"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.s"))}</th><th scope="col">${esc(tx("ext.rep.c.state"))}</th></tr></thead>
+      <tbody>${rows.map(r => `<tr data-dsfrow="${r.c}" data-dsfk="${r.k}"><th scope="row">${esc(tx("crit." + r.c + ".s"))}</th><td class="n">${jnVal(r.c, r.e)}</td><td class="n">${jnVal(r.c, r.t)}</td><td class="n">${r.s == null ? "–" : esc(txNum(r.s, 2))}</td><td><span class="ds-state ${r.k}">${esc(tx("state." + (r.k === "na" ? "na" : r.k)))}</span></td></tr>`).join("")}${ext}</tbody></table></div>
+      <p class="note small">${esc(tx("dsf.compare.thr"))}${ext ? " " + esc(tx("dsf.compare.ext")) : ""}</p>`;
+  }
+  if (k === "weights") {
+    return `<p class="note">${esc(tx("dsf.weights.p"))}</p>
+      <div class="ds-seg ds-wrap" role="group" aria-label="${esc(tx("dsf.weights.profiles"))}">${Object.keys(S.app.profiles).map(pid => `<button type="button" data-dsfprof="${pid}" aria-pressed="${S.profile === pid}">${esc(tx("profile." + pid))}</button>`).join("")}</div>
+      <p class="note small">${esc(tx("dsf.weights.console"))}</p>
+      <button type="button" class="btn-ghost btn-sm" data-dsfweights>${esc(tx("dsf.weights.show"))}</button>`;
+  }
+  if (k === "gaps") {
+    const rows = dsfRows(tid, i), weak = rows.filter(r => r.k === "different"), part = rows.filter(r => r.k === "partial");
+    const L = JE.lens(jnCtx(tid), i, S.weights), miss = jnMissingItems(jnCtx(tid), L);
+    return `<h4 class="xt-h">${esc(tx("dsf.gaps.diff"))}</h4><ul class="xt-list" data-dsfdiff>${weak.length || part.length ? weak.concat(part).map(r => `<li>${esc(tx("crit." + r.c + ".s"))}: ${esc(tx("state." + r.k))} (s = ${esc(txNum(r.s, 2))})</li>`).join("") : `<li>${esc(tx("ds.sum.no_weak"))}</li>`}</ul>
+      <h4 class="xt-h">${esc(tx("dsf.gaps.missing"))}</h4><ul class="xt-list" data-dsfmiss>${miss.map(m => `<li>${jnMissingText(m)}</li>`).join("") || `<li>${esc(tx("dsf.gaps.none"))}</li>`}</ul>
+      <p class="note small">${esc(tx("dsf.gaps.never_zero"))}</p>`;
+  }
+  if (k === "evidence") {
+    const T = S.T[tid], ds = S.app.datasets;
+    return `<p class="note">${esc(tx("dsf.evidence.p"))}</p>
+      <h4 class="xt-h">${esc(tx("dsf.evidence.earth"))}</h4><ul class="xt-list" data-dsfev>${ds.map(d => `<li>${keep(d.dataset)} <span class="meta">${keep(d.provider)} · ${keep(d.version || "")} · ${keep(d.resolution || "")}</span></li>`).join("")}</ul>
+      <h4 class="xt-h">${esc(tx("dsf.evidence.target"))}</h4><ul class="xt-list">${(T.sources || []).map(s => `<li>${keep(s)}</li>`).join("") || `<li>${esc(tx("val.na"))}</li>`}</ul>
+      <div class="ds-seg"><button type="button" data-dsfdo="trace">${esc(tx("dsf.evidence.trace"))}</button><button type="button" data-dsfdo="graph">${esc(tx("dsf.evidence.graph"))}</button></div>`;
+  }
+  if (k === "reproduce") {
+    const rec = { algorithm: S.app.algorithm_version, target: tid, cell: S.cell[i], weights: S.weights, stack_sha256: S.app.stack.sha256 };
+    return `<p class="note">${esc(tx("dsf.repro.p"))}</p>
+      <pre class="ds-pre" data-dsfrec>${esc(JSON.stringify(rec, null, 1))}</pre>
+      <div class="ds-seg"><button type="button" data-dsfdo="repro">${esc(tx("dsf.repro.open"))}</button><button type="button" data-dsfdo="report">${esc(tx("dsf.repro.report"))}</button></div>`;
+  }
+  return "";
+}
+function dsfHTML() {
+  const open = DSF.steps[DSF.step - 1];
+  return `<section class="sec ds-flow" data-i18n-done data-dsflow aria-labelledby="dsf-title">
+    <h2 id="dsf-title" class="ds-flow-title">${esc(tx("dsf.title"))}</h2><p class="ds-flow-intro">${esc(tx("dsf.intro"))}</p>
+    <ol class="ds-steps">${DSF.steps.map((k, n) => { const on = k === open;
+      return `<li class="ds-step${on ? " on" : ""}" data-dsfstep="${k}"><button type="button" class="ds-step-h" data-dsfgo="${n + 1}" aria-expanded="${on}" aria-controls="dsf-b-${k}"><span class="ds-step-n">${esc(txInt(n + 1))}</span><span class="ds-step-t">${esc(tx("dsf." + k + ".t"))}</span><span class="ds-step-s">${esc(dsfSummary(k))}</span></button>
+        ${on ? `<div class="ds-step-b" id="dsf-b-${k}">${dsfStep(k)}<div class="ds-step-nav">${n > 0 ? `<button type="button" class="btn-ghost btn-sm" data-dsfgo="${n}">${esc(tx("dsf.prev"))}</button>` : ""}${n < 6 ? `<button type="button" class="btn-primary btn-sm" data-dsfgo="${n + 2}">${esc(tx("dsf.next"))}: ${esc(tx("dsf." + DSF.steps[n + 1] + ".t"))}</button>` : ""}</div></div>` : ""}</li>`; }).join("")}</ol>
+    <h2 class="ds-flow-title ds-mods">${esc(tx("dsf.modules"))}</h2><p class="ds-flow-intro">${esc(tx("dsf.modules_p"))}</p>${dsLegalLinks()}</section>`;
+}
+{ const f = viewLab; viewLab = function () { let h = f.apply(this, arguments); try { h = dsfHTML() + h; } catch (e) { console.error(e); } return h; }; }
+function dsfRerender(focusSel) { if (S.tab !== "lab") return; renderLeft(); if (focusSel) { const n = document.querySelector(focusSel); if (n) n.focus(); } }
+document.addEventListener("click", e => {
+  const t = e.target.closest && e.target.closest("[data-dsfgo],[data-dsftgt],[data-dsfprof],[data-dsfweights],[data-dsfdo],[data-dsfsearch]"); if (!t) return;
+  if (t.dataset.dsfgo) { DSF.step = Math.max(1, Math.min(7, +t.dataset.dsfgo)); dsfRerender(`[data-dsfgo="${DSF.step}"].ds-step-h`); }
+  else if (t.dataset.dsftgt) { setTarget(t.dataset.dsftgt); dsfRerender(`[data-dsftgt="${t.dataset.dsftgt}"]`); }
+  else if (t.dataset.dsfprof) { applyProfile(t.dataset.dsfprof); dsfRerender(`[data-dsfprof="${t.dataset.dsfprof}"]`); }
+  else if (t.dataset.dsfweights != null) { dsSetMode("advanced"); const c = document.getElementById("console"); if (c) { c.classList.add("open"); renderConsole(); c.scrollIntoView({ block: "nearest" }); const s = c.querySelector("input[type=range]"); if (s) s.focus(); } }
+  else if (t.dataset.dsfsearch != null) { runSearch(); setTimeout(() => dsfRerender(), 0); }
+  else if (t.dataset.dsfdo) {
+    const i = dsfCand(); if (i != null && S.selected !== i) select(i);
+    const a = t.dataset.dsfdo;
+    if (a === "trace") showTrace(); else if (a === "repro") showReproduce();
+    else if (a === "report" && typeof xtRepDownload === "function") { JN.i = i; JN.tid = S.targetId; JN.pid = S.profile in S.app.profiles ? S.profile : "general"; xtRepDownload("detailed"); }
+    else if (a === "graph") { L.mod = "graph"; labRender(); }
+  }
+});
+document.addEventListener("change", e => {
+  const t = e.target; if (!t.dataset) return;
+  if (t.dataset.dsftgtsel != null) { setTarget(t.value); dsfRerender("[data-dsftgtsel]"); }
+  else if (t.dataset.dsfcand != null) { select(+t.value); dsfRerender("[data-dsfcand]"); }
+});
+
+/* ===== Atlas: the Earth globe at the centre, a quiet context card, layers on request =====
+ * In the Atlas view the planetary atlas moves to a narrower side panel so the 3D Earth globe (still the default
+ * projection) takes the centre. Selecting an Earth candidate (globe or list) shows a short context card on the globe:
+ * where it is, how similar it is to the current target, its landscape and climate class, the strongest similarities
+ * and the important differences, with the full analysis one click away. The analysis layer buttons (Similarity,
+ * Constellations, Change, Coverage, Dimension) are behind a single "Layers" button in this view. Nothing is computed
+ * here that the engine does not already provide. */
+function dsaCard() {
+  const vp = document.getElementById("viewport"); if (!vp) return;
+  let c = document.getElementById("ds-acard");
+  if (S.tab !== "atlas" || !S.res) { if (c) c.hidden = true; return; }
+  if (!c) { c = document.createElement("section"); c.id = "ds-acard"; c.className = "ds-acard"; c.setAttribute("aria-live", "polite"); c.setAttribute("data-i18n-done", ""); vp.appendChild(c); }
+  c.hidden = false;
+  const tid = S.targetId, i = S.selected;
+  if (i == null || tid === "cross") {
+    c.setAttribute("data-dsacard", "hint");
+    c.innerHTML = `<h3>${esc(tx("dsa.hint.t", { target: tid === "cross" ? tx("tname.cross") : jnTNameText(tid) }))}</h3><p>${esc(tx("dsa.hint.p"))}</p>`;
+    return;
+  }
+  const th = S.app.thresholds, D = ENG.detail(S.A, S.critIds, i, jnCtx(tid).tv, S.weights, jnCtx(tid).ranges);
+  const rows = D.rows.filter(r => r.s != null && r.s === r.s && r.w > 0), strong = rows.filter(r => r.s >= th.match).sort((a, b) => b.s - a.s).slice(0, 3), weak = rows.filter(r => r.s < th.partial).sort((a, b) => a.s - b.s).slice(0, 3);
+  const env = typeof xcEnv === "function" ? xcEnv(i) : null, kg = typeof xcKoppen === "function" ? xcKoppen(i) : null;
+  c.setAttribute("data-dsacard", String(S.cell[i]));
+  c.innerHTML = `<p class="dsa-k">${esc(tx("dsa.selected"))}</p><h3>${jnPlace(i)}</h3><p class="dsa-ll">${esc(txLL(S.lat[i], S.lon[i]))}${env ? " · " + xcEnvName(env) : ""}${kg ? " · " + keep(kg) : ""}</p>
+    <p class="dsa-score"><b>${esc(S.res.eff[i] >= 0 ? txPct(S.res.eff[i]) : tx("val.na"))}</b> ${esc(tx("dsa.similar_to", { target: jnTNameText(tid) }))}</p>
+    ${strong.length ? `<p class="dsa-l"><span>${esc(tx("dsa.alike"))}</span> ${strong.map(r => esc(tx("crit." + r.c + ".s"))).join(", ")}</p>` : ""}
+    ${weak.length ? `<p class="dsa-l"><span>${esc(tx("dsa.differs"))}</span> ${weak.map(r => esc(tx("crit." + r.c + ".s"))).join(", ")}</p>` : ""}
+    <div class="dsa-act"><button type="button" class="btn-primary btn-sm" data-dsaopen="${i}">${esc(tx("dsa.open"))}</button><button type="button" class="btn-ghost btn-sm" data-dsalab="${i}">${esc(tx("dsa.lab"))}</button></div>`;
+}
+function dsaLayersBtn() {
+  const top = document.querySelector("#viewport .vp-top"); if (!top) return;
+  let b = document.getElementById("ds-layers");
+  if (!b) { b = document.createElement("button"); b.type = "button"; b.id = "ds-layers"; b.className = "ds-layers"; top.appendChild(b); }
+  const open = document.documentElement.classList.contains("ds-layers-open");
+  b.setAttribute("aria-expanded", String(open)); b.textContent = tx(open ? "dsa.layers_hide" : "dsa.layers");
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest && e.target.closest("#ds-layers,[data-dsaopen],[data-dsalab]"); if (!t) return;
+  if (t.id === "ds-layers") { document.documentElement.classList.toggle("ds-layers-open"); dsaLayersBtn(); return; }
+  if (t.dataset.dsaopen) jnOpen("place", { i: +t.dataset.dsaopen, tid: S.targetId, pid: S.profile === "custom" ? "custom" : S.profile, sec: "lens", step: 0 });
+  else if (t.dataset.dsalab) { if (S.selected !== +t.dataset.dsalab) select(+t.dataset.dsalab); DSF.step = 3; setTab("lab"); }
+});
+{ const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { dsaCard(); dsaLayersBtn(); } catch (e) { console.error(e); } return r; }; }
+{ const f = select; select = function () { const r = f.apply(this, arguments); try { dsaCard(); } catch (e) { console.error(e); } return r; }; }
+document.addEventListener("asterro:lang", () => { try { dsaCard(); dsaLayersBtn(); } catch (e) { console.error(e); } });
+/* the Atlas opens on the 3D globe (phones otherwise start on the flat map); later choices are kept */
+{ const f = setTab; setTab = function (t) { const r = f.apply(this, arguments); try { if (t === "atlas" && !DSF.atlasGlobe) { DSF.atlasGlobe = true; if (S.proj !== 0) setProj(0); } } catch (e) { console.error(e); } return r; }; }
 
 /* ===== Interface languages for the Markdown report =====
  * The baseline builds the report as English Markdown (reportMD, protected). In another language the report sheet

@@ -340,3 +340,69 @@ Failures found during this pass and how they were fixed (no assertion was weaken
   reworded so the name stays intact.
 - **`ui_ext_smoke.py` expectations.** Two were updated because the data changed: aeolian processes are now an indirect
   indicator, so the described-only check uses volcanism; there are now 30 dimensions instead of 28.
+
+## Atlas and Research Laboratory redesign (2026-11-09, final build)
+
+**`npm test`.** All passing:
+
+- Python: 116/116.
+- JS parity: passing.
+- Phase II: passing.
+- Phase III: 132/132.
+- Phase IV: 74/74.
+- Trajectory: 26/26.
+- Methods: 37/37.
+- Journey: 53/53.
+- i18n: 52/52.
+- Routes: 63/63.
+- Extension: 39/39.
+- Extension languages: 36/36 (now covering `ui_26`–`ui_28`).
+
+**Browser suites.** All 15 pass in one sequential run (Chromium, SwiftShader):
+
+| Suite | Result |
+|---|---|
+| `ui_smoke.py`, `ui_lab_smoke.py`, `ui_atlas_smoke.py` | exit 0 |
+| `ui_phase4_smoke.py` | 75 |
+| `ui_trajectory_smoke.py` | 24 |
+| `ui_methods_smoke.py` | 19 |
+| `ui_journey_smoke.py` | 70 |
+| `ui_global_smoke.py` | 39 |
+| `ui_routes_i18n_smoke.py` | 27 |
+| `ui_journal_persist_smoke.py` | 16 |
+| `ui_responsive_smoke.py` | 113 |
+| `ui_ext_smoke.py` | 45 |
+| `ui_design_smoke.py` | 23 |
+| `ui_design_audit.py` (new) | 138 |
+
+**What the new `ui_design_audit.py` covers.**
+
+- **Prohibited-element audit.** Run on the landing, the Atlas (before and after selecting a place), each of the seven
+  Laboratory steps, the trace sheet and the legal dialogs. Repeated at desktop, tablet and phone, plus the Atlas and
+  Laboratory in Bengali and German, and the Privacy Policy in five languages.
+- **Atlas, real interactions.**
+  - Globe is the default projection and the widest region.
+  - Layers button.
+  - Candidate tapped in the list leads to the context card with the engine's score.
+  - "Full analysis" opens the Lens; "Compare in the laboratory" opens step 3 for that place.
+- **Research Laboratory, all seven steps with real interactions.**
+  - Moon target selected.
+  - Candidate chosen.
+  - Readings equal the engine's `ENG.detail`.
+  - Profile applied; all weights shown.
+  - Differences and missing evidence listed.
+  - Trace sheet opened.
+  - Reproduction record checked; reproduction sheet opened; report downloaded.
+  - Research modules still open.
+- **Legal pages.** Terms of Service and Privacy Policy: links present, opening by click and by `#privacy`, focus,
+  Escape.
+- **Baseline and layout.** Baseline result identical afterwards; no horizontal page scroll; no page error.
+
+**Failures found while building the audit, and fixed.**
+
+- The Phase IV hero gradient.
+- A Layers button covered by the globe canvas.
+- Monospace labels in Bengali.
+- A 12 px toast radius.
+- The context card on phones.
+- Phones opening the Atlas on the flat map.

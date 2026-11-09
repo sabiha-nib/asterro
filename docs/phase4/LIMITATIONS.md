@@ -133,3 +133,13 @@
 - **Design** was checked in headless Chromium (SwiftShader) at 390, 820, 1180 and 1440 px. It was not checked on
   physical devices, with a screen reader, or with the real SF / Instrument Sans fonts (web fonts are unreachable here,
   so fallback fonts were used).
+
+## Atlas and Research Laboratory redesign
+
+- **Terms of Service and Privacy Policy** are plain-language texts. No lawyer has reviewed them, and the translations
+  have not been reviewed by native speakers.
+- **Em dashes and checkmarks** are replaced when the page is drawn: em dashes become en dashes, checkmarks become
+  filled dots. The source catalogues and the protected baseline sources still contain them.
+- **The globe's rim glow** is drawn by the protected WebGL renderer and was not changed.
+- **The prohibited-element audit** checks computed CSS and visible text. It cannot see pixels drawn on the globe
+  canvas.

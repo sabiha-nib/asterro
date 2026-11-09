@@ -15,11 +15,11 @@
 .xt-t tr.ref td{background:var(--panel-2)}
 .xt-t .xdc-fam th{font:600 12px/1.3 var(--f-body);color:var(--accent);padding-top:12px}
 .xt-st{display:inline-block;font:600 11px/1.5 var(--f-body);padding:0 6px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
-.xt-st.similar,.xt-st.data,.xt-st.lab-verified,.xt-st.dim-scored{color:#6fcf97}
-.xt-st.partial,.xt-st.lab-pending,.xt-st.dim-extension{color:#e0c36a}
-.xt-st.different,.xt-st.lab-unavailable{color:#ef8a8a}
+.xt-st.similar,.xt-st.data,.xt-st.lab-verified,.xt-st.dim-scored{color:var(--match)}
+.xt-st.partial,.xt-st.lab-pending,.xt-st.dim-extension{color:var(--partial)}
+.xt-st.different,.xt-st.lab-unavailable{color:var(--mismatch)}
 .xt-st.na,.xt-st.unknown,.xt-st.nodata,.xt-st.dim-no_data,.xt-st.lab-unsuitable{color:var(--ink-3)}
-.xt-st.dim-evidence,.xt-st.lab-future{color:#8fbfe8}
+.xt-st.dim-evidence,.xt-st.lab-future{color:var(--moon)}
 .xt-note{font-size:12px;color:var(--ink-2);margin-top:3px}
 .xt-box{margin:16px 0 0;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel-2)}
 .xt-list{margin:6px 0;padding-left:18px;font-size:13px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
