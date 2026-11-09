@@ -29,7 +29,7 @@ check(keys.length > 450, `English extension source has ${keys.length} keys`);
 const newKeys = keys.filter(k => !coreKeys.en.has(k));
 check(newKeys.length === keys.length, `every extension key is new to the original catalogues (${keys.filter(k => coreKeys.en.has(k)).slice(0, 4)})`);
 const ph = s => (s.match(/\{\w+\}/g) || []).sort().join(",");
-const SAME = /^(ext\.bf\.nearest|ext\.hub\.constellations|ext\.(th|dc)\.col_(dim|status|label|source)|ext\.rob\.standard|ext\.bf\.col_score|ext\.rq\.(notes|ev\.status)|ext\.rep\.(h\.dims|c\.crit)|ext\.dim\.(surface_materials|volcanic_terrain|dunes|fluvial_landforms)\.unit|ext\.env\.(tundra|delta|continent|plateau|gorge)|ext\.kg\.ET|ext\.op\.navigation\.name|ext\.proc\.sedimentation\.name|ds\.mode\.simple|ds\.tos\.s6\.h|ds\.pp\.s7\.h|ds\.pp\.s5\.h)$/;
+const SAME = /^(ext\.bf\.nearest|ext\.hub\.constellations|ext\.(th|dc)\.col_(dim|status|label|source)|ext\.rob\.standard|ext\.bf\.col_score|ext\.rq\.(notes|ev\.status)|ext\.rep\.(h\.dims|c\.crit)|ext\.dim\.(surface_materials|volcanic_terrain|dunes|fluvial_landforms)\.unit|ext\.env\.(tundra|delta|continent|plateau|gorge)|ext\.kg\.ET|ext\.op\.navigation\.name|ext\.proc\.sedimentation\.name|ds\.mode\.simple|ds\.tos\.s6\.h|ds\.pp\.s7\.h|ds\.pp\.s5\.h|ds\.gl\.analogue\.t)$/;
 for (const l of ["bn", "es", "fr", "de"]) {
   const d = ext[l], k2 = Object.keys(d);
   const miss = keys.filter(k => !(k in d)), extra = k2.filter(k => !(k in EN));

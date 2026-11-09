@@ -127,3 +127,21 @@ See `docs/phase4/DESIGN.md`.
 | `app/frontend/phase4/p10_ext.css` | Status colours use the palette tokens |
 | `app/frontend/phase4/i18n_80`–`84_ext_*.js` | 91 keys added in each language; `ext.proc.p` reworded |
 | `tests/phase4/ui_design_audit.py`, `tests/phase4/test_ext_i18n.mjs`, `package.json` | New audit and walk-through; key checks extended to `ui_26`–`ui_28`; `test:ui` runs the audit |
+
+## Version 15: layout, two modes, interpretation
+
+See `docs/phase4/DESIGN.md`, section "Version 15".
+
+| Path | Change |
+|---|---|
+| `app/frontend/phase4/q1_design.css` | Two-tone geological palette (stone panels, ocean chrome). Container queries on the side panels. Small-laptop Atlas columns. Collapsible panels. Compact console in Explore mode. Phone card moved under the globe. Comparison table fits the panel. Light colour scheme, link colour and tertiary ink in the panels |
+| `app/frontend/phase4/ui_27_lab_flow.js` | Eighth step "Interpret and apply". Second-place column, target status and Earth dataset with resolution in step 3. Glossary of seven terms |
+| `app/frontend/phase4/ui_28_atlas.js` | On phones the card is placed under the globe. Card adds dimensions assessed, weight coverage, direct and proxy counts, closest exploration operation and the not-a-probability note. Panel toggles. Configuration summary and "Reset weights" in the console |
+| `app/frontend/phase4/ui_22_discover_hub.js` | `xtProcEval` also returns the set of matching cells, so a place can list the process settings it falls in |
+| `app/frontend/phase4/i18n_80`–`84_ext_*.js` | 37 keys added or reworded in each language: modes renamed Explore mode and Research mode, with a hint explaining the difference; the Laboratory intro says eight steps |
+| `tests/phase4/ui_layout_sweep.py` | New: seven viewports, overlap, clipping, squeezed text, globe dominance, contrast |
+| `tests/phase4/ui_design_audit.py` | Eight steps; second place, glossary, Research-mode columns, interpretation step, panel toggle, configuration summary and weight reset |
+| `package.json` | `test:ui` also runs the layout sweep |
+
+No engine file, dataset, threshold, profile, fingerprint, report format or route changed. The 79 protected files are
+byte-identical.

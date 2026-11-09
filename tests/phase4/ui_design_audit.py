@@ -14,8 +14,8 @@
 3. Atlas: the 3D globe is the default projection and the widest region; candidates are listed; a candidate selected on
    the list shows a context card with the engine's own score; layers are behind one button; the card leads to the full
    analysis and to the laboratory.
-4. Research Laboratory: the seven-step workflow (target, Earth candidate, comparison, weights, differences and missing
-   data, evidence, reproduce) works end to end with the real engine; the fourteen modules stay visible and clickable.
+4. Research Laboratory: the eight-step workflow (target, Earth candidate, comparison, weights, differences and missing
+   data, evidence, interpretation, reproduce) works end to end with the real engine; the fourteen modules stay visible and clickable.
 5. The baseline result is unchanged afterwards; no page error.
 """
 import json, os, subprocess, sys, time
@@ -139,6 +139,21 @@ try:
             pg.screenshot(path=os.path.join(OUT, f"{dev}_atlas.png"))
             audit(pg, f"{dev} atlas")
             check(pg.evaluate("[...document.querySelectorAll('#left [data-dslegal], #console [data-dslegal]')].some(a => a.getBoundingClientRect().width > 0) || !!document.querySelector('#left [data-dslegal]')"), f"{dev} atlas: legal links present")
+            m = pg.evaluate("({ names: [...document.querySelectorAll('.ds-mode button')].map(b => b.textContent.trim()), cfg: (document.querySelector('.ds-cfg') || {}).textContent || '' })")
+            check(m["names"][:2] == ["Explore mode", "Research mode"], f"{dev}: Explore mode and Research mode are offered ({m['names']})")
+            check("of 6 dimensions weighted" in m["cfg"], f"{dev}: the console summarises the analysis configuration ({m['cfg'][:60]})")
+            if dev == "desktop":
+                tap('[data-dspanel="right"]'); time.sleep(0.6)
+                wr = pg.evaluate("({ hid: document.querySelector('#app').classList.contains('ds-hide-right'), vw: document.querySelector('#viewport').getBoundingClientRect().width })")
+                check(wr["hid"] and wr["vw"] > g["vw"] + 150, f"{dev} atlas: hiding the ranking widens the globe ({g['vw']:.0f} -> {wr['vw']:.0f} px)")
+                tap('[data-dspanel="right"]'); time.sleep(0.6)
+                check(not pg.evaluate("document.querySelector('#app').classList.contains('ds-hide-right')") and pg.evaluate("document.querySelectorAll('#right .site').length") >= 10, f"{dev} atlas: the ranking comes back")
+                pg.evaluate("dsSetMode('advanced')"); time.sleep(0.4)
+                pg.evaluate("document.querySelector('#w-' + S.critIds[0]).value = 0; document.querySelector('#w-' + S.critIds[0]).dispatchEvent(new Event('input', {bubbles: true}))"); time.sleep(1.0)
+                changed = pg.evaluate("JSON.stringify(S.weights)") != base["w"]
+                pg.evaluate("document.querySelector('[data-dsreset]').scrollIntoView()"); tap("[data-dsreset]"); time.sleep(1.2)
+                check(changed and pg.evaluate("JSON.stringify(S.weights)") == base["w"], f"{dev}: 'Reset weights' restores the profile weights")
+                pg.evaluate("dsSetMode('simple')"); time.sleep(0.3)
             tap("#ds-layers"); time.sleep(0.3)
             check(pg.evaluate("getComputedStyle(document.querySelectorAll('#viewport .vp-top .seg')[1]).display") != "none", f"{dev} atlas: the Layers button reveals the analysis layers")
             tap("#ds-layers"); time.sleep(0.2)
@@ -155,13 +170,27 @@ try:
             check(lab["tab"] == "lab" and lab["step"] == 3 and lab["cell"] == card["sel"], f"{dev} atlas: 'Compare in the laboratory' opens step 3 for that place")
             # ------------------------------------------------------------ Research Laboratory
             steps = pg.evaluate("[...document.querySelectorAll('[data-dsfstep]')].map(s => s.dataset.dsfstep)")
-            check(steps == ["target", "candidate", "compare", "weights", "gaps", "evidence", "reproduce"], f"{dev} lab: seven-step workflow ({steps})")
+            check(steps == ["target", "candidate", "compare", "weights", "gaps", "evidence", "interpret", "reproduce"], f"{dev} lab: eight-step workflow ({steps})")
             rows = pg.evaluate("""(() => { const out = []; for (const tr of document.querySelectorAll('[data-dsfcmp] tbody tr[data-dsfrow]')) { const c = tr.dataset.dsfrow; out.push([c, tr.dataset.dsfk]); }
               const D = ENG.detail(S.A, S.critIds, dsfCand(), jnCtx(S.targetId).tv, S.weights, jnCtx(S.targetId).ranges), th = S.app.thresholds;
               const ref = D.rows.map(r => [r.c, r.s == null || r.s !== r.s ? 'na' : r.s >= th.match ? 'similar' : r.s >= th.partial ? 'partial' : 'different']); return { out, ref }; })()""")
             check(rows["out"] == rows["ref"] and len(rows["out"]) == 6, f"{dev} lab step 3: six dimensions compared, readings equal the engine's")
             pg.screenshot(path=os.path.join(OUT, f"{dev}_lab_compare.png"))
-            for k in range(1, 8):
+            opt2 = pg.evaluate("document.querySelectorAll('[data-dsfcmp2] option')[2].value")
+            pg.select_option("[data-dsfcmp2]", opt2); time.sleep(0.8)
+            c2 = pg.evaluate("""(() => { const j = DSF.cmp2, D = ENG.detail(S.A, S.critIds, j, jnCtx(S.targetId).tv, S.weights, jnCtx(S.targetId).ranges), th = S.app.thresholds;
+              const ref = D.rows.map(r => r.s == null || r.s !== r.s ? 'na' : r.s >= th.match ? 'similar' : r.s >= th.partial ? 'partial' : 'different');
+              const got = [...document.querySelectorAll('[data-dsfc2]')].map(td => td.dataset.dsfc2); return { j, ref, got }; })()""")
+            check(c2["j"] == int(opt2) and c2["got"] == c2["ref"], f"{dev} lab step 3: a second place is compared side by side with the engine's readings ({c2['got']})")
+            pg.select_option("[data-dsfcmp2]", ""); time.sleep(0.5)
+            tap("[data-dsgloss]"); time.sleep(0.4)
+            check(pg.evaluate("document.querySelectorAll('#ds-gloss dt').length") == 7, f"{dev} lab step 3: the glossary explains seven terms in plain words")
+            tap("[data-dsgloss]"); time.sleep(0.3)
+            check(pg.evaluate("[...document.querySelectorAll('[data-dsfcmp] .ds-adv')].every(e => getComputedStyle(e).display === 'none')"), f"{dev} lab step 3: source and status columns stay hidden in Explore mode")
+            pg.evaluate("dsSetMode('advanced')"); time.sleep(0.5)
+            check(pg.evaluate("[...document.querySelectorAll('[data-dsfcmp] .ds-adv')].some(e => getComputedStyle(e).display !== 'none') && S.res && DSF.step === 3"), f"{dev} lab step 3: Research mode adds target status, Earth dataset and resolution, keeping the analysis")
+            pg.evaluate("dsSetMode('simple')"); time.sleep(0.4)
+            for k in range(1, 9):
                 pg.evaluate(f"document.querySelector('[data-dsfgo=\"{k}\"].ds-step-h').scrollIntoView()"); tap(f"[data-dsfgo=\"{k}\"].ds-step-h"); time.sleep(0.5)
                 audit(pg, f"{dev} lab step {k}", "#left")
             # step 1: Moon target, then back to Mars
@@ -191,16 +220,21 @@ try:
             check(pg.evaluate("!document.querySelector('#sheet').hidden"), f"{dev} lab step 6: the trace of the result opens")
             audit(pg, f"{dev} trace sheet", "#sheet")
             pg.evaluate("closeSheet()"); time.sleep(0.3)
-            # step 7: reproduce
+            # step 7: interpret and apply
             tap('[data-dsfgo="7"].ds-step-h'); time.sleep(0.4)
+            ip = pg.evaluate("""({ card: !!document.querySelector('[data-dsflow] .ds-sum'), ops: document.querySelectorAll('[data-dsfops] li').length,
+                                   procs: !!document.querySelector('[data-dsfprocs]') })""")
+            check(ip["card"] and ip["ops"] > 0 and ip["procs"], f"{dev} lab step 7: interpretation card, exploration operations and indicated processes ({ip})")
+            # step 8: reproduce
+            tap('[data-dsfgo="8"].ds-step-h'); time.sleep(0.4)
             rec = json.loads(pg.evaluate("document.querySelector('[data-dsfrec]').textContent"))
-            check(rec["cell"] == pg.evaluate("S.cell[dsfCand()]") and rec["algorithm"] == "tai-sim-1.0.0" and rec["target"] == "mars_jezero", f"{dev} lab step 7: the reproduction record names the algorithm, target and place")
+            check(rec["cell"] == pg.evaluate("S.cell[dsfCand()]") and rec["algorithm"] == "tai-sim-1.0.0" and rec["target"] == "mars_jezero", f"{dev} lab step 8: the reproduction record names the algorithm, target and place")
             tap('[data-dsfdo="repro"]'); time.sleep(0.8)
-            check(pg.evaluate("!document.querySelector('#sheet').hidden"), f"{dev} lab step 7: 'Reproduce this result' opens the reproduction sheet")
+            check(pg.evaluate("!document.querySelector('#sheet').hidden"), f"{dev} lab step 8: 'Reproduce this result' opens the reproduction sheet")
             pg.evaluate("closeSheet()"); time.sleep(0.3)
             with pg.expect_download() as d:
                 tap('[data-dsfdo="report"]')
-            check(d.value.suggested_filename.endswith(".md"), f"{dev} lab step 7: the detailed report downloads ({d.value.suggested_filename})")
+            check(d.value.suggested_filename.endswith(".md"), f"{dev} lab step 8: the detailed report downloads ({d.value.suggested_filename})")
             # modules stay visible and work
             pg.evaluate("document.querySelector('[data-labmod=robust]').scrollIntoView()"); tap("[data-labmod=robust]"); time.sleep(0.8)
             check(pg.evaluate("L.mod") == "robust" and pg.evaluate("!!document.querySelector('[data-dsflow]')"), f"{dev} lab: the research modules stay visible and open below the workflow")

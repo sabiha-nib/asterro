@@ -9,18 +9,29 @@
   --ds-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
   --ds-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
   --ds-mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
-  --ground:#0D1014; --panel:#12161B; --panel-2:#171C22; --raise:#1D232A;
-  --line:#242A31; --line-2:#323A43;
-  --ink:#E9ECEF; --ink-2:#AEB6BF; --ink-3:#8D96A0;
-  --mars:#C9784F; --moon:#9FB3C8; --cross:#B9A274; --earth:#8DAF9B;
-  --accent:var(--mars); --accent-dim:#3A2419;
-  --match:#7FB08A; --partial:#C9A55A; --mismatch:#C8695B;
-  --ds-focus:#9FB3C8; --ds-sel:#1E252D;
+  /* content surfaces: warm stone (never pure white), charcoal text; accents darkened to keep >= 4.5 : 1 */
+  --ground:#0B1C27; --panel:#F0EDE8; --panel-2:#EAE6E0; --raise:#DED8CF;
+  --line:#DDD3C4; --line-2:#C6B9A5;
+  --ink:#1E2529; --ink-2:#45505A; --ink-3:#56606A;
+  --mars:#A0451F; --moon:#375A80; --cross:#7D5D0E; --earth:#246864;
+  --accent:var(--mars); --accent-dim:#E8D3C6;
+  --match:#2A6F47; --partial:#835406; --mismatch:#9E3627;
+  --ds-focus:#1F5F8B; --ds-sel:#DED8CF; --ds-on-accent:#FFF8F0;
   --f-display:var(--ds-display); --f-body:var(--ds-font); --f-mono:var(--ds-font);
   --r:6px;
 }
-#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#1F2A35}
-#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#2E2918}
+#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#D5DEE8}
+#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#E8DDC2}
+/* chrome and imagery surfaces: deep ocean blue, light text; the same token names, lighter accents */
+header.bar,.console,.viewport,.hero,#jn,.jl-toast,#ds-legal-dlg{
+  --panel:#102330; --panel-2:#163041; --raise:#1D3B4F; --line:#21404F; --line-2:#2E5164;
+  --ink:#EEF2F3; --ink-2:#B9C8CE; --ink-3:#93A9B2;
+  --mars:#D98B63; --moon:#9DBBD8; --cross:#CDB06A; --earth:#7FC4BE;
+  --match:#7FC0A0; --partial:#E0B35A; --mismatch:#E58C7C;
+  --accent:var(--mars); --accent-dim:#4A2C1E; --ds-focus:#9DBBD8; --ds-sel:#1D3B4F; --ds-on-accent:#1A0F0A; color:var(--ink)}
+#app[data-target="moon_south_pole"] :is(header.bar,.console,.viewport,.hero){--accent:var(--moon)}
+#app[data-target="cross"] :is(header.bar,.console,.viewport,.hero){--accent:var(--cross)}
+#ds-legal-dlg .ds-legal-box{--panel:#F0EDE8;--panel-2:#EAE6E0;--line:#DDD3C4;--line-2:#C6B9A5;--ink:#1E2529;--ink-2:#45505A;--ink-3:#56606A;color:var(--ink)}
 html,body{background:var(--ground);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{font-family:var(--f-body);font-size:14.5px}
 
@@ -31,11 +42,12 @@ code,pre,kbd,samp,.mono,.hash,.xt-cfg code{font-family:var(--ds-mono)!important}
 b,strong{font-weight:600}
 
 /* --- surfaces: flat, one border colour, small radii --- */
-header.bar{background:var(--ground);border-bottom:1px solid var(--line)}
+header.bar{background:var(--panel);border-bottom:1px solid var(--line)}
 .panel,#left,#right{background:var(--panel)}
 .console{background:var(--panel);border-top:1px solid var(--line)}
-.viewport{background:var(--ground)}
-.hero{background:rgba(13,16,20,.62)}
+.viewport{background:#0B1C27}
+#left,#right{color:var(--ink)}
+.hero{background:rgba(11,28,39,.66)}
 .sheet-card,.jn-card,#jn .jn-dlg,.dm-info,.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.ht,.empty,.ds-sum,.ds-flow,.ds-legal-box{border-radius:8px!important}
 button,select,input,textarea,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs button,.site,.ds-mode,.ds-mode button,.xt-hub button,.xt-procs button,.xt-chip,.xt-st,.tag,.vp-top,.vp-top button,.proj,.proj button,.target-ctl,.hero-lang button{border-radius:6px!important}
 .site{border-left:0!important}
@@ -52,8 +64,8 @@ button,select,input,textarea,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs b
 .num,.score,.site .sc,td.n{font-variant-numeric:tabular-nums}
 
 /* --- controls: one visual language --- */
-.btn-primary,.btn-search{background:var(--mars);color:#14100D;border:1px solid var(--mars);font:600 14px/1 var(--f-body)}
-.btn-primary:hover,.btn-search:hover{background:#D3865F;border-color:#D3865F}
+.btn-primary,.btn-search{background:var(--mars);color:var(--ds-on-accent);border:1px solid var(--mars);font:600 14px/1 var(--f-body)}
+.btn-primary:hover,.btn-search:hover{filter:brightness(1.08)}
 .btn-ghost{border:1px solid var(--line-2);background:transparent;color:var(--ink);font:500 14px/1 var(--f-body)}
 .btn-ghost:hover,.btn-sm:hover{background:var(--panel-2)}
 .btn-sm{font:500 12.5px/1 var(--f-body);border:1px solid var(--line-2);background:transparent;color:var(--ink-2)}
@@ -120,7 +132,7 @@ html.ds-simple .ds-adv{display:none!important}
 .ds-legal a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
 .ds-legal a:hover{color:var(--ink)}
 .hero .ds-legal{margin-top:10px}
-#ds-legal-dlg{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(13,16,20,.86)}
+#ds-legal-dlg{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(11,28,39,.86)}
 #ds-legal-dlg[hidden]{display:none}
 .ds-legal-box{width:min(720px,100%);max-height:min(86vh,900px);overflow:auto;background:var(--panel);border:1px solid var(--line-2);padding:22px 24px}
 .ds-legal-box h2{font:700 22px/1.25 var(--f-display);margin:0 0 4px;color:var(--ink)}
@@ -174,6 +186,113 @@ html.ds-simple .ds-adv-field{display:none}
 .p4-hero{background-image:none!important;background-color:var(--panel-2)!important}
 html[lang]{--f-mono:var(--f-body)}
 .jl-toast{border-radius:8px!important}
-.btn-primary.btn-sm{background:var(--mars);color:#14100D;border-color:var(--mars)}
-.btn-primary.btn-sm:hover{background:#D3865F;border-color:#D3865F}
+.btn-primary.btn-sm{background:var(--mars);color:var(--ds-on-accent);border-color:var(--mars)}
+
 .ds-cmp th[scope=row]::first-letter,.ds-acard .dsa-l::first-letter{text-transform:uppercase}
+
+/* --- weight console: a compact configuration bar in Explore mode, full detail in Research mode --- */
+.console{padding:8px 16px;gap:6px}
+html.ds-simple .sl{position:relative;gap:2px}
+html.ds-simple .sl .dm-plain{display:none}
+html.ds-simple .sl .foot{position:absolute;top:-2px;right:0}
+html.ds-simple .sl label{padding-right:26px}
+html.ds-simple .sliders{gap:2px 18px}
+.con-side{gap:10px 14px}
+.con-side .ds-legal{margin:0;flex:0 0 auto}
+.disclaimer{font-size:11px;flex:1 1 300px}
+.ds-cfg{font:500 12.5px/1.3 var(--f-body);color:var(--ink-2)}
+.ds-cfg b{color:var(--ink);font-weight:600}
+.ds-reset{font:500 12.5px/1 var(--f-body);padding:7px 10px;border:1px solid var(--line-2);background:transparent;color:var(--ink)}
+.ds-reset:hover{background:var(--panel-2)}
+html.ds-simple .ds-reset{display:none}
+
+/* --- collapsible side panels (desktop) --- */
+.ds-paneltog{position:absolute;top:56px;z-index:3;pointer-events:auto;font:500 12px/1 var(--f-body);padding:7px 10px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink)}
+.ds-paneltog:hover{background:var(--panel-2)}
+.ds-paneltog[data-dspanel="left"]{left:12px} .ds-paneltog[data-dspanel="right"]{right:12px;top:100px}
+@media (min-width:1181px){
+  #app.ds-hide-left .stage{grid-template-columns:0 minmax(0,1fr) minmax(260px,320px)!important}
+  #app.ds-hide-right .stage{grid-template-columns:minmax(330px,390px) minmax(0,1fr) 0!important}
+  #app.wide.ds-hide-right .stage{grid-template-columns:minmax(520px,700px) minmax(0,1fr) 0!important}
+  #app.ds-hide-left.ds-hide-right .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+  #app.ds-hide-left #left,#app.ds-hide-right #right{visibility:hidden;overflow:hidden;border:0}
+  #app.wide:not([data-tab="atlas"]) .stage{grid-template-columns:minmax(520px,700px) minmax(0,1fr) minmax(260px,300px)}
+}
+@media (max-width:1180px){.ds-paneltog[data-dspanel="left"]{display:none}
+  #app.ds-hide-right .stage{grid-template-columns:minmax(0,1fr) 0!important} #app.ds-hide-right #right{visibility:hidden;overflow:hidden;border:0}}
+@media (max-width:760px){.ds-paneltog{display:none}}
+/* analysis layers behind one button wherever the globe column is narrow (Atlas and the wide research views) */
+#app.wide .vp-top .seg:nth-of-type(2){display:none}
+html.ds-layers-open #app.wide .vp-top .seg:nth-of-type(2){display:flex}
+#app.wide .ds-layers{display:inline-block}
+.ds-acard .dsa-note{font-size:12px;color:var(--ink-3);margin-top:8px}
+.ds-cmp2{margin:4px 0 10px;max-width:420px}
+.ds-ev{font:500 12px/1.3 var(--f-body)}
+.ds-ev.direct{color:var(--earth)} .ds-ev.proxy{color:var(--partial)} .ds-ev.na{color:var(--ink-3)}
+.ds-gloss-btn{font:500 12.5px/1 var(--f-body);padding:5px 8px;border:1px solid var(--line-2);background:transparent;color:var(--ink);margin-left:4px}
+.ds-gloss-btn:hover{background:var(--panel-2)}
+.ds-gloss{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:6px 14px;margin:6px 0 12px;padding:12px 14px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;font-size:13px}
+.ds-gloss dt{font-weight:600;color:var(--ink)} .ds-gloss dd{margin:0;color:var(--ink-2)}
+@media (max-width:560px){.ds-gloss{grid-template-columns:1fr}.ds-gloss dd{margin-bottom:6px}}
+
+/* panels size their content to their own width (container queries), so a narrow side panel never squeezes text into
+   one-word lines: two-column blocks stack below 560 px of panel width */
+#left,#right{container-type:inline-size}
+@container (max-width:560px){
+  .p4-split{grid-template-columns:minmax(0,1fr)}
+  .p4-col-tree{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:0 0 8px}
+  .p4-regions,.p4-cards,.p4-agg,.p4-scn,.xt-wgrid{grid-template-columns:minmax(0,1fr)}
+  .xt-dl{grid-template-columns:minmax(0,1fr)}
+}
+
+/* --- v15: light side panels carry their own colour scheme, link colour and tertiary ink --- */
+#left,#right{color-scheme:light}
+header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
+#left [data-p4],#right [data-p4]{--ink-3:#56606A}
+#left a:not([class]),#right a:not([class]),.console a:not([class]){color:var(--moon);text-decoration:underline;text-underline-offset:2px}
+/* small laptops: keep the globe the widest region of the Atlas */
+@media (min-width:1181px) and (max-width:1366px){#app.wide[data-tab="atlas"] .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) minmax(240px,260px)}
+  #app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) 0!important}}
+/* phones: the candidate card keeps its two actions in view; the details scroll under them */
+@media (max-width:760px){
+  .ds-acard:not([data-dsacard="hint"]){display:flex;flex-direction:column}
+  .ds-acard .dsa-k,.ds-acard h3,.ds-acard .dsa-ll,.ds-acard .dsa-score{order:0}
+  .ds-acard .dsa-act{order:1;margin:8px 0 4px}
+  .ds-acard .dsa-l,.ds-acard .dsa-note{order:2}
+}
+/* Atlas keeps its own column widths when one side panel is hidden */
+@media (min-width:1181px){
+  #app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(340px,410px) minmax(0,1fr) 0!important}
+  #app.wide[data-tab="atlas"].ds-hide-left .stage{grid-template-columns:0 minmax(0,1fr) minmax(260px,300px)!important}
+  #app.wide[data-tab="atlas"].ds-hide-left.ds-hide-right .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+}
+@media (min-width:1181px) and (max-width:1366px){#app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) 0!important}}
+/* signature chips sit on the surface they are drawn on (light panel or dark chrome) */
+.m6-chip{background:var(--panel-2)}
+.m6-chip.st-d{border-color:var(--match)}.m6-chip.st-p{border-color:var(--partial)}.m6-chip.p4-bad{border-color:var(--mismatch)}
+/* form fields, code and formulas inside the light panels take the light surface (they were drawn on the dark ground) */
+#left :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea),#right :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea){background:var(--panel-2);color:var(--ink);border-color:var(--line-2)}
+#left :is(input,textarea)::placeholder,#right :is(input,textarea)::placeholder{color:var(--ink-3);opacity:1}
+#left :is(pre.code,.formula),#right :is(pre.code,.formula){background:var(--panel-2);color:var(--ink)}
+/* phones: the candidate card is a panel under the globe (moved there by ui_28), not an overlay */
+@media (max-width:760px){
+  .stage>.ds-acard{position:static;grid-column:1;grid-row:2;width:auto;max-height:none;overflow:visible;border-radius:0;border-width:1px 0 0;padding:14px 16px}
+  #app.ds-card-below .stage{grid-template-rows:56vh auto auto auto}
+  #app.ds-card-below .right{grid-row:3} #app.ds-card-below .left{grid-row:4}
+}
+.legend .ticks{gap:10px}
+@media (max-width:760px){.legend{min-width:200px}}
+/* comparison table: dataset names wrap inside their column instead of pushing the table past the panel */
+.ds-cmp{width:100%}
+.ds-cmp td.ds-adv.meta{min-width:120px;max-width:220px;overflow-wrap:anywhere;font-size:12px;line-height:1.4}
+.ds-cmp th,.ds-cmp td{overflow-wrap:break-word}
+.ds-cmp td.n{white-space:normal}.ds-cmp td.n .meta{display:block;white-space:nowrap}
+/* narrow panels (phones): the reading moves under the similarity, so the comparison fits without sideways scrolling */
+.ds-st-in{display:none}
+.ds-st-in.similar{color:var(--match)}.ds-st-in.partial{color:var(--partial)}.ds-st-in.different{color:var(--mismatch)}.ds-st-in.na{color:var(--ink-3)}
+@container (max-width:480px){
+  .ds-cmp .ds-st-in{display:block;font:500 12px/1.3 var(--f-body);white-space:normal}
+  .ds-cmp tr>:nth-child(5){display:none}
+  .ds-cmp th,.ds-cmp td{padding-left:4px;padding-right:4px}
+  .ds-cmp th[scope=row]{font-size:13px}
+}

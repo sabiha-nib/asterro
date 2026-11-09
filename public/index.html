@@ -1139,18 +1139,29 @@ html[lang="bn"] .inv-st{font-family:var(--f-body);letter-spacing:normal;font-siz
   --ds-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
   --ds-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","Instrument Sans","Segoe UI",Roboto,Arial,system-ui,sans-serif;
   --ds-mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
-  --ground:#0D1014; --panel:#12161B; --panel-2:#171C22; --raise:#1D232A;
-  --line:#242A31; --line-2:#323A43;
-  --ink:#E9ECEF; --ink-2:#AEB6BF; --ink-3:#8D96A0;
-  --mars:#C9784F; --moon:#9FB3C8; --cross:#B9A274; --earth:#8DAF9B;
-  --accent:var(--mars); --accent-dim:#3A2419;
-  --match:#7FB08A; --partial:#C9A55A; --mismatch:#C8695B;
-  --ds-focus:#9FB3C8; --ds-sel:#1E252D;
+  /* content surfaces: warm stone (never pure white), charcoal text; accents darkened to keep >= 4.5 : 1 */
+  --ground:#0B1C27; --panel:#F0EDE8; --panel-2:#EAE6E0; --raise:#DED8CF;
+  --line:#DDD3C4; --line-2:#C6B9A5;
+  --ink:#1E2529; --ink-2:#45505A; --ink-3:#56606A;
+  --mars:#A0451F; --moon:#375A80; --cross:#7D5D0E; --earth:#246864;
+  --accent:var(--mars); --accent-dim:#E8D3C6;
+  --match:#2A6F47; --partial:#835406; --mismatch:#9E3627;
+  --ds-focus:#1F5F8B; --ds-sel:#DED8CF; --ds-on-accent:#FFF8F0;
   --f-display:var(--ds-display); --f-body:var(--ds-font); --f-mono:var(--ds-font);
   --r:6px;
 }
-#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#1F2A35}
-#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#2E2918}
+#app[data-target="moon_south_pole"]{--accent:var(--moon);--accent-dim:#D5DEE8}
+#app[data-target="cross"]{--accent:var(--cross);--accent-dim:#E8DDC2}
+/* chrome and imagery surfaces: deep ocean blue, light text; the same token names, lighter accents */
+header.bar,.console,.viewport,.hero,#jn,.jl-toast,#ds-legal-dlg{
+  --panel:#102330; --panel-2:#163041; --raise:#1D3B4F; --line:#21404F; --line-2:#2E5164;
+  --ink:#EEF2F3; --ink-2:#B9C8CE; --ink-3:#93A9B2;
+  --mars:#D98B63; --moon:#9DBBD8; --cross:#CDB06A; --earth:#7FC4BE;
+  --match:#7FC0A0; --partial:#E0B35A; --mismatch:#E58C7C;
+  --accent:var(--mars); --accent-dim:#4A2C1E; --ds-focus:#9DBBD8; --ds-sel:#1D3B4F; --ds-on-accent:#1A0F0A; color:var(--ink)}
+#app[data-target="moon_south_pole"] :is(header.bar,.console,.viewport,.hero){--accent:var(--moon)}
+#app[data-target="cross"] :is(header.bar,.console,.viewport,.hero){--accent:var(--cross)}
+#ds-legal-dlg .ds-legal-box{--panel:#F0EDE8;--panel-2:#EAE6E0;--line:#DDD3C4;--line-2:#C6B9A5;--ink:#1E2529;--ink-2:#45505A;--ink-3:#56606A;color:var(--ink)}
 html,body{background:var(--ground);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{font-family:var(--f-body);font-size:14.5px}
 
@@ -1161,11 +1172,12 @@ code,pre,kbd,samp,.mono,.hash,.xt-cfg code{font-family:var(--ds-mono)!important}
 b,strong{font-weight:600}
 
 /* --- surfaces: flat, one border colour, small radii --- */
-header.bar{background:var(--ground);border-bottom:1px solid var(--line)}
+header.bar{background:var(--panel);border-bottom:1px solid var(--line)}
 .panel,#left,#right{background:var(--panel)}
 .console{background:var(--panel);border-top:1px solid var(--line)}
-.viewport{background:var(--ground)}
-.hero{background:rgba(13,16,20,.62)}
+.viewport{background:#0B1C27}
+#left,#right{color:var(--ink)}
+.hero{background:rgba(11,28,39,.66)}
 .sheet-card,.jn-card,#jn .jn-dlg,.dm-info,.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.ht,.empty,.ds-sum,.ds-flow,.ds-legal-box{border-radius:8px!important}
 button,select,input,textarea,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs button,.site,.ds-mode,.ds-mode button,.xt-hub button,.xt-procs button,.xt-chip,.xt-st,.tag,.vp-top,.vp-top button,.proj,.proj button,.target-ctl,.hero-lang button{border-radius:6px!important}
 .site{border-left:0!important}
@@ -1182,8 +1194,8 @@ button,select,input,textarea,.btn-sm,.btn-ghost,.btn-primary,.btn-search,.tabs b
 .num,.score,.site .sc,td.n{font-variant-numeric:tabular-nums}
 
 /* --- controls: one visual language --- */
-.btn-primary,.btn-search{background:var(--mars);color:#14100D;border:1px solid var(--mars);font:600 14px/1 var(--f-body)}
-.btn-primary:hover,.btn-search:hover{background:#D3865F;border-color:#D3865F}
+.btn-primary,.btn-search{background:var(--mars);color:var(--ds-on-accent);border:1px solid var(--mars);font:600 14px/1 var(--f-body)}
+.btn-primary:hover,.btn-search:hover{filter:brightness(1.08)}
 .btn-ghost{border:1px solid var(--line-2);background:transparent;color:var(--ink);font:500 14px/1 var(--f-body)}
 .btn-ghost:hover,.btn-sm:hover{background:var(--panel-2)}
 .btn-sm{font:500 12.5px/1 var(--f-body);border:1px solid var(--line-2);background:transparent;color:var(--ink-2)}
@@ -1250,7 +1262,7 @@ html.ds-simple .ds-adv{display:none!important}
 .ds-legal a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
 .ds-legal a:hover{color:var(--ink)}
 .hero .ds-legal{margin-top:10px}
-#ds-legal-dlg{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(13,16,20,.86)}
+#ds-legal-dlg{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(11,28,39,.86)}
 #ds-legal-dlg[hidden]{display:none}
 .ds-legal-box{width:min(720px,100%);max-height:min(86vh,900px);overflow:auto;background:var(--panel);border:1px solid var(--line-2);padding:22px 24px}
 .ds-legal-box h2{font:700 22px/1.25 var(--f-display);margin:0 0 4px;color:var(--ink)}
@@ -1304,9 +1316,116 @@ html.ds-simple .ds-adv-field{display:none}
 .p4-hero{background-image:none!important;background-color:var(--panel-2)!important}
 html[lang]{--f-mono:var(--f-body)}
 .jl-toast{border-radius:8px!important}
-.btn-primary.btn-sm{background:var(--mars);color:#14100D;border-color:var(--mars)}
-.btn-primary.btn-sm:hover{background:#D3865F;border-color:#D3865F}
+.btn-primary.btn-sm{background:var(--mars);color:var(--ds-on-accent);border-color:var(--mars)}
+
 .ds-cmp th[scope=row]::first-letter,.ds-acard .dsa-l::first-letter{text-transform:uppercase}
+
+/* --- weight console: a compact configuration bar in Explore mode, full detail in Research mode --- */
+.console{padding:8px 16px;gap:6px}
+html.ds-simple .sl{position:relative;gap:2px}
+html.ds-simple .sl .dm-plain{display:none}
+html.ds-simple .sl .foot{position:absolute;top:-2px;right:0}
+html.ds-simple .sl label{padding-right:26px}
+html.ds-simple .sliders{gap:2px 18px}
+.con-side{gap:10px 14px}
+.con-side .ds-legal{margin:0;flex:0 0 auto}
+.disclaimer{font-size:11px;flex:1 1 300px}
+.ds-cfg{font:500 12.5px/1.3 var(--f-body);color:var(--ink-2)}
+.ds-cfg b{color:var(--ink);font-weight:600}
+.ds-reset{font:500 12.5px/1 var(--f-body);padding:7px 10px;border:1px solid var(--line-2);background:transparent;color:var(--ink)}
+.ds-reset:hover{background:var(--panel-2)}
+html.ds-simple .ds-reset{display:none}
+
+/* --- collapsible side panels (desktop) --- */
+.ds-paneltog{position:absolute;top:56px;z-index:3;pointer-events:auto;font:500 12px/1 var(--f-body);padding:7px 10px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink)}
+.ds-paneltog:hover{background:var(--panel-2)}
+.ds-paneltog[data-dspanel="left"]{left:12px} .ds-paneltog[data-dspanel="right"]{right:12px;top:100px}
+@media (min-width:1181px){
+  #app.ds-hide-left .stage{grid-template-columns:0 minmax(0,1fr) minmax(260px,320px)!important}
+  #app.ds-hide-right .stage{grid-template-columns:minmax(330px,390px) minmax(0,1fr) 0!important}
+  #app.wide.ds-hide-right .stage{grid-template-columns:minmax(520px,700px) minmax(0,1fr) 0!important}
+  #app.ds-hide-left.ds-hide-right .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+  #app.ds-hide-left #left,#app.ds-hide-right #right{visibility:hidden;overflow:hidden;border:0}
+  #app.wide:not([data-tab="atlas"]) .stage{grid-template-columns:minmax(520px,700px) minmax(0,1fr) minmax(260px,300px)}
+}
+@media (max-width:1180px){.ds-paneltog[data-dspanel="left"]{display:none}
+  #app.ds-hide-right .stage{grid-template-columns:minmax(0,1fr) 0!important} #app.ds-hide-right #right{visibility:hidden;overflow:hidden;border:0}}
+@media (max-width:760px){.ds-paneltog{display:none}}
+/* analysis layers behind one button wherever the globe column is narrow (Atlas and the wide research views) */
+#app.wide .vp-top .seg:nth-of-type(2){display:none}
+html.ds-layers-open #app.wide .vp-top .seg:nth-of-type(2){display:flex}
+#app.wide .ds-layers{display:inline-block}
+.ds-acard .dsa-note{font-size:12px;color:var(--ink-3);margin-top:8px}
+.ds-cmp2{margin:4px 0 10px;max-width:420px}
+.ds-ev{font:500 12px/1.3 var(--f-body)}
+.ds-ev.direct{color:var(--earth)} .ds-ev.proxy{color:var(--partial)} .ds-ev.na{color:var(--ink-3)}
+.ds-gloss-btn{font:500 12.5px/1 var(--f-body);padding:5px 8px;border:1px solid var(--line-2);background:transparent;color:var(--ink);margin-left:4px}
+.ds-gloss-btn:hover{background:var(--panel-2)}
+.ds-gloss{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:6px 14px;margin:6px 0 12px;padding:12px 14px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;font-size:13px}
+.ds-gloss dt{font-weight:600;color:var(--ink)} .ds-gloss dd{margin:0;color:var(--ink-2)}
+@media (max-width:560px){.ds-gloss{grid-template-columns:1fr}.ds-gloss dd{margin-bottom:6px}}
+
+/* panels size their content to their own width (container queries), so a narrow side panel never squeezes text into
+   one-word lines: two-column blocks stack below 560 px of panel width */
+#left,#right{container-type:inline-size}
+@container (max-width:560px){
+  .p4-split{grid-template-columns:minmax(0,1fr)}
+  .p4-col-tree{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:0 0 8px}
+  .p4-regions,.p4-cards,.p4-agg,.p4-scn,.xt-wgrid{grid-template-columns:minmax(0,1fr)}
+  .xt-dl{grid-template-columns:minmax(0,1fr)}
+}
+
+/* --- v15: light side panels carry their own colour scheme, link colour and tertiary ink --- */
+#left,#right{color-scheme:light}
+header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
+#left [data-p4],#right [data-p4]{--ink-3:#56606A}
+#left a:not([class]),#right a:not([class]),.console a:not([class]){color:var(--moon);text-decoration:underline;text-underline-offset:2px}
+/* small laptops: keep the globe the widest region of the Atlas */
+@media (min-width:1181px) and (max-width:1366px){#app.wide[data-tab="atlas"] .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) minmax(240px,260px)}
+  #app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) 0!important}}
+/* phones: the candidate card keeps its two actions in view; the details scroll under them */
+@media (max-width:760px){
+  .ds-acard:not([data-dsacard="hint"]){display:flex;flex-direction:column}
+  .ds-acard .dsa-k,.ds-acard h3,.ds-acard .dsa-ll,.ds-acard .dsa-score{order:0}
+  .ds-acard .dsa-act{order:1;margin:8px 0 4px}
+  .ds-acard .dsa-l,.ds-acard .dsa-note{order:2}
+}
+/* Atlas keeps its own column widths when one side panel is hidden */
+@media (min-width:1181px){
+  #app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(340px,410px) minmax(0,1fr) 0!important}
+  #app.wide[data-tab="atlas"].ds-hide-left .stage{grid-template-columns:0 minmax(0,1fr) minmax(260px,300px)!important}
+  #app.wide[data-tab="atlas"].ds-hide-left.ds-hide-right .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+}
+@media (min-width:1181px) and (max-width:1366px){#app.wide[data-tab="atlas"].ds-hide-right .stage{grid-template-columns:minmax(300px,330px) minmax(0,1fr) 0!important}}
+/* signature chips sit on the surface they are drawn on (light panel or dark chrome) */
+.m6-chip{background:var(--panel-2)}
+.m6-chip.st-d{border-color:var(--match)}.m6-chip.st-p{border-color:var(--partial)}.m6-chip.p4-bad{border-color:var(--mismatch)}
+/* form fields, code and formulas inside the light panels take the light surface (they were drawn on the dark ground) */
+#left :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea),#right :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea){background:var(--panel-2);color:var(--ink);border-color:var(--line-2)}
+#left :is(input,textarea)::placeholder,#right :is(input,textarea)::placeholder{color:var(--ink-3);opacity:1}
+#left :is(pre.code,.formula),#right :is(pre.code,.formula){background:var(--panel-2);color:var(--ink)}
+/* phones: the candidate card is a panel under the globe (moved there by ui_28), not an overlay */
+@media (max-width:760px){
+  .stage>.ds-acard{position:static;grid-column:1;grid-row:2;width:auto;max-height:none;overflow:visible;border-radius:0;border-width:1px 0 0;padding:14px 16px}
+  #app.ds-card-below .stage{grid-template-rows:56vh auto auto auto}
+  #app.ds-card-below .right{grid-row:3} #app.ds-card-below .left{grid-row:4}
+}
+.legend .ticks{gap:10px}
+@media (max-width:760px){.legend{min-width:200px}}
+/* comparison table: dataset names wrap inside their column instead of pushing the table past the panel */
+.ds-cmp{width:100%}
+.ds-cmp td.ds-adv.meta{min-width:120px;max-width:220px;overflow-wrap:anywhere;font-size:12px;line-height:1.4}
+.ds-cmp th,.ds-cmp td{overflow-wrap:break-word}
+.ds-cmp td.n{white-space:normal}.ds-cmp td.n .meta{display:block;white-space:nowrap}
+/* narrow panels (phones): the reading moves under the similarity, so the comparison fits without sideways scrolling */
+.ds-st-in{display:none}
+.ds-st-in.similar{color:var(--match)}.ds-st-in.partial{color:var(--partial)}.ds-st-in.different{color:var(--mismatch)}.ds-st-in.na{color:var(--ink-3)}
+@container (max-width:480px){
+  .ds-cmp .ds-st-in{display:block;font:500 12px/1.3 var(--f-body);white-space:normal}
+  .ds-cmp tr>:nth-child(5){display:none}
+  .ds-cmp th,.ds-cmp td{padding-left:4px;padding-right:4px}
+  .ds-cmp th[scope=row]{font-size:13px}
+}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -21215,9 +21334,9 @@ i18nExtend("en", {
   "ext.proc.water_alteration.lim": "Not searchable: needs mineral maps (CRISM, Landsat or Sentinel-2 spectra), not in ASTERRO.",
 
   "ds.mode.label": "View",
-  "ds.mode.simple": "Simple",
-  "ds.mode.advanced": "Advanced",
-  "ds.mode.hint": "Simple shows the essentials; Advanced shows every weight and control.",
+  "ds.mode.simple": "Explore mode",
+  "ds.mode.advanced": "Research mode",
+  "ds.mode.hint": "Explore mode shows the essentials in plain language; Research mode adds every variable, weight, source and control. Switching keeps your analysis.",
   "ds.hero.lede": "Find Earth's environmental analogues for worlds beyond Earth.",
   "ds.hero.ways": "Ways to begin",
   "ds.hero.explore": "Explore Earth",
@@ -21274,7 +21393,7 @@ i18nExtend("en", {
   "ds.pp.s7.h": "Contact",
   "ds.pp.s7.p": "Questions go to the issue tracker of the public repository github.com/sabiha-nib/asterro.",
   "dsf.title": "Research laboratory",
-  "dsf.intro": "Work through one comparison in seven steps. Each step shows the essentials first; detailed controls stay one click away.",
+  "dsf.intro": "Work through one comparison in eight steps. Each step shows the essentials first; detailed controls stay one click away.",
   "dsf.modules": "Research modules",
   "dsf.modules_p": "Fourteen deeper analyses that sit beside the baseline score and never change it.",
   "dsf.prev": "Back",
@@ -21329,7 +21448,42 @@ i18nExtend("en", {
   "dsa.open": "Full analysis",
   "dsa.lab": "Compare in the laboratory",
   "dsa.layers": "Layers",
-  "dsa.layers_hide": "Hide layers"
+  "dsa.layers_hide": "Hide layers",
+
+  "dsp.left.hide": "Hide side panel",
+  "dsp.left.show": "Show side panel",
+  "dsp.right.hide": "Hide ranking",
+  "dsp.right.show": "Show ranking",
+  "dsp.cfg": "Analysis: {n} of {m} dimensions weighted ·",
+  "dsp.reset": "Reset weights",
+  "dsf.compare.with": "Compare with a second place",
+  "dsf.compare.none": "No second place",
+  "dsf.compare.kind": "Target measurement",
+  "dsf.compare.source": "Earth data and resolution",
+  "dsf.interpret.t": "Interpret and apply",
+  "dsf.interpret.sum": "Meaning and exploration use",
+  "dsf.interpret.ops": "Exploration operations",
+  "dsf.interpret.procs": "Process settings indicated at this place",
+  "dsf.interpret.noprocs": "No process rule matches this place.",
+  "dsa.assessed": "{k} of {n} dimensions assessed · weight coverage {p}",
+  "dsa.evidence": "Target values: {d} direct measurements, {p} proxies",
+  "dsa.useful": "Closest exploration operation:",
+  "dsa.note": "A similarity of measured conditions, not a probability, a suitability rating or a certification.",
+  "ds.gl.open": "What do these terms mean?",
+  "ds.gl.analogue.t": "Analogue",
+  "ds.gl.analogue.d": "An Earth environment that shares selected measurable characteristics with a place on the Moon or Mars.",
+  "ds.gl.similarity.t": "Similarity s",
+  "ds.gl.similarity.d": "How close the Earth value is to the target value, from 0 to 1, after scaling by the range of all values. It is not a probability.",
+  "ds.gl.aridity.t": "Aridity",
+  "ds.gl.aridity.d": "How dry an environment is, from rainfall compared with how much water could evaporate.",
+  "ds.gl.roughness.t": "Surface roughness",
+  "ds.gl.roughness.d": "How much the height of the ground varies within an area of about 1 km and more.",
+  "ds.gl.thermal.t": "Thermal behaviour",
+  "ds.gl.thermal.d": "How much the ground surface warms by day and cools by night.",
+  "ds.gl.proxy.t": "Proxy",
+  "ds.gl.proxy.d": "An indirect value used when no direct measurement exists. ASTERRO labels every proxy.",
+  "ds.gl.coverage.t": "Weight coverage",
+  "ds.gl.coverage.d": "The share of the weights that could be compared at a place. Missing data is left out, never counted as zero."
 });
 
 /* ===== Extension catalogue · বাংলা =====
@@ -22028,9 +22182,9 @@ i18nExtend("bn", {
   "ext.proc.water_alteration.lim": "খোঁজা যায় না: খনিজ মানচিত্র (CRISM, Landsat বা Sentinel-2-এর বর্ণালি) লাগে, যা ASTERRO-তে নেই।",
 
   "ds.mode.label": "দৃশ্য",
-  "ds.mode.simple": "সহজ",
-  "ds.mode.advanced": "উন্নত",
-  "ds.mode.hint": "সহজ দৃশ্যে মূল বিষয়গুলো থাকে; উন্নত দৃশ্যে সব ভার ও নিয়ন্ত্রণ দেখা যায়।",
+  "ds.mode.simple": "অন্বেষণ মোড",
+  "ds.mode.advanced": "গবেষণা মোড",
+  "ds.mode.hint": "অন্বেষণ মোডে সহজ ভাষায় মূল বিষয় দেখানো হয়; গবেষণা মোডে প্রতিটি চলক, ভার, উৎস ও নিয়ন্ত্রণ যোগ হয়। মোড বদলালেও আপনার বিশ্লেষণ থাকে।",
   "ds.hero.lede": "অন্য জগতের পরিবেশের মতো জায়গা খুঁজুন পৃথিবীতেই।",
   "ds.hero.ways": "শুরু করার উপায়",
   "ds.hero.explore": "পৃথিবী অন্বেষণ করুন",
@@ -22087,7 +22241,7 @@ i18nExtend("bn", {
   "ds.pp.s7.h": "যোগাযোগ",
   "ds.pp.s7.p": "প্রশ্ন সর্বজনীন রিপোজিটরি github.com/sabiha-nib/asterro-র ইস্যু ট্র্যাকারে জানান।",
   "dsf.title": "গবেষণাগার",
-  "dsf.intro": "সাতটি ধাপে একটি তুলনা সম্পন্ন করুন। প্রতিটি ধাপে আগে মূল বিষয় দেখানো হয়; বিস্তারিত নিয়ন্ত্রণ এক ক্লিক দূরে থাকে।",
+  "dsf.intro": "আটটি ধাপে একটি তুলনা সম্পন্ন করুন। প্রতিটি ধাপে আগে মূল বিষয় দেখানো হয়; বিস্তারিত নিয়ন্ত্রণ এক ক্লিক দূরে থাকে।",
   "dsf.modules": "গবেষণা মডিউল",
   "dsf.modules_p": "মূল স্কোরের পাশে থাকা চোদ্দটি গভীর বিশ্লেষণ, যা স্কোরটি কখনও বদলায় না।",
   "dsf.prev": "পেছনে",
@@ -22142,7 +22296,42 @@ i18nExtend("bn", {
   "dsa.open": "পূর্ণ বিশ্লেষণ",
   "dsa.lab": "গবেষণাগারে তুলনা করুন",
   "dsa.layers": "স্তর",
-  "dsa.layers_hide": "স্তর লুকান"
+  "dsa.layers_hide": "স্তর লুকান",
+
+  "dsp.left.hide": "পাশের প্যানেল লুকান",
+  "dsp.left.show": "পাশের প্যানেল দেখান",
+  "dsp.right.hide": "ক্রমতালিকা লুকান",
+  "dsp.right.show": "ক্রমতালিকা দেখান",
+  "dsp.cfg": "বিশ্লেষণ: {m}টির মধ্যে {n}টি মাত্রায় ভার ·",
+  "dsp.reset": "ভার পুনরায় ঠিক করুন",
+  "dsf.compare.with": "দ্বিতীয় একটি স্থানের সঙ্গে তুলনা করুন",
+  "dsf.compare.none": "দ্বিতীয় স্থান নেই",
+  "dsf.compare.kind": "লক্ষ্যের পরিমাপ",
+  "dsf.compare.source": "পৃথিবীর ডেটা ও রেজোলিউশন",
+  "dsf.interpret.t": "ব্যাখ্যা ও প্রয়োগ",
+  "dsf.interpret.sum": "অর্থ ও অন্বেষণে ব্যবহার",
+  "dsf.interpret.ops": "অন্বেষণের কাজ",
+  "dsf.interpret.procs": "এই স্থানে নির্দেশিত প্রক্রিয়ার পরিবেশ",
+  "dsf.interpret.noprocs": "কোনো প্রক্রিয়ার নিয়ম এই স্থানের সঙ্গে মেলে না।",
+  "dsa.assessed": "{n}টির মধ্যে {k}টি মাত্রা মূল্যায়িত · ভারের আওতা {p}",
+  "dsa.evidence": "লক্ষ্যের মান: {d}টি সরাসরি পরিমাপ, {p}টি পরোক্ষ মান",
+  "dsa.useful": "সবচেয়ে কাছের অন্বেষণের কাজ:",
+  "dsa.note": "মাপা অবস্থার সাদৃশ্য; কোনো সম্ভাবনা, উপযুক্ততার মান বা সনদ নয়।",
+  "ds.gl.open": "এই শব্দগুলোর মানে কী?",
+  "ds.gl.analogue.t": "অনুরূপ",
+  "ds.gl.analogue.d": "পৃথিবীর এমন পরিবেশ, যা চাঁদ বা মঙ্গলের কোনো স্থানের সঙ্গে কিছু মাপা যায় এমন বৈশিষ্ট্য ভাগ করে।",
+  "ds.gl.similarity.t": "সাদৃশ্য s",
+  "ds.gl.similarity.d": "সব মানের পরিসর অনুযায়ী মাপার পর পৃথিবীর মান লক্ষ্যের মানের কতটা কাছে, ০ থেকে ১-এর মধ্যে। এটি সম্ভাবনা নয়।",
+  "ds.gl.aridity.t": "শুষ্কতা",
+  "ds.gl.aridity.d": "বৃষ্টি আর সম্ভাব্য বাষ্পীভবনের তুলনায় একটি পরিবেশ কতটা শুকনো।",
+  "ds.gl.roughness.t": "ভূপৃষ্ঠের অমসৃণতা",
+  "ds.gl.roughness.d": "প্রায় ১ কিমি বা তার বেশি এলাকায় ভূমির উচ্চতা কতটা ওঠানামা করে।",
+  "ds.gl.thermal.t": "তাপীয় আচরণ",
+  "ds.gl.thermal.d": "ভূপৃষ্ঠ দিনে কতটা গরম হয় আর রাতে কতটা ঠান্ডা হয়।",
+  "ds.gl.proxy.t": "পরোক্ষ মান",
+  "ds.gl.proxy.d": "সরাসরি পরিমাপ না থাকলে ব্যবহৃত একটি পরোক্ষ মান। ASTERRO প্রতিটি চিহ্নিত করে।",
+  "ds.gl.coverage.t": "ভারের আওতা",
+  "ds.gl.coverage.d": "কোনো স্থানে ভারের কতটা অংশ তুলনা করা গেছে। অনুপস্থিত ডেটা বাদ পড়ে, কখনও শূন্য ধরা হয় না।"
 });
 
 /* ===== Extension catalogue · Español =====
@@ -22841,9 +23030,9 @@ i18nExtend("es", {
   "ext.proc.water_alteration.lim": "No se puede buscar: necesita mapas minerales (espectros de CRISM, Landsat o Sentinel-2), que no están en ASTERRO.",
 
   "ds.mode.label": "Vista",
-  "ds.mode.simple": "Sencilla",
-  "ds.mode.advanced": "Avanzada",
-  "ds.mode.hint": "La vista sencilla muestra lo esencial; la avanzada muestra todos los pesos y controles.",
+  "ds.mode.simple": "Modo exploración",
+  "ds.mode.advanced": "Modo investigación",
+  "ds.mode.hint": "El modo exploración muestra lo esencial en lenguaje claro; el modo investigación añade cada variable, peso, fuente y control. Cambiar de modo conserva tu análisis.",
   "ds.hero.lede": "Encuentra en la Tierra análogos ambientales de otros mundos.",
   "ds.hero.ways": "Formas de empezar",
   "ds.hero.explore": "Explorar la Tierra",
@@ -22900,7 +23089,7 @@ i18nExtend("es", {
   "ds.pp.s7.h": "Contacto",
   "ds.pp.s7.p": "Las preguntas se dirigen al gestor de incidencias del repositorio público github.com/sabiha-nib/asterro.",
   "dsf.title": "Laboratorio de investigación",
-  "dsf.intro": "Recorre una comparación en siete pasos. Cada paso muestra primero lo esencial; los controles detallados quedan a un clic.",
+  "dsf.intro": "Recorre una comparación en ocho pasos. Cada paso muestra primero lo esencial; los controles detallados quedan a un clic.",
   "dsf.modules": "Módulos de investigación",
   "dsf.modules_p": "Catorce análisis más profundos que acompañan a la puntuación de base y nunca la cambian.",
   "dsf.prev": "Atrás",
@@ -22955,7 +23144,42 @@ i18nExtend("es", {
   "dsa.open": "Análisis completo",
   "dsa.lab": "Comparar en el laboratorio",
   "dsa.layers": "Capas",
-  "dsa.layers_hide": "Ocultar capas"
+  "dsa.layers_hide": "Ocultar capas",
+
+  "dsp.left.hide": "Ocultar panel lateral",
+  "dsp.left.show": "Mostrar panel lateral",
+  "dsp.right.hide": "Ocultar clasificación",
+  "dsp.right.show": "Mostrar clasificación",
+  "dsp.cfg": "Análisis: {n} de {m} dimensiones con peso ·",
+  "dsp.reset": "Restablecer pesos",
+  "dsf.compare.with": "Comparar con un segundo lugar",
+  "dsf.compare.none": "Sin segundo lugar",
+  "dsf.compare.kind": "Medición del objetivo",
+  "dsf.compare.source": "Datos terrestres y resolución",
+  "dsf.interpret.t": "Interpretar y aplicar",
+  "dsf.interpret.sum": "Significado y uso en exploración",
+  "dsf.interpret.ops": "Operaciones de exploración",
+  "dsf.interpret.procs": "Entornos de procesos indicados en este lugar",
+  "dsf.interpret.noprocs": "Ninguna regla de proceso coincide con este lugar.",
+  "dsa.assessed": "{k} de {n} dimensiones evaluadas · cobertura de peso {p}",
+  "dsa.evidence": "Valores del objetivo: {d} mediciones directas, {p} indicadores indirectos",
+  "dsa.useful": "Operación de exploración más cercana:",
+  "dsa.note": "Una similitud de condiciones medidas, no una probabilidad, una valoración de idoneidad ni una certificación.",
+  "ds.gl.open": "¿Qué significan estos términos?",
+  "ds.gl.analogue.t": "Análogo",
+  "ds.gl.analogue.d": "Un entorno terrestre que comparte ciertas características medibles con un lugar de la Luna o de Marte.",
+  "ds.gl.similarity.t": "Similitud s",
+  "ds.gl.similarity.d": "Lo cerca que está el valor terrestre del valor del objetivo, de 0 a 1, tras escalar por el rango de todos los valores. No es una probabilidad.",
+  "ds.gl.aridity.t": "Aridez",
+  "ds.gl.aridity.d": "Lo seco que es un entorno, comparando la lluvia con el agua que podría evaporarse.",
+  "ds.gl.roughness.t": "Rugosidad del terreno",
+  "ds.gl.roughness.d": "Cuánto varía la altura del suelo dentro de un área de 1 km o más.",
+  "ds.gl.thermal.t": "Comportamiento térmico",
+  "ds.gl.thermal.d": "Cuánto se calienta la superficie de día y cuánto se enfría de noche.",
+  "ds.gl.proxy.t": "Indicador indirecto",
+  "ds.gl.proxy.d": "Un valor indirecto que se usa cuando no hay medición directa. ASTERRO señala cada uno.",
+  "ds.gl.coverage.t": "Cobertura de peso",
+  "ds.gl.coverage.d": "La parte de los pesos que se pudo comparar en un lugar. Los datos ausentes se dejan fuera, nunca cuentan como cero."
 });
 
 /* ===== Extension catalogue · Français =====
@@ -23654,9 +23878,9 @@ i18nExtend("fr", {
   "ext.proc.water_alteration.lim": "Non recherchable : nécessite des cartes minérales (spectres CRISM, Landsat ou Sentinel-2), absentes d'ASTERRO.",
 
   "ds.mode.label": "Affichage",
-  "ds.mode.simple": "Simple",
-  "ds.mode.advanced": "Avancé",
-  "ds.mode.hint": "L'affichage simple montre l'essentiel ; l'affichage avancé montre tous les poids et réglages.",
+  "ds.mode.simple": "Mode exploration",
+  "ds.mode.advanced": "Mode recherche",
+  "ds.mode.hint": "Le mode exploration montre l'essentiel en langage clair ; le mode recherche ajoute chaque variable, poids, source et réglage. Changer de mode conserve votre analyse.",
   "ds.hero.lede": "Trouvez sur Terre des analogues environnementaux d'autres mondes.",
   "ds.hero.ways": "Pour commencer",
   "ds.hero.explore": "Explorer la Terre",
@@ -23713,7 +23937,7 @@ i18nExtend("fr", {
   "ds.pp.s7.h": "Contact",
   "ds.pp.s7.p": "Les questions vont au gestionnaire de tickets du dépôt public github.com/sabiha-nib/asterro.",
   "dsf.title": "Laboratoire de recherche",
-  "dsf.intro": "Suivez une comparaison en sept étapes. Chaque étape montre d'abord l'essentiel ; les réglages détaillés restent à un clic.",
+  "dsf.intro": "Suivez une comparaison en huit étapes. Chaque étape montre d'abord l'essentiel ; les réglages détaillés restent à un clic.",
   "dsf.modules": "Modules de recherche",
   "dsf.modules_p": "Quatorze analyses approfondies qui accompagnent le score de base sans jamais le modifier.",
   "dsf.prev": "Retour",
@@ -23768,7 +23992,42 @@ i18nExtend("fr", {
   "dsa.open": "Analyse complète",
   "dsa.lab": "Comparer au laboratoire",
   "dsa.layers": "Calques",
-  "dsa.layers_hide": "Masquer les calques"
+  "dsa.layers_hide": "Masquer les calques",
+
+  "dsp.left.hide": "Masquer le panneau latéral",
+  "dsp.left.show": "Afficher le panneau latéral",
+  "dsp.right.hide": "Masquer le classement",
+  "dsp.right.show": "Afficher le classement",
+  "dsp.cfg": "Analyse : {n} dimensions pondérées sur {m} ·",
+  "dsp.reset": "Rétablir les poids",
+  "dsf.compare.with": "Comparer avec un second lieu",
+  "dsf.compare.none": "Aucun second lieu",
+  "dsf.compare.kind": "Mesure de la cible",
+  "dsf.compare.source": "Données terrestres et résolution",
+  "dsf.interpret.t": "Interpréter et appliquer",
+  "dsf.interpret.sum": "Sens et usage pour l'exploration",
+  "dsf.interpret.ops": "Opérations d'exploration",
+  "dsf.interpret.procs": "Contextes de processus indiqués en ce lieu",
+  "dsf.interpret.noprocs": "Aucune règle de processus ne correspond à ce lieu.",
+  "dsa.assessed": "{k} dimensions évaluées sur {n} · couverture du poids {p}",
+  "dsa.evidence": "Valeurs de la cible : {d} mesures directes, {p} indicateurs indirects",
+  "dsa.useful": "Opération d'exploration la plus proche :",
+  "dsa.note": "Une similarité de conditions mesurées, ni une probabilité, ni une note d'aptitude, ni une certification.",
+  "ds.gl.open": "Que signifient ces termes ?",
+  "ds.gl.analogue.t": "Analogue",
+  "ds.gl.analogue.d": "Un environnement terrestre qui partage certaines caractéristiques mesurables avec un lieu de la Lune ou de Mars.",
+  "ds.gl.similarity.t": "Similarité s",
+  "ds.gl.similarity.d": "La proximité entre la valeur terrestre et celle de la cible, de 0 à 1, après mise à l'échelle par la plage de toutes les valeurs. Ce n'est pas une probabilité.",
+  "ds.gl.aridity.t": "Aridité",
+  "ds.gl.aridity.d": "À quel point un milieu est sec, en comparant la pluie à l'eau qui pourrait s'évaporer.",
+  "ds.gl.roughness.t": "Rugosité du terrain",
+  "ds.gl.roughness.d": "À quel point l'altitude du sol varie sur une zone d'un kilomètre ou plus.",
+  "ds.gl.thermal.t": "Comportement thermique",
+  "ds.gl.thermal.d": "À quel point la surface se réchauffe le jour et se refroidit la nuit.",
+  "ds.gl.proxy.t": "Indicateur indirect",
+  "ds.gl.proxy.d": "Une valeur indirecte utilisée faute de mesure directe. ASTERRO signale chacune.",
+  "ds.gl.coverage.t": "Couverture du poids",
+  "ds.gl.coverage.d": "La part des poids qui a pu être comparée en un lieu. Les données manquantes sont laissées de côté, jamais comptées pour zéro."
 });
 
 /* ===== Extension catalogue · Deutsch =====
@@ -24467,9 +24726,9 @@ i18nExtend("de", {
   "ext.proc.water_alteration.lim": "Nicht durchsuchbar: benötigt Mineralkarten (Spektren von CRISM, Landsat oder Sentinel-2), die nicht in ASTERRO sind.",
 
   "ds.mode.label": "Ansicht",
-  "ds.mode.simple": "Einfach",
-  "ds.mode.advanced": "Erweitert",
-  "ds.mode.hint": "Die einfache Ansicht zeigt das Wesentliche, die erweiterte alle Gewichte und Regler.",
+  "ds.mode.simple": "Erkundungsmodus",
+  "ds.mode.advanced": "Forschungsmodus",
+  "ds.mode.hint": "Der Erkundungsmodus zeigt das Wesentliche in einfacher Sprache; der Forschungsmodus ergänzt jede Variable, jedes Gewicht, jede Quelle und jeden Regler. Der Wechsel behält Ihre Analyse bei.",
   "ds.hero.lede": "Finden Sie auf der Erde Umweltanaloga für andere Welten.",
   "ds.hero.ways": "So können Sie beginnen",
   "ds.hero.explore": "Die Erde erkunden",
@@ -24526,7 +24785,7 @@ i18nExtend("de", {
   "ds.pp.s7.h": "Kontakt",
   "ds.pp.s7.p": "Fragen richten Sie an den Issue-Tracker des öffentlichen Repositorys github.com/sabiha-nib/asterro.",
   "dsf.title": "Forschungslabor",
-  "dsf.intro": "Führen Sie einen Vergleich in sieben Schritten durch. Jeder Schritt zeigt zuerst das Wesentliche; detaillierte Regler sind einen Klick entfernt.",
+  "dsf.intro": "Führen Sie einen Vergleich in acht Schritten durch. Jeder Schritt zeigt zuerst das Wesentliche; detaillierte Regler sind einen Klick entfernt.",
   "dsf.modules": "Forschungsmodule",
   "dsf.modules_p": "Vierzehn vertiefende Analysen neben dem Basiswert, die ihn nie verändern.",
   "dsf.prev": "Zurück",
@@ -24581,7 +24840,42 @@ i18nExtend("de", {
   "dsa.open": "Vollständige Analyse",
   "dsa.lab": "Im Labor vergleichen",
   "dsa.layers": "Ebenen",
-  "dsa.layers_hide": "Ebenen ausblenden"
+  "dsa.layers_hide": "Ebenen ausblenden",
+
+  "dsp.left.hide": "Seitenleiste ausblenden",
+  "dsp.left.show": "Seitenleiste einblenden",
+  "dsp.right.hide": "Rangliste ausblenden",
+  "dsp.right.show": "Rangliste einblenden",
+  "dsp.cfg": "Analyse: {n} von {m} Dimensionen gewichtet ·",
+  "dsp.reset": "Gewichte zurücksetzen",
+  "dsf.compare.with": "Mit einem zweiten Ort vergleichen",
+  "dsf.compare.none": "Kein zweiter Ort",
+  "dsf.compare.kind": "Messung am Ziel",
+  "dsf.compare.source": "Erddaten und Auflösung",
+  "dsf.interpret.t": "Deuten und anwenden",
+  "dsf.interpret.sum": "Bedeutung und Nutzen für die Erkundung",
+  "dsf.interpret.ops": "Erkundungsaufgaben",
+  "dsf.interpret.procs": "An diesem Ort angezeigte Prozessumgebungen",
+  "dsf.interpret.noprocs": "Keine Prozessregel trifft auf diesen Ort zu.",
+  "dsa.assessed": "{k} von {n} Dimensionen bewertet · Gewichtsabdeckung {p}",
+  "dsa.evidence": "Zielwerte: {d} direkte Messungen, {p} Ersatzwerte",
+  "dsa.useful": "Nächstliegende Erkundungsaufgabe:",
+  "dsa.note": "Eine Ähnlichkeit gemessener Bedingungen, keine Wahrscheinlichkeit, keine Eignungsbewertung und keine Zertifizierung.",
+  "ds.gl.open": "Was bedeuten diese Begriffe?",
+  "ds.gl.analogue.t": "Analogon",
+  "ds.gl.analogue.d": "Eine Umgebung auf der Erde, die bestimmte messbare Merkmale mit einem Ort auf Mond oder Mars teilt.",
+  "ds.gl.similarity.t": "Ähnlichkeit s",
+  "ds.gl.similarity.d": "Wie nah der Erdwert am Zielwert liegt, von 0 bis 1, skaliert über die Spanne aller Werte. Sie ist keine Wahrscheinlichkeit.",
+  "ds.gl.aridity.t": "Trockenheit",
+  "ds.gl.aridity.d": "Wie trocken eine Umgebung ist, gemessen am Regen im Vergleich zur möglichen Verdunstung.",
+  "ds.gl.roughness.t": "Oberflächenrauheit",
+  "ds.gl.roughness.d": "Wie stark die Geländehöhe innerhalb einer Fläche von einem Kilometer und mehr schwankt.",
+  "ds.gl.thermal.t": "Thermisches Verhalten",
+  "ds.gl.thermal.d": "Wie stark sich die Oberfläche tagsüber erwärmt und nachts abkühlt.",
+  "ds.gl.proxy.t": "Ersatzwert",
+  "ds.gl.proxy.d": "Ein indirekter Wert, der verwendet wird, wenn keine direkte Messung vorliegt. ASTERRO kennzeichnet jeden.",
+  "ds.gl.coverage.t": "Gewichtsabdeckung",
+  "ds.gl.coverage.d": "Der Anteil der Gewichte, der an einem Ort verglichen werden konnte. Fehlende Daten bleiben außen vor und zählen nie als null."
 });
 
 /* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
@@ -28829,7 +29123,7 @@ function xtProcEval(P) {
   const sites = ENG.distinctSites(Int32Array.from(hit), S.lat, S.lon, 10, S.app.thresholds.distinct_sep_km);
   const cc = new Map(); for (const i of hit) { const c = placeName(i).secondary || placeName(i).primary; cc.set(c, (cc.get(c) || 0) + 1); }
   const top = [...cc.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 6);
-  const r = { n: hit.length, area, share: area / landArea, sites, top, thr, ov };
+  const r = { n: hit.length, hitSet: new Set(hit), area, share: area / landArea, sites, top, thr, ov };
   XT.cache.set(key, r); return r;
 }
 function xtFmtVar(v, x) {
@@ -29443,7 +29737,7 @@ function dsNoEmDash(root) {
  * value comes from the existing engine and records (ENG.detail, S.res, jnMissingItems, S.app.datasets, the target
  * record); every action calls an existing function (setTarget, select, applyProfile, showTrace, showReproduce,
  * xtRepDownload). The fourteen research modules stay below, unchanged and always visible. */
-const DSF = { step: 1, steps: ["target", "candidate", "compare", "weights", "gaps", "evidence", "reproduce"] };
+const DSF = { step: 1, steps: ["target", "candidate", "compare", "weights", "gaps", "evidence", "interpret", "reproduce"], cmp2: null };
 function dsfCand() { if (!S.res) return null; const i = S.selected != null ? S.selected : (S.picked != null ? S.picked : S.res.distinct[0]); return i == null ? null : i; }
 function dsfTargets() {
   const ids = Object.keys(S.T).filter(t => t !== "cross" && S.T[t] && S.T[t].variables);
@@ -29485,10 +29779,15 @@ function dsfStep(k) {
     const rows = dsfRows(tid, i);
     let ext = "";
     if (typeof xtHas === "function" && xtHas(tid)) { const T = xtTarget(tid); ext = XC().rows(xtStack(), i, T.tv, T.ranges, XT.earth).map(r => `<tr class="ds-adv"><th scope="row">${xtDimName(r.c)}</th><td class="n">${r.e == null ? "–" : xtK(r.e)}</td><td class="n">${r.t == null ? esc(tx("ext.th.na")) : xtK(r.t)}</td><td class="n">${r.s == null || r.state === "na" || r.state === "unknown" ? "–" : esc(txNum(r.s, 2))}</td><td>${esc(r.state === "na" ? tx("ext.th.na") : r.state === "unknown" ? tx("ext.th.unknown") : tx("state." + xtState(r.s)))}</td></tr>`).join(""); }
-    return `<p class="note">${esc(tx("dsf.compare.p"))}</p>
-      <div class="tbl-wrap"><table class="t xt-t ds-cmp" data-dsfcmp><thead><tr><th scope="col">${esc(tx("ext.rep.c.crit"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.earth"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.target"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.s"))}</th><th scope="col">${esc(tx("ext.rep.c.state"))}</th></tr></thead>
-      <tbody>${rows.map(r => `<tr data-dsfrow="${r.c}" data-dsfk="${r.k}"><th scope="row">${esc(tx("crit." + r.c + ".s"))}</th><td class="n">${jnVal(r.c, r.e)}</td><td class="n">${jnVal(r.c, r.t)}</td><td class="n">${r.s == null ? "–" : esc(txNum(r.s, 2))}</td><td><span class="ds-state ${r.k}">${esc(tx("state." + (r.k === "na" ? "na" : r.k)))}</span></td></tr>`).join("")}${ext}</tbody></table></div>
-      <p class="note small">${esc(tx("dsf.compare.thr"))}${ext ? " " + esc(tx("dsf.compare.ext")) : ""}</p>`;
+    const j = DSF.cmp2 != null && DSF.cmp2 !== i && S.res.eff[DSF.cmp2] >= 0 ? DSF.cmp2 : null, rows2 = j != null ? Object.fromEntries(dsfRows(tid, j).map(r => [r.c, r])) : null;
+    const st = (S.T[tid].status || {}), crit = c => S.app.criteria.find(x => x.id === c) || {};
+    const src = c => { let ids = crit(c).earth_source; if (typeof ids === "string") { try { ids = JSON.parse(ids.replace(/'/g, '"')); } catch (e) { ids = [ids]; } } return (ids || []).map(id => S.app.datasets.find(d => d.id === id)).filter(Boolean); };
+    const others = Array.from(S.res.distinct.slice(0, 20)).filter(c => c !== i);
+    return `<p class="note">${esc(tx("dsf.compare.p"))} ${dsGlossBtn()}</p>${dsGloss()}
+      <label class="xt-field ds-cmp2"><span>${esc(tx("dsf.compare.with"))}</span><select data-dsfcmp2><option value="">${esc(tx("dsf.compare.none"))}</option>${others.map(c => `<option value="${c}"${c === j ? " selected" : ""}>${esc(jnPlaceText(c))} · ${esc(txPct(S.res.eff[c]))}</option>`).join("")}</select></label>
+      <div class="tbl-wrap"><table class="t xt-t ds-cmp" data-dsfcmp><thead><tr><th scope="col">${esc(tx("ext.rep.c.crit"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.earth"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.target"))}</th><th scope="col" class="n">${esc(tx("ext.rep.c.s"))}</th><th scope="col">${esc(tx("ext.rep.c.state"))}</th>${j != null ? `<th scope="col" class="n" data-dsfcol2>${esc(jnPlaceText(j))}</th>` : ""}<th scope="col" class="ds-adv">${esc(tx("dsf.compare.kind"))}</th><th scope="col" class="ds-adv">${esc(tx("dsf.compare.source"))}</th></tr></thead>
+      <tbody>${rows.map(r => `<tr data-dsfrow="${r.c}" data-dsfk="${r.k}"><th scope="row">${esc(tx("crit." + r.c + ".s"))}</th><td class="n">${jnVal(r.c, r.e)}</td><td class="n">${jnVal(r.c, r.t)}</td><td class="n">${r.s == null ? "–" : esc(txNum(r.s, 2))}<span class="ds-st-in ${r.k}">${esc(tx("state." + (r.k === "na" ? "na" : r.k)))}</span></td><td><span class="ds-state ${r.k}">${esc(tx("state." + (r.k === "na" ? "na" : r.k)))}</span></td>${j != null ? `<td class="n" data-dsfc2="${rows2[r.c] ? rows2[r.c].k : "na"}">${rows2[r.c] && rows2[r.c].s != null ? esc(txNum(rows2[r.c].s, 2)) : "–"}</td>` : ""}<td class="ds-adv"><span class="ds-ev ${String(st[r.c] || "").toLowerCase().replace("/", "")}">${esc(txHas("status." + st[r.c]) ? tx("status." + st[r.c]) : (st[r.c] || "–"))}</span></td><td class="ds-adv meta">${src(r.c).map(d => keep(d.dataset) + (d.resolution ? " · " + keep(d.resolution) : "")).join("; ") || "–"}</td></tr>`).join("")}${ext}</tbody></table></div>
+      <p class="note small">${esc(tx("dsf.compare.thr"))}${ext ? " " + esc(tx("dsf.compare.ext")) : ""} ${esc(tx("dsa.note"))}</p>`;
   }
   if (k === "weights") {
     return `<p class="note">${esc(tx("dsf.weights.p"))}</p>
@@ -29510,6 +29809,15 @@ function dsfStep(k) {
       <h4 class="xt-h">${esc(tx("dsf.evidence.target"))}</h4><ul class="xt-list">${(T.sources || []).map(s => `<li>${keep(s)}</li>`).join("") || `<li>${esc(tx("val.na"))}</li>`}</ul>
       <div class="ds-seg"><button type="button" data-dsfdo="trace">${esc(tx("dsf.evidence.trace"))}</button><button type="button" data-dsfdo="graph">${esc(tx("dsf.evidence.graph"))}</button></div>`;
   }
+  if (k === "interpret") {
+    const card = typeof dsSummary === "function" ? dsSummary(i, tid) : "";
+    const ops = typeof xcOps === "function" ? xcOps(i, tid) : [];
+    const procs = (XD && XD.processes ? XD.processes.processes : []).filter(P => P.status !== "no_data" && P.rule).filter(P => { try { const r = xtProcEval(P); return r && r.hitSet ? r.hitSet.has(i) : false; } catch (e) { return false; } });
+    return `${card}
+      <h4 class="xt-h">${esc(tx("dsf.interpret.ops"))}</h4><ul class="xt-list" data-dsfops>${ops.map(o => `<li><b>${esc(tx("ext.op." + o.id + ".name"))}</b>: <span class="ds-state ${o.k === "cannot" ? "na" : o.k}">${esc(o.k === "cannot" ? tx("ext.cx.cannot") : tx("state." + o.k))}</span></li>`).join("")}</ul>
+      <h4 class="xt-h">${esc(tx("dsf.interpret.procs"))}</h4><ul class="xt-list" data-dsfprocs>${procs.length ? procs.map(P => `<li>${esc(tx("ext.proc." + P.id + ".name"))} <span class="meta">${esc(tx(P.status === "data" ? "ext.proc.st.data" : "ext.proc.st.indirect"))}</span></li>`).join("") : `<li>${esc(tx("dsf.interpret.noprocs"))}</li>`}</ul>
+      <p class="jn-note">${esc(tx("ext.cx.not_cert"))}</p>`;
+  }
   if (k === "reproduce") {
     const rec = { algorithm: S.app.algorithm_version, target: tid, cell: S.cell[i], weights: S.weights, stack_sha256: S.app.stack.sha256 };
     return `<p class="note">${esc(tx("dsf.repro.p"))}</p>
@@ -29524,14 +29832,14 @@ function dsfHTML() {
     <h2 id="dsf-title" class="ds-flow-title">${esc(tx("dsf.title"))}</h2><p class="ds-flow-intro">${esc(tx("dsf.intro"))}</p>
     <ol class="ds-steps">${DSF.steps.map((k, n) => { const on = k === open;
       return `<li class="ds-step${on ? " on" : ""}" data-dsfstep="${k}"><button type="button" class="ds-step-h" data-dsfgo="${n + 1}" aria-expanded="${on}" aria-controls="dsf-b-${k}"><span class="ds-step-n">${esc(txInt(n + 1))}</span><span class="ds-step-t">${esc(tx("dsf." + k + ".t"))}</span><span class="ds-step-s">${esc(dsfSummary(k))}</span></button>
-        ${on ? `<div class="ds-step-b" id="dsf-b-${k}">${dsfStep(k)}<div class="ds-step-nav">${n > 0 ? `<button type="button" class="btn-ghost btn-sm" data-dsfgo="${n}">${esc(tx("dsf.prev"))}</button>` : ""}${n < 6 ? `<button type="button" class="btn-primary btn-sm" data-dsfgo="${n + 2}">${esc(tx("dsf.next"))}: ${esc(tx("dsf." + DSF.steps[n + 1] + ".t"))}</button>` : ""}</div></div>` : ""}</li>`; }).join("")}</ol>
+        ${on ? `<div class="ds-step-b" id="dsf-b-${k}">${dsfStep(k)}<div class="ds-step-nav">${n > 0 ? `<button type="button" class="btn-ghost btn-sm" data-dsfgo="${n}">${esc(tx("dsf.prev"))}</button>` : ""}${n < DSF.steps.length - 1 ? `<button type="button" class="btn-primary btn-sm" data-dsfgo="${n + 2}">${esc(tx("dsf.next"))}: ${esc(tx("dsf." + DSF.steps[n + 1] + ".t"))}</button>` : ""}</div></div>` : ""}</li>`; }).join("")}</ol>
     <h2 class="ds-flow-title ds-mods">${esc(tx("dsf.modules"))}</h2><p class="ds-flow-intro">${esc(tx("dsf.modules_p"))}</p>${dsLegalLinks()}</section>`;
 }
 { const f = viewLab; viewLab = function () { let h = f.apply(this, arguments); try { h = dsfHTML() + h; } catch (e) { console.error(e); } return h; }; }
 function dsfRerender(focusSel) { if (S.tab !== "lab") return; renderLeft(); if (focusSel) { const n = document.querySelector(focusSel); if (n) n.focus(); } }
 document.addEventListener("click", e => {
   const t = e.target.closest && e.target.closest("[data-dsfgo],[data-dsftgt],[data-dsfprof],[data-dsfweights],[data-dsfdo],[data-dsfsearch]"); if (!t) return;
-  if (t.dataset.dsfgo) { DSF.step = Math.max(1, Math.min(7, +t.dataset.dsfgo)); dsfRerender(`[data-dsfgo="${DSF.step}"].ds-step-h`); }
+  if (t.dataset.dsfgo) { DSF.step = Math.max(1, Math.min(DSF.steps.length, +t.dataset.dsfgo)); dsfRerender(`[data-dsfgo="${DSF.step}"].ds-step-h`); }
   else if (t.dataset.dsftgt) { setTarget(t.dataset.dsftgt); dsfRerender(`[data-dsftgt="${t.dataset.dsftgt}"]`); }
   else if (t.dataset.dsfprof) { applyProfile(t.dataset.dsfprof); dsfRerender(`[data-dsfprof="${t.dataset.dsfprof}"]`); }
   else if (t.dataset.dsfweights != null) { dsSetMode("advanced"); const c = document.getElementById("console"); if (c) { c.classList.add("open"); renderConsole(); c.scrollIntoView({ block: "nearest" }); const s = c.querySelector("input[type=range]"); if (s) s.focus(); } }
@@ -29548,7 +29856,14 @@ document.addEventListener("change", e => {
   const t = e.target; if (!t.dataset) return;
   if (t.dataset.dsftgtsel != null) { setTarget(t.value); dsfRerender("[data-dsftgtsel]"); }
   else if (t.dataset.dsfcand != null) { select(+t.value); dsfRerender("[data-dsfcand]"); }
+  else if (t.dataset.dsfcmp2 != null) { DSF.cmp2 = t.value === "" ? null : +t.value; dsfRerender("[data-dsfcmp2]"); }
 });
+
+/* plain-language glossary, opened on request */
+const DS_GLOSS = ["analogue", "similarity", "aridity", "roughness", "thermal", "proxy", "coverage"];
+function dsGlossBtn() { return `<button type="button" class="ds-gloss-btn" data-dsgloss aria-expanded="${!!DSF.gloss}" aria-controls="ds-gloss">${esc(tx("ds.gl.open"))}</button>`; }
+function dsGloss() { return DSF.gloss ? `<dl class="ds-gloss" id="ds-gloss" data-i18n-done>${DS_GLOSS.map(k => `<dt>${esc(tx("ds.gl." + k + ".t"))}</dt><dd>${esc(tx("ds.gl." + k + ".d"))}</dd>`).join("")}</dl>` : ""; }
+document.addEventListener("click", e => { const g = e.target.closest && e.target.closest("[data-dsgloss]"); if (g) { DSF.gloss = !DSF.gloss; if (S.tab === "lab") dsfRerender("[data-dsgloss]"); } });
 
 /* ===== Atlas: the Earth globe at the centre, a quiet context card, layers on request =====
  * In the Atlas view the planetary atlas moves to a narrower side panel so the 3D Earth globe (still the default
@@ -29557,12 +29872,19 @@ document.addEventListener("change", e => {
  * and the important differences, with the full analysis one click away. The analysis layer buttons (Similarity,
  * Constellations, Change, Coverage, Dimension) are behind a single "Layers" button in this view. Nothing is computed
  * here that the engine does not already provide. */
+const DSA_PHONE = matchMedia("(max-width:760px)");
+try { DSA_PHONE.addEventListener("change", () => { try { dsaCard(); } catch (e) { console.error(e); } }); } catch (e) { }
 function dsaCard() {
   const vp = document.getElementById("viewport"); if (!vp) return;
   let c = document.getElementById("ds-acard");
-  if (S.tab !== "atlas" || !S.res) { if (c) c.hidden = true; return; }
+  const app = document.getElementById("app");
+  if (S.tab !== "atlas" || !S.res) { if (c) c.hidden = true; if (app) app.classList.remove("ds-card-below"); return; }
   if (!c) { c = document.createElement("section"); c.id = "ds-acard"; c.className = "ds-acard"; c.setAttribute("aria-live", "polite"); c.setAttribute("data-i18n-done", ""); vp.appendChild(c); }
   c.hidden = false;
+  // phones: the card sits under the globe instead of over it, so the globe stays fully visible and the card never scrolls
+  const below = DSA_PHONE.matches;
+  if (below && c.previousElementSibling !== vp) vp.after(c); else if (!below && c.parentElement !== vp) vp.appendChild(c);
+  if (app) app.classList.toggle("ds-card-below", below);
   const tid = S.targetId, i = S.selected;
   if (i == null || tid === "cross") {
     c.setAttribute("data-dsacard", "hint");
@@ -29577,6 +29899,10 @@ function dsaCard() {
     <p class="dsa-score"><b>${esc(S.res.eff[i] >= 0 ? txPct(S.res.eff[i]) : tx("val.na"))}</b> ${esc(tx("dsa.similar_to", { target: jnTNameText(tid) }))}</p>
     ${strong.length ? `<p class="dsa-l"><span>${esc(tx("dsa.alike"))}</span> ${strong.map(r => esc(tx("crit." + r.c + ".s"))).join(", ")}</p>` : ""}
     ${weak.length ? `<p class="dsa-l"><span>${esc(tx("dsa.differs"))}</span> ${weak.map(r => esc(tx("crit." + r.c + ".s"))).join(", ")}</p>` : ""}
+    <p class="dsa-l"><span>${esc(tx("dsa.assessed", { k: txInt(D.rows.filter(r => r.s != null && r.s === r.s).length), n: txInt(S.critIds.length), p: txPct(D.coverage, 0) }))}</span></p>
+    <p class="dsa-l ds-adv"><span>${esc(tx("dsa.evidence", { d: txInt(S.critIds.filter(c => (S.T[tid].status || {})[c] === "DIRECT").length), p: txInt(S.critIds.filter(c => (S.T[tid].status || {})[c] === "PROXY").length) }))}</span></p>
+    ${(() => { const ops = typeof xcOps === "function" ? xcOps(i, tid).filter(o => o.mean != null).sort((a, b) => b.mean - a.mean) : []; return ops.length ? `<p class="dsa-l"><span>${esc(tx("dsa.useful"))}</span> ${esc(tx("ext.op." + ops[0].id + ".name"))}</p>` : ""; })()}
+    <p class="dsa-note">${esc(tx("dsa.note"))}</p>
     <div class="dsa-act"><button type="button" class="btn-primary btn-sm" data-dsaopen="${i}">${esc(tx("dsa.open"))}</button><button type="button" class="btn-ghost btn-sm" data-dsalab="${i}">${esc(tx("dsa.lab"))}</button></div>`;
 }
 function dsaLayersBtn() {
@@ -29597,6 +29923,35 @@ document.addEventListener("click", e => {
 document.addEventListener("asterro:lang", () => { try { dsaCard(); dsaLayersBtn(); } catch (e) { console.error(e); } });
 /* the Atlas opens on the 3D globe (phones otherwise start on the flat map); later choices are kept */
 { const f = setTab; setTab = function (t) { const r = f.apply(this, arguments); try { if (t === "atlas" && !DSF.atlasGlobe) { DSF.atlasGlobe = true; if (S.proj !== 0) setProj(0); } } catch (e) { console.error(e); } return r; }; }
+
+/* collapsible side panels (desktop) and the configuration summary in the weight console */
+function dsaPanelBtns() {
+  const vp = document.getElementById("viewport"), app = document.getElementById("app"); if (!vp || !app || app.classList.contains("is-hero")) return;
+  for (const side of ["left", "right"]) {
+    let b = vp.querySelector(`.ds-paneltog[data-dspanel="${side}"]`);
+    if (!b) { b = document.createElement("button"); b.type = "button"; b.className = "ds-paneltog"; b.dataset.dspanel = side; b.setAttribute("aria-controls", side); vp.appendChild(b); }
+    const hidden = app.classList.contains("ds-hide-" + side);
+    b.setAttribute("aria-expanded", String(!hidden)); b.textContent = tx("dsp." + side + (hidden ? ".show" : ".hide"));
+  }
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest(".ds-paneltog"); if (!b) return;
+  const app = document.getElementById("app"); app.classList.toggle("ds-hide-" + b.dataset.dspanel); dsaPanelBtns();
+  if (typeof GLOBE !== "undefined" && GLOBE.resize) setTimeout(() => GLOBE.resize(), 0); window.dispatchEvent(new Event("resize"));
+});
+function dsCfgSummary() {
+  const side = document.querySelector("#console .con-side"); if (!side) return;
+  let c = side.querySelector(".ds-cfg"); if (!c) { c = document.createElement("span"); c.className = "ds-cfg"; c.setAttribute("data-i18n-done", ""); const pr = side.querySelector(".profiles"); if (pr) pr.insertAdjacentElement("afterend", c); else side.prepend(c); }
+  const tid = S.targetId, active = S.critIds.filter(k => (+S.weights[k] || 0) > 0).length;
+  const prof = S.profile === "custom" ? tx("dsf.weights.custom") : tx("profile." + S.profile);
+  c.innerHTML = `${esc(tx("dsp.cfg", { n: txInt(active), m: txInt(S.critIds.length) }))} <b>${esc(prof)}</b>`;
+  let r = side.querySelector(".ds-reset"); if (!r) { r = document.createElement("button"); r.type = "button"; r.className = "ds-reset"; r.dataset.dsreset = ""; c.insertAdjacentElement("afterend", r); }
+  r.textContent = tx("dsp.reset");
+}
+document.addEventListener("click", e => { const r = e.target.closest && e.target.closest("[data-dsreset]"); if (r) { applyProfile(S.profile in S.app.profiles ? S.profile : "general"); } });
+{ const f = renderConsole; renderConsole = function () { const r = f.apply(this, arguments); try { dsCfgSummary(); } catch (e) { console.error(e); } return r; }; }
+{ const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { dsaPanelBtns(); } catch (e) { console.error(e); } return r; }; }
+document.addEventListener("asterro:lang", () => { try { dsaPanelBtns(); dsCfgSummary(); } catch (e) { } });
 
 /* ===== Interface languages for the Markdown report =====
  * The baseline builds the report as English Markdown (reportMD, protected). In another language the report sheet

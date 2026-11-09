@@ -406,3 +406,67 @@ Failures found during this pass and how they were fixed (no assertion was weaken
 - A 12 px toast radius.
 - The context card on phones.
 - Phones opening the Atlas on the flat map.
+
+## Version 15 (2026-11-09, final build)
+
+**`npm test`.** All passing: Python 116/116, JS parity, Phase II 65, Phase III 132/132, Phase IV 74/74, trajectory
+26/26, methods 37/37, journey 53/53, i18n 52/52, routes 63/63, extension 39/39, extension languages 36/36.
+The 79 protected files are byte-identical (`tests/phase3/fixtures/protected_sha256.json`).
+
+**Browser suites.** All 16 pass in one sequential run on the final CSS (Chromium, SwiftShader). The suites touched by
+the last two fixes (phone comparison table, phone card) were run again afterwards and pass.
+
+| Suite | Result |
+|---|---|
+| `ui_smoke.py`, `ui_lab_smoke.py`, `ui_atlas_smoke.py` | exit 0 |
+| `ui_phase4_smoke.py` | 75 |
+| `ui_trajectory_smoke.py` | 24 |
+| `ui_methods_smoke.py` | 19 |
+| `ui_journey_smoke.py` | 70 |
+| `ui_global_smoke.py` | 39 |
+| `ui_routes_i18n_smoke.py` | 27 |
+| `ui_journal_persist_smoke.py` | 16 |
+| `ui_responsive_smoke.py` | 113 |
+| `ui_ext_smoke.py` | 45 |
+| `ui_design_smoke.py` | 23 |
+| `ui_design_audit.py` | 165 (was 138) |
+| `ui_layout_sweep.py` (new) | 204 |
+
+**New and extended checks.**
+
+- `ui_layout_sweep.py` runs at 2048 × 1331, 1920 × 1080, 1440 × 900, 1280 × 800, 1024 × 768, 768 × 1024 and
+  390 × 844. It covers the Atlas (default, selected place, Research mode) and the Laboratory (comparison in Research
+  mode, interpretation in Explore mode). Checks:
+  - horizontal scroll;
+  - overlapping controls on the globe;
+  - controls clipped by the window;
+  - squeezed text;
+  - globe dominance;
+  - WCAG AA contrast of the side-panel text.
+- `ui_design_audit.py` now covers:
+  - the eight-step workflow;
+  - the second place compared with the engine's readings;
+  - the glossary;
+  - source and status columns hidden in Explore mode and shown in Research mode;
+  - the interpretation step;
+  - the mode names;
+  - the configuration summary;
+  - "Hide ranking" widening the globe;
+  - "Reset weights".
+
+**Failures found while testing, and fixed.**
+
+- The right panel toggle overlapped the Expedition chip.
+- At 1280 × 800 the globe was not the widest region.
+- Hiding the ranking widened the side panel instead of the globe.
+- Panel text was low contrast: a tertiary ink tuned for dark panels, and browser dark-scheme link colour (violet) on
+  light panels.
+- Atlas search text was dark on dark.
+- Signature chips had low contrast.
+- The stone panel colours read as pastel.
+- On phones, the scrolling card left an unpainted rectangle on the WebGL globe.
+- The Research-mode comparison table was wider than its panel.
+
+**Flaky once.** In one run under load, `ui_phase4_smoke.py` reported the phone Atlas panel at 347 px instead of
+< 200 px after the hero button. It passed on the immediate rerun and in the final full run. The check waits a fixed
+8 s. Its assertion was left as it is rather than loosened.

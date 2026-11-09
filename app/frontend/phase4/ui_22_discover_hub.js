@@ -80,7 +80,7 @@ function xtProcEval(P) {
   const sites = ENG.distinctSites(Int32Array.from(hit), S.lat, S.lon, 10, S.app.thresholds.distinct_sep_km);
   const cc = new Map(); for (const i of hit) { const c = placeName(i).secondary || placeName(i).primary; cc.set(c, (cc.get(c) || 0) + 1); }
   const top = [...cc.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 6);
-  const r = { n: hit.length, area, share: area / landArea, sites, top, thr, ov };
+  const r = { n: hit.length, hitSet: new Set(hit), area, share: area / landArea, sites, top, thr, ov };
   XT.cache.set(key, r); return r;
 }
 function xtFmtVar(v, x) {

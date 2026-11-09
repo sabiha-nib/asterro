@@ -14,17 +14,17 @@ Every number shown comes from the existing engine.
 
 `tests/phase4/ui_design_audit.py` reads the computed style and visible text of every visible element. It covers:
 
-- the landing, the Atlas (with and without a selected place) and all seven Laboratory steps;
+- the landing, the Atlas (with and without a selected place) and all eight Laboratory steps;
 - the trace sheet and the legal dialogs;
-- three sizes: 1440 × 900, 820 × 1180 and 390 × 844;
+- three sizes: 1440 × 900, 820 × 1180 and 390 × 844 (the layout sweep adds the seven viewports of Version 15);
 - Bengali and German as well as English.
 
 | Prohibited | How it is excluded | Audited as |
 |---|---|---|
 | Harsh gradients, dot grids | No gradient in the design layer. The Phase IV hero gradient is replaced by a flat surface. The only colour ramps left are data scales (similarity legend, slider fill, dimension track) | `background-image` containing a gradient, outside data scales |
 | Lucide icons, sparkle icons, emojis | No icon library. The three landing entries are numbered 1–3; the earlier symbols ◐ ✦ ⇄ were removed | Extended-pictographic and sparkle characters in the visible text |
-| Pure white backgrounds | Graphite surfaces only. The lightest background is `#1D232A` | Background RGB ≥ 250 |
-| Rainbow, neon, pastel, purple | One palette:<br>• graphite `#0D1014` / `#12161B` / `#171C22` / `#1D232A`;<br>• text `#E9ECEF` / `#AEB6BF` / `#8D96A0`;<br>• Mars terracotta `#C9784F`;<br>• Moon steel `#9FB3C8`;<br>• muted readings `#7FB08A` / `#C9A55A` / `#C8695B`.<br>The violet and lavender of the previous pass are gone. Extension status colours now use the same tokens | Hue 255–320°; saturation > 0.85 at mid lightness; light saturated backgrounds |
+| Pure white backgrounds | Two tones, neither white nor black: warm stone panels (lightest `#F0EDE8`) and a deep-ocean chrome and globe (`#0B1C27` / `#102330`) | Background RGB ≥ 250 |
+| Rainbow, neon, pastel, purple | One geological palette, used semantically (see "Version 15"):<br>• stone panels `#F0EDE8` / `#EAE6E0` / `#DED8CF`, ink `#1E2529` / `#45505A` / `#56606A`;<br>• ocean chrome `#0B1C27` / `#102330` / `#163041`;<br>• Mars terracotta `#A0451F`, Moon blue `#375A80`, both targets amber `#7D5D0E`, Earth mineral teal `#246864`;<br>• readings: similar `#2A6F47`, partial `#835406`, different `#9E3627`.<br>Chrome uses lighter tints of the same hues. Panels are low in saturation so they do not read as pastel | Hue 255–320°; saturation > 0.85 at mid lightness; light backgrounds with saturation > 0.25 |
 | Drop shadows, liquid glass | `box-shadow`, `text-shadow` and `backdrop-filter` are off everywhere | Computed values |
 | Hover animations, animated arrows | Every transition and animation is off. Hover changes colour instantly | Transition duration, animation name |
 | Excessively rounded corners | 6 px on controls, 8 px on panels and dialogs | Radius > 8 px on boxes larger than 24 px |
@@ -92,3 +92,48 @@ open at a time, with Back and Next:
   similarity colour. It is not CSS, so the audit does not cover it, and it was left unchanged.
 - Fallback fonts were used for testing, because the web fonts are unreachable here.
 - No physical-device or screen-reader session took place.
+
+## Version 15: layout, two modes, interpretation
+
+**Palette.** The interface is two-tone. Side panels are warm stone; the header, console, globe and dialogs are deep
+ocean. Colour carries meaning: terracotta for Mars, blue for the Moon, amber for "both", mineral teal for Earth, and
+green / amber / brick for similar / partial / different readings. Panels declare `color-scheme: light` so links and
+form controls take light-panel colours; links are Moon blue and underlined.
+
+**Layout.**
+
+- The Atlas is three columns from 1181 px: panel, globe, ranking. The globe is always the widest region (narrower
+  panels between 1181 and 1366 px).
+- Desktop: "Hide side panel" and "Hide ranking" give the globe the full width. Tablet: the ranking can be hidden.
+- Side panels are CSS containers. Below 560 px of panel width, side-by-side blocks stack, so no column is squeezed.
+- On phones the candidate card is a panel under the globe, not an overlay, so the globe stays fully visible. Its two
+  actions come straight after the score. (As an overlay with its own scrolling, it also left an unpainted rectangle
+  on the WebGL globe in Chromium.)
+- The comparison table fits the panel: dataset names and Celsius values wrap inside their columns.
+  In a panel narrower than 480 px the reading moves under the similarity value, so phones need no sideways scroll.
+- Analysis layers stay behind one Layers button wherever the globe column is narrow.
+
+**Explore mode and Research mode.** "Explore mode" (default) shows the essentials in plain language. "Research mode"
+adds per-dimension source, direct or proxy status, contribution, the weight reset and the full sliders. Switching
+keeps the target, place, weights and workflow step.
+
+**Weights in context.** The console states the configuration ("Analysis: 6 of 6 dimensions weighted · General
+analogue"). Research mode adds "Reset weights", which reapplies the active profile.
+
+**Atlas card.** Name, coordinates, environment, Köppen class, score, alike and differing dimensions, dimensions
+assessed and weight coverage, direct and proxy target values (Research mode), the closest exploration operation, and
+the sentence "A similarity of measured conditions, not a probability, a suitability rating or a certification."
+
+**Research Laboratory, eight steps.** Target, Earth candidate, comparison, weights, differences and missing data,
+evidence, interpretation, reproduce.
+
+- Step 3 can add a second place as an extra column. In Research mode it shows each dimension's target measurement
+  status and Earth dataset with resolution.
+- Step 7 "Interpret and apply" shows the plain-words summary, the exploration operations and the process settings
+  whose rule matches the place.
+- A glossary explains seven terms: analogue, similarity, aridity, surface roughness, thermal behaviour, proxy and
+  weight coverage.
+
+**Verification.** `tests/phase4/ui_layout_sweep.py` runs at 2048 × 1331, 1920 × 1080, 1440 × 900, 1280 × 800,
+1024 × 768, 768 × 1024 and 390 × 844. It checks horizontal scroll, overlapping and clipped controls, squeezed text,
+globe dominance and WCAG AA contrast of panel text.

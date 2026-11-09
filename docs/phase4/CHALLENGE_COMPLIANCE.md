@@ -63,3 +63,14 @@ checksummed in the repository.
 | 10 | Creative approaches | Similarity metrics, process rules, method arena, guided story, research queue | Implemented |
 | 11 | Earth's limits | Gravity, vacuum, thin CO₂ atmosphere, radiation and history appear in every report, the summary card, the site profile and the dimension table | Implemented and tested |
 | 12 | Surprise | Mars nights at Jezero are 16.1 K colder than anywhere on Earth. Jezero's mean air temperature is within 0.03 K of Earth's coldest cell | Implemented (findings from retained data) |
+
+## Version 15 additions
+
+| Requirement | Where it is met | Status |
+|---|---|---|
+| Explain what a similarity score means and does not mean | Atlas card and comparison step: "A similarity of measured conditions, not a probability, a suitability rating or a certification." | Implemented, five languages |
+| Show how much of the comparison is supported by data | Atlas card: dimensions assessed and weight coverage; Research mode: direct and proxy target values | Implemented |
+| Show data source, resolution and measurement type per dimension | Laboratory step 3, Research mode | Implemented from the build's dataset records |
+| Interpret results for exploration use | Laboratory step 7: summary, exploration operations, matching process settings | Implemented; rule-based, not an operational assessment |
+| Usable by non-specialists | Explore mode, glossary of seven terms, numbered workflow | Implemented |
+| Integrate additional open datasets | Not possible here: no network access to data providers | Not done; documented in `LIMITATIONS.md` |

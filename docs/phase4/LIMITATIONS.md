@@ -143,3 +143,20 @@
 - **The globe's rim glow** is drawn by the protected WebGL renderer and was not changed.
 - **The prohibited-element audit** checks computed CSS and visible text. It cannot see pixels drawn on the globe
   canvas.
+
+## Version 15
+
+- **No new dataset was integrated.** The brief asks for additional NASA and other provider data (for example more
+  thermal, mineralogy or illumination layers). This environment cannot reach any data provider, package registry or
+  GitHub, so nothing new could be downloaded, processed or checked. The interface names only the datasets already in
+  the build. It does not claim any integration that did not happen.
+- **"Closest exploration operation"** is the operation with the highest mean similarity under the existing
+  operation rules. It ranks environments. It does not judge operational suitability.
+- **Process settings in step 7** are the existing rule-based process environments that match the cell. They indicate
+  a setting, not an observed process.
+- **The glossary and the new strings** are written in plain language in five languages. They have not been reviewed
+  by native speakers.
+- **The layout sweep** measures boxes, overlaps and computed contrast. It cannot judge visual balance; the screenshots
+  were also inspected by eye.
+- **Panel colour.** To pass the pastel check, the stone panels were made slightly less warm. Colour now comes from
+  the semantic accents rather than the panel surface.
