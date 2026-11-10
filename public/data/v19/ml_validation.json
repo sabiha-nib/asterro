@@ -1,0 +1,234 @@
+{
+ "ablation": {
+  "annual_temperature_range": {
+   "spearman": 0.9612305220618781,
+   "top2_jaccard": 0.8746223564954683
+  },
+  "aridity": {
+   "spearman": 0.9458789432894911,
+   "top2_jaccard": 0.8024691358024691
+  },
+  "dry_months": {
+   "spearman": 0.9313572177393369,
+   "top2_jaccard": 0.8077203204661325
+  },
+  "elevation": {
+   "spearman": 0.9587461226477624,
+   "top2_jaccard": 0.6815718157181572
+  },
+  "freeze_months": {
+   "spearman": 0.9523966717239662,
+   "top2_jaccard": 0.8183150183150183
+  },
+  "lst_day_k": {
+   "spearman": 0.9800671282220097,
+   "top2_jaccard": 0.8675696012039127
+  },
+  "lst_diurnal_range": {
+   "spearman": 0.9790264662541059,
+   "top2_jaccard": 0.8183150183150183
+  },
+  "lst_night_k": {
+   "spearman": 0.9766788286359511,
+   "top2_jaccard": 0.8661654135338346
+  },
+  "precip_cv": {
+   "spearman": 0.9538443488862084,
+   "top2_jaccard": 0.8050909090909091
+  },
+  "slope": {
+   "spearman": 0.9562157296754461,
+   "top2_jaccard": 0.7344514325646401
+  },
+  "surface_roughness": {
+   "spearman": 0.9664796267281637,
+   "top2_jaccard": 0.7176470588235294
+  },
+  "t2m_mean_c": {
+   "spearman": 0.9794599467949155,
+   "top2_jaccard": 0.8845861807137434
+  }
+ },
+ "features": [
+  "aridity",
+  "annual_temperature_range",
+  "elevation",
+  "slope",
+  "surface_roughness",
+  "lst_diurnal_range",
+  "lst_day_k",
+  "lst_night_k",
+  "t2m_mean_c",
+  "freeze_months",
+  "dry_months",
+  "precip_cv"
+ ],
+ "hidden_persistence": {
+  "cells": [
+   {
+    "cell": 197741,
+    "kept": 5
+   },
+   {
+    "cell": 197742,
+    "kept": 5
+   },
+   {
+    "cell": 197743,
+    "kept": 5
+   },
+   {
+    "cell": 198321,
+    "kept": 5
+   },
+   {
+    "cell": 198322,
+    "kept": 5
+   },
+   {
+    "cell": 14950,
+    "kept": 4
+   },
+   {
+    "cell": 195996,
+    "kept": 3
+   },
+   {
+    "cell": 21134,
+    "kept": 2
+   },
+   {
+    "cell": 197756,
+    "kept": 2
+   },
+   {
+    "cell": 194293,
+    "kept": 1
+   },
+   {
+    "cell": 197200,
+    "kept": 0
+   },
+   {
+    "cell": 198319,
+    "kept": 0
+   }
+  ],
+  "kept_counts": [
+   5,
+   5,
+   5,
+   5,
+   5,
+   4,
+   3,
+   2,
+   2,
+   1,
+   0,
+   0
+  ],
+  "kept_in_all_seeds": 5,
+  "n_hidden_seed0": 12
+ },
+ "iforest_seed": {
+  "1": {
+   "spearman": 0.975741925582599,
+   "top2_jaccard": 0.8703843255463452
+  },
+  "2": {
+   "spearman": 0.9831959268153203,
+   "top2_jaccard": 0.8831562974203339
+  },
+  "3": {
+   "spearman": 0.9793801019978575,
+   "top2_jaccard": 0.8903274942878904
+  },
+  "4": {
+   "spearman": 0.9789302995663912,
+   "top2_jaccard": 0.8946564885496183
+  },
+  "5": {
+   "spearman": 0.9804797093986228,
+   "top2_jaccard": 0.8732075471698113
+  }
+ },
+ "k": 8,
+ "kmeans_seed_ari": {
+  "1": 0.9997890357311655,
+  "2": 0.9873463532381788,
+  "3": 0.9994576427333648,
+  "4": 0.9997890357311655,
+  "5": 0.9997890357311655
+ },
+ "latitude_bias": [
+  {
+   "band": [
+    -90,
+    -60
+   ],
+   "cells_share": 0.09657652427716769,
+   "ratio": 0.4839323341786022,
+   "top2_share": 0.046736502820306204
+  },
+  {
+   "band": [
+    -60,
+    -30
+   ],
+   "cells_share": 0.03389611855578669,
+   "ratio": 0.7844986279902261,
+   "top2_share": 0.0265914585012087
+  },
+  {
+   "band": [
+    -30,
+    0
+   ],
+   "cells_share": 0.14543724702884878,
+   "ratio": 1.8505423995667132,
+   "top2_share": 0.26913779210314265
+  },
+  {
+   "band": [
+    0,
+    30
+   ],
+   "cells_share": 0.1814135745730734,
+   "ratio": 0.9105678216492076,
+   "top2_share": 0.1651893634165995
+  },
+  {
+   "band": [
+    30,
+    60
+   ],
+   "cells_share": 0.30582297260251884,
+   "ratio": 1.5071418935555616,
+   "top2_share": 0.46091861402095086
+  },
+  {
+   "band": [
+    60,
+    90
+   ],
+   "cells_share": 0.23685356296260462,
+   "ratio": 0.13268227315100092,
+   "top2_share": 0.031426269137792104
+  }
+ ],
+ "missing_checks": {
+  "anomaly_none_equals_incomplete": true,
+  "cells_missing_a_rarity_criterion": 14750,
+  "incomplete_cells": 14768,
+  "label_none_equals_incomplete": true,
+  "rarity_scored_with_missing_criteria": 0
+ },
+ "missing_rule": "cells with any of the 12 features missing receive no cluster label and no anomaly score",
+ "n_complete": 62013,
+ "n_incomplete": 14768,
+ "note": "Unsupervised models: no labels, so no accuracy is reported. Stability and sensitivity only.",
+ "schema": "asterro.v19.mlval/1",
+ "validates": "tai-v17-ml-1.0.0",
+ "version": "tai-v19-mlval-1.0.0"
+}

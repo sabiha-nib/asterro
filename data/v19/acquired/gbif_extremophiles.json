@@ -1,0 +1,30 @@
+{
+ "coverage": "16 analysed cells",
+ "endpoint": "https://api.gbif.org/v1/occurrence/search",
+ "files": {
+  "data/v19/samples/requests.json": "5f27dcf8927a03f7f5f00816397f993f47b635bcd2b019e574e090e5fab1296d",
+  "data/v19/samples/site_samples_raw.json": "ab97b1364ad7c2cce6a1b39d05d30797ecd20a8a78a11321f7aa21719235bbda",
+  "public/data/v19/site_samples.json": "f55979f354c0631276a4d61ff3bccd5b049c576a7448d68ed14c0e8578cca0b5"
+ },
+ "id": "gbif_extremophiles",
+ "license": "per dataset (both cited datasets CC BY 4.0)",
+ "method": "counts of all records, Archaea and Bacteria inside each cell; up to 3 Archaea records with dataset metadata",
+ "processing": null,
+ "product": "public/data/v19/site_samples.json",
+ "records": 91,
+ "retrieved_utc": "2026-11-10",
+ "route": "WebFetch service (structured transcription)",
+ "validation": {
+  "checks": {
+   "repeat_fetches_agree": true,
+   "structure": true,
+   "volcanoes_stored_once": true
+  },
+  "open_questions": [
+   "16 analysed cells are a sample, not coverage of the land grid",
+   "values were transcribed from the responses by the fetch service, not stored as byte-verified files",
+   "Macrostrat units at these scales are regional map classes, not field observations"
+  ],
+  "passed": true
+ }
+}

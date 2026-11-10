@@ -1,0 +1,30 @@
+{
+ "schema": "asterro.v19.fetch_attempts/1",
+ "note": "attempts through the WebFetch service; a robots.txt refusal or a URL-length limit of that service says nothing about the provider's own availability",
+ "attempts": [
+  {
+   "dataset": "power_wind",
+   "origin": "v19_catalogue",
+   "route": "webfetch",
+   "utc": "2026-11-10T11:15:00Z",
+   "class": "fetch_refused",
+   "error": "robots_disallowed (fetch service refused power.larc.nasa.gov API by robots.txt)"
+  },
+  {
+   "dataset": "soilgrids",
+   "origin": "v19_catalogue",
+   "route": "webfetch",
+   "utc": "2026-11-10T11:15:00Z",
+   "class": "fetch_refused",
+   "error": "robots_disallowed (fetch service refused rest.isric.org by robots.txt)"
+  },
+  {
+   "dataset": "wikidata_caves",
+   "origin": "v19_catalogue",
+   "route": "webfetch",
+   "utc": "2026-11-10T11:15:00Z",
+   "class": "fetch_refused",
+   "error": "fetch service rejected the SPARQL URL (url exceeds maximum fetchable length; a shorter query returned url_not_found)"
+  }
+ ]
+}

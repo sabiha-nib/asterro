@@ -1,0 +1,1873 @@
+{
+ "failed_routes": {
+  "power_wind": "robots_disallowed (fetch service refused power.larc.nasa.gov API by robots.txt)",
+  "soilgrids": "robots_disallowed (fetch service refused rest.isric.org by robots.txt)",
+  "wikidata_caves": "fetch service rejected the SPARQL URL (url exceeds maximum fetchable length; a shorter query returned url_not_found)"
+ },
+ "gbif_datasets": {
+  "583d91fe-bbc0-4b4a-afe1-801f88263016": {
+   "doi": "10.15468/mcmd5g",
+   "license": "CC BY 4.0",
+   "note": "INSDC sequences associated with environmental sample identifiers; worldwide",
+   "title": "INSDC Environment Sample Sequences",
+   "type": "OCCURRENCE"
+  },
+  "bc0e461c-7b8f-4b9a-9310-0f0ed283a7ae": {
+   "doi": "10.15468/uft5fu",
+   "license": "CC BY 4.0",
+   "note": "two microbial mats from hypersaline lakes Brava and Tebenquiche, Atacama region, Chile (dataset description)",
+   "title": "Metagenomics of Brava and Tebenquiche lakes microbial mats",
+   "type": "SAMPLING_EVENT"
+  }
+ },
+ "limits": [
+  "A geological map unit at 1:5M (small) or coarser (tiny) describes a region, not the analysed spot.",
+  "Volcano locations are summit points from the Smithsonian catalogue; the 100 km radius is measured from the cell centre.",
+  "GBIF counts reflect where people sampled and published, not where organisms live; zero records is not absence.",
+  "Microbial records are presence records; they say nothing about habitability on Earth or elsewhere."
+ ],
+ "literature": [
+  {
+   "body": "mars",
+   "citation": "Ehlmann, B.L. et al. (2008). Clay minerals in delta deposits and organic preservation potential on Mars. Nature Geoscience 1, 355–358.",
+   "finding": "CRISM near-infrared spectra show Fe/Mg smectite clay in the Jezero delta deposits.",
+   "id": "ehlmann2008",
+   "kind": "orbital_spectral",
+   "target": "mars_jezero",
+   "verified": "bibliographic record located (Smithsonian repository, Caltech authors) 2026-11-10"
+  },
+  {
+   "body": "mars",
+   "citation": "Farley, K.A. et al. (2022). Aqueously altered igneous rocks sampled on the floor of Jezero crater, Mars. Science 377, eabo2196.",
+   "finding": "Perseverance found the crater-floor rocks to be igneous (including olivine-rich rock) altered by water.",
+   "id": "farley2022",
+   "kind": "in_situ",
+   "target": "mars_jezero",
+   "verified": "bibliographic record located (USGS publications, Caltech authors) 2026-11-10"
+  },
+  {
+   "body": "moon",
+   "citation": "Li, S. et al. (2018). Direct evidence of surface exposed water ice in the lunar polar regions. PNAS 115, 8907–8912.",
+   "finding": "Moon Mineralogy Mapper (M3) spectra show water ice exposed at the surface in permanently shadowed areas near both poles.",
+   "id": "li2018",
+   "kind": "orbital_spectral",
+   "target": "moon_south_pole",
+   "verified": "bibliographic record located (PubMed Central 6130389) 2026-11-10"
+  },
+  {
+   "body": "moon",
+   "citation": "Fortezzo, C.M., Spudis, P.D. & Harrel, S.L. (2020). Unified Geologic Map of the Moon, 1:5M. USGS Astrogeology Science Center.",
+   "finding": "Map product exists at 1:5M; its units were not acquired by ASTERRO (access blocked).",
+   "id": "fortezzo2020",
+   "kind": "geologic_map",
+   "target": "moon_south_pole",
+   "verified": "product page located (USGS Astrogeology) 2026-11-10"
+  }
+ ],
+ "map_sources": {
+  "1087": {
+   "citation": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+   "macrostrat_scale": "small",
+   "scale": "1:5 000 000"
+  },
+  "154": {
+   "citation": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+   "doi": "10.4095/223767",
+   "macrostrat_scale": "tiny"
+  }
+ },
+ "n_sites": 16,
+ "radius_km": 100.0,
+ "retrieved": "2026-11-10",
+ "route": "Anthropic WebFetch service (the build environment's own egress refuses every provider). Each response was read by a fetch agent and returned as structured fields; values are transcriptions, not byte copies of the responses, and no response body was stored.",
+ "schema": "asterro.v19.site_samples/1",
+ "sites": [
+  {
+   "biology": {
+    "all": 1776,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 2
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 77940,
+   "geology": {
+    "lith_classes": [
+     "siliciclastic",
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 2.58,
+      "b_int_name": "Quaternary",
+      "best_int_name": "Quaternary",
+      "doi": null,
+      "lith": "Siliciclastic",
+      "lith_class": "siliciclastic",
+      "map_id": 4971383,
+      "name": "Quaternary Siliciclastic",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Tertiary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "intermediate-felsic volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3186221,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "jez1",
+   "lat": -22.5,
+   "lon": -67.5,
+   "place": "Altiplano, Bolivia",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-23.4,-68.4742,-21.6,-66.5258,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-22.5&lng=-67.5",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-67.5%20-22.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 8,
+    "n": 8,
+    "near": [
+     {
+      "km": 36.8,
+      "number": 355090
+     },
+     {
+      "km": 44.4,
+      "number": 355093
+     },
+     {
+      "km": 46.9,
+      "number": 355091
+     },
+     {
+      "km": 53.5,
+      "number": 355092
+     },
+     {
+      "km": 61.2,
+      "number": 355094
+     },
+     {
+      "km": 83.2,
+      "number": 355095
+     },
+     {
+      "km": 88.9,
+      "number": 355096
+     },
+     {
+      "km": 99.6,
+      "number": 355100
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 0,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 146152,
+   "geology": {
+    "lith_classes": [
+     "sedimentary"
+    ],
+    "units": [
+     {
+      "b_age_ma": 251.902,
+      "b_int_name": "Triassic",
+      "best_int_name": "Mesozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3184523,
+      "name": "Mesozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 201.3,
+      "t_int_name": "Triassic"
+     }
+    ]
+   },
+   "id": "jez2",
+   "lat": 36.5,
+   "lon": 85,
+   "place": "Kunlun Mountains, China",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=35.6,83.8804,37.4,86.1196,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=36.5&lng=85",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(85%2036.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 410,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 82546,
+   "geology": {
+    "lith_classes": [
+     "siliciclastic",
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 2.58,
+      "b_int_name": "Quaternary",
+      "best_int_name": "Quaternary",
+      "doi": null,
+      "lith": "Siliciclastic",
+      "lith_class": "siliciclastic",
+      "map_id": 4968144,
+      "name": "Quaternary Siliciclastic",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Tertiary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "intermediate-felsic volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3186221,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "jez3",
+   "lat": -18.5,
+   "lon": -68.75,
+   "place": "Cordillera Occidental, Bolivia",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-19.4,-69.699,-17.6,-67.801,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-18.5&lng=-68.75",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.75%20-18.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 5,
+    "n": 5,
+    "near": [
+     {
+      "km": 37.2,
+      "number": 355020
+     },
+     {
+      "km": 55.6,
+      "number": 355012
+     },
+     {
+      "km": 72.8,
+      "number": 355030
+     },
+     {
+      "km": 73.8,
+      "number": 355032
+     },
+     {
+      "km": 90.8,
+      "number": 355011
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 7,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 144991,
+   "geology": {
+    "lith_classes": [
+     "sedimentary"
+    ],
+    "units": [
+     {
+      "b_age_ma": 358.9,
+      "b_int_name": "Late Paleozoic",
+      "best_int_name": "Paleozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3191462,
+      "name": "Paleozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 251.902,
+      "t_int_name": "Late Paleozoic"
+     }
+    ]
+   },
+   "id": "jez4",
+   "lat": 35.5,
+   "lon": 79.375,
+   "place": "Karakoram Range, China",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=34.6,78.2695,36.4,80.4805,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=35.5&lng=79.375",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(79.375%2035.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 16100,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 8
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 85422,
+   "geology": {
+    "lith_classes": [
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Paleogene",
+      "best_int_name": "Cenozoic",
+      "doi": null,
+      "lith": "Volcaniclastic, volcanic",
+      "lith_class": "volcanic",
+      "map_id": 4970532,
+      "name": "Paleogene - Neogene Volcano-sedimentary",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 2.58,
+      "t_int_name": "Neogene"
+     },
+     {
+      "b_age_ma": 23.03,
+      "b_int_name": "Neogene",
+      "best_int_name": "Neogene",
+      "doi": "10.4095/223767",
+      "lith": "volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3191134,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 2.588,
+      "t_int_name": "Neogene"
+     }
+    ]
+   },
+   "id": "jez5",
+   "lat": -16,
+   "lon": -71.25,
+   "place": "Cordillera Occidental, Peru",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-16.9,-72.1863,-15.1,-70.3137,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-16&lng=-71.25",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-71.25%20-16)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 6,
+    "n": 5,
+    "near": [
+     {
+      "km": 37.2,
+      "number": 354010
+     },
+     {
+      "km": 53.8,
+      "number": 354020
+     },
+     {
+      "km": 69.1,
+      "number": 354006
+     },
+     {
+      "km": 80.3,
+      "number": 354030
+     },
+     {
+      "km": 92.1,
+      "number": 354005
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 3,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 143844,
+   "geology": {
+    "lith_classes": [
+     "sedimentary"
+    ],
+    "units": [
+     {
+      "b_age_ma": 358.9,
+      "b_int_name": "Late Paleozoic",
+      "best_int_name": "Paleozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3191462,
+      "name": "Paleozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 251.902,
+      "t_int_name": "Late Paleozoic"
+     }
+    ]
+   },
+   "id": "jez6",
+   "lat": 34.5,
+   "lon": 82.5,
+   "place": "Plateau Of Tibet, China",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=33.6,81.4079,35.4,83.5921,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=34.5&lng=82.5",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(82.5%2034.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 84,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 75058,
+   "geology": {
+    "lith_classes": [
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 23.04,
+      "b_int_name": "Neogene",
+      "best_int_name": "Neogene",
+      "doi": null,
+      "lith": "Rhyolite",
+      "lith_class": "volcanic",
+      "map_id": 4974781,
+      "name": "Neogene Rhyolitic",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 2.58,
+      "t_int_name": "Neogene"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Tertiary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "intermediate-felsic volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3186221,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "jez7",
+   "lat": -25,
+   "lon": -68.75,
+   "place": "Desierto De Atacama, Chile",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-25.9,-69.743,-24.1,-67.757,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-25&lng=-68.75",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.75%20-25)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 10,
+    "n": 8,
+    "near": [
+     {
+      "km": 30.8,
+      "number": 355120
+     },
+     {
+      "km": 38.2,
+      "number": 355110
+     },
+     {
+      "km": 39.7,
+      "number": 355112
+     },
+     {
+      "km": 43.9,
+      "number": 355121
+     },
+     {
+      "km": 48.8,
+      "number": 355122
+     },
+     {
+      "km": 49.5,
+      "number": 355161
+     },
+     {
+      "km": 77.4,
+      "number": 355108
+     },
+     {
+      "km": 84.3,
+      "number": 355109
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 1,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 147310,
+   "geology": {
+    "lith_classes": [
+     "sedimentary"
+    ],
+    "units": [
+     {
+      "b_age_ma": 145,
+      "b_int_name": "Cretaceous",
+      "best_int_name": "Mesozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3192891,
+      "name": "Mesozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 66,
+      "t_int_name": "Cretaceous"
+     }
+    ]
+   },
+   "id": "jez8",
+   "lat": 37.5,
+   "lon": 88.75,
+   "place": "Kunlun Mountains, China",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=36.6,87.6156,38.4,89.8844,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=37.5&lng=88.75",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(88.75%2037.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 53,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 140962,
+   "geology": {
+    "lith_classes": [
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 145,
+      "b_int_name": "Cretaceous",
+      "best_int_name": "Phanerozoic",
+      "doi": "10.4095/223767",
+      "lith": "intermediate-felsic volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3190700,
+      "name": "Mesozoic-Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 2.588,
+      "t_int_name": "Tertiary"
+     }
+    ]
+   },
+   "id": "jez9",
+   "lat": 32,
+   "lon": 81.25,
+   "place": "Plateau Of Tibet, China",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=31.1,80.1887,32.9,82.3113,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=32&lng=81.25",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(81.25%2032)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 400,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 71025,
+   "geology": {
+    "lith_classes": [
+     "siliciclastic",
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Paleogene",
+      "best_int_name": "Paleogene",
+      "doi": null,
+      "lith": "Siliciclastic",
+      "lith_class": "siliciclastic",
+      "map_id": 4970386,
+      "name": "Paleogene Siliciclastic",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 23.04,
+      "t_int_name": "Paleogene"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Tertiary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "intermediate-felsic volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3186221,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "jez10",
+   "lat": -28.5,
+   "lon": -69.375,
+   "place": "Andes, Argentina",
+   "target": "mars_jezero",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-29.4,-70.3991,-27.6,-68.3509,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-28.5&lng=-69.375",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-69.375%20-28.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for Jezero Crater (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 20,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 145569,
+   "geology": {
+    "lith_classes": [
+     "intrusive"
+    ],
+    "units": [
+     {
+      "b_age_ma": 358.9,
+      "b_int_name": "Late Paleozoic",
+      "best_int_name": "Paleozoic",
+      "doi": "10.4095/223767",
+      "lith": "intrusive igneous rocks",
+      "lith_class": "intrusive",
+      "map_id": 3190556,
+      "name": "Paleozoic intrusive rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 251.902,
+      "t_int_name": "Late Paleozoic"
+     }
+    ]
+   },
+   "id": "lsp1",
+   "lat": 36,
+   "lon": 80.625,
+   "place": "Kunlun Mountains, China",
+   "target": "moon_south_pole",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=35.1,79.5125,36.9,81.7375,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=36&lng=80.625",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(80.625%2036)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 1,
+    "n": 1,
+    "near": [
+     {
+      "km": 96.4,
+      "number": 304030
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for the Lunar South Pole (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 15162,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 1
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 90022,
+   "geology": {
+    "lith_classes": [
+     "sedimentary",
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 23.04,
+      "b_int_name": "Neogene",
+      "best_int_name": "Neogene",
+      "doi": null,
+      "lith": "Volcaniclastic, volcanic",
+      "lith_class": "volcanic",
+      "map_id": 4975050,
+      "name": "Neogene Volcano-sedimentary",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 2.58,
+      "t_int_name": "Neogene"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Paleogene",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3191170,
+      "name": "Cenozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 23.03,
+      "t_int_name": "Paleogene"
+     }
+    ]
+   },
+   "id": "lsp2",
+   "lat": -12,
+   "lon": -76.25,
+   "place": "Cordillera Occidental, Peru",
+   "target": "moon_south_pole",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-12.9,-77.1701,-11.1,-75.3299,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-12&lng=-76.25",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-76.25%20-12)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for the Lunar South Pole (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 460,
+    "archaea": 47,
+    "archaea_examples": [
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": true,
+      "dataset": "583d91fe-bbc0-4b4a-afe1-801f88263016",
+      "dataset_doi": "10.15468/mcmd5g",
+      "dataset_title": "INSDC Environment Sample Sequences",
+      "date": "2022",
+      "key": 6596291389,
+      "lat": 37.0,
+      "lon": 85.0,
+      "name": "Halalkalicoccus Xue et al., 2005",
+      "uncertainty_m": null
+     },
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": true,
+      "dataset": "583d91fe-bbc0-4b4a-afe1-801f88263016",
+      "dataset_doi": "10.15468/mcmd5g",
+      "dataset_title": "INSDC Environment Sample Sequences",
+      "date": "2022",
+      "key": 6596293301,
+      "lat": 37.0,
+      "lon": 85.0,
+      "name": "Natronorubrum Xu et al., 1999",
+      "uncertainty_m": null
+     },
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": true,
+      "dataset": "583d91fe-bbc0-4b4a-afe1-801f88263016",
+      "dataset_doi": "10.15468/mcmd5g",
+      "dataset_title": "INSDC Environment Sample Sequences",
+      "date": "2022",
+      "key": 6596293400,
+      "lat": 37.0,
+      "lon": 85.0,
+      "name": "Halogranum Cui et al., 2010",
+      "uncertainty_m": null
+     }
+    ],
+    "bacteria": 333
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 146728,
+   "geology": {
+    "lith_classes": [
+     "sedimentary"
+    ],
+    "units": [
+     {
+      "b_age_ma": 358.9,
+      "b_int_name": "Late Paleozoic",
+      "best_int_name": "Paleozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3191462,
+      "name": "Paleozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 251.902,
+      "t_int_name": "Late Paleozoic"
+     }
+    ]
+   },
+   "id": "lsp3",
+   "lat": 37,
+   "lon": 85,
+   "place": "Kunlun Mountains, China",
+   "target": "moon_south_pole",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=36.1,83.8731,37.9,86.1269,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=37&lng=85",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(85%2037)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for the Lunar South Pole (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 3268,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 1
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 83696,
+   "geology": {
+    "lith_classes": [
+     "sedimentary",
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Paleogene",
+      "best_int_name": "Paleogene",
+      "doi": null,
+      "lith": "Volcaniclastic, volcanic",
+      "lith_class": "volcanic",
+      "map_id": 4966927,
+      "name": "Paleogene Volcano-sedimentary",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 23.04,
+      "t_int_name": "Paleogene"
+     },
+     {
+      "b_age_ma": 2.588,
+      "b_int_name": "Quaternary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3186428,
+      "name": "Cenozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "lsp4",
+   "lat": -17.5,
+   "lon": -70,
+   "place": "Cordillera Occidental, Peru",
+   "target": "moon_south_pole",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-18.4,-70.9437,-16.6,-69.0563,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-17.5&lng=-70",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-70%20-17.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 7,
+    "n": 4,
+    "near": [
+     {
+      "km": 22.5,
+      "number": 354060
+     },
+     {
+      "km": 40.8,
+      "number": 354050
+     },
+     {
+      "km": 65.9,
+      "number": 354040
+     },
+     {
+      "km": 85.2,
+      "number": 355011
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for the Lunar South Pole (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 861,
+    "archaea": 0,
+    "archaea_examples": [],
+    "bacteria": 0
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 71024,
+   "geology": {
+    "lith_classes": [
+     "volcanic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 143.1,
+      "b_int_name": "Cretaceous",
+      "best_int_name": "Cretaceous",
+      "doi": null,
+      "lith": "Volcaniclastic, volcanic",
+      "lith_class": "volcanic",
+      "map_id": 4975037,
+      "name": "Cretaceous Volcano-sedimentary",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 66,
+      "t_int_name": "Cretaceous"
+     },
+     {
+      "b_age_ma": 66,
+      "b_int_name": "Tertiary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "volcanic rocks",
+      "lith_class": "volcanic",
+      "map_id": 3189355,
+      "name": "Cenozoic volcanic rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "lsp5",
+   "lat": -28.5,
+   "lon": -70,
+   "place": "Andes, Chile",
+   "target": "moon_south_pole",
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-29.4,-71.0241,-27.6,-68.9759,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-28.5&lng=-70",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-70%20-28.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 0,
+    "n": 0,
+    "near": [],
+    "radius_km": 100.0
+   },
+   "why": "top distinct candidate for the Lunar South Pole (General analogue)"
+  },
+  {
+   "biology": {
+    "all": 9994,
+    "archaea": 44,
+    "archaea_examples": [
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": false,
+      "dataset": "bc0e461c-7b8f-4b9a-9310-0f0ed283a7ae",
+      "dataset_doi": "10.15468/uft5fu",
+      "dataset_title": "Metagenomics of Brava and Tebenquiche lakes microbial mats",
+      "date": "2013-12-02",
+      "key": 2442515694,
+      "lat": -23.7301,
+      "lon": -68.2469,
+      "name": "Thermoplasmata",
+      "uncertainty_m": null
+     },
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": false,
+      "dataset": "bc0e461c-7b8f-4b9a-9310-0f0ed283a7ae",
+      "dataset_doi": "10.15468/uft5fu",
+      "dataset_title": "Metagenomics of Brava and Tebenquiche lakes microbial mats",
+      "date": "2013-12-02",
+      "key": 2442515706,
+      "lat": -23.7301,
+      "lon": -68.2469,
+      "name": "Nanoarchaeota",
+      "uncertainty_m": null
+     },
+     {
+      "basis": "MATERIAL_SAMPLE",
+      "coords_whole_degrees": false,
+      "dataset": "bc0e461c-7b8f-4b9a-9310-0f0ed283a7ae",
+      "dataset_doi": "10.15468/uft5fu",
+      "dataset_title": "Metagenomics of Brava and Tebenquiche lakes microbial mats",
+      "date": "2013-12-02",
+      "key": 2442515815,
+      "lat": -23.7301,
+      "lon": -68.2469,
+      "name": "Archaea",
+      "uncertainty_m": null
+     }
+    ],
+    "bacteria": 2016
+   },
+   "caves": {
+    "reason": "fetch_url_rejected",
+    "state": "access_blocked"
+   },
+   "cell": 76787,
+   "geology": {
+    "lith_classes": [
+     "sedimentary",
+     "siliciclastic"
+    ],
+    "units": [
+     {
+      "b_age_ma": 23.04,
+      "b_int_name": "Neogene",
+      "best_int_name": "Cenozoic",
+      "doi": null,
+      "lith": "Siliciclastic",
+      "lith_class": "siliciclastic",
+      "map_id": 4969814,
+      "name": "Neogene - Quaternary Siliciclastic",
+      "scale": "small",
+      "source": "Gómez, J., Schobbenhaus, C. & Montes, N.E., compilers (2019). Geological Map of South America 2018. CGMW, Colombian Geological Survey and Geological Survey of Brazil.",
+      "source_id": 1087,
+      "source_scale": "1:5 000 000",
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     },
+     {
+      "b_age_ma": 2.588,
+      "b_int_name": "Quaternary",
+      "best_int_name": "Cenozoic",
+      "doi": "10.4095/223767",
+      "lith": "sedimentary rocks",
+      "lith_class": "sedimentary",
+      "map_id": 3186157,
+      "name": "Cenozoic sedimentary rocks",
+      "scale": "tiny",
+      "source": "Chorlton, L.B. (2007). Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529.",
+      "source_id": 154,
+      "source_scale": null,
+      "t_age_ma": 0,
+      "t_int_name": "Quaternary"
+     }
+    ]
+   },
+   "id": "loc1",
+   "lat": -23.5,
+   "lon": -68.125,
+   "place": "Desierto De Atacama, Chile",
+   "target": null,
+   "urls": {
+    "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&limit=0",
+    "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&kingdomKey=2&limit=3",
+    "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&kingdomKey=3&limit=0",
+    "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-24.4,-69.1064,-22.6,-67.1436,urn:ogc:def:crs:EPSG::4326",
+    "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-23.5&lng=-68.125",
+    "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.125%20-23.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+   },
+   "volcanoes": {
+    "box_n": 17,
+    "n": 15,
+    "near": [
+     {
+      "km": 40.8,
+      "number": 355103
+     },
+     {
+      "km": 42.8,
+      "number": 355100
+     },
+     {
+      "km": 44.2,
+      "number": 355098
+     },
+     {
+      "km": 50.7,
+      "number": 355102
+     },
+     {
+      "km": 52.3,
+      "number": 355105
+     },
+     {
+      "km": 56.7,
+      "number": 355096
+     },
+     {
+      "km": 57.1,
+      "number": 355095
+     },
+     {
+      "km": 63.5,
+      "number": 355104
+     },
+     {
+      "km": 66.0,
+      "number": 355101
+     },
+     {
+      "km": 67.5,
+      "number": 355094
+     },
+     {
+      "km": 76.8,
+      "number": 355107
+     },
+     {
+      "km": 78.6,
+      "number": 355092
+     },
+     {
+      "km": 88.3,
+      "number": 355093
+     },
+     {
+      "km": 90.1,
+      "number": 355091
+     },
+     {
+      "km": 94.5,
+      "number": 355160
+     }
+    ],
+    "radius_km": 100.0
+   },
+   "why": "V18 Local Impact example (Atacama position)"
+  }
+ ],
+ "validation": {
+  "checks": {
+   "repeat_fetches_agree": true,
+   "structure": true,
+   "volcanoes_stored_once": true
+  },
+  "open_questions": [
+   "16 analysed cells are a sample, not coverage of the land grid",
+   "values were transcribed from the responses by the fetch service, not stored as byte-verified files",
+   "Macrostrat units at these scales are regional map classes, not field observations"
+  ],
+  "repeat_fetches": [
+   {
+    "agree": true,
+    "fetches": 3,
+    "note": "map ids 4969814 and 3186157, names, ages and sources identical in all three (one at -23.65, -68.15, two at the cell centre)",
+    "what": "loc1 macrostrat"
+   },
+   {
+    "agree": true,
+    "fetches": 2,
+    "note": "9994 and 44 in both",
+    "what": "loc1 GBIF all and Archaea counts"
+   },
+   {
+    "agree": true,
+    "fetches": 2,
+    "note": "an earlier, slightly larger bounding box returned the same 17 volcanoes with identical attributes plus Putana, which lies outside the later box",
+    "what": "loc1 GVP volcanoes"
+   },
+   {
+    "agree": true,
+    "fetches": 2,
+    "note": "Taapaca, Parinacota (jez3, lsp4); Ticsani, Huaynaputina (jez5, lsp4); the Atacama volcanoes (jez1, jez7, loc1): identical attributes in each response",
+    "what": "volcanoes returned for two sites"
+   }
+  ]
+ },
+ "version": "tai-v19-samples-1.0.0",
+ "volcanoes": {
+  "304030": {
+   "elevation_m": 5090,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1951,
+   "lat": 35.742,
+   "lon": 81.646,
+   "major_rock_type": "Trachyte / Trachydacite",
+   "name": "Ashikule Volcanic Field",
+   "number": 304030,
+   "primary_type": "Volcanic field"
+  },
+  "354005": {
+   "elevation_m": 4554,
+   "evidence_category": "Eruption Dated",
+   "last_eruption_year": -700,
+   "lat": -15.78,
+   "lon": -72.08,
+   "major_rock_type": "Trachyandesite / Basaltic Trachyandesite",
+   "name": "Huambo",
+   "number": 354005,
+   "primary_type": "Volcanic field"
+  },
+  "354006": {
+   "elevation_m": 5960,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 2026,
+   "lat": -15.787,
+   "lon": -71.857,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Sabancaya",
+   "number": 354006,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "354010": {
+   "elevation_m": 5793,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1985,
+   "lat": -16.2991,
+   "lon": -71.4056,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Misti, El",
+   "number": 354010,
+   "primary_type": "Stratovolcano"
+  },
+  "354020": {
+   "elevation_m": 5608,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 2024,
+   "lat": -16.345,
+   "lon": -70.8972,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Ubinas",
+   "number": 354020,
+   "primary_type": "Stratovolcano"
+  },
+  "354030": {
+   "elevation_m": 4679,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1600,
+   "lat": -16.6144,
+   "lon": -70.8542,
+   "major_rock_type": "Dacite",
+   "name": "Huaynaputina",
+   "number": 354030,
+   "primary_type": "Stratovolcano"
+  },
+  "354031": {
+   "elevation_m": 5382,
+   "evidence_category": "Eruption Dated",
+   "last_eruption_year": 1800,
+   "lat": -16.7586,
+   "lon": -70.5981,
+   "major_rock_type": "Dacite",
+   "name": "Ticsani",
+   "number": 354031,
+   "primary_type": "Lava dome(s)"
+  },
+  "354040": {
+   "elevation_m": 5801,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1802,
+   "lat": -17.026,
+   "lon": -70.372,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Tutupaca",
+   "number": 354040,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "354050": {
+   "elevation_m": 5495,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": -1320,
+   "lat": -17.184,
+   "lon": -70.196,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Yucamane",
+   "number": 354050,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "354060": {
+   "elevation_m": 5626,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -17.4852,
+   "lon": -69.7886,
+   "major_rock_type": "Trachyte / Trachydacite",
+   "name": "Casiri, Nevados",
+   "number": 354060,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355011": {
+   "elevation_m": 5860,
+   "evidence_category": "Eruption Dated",
+   "last_eruption_year": -320,
+   "lat": -18.1,
+   "lon": -69.5,
+   "major_rock_type": "Dacite",
+   "name": "Taapaca",
+   "number": 355011,
+   "primary_type": "Complex"
+  },
+  "355012": {
+   "elevation_m": 6336,
+   "evidence_category": "Eruption Dated",
+   "last_eruption_year": 290,
+   "lat": -18.166,
+   "lon": -69.142,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Parinacota",
+   "number": 355012,
+   "primary_type": "Stratovolcano"
+  },
+  "355020": {
+   "elevation_m": 6071,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1960,
+   "lat": -18.42,
+   "lon": -69.092,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Guallatiri",
+   "number": 355020,
+   "primary_type": "Stratovolcano"
+  },
+  "355030": {
+   "elevation_m": 5550,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1913,
+   "lat": -19.15,
+   "lon": -68.83,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Isluga",
+   "number": 355030,
+   "primary_type": "Stratovolcano"
+  },
+  "355032": {
+   "elevation_m": 5430,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -19.13,
+   "lon": -68.53,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Tata Sabaya",
+   "number": 355032,
+   "primary_type": "Stratovolcano"
+  },
+  "355090": {
+   "elevation_m": 5884,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1810,
+   "lat": -22.557,
+   "lon": -67.853,
+   "major_rock_type": "Dacite",
+   "name": "Putana",
+   "number": 355090,
+   "primary_type": "Stratovolcano"
+  },
+  "355091": {
+   "elevation_m": 5961,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -22.719,
+   "lon": -67.891,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Sairecabur",
+   "number": 355091,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355092": {
+   "elevation_m": 5916,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -22.83,
+   "lon": -67.88,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Licancabur",
+   "number": 355092,
+   "primary_type": "Stratovolcano"
+  },
+  "355093": {
+   "elevation_m": 5598,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -22.895,
+   "lon": -67.566,
+   "major_rock_type": "Dacite",
+   "name": "Guayaques",
+   "number": 355093,
+   "primary_type": "Lava dome(s)"
+  },
+  "355094": {
+   "elevation_m": 5703,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -23,
+   "lon": -67.75,
+   "major_rock_type": "Dacite",
+   "name": "Purico Complex",
+   "number": 355094,
+   "primary_type": "Shield(pyroclastic)"
+  },
+  "355095": {
+   "elevation_m": 5631,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -23.236,
+   "lon": -67.645,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Colachi",
+   "number": 355095,
+   "primary_type": "Stratovolcano"
+  },
+  "355096": {
+   "elevation_m": 6023,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -23.292,
+   "lon": -67.618,
+   "major_rock_type": "Dacite",
+   "name": "Acamarachi",
+   "number": 355096,
+   "primary_type": "Stratovolcano"
+  },
+  "355098": {
+   "elevation_m": 5778,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -23.58,
+   "lon": -67.7,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Chiliques",
+   "number": 355098,
+   "primary_type": "Stratovolcano"
+  },
+  "355100": {
+   "elevation_m": 5592,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 2026,
+   "lat": -23.37,
+   "lon": -67.73,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Lascar",
+   "number": 355100,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355101": {
+   "elevation_m": 5852,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -23.743,
+   "lon": -67.534,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Cordon de Puntas Negras",
+   "number": 355101,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355102": {
+   "elevation_m": 5910,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -23.82,
+   "lon": -67.77,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Miniques",
+   "number": 355102,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355103": {
+   "elevation_m": 3550,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -23.83,
+   "lon": -67.95,
+   "major_rock_type": "No Data (checked)",
+   "name": "Tujle, Cerro",
+   "number": 355103,
+   "primary_type": "Maar"
+  },
+  "355104": {
+   "elevation_m": 4458,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -23.949,
+   "lon": -67.74,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Caichinque",
+   "number": 355104,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355105": {
+   "elevation_m": 3109,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -23.97,
+   "lon": -68.13,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Tilocalar",
+   "number": 355105,
+   "primary_type": "Lava cone(es)"
+  },
+  "355107": {
+   "elevation_m": 6233,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -24.188,
+   "lon": -68.054,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Pular",
+   "number": 355107,
+   "primary_type": "Stratovolcano(es)"
+  },
+  "355108": {
+   "elevation_m": 4220,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -24.319,
+   "lon": -68.59,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Negrillar, La",
+   "number": 355108,
+   "primary_type": "Pyroclastic cone(s)"
+  },
+  "355109": {
+   "elevation_m": 6031,
+   "evidence_category": "Eruption Dated",
+   "last_eruption_year": -5250,
+   "lat": -24.396,
+   "lon": -68.246,
+   "major_rock_type": "Dacite",
+   "name": "Socompa",
+   "number": 355109,
+   "primary_type": "Stratovolcano"
+  },
+  "355110": {
+   "elevation_m": 6739,
+   "evidence_category": "Eruption Observed",
+   "last_eruption_year": 1877,
+   "lat": -24.72,
+   "lon": -68.53,
+   "major_rock_type": "Dacite",
+   "name": "Llullaillaco",
+   "number": 355110,
+   "primary_type": "Stratovolcano"
+  },
+  "355112": {
+   "elevation_m": 5451,
+   "evidence_category": "Evidence Uncertain",
+   "last_eruption_year": null,
+   "lat": -25.083,
+   "lon": -68.367,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Corrida de Cori Volcanic Field",
+   "number": 355112,
+   "primary_type": "Stratovolcano"
+  },
+  "355120": {
+   "elevation_m": 5706,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -25.168,
+   "lon": -68.507,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Lastarria",
+   "number": 355120,
+   "primary_type": "Stratovolcano"
+  },
+  "355121": {
+   "elevation_m": 5481,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -25.336,
+   "lon": -68.521,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Cordon del Azufre",
+   "number": 355121,
+   "primary_type": "Complex"
+  },
+  "355122": {
+   "elevation_m": 5413,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -25.414,
+   "lon": -68.588,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Bayo Gorbea, Cerro",
+   "number": 355122,
+   "primary_type": "Complex"
+  },
+  "355160": {
+   "elevation_m": 6095,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -24.29,
+   "lon": -67.783,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Aracar",
+   "number": 355160,
+   "primary_type": "Stratovolcano"
+  },
+  "355161": {
+   "elevation_m": 4652,
+   "evidence_category": "Evidence Credible",
+   "last_eruption_year": null,
+   "lat": -25.078,
+   "lon": -68.266,
+   "major_rock_type": "Andesite / Basaltic Andesite",
+   "name": "Central Andean Arc at 25.1°S",
+   "number": 355161,
+   "primary_type": "Pyroclastic cone"
+  }
+ }
+}

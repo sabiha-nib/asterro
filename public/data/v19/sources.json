@@ -1,0 +1,637 @@
+{
+ "domains": [
+  "terrain",
+  "geology",
+  "mineralogy",
+  "surface_materials",
+  "thermal",
+  "illumination",
+  "hydrology",
+  "cryosphere",
+  "atmosphere",
+  "dust_aeolian",
+  "biology",
+  "subsurface",
+  "processes",
+  "robotic_ops",
+  "human_ops",
+  "resources"
+ ],
+ "note": "Candidates and their official access routes. Not data, and not an integration state.",
+ "schema": "asterro.v19.sources/1",
+ "sources": [
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "≈ 140 API calls per parameter",
+   "coverage": "global",
+   "crs": "EPSG:4326",
+   "dataset_id": "POWER Climatology API v2 (source: MERRA-2)",
+   "doc_status": "unverified",
+   "docs": "https://power.larc.nasa.gov/docs/",
+   "domains": [
+    "atmosphere",
+    "dust_aeolian",
+    "human_ops"
+   ],
+   "format": "JSON (regional API, 10° × 10° tiles)",
+   "id": "power_wind",
+   "instrument": "MERRA-2 reanalysis (GMAO)",
+   "license": "NASA open data; POWER citation requested",
+   "priority": 1,
+   "processing": "Same tiling and cell alignment as the retained T2M/PRECTOTCORR climatology; fill value −999 kept as missing.",
+   "provider": "NASA Langley Research Center, POWER project",
+   "purpose": "Climatological near-surface wind speed (2 m, 10 m, 50 m) and humidity/pressure on ASTERRO's own grid, for wind exposure and aeolian-process context.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "api",
+     "note": "the route used for the retained POWER climatology (API v2.10.0)",
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional"
+    },
+    {
+     "auth": "none",
+     "kind": "api",
+     "note": "parameter dictionary, to confirm WS2M, WS10M, WS50M, RH2M, PS",
+     "url": "https://power.larc.nasa.gov/api/system/manager/parameters"
+    }
+   ],
+   "spatial": "0.5° × 0.625° (MERRA-2 native)",
+   "storage": "≈ 2 MB per parameter (13 × 361 × 576 float32)",
+   "temporal": "monthly and annual climatology, 2001–2020",
+   "units": "m/s (wind), % (RH), kPa (pressure)",
+   "validation": "Grid identity with power_climatology.npz; physical ranges; spot comparison with REMS/MEDA is not a validation (different planet).",
+   "value": "Unlocks wind exposure (atmosphere, dust/aeolian, EVA/habitat operations). Reanalysis, not observation: labelled as such."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "≈ 12–120 WMS calls",
+   "coverage": "global, cloud-free retrievals only",
+   "crs": "EPSG:4326",
+   "dataset_id": "MODIS aerosol optical depth layers (GIBS)",
+   "doc_status": "unverified",
+   "docs": "https://nasa-gibs.github.io/gibs-api-docs/",
+   "domains": [
+    "atmosphere",
+    "dust_aeolian"
+   ],
+   "format": "PNG + colormap XML",
+   "id": "gibs_modis_aod",
+   "instrument": "Terra/Aqua MODIS",
+   "license": "NASA open data",
+   "priority": 2,
+   "processing": "Decode rendered colours with the layer's colormap (as for LST), aggregate to cells, keep retrieval counts.",
+   "provider": "NASA ESDIS, Global Imagery Browse Services",
+   "purpose": "Column aerosol optical depth climatology as an atmospheric dust/aerosol indicator (never as surface dust deposition).",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "wms",
+     "note": "the route used for the retained MODIS LST",
+     "url": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi"
+    },
+    {
+     "auth": "none",
+     "kind": "wmts_capabilities",
+     "note": "to find the exact AOD layer and its colormap",
+     "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml"
+    }
+   ],
+   "spatial": "rendered imagery; native product resolution per layer",
+   "storage": "≈ 3 MB per month layer at 0.1°",
+   "temporal": "per layer (daily/monthly)",
+   "units": "dimensionless (AOD)",
+   "validation": "Quantisation error from the colormap; comparison with MCD19A2 or MERRA-2 AOD if those become accessible.",
+   "value": "First aerosol indicator. Decoded from imagery: labelled 'satellite-derived, decoded', proxy for dust."
+  },
+  {
+   "auth": "earthdata_login",
+   "body": "earth",
+   "compute": "moderate",
+   "coverage": "global",
+   "crs": "EPSG:4326",
+   "dataset_id": "M2TMNXAER (MERRA-2 tavgM_2d_aer_Nx)",
+   "doc_status": "unverified",
+   "docs": "https://disc.gsfc.nasa.gov/",
+   "domains": [
+    "atmosphere",
+    "dust_aeolian"
+   ],
+   "format": "NetCDF4",
+   "id": "merra2_aer",
+   "instrument": "MERRA-2 reanalysis",
+   "license": "NASA open data",
+   "priority": 4,
+   "processing": "Monthly climatology over 2001–2020 to match POWER.",
+   "provider": "NASA GES DISC",
+   "purpose": "Dust column mass and dust AOD (reanalysis) to separate dust from other aerosols.",
+   "routes": [
+    {
+     "auth": "earthdata_login",
+     "kind": "daac",
+     "url": "https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2_MONTHLY/"
+    }
+   ],
+   "spatial": "0.5° × 0.625°",
+   "storage": "≈ 1 GB for 20 years monthly",
+   "temporal": "monthly, 1980–present",
+   "units": "kg/m² (column mass), dimensionless (AOD)",
+   "validation": "AERONET comparisons published by GMAO (reference only).",
+   "value": "Dust-specific aerosol; model output, labelled as such."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "≈ 77 000 requests: needs polite rate limiting and caching",
+   "coverage": "global at small scale, denser where large-scale maps exist",
+   "crs": "EPSG:4326",
+   "dataset_id": "Macrostrat API v2 geologic_units/map (harmonised maps)",
+   "doc_status": "verified_response",
+   "docs": "https://macrostrat.org/api/v2/",
+   "domains": [
+    "geology",
+    "surface_materials",
+    "processes",
+    "resources"
+   ],
+   "format": "JSON",
+   "id": "macrostrat_units",
+   "instrument": "compiled geological maps",
+   "license": "CC BY 4.0 (Macrostrat); source maps cited per unit",
+   "priority": 1,
+   "processing": "Query each land cell centre (or a sample of points per cell); keep source map id and scale; never treat as a field survey.",
+   "provider": "Macrostrat (University of Wisconsin–Madison)",
+   "purpose": "Geological map units at a point: lithology, age range, map scale and source map, for cell-level geological context.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "api",
+     "note": "one request per cell centre",
+     "url": "https://macrostrat.org/api/v2/geologic_units/map?lat={lat}&lng={lon}&scale=small"
+    },
+    {
+     "auth": "none",
+     "kind": "api",
+     "note": "lithology vocabulary",
+     "url": "https://macrostrat.org/api/v2/defs/lithologies"
+    }
+   ],
+   "spatial": "map scale per source (small ≈ 1:5–20M globally)",
+   "storage": "≈ 20–60 MB JSON for all land cells",
+   "temporal": "static",
+   "units": "classes; ages in Ma",
+   "validation": "Spot checks against well-known units (e.g. Deccan basalts, Atacama evaporites); share of cells with a unit.",
+   "value": "Unlocks geology, surface materials and part of resources; volcanic, sedimentary and evaporite context."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "trivial",
+   "coverage": "global",
+   "crs": "EPSG:4326",
+   "dataset_id": "Volcanoes of the World (VOTW) Holocene list",
+   "doc_status": "verified_response",
+   "docs": "https://volcano.si.edu/",
+   "domains": [
+    "geology",
+    "processes",
+    "subsurface"
+   ],
+   "format": "GeoJSON/XLSX",
+   "id": "gvp_holocene",
+   "instrument": "catalogue",
+   "license": "Smithsonian terms of use; cite VOTW version",
+   "priority": 1,
+   "processing": "Points to cells; distances for Local Impact.",
+   "provider": "Smithsonian Institution, Global Volcanism Program",
+   "purpose": "Inventory of Holocene volcanoes (location, type, rock type, last eruption) for volcanic context and lava-tube connections.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "wfs",
+     "url": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&request=GetCapabilities"
+    },
+    {
+     "auth": "none",
+     "kind": "download",
+     "note": "spreadsheet export",
+     "url": "https://volcano.si.edu/list_volcano_holocene.cfm"
+    }
+   ],
+   "spatial": "point locations",
+   "storage": "< 2 MB",
+   "temporal": "catalogue version",
+   "units": "points; elevation m",
+   "validation": "Record count against the published VOTW version; spot checks.",
+   "value": "Real nearby volcanoes in Local Impact; volcanic environments."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "needs rasterio/GDAL",
+   "coverage": "global land",
+   "crs": "Homolosine (files) / EPSG:4326 (API)",
+   "dataset_id": "SoilGrids 2.0",
+   "doc_status": "unverified",
+   "docs": "https://www.isric.org/explore/soilgrids",
+   "domains": [
+    "surface_materials",
+    "biology"
+   ],
+   "format": "GeoTIFF/JSON",
+   "id": "soilgrids",
+   "instrument": "digital soil mapping (model)",
+   "license": "CC BY 4.0",
+   "priority": 3,
+   "processing": "Aggregate the 0–5 cm layer to cells from the COGs (preferred over 77 000 point calls).",
+   "provider": "ISRIC – World Soil Information",
+   "purpose": "Soil texture, organic carbon and pH as surface-material context.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "api",
+     "note": "point queries; rate-limited",
+     "url": "https://rest.isric.org/soilgrids/v2.0/properties/query?lat={lat}&lon={lon}"
+    },
+    {
+     "auth": "none",
+     "kind": "files",
+     "note": "global COG/VRT layers",
+     "url": "https://files.isric.org/soilgrids/latest/data/"
+    }
+   ],
+   "spatial": "250 m",
+   "storage": "≈ 1–5 GB per property for the full global layer, or windowed reads",
+   "temporal": "static",
+   "units": "per property (e.g. g/kg, pH×10)",
+   "validation": "Published SoilGrids accuracy statistics (reference).",
+   "value": "Surface materials; model output, labelled as such."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "needs rasterio",
+   "coverage": "global (−56° to 78°)",
+   "crs": "EPSG:4326",
+   "dataset_id": "Global Surface Water v1.4",
+   "doc_status": "unverified",
+   "docs": "https://global-surface-water.appspot.com/",
+   "domains": [
+    "hydrology",
+    "processes"
+   ],
+   "format": "GeoTIFF",
+   "id": "jrc_gsw",
+   "instrument": "Landsat 5/7/8",
+   "license": "CC BY 4.0 (cite Pekel et al. 2016)",
+   "priority": 2,
+   "processing": "Per-cell share of pixels with occurrence > 0, mean occurrence, and 'lost water' (transitions layer).",
+   "provider": "European Commission JRC / Google",
+   "purpose": "Surface-water occurrence 1984–2021 (historical vs present water) for water-history context.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "cloud",
+     "note": "10° × 10° tiles per layer",
+     "url": "https://storage.googleapis.com/global-surface-water/downloads2021/"
+    }
+   ],
+   "spatial": "30 m",
+   "storage": "occurrence layer ≈ 6–10 GB if all tiles are read; windowed/streamed reading preferred",
+   "temporal": "1984–2021",
+   "units": "% of valid observations with water",
+   "validation": "Published accuracy (omission/commission); compare with Natural Earth lakes.",
+   "value": "Water history; dry-lake context."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "needs rasterio",
+   "coverage": "global land",
+   "crs": "EPSG:4326",
+   "dataset_id": "ESA WorldCover 10 m v200 (2021)",
+   "doc_status": "unverified",
+   "docs": "https://esa-worldcover.org/",
+   "domains": [
+    "surface_materials",
+    "biology"
+   ],
+   "format": "COG",
+   "id": "esa_worldcover",
+   "instrument": "Sentinel-1/2",
+   "license": "CC BY 4.0",
+   "priority": 3,
+   "processing": "Class shares per cell from overviews (COG pyramids) instead of full resolution.",
+   "provider": "ESA / VITO",
+   "purpose": "Land cover classes (bare/sparse, snow/ice, water, vegetation) per cell.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "cloud",
+     "note": "3° × 3° COG tiles",
+     "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/"
+    }
+   ],
+   "spatial": "10 m",
+   "storage": "≈ 100 GB at full resolution; overviews keep it to a few GB",
+   "temporal": "2021",
+   "units": "class shares",
+   "validation": "Published accuracy ≈ 77 % overall (reference).",
+   "value": "Bare-ground share, snow/ice, vegetation."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "needs rasterio",
+   "coverage": "global",
+   "crs": "EPSG:4326",
+   "dataset_id": "Copernicus DEM GLO-90 / GLO-30",
+   "doc_status": "unverified",
+   "docs": "https://spacedata.copernicus.eu/",
+   "domains": [
+    "terrain"
+   ],
+   "format": "COG",
+   "id": "copernicus_dem",
+   "instrument": "TanDEM-X",
+   "license": "Copernicus DEM licence (free, attribution)",
+   "priority": 4,
+   "processing": "Aspect and sub-cell landform statistics.",
+   "provider": "ESA / Copernicus",
+   "purpose": "Higher-resolution terrain for aspect and landform scale.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "cloud",
+     "url": "https://copernicus-dem-90m.s3.amazonaws.com/"
+    },
+    {
+     "auth": "none",
+     "kind": "cloud",
+     "url": "https://copernicus-dem-30m.s3.amazonaws.com/"
+    }
+   ],
+   "spatial": "90 m / 30 m",
+   "storage": "GLO-90 ≈ 30–40 GB",
+   "temporal": "2011–2015",
+   "units": "m",
+   "validation": "Compare with GMTED2010 cell means (already integrated).",
+   "value": "Aspect; landform-scale analysis."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "needs shapely or ogr",
+   "coverage": "global glaciers outside ice sheets",
+   "crs": "EPSG:4326",
+   "dataset_id": "Randolph Glacier Inventory v7.0 (NSIDC-0770)",
+   "doc_status": "unverified",
+   "docs": "https://nsidc.org/data/nsidc-0770/versions/7",
+   "domains": [
+    "cryosphere"
+   ],
+   "format": "Shapefile/CSV",
+   "id": "rgi7",
+   "instrument": "compiled outlines",
+   "license": "CC BY 4.0",
+   "priority": 3,
+   "processing": "Glacier area share per cell.",
+   "provider": "GLIMS / NSIDC",
+   "purpose": "Glacier outlines for ice context.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://daacdata.apps.nsidc.org/pub/DATASETS/nsidc0770_rgi_v7/"
+    }
+   ],
+   "spatial": "vector",
+   "storage": "≈ 1 GB",
+   "temporal": "≈ 2000 epoch",
+   "units": "km²",
+   "validation": "Area totals against the RGI documentation.",
+   "value": "Cryosphere: glaciers."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "paged API calls",
+   "coverage": "uneven (sampling bias)",
+   "crs": "EPSG:4326",
+   "dataset_id": "GBIF occurrence API v1",
+   "doc_status": "verified_response",
+   "docs": "https://techdocs.gbif.org/en/openapi/v1/occurrence",
+   "domains": [
+    "biology"
+   ],
+   "format": "JSON",
+   "id": "gbif_extremophiles",
+   "instrument": "aggregated occurrence records",
+   "license": "per record: CC0, CC BY or CC BY-NC; recorded per record",
+   "priority": 2,
+   "processing": "Fixed, documented taxon list; keep dataset key, licence, basis of record, date, uncertainty; drop records without coordinates.",
+   "provider": "GBIF Secretariat",
+   "purpose": "Documented occurrence records of selected extremophile taxa (halophiles, acidophiles, psychrophiles) with source, date and coordinate uncertainty.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "api",
+     "url": "https://api.gbif.org/v1/occurrence/search?taxonKey={key}&hasCoordinate=true"
+    }
+   ],
+   "spatial": "points with coordinateUncertaintyInMeters",
+   "storage": "< 50 MB",
+   "temporal": "per record",
+   "units": "records",
+   "validation": "Taxon-key resolution via the GBIF species API; counts per taxon; sampling-bias note.",
+   "value": "Biological evidence: presence records, never inferred life or habitability."
+  },
+  {
+   "auth": "none",
+   "body": "earth",
+   "compute": "few queries",
+   "coverage": "uneven",
+   "crs": "EPSG:4326",
+   "dataset_id": "Wikidata SPARQL (instances of cave / lava tube)",
+   "doc_status": "unverified",
+   "docs": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
+   "domains": [
+    "subsurface"
+   ],
+   "format": "JSON",
+   "id": "wikidata_caves",
+   "instrument": "community catalogue",
+   "license": "CC0",
+   "priority": 2,
+   "processing": "Keep item id, label, class, coordinates, stated length/depth with their references.",
+   "provider": "Wikimedia Foundation, Wikidata",
+   "purpose": "Documented caves and lava tubes with coordinates as a community-maintained inventory (not authoritative, not complete).",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "sparql",
+     "url": "https://query.wikidata.org/sparql"
+    }
+   ],
+   "spatial": "points (accuracy unknown per item)",
+   "storage": "< 20 MB",
+   "temporal": "query date",
+   "units": "points; length m where stated",
+   "validation": "Spot checks of known lava tubes; share of items with references.",
+   "value": "Subsurface context in Local Impact, labelled as an incomplete inventory."
+  },
+  {
+   "auth": "none",
+   "body": "mars",
+   "compute": "needs shapely",
+   "coverage": "global Mars",
+   "crs": "Mars 2000 (IAU)",
+   "dataset_id": "Geologic Map of Mars, SIM 3292 (Tanaka et al. 2014), 1:20M",
+   "doc_status": "unverified",
+   "docs": "https://pubs.usgs.gov/sim/3292/",
+   "domains": [
+    "geology"
+   ],
+   "format": "Shapefile/GeoPackage",
+   "id": "usgs_mars_geology",
+   "instrument": "MOLA, THEMIS, CTX, HRSC based mapping",
+   "license": "US public domain",
+   "priority": 2,
+   "processing": "Unit at each Mars target.",
+   "provider": "USGS Astrogeology",
+   "purpose": "Global geologic units of Mars for the planetary side of a geological comparison (map classes, not mineralogy).",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://astrogeology.usgs.gov/search/map/mars_geologic_map"
+    },
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://planetarymaps.usgs.gov/"
+    }
+   ],
+   "spatial": "1:20 000 000",
+   "storage": "≈ 50 MB",
+   "temporal": "static",
+   "units": "units and ages",
+   "validation": "Unit of Jezero/Gale against the map text.",
+   "value": "Geological context of Mars targets."
+  },
+  {
+   "auth": "none",
+   "body": "moon",
+   "compute": "needs shapely",
+   "coverage": "global Moon",
+   "crs": "Moon 2000 (IAU)",
+   "dataset_id": "Unified Geologic Map of the Moon, 1:5M (Fortezzo et al. 2020)",
+   "doc_status": "unverified",
+   "docs": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+   "domains": [
+    "geology"
+   ],
+   "format": "Shapefile/GeoPackage",
+   "id": "usgs_moon_geology",
+   "instrument": "compiled Apollo-era and LRO mapping",
+   "license": "US public domain",
+   "priority": 2,
+   "processing": "Unit at each lunar target.",
+   "provider": "USGS Astrogeology",
+   "purpose": "Global geologic units of the Moon for lunar targets.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+    },
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://planetarymaps.usgs.gov/"
+    }
+   ],
+   "spatial": "1:5 000 000",
+   "storage": "≈ 100 MB",
+   "temporal": "static",
+   "units": "units and ages",
+   "validation": "Unit at the South Pole targets against the map text.",
+   "value": "Geological context of lunar targets."
+  },
+  {
+   "auth": "none",
+   "body": "mars",
+   "compute": "moderate",
+   "coverage": "global Mars",
+   "crs": "Mars",
+   "dataset_id": "MRO Mars Climate Sounder derived data",
+   "doc_status": "unverified",
+   "docs": "https://pds-atmospheres.nmsu.edu/",
+   "domains": [
+    "atmosphere",
+    "dust_aeolian"
+   ],
+   "format": "PDS tables",
+   "id": "mcs_climatology",
+   "instrument": "MRO MCS",
+   "license": "NASA PDS (open)",
+   "priority": 4,
+   "processing": "Seasonal column dust opacity near targets.",
+   "provider": "NASA PDS Atmospheres Node",
+   "purpose": "Mars atmospheric temperature and dust profiles for the Mars side of atmospheric comparisons.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://pds-atmospheres.nmsu.edu/data_and_services/atmospheres_data/MARS/mcs.html"
+    }
+   ],
+   "spatial": "profiles",
+   "storage": "large; subset only",
+   "temporal": "2006–present",
+   "units": "K; dust opacity per km",
+   "validation": "Against published MCS climatologies.",
+   "value": "Mars dust/atmosphere reference."
+  },
+  {
+   "auth": "none",
+   "body": "mars",
+   "compute": "heavy",
+   "coverage": "targeted footprints",
+   "crs": "Mars",
+   "dataset_id": "MRO CRISM MTRDR / summary products",
+   "doc_status": "unverified",
+   "docs": "https://pds-geosciences.wustl.edu/missions/mro/crism.htm",
+   "domains": [
+    "mineralogy"
+   ],
+   "format": "PDS3 IMG",
+   "id": "crism_mtrdr",
+   "instrument": "MRO CRISM",
+   "license": "NASA PDS (open)",
+   "priority": 5,
+   "processing": "Summary parameters over target footprints; spectral association only.",
+   "provider": "NASA PDS Geosciences Node",
+   "purpose": "Spectral summary parameters (e.g. olivine, clay, carbonate indices) at Mars targets.",
+   "routes": [
+    {
+     "auth": "none",
+     "kind": "files",
+     "url": "https://pds-geosciences.wustl.edu/"
+    },
+    {
+     "auth": "none",
+     "kind": "search",
+     "url": "https://ode.rsl.wustl.edu/mars/"
+    }
+   ],
+   "spatial": "≈ 18 m/pixel (targeted)",
+   "storage": "hundreds of MB per footprint",
+   "temporal": "2006–",
+   "units": "band-depth parameters",
+   "validation": "Published Jezero/Gale mineralogy (reference).",
+   "value": "Mars mineralogical indicators; associations, never identifications."
+  }
+ ]
+}

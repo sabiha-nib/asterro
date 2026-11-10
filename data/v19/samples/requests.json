@@ -1,0 +1,226 @@
+{
+ "jez1": {
+  "cell": 77940,
+  "lat": -22.5,
+  "lon": -67.5,
+  "place": "Altiplano, Bolivia",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-22.5&lng=-67.5",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-22.75,-22.25&decimalLongitude=-67.8125,-67.1875&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-23.4,-68.4742,-21.6,-66.5258,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-67.5%20-22.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez2": {
+  "cell": 146152,
+  "lat": 36.5,
+  "lon": 85,
+  "place": "Kunlun Mountains, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=36.5&lng=85",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.25,36.75&decimalLongitude=84.6875,85.3125&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=35.6,83.8804,37.4,86.1196,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(85%2036.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez3": {
+  "cell": 82546,
+  "lat": -18.5,
+  "lon": -68.75,
+  "place": "Cordillera Occidental, Bolivia",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-18.5&lng=-68.75",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-18.75,-18.25&decimalLongitude=-69.0625,-68.4375&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-19.4,-69.699,-17.6,-67.801,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.75%20-18.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez4": {
+  "cell": 144991,
+  "lat": 35.5,
+  "lon": 79.375,
+  "place": "Karakoram Range, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=35.5&lng=79.375",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.25,35.75&decimalLongitude=79.0625,79.6875&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=34.6,78.2695,36.4,80.4805,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(79.375%2035.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez5": {
+  "cell": 85422,
+  "lat": -16,
+  "lon": -71.25,
+  "place": "Cordillera Occidental, Peru",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-16&lng=-71.25",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-16.25,-15.75&decimalLongitude=-71.5625,-70.9375&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-16.9,-72.1863,-15.1,-70.3137,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-71.25%20-16)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez6": {
+  "cell": 143844,
+  "lat": 34.5,
+  "lon": 82.5,
+  "place": "Plateau Of Tibet, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=34.5&lng=82.5",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=34.25,34.75&decimalLongitude=82.1875,82.8125&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=33.6,81.4079,35.4,83.5921,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(82.5%2034.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez7": {
+  "cell": 75058,
+  "lat": -25,
+  "lon": -68.75,
+  "place": "Desierto De Atacama, Chile",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-25&lng=-68.75",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-25.25,-24.75&decimalLongitude=-69.0625,-68.4375&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-25.9,-69.743,-24.1,-67.757,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.75%20-25)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez8": {
+  "cell": 147310,
+  "lat": 37.5,
+  "lon": 88.75,
+  "place": "Kunlun Mountains, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=37.5&lng=88.75",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=37.25,37.75&decimalLongitude=88.4375,89.0625&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=36.6,87.6156,38.4,89.8844,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(88.75%2037.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez9": {
+  "cell": 140962,
+  "lat": 32,
+  "lon": 81.25,
+  "place": "Plateau Of Tibet, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=32&lng=81.25",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=31.75,32.25&decimalLongitude=80.9375,81.5625&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=31.1,80.1887,32.9,82.3113,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(81.25%2032)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "jez10": {
+  "cell": 71025,
+  "lat": -28.5,
+  "lon": -69.375,
+  "place": "Andes, Argentina",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-28.5&lng=-69.375",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-69.6875,-69.0625&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-29.4,-70.3991,-27.6,-68.3509,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-69.375%20-28.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "lsp1": {
+  "cell": 145569,
+  "lat": 36,
+  "lon": 80.625,
+  "place": "Kunlun Mountains, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=36&lng=80.625",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=35.75,36.25&decimalLongitude=80.3125,80.9375&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=35.1,79.5125,36.9,81.7375,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(80.625%2036)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "lsp2": {
+  "cell": 90022,
+  "lat": -12,
+  "lon": -76.25,
+  "place": "Cordillera Occidental, Peru",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-12&lng=-76.25",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-12.25,-11.75&decimalLongitude=-76.5625,-75.9375&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-12.9,-77.1701,-11.1,-75.3299,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-76.25%20-12)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "lsp3": {
+  "cell": 146728,
+  "lat": 37,
+  "lon": 85,
+  "place": "Kunlun Mountains, China",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=37&lng=85",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=36.75,37.25&decimalLongitude=84.6875,85.3125&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=36.1,83.8731,37.9,86.1269,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(85%2037)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "lsp4": {
+  "cell": 83696,
+  "lat": -17.5,
+  "lon": -70,
+  "place": "Cordillera Occidental, Peru",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-17.5&lng=-70",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-17.75,-17.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-18.4,-70.9437,-16.6,-69.0563,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-70%20-17.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "lsp5": {
+  "cell": 71024,
+  "lat": -28.5,
+  "lon": -70,
+  "place": "Andes, Chile",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-28.5&lng=-70",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-28.75,-28.25&decimalLongitude=-70.3125,-69.6875&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-29.4,-71.0241,-27.6,-68.9759,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-70%20-28.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ },
+ "loc1": {
+  "cell": 76787,
+  "lat": -23.5,
+  "lon": -68.125,
+  "place": "Desierto De Atacama, Chile",
+  "urls": {
+   "macrostrat": "https://macrostrat.org/api/v2/geologic_units/map?lat=-23.5&lng=-68.125",
+   "gbif_all": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&limit=0",
+   "gbif_archaea": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&kingdomKey=2&limit=3",
+   "gbif_bacteria": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=-23.75,-23.25&decimalLongitude=-68.4375,-67.8125&kingdomKey=3&limit=0",
+   "gvp": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=application/json&bbox=-24.4,-69.1064,-22.6,-67.1436,urn:ogc:def:crs:EPSG::4326",
+   "wikidata_caves": "https://query.wikidata.org/sparql?format=json&query=SELECT%20?i%20?l%20?c%20WHERE{SERVICE%20wikibase:around{?i%20wdt:P625%20?c.bd:serviceParam%20wikibase:center\"Point(-68.125%20-23.5)\"%5E%5Egeo:wktLiteral;wikibase:radius\"100\".}?i%20wdt:P31/wdt:P279*wd:Q35509;rdfs:label%20?l.FILTER(LANG(?l)=\"en\")}"
+  }
+ }
+}
