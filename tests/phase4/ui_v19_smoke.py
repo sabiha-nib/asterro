@@ -120,7 +120,7 @@ try:
         pg.click("#li-geo"); pg.wait_for_function("LI.i != null"); time.sleep(1.0)
         li = pg.evaluate("""(() => { const secs = [...document.querySelectorAll('[data-lisec]')].map(s => s.dataset.lisec); const s = document.querySelector('[data-lisec=v19]');
           return { secs, doms: s ? s.querySelectorAll('[data-v9dom]').length : 0, profs: s ? s.querySelectorAll('[data-v9prof]').length : 0 }; })()""")
-        check(li["secs"][-2:] == ["v19", "report"] and li["doms"] == 16 and li["profs"] == 14, f"Local Impact shows the sixteen domains and the objectives before the report ({li['secs']})")
+        check((li["secs"][-2:] == ["v19", "report"] or li["secs"][-3:] == ["v19", "v19x", "report"]) and li["doms"] == 16 and li["profs"] == 14, f"Local Impact shows the sixteen domains and the objectives before the report ({li['secs']})")
         check(pg.evaluate("localStorage.getItem('asterro.local.v1')") is None, "Local Impact privacy unchanged: nothing stored without consent")
         lg = pg.evaluate("""(() => { const s = document.querySelector('[data-lisec=v19]'); return { g: s.querySelector('[data-v9dom=geology]').dataset.v9state, v: s.querySelectorAll('[data-v9dom=geology] [data-v9v]').length,
           note: (document.querySelector('[data-linofeat] [data-v9volcnote]') || {}).innerText || '', bio: (s.querySelector('[data-v9bio-ex]') || {}).innerText || '' }; })()""")

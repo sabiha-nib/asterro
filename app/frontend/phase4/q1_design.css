@@ -386,4 +386,5 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
 .v9x-dl dt{color:var(--ink-3);font-weight:600}
 .v9x-dl dd{margin:0;overflow-wrap:anywhere}
 .v9x-inv details{margin:6px 0}
+.v9x-inv summary,.v9x-inv summary b,.v9x-inv summary .i18n-keep{overflow-wrap:anywhere;white-space:normal;min-width:0}
 @media (max-width:560px){.v9x-dl{grid-template-columns:1fr}.v9x-dl dt{margin-top:4px}}
