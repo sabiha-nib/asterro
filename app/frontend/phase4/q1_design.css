@@ -375,3 +375,15 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
 .v9-mat{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
 .v9-mat .xt-list li{line-height:1.5}
 @media (max-width:720px){.v9-mat{grid-template-columns:1fr}}
+/* V19 data extension: agency and state badges, inventory field lists */
+.v9x-ag{display:inline-block;font:600 11px/1.35 var(--f-body);padding:1px 7px;border-radius:6px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-2);white-space:nowrap}
+.v9x-ag.nasa{color:var(--moon);border-color:var(--moon)}
+.v9x-st{display:inline-block;font:500 11px/1.35 var(--f-body);padding:1px 6px;border-radius:6px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-2);margin:1px 2px 1px 0}
+.v9x-st.integrated,.v9x-st.cached,.v9x-st.validated,.v9x-st.processed{color:var(--match);border-color:var(--match)}
+.v9x-st.blocked{color:var(--mismatch);border-color:var(--mismatch)}
+.v9x-st.requires_authentication{color:var(--partial);border-color:var(--partial)}
+.v9x-dl{display:grid;grid-template-columns:minmax(110px,max-content) 1fr;gap:4px 12px;margin:8px 0 4px;font:400 12.5px/1.45 var(--f-body);color:var(--ink)}
+.v9x-dl dt{color:var(--ink-3);font-weight:600}
+.v9x-dl dd{margin:0;overflow-wrap:anywhere}
+.v9x-inv details{margin:6px 0}
+@media (max-width:560px){.v9x-dl{grid-template-columns:1fr}.v9x-dl dt{margin-top:4px}}

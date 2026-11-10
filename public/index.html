@@ -1505,6 +1505,18 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
 .v9-mat{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
 .v9-mat .xt-list li{line-height:1.5}
 @media (max-width:720px){.v9-mat{grid-template-columns:1fr}}
+/* V19 data extension: agency and state badges, inventory field lists */
+.v9x-ag{display:inline-block;font:600 11px/1.35 var(--f-body);padding:1px 7px;border-radius:6px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-2);white-space:nowrap}
+.v9x-ag.nasa{color:var(--moon);border-color:var(--moon)}
+.v9x-st{display:inline-block;font:500 11px/1.35 var(--f-body);padding:1px 6px;border-radius:6px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-2);margin:1px 2px 1px 0}
+.v9x-st.integrated,.v9x-st.cached,.v9x-st.validated,.v9x-st.processed{color:var(--match);border-color:var(--match)}
+.v9x-st.blocked{color:var(--mismatch);border-color:var(--mismatch)}
+.v9x-st.requires_authentication{color:var(--partial);border-color:var(--partial)}
+.v9x-dl{display:grid;grid-template-columns:minmax(110px,max-content) 1fr;gap:4px 12px;margin:8px 0 4px;font:400 12.5px/1.45 var(--f-body);color:var(--ink)}
+.v9x-dl dt{color:var(--ink-3);font-weight:600}
+.v9x-dl dd{margin:0;overflow-wrap:anywhere}
+.v9x-inv details{margin:6px 0}
+@media (max-width:560px){.v9x-dl{grid-template-columns:1fr}.v9x-dl dt{margin-top:4px}}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -7187,6 +7199,92 @@ const ASTERRO_V19 = {"ml_validation":{"ablation":{"annual_temperature_range":{"s
   const api = { VERSION, EARTH_KIND, DOMAINS, BYID, MEASURES, PROFILES, INTEGRATED, POINT, domainState, evaluate, measures, interpret, profileState, sampleFor, material };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.AsterroV19 = api;
 })(typeof window !== "undefined" ? window : globalThis);
+
+/* ASTERRO V19 data extension engine (tai-v19-data-2.0.0). Browser and Node.
+ *
+ * Reads the environmental cube written by src/v19x/cube.py (public/data/v19/env/cube.bin + cube.json): one Int16
+ * array per variable, aligned with the app's valid land cells. A stored -32768 is missing and is returned as null,
+ * never as 0. The original six-dimensional engine is not used or changed here.
+ *
+ * DOMAINS groups the variables into seven data-layer domains. Each domain carries the statement of what its data
+ * cannot say (not_said), shown with it. Nothing is combined into a score.
+ * verify(manifest, buffer, cellSha) checks byte length, SHA-256 and the cell order before a copy is used.
+ * analyse(i) records the values, the datasets that produced them, the domains without data and the cube hash, so a
+ * stored analysis can be traced and reproduced.
+ */
+(function (root) {
+  "use strict";
+  const VERSION = "tai-v19-data-2.0.0";
+  const DOMAINS = [
+    { id: "wind_atmosphere", vars: ["wind_ws10m", "wind_ws10m_maxmonth", "wind_ws50m", "wind_ws10m_max", "wind_dir_from", "wind_steadiness", "ps_kpa", "rh2m", "cloud_amt", "sw_dwn"], not_said: "wind_not_dust" },
+    { id: "aerosol_dust", vars: ["dust_sfc_ugm3", "dust_sfc_maxmonth", "dust_top_bin_months", "aod550_ceres", "aod_misr_mean", "aod_misr_months"], not_said: "aod_not_surface" },
+    { id: "water_soil", vars: ["water_mask_frac", "lc_water", "gwettop", "gwetroot"], not_said: "water_not_resource" },
+    { id: "snow_ice", vars: ["snodp_cm", "snodp_maxmonth", "frsno", "frsno_months50", "snow_detected_maxmonth", "snow_detected_months50", "lc_snowice"], not_said: "snow_lower_bound" },
+    { id: "surface_cover", vars: ["lc_dominant", "lc_barren", "lc_vegetated", "lc_urban", "albedo"], not_said: "class_not_mineral" },
+    { id: "vegetation", vars: ["evi_mean", "evi_max", "evi_months"], not_said: "evi_not_life" },
+    { id: "volcanic", vars: ["volc_nearest_km", "volc_holo_100km", "volc_pleis_100km"], not_said: "proximity_not_hazard" }
+  ];
+
+  function create(man, buffer) {
+    if (!man || !buffer) throw new Error("cube manifest and data are required");
+    if (buffer.byteLength !== man.bytes) throw new Error("cube size " + buffer.byteLength + " differs from the manifest " + man.bytes);
+    const n = man.n, V = {};
+    for (const v of man.variables) V[v.id] = { meta: v, arr: new Int16Array(buffer, v.offset, n) };
+    function value(id, i) {
+      const x = V[id]; if (!x || i == null || i < 0 || i >= n) return null;
+      const q = x.arr[i]; return q === man.nodata ? null : q * x.meta.scale + (x.meta.add || 0);
+    }
+    function lowerBound(m, i) {
+      if (m.lower_bound) return true;
+      const w = m.lower_bound_where && /^(\w+) > (\d+(?:\.\d+)?)$/.exec(m.lower_bound_where);
+      if (w) { const x = value(w[1], i); return x != null && x > +w[2]; }
+      return false;
+    }
+    function row(id, i) {
+      const x = V[id]; if (!x) return null; const m = x.meta, v = value(id, i);
+      return { id, value: v, units: m.units, label: m.label, kind: m.kind, datasets: m.datasets || [], resolution: m.resolution, period: m.period,
+               lower_bound: v != null && lowerBound(m, i), cls: m.classes && v != null ? m.classes[String(Math.round(v))] || null : null, agency: m.agency, note: m.note || null };
+    }
+    function domains(i) {
+      return DOMAINS.map(d => {
+        const rows = d.vars.map(id => row(id, i)).filter(Boolean), have = rows.filter(r => r.value != null).length;
+        return { id: d.id, rows, have, n: rows.length, state: !rows.length ? "not_built" : have === 0 ? "no_data" : have === rows.length ? "complete" : "partial", not_said: d.not_said };
+      });
+    }
+    function analyse(i, opts) {
+      const ds = domains(i), used = new Set(), values = {};
+      for (const d of ds) for (const r of d.rows) { values[r.id] = r.value; if (r.value != null) r.datasets.forEach(x => used.add(x)); }
+      return { version: VERSION, i, cube_sha256: man.sha256, cube_version: man.version, source: (opts && opts.source) || null, retrieved: (opts && opts.retrieved) || null,
+               created: (opts && opts.now) || new Date().toISOString(), values, datasets_used: Array.from(used).sort(),
+               domains_unavailable: ds.filter(d => d.have === 0).map(d => d.id), lower_bounds: ds.flatMap(d => d.rows.filter(r => r.lower_bound).map(r => r.id)) };
+    }
+    return { n, version: man.version, value, row, domains, analyse, variables: man.variables.map(v => v.id) };
+  }
+
+  function subtle() {
+    if (typeof crypto !== "undefined" && crypto.subtle) return crypto.subtle;
+    if (typeof require === "function") return require("node:crypto").webcrypto.subtle;
+    throw new Error("no SubtleCrypto");
+  }
+  async function sha256Hex(buffer) {
+    const h = await subtle().digest("SHA-256", buffer);
+    return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  /* why: "size" | "hash" | "cells" | "manifest" */
+  async function verify(man, buffer, cellSha) {
+    if (!man || !man.sha256 || !Array.isArray(man.variables)) return { ok: false, why: "manifest" };
+    if (!buffer || buffer.byteLength !== man.bytes) return { ok: false, why: "size" };
+    if ((await sha256Hex(buffer)) !== man.sha256) return { ok: false, why: "hash" };
+    if (cellSha && man.cell_order_sha256 && cellSha !== man.cell_order_sha256) return { ok: false, why: "cells" };
+    return { ok: true, why: null };
+  }
+  function sameAnalysis(a, b) {
+    return !!(a && b) && a.cube_sha256 === b.cube_sha256 && JSON.stringify(a.values) === JSON.stringify(b.values);
+  }
+
+  const api = { VERSION, DOMAINS, create, verify, sha256Hex, sameAnalysis };
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.AsterroV19X = api;
+})(typeof self !== "undefined" ? self : this);
 
 /* ===== ASTERRO · extended fingerprint engine (browser + Node), exposed as AsterroExt =====
  * Configuration explore-ext-thermal-v1 = the UNCHANGED baseline similarity (TAIEngine.similarity, tai-sim-1.0.0) applied
@@ -29457,6 +29555,761 @@ i18nExtend("de", {
  "v19.reg.doc.verified_response": "Zugang, Felder und Lizenz durch die Antworten des Anbieters bestätigt"
 });
 
+/* ASTERRO V19 data extension, en catalogue (generated). Machine-assisted; not reviewed by native speakers. */
+i18nExtend("en", {
+ "v19x.nasa": "NASA",
+ "v19x.not_nasa": "not NASA",
+ "v19x.kind.model": "Reanalysis / model",
+ "v19x.kind.obs": "Satellite observation",
+ "v19x.kind.obs_lb": "Satellite observation, lower bound",
+ "v19x.kind.class": "Satellite classification",
+ "v19x.kind.satderived": "Satellite-derived",
+ "v19x.kind.catalogue": "Catalogue",
+ "v19x.kind.derived": "Derived",
+ "v19x.src.server": "Copy loaded from the ASTERRO server. Providers queried {d}; stored in this browser {s}.",
+ "v19x.src.offline_store": "Offline copy from this browser's data store (stored {s}). Providers queried {d}. Not live data.",
+ "v19x.layers.title": "Environmental data layers",
+ "v19x.layers.p": "NASA and other agency data acquired for this release, at this ~55 km cell. Each value says how it was obtained. Nothing here changes the similarity score.",
+ "v19x.err.verify": "The data layers did not pass their integrity check, so they are not shown.",
+ "v19x.err.unavailable": "The data layers are not available: no server copy and no offline copy.",
+ "v19x.loading": "Loading the data layers…",
+ "v19x.dom.wind_atmosphere": "Wind and atmosphere",
+ "v19x.dom.aerosol_dust": "Aerosols and dust",
+ "v19x.dom.water_soil": "Surface water and soil wetness",
+ "v19x.dom.snow_ice": "Snow and ice",
+ "v19x.dom.surface_cover": "Surface cover",
+ "v19x.dom.vegetation": "Vegetation",
+ "v19x.dom.volcanic": "Volcanic context",
+ "v19x.dom.have": "{k} of {n} values here",
+ "v19x.var.wind_ws10m": "Wind speed at 10 m, annual mean",
+ "v19x.var.wind_ws10m_maxmonth": "Wind speed at 10 m, windiest month",
+ "v19x.var.wind_ws50m": "Wind speed at 50 m, annual mean",
+ "v19x.var.wind_ws10m_max": "Maximum wind speed at 10 m",
+ "v19x.var.wind_dir_from": "Prevailing wind direction (from)",
+ "v19x.var.wind_steadiness": "Wind steadiness (1 = always one direction)",
+ "v19x.var.ps_kpa": "Surface pressure",
+ "v19x.var.rh2m": "Relative humidity at 2 m",
+ "v19x.var.cloud_amt": "Cloud amount",
+ "v19x.var.sw_dwn": "Sunlight reaching the surface",
+ "v19x.var.dust_sfc_ugm3": "Dust near the surface, annual mean",
+ "v19x.var.dust_sfc_maxmonth": "Dust near the surface, dustiest month",
+ "v19x.var.dust_top_bin_months": "Months above the top colour bin",
+ "v19x.var.aod550_ceres": "Aerosol optical depth (CERES)",
+ "v19x.var.aod_misr_mean": "Aerosol optical depth (MISR)",
+ "v19x.var.aod_misr_months": "Months with a MISR value",
+ "v19x.var.gwettop": "Surface soil wetness",
+ "v19x.var.gwetroot": "Root-zone soil wetness",
+ "v19x.var.water_mask_frac": "Water share (MODIS water mask)",
+ "v19x.var.lc_water": "Water bodies share (land cover)",
+ "v19x.var.snodp_cm": "Snow depth, annual mean (model)",
+ "v19x.var.snodp_maxmonth": "Snow depth, deepest month (model)",
+ "v19x.var.frsno": "Snow-covered share, annual mean (model)",
+ "v19x.var.frsno_months50": "Months at least half snow-covered (model)",
+ "v19x.var.snow_detected_maxmonth": "Detected snow cover, snowiest month",
+ "v19x.var.snow_detected_months50": "Months with at least 50 % detected snow",
+ "v19x.var.lc_snowice": "Permanent snow and ice share",
+ "v19x.var.lc_dominant": "Dominant land cover",
+ "v19x.var.lc_barren": "Barren share",
+ "v19x.var.lc_vegetated": "Vegetated share",
+ "v19x.var.lc_urban": "Built-up share",
+ "v19x.var.albedo": "Surface albedo",
+ "v19x.var.evi_mean": "Vegetation index (EVI), mean",
+ "v19x.var.evi_max": "Vegetation index (EVI), greenest month",
+ "v19x.var.evi_months": "Months with an EVI value",
+ "v19x.var.volc_nearest_km": "Nearest Holocene volcano",
+ "v19x.var.volc_holo_100km": "Holocene volcanoes within 100 km",
+ "v19x.var.volc_pleis_100km": "Pleistocene volcanoes within 100 km",
+ "v19x.unit.months": "months",
+ "v19x.unit.count": "",
+ "v19x.unit.km": "km",
+ "v19x.unit.deg": "°",
+ "v19x.unit.fraction": "share",
+ "v19x.unit.ratio": "",
+ "v19x.lower_bound": "lower bound: the true value may be higher",
+ "v19x.volc.nearest": "Nearest Holocene volcano: {name}, {km} km from the cell centre; last known eruption {y}.",
+ "v19x.not.wind_not_dust": "Wind is not a dust measurement, and Earth's wind does not reproduce Martian atmospheric behaviour.",
+ "v19x.not.aod_not_surface": "Aerosol optical depth describes the whole atmospheric column, not dust at ground level or dust deposited on surfaces.",
+ "v19x.not.water_not_resource": "Water occurrence and soil wetness are not accessible water resources.",
+ "v19x.not.snow_lower_bound": "Detected snow is a lower bound: cloud, darkness and snow-free ground look the same in the imagery. Model snow values are not observations.",
+ "v19x.not.class_not_mineral": "A land-cover class is not a mineral or rock composition.",
+ "v19x.not.evi_not_life": "A vegetation index measures plant greenness. It is not evidence about microbial life or habitability.",
+ "v19x.not.proximity_not_hazard": "Distance to a volcano is not a hazard rating or an eruption probability.",
+ "v19x.used": "This analysis used {n} datasets. Domains without data here: {m}.",
+ "v19x.inv.title": "Data inventory",
+ "v19x.inv.p": "Every dataset ASTERRO uses, has found or needs, with its agency and how far it has progressed. A state is shown only when there is evidence for it.",
+ "v19x.inv.counts": "{n} datasets: {k} NASA, {o} from other providers.",
+ "v19x.inv.agency": "Agency",
+ "v19x.inv.state": "State",
+ "v19x.inv.f_all": "All",
+ "v19x.inv.f_nasa": "NASA",
+ "v19x.inv.f_other": "Other providers",
+ "v19x.inv.shown": "{n} shown",
+ "v19x.inv.no_states": "No state reached yet.",
+ "v19x.inv.never": "Discovered is not downloaded, a successful request is not validated data, and a prepared pipeline is not an integrated dataset.",
+ "v19x.st.DISCOVERED": "Discovered",
+ "v19x.st.ACCESSIBLE": "Accessible",
+ "v19x.st.DOWNLOADED": "Downloaded",
+ "v19x.st.VALIDATED": "Validated",
+ "v19x.st.PROCESSED": "Processed",
+ "v19x.st.INTEGRATED": "Integrated",
+ "v19x.st.CACHED": "Cached offline",
+ "v19x.st.BLOCKED": "Blocked",
+ "v19x.st.REQUIRES_AUTHENTICATION": "Requires authentication",
+ "v19x.st.NOT_INVESTIGATED": "Not investigated",
+ "v19x.f.agency": "Agency",
+ "v19x.f.provider": "Provider",
+ "v19x.f.product": "Product and version",
+ "v19x.f.source_product": "Source product",
+ "v19x.f.doi": "DOI",
+ "v19x.f.url": "Official source",
+ "v19x.f.docs": "Documentation",
+ "v19x.f.variables": "Variables",
+ "v19x.f.units": "Units",
+ "v19x.f.spatial": "Spatial resolution",
+ "v19x.f.temporal": "Temporal resolution",
+ "v19x.f.coverage": "Coverage",
+ "v19x.f.period": "Observation period",
+ "v19x.f.retrieved": "Retrieved",
+ "v19x.f.route": "Retrieval route",
+ "v19x.f.processing": "Processing",
+ "v19x.f.validation": "Validation",
+ "v19x.f.cube_variables": "ASTERRO variables",
+ "v19x.f.cloud": "Cloud archive region",
+ "v19x.f.access": "Access conditions",
+ "v19x.f.last_attempt": "Last attempt",
+ "v19x.f.note": "Note",
+ "v19x.f.limitations": "Limitations",
+ "v19x.f.raw_sha256": "Raw file SHA-256",
+ "v19x.f.from": "Recorded in",
+ "v19x.store.title": "Offline data store",
+ "v19x.store.online": "This browser is online.",
+ "v19x.store.offline": "This browser is offline: ASTERRO is using its stored copies.",
+ "v19x.store.cube": "Environmental data layers: {v} variables, {mb} MB, stored {s}",
+ "v19x.store.verified": "integrity verified",
+ "v19x.store.src.server": "Loaded from the ASTERRO server and kept in this browser.",
+ "v19x.store.src.offline_store": "Loaded from this browser's offline store.",
+ "v19x.store.retrieved": "The providers were queried {d}. The values are climatologies and catalogues, not live measurements.",
+ "v19x.store.never_live": "Stored data are never shown as live. Refreshing keeps the valid copy until a new copy has passed its integrity check.",
+ "v19x.store.refresh": "Check for updated data",
+ "v19x.store.verify": "Verify stored data",
+ "v19x.store.clear": "Delete saved analyses",
+ "v19x.msg.same": "No newer data: the stored copy is current.",
+ "v19x.msg.updated": "Updated data were verified and stored.",
+ "v19x.msg.failed": "The server could not be reached; the stored copy is kept.",
+ "v19x.msg.offline": "Offline: the stored copy is kept.",
+ "v19x.msg.nostore": "Nothing is stored in this browser yet.",
+ "v19x.msg.verify_ok": "The stored copy matches its checksum.",
+ "v19x.msg.verify_bad": "The stored copy does not match its checksum and will not be used.",
+ "v19x.msg.cleared": "Saved analyses deleted.",
+ "v19x.saved.title": "Saved analyses ({n})",
+ "v19x.saved.used": "{n} datasets used, {m} domains without data",
+ "v19x.saved.none": "Analyses are saved here when you analyse a place in Local Impact."
+});
+
+/* ASTERRO V19 data extension, bn catalogue (generated). Machine-assisted; not reviewed by native speakers. */
+i18nExtend("bn", {
+ "v19x.nasa": "NASA",
+ "v19x.not_nasa": "NASA নয়",
+ "v19x.kind.model": "রিঅ্যানালাইসিস / মডেল",
+ "v19x.kind.obs": "স্যাটেলাইট পর্যবেক্ষণ",
+ "v19x.kind.obs_lb": "স্যাটেলাইট পর্যবেক্ষণ, নিম্নসীমা",
+ "v19x.kind.class": "স্যাটেলাইট শ্রেণিবিন্যাস",
+ "v19x.kind.satderived": "স্যাটেলাইট থেকে প্রাপ্ত",
+ "v19x.kind.catalogue": "তালিকা",
+ "v19x.kind.derived": "উদ্ভূত",
+ "v19x.src.server": "ASTERRO সার্ভার থেকে লোড করা অনুলিপি। সরবরাহকারীদের কাছে অনুরোধ: {d}; এই ব্রাউজারে সংরক্ষিত: {s}।",
+ "v19x.src.offline_store": "এই ব্রাউজারের ডেটা ভান্ডার থেকে অফলাইন অনুলিপি (সংরক্ষিত: {s})। সরবরাহকারীদের কাছে অনুরোধ: {d}। এটি সরাসরি (লাইভ) ডেটা নয়।",
+ "v19x.layers.title": "পরিবেশগত ডেটা স্তর",
+ "v19x.layers.p": "এই সংস্করণের জন্য সংগৃহীত NASA ও অন্যান্য সংস্থার ডেটা, এই প্রায় ৫৫ কিমি ঘরের জন্য। প্রতিটি মান কীভাবে পাওয়া গেছে তা জানায়। এখানের কিছুই সাদৃশ্য স্কোর বদলায় না।",
+ "v19x.err.verify": "ডেটা স্তরগুলো অখণ্ডতা যাচাইয়ে উত্তীর্ণ হয়নি, তাই দেখানো হচ্ছে না।",
+ "v19x.err.unavailable": "ডেটা স্তর পাওয়া যাচ্ছে না: সার্ভারের অনুলিপি বা অফলাইন অনুলিপি কোনোটিই নেই।",
+ "v19x.loading": "ডেটা স্তর লোড হচ্ছে…",
+ "v19x.dom.wind_atmosphere": "বাতাস ও বায়ুমণ্ডল",
+ "v19x.dom.aerosol_dust": "অ্যারোসল ও ধুলা",
+ "v19x.dom.water_soil": "ভূপৃষ্ঠের পানি ও মাটির আর্দ্রতা",
+ "v19x.dom.snow_ice": "তুষার ও বরফ",
+ "v19x.dom.surface_cover": "ভূপৃষ্ঠের আবরণ",
+ "v19x.dom.vegetation": "উদ্ভিদ",
+ "v19x.dom.volcanic": "আগ্নেয়গিরির প্রেক্ষাপট",
+ "v19x.dom.have": "এখানে {n}টির মধ্যে {k}টি মান",
+ "v19x.var.wind_ws10m": "১০ মি উচ্চতায় বাতাসের গতি, বার্ষিক গড়",
+ "v19x.var.wind_ws10m_maxmonth": "১০ মি উচ্চতায় বাতাসের গতি, সবচেয়ে বাতাসময় মাস",
+ "v19x.var.wind_ws50m": "৫০ মি উচ্চতায় বাতাসের গতি, বার্ষিক গড়",
+ "v19x.var.wind_ws10m_max": "১০ মি উচ্চতায় সর্বোচ্চ বাতাসের গতি",
+ "v19x.var.wind_dir_from": "প্রধান বায়ুপ্রবাহের দিক (যেদিক থেকে)",
+ "v19x.var.wind_steadiness": "বাতাসের স্থিরতা (১ = সবসময় একই দিক)",
+ "v19x.var.ps_kpa": "ভূপৃষ্ঠের বায়ুচাপ",
+ "v19x.var.rh2m": "২ মি উচ্চতায় আপেক্ষিক আর্দ্রতা",
+ "v19x.var.cloud_amt": "মেঘের পরিমাণ",
+ "v19x.var.sw_dwn": "ভূপৃষ্ঠে পৌঁছানো সূর্যালোক",
+ "v19x.var.dust_sfc_ugm3": "ভূপৃষ্ঠের কাছে ধুলা, বার্ষিক গড়",
+ "v19x.var.dust_sfc_maxmonth": "ভূপৃষ্ঠের কাছে ধুলা, সবচেয়ে ধুলাময় মাস",
+ "v19x.var.dust_top_bin_months": "সর্বোচ্চ রঙের ধাপের ওপরে থাকা মাস",
+ "v19x.var.aod550_ceres": "অ্যারোসলের আলোকীয় গভীরতা (CERES)",
+ "v19x.var.aod_misr_mean": "অ্যারোসলের আলোকীয় গভীরতা (MISR)",
+ "v19x.var.aod_misr_months": "MISR মানসহ মাস",
+ "v19x.var.gwettop": "ভূপৃষ্ঠের মাটির আর্দ্রতা",
+ "v19x.var.gwetroot": "শিকড় অঞ্চলের মাটির আর্দ্রতা",
+ "v19x.var.water_mask_frac": "পানির অংশ (MODIS পানি মাস্ক)",
+ "v19x.var.lc_water": "জলাশয়ের অংশ (ভূমি আবরণ)",
+ "v19x.var.snodp_cm": "তুষারের গভীরতা, বার্ষিক গড় (মডেল)",
+ "v19x.var.snodp_maxmonth": "তুষারের গভীরতা, সবচেয়ে গভীর মাস (মডেল)",
+ "v19x.var.frsno": "তুষারে ঢাকা অংশ, বার্ষিক গড় (মডেল)",
+ "v19x.var.frsno_months50": "অন্তত অর্ধেক তুষারে ঢাকা মাস (মডেল)",
+ "v19x.var.snow_detected_maxmonth": "শনাক্ত তুষার আবরণ, সবচেয়ে তুষারময় মাস",
+ "v19x.var.snow_detected_months50": "অন্তত ৫০ % শনাক্ত তুষারসহ মাস",
+ "v19x.var.lc_snowice": "স্থায়ী তুষার ও বরফের অংশ",
+ "v19x.var.lc_dominant": "প্রধান ভূমি আবরণ",
+ "v19x.var.lc_barren": "অনাবৃত ভূমির অংশ",
+ "v19x.var.lc_vegetated": "উদ্ভিদে ঢাকা অংশ",
+ "v19x.var.lc_urban": "নির্মিত এলাকার অংশ",
+ "v19x.var.albedo": "ভূপৃষ্ঠের প্রতিফলন (অ্যালবেডো)",
+ "v19x.var.evi_mean": "উদ্ভিদ সূচক (EVI), গড়",
+ "v19x.var.evi_max": "উদ্ভিদ সূচক (EVI), সবচেয়ে সবুজ মাস",
+ "v19x.var.evi_months": "EVI মানসহ মাস",
+ "v19x.var.volc_nearest_km": "নিকটতম হলোসিন আগ্নেয়গিরি",
+ "v19x.var.volc_holo_100km": "১০০ কিমির মধ্যে হলোসিন আগ্নেয়গিরি",
+ "v19x.var.volc_pleis_100km": "১০০ কিমির মধ্যে প্লাইস্টোসিন আগ্নেয়গিরি",
+ "v19x.unit.months": "মাস",
+ "v19x.unit.count": "",
+ "v19x.unit.km": "কিমি",
+ "v19x.unit.deg": "°",
+ "v19x.unit.fraction": "অংশ",
+ "v19x.unit.ratio": "",
+ "v19x.lower_bound": "নিম্নসীমা: প্রকৃত মান বেশি হতে পারে",
+ "v19x.volc.nearest": "নিকটতম হলোসিন আগ্নেয়গিরি: {name}, ঘরের কেন্দ্র থেকে {km} কিমি; সর্বশেষ জানা অগ্ন্যুৎপাত: {y}।",
+ "v19x.not.wind_not_dust": "বাতাস ধুলার পরিমাপ নয়, আর পৃথিবীর বাতাস মঙ্গলের বায়ুমণ্ডলের আচরণ পুনরুৎপাদন করে না।",
+ "v19x.not.aod_not_surface": "অ্যারোসলের আলোকীয় গভীরতা পুরো বায়ুস্তম্ভকে বর্ণনা করে, ভূমির কাছের ধুলা বা ভূপৃষ্ঠে জমা ধুলাকে নয়।",
+ "v19x.not.water_not_resource": "পানির উপস্থিতি ও মাটির আর্দ্রতা ব্যবহারযোগ্য পানিসম্পদ নয়।",
+ "v19x.not.snow_lower_bound": "শনাক্ত তুষার একটি নিম্নসীমা: ছবিতে মেঘ, অন্ধকার ও তুষারহীন মাটি একই রকম দেখায়। মডেলের তুষার মান পর্যবেক্ষণ নয়।",
+ "v19x.not.class_not_mineral": "ভূমি আবরণের শ্রেণি কোনো খনিজ বা শিলার গঠন নয়।",
+ "v19x.not.evi_not_life": "উদ্ভিদ সূচক গাছপালার সবুজতা মাপে। এটি অণুজীবের জীবন বা বাসযোগ্যতার প্রমাণ নয়।",
+ "v19x.not.proximity_not_hazard": "আগ্নেয়গিরি থেকে দূরত্ব ঝুঁকির মূল্যায়ন বা অগ্ন্যুৎপাতের সম্ভাবনা নয়।",
+ "v19x.used": "এই বিশ্লেষণে {n}টি ডেটাসেট ব্যবহৃত হয়েছে। এখানে ডেটাহীন ক্ষেত্র: {m}।",
+ "v19x.inv.title": "ডেটা তালিকা",
+ "v19x.inv.p": "ASTERRO যে সব ডেটাসেট ব্যবহার করে, খুঁজে পেয়েছে বা যার প্রয়োজন, তাদের সংস্থা ও অগ্রগতিসহ। প্রমাণ থাকলেই কেবল একটি অবস্থা দেখানো হয়।",
+ "v19x.inv.counts": "{n}টি ডেটাসেট: {k}টি NASA-র, {o}টি অন্য সরবরাহকারীর।",
+ "v19x.inv.agency": "সংস্থা",
+ "v19x.inv.state": "অবস্থা",
+ "v19x.inv.f_all": "সব",
+ "v19x.inv.f_nasa": "NASA",
+ "v19x.inv.f_other": "অন্য সরবরাহকারী",
+ "v19x.inv.shown": "{n}টি দেখানো হচ্ছে",
+ "v19x.inv.no_states": "এখনও কোনো অবস্থায় পৌঁছায়নি।",
+ "v19x.inv.never": "খুঁজে পাওয়া মানে ডাউনলোড করা নয়, সফল অনুরোধ মানে যাচাইকৃত ডেটা নয়, আর প্রস্তুত প্রক্রিয়া মানে সমন্বিত ডেটাসেট নয়।",
+ "v19x.st.DISCOVERED": "খুঁজে পাওয়া",
+ "v19x.st.ACCESSIBLE": "প্রবেশযোগ্য",
+ "v19x.st.DOWNLOADED": "ডাউনলোড করা",
+ "v19x.st.VALIDATED": "যাচাইকৃত",
+ "v19x.st.PROCESSED": "প্রক্রিয়াকৃত",
+ "v19x.st.INTEGRATED": "সমন্বিত",
+ "v19x.st.CACHED": "অফলাইনে সংরক্ষিত",
+ "v19x.st.BLOCKED": "অবরুদ্ধ",
+ "v19x.st.REQUIRES_AUTHENTICATION": "প্রমাণীকরণ প্রয়োজন",
+ "v19x.st.NOT_INVESTIGATED": "অনুসন্ধান হয়নি",
+ "v19x.f.agency": "সংস্থা",
+ "v19x.f.provider": "সরবরাহকারী",
+ "v19x.f.product": "পণ্য ও সংস্করণ",
+ "v19x.f.source_product": "উৎস পণ্য",
+ "v19x.f.doi": "DOI",
+ "v19x.f.url": "আনুষ্ঠানিক উৎস",
+ "v19x.f.docs": "নথিপত্র",
+ "v19x.f.variables": "চলক",
+ "v19x.f.units": "একক",
+ "v19x.f.spatial": "স্থানিক রেজোলিউশন",
+ "v19x.f.temporal": "কালিক রেজোলিউশন",
+ "v19x.f.coverage": "পরিসর",
+ "v19x.f.period": "পর্যবেক্ষণকাল",
+ "v19x.f.retrieved": "সংগ্রহের সময়",
+ "v19x.f.route": "সংগ্রহের পথ",
+ "v19x.f.processing": "প্রক্রিয়াকরণ",
+ "v19x.f.validation": "যাচাই",
+ "v19x.f.cube_variables": "ASTERRO চলক",
+ "v19x.f.cloud": "ক্লাউড আর্কাইভ অঞ্চল",
+ "v19x.f.access": "প্রবেশের শর্ত",
+ "v19x.f.last_attempt": "সর্বশেষ চেষ্টা",
+ "v19x.f.note": "টীকা",
+ "v19x.f.limitations": "সীমাবদ্ধতা",
+ "v19x.f.raw_sha256": "মূল ফাইলের SHA-256",
+ "v19x.f.from": "নথিভুক্ত",
+ "v19x.store.title": "অফলাইন ডেটা ভান্ডার",
+ "v19x.store.online": "এই ব্রাউজার অনলাইনে আছে।",
+ "v19x.store.offline": "এই ব্রাউজার অফলাইনে: ASTERRO সংরক্ষিত অনুলিপি ব্যবহার করছে।",
+ "v19x.store.cube": "পরিবেশগত ডেটা স্তর: {v}টি চলক, {mb} MB, সংরক্ষিত {s}",
+ "v19x.store.verified": "অখণ্ডতা যাচাইকৃত",
+ "v19x.store.src.server": "ASTERRO সার্ভার থেকে লোড করে এই ব্রাউজারে রাখা হয়েছে।",
+ "v19x.store.src.offline_store": "এই ব্রাউজারের অফলাইন ভান্ডার থেকে লোড করা হয়েছে।",
+ "v19x.store.retrieved": "সরবরাহকারীদের কাছে অনুরোধ করা হয়েছিল: {d}। মানগুলো জলবায়ু-গড় ও তালিকা, সরাসরি (লাইভ) পরিমাপ নয়।",
+ "v19x.store.never_live": "সংরক্ষিত ডেটা কখনো সরাসরি (লাইভ) ডেটা হিসেবে দেখানো হয় না। হালনাগাদ করার সময় নতুন অনুলিপি অখণ্ডতা যাচাইয়ে উত্তীর্ণ না হওয়া পর্যন্ত বৈধ অনুলিপিটি রাখা হয়।",
+ "v19x.store.refresh": "হালনাগাদ ডেটা খুঁজুন",
+ "v19x.store.verify": "সংরক্ষিত ডেটা যাচাই করুন",
+ "v19x.store.clear": "সংরক্ষিত বিশ্লেষণ মুছুন",
+ "v19x.msg.same": "নতুন কোনো ডেটা নেই: সংরক্ষিত অনুলিপিই সর্বশেষ।",
+ "v19x.msg.updated": "হালনাগাদ ডেটা যাচাই করে সংরক্ষণ করা হয়েছে।",
+ "v19x.msg.failed": "সার্ভারে পৌঁছানো যায়নি; সংরক্ষিত অনুলিপি রাখা হয়েছে।",
+ "v19x.msg.offline": "অফলাইন: সংরক্ষিত অনুলিপি রাখা হয়েছে।",
+ "v19x.msg.nostore": "এই ব্রাউজারে এখনও কিছু সংরক্ষিত নেই।",
+ "v19x.msg.verify_ok": "সংরক্ষিত অনুলিপি তার চেকসামের সাথে মেলে।",
+ "v19x.msg.verify_bad": "সংরক্ষিত অনুলিপি তার চেকসামের সাথে মেলে না এবং ব্যবহার করা হবে না।",
+ "v19x.msg.cleared": "সংরক্ষিত বিশ্লেষণ মুছে ফেলা হয়েছে।",
+ "v19x.saved.title": "সংরক্ষিত বিশ্লেষণ ({n})",
+ "v19x.saved.used": "{n}টি ডেটাসেট ব্যবহৃত, {m}টি ক্ষেত্র ডেটাহীন",
+ "v19x.saved.none": "স্থানীয় প্রভাবে কোনো স্থান বিশ্লেষণ করলে বিশ্লেষণগুলো এখানে সংরক্ষিত হয়।"
+});
+
+/* ASTERRO V19 data extension, es catalogue (generated). Machine-assisted; not reviewed by native speakers. */
+i18nExtend("es", {
+ "v19x.nasa": "NASA",
+ "v19x.not_nasa": "no NASA",
+ "v19x.kind.model": "Reanálisis / modelo",
+ "v19x.kind.obs": "Observación satelital",
+ "v19x.kind.obs_lb": "Observación satelital, cota inferior",
+ "v19x.kind.class": "Clasificación satelital",
+ "v19x.kind.satderived": "Derivado de satélite",
+ "v19x.kind.catalogue": "Catálogo",
+ "v19x.kind.derived": "Derivado",
+ "v19x.src.server": "Copia cargada desde el servidor de ASTERRO. Proveedores consultados: {d}; guardada en este navegador: {s}.",
+ "v19x.src.offline_store": "Copia sin conexión del almacén de datos de este navegador (guardada: {s}). Proveedores consultados: {d}. No son datos en vivo.",
+ "v19x.layers.title": "Capas de datos ambientales",
+ "v19x.layers.p": "Datos de la NASA y de otras agencias adquiridos para esta versión, en esta celda de ~55 km. Cada valor indica cómo se obtuvo. Nada aquí cambia la puntuación de similitud.",
+ "v19x.err.verify": "Las capas de datos no superaron la comprobación de integridad, por lo que no se muestran.",
+ "v19x.err.unavailable": "Las capas de datos no están disponibles: no hay copia en el servidor ni copia sin conexión.",
+ "v19x.loading": "Cargando las capas de datos…",
+ "v19x.dom.wind_atmosphere": "Viento y atmósfera",
+ "v19x.dom.aerosol_dust": "Aerosoles y polvo",
+ "v19x.dom.water_soil": "Agua superficial y humedad del suelo",
+ "v19x.dom.snow_ice": "Nieve y hielo",
+ "v19x.dom.surface_cover": "Cobertura de la superficie",
+ "v19x.dom.vegetation": "Vegetación",
+ "v19x.dom.volcanic": "Contexto volcánico",
+ "v19x.dom.have": "{k} de {n} valores aquí",
+ "v19x.var.wind_ws10m": "Velocidad del viento a 10 m, media anual",
+ "v19x.var.wind_ws10m_maxmonth": "Velocidad del viento a 10 m, mes más ventoso",
+ "v19x.var.wind_ws50m": "Velocidad del viento a 50 m, media anual",
+ "v19x.var.wind_ws10m_max": "Velocidad máxima del viento a 10 m",
+ "v19x.var.wind_dir_from": "Dirección predominante del viento (de dónde sopla)",
+ "v19x.var.wind_steadiness": "Constancia del viento (1 = siempre la misma dirección)",
+ "v19x.var.ps_kpa": "Presión en superficie",
+ "v19x.var.rh2m": "Humedad relativa a 2 m",
+ "v19x.var.cloud_amt": "Nubosidad",
+ "v19x.var.sw_dwn": "Luz solar que llega a la superficie",
+ "v19x.var.dust_sfc_ugm3": "Polvo cerca de la superficie, media anual",
+ "v19x.var.dust_sfc_maxmonth": "Polvo cerca de la superficie, mes con más polvo",
+ "v19x.var.dust_top_bin_months": "Meses por encima del último tramo de color",
+ "v19x.var.aod550_ceres": "Espesor óptico de aerosoles (CERES)",
+ "v19x.var.aod_misr_mean": "Espesor óptico de aerosoles (MISR)",
+ "v19x.var.aod_misr_months": "Meses con valor de MISR",
+ "v19x.var.gwettop": "Humedad del suelo superficial",
+ "v19x.var.gwetroot": "Humedad del suelo en la zona de raíces",
+ "v19x.var.water_mask_frac": "Proporción de agua (máscara de agua MODIS)",
+ "v19x.var.lc_water": "Proporción de masas de agua (cobertura del suelo)",
+ "v19x.var.snodp_cm": "Espesor de nieve, media anual (modelo)",
+ "v19x.var.snodp_maxmonth": "Espesor de nieve, mes más nevado (modelo)",
+ "v19x.var.frsno": "Proporción cubierta de nieve, media anual (modelo)",
+ "v19x.var.frsno_months50": "Meses con al menos la mitad cubierta de nieve (modelo)",
+ "v19x.var.snow_detected_maxmonth": "Nieve detectada, mes más nevado",
+ "v19x.var.snow_detected_months50": "Meses con al menos 50 % de nieve detectada",
+ "v19x.var.lc_snowice": "Proporción de nieve y hielo permanentes",
+ "v19x.var.lc_dominant": "Cobertura del suelo dominante",
+ "v19x.var.lc_barren": "Proporción de suelo desnudo",
+ "v19x.var.lc_vegetated": "Proporción con vegetación",
+ "v19x.var.lc_urban": "Proporción edificada",
+ "v19x.var.albedo": "Albedo de la superficie",
+ "v19x.var.evi_mean": "Índice de vegetación (EVI), media",
+ "v19x.var.evi_max": "Índice de vegetación (EVI), mes más verde",
+ "v19x.var.evi_months": "Meses con valor de EVI",
+ "v19x.var.volc_nearest_km": "Volcán holoceno más cercano",
+ "v19x.var.volc_holo_100km": "Volcanes holocenos a menos de 100 km",
+ "v19x.var.volc_pleis_100km": "Volcanes pleistocenos a menos de 100 km",
+ "v19x.unit.months": "meses",
+ "v19x.unit.count": "",
+ "v19x.unit.km": "km",
+ "v19x.unit.deg": "°",
+ "v19x.unit.fraction": "proporción",
+ "v19x.unit.ratio": "",
+ "v19x.lower_bound": "cota inferior: el valor real puede ser mayor",
+ "v19x.volc.nearest": "Volcán holoceno más cercano: {name}, a {km} km del centro de la celda; última erupción conocida: {y}.",
+ "v19x.not.wind_not_dust": "El viento no es una medida de polvo, y el viento terrestre no reproduce el comportamiento de la atmósfera marciana.",
+ "v19x.not.aod_not_surface": "El espesor óptico de aerosoles describe toda la columna atmosférica, no el polvo a ras de suelo ni el depositado en superficies.",
+ "v19x.not.water_not_resource": "La presencia de agua y la humedad del suelo no son recursos hídricos accesibles.",
+ "v19x.not.snow_lower_bound": "La nieve detectada es una cota inferior: nubes, oscuridad y suelo sin nieve se ven igual en las imágenes. Los valores de nieve del modelo no son observaciones.",
+ "v19x.not.class_not_mineral": "Una clase de cobertura del suelo no es una composición mineral ni de rocas.",
+ "v19x.not.evi_not_life": "Un índice de vegetación mide el verdor de las plantas. No es evidencia de vida microbiana ni de habitabilidad.",
+ "v19x.not.proximity_not_hazard": "La distancia a un volcán no es una calificación de peligro ni una probabilidad de erupción.",
+ "v19x.used": "Este análisis usó {n} conjuntos de datos. Dominios sin datos aquí: {m}.",
+ "v19x.inv.title": "Inventario de datos",
+ "v19x.inv.p": "Cada conjunto de datos que ASTERRO usa, ha encontrado o necesita, con su agencia y su grado de avance. Un estado solo se muestra cuando hay pruebas de él.",
+ "v19x.inv.counts": "{n} conjuntos de datos: {k} de la NASA, {o} de otros proveedores.",
+ "v19x.inv.agency": "Agencia",
+ "v19x.inv.state": "Estado",
+ "v19x.inv.f_all": "Todos",
+ "v19x.inv.f_nasa": "NASA",
+ "v19x.inv.f_other": "Otros proveedores",
+ "v19x.inv.shown": "{n} mostrados",
+ "v19x.inv.no_states": "Aún no se ha alcanzado ningún estado.",
+ "v19x.inv.never": "Descubierto no es descargado, una solicitud correcta no son datos validados y un proceso preparado no es un conjunto de datos integrado.",
+ "v19x.st.DISCOVERED": "Descubierto",
+ "v19x.st.ACCESSIBLE": "Accesible",
+ "v19x.st.DOWNLOADED": "Descargado",
+ "v19x.st.VALIDATED": "Validado",
+ "v19x.st.PROCESSED": "Procesado",
+ "v19x.st.INTEGRATED": "Integrado",
+ "v19x.st.CACHED": "Guardado sin conexión",
+ "v19x.st.BLOCKED": "Bloqueado",
+ "v19x.st.REQUIRES_AUTHENTICATION": "Requiere autenticación",
+ "v19x.st.NOT_INVESTIGATED": "Sin investigar",
+ "v19x.f.agency": "Agencia",
+ "v19x.f.provider": "Proveedor",
+ "v19x.f.product": "Producto y versión",
+ "v19x.f.source_product": "Producto de origen",
+ "v19x.f.doi": "DOI",
+ "v19x.f.url": "Fuente oficial",
+ "v19x.f.docs": "Documentación",
+ "v19x.f.variables": "Variables",
+ "v19x.f.units": "Unidades",
+ "v19x.f.spatial": "Resolución espacial",
+ "v19x.f.temporal": "Resolución temporal",
+ "v19x.f.coverage": "Cobertura",
+ "v19x.f.period": "Periodo de observación",
+ "v19x.f.retrieved": "Obtenido",
+ "v19x.f.route": "Vía de obtención",
+ "v19x.f.processing": "Procesamiento",
+ "v19x.f.validation": "Validación",
+ "v19x.f.cube_variables": "Variables de ASTERRO",
+ "v19x.f.cloud": "Región del archivo en la nube",
+ "v19x.f.access": "Condiciones de acceso",
+ "v19x.f.last_attempt": "Último intento",
+ "v19x.f.note": "Nota",
+ "v19x.f.limitations": "Limitaciones",
+ "v19x.f.raw_sha256": "SHA-256 del archivo original",
+ "v19x.f.from": "Registrado en",
+ "v19x.store.title": "Almacén de datos sin conexión",
+ "v19x.store.online": "Este navegador está en línea.",
+ "v19x.store.offline": "Este navegador está sin conexión: ASTERRO usa sus copias guardadas.",
+ "v19x.store.cube": "Capas de datos ambientales: {v} variables, {mb} MB, guardadas el {s}",
+ "v19x.store.verified": "integridad verificada",
+ "v19x.store.src.server": "Cargado desde el servidor de ASTERRO y guardado en este navegador.",
+ "v19x.store.src.offline_store": "Cargado desde el almacén sin conexión de este navegador.",
+ "v19x.store.retrieved": "Los proveedores se consultaron: {d}. Los valores son climatologías y catálogos, no mediciones en vivo.",
+ "v19x.store.never_live": "Los datos guardados nunca se presentan como datos en vivo. Al actualizar se conserva la copia válida hasta que una copia nueva supere su comprobación de integridad.",
+ "v19x.store.refresh": "Buscar datos actualizados",
+ "v19x.store.verify": "Verificar los datos guardados",
+ "v19x.store.clear": "Borrar los análisis guardados",
+ "v19x.msg.same": "No hay datos más recientes: la copia guardada está al día.",
+ "v19x.msg.updated": "Se verificaron y guardaron datos actualizados.",
+ "v19x.msg.failed": "No se pudo contactar con el servidor; se conserva la copia guardada.",
+ "v19x.msg.offline": "Sin conexión: se conserva la copia guardada.",
+ "v19x.msg.nostore": "Aún no hay nada guardado en este navegador.",
+ "v19x.msg.verify_ok": "La copia guardada coincide con su suma de comprobación.",
+ "v19x.msg.verify_bad": "La copia guardada no coincide con su suma de comprobación y no se usará.",
+ "v19x.msg.cleared": "Análisis guardados borrados.",
+ "v19x.saved.title": "Análisis guardados ({n})",
+ "v19x.saved.used": "{n} conjuntos de datos usados, {m} dominios sin datos",
+ "v19x.saved.none": "Los análisis se guardan aquí cuando analizas un lugar en Impacto local."
+});
+
+/* ASTERRO V19 data extension, fr catalogue (generated). Machine-assisted; not reviewed by native speakers. */
+i18nExtend("fr", {
+ "v19x.nasa": "NASA",
+ "v19x.not_nasa": "hors NASA",
+ "v19x.kind.model": "Réanalyse / modèle",
+ "v19x.kind.obs": "Observation satellitaire",
+ "v19x.kind.obs_lb": "Observation satellitaire, borne inférieure",
+ "v19x.kind.class": "Classification satellitaire",
+ "v19x.kind.satderived": "Dérivé de satellite",
+ "v19x.kind.catalogue": "Catalogue",
+ "v19x.kind.derived": "Dérivé",
+ "v19x.src.server": "Copie chargée depuis le serveur ASTERRO. Fournisseurs interrogés : {d} ; enregistrée dans ce navigateur : {s}.",
+ "v19x.src.offline_store": "Copie hors ligne du stockage de données de ce navigateur (enregistrée : {s}). Fournisseurs interrogés : {d}. Données non en direct.",
+ "v19x.layers.title": "Couches de données environnementales",
+ "v19x.layers.p": "Données de la NASA et d’autres agences acquises pour cette version, pour cette cellule d’environ 55 km. Chaque valeur indique comment elle a été obtenue. Rien ici ne modifie le score de similarité.",
+ "v19x.err.verify": "Les couches de données n’ont pas passé le contrôle d’intégrité et ne sont donc pas affichées.",
+ "v19x.err.unavailable": "Les couches de données ne sont pas disponibles : ni copie serveur ni copie hors ligne.",
+ "v19x.loading": "Chargement des couches de données…",
+ "v19x.dom.wind_atmosphere": "Vent et atmosphère",
+ "v19x.dom.aerosol_dust": "Aérosols et poussières",
+ "v19x.dom.water_soil": "Eau de surface et humidité du sol",
+ "v19x.dom.snow_ice": "Neige et glace",
+ "v19x.dom.surface_cover": "Couverture de surface",
+ "v19x.dom.vegetation": "Végétation",
+ "v19x.dom.volcanic": "Contexte volcanique",
+ "v19x.dom.have": "{k} valeurs sur {n} ici",
+ "v19x.var.wind_ws10m": "Vitesse du vent à 10 m, moyenne annuelle",
+ "v19x.var.wind_ws10m_maxmonth": "Vitesse du vent à 10 m, mois le plus venteux",
+ "v19x.var.wind_ws50m": "Vitesse du vent à 50 m, moyenne annuelle",
+ "v19x.var.wind_ws10m_max": "Vitesse maximale du vent à 10 m",
+ "v19x.var.wind_dir_from": "Direction dominante du vent (provenance)",
+ "v19x.var.wind_steadiness": "Constance du vent (1 = toujours la même direction)",
+ "v19x.var.ps_kpa": "Pression en surface",
+ "v19x.var.rh2m": "Humidité relative à 2 m",
+ "v19x.var.cloud_amt": "Nébulosité",
+ "v19x.var.sw_dwn": "Lumière solaire reçue en surface",
+ "v19x.var.dust_sfc_ugm3": "Poussières près de la surface, moyenne annuelle",
+ "v19x.var.dust_sfc_maxmonth": "Poussières près de la surface, mois le plus poussiéreux",
+ "v19x.var.dust_top_bin_months": "Mois au-delà de la dernière classe de couleur",
+ "v19x.var.aod550_ceres": "Épaisseur optique des aérosols (CERES)",
+ "v19x.var.aod_misr_mean": "Épaisseur optique des aérosols (MISR)",
+ "v19x.var.aod_misr_months": "Mois avec une valeur MISR",
+ "v19x.var.gwettop": "Humidité du sol en surface",
+ "v19x.var.gwetroot": "Humidité du sol dans la zone racinaire",
+ "v19x.var.water_mask_frac": "Part d’eau (masque d’eau MODIS)",
+ "v19x.var.lc_water": "Part des plans d’eau (occupation du sol)",
+ "v19x.var.snodp_cm": "Épaisseur de neige, moyenne annuelle (modèle)",
+ "v19x.var.snodp_maxmonth": "Épaisseur de neige, mois le plus enneigé (modèle)",
+ "v19x.var.frsno": "Part enneigée, moyenne annuelle (modèle)",
+ "v19x.var.frsno_months50": "Mois enneigés au moins à moitié (modèle)",
+ "v19x.var.snow_detected_maxmonth": "Neige détectée, mois le plus enneigé",
+ "v19x.var.snow_detected_months50": "Mois avec au moins 50 % de neige détectée",
+ "v19x.var.lc_snowice": "Part de neige et glace permanentes",
+ "v19x.var.lc_dominant": "Occupation du sol dominante",
+ "v19x.var.lc_barren": "Part de sol nu",
+ "v19x.var.lc_vegetated": "Part végétalisée",
+ "v19x.var.lc_urban": "Part bâtie",
+ "v19x.var.albedo": "Albédo de surface",
+ "v19x.var.evi_mean": "Indice de végétation (EVI), moyenne",
+ "v19x.var.evi_max": "Indice de végétation (EVI), mois le plus vert",
+ "v19x.var.evi_months": "Mois avec une valeur EVI",
+ "v19x.var.volc_nearest_km": "Volcan holocène le plus proche",
+ "v19x.var.volc_holo_100km": "Volcans holocènes à moins de 100 km",
+ "v19x.var.volc_pleis_100km": "Volcans pléistocènes à moins de 100 km",
+ "v19x.unit.months": "mois",
+ "v19x.unit.count": "",
+ "v19x.unit.km": "km",
+ "v19x.unit.deg": "°",
+ "v19x.unit.fraction": "part",
+ "v19x.unit.ratio": "",
+ "v19x.lower_bound": "borne inférieure : la valeur réelle peut être plus élevée",
+ "v19x.volc.nearest": "Volcan holocène le plus proche : {name}, à {km} km du centre de la cellule ; dernière éruption connue : {y}.",
+ "v19x.not.wind_not_dust": "Le vent n’est pas une mesure de poussière, et le vent terrestre ne reproduit pas le comportement de l’atmosphère martienne.",
+ "v19x.not.aod_not_surface": "L’épaisseur optique des aérosols décrit toute la colonne atmosphérique, pas la poussière au niveau du sol ni celle déposée sur les surfaces.",
+ "v19x.not.water_not_resource": "La présence d’eau et l’humidité du sol ne sont pas des ressources en eau accessibles.",
+ "v19x.not.snow_lower_bound": "La neige détectée est une borne inférieure : nuages, obscurité et sol sans neige se ressemblent sur les images. Les valeurs de neige du modèle ne sont pas des observations.",
+ "v19x.not.class_not_mineral": "Une classe d’occupation du sol n’est pas une composition minérale ou rocheuse.",
+ "v19x.not.evi_not_life": "Un indice de végétation mesure la verdure des plantes. Ce n’est pas une preuve de vie microbienne ni d’habitabilité.",
+ "v19x.not.proximity_not_hazard": "La distance à un volcan n’est ni une évaluation du danger ni une probabilité d’éruption.",
+ "v19x.used": "Cette analyse a utilisé {n} jeux de données. Domaines sans données ici : {m}.",
+ "v19x.inv.title": "Inventaire des données",
+ "v19x.inv.p": "Chaque jeu de données qu’ASTERRO utilise, a trouvé ou dont il a besoin, avec son agence et son état d’avancement. Un état n’est affiché que s’il est étayé.",
+ "v19x.inv.counts": "{n} jeux de données : {k} de la NASA, {o} d’autres fournisseurs.",
+ "v19x.inv.agency": "Agence",
+ "v19x.inv.state": "État",
+ "v19x.inv.f_all": "Tous",
+ "v19x.inv.f_nasa": "NASA",
+ "v19x.inv.f_other": "Autres fournisseurs",
+ "v19x.inv.shown": "{n} affichés",
+ "v19x.inv.no_states": "Aucun état atteint pour l’instant.",
+ "v19x.inv.never": "Découvert ne veut pas dire téléchargé, une requête réussie n’est pas une donnée validée, et une chaîne de traitement préparée n’est pas un jeu de données intégré.",
+ "v19x.st.DISCOVERED": "Découvert",
+ "v19x.st.ACCESSIBLE": "Accessible",
+ "v19x.st.DOWNLOADED": "Téléchargé",
+ "v19x.st.VALIDATED": "Validé",
+ "v19x.st.PROCESSED": "Traité",
+ "v19x.st.INTEGRATED": "Intégré",
+ "v19x.st.CACHED": "Disponible hors ligne",
+ "v19x.st.BLOCKED": "Bloqué",
+ "v19x.st.REQUIRES_AUTHENTICATION": "Authentification requise",
+ "v19x.st.NOT_INVESTIGATED": "Non étudié",
+ "v19x.f.agency": "Agence",
+ "v19x.f.provider": "Fournisseur",
+ "v19x.f.product": "Produit et version",
+ "v19x.f.source_product": "Produit source",
+ "v19x.f.doi": "DOI",
+ "v19x.f.url": "Source officielle",
+ "v19x.f.docs": "Documentation",
+ "v19x.f.variables": "Variables",
+ "v19x.f.units": "Unités",
+ "v19x.f.spatial": "Résolution spatiale",
+ "v19x.f.temporal": "Résolution temporelle",
+ "v19x.f.coverage": "Couverture",
+ "v19x.f.period": "Période d’observation",
+ "v19x.f.retrieved": "Obtenu",
+ "v19x.f.route": "Voie d’obtention",
+ "v19x.f.processing": "Traitement",
+ "v19x.f.validation": "Validation",
+ "v19x.f.cube_variables": "Variables ASTERRO",
+ "v19x.f.cloud": "Région de l’archive en nuage",
+ "v19x.f.access": "Conditions d’accès",
+ "v19x.f.last_attempt": "Dernière tentative",
+ "v19x.f.note": "Remarque",
+ "v19x.f.limitations": "Limites",
+ "v19x.f.raw_sha256": "SHA-256 du fichier brut",
+ "v19x.f.from": "Enregistré dans",
+ "v19x.store.title": "Stockage de données hors ligne",
+ "v19x.store.online": "Ce navigateur est en ligne.",
+ "v19x.store.offline": "Ce navigateur est hors ligne : ASTERRO utilise ses copies enregistrées.",
+ "v19x.store.cube": "Couches de données environnementales : {v} variables, {mb} Mo, enregistrées le {s}",
+ "v19x.store.verified": "intégrité vérifiée",
+ "v19x.store.src.server": "Chargé depuis le serveur ASTERRO et conservé dans ce navigateur.",
+ "v19x.store.src.offline_store": "Chargé depuis le stockage hors ligne de ce navigateur.",
+ "v19x.store.retrieved": "Les fournisseurs ont été interrogés : {d}. Les valeurs sont des climatologies et des catalogues, pas des mesures en direct.",
+ "v19x.store.never_live": "Les données enregistrées ne sont jamais présentées comme des données en direct. Une actualisation conserve la copie valide jusqu’à ce qu’une nouvelle copie ait passé son contrôle d’intégrité.",
+ "v19x.store.refresh": "Rechercher des données à jour",
+ "v19x.store.verify": "Vérifier les données enregistrées",
+ "v19x.store.clear": "Supprimer les analyses enregistrées",
+ "v19x.msg.same": "Pas de données plus récentes : la copie enregistrée est à jour.",
+ "v19x.msg.updated": "Des données à jour ont été vérifiées et enregistrées.",
+ "v19x.msg.failed": "Le serveur est injoignable ; la copie enregistrée est conservée.",
+ "v19x.msg.offline": "Hors ligne : la copie enregistrée est conservée.",
+ "v19x.msg.nostore": "Rien n’est encore enregistré dans ce navigateur.",
+ "v19x.msg.verify_ok": "La copie enregistrée correspond à sa somme de contrôle.",
+ "v19x.msg.verify_bad": "La copie enregistrée ne correspond pas à sa somme de contrôle et ne sera pas utilisée.",
+ "v19x.msg.cleared": "Analyses enregistrées supprimées.",
+ "v19x.saved.title": "Analyses enregistrées ({n})",
+ "v19x.saved.used": "{n} jeux de données utilisés, {m} domaines sans données",
+ "v19x.saved.none": "Les analyses sont enregistrées ici lorsque vous analysez un lieu dans Impact local."
+});
+
+/* ASTERRO V19 data extension, de catalogue (generated). Machine-assisted; not reviewed by native speakers. */
+i18nExtend("de", {
+ "v19x.nasa": "NASA",
+ "v19x.not_nasa": "nicht NASA",
+ "v19x.kind.model": "Reanalyse / Modell",
+ "v19x.kind.obs": "Satellitenbeobachtung",
+ "v19x.kind.obs_lb": "Satellitenbeobachtung, Untergrenze",
+ "v19x.kind.class": "Satellitenklassifikation",
+ "v19x.kind.satderived": "Aus Satellitendaten abgeleitet",
+ "v19x.kind.catalogue": "Katalog",
+ "v19x.kind.derived": "Abgeleitet",
+ "v19x.src.server": "Kopie vom ASTERRO-Server geladen. Anbieter abgefragt: {d}; in diesem Browser gespeichert: {s}.",
+ "v19x.src.offline_store": "Offline-Kopie aus dem Datenspeicher dieses Browsers (gespeichert: {s}). Anbieter abgefragt: {d}. Keine Live-Daten.",
+ "v19x.layers.title": "Umweltdatenschichten",
+ "v19x.layers.p": "Für diese Version erworbene Daten der NASA und anderer Behörden für diese ~55-km-Zelle. Jeder Wert nennt, wie er gewonnen wurde. Nichts hier verändert den Ähnlichkeitswert.",
+ "v19x.err.verify": "Die Datenschichten haben die Integritätsprüfung nicht bestanden und werden daher nicht angezeigt.",
+ "v19x.err.unavailable": "Die Datenschichten sind nicht verfügbar: weder eine Serverkopie noch eine Offline-Kopie.",
+ "v19x.loading": "Datenschichten werden geladen …",
+ "v19x.dom.wind_atmosphere": "Wind und Atmosphäre",
+ "v19x.dom.aerosol_dust": "Aerosole und Staub",
+ "v19x.dom.water_soil": "Oberflächenwasser und Bodenfeuchte",
+ "v19x.dom.snow_ice": "Schnee und Eis",
+ "v19x.dom.surface_cover": "Oberflächenbedeckung",
+ "v19x.dom.vegetation": "Vegetation",
+ "v19x.dom.volcanic": "Vulkanischer Kontext",
+ "v19x.dom.have": "{k} von {n} Werten hier",
+ "v19x.var.wind_ws10m": "Windgeschwindigkeit in 10 m, Jahresmittel",
+ "v19x.var.wind_ws10m_maxmonth": "Windgeschwindigkeit in 10 m, windigster Monat",
+ "v19x.var.wind_ws50m": "Windgeschwindigkeit in 50 m, Jahresmittel",
+ "v19x.var.wind_ws10m_max": "Maximale Windgeschwindigkeit in 10 m",
+ "v19x.var.wind_dir_from": "Vorherrschende Windrichtung (aus)",
+ "v19x.var.wind_steadiness": "Windbeständigkeit (1 = immer dieselbe Richtung)",
+ "v19x.var.ps_kpa": "Luftdruck am Boden",
+ "v19x.var.rh2m": "Relative Luftfeuchte in 2 m",
+ "v19x.var.cloud_amt": "Bewölkung",
+ "v19x.var.sw_dwn": "Sonnenlicht an der Oberfläche",
+ "v19x.var.dust_sfc_ugm3": "Bodennaher Staub, Jahresmittel",
+ "v19x.var.dust_sfc_maxmonth": "Bodennaher Staub, staubigster Monat",
+ "v19x.var.dust_top_bin_months": "Monate über der obersten Farbstufe",
+ "v19x.var.aod550_ceres": "Aerosol-optische Dicke (CERES)",
+ "v19x.var.aod_misr_mean": "Aerosol-optische Dicke (MISR)",
+ "v19x.var.aod_misr_months": "Monate mit MISR-Wert",
+ "v19x.var.gwettop": "Bodenfeuchte an der Oberfläche",
+ "v19x.var.gwetroot": "Bodenfeuchte im Wurzelraum",
+ "v19x.var.water_mask_frac": "Wasseranteil (MODIS-Wassermaske)",
+ "v19x.var.lc_water": "Anteil Gewässer (Landbedeckung)",
+ "v19x.var.snodp_cm": "Schneehöhe, Jahresmittel (Modell)",
+ "v19x.var.snodp_maxmonth": "Schneehöhe, schneereichster Monat (Modell)",
+ "v19x.var.frsno": "Schneebedeckter Anteil, Jahresmittel (Modell)",
+ "v19x.var.frsno_months50": "Monate mit mindestens halber Schneebedeckung (Modell)",
+ "v19x.var.snow_detected_maxmonth": "Erkannte Schneebedeckung, schneereichster Monat",
+ "v19x.var.snow_detected_months50": "Monate mit mindestens 50 % erkanntem Schnee",
+ "v19x.var.lc_snowice": "Anteil dauerhafter Schnee und Eis",
+ "v19x.var.lc_dominant": "Vorherrschende Landbedeckung",
+ "v19x.var.lc_barren": "Anteil vegetationsloser Flächen",
+ "v19x.var.lc_vegetated": "Anteil mit Vegetation",
+ "v19x.var.lc_urban": "Anteil bebauter Flächen",
+ "v19x.var.albedo": "Oberflächenalbedo",
+ "v19x.var.evi_mean": "Vegetationsindex (EVI), Mittel",
+ "v19x.var.evi_max": "Vegetationsindex (EVI), grünster Monat",
+ "v19x.var.evi_months": "Monate mit EVI-Wert",
+ "v19x.var.volc_nearest_km": "Nächster holozäner Vulkan",
+ "v19x.var.volc_holo_100km": "Holozäne Vulkane im Umkreis von 100 km",
+ "v19x.var.volc_pleis_100km": "Pleistozäne Vulkane im Umkreis von 100 km",
+ "v19x.unit.months": "Monate",
+ "v19x.unit.count": "",
+ "v19x.unit.km": "km",
+ "v19x.unit.deg": "°",
+ "v19x.unit.fraction": "Anteil",
+ "v19x.unit.ratio": "",
+ "v19x.lower_bound": "Untergrenze: der wahre Wert kann höher sein",
+ "v19x.volc.nearest": "Nächster holozäner Vulkan: {name}, {km} km vom Zellmittelpunkt; letzter bekannter Ausbruch: {y}.",
+ "v19x.not.wind_not_dust": "Wind ist keine Staubmessung, und irdischer Wind bildet das Verhalten der Marsatmosphäre nicht nach.",
+ "v19x.not.aod_not_surface": "Die aerosol-optische Dicke beschreibt die gesamte Luftsäule, nicht den Staub in Bodennähe oder auf Oberflächen abgelagerten Staub.",
+ "v19x.not.water_not_resource": "Wasservorkommen und Bodenfeuchte sind keine zugänglichen Wasserressourcen.",
+ "v19x.not.snow_lower_bound": "Erkannter Schnee ist eine Untergrenze: Wolken, Dunkelheit und schneefreier Boden sehen in den Bildern gleich aus. Modellwerte für Schnee sind keine Beobachtungen.",
+ "v19x.not.class_not_mineral": "Eine Landbedeckungsklasse ist keine Mineral- oder Gesteinszusammensetzung.",
+ "v19x.not.evi_not_life": "Ein Vegetationsindex misst das Grün von Pflanzen. Er ist kein Beleg für mikrobielles Leben oder Bewohnbarkeit.",
+ "v19x.not.proximity_not_hazard": "Die Entfernung zu einem Vulkan ist keine Gefahrenbewertung und keine Ausbruchswahrscheinlichkeit.",
+ "v19x.used": "Diese Analyse nutzte {n} Datensätze. Bereiche ohne Daten hier: {m}.",
+ "v19x.inv.title": "Dateninventar",
+ "v19x.inv.p": "Jeder Datensatz, den ASTERRO nutzt, gefunden hat oder benötigt, mit seiner Behörde und seinem Fortschritt. Ein Status wird nur gezeigt, wenn er belegt ist.",
+ "v19x.inv.counts": "{n} Datensätze: {k} von der NASA, {o} von anderen Anbietern.",
+ "v19x.inv.agency": "Behörde",
+ "v19x.inv.state": "Status",
+ "v19x.inv.f_all": "Alle",
+ "v19x.inv.f_nasa": "NASA",
+ "v19x.inv.f_other": "Andere Anbieter",
+ "v19x.inv.shown": "{n} angezeigt",
+ "v19x.inv.no_states": "Noch kein Status erreicht.",
+ "v19x.inv.never": "Entdeckt heißt nicht heruntergeladen, eine erfolgreiche Anfrage sind keine validierten Daten, und eine vorbereitete Verarbeitungskette ist kein integrierter Datensatz.",
+ "v19x.st.DISCOVERED": "Entdeckt",
+ "v19x.st.ACCESSIBLE": "Zugänglich",
+ "v19x.st.DOWNLOADED": "Heruntergeladen",
+ "v19x.st.VALIDATED": "Validiert",
+ "v19x.st.PROCESSED": "Verarbeitet",
+ "v19x.st.INTEGRATED": "Integriert",
+ "v19x.st.CACHED": "Offline gespeichert",
+ "v19x.st.BLOCKED": "Blockiert",
+ "v19x.st.REQUIRES_AUTHENTICATION": "Anmeldung erforderlich",
+ "v19x.st.NOT_INVESTIGATED": "Nicht untersucht",
+ "v19x.f.agency": "Behörde",
+ "v19x.f.provider": "Anbieter",
+ "v19x.f.product": "Produkt und Version",
+ "v19x.f.source_product": "Quellprodukt",
+ "v19x.f.doi": "DOI",
+ "v19x.f.url": "Offizielle Quelle",
+ "v19x.f.docs": "Dokumentation",
+ "v19x.f.variables": "Variablen",
+ "v19x.f.units": "Einheiten",
+ "v19x.f.spatial": "Räumliche Auflösung",
+ "v19x.f.temporal": "Zeitliche Auflösung",
+ "v19x.f.coverage": "Abdeckung",
+ "v19x.f.period": "Beobachtungszeitraum",
+ "v19x.f.retrieved": "Abgerufen",
+ "v19x.f.route": "Abrufweg",
+ "v19x.f.processing": "Verarbeitung",
+ "v19x.f.validation": "Validierung",
+ "v19x.f.cube_variables": "ASTERRO-Variablen",
+ "v19x.f.cloud": "Region des Cloud-Archivs",
+ "v19x.f.access": "Zugangsbedingungen",
+ "v19x.f.last_attempt": "Letzter Versuch",
+ "v19x.f.note": "Hinweis",
+ "v19x.f.limitations": "Grenzen",
+ "v19x.f.raw_sha256": "SHA-256 der Rohdatei",
+ "v19x.f.from": "Erfasst in",
+ "v19x.store.title": "Offline-Datenspeicher",
+ "v19x.store.online": "Dieser Browser ist online.",
+ "v19x.store.offline": "Dieser Browser ist offline: ASTERRO nutzt seine gespeicherten Kopien.",
+ "v19x.store.cube": "Umweltdatenschichten: {v} Variablen, {mb} MB, gespeichert am {s}",
+ "v19x.store.verified": "Integrität geprüft",
+ "v19x.store.src.server": "Vom ASTERRO-Server geladen und in diesem Browser gespeichert.",
+ "v19x.store.src.offline_store": "Aus dem Offline-Speicher dieses Browsers geladen.",
+ "v19x.store.retrieved": "Die Anbieter wurden abgefragt: {d}. Die Werte sind Klimatologien und Kataloge, keine Live-Messungen.",
+ "v19x.store.never_live": "Gespeicherte Daten werden nie als Live-Daten gezeigt. Beim Aktualisieren bleibt die gültige Kopie erhalten, bis eine neue Kopie ihre Integritätsprüfung bestanden hat.",
+ "v19x.store.refresh": "Nach aktualisierten Daten suchen",
+ "v19x.store.verify": "Gespeicherte Daten prüfen",
+ "v19x.store.clear": "Gespeicherte Analysen löschen",
+ "v19x.msg.same": "Keine neueren Daten: die gespeicherte Kopie ist aktuell.",
+ "v19x.msg.updated": "Aktualisierte Daten wurden geprüft und gespeichert.",
+ "v19x.msg.failed": "Der Server war nicht erreichbar; die gespeicherte Kopie bleibt erhalten.",
+ "v19x.msg.offline": "Offline: die gespeicherte Kopie bleibt erhalten.",
+ "v19x.msg.nostore": "In diesem Browser ist noch nichts gespeichert.",
+ "v19x.msg.verify_ok": "Die gespeicherte Kopie stimmt mit ihrer Prüfsumme überein.",
+ "v19x.msg.verify_bad": "Die gespeicherte Kopie stimmt nicht mit ihrer Prüfsumme überein und wird nicht verwendet.",
+ "v19x.msg.cleared": "Gespeicherte Analysen gelöscht.",
+ "v19x.saved.title": "Gespeicherte Analysen ({n})",
+ "v19x.saved.used": "{n} Datensätze genutzt, {m} Bereiche ohne Daten",
+ "v19x.saved.none": "Analysen werden hier gespeichert, wenn Sie in Lokale Wirkung einen Ort analysieren."
+});
+
 /* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
  *
  * Everything the story-led journey shows is derived here from the unchanged baseline engine (TAIEngine,
@@ -35447,6 +36300,166 @@ function v9Registry() {
     <p class="note small">${esc(tx("v19.reg.never"))}</p></div>`;
 }
 { const f = viewData; viewData = function () { let h = f.apply(this, arguments); try { h += v9Registry(); } catch (e) { console.error(e); } return h; }; }
+
+/* ASTERRO V19 data extension (tai-v19-data-2.0.0): offline data store, data inventory, environmental data layers.
+ * Store   : IndexedDB "asterro-data" (stores: datasets, analyses). Each dataset is versioned and hashed; a copy is
+ *           used only if its SHA-256 and cell order match. Refresh never deletes a valid copy before a new valid
+ *           copy has been verified. Cached data are never called live: every view states where the copy came from
+ *           and when the providers were queried.
+ * Views   : Data (inventory with NASA / non-NASA attribution and nine states, store status, refresh, verify),
+ *           Discover › Science domains and Local Impact (data layers at the cell, with provenance), saved analyses. */
+const V9X = { man: null, C: null, src: null, stored: null, err: null, inv: null, vol: null, sites: null, loading: null, online: typeof navigator === "undefined" ? true : navigator.onLine, filter: { nasa: "all", state: "all" }, analyses: [], cellOk: null, msg: null };
+const V9X_DB = "asterro-data", V9X_FILES = { cube: ["data/v19/env/cube.json", "data/v19/env/cube.bin"], inventory: ["data/v19/env/inventory.json"], volcanoes: ["data/v19/env/volcanoes.json"], sites: ["data/v19/env/sites.json"] };
+function v9xDb() {
+  return new Promise((res, rej) => { try { const r = indexedDB.open(V9X_DB, 1); r.onupgradeneeded = () => { const d = r.result; if (!d.objectStoreNames.contains("datasets")) d.createObjectStore("datasets", { keyPath: "id" }); if (!d.objectStoreNames.contains("analyses")) d.createObjectStore("analyses", { keyPath: "key" }); }; r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } });
+}
+async function v9xTx(store, mode, fn) { const d = await v9xDb(); return new Promise((res, rej) => { const t = d.transaction(store, mode), s = t.objectStore(store); let out; Promise.resolve(fn(s)).then(r => { out = r; }); t.oncomplete = () => res(out); t.onerror = () => rej(t.error); }); }
+const v9xReq = r => new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+async function v9xGet(id) { try { return await v9xTx("datasets", "readonly", s => v9xReq(s.get(id))); } catch (e) { return null; } }
+async function v9xPut(rec) { try { await v9xTx("datasets", "readwrite", s => v9xReq(s.put(rec))); return true; } catch (e) { return false; } }
+async function v9xAll(store) { try { return await v9xTx(store, "readonly", s => v9xReq(s.getAll())); } catch (e) { return []; } }
+async function v9xCellSha() { const a = new Int32Array(S.cell.length); for (let i = 0; i < a.length; i++) a[i] = S.cell[i]; return AsterroV19X.sha256Hex(a.buffer); }
+async function v9xFetch(u, kind, opts) { const r = await fetch(u, opts); if (!r.ok) throw new Error("HTTP " + r.status); return kind === "bin" ? r.arrayBuffer() : r.json(); }
+/* load: network (through the service worker) first, then the IndexedDB copy; a copy is used only if it verifies */
+async function v9xLoad(force) {
+  if (typeof AsterroV19X === "undefined" || !S.cell) return;
+  if (V9X.loading) return V9X.loading;
+  V9X.loading = (async () => {
+    V9X.err = null; const cellSha = V9X.cellSha || (V9X.cellSha = await v9xCellSha());
+    let man = null, buf = null, src = null;
+    if (V9X.online || force) {
+      try {
+        const o = force ? { cache: "reload" } : undefined;
+        man = await v9xFetch(V9X_FILES.cube[0] + (force ? "?r=" + Date.now() : ""), "json", o); buf = await v9xFetch(V9X_FILES.cube[1] + (force ? "?r=" + Date.now() : ""), "bin", o);
+        const v = await AsterroV19X.verify(man, buf, cellSha);
+        if (!v.ok) { V9X.err = "verify_" + v.why; man = buf = null; } else src = "server";
+      } catch (e) { man = buf = null; }
+    }
+    const rec = await v9xGet("cube");
+    if (man && buf) {
+      if (!rec || rec.sha256 !== man.sha256) await v9xPut({ id: "cube", version: man.version, sha256: man.sha256, bytes: man.bytes, manifest: man, buffer: buf, stored: new Date().toISOString(), from: "server" });
+      V9X.stored = rec && rec.sha256 === man.sha256 ? rec.stored : new Date().toISOString();
+    } else if (rec) {
+      const v = await AsterroV19X.verify(rec.manifest, rec.buffer, cellSha);
+      if (v.ok) { man = rec.manifest; buf = rec.buffer; src = "offline_store"; V9X.stored = rec.stored; } else V9X.err = "store_" + v.why;
+    }
+    if (man && buf) { V9X.man = man; V9X.C = AsterroV19X.create(man, buf); V9X.src = src; V9X.cellOk = true; }
+    else if (!V9X.err) V9X.err = "unavailable";
+    for (const k of ["inventory", "volcanoes", "sites"]) {
+      let j = null;
+      if (V9X.online || force) { try { j = await v9xFetch(V9X_FILES[k][0] + (force ? "?r=" + Date.now() : ""), "json", force ? { cache: "reload" } : undefined); await v9xPut({ id: k, json: j, stored: new Date().toISOString(), from: "server" }); } catch (e) { j = null; } }
+      if (!j) { const r = await v9xGet(k); if (r) j = r.json; }
+      V9X[k === "inventory" ? "inv" : k === "volcanoes" ? "vol" : "sites"] = j;
+    }
+    V9X.analyses = await v9xAll("analyses");
+  })().finally(() => { V9X.loading = null; });
+  return V9X.loading;
+}
+async function v9xSaveAnalysis(i) {
+  if (!V9X.C) return;
+  const key = S.cell[i] + ":" + V9X.man.sha256.slice(0, 16);
+  if (V9X.analyses.some(a => a.key === key)) return;
+  const a = V9X.C.analyse(i, { source: V9X.src, retrieved: v9xRetrieved(), now: new Date().toISOString() });
+  const rec = { key, cell: S.cell[i], place: jnPlaceText ? jnPlaceText(i) : String(S.cell[i]), result: a, created: a.created };
+  try { await v9xTx("analyses", "readwrite", s => v9xReq(s.put(rec))); V9X.analyses.push(rec); } catch (e) { /* storage refused: the analysis is still shown */ }
+}
+function v9xRetrieved() { const s = (V9X.man && V9X.man.sources) || {}; const d = Object.values(s).map(x => String(x.retrieved || "").slice(0, 10)).filter(Boolean).sort(); return d.length ? d[0] === d[d.length - 1] ? d[0] : d[0] + " – " + d[d.length - 1] : null; }
+function v9xRerender() { if (["data", "local", "discover"].includes(S.tab) && typeof renderLeft === "function") renderLeft(); }
+if (typeof window !== "undefined") {
+  window.addEventListener("online", () => { V9X.online = true; v9xRerender(); });
+  window.addEventListener("offline", () => { V9X.online = false; v9xRerender(); });
+}
+/* ------------------------------------------------------------------ formatting */
+function v9xVal(r) {
+  if (r.value == null) return `<span class="meta">${esc(tx("v18.missing"))}</span>`;
+  if (r.cls) return `${esc(r.cls)} <span class="meta">(${esc(txInt(Math.round(r.value)))})</span>`;
+  const u = r.units, x = r.value, dp = u === "count" || u === "months" || u === "km" || u === "class" || u === "index" ? 0 : Math.abs(x) >= 100 ? 0 : Math.abs(x) >= 10 ? 1 : u === "1" || u === "ratio" || u.startsWith("fraction") ? 3 : 2;
+  const unit = u === "1" || u === "class" || u === "index" ? "" : (txHas("v19x.unit." + u) ? tx("v19x.unit." + u) : u);
+  return `<span class="li-nw">${r.lower_bound ? "≥ " : ""}${esc(txNum(x, dp))}${unit ? ` <span class="meta">${esc(unit)}</span>` : ""}</span>`;
+}
+function v9xAgency(r) { const nasa = String(r.agency || "").startsWith("NASA"); return `<span class="v9x-ag ${nasa ? "nasa" : "other"}">${esc(tx(nasa ? "v19x.nasa" : "v19x.not_nasa"))}</span>`; }
+function v9xKind(k) { const c = /reanalysis|model/.test(k) ? "model" : /satellite observation/.test(k) ? "direct" : /satellite/.test(k) ? "proxy" : /catalogue|classification/.test(k) ? "derived" : "derived";
+  return `<span class="v7-kind ${c}" title="${esc(k)}">${esc(tx("v19x.kind." + (/reanalysis|model/.test(k) ? "model" : /lower bound/.test(k) ? "obs_lb" : /satellite observation/.test(k) ? "obs" : /classification/.test(k) ? "class" : /satellite-derived/.test(k) ? "satderived" : /catalogue/.test(k) ? "catalogue" : "derived")))}</span>`; }
+function v9xSourceLine() {
+  if (!V9X.man) return "";
+  return `<p class="meta small" data-v9xsrc="${esc(V9X.src)}">${esc(tx("v19x.src." + V9X.src, { d: v9xRetrieved() || "–", s: (V9X.stored || "").slice(0, 10) }))} · <span class="ds-adv" lang="en">${keep(V9X.man.version)} · ${keep(V9X.man.sha256.slice(0, 12))}</span></p>`;
+}
+function v9xLayers(i, attr) {
+  if (!V9X.C) return `<div class="sec" ${attr} data-i18n-done><h3>${esc(tx("v19x.layers.title"))}</h3><p class="note" data-v9xnone>${esc(tx(V9X.err ? "v19x.err." + (V9X.err.startsWith("verify") || V9X.err.startsWith("store") ? "verify" : "unavailable") : "v19x.loading"))}</p></div>`;
+  const doms = V9X.C.domains(i), a = V9X.C.analyse(i, { source: V9X.src });
+  const vol = V9X.vol && V9X.C.value("volc_nearest_idx", i) != null ? V9X.vol.volcanoes[Math.round(V9X.C.value("volc_nearest_idx", i))] : null;
+  return `<div class="sec" ${attr} data-i18n-done><h3>${esc(tx("v19x.layers.title"))}</h3><p class="note">${esc(tx("v19x.layers.p"))}</p>${v9xSourceLine()}
+    ${doms.map(d => `<details class="v7-mod v9x-dom" data-v9xdom="${d.id}" data-v9xstate="${d.state}"${d.have ? " open" : ""}><summary><b>${esc(tx("v19x.dom." + d.id))}</b> <span class="meta">· ${esc(tx("v19x.dom.have", { k: txInt(d.have), n: txInt(d.n) }))}</span></summary>
+      <div class="tbl-wrap"><table class="t xt-t li-prof v9x-t"><thead><tr><th scope="col">${esc(tx("v17.col.var"))}</th><th scope="col" class="n">${esc(tx("v17.col.value"))}</th><th scope="col">${esc(tx("v17.col.kind"))}</th><th scope="col" class="ds-adv">${esc(tx("v18.col.dataset"))}</th><th scope="col" class="ds-adv">${esc(tx("v18.col.res"))}</th></tr></thead><tbody>
+      ${d.rows.map(r => `<tr data-v9xvar="${r.id}"${r.lower_bound ? " data-v9xlb" : ""}><th scope="row">${esc(txHas("v19x.var." + r.id) ? tx("v19x.var." + r.id) : r.label)}${r.lower_bound ? `<br><span class="meta">${esc(tx("v19x.lower_bound"))}</span>` : ""}</th><td class="n">${v9xVal(r)}</td><td>${v9xKind(r.kind)} ${v9xAgency(r)}</td>
+        <td class="ds-adv meta" lang="en">${r.datasets.map(keep).join(", ")}</td><td class="ds-adv meta" lang="en">${esc(r.resolution || "")} · ${esc(r.period || "")}</td></tr>`).join("")}</tbody></table></div>
+      ${d.id === "volcanic" && vol ? `<p class="note small" data-v9xvolc>${esc(tx("v19x.volc.nearest", { name: vol[1], km: txInt(Math.round(V9X.C.value("volc_nearest_km", i))), y: vol[3] == null ? tx("v19.pt.last_none") : vol[3] < 0 ? tx("v19.pt.bce", { y: txInt(-vol[3]) }) : String(vol[3]) }))}</p>` : ""}
+      <p class="note small" data-v9xnotsaid>${esc(tx("v19x.not." + d.not_said))}</p></details>`).join("")}
+    <p class="note small" data-v9xused>${esc(tx("v19x.used", { n: txInt(a.datasets_used.length), m: a.domains_unavailable.length ? a.domains_unavailable.map(x => tx("v19x.dom." + x)).join(", ") : "–" }))}</p></div>`;
+}
+/* ------------------------------------------------------------------ Data tab: inventory and store */
+function v9xInventory() {
+  const I = V9X.inv; if (!I) return `<div class="sec" data-v9xinv data-i18n-done><h3>${esc(tx("v19x.inv.title"))}</h3><p class="note">${esc(tx(V9X.loading ? "v19x.loading" : "v19x.err.unavailable"))}</p></div>`;
+  const F = V9X.filter, rows = I.rows.filter(r => (F.nasa === "all" || (F.nasa === "nasa") === !!r.nasa) && (F.state === "all" || r.state === F.state));
+  const st = s => `<span class="v9x-st ${esc(s.toLowerCase())}">${esc(tx("v19x.st." + s))}</span>`;
+  const fld = (k, v) => v == null || v === "" || (Array.isArray(v) && !v.length) ? "" : `<dt>${esc(tx("v19x.f." + k))}</dt><dd lang="en">${typeof v === "object" ? esc(JSON.stringify(v)) : esc(String(v))}</dd>`;
+  const order = I.states.concat(["NOT_INVESTIGATED"]);
+  return `<div class="sec" data-v9xinv data-i18n-done><h3>${esc(tx("v19x.inv.title"))}</h3><p class="note">${esc(tx("v19x.inv.p"))}</p>
+    <p class="meta">${esc(tx("v19x.inv.counts", { n: txInt(I.n), k: txInt(I.nasa), o: txInt(I.n - I.nasa) }))}</p>
+    <ul class="xt-list" data-v9xcounts>${order.filter(s => I.counts[s]).map(s => `<li data-v9xcnt="${s}">${st(s)} · ${esc(txInt(I.counts[s]))}</li>`).join("")}</ul>
+    <div class="li-row"><label class="xt-field"><span>${esc(tx("v19x.inv.agency"))}</span><select data-v9xf="nasa">${["all", "nasa", "other"].map(k => `<option value="${k}"${F.nasa === k ? " selected" : ""}>${esc(tx("v19x.inv.f_" + k))}</option>`).join("")}</select></label>
+      <label class="xt-field"><span>${esc(tx("v19x.inv.state"))}</span><select data-v9xf="state"><option value="all">${esc(tx("v19x.inv.f_all"))}</option>${order.map(s => `<option value="${s}"${F.state === s ? " selected" : ""}>${esc(tx("v19x.st." + s))}</option>`).join("")}</select></label></div>
+    <p class="meta" data-v9xshown>${esc(tx("v19x.inv.shown", { n: txInt(rows.length) }))}</p>
+    <div class="v9x-inv">${rows.map(r => `<details class="v7-mod" data-v9xrow="${esc(r.id)}" data-v9xstate="${esc(r.state)}" data-v9xnasa="${r.nasa ? 1 : 0}"><summary><b>${keep(r.name || r.id)}</b> ${`<span class="v9x-ag ${r.nasa ? "nasa" : "other"}">${esc(tx(r.nasa ? "v19x.nasa" : "v19x.not_nasa"))}</span>`} ${st(r.state)}</summary>
+      <p class="meta">${r.states.length ? r.states.map(st).join(" ") : esc(tx("v19x.inv.no_states"))}</p>
+      <dl class="v9x-dl">${fld("agency", r.agency)}${fld("provider", r.provider)}${fld("product", r.product)}${fld("source_product", r.source_product)}${fld("doi", r.doi)}${fld("url", r.url)}${fld("docs", r.docs)}${fld("variables", r.variables)}${fld("units", r.units)}${fld("spatial", r.spatial)}${fld("temporal", r.temporal)}${fld("coverage", r.coverage)}${fld("period", r.period)}${fld("retrieved", r.retrieved)}${fld("route", r.route)}${fld("processing", r.processing)}${fld("validation", r.validation)}${fld("cube_variables", r.cube_variables)}${fld("cloud", r.cloud)}${fld("access", r.access)}${fld("last_attempt", r.last_attempt && (r.last_attempt.class + " · " + r.last_attempt.utc + " · " + (r.last_attempt.error || "")))}${fld("note", r.note)}${fld("limitations", r.limitations)}${fld("raw_sha256", r.raw_sha256)}${fld("from", r.from)}</dl></details>`).join("")}</div>
+    <p class="note small">${esc(tx("v19x.inv.never"))}</p></div>`;
+}
+function v9xStore() {
+  const m = V9X.man;
+  return `<div class="sec" data-v9xstore data-i18n-done><h3>${esc(tx("v19x.store.title"))}</h3>
+    <p class="li-st" data-v9xnet="${V9X.online ? "online" : "offline"}" role="status" aria-live="polite">${esc(tx(V9X.online ? "v19x.store.online" : "v19x.store.offline"))}</p>
+    ${m ? `<ul class="xt-list"><li data-v9xcube>${esc(tx("v19x.store.cube", { v: txInt(m.variables.length), mb: txNum(m.bytes / 1048576, 1), s: (V9X.stored || "").slice(0, 16).replace("T", " ") }))} · ${esc(tx("v19x.store.verified"))}</li>
+      <li>${esc(tx("v19x.store.src." + V9X.src))}</li><li>${esc(tx("v19x.store.retrieved", { d: v9xRetrieved() || "–" }))}</li></ul>` : `<p class="note">${esc(tx(V9X.err ? "v19x.err." + (/verify|store/.test(V9X.err) ? "verify" : "unavailable") : "v19x.loading"))}</p>`}
+    <p class="note small">${esc(tx("v19x.store.never_live"))}</p>
+    <div class="li-row"><button class="btn-ghost" data-v9xdo="refresh">${esc(tx("v19x.store.refresh"))}</button><button class="btn-ghost" data-v9xdo="verify">${esc(tx("v19x.store.verify"))}</button>${V9X.analyses.length ? `<button class="btn-ghost" data-v9xdo="clear">${esc(tx("v19x.store.clear"))}</button>` : ""}</div>
+    ${V9X.msg ? `<p class="li-st" role="status" data-v9xmsg="${esc(V9X.msg.k)}">${esc(tx("v19x.msg." + V9X.msg.k, V9X.msg.p || {}))}</p>` : ""}
+    <h4 class="xt-h">${esc(tx("v19x.saved.title", { n: txInt(V9X.analyses.length) }))}</h4>
+    ${V9X.analyses.length ? `<ul class="xt-list" data-v9xsaved>${V9X.analyses.slice(-12).reverse().map(a => `<li>${keep(a.place)} · ${esc((a.created || "").slice(0, 16).replace("T", " "))} · ${esc(tx("v19x.saved.used", { n: txInt(a.result.datasets_used.length), m: txInt(a.result.domains_unavailable.length) }))}</li>`).join("")}</ul>` : `<p class="note small">${esc(tx("v19x.saved.none"))}</p>`}</div>`;
+}
+/* ------------------------------------------------------------------ wiring into existing views */
+{ const f = viewData; viewData = function () { let h = f.apply(this, arguments); try { if (!V9X.man && !V9X.loading && !V9X.err) v9xLoad().then(v9xRerender); h += v9xStore() + v9xInventory(); } catch (e) { console.error(e); } return h; }; }
+{ const f = v7HubDomains; v7HubDomains = function () {
+  let h = f.apply(this, arguments);
+  try { const i = v7Cur(); if (i != null) { if (!V9X.man && !V9X.loading && !V9X.err) v9xLoad().then(v9xRerender); h += v9xLayers(i, "data-v9xlayers"); } } catch (e) { console.error(e); }
+  return h;
+}; }
+{ const f = viewLocal; viewLocal = function () {
+  let h = f.apply(this, arguments);
+  try {
+    if (typeof LI !== "undefined" && LI.i != null) {
+      if (!V9X.man && !V9X.loading && !V9X.err) v9xLoad().then(v9xRerender);
+      if (V9X.C) v9xSaveAnalysis(LI.i);
+      const sec = `<section class="sec li-sec" data-lisec="v19x" data-i18n-done>${v9xLayers(LI.i, "data-v9xlayers").replace(/^<div class="sec" [^>]*>/, "").replace(/<\/div>$/, "")}</section>`;
+      const k = h.indexOf('<section class="sec li-sec" data-lisec="report"');
+      h = k >= 0 ? h.slice(0, k) + sec + h.slice(k) : h + sec;
+    }
+  } catch (e) { console.error(e); }
+  return h;
+}; }
+if (typeof document !== "undefined") {
+  document.addEventListener("change", e => {
+    const t = e.target; if (!t || !t.dataset || !t.dataset.v9xf) return;
+    V9X.filter[t.dataset.v9xf] = t.value; const sel = `[data-v9xf="${t.dataset.v9xf}"]`; renderLeft(); const n = document.querySelector(sel); if (n) n.focus();
+  });
+  document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("[data-v9xdo]"); if (!b) return;
+    const k = b.dataset.v9xdo, sel = `[data-v9xdo="${k}"]`, done = m => { V9X.msg = m; renderLeft(); const n = document.querySelector(sel); if (n) n.focus(); };
+    if (k === "refresh") { const old = V9X.man && V9X.man.sha256; V9X.err = null; v9xLoad(true).then(() => done(V9X.src === "server" ? { k: V9X.man.sha256 === old ? "same" : "updated" } : { k: V9X.online ? "failed" : "offline" })); }
+    else if (k === "verify") { v9xGet("cube").then(async r => { if (!r) return done({ k: "nostore" }); const v = await AsterroV19X.verify(r.manifest, r.buffer, V9X.cellSha); done({ k: v.ok ? "verify_ok" : "verify_bad" }); }); }
+    else if (k === "clear") { v9xTx("analyses", "readwrite", s => v9xReq(s.clear())).then(() => { V9X.analyses = []; done({ k: "cleared" }); }).catch(() => done({ k: "failed" })); }
+  });
+}
 
 /* ===== Interface languages for the Markdown report =====
  * The baseline builds the report as English Markdown (reportMD, protected). In another language the report sheet

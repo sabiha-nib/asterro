@@ -1,0 +1,769 @@
+{
+ "schema": "asterro.v19x.cube/1",
+ "version": "tai-v19-data-2.0.0",
+ "n": 76781,
+ "dtype": "int16le",
+ "nodata": -32768,
+ "cell_order_sha256": "3d7f3ee6580e4cc10b3682b9eb91b0f05aee2d758811c146d6ab77494265a650",
+ "bytes": 5221108,
+ "sha256": "045ba75ecedb4060704f58118c10e42bc6cd22ec3c1941e3fe918d35ca6f0bbb",
+ "variables": [
+  {
+   "id": "wind_ws10m",
+   "scale": 0.01,
+   "n_valid": 76781,
+   "label": "Wind speed at 10 m, annual mean",
+   "units": "m/s",
+   "datasets": [
+    "power_ws10m"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 0
+  },
+  {
+   "id": "wind_ws10m_maxmonth",
+   "scale": 0.01,
+   "n_valid": 76781,
+   "label": "Wind speed at 10 m, windiest calendar month",
+   "units": "m/s",
+   "datasets": [
+    "power_ws10m"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 153562
+  },
+  {
+   "id": "wind_ws50m",
+   "scale": 0.01,
+   "n_valid": 76275,
+   "label": "Wind speed at 50 m, annual mean",
+   "units": "m/s",
+   "datasets": [
+    "power_ws50m"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 307124
+  },
+  {
+   "id": "wind_ws10m_max",
+   "scale": 0.01,
+   "n_valid": 76781,
+   "label": "Maximum wind speed at 10 m (POWER climatology, annual)",
+   "units": "m/s",
+   "datasets": [
+    "power_ws10m_max"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 460686
+  },
+  {
+   "id": "wind_dir_from",
+   "scale": 0.1,
+   "n_valid": 75410,
+   "label": "Prevailing wind direction (from), resultant of annual-mean U and V",
+   "units": "deg",
+   "datasets": [
+    "power_u10m",
+    "power_v10m"
+   ],
+   "agency": "NASA",
+   "kind": "derived from reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 614248
+  },
+  {
+   "id": "wind_steadiness",
+   "scale": 0.001,
+   "n_valid": 75788,
+   "label": "Wind steadiness: resultant / mean speed (1 = always the same direction)",
+   "units": "ratio",
+   "datasets": [
+    "power_u10m",
+    "power_v10m",
+    "power_ws10m"
+   ],
+   "agency": "NASA",
+   "kind": "derived from reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "note": "uses annual means of monthly means; an approximation of the true directional constancy",
+   "offset": 767810
+  },
+  {
+   "id": "aod550_ceres",
+   "scale": 0.001,
+   "n_valid": 61092,
+   "label": "Aerosol optical depth at 550 nm, annual mean",
+   "units": "1",
+   "datasets": [
+    "power_aod_55"
+   ],
+   "agency": "NASA",
+   "kind": "satellite-derived (CERES SYN1deg)",
+   "resolution": "1 deg x 1 deg (sampled at the cell centre)",
+   "period": "2001-2025 climatology",
+   "note": "column aerosol, not surface dust; exact zeros in every month (Antarctic ice sheet) are treated as missing",
+   "offset": 921372
+  },
+  {
+   "id": "ps_kpa",
+   "scale": 0.01,
+   "n_valid": 76781,
+   "label": "Surface pressure, annual mean",
+   "units": "kPa",
+   "datasets": [
+    "power_ps"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1074934
+  },
+  {
+   "id": "gwettop",
+   "scale": 0.001,
+   "n_valid": 76577,
+   "label": "Surface soil wetness (0-5 cm), annual mean",
+   "units": "fraction of saturation",
+   "datasets": [
+    "power_gwettop"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1228496
+  },
+  {
+   "id": "snodp_cm",
+   "scale": 0.1,
+   "n_valid": 54193,
+   "label": "Snow depth, annual mean",
+   "units": "cm",
+   "datasets": [
+    "power_snodp"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1382058
+  },
+  {
+   "id": "snodp_maxmonth",
+   "scale": 0.1,
+   "n_valid": 54193,
+   "label": "Snow depth, deepest calendar month",
+   "units": "cm",
+   "datasets": [
+    "power_snodp"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1535620
+  },
+  {
+   "id": "frsno",
+   "scale": 0.001,
+   "n_valid": 53862,
+   "label": "Fraction of land covered by snow, annual mean",
+   "units": "1",
+   "datasets": [
+    "power_frsno"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1689182
+  },
+  {
+   "id": "frsno_months50",
+   "scale": 1,
+   "n_valid": 53862,
+   "label": "Months with at least half of the land snow covered (model)",
+   "units": "months",
+   "datasets": [
+    "power_frsno"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2)",
+   "resolution": "0.5 x 0.625 deg (native)",
+   "period": "2001-2025 climatology",
+   "offset": 1842744
+  },
+  {
+   "id": "dust_sfc_ugm3",
+   "scale": 0.1,
+   "n_valid": 76781,
+   "label": "Dust surface mass concentration, annual mean of the monthly climatology",
+   "units": "ug/m3",
+   "datasets": [
+    "gibs_merra2_dust_surface_mass_concentration_monthly",
+    "m2tmnxaer"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2 aerosol assimilation)",
+   "resolution": "0.5 x 0.625 deg model, imaged at 0.25 deg",
+   "period": "2016-2025 monthly climatology",
+   "decoded_from": "NASA GIBS WMS layer MERRA2_Dust_Surface_Mass_Concentration_Monthly with its colormap (quantised to the colormap bins)",
+   "lower_bound_where": "dust_top_bin_months > 0",
+   "offset": 1996306
+  },
+  {
+   "id": "dust_sfc_maxmonth",
+   "scale": 0.1,
+   "n_valid": 76781,
+   "label": "Dust surface mass concentration, dustiest calendar month",
+   "units": "ug/m3",
+   "datasets": [
+    "gibs_merra2_dust_surface_mass_concentration_monthly",
+    "m2tmnxaer"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2 aerosol assimilation)",
+   "resolution": "0.5 x 0.625 deg model, imaged at 0.25 deg",
+   "period": "2016-2025 monthly climatology",
+   "decoded_from": "NASA GIBS WMS layer MERRA2_Dust_Surface_Mass_Concentration_Monthly with its colormap (quantised to the colormap bins)",
+   "lower_bound_where": "dust_top_bin_months > 0",
+   "offset": 2149868
+  },
+  {
+   "id": "dust_top_bin_months",
+   "scale": 1,
+   "n_valid": 76781,
+   "label": "Calendar months in which part of the cell exceeded the colormap's top bin (90 ug/m3); values are then lower bounds",
+   "units": "months",
+   "datasets": [
+    "gibs_merra2_dust_surface_mass_concentration_monthly",
+    "m2tmnxaer"
+   ],
+   "agency": "NASA",
+   "kind": "reanalysis model (MERRA-2 aerosol assimilation)",
+   "resolution": "0.5 x 0.625 deg model, imaged at 0.25 deg",
+   "period": "2016-2025 monthly climatology",
+   "decoded_from": "NASA GIBS WMS layer MERRA2_Dust_Surface_Mass_Concentration_Monthly with its colormap (quantised to the colormap bins)",
+   "offset": 2303430
+  },
+  {
+   "id": "snow_detected_maxmonth",
+   "scale": 0.1,
+   "n_valid": 76781,
+   "label": "Detected snow cover, snowiest calendar month (lower bound)",
+   "units": "%",
+   "datasets": [
+    "gibs_modis_terra_l3_snow_cover_monthly_average_pct",
+    "mod10cm"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MODIS Terra), lower bound",
+   "resolution": "0.05 deg product, imaged at 0.1 deg",
+   "period": "2016-2025 monthly",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct with its colormap (quantised to the colormap bins)",
+   "lower_bound": true,
+   "note": "GIBS renders 0 % snow, cloud and polar night alike as transparent; a value is the snow cover that was detected, and no detection is not evidence of no snow",
+   "offset": 2456992
+  },
+  {
+   "id": "snow_detected_months50",
+   "scale": 1,
+   "n_valid": 76781,
+   "label": "Calendar months with at least 50 % detected snow cover (lower bound)",
+   "units": "months",
+   "datasets": [
+    "gibs_modis_terra_l3_snow_cover_monthly_average_pct",
+    "mod10cm"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MODIS Terra), lower bound",
+   "resolution": "0.05 deg product, imaged at 0.1 deg",
+   "period": "2016-2025 monthly",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct with its colormap (quantised to the colormap bins)",
+   "lower_bound": true,
+   "note": "GIBS renders 0 % snow, cloud and polar night alike as transparent; a value is the snow cover that was detected, and no detection is not evidence of no snow",
+   "offset": 2610554
+  },
+  {
+   "id": "evi_mean",
+   "scale": 0.001,
+   "n_valid": 48306,
+   "label": "Enhanced Vegetation Index, mean of the observed calendar months",
+   "units": "1",
+   "datasets": [
+    "gibs_modis_terra_l3_evi_monthly",
+    "mod13a3"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MODIS Terra)",
+   "resolution": "1 km product, imaged at 0.25 deg",
+   "period": "2021-2025 monthly",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_EVI_Monthly with its colormap (quantised to the colormap bins)",
+   "offset": 2764116
+  },
+  {
+   "id": "evi_max",
+   "scale": 0.001,
+   "n_valid": 48306,
+   "label": "Enhanced Vegetation Index, greenest calendar month",
+   "units": "1",
+   "datasets": [
+    "gibs_modis_terra_l3_evi_monthly",
+    "mod13a3"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MODIS Terra)",
+   "resolution": "1 km product, imaged at 0.25 deg",
+   "period": "2021-2025 monthly",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_EVI_Monthly with its colormap (quantised to the colormap bins)",
+   "offset": 2917678
+  },
+  {
+   "id": "evi_months",
+   "scale": 1,
+   "n_valid": 48306,
+   "label": "Calendar months with an EVI value (snow, cloud and darkness leave gaps)",
+   "units": "months",
+   "datasets": [
+    "gibs_modis_terra_l3_evi_monthly",
+    "mod13a3"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MODIS Terra)",
+   "resolution": "1 km product, imaged at 0.25 deg",
+   "period": "2021-2025 monthly",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_EVI_Monthly with its colormap (quantised to the colormap bins)",
+   "offset": 3071240
+  },
+  {
+   "id": "aod_misr_mean",
+   "scale": 0.001,
+   "n_valid": 45098,
+   "label": "MISR aerosol optical depth (green), mean of observed calendar months (at least 6)",
+   "units": "1",
+   "datasets": [
+    "gibs_misr_aerosol_optical_depth_avg_green_monthly",
+    "mil3maen"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MISR, Terra)",
+   "resolution": "0.5 deg product, imaged at 0.25 deg",
+   "period": "2013-2022 monthly",
+   "decoded_from": "NASA GIBS WMS layer MISR_Aerosol_Optical_Depth_Avg_Green_Monthly with its colormap (quantised to the colormap bins)",
+   "note": "column aerosol optical depth at 558 nm; not surface dust; observed months only",
+   "offset": 3224802
+  },
+  {
+   "id": "aod_misr_months",
+   "scale": 1,
+   "n_valid": 53662,
+   "label": "Calendar months with a MISR aerosol value",
+   "units": "months",
+   "datasets": [
+    "gibs_misr_aerosol_optical_depth_avg_green_monthly",
+    "mil3maen"
+   ],
+   "agency": "NASA",
+   "kind": "satellite observation (MISR, Terra)",
+   "resolution": "0.5 deg product, imaged at 0.25 deg",
+   "period": "2013-2022 monthly",
+   "decoded_from": "NASA GIBS WMS layer MISR_Aerosol_Optical_Depth_Avg_Green_Monthly with its colormap (quantised to the colormap bins)",
+   "note": "column aerosol optical depth at 558 nm; not surface dust; observed months only",
+   "offset": 3378364
+  },
+  {
+   "id": "lc_dominant",
+   "scale": 1,
+   "n_valid": 76781,
+   "label": "Dominant IGBP land-cover class (code)",
+   "units": "class",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "classes": {
+    "0": "Water Bodies",
+    "1": "Evergreen Needleleaf Forests",
+    "2": "Evergreen Broadleaf Forests",
+    "3": "Deciduous Needleleaf Forests",
+    "4": "Deciduous Broadleaf Forests",
+    "5": "Mixed Forests",
+    "6": "Closed Shrublands",
+    "7": "Open Shrublands",
+    "8": "Woody Savannas",
+    "9": "Savannas",
+    "10": "Grasslands",
+    "11": "Permanent Wetlands",
+    "12": "Croplands",
+    "13": "Urban and Built-up Lands",
+    "14": "Cropland/Natural Vegetation Mosaics",
+    "15": "Permanent Snow and Ice",
+    "16": "Barren",
+    "17": "Water Bodies"
+   },
+   "offset": 3531926
+  },
+  {
+   "id": "lc_barren",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell classed Barren",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "offset": 3685488
+  },
+  {
+   "id": "lc_snowice",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell classed Permanent Snow and Ice",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "offset": 3839050
+  },
+  {
+   "id": "lc_water",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell classed Water Bodies",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "offset": 3992612
+  },
+  {
+   "id": "lc_vegetated",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell in vegetated classes (forests, shrublands, savannas, grasslands, wetlands, croplands, mosaics)",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "offset": 4146174
+  },
+  {
+   "id": "lc_urban",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell classed Urban and Built-up",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+    "mcd12q1"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra+Aqua, IGBP scheme)",
+   "resolution": "500 m product, imaged at 0.1 deg",
+   "period": "2024",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual with its colormap (quantised to the colormap bins)",
+   "offset": 4299736
+  },
+  {
+   "id": "water_mask_frac",
+   "scale": 0.001,
+   "n_valid": 76781,
+   "label": "Share of the cell that is water (MODIS land/water mask, includes ocean at coasts)",
+   "units": "fraction",
+   "datasets": [
+    "gibs_modis_terra_l3_land_water_mask",
+    "mod44w"
+   ],
+   "agency": "NASA",
+   "kind": "satellite classification (MODIS Terra)",
+   "resolution": "250 m product, imaged at 0.1 deg",
+   "period": "2015",
+   "decoded_from": "NASA GIBS WMS layer MODIS_Terra_L3_Land_Water_Mask with its colormap (quantised to the colormap bins)",
+   "offset": 4453298
+  },
+  {
+   "id": "volc_nearest_km",
+   "scale": 1,
+   "n_valid": 76781,
+   "agency": "Smithsonian Institution (not NASA)",
+   "kind": "catalogue",
+   "resolution": "volcano summit or field-centre points; distance from the cell centre",
+   "period": "Holocene (last ~11,700 years) / Pleistocene",
+   "label": "Distance from the cell centre to the nearest Holocene volcano",
+   "units": "km",
+   "datasets": [
+    "gvp_holocene"
+   ],
+   "offset": 4606860
+  },
+  {
+   "id": "volc_nearest_idx",
+   "scale": 1,
+   "n_valid": 76781,
+   "agency": "Smithsonian Institution (not NASA)",
+   "kind": "catalogue",
+   "resolution": "volcano summit or field-centre points; distance from the cell centre",
+   "period": "Holocene (last ~11,700 years) / Pleistocene",
+   "label": "Nearest Holocene volcano (index into volcanoes.json)",
+   "units": "index",
+   "datasets": [
+    "gvp_holocene"
+   ],
+   "offset": 4760422
+  },
+  {
+   "id": "volc_holo_100km",
+   "scale": 1,
+   "n_valid": 76781,
+   "agency": "Smithsonian Institution (not NASA)",
+   "kind": "catalogue",
+   "resolution": "volcano summit or field-centre points; distance from the cell centre",
+   "period": "Holocene (last ~11,700 years) / Pleistocene",
+   "label": "Holocene volcanoes within 100 km of the cell centre",
+   "units": "count",
+   "datasets": [
+    "gvp_holocene"
+   ],
+   "offset": 4913984
+  },
+  {
+   "id": "volc_pleis_100km",
+   "scale": 1,
+   "n_valid": 76781,
+   "agency": "Smithsonian Institution (not NASA)",
+   "kind": "catalogue",
+   "resolution": "volcano summit or field-centre points; distance from the cell centre",
+   "period": "Holocene (last ~11,700 years) / Pleistocene",
+   "label": "Pleistocene volcanoes within 100 km of the cell centre",
+   "units": "count",
+   "datasets": [
+    "gvp_pleistocene"
+   ],
+   "offset": 5067546
+  }
+ ],
+ "sources": {
+  "power_WS10M": {
+   "dataset": "power_ws10m",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter WS10M (Wind Speed at 10 Meters)",
+   "source_model": "MERRA2+POWER",
+   "units": "m/s",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T13:40:11.243Z",
+   "raw_sha256": "405d71d79e91750593c3b8e04c29124a75af11c36672f09fb859a5cca472ba64"
+  },
+  "power_WS50M": {
+   "dataset": "power_ws50m",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter WS50M (Wind Speed at 50 Meters)",
+   "source_model": "MERRA2+POWER",
+   "units": "m/s",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T13:44:44.475Z",
+   "raw_sha256": "541a1154f6d8e62bd6c70b3904087338d485c8a4f976135751d2f423ea14d5b0"
+  },
+  "power_WS10M_MAX": {
+   "dataset": "power_ws10m_max",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter WS10M_MAX (Wind Speed at 10 Meters Maximum)",
+   "source_model": "MERRA2+POWER",
+   "units": "m/s",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T16:23:16.494Z",
+   "raw_sha256": "354cf3bac3edec4a7d9a7c50915e31a21037eaa0d7a6a4aa834f7d5ea63cf440"
+  },
+  "power_U10M": {
+   "dataset": "power_u10m",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter U10M (Eastward Wind at 10 Meters)",
+   "source_model": "MERRA2",
+   "units": "m/s",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T16:13:29.480Z",
+   "raw_sha256": "ffc16220695d77d9322d03d75623e056429b0239775b15cb812af89b666ca7c6"
+  },
+  "power_V10M": {
+   "dataset": "power_v10m",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter V10M (Northward Wind at 10 Meters)",
+   "source_model": "MERRA2",
+   "units": "m/s",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T16:19:16.154Z",
+   "raw_sha256": "f55d3de30c169105fa691214ec17a8b38e8a754bb0c3566472b5b542fe809aa5"
+  },
+  "power_AOD_55": {
+   "dataset": "power_aod_55",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter AOD_55 (Aerosol Optical Depth 55)",
+   "source_model": "SYN1DEG",
+   "units": "dimensionless",
+   "grid": "1deg",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T13:48:46.428Z",
+   "raw_sha256": "2068915c64e89d776e938c08878b9e0a0d5b7bf5392a8cc8e4d1c58f91434c3f"
+  },
+  "power_PS": {
+   "dataset": "power_ps",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter PS (Surface Pressure)",
+   "source_model": "MERRA2",
+   "units": "kPa",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T13:53:07.479Z",
+   "raw_sha256": "b37416a479ab21a5ad38abe9b371442a71d826dbe661eb5755f6ff6a2bbafc60"
+  },
+  "power_GWETTOP": {
+   "dataset": "power_gwettop",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter GWETTOP (Surface Soil Wetness)",
+   "source_model": "MERRA2",
+   "units": "1",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T13:57:01.531Z",
+   "raw_sha256": "dfadfba6216e857bca3fa8ed92af9bbd2f365a8f964dde987a7314cc65535e91"
+  },
+  "power_SNODP": {
+   "dataset": "power_snodp",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter SNODP (Snow Depth)",
+   "source_model": "MERRA2",
+   "units": "cm",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T14:00:57.398Z",
+   "raw_sha256": "d67dee8892cb96bb1113f92b01aaa95ed882614eb9c88a2e5ef707c658689786"
+  },
+  "power_FRSNO": {
+   "dataset": "power_frsno",
+   "agency": "NASA",
+   "provider": "NASA Langley Research Center, POWER project",
+   "product": "POWER Climatology API v2.10.1 regional, parameter FRSNO (Land Snowcover Fraction)",
+   "source_model": "MERRA2",
+   "units": "1",
+   "grid": "native",
+   "period": "2001-2025",
+   "retrieved": "2026-11-10T15:59:10.817Z",
+   "raw_sha256": "8cbd3537a5896b83bd05c22054232cb9961ea68e44926812fda950a8a156c891"
+  },
+  "gibs_MERRA2_Dust_Surface_Mass_Concentration_Monthly": {
+   "dataset": "gibs_merra2_dust_surface_mass_concentration_monthly",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MERRA2_Dust_Surface_Mass_Concentration_Monthly",
+   "raw_sha256": "1fcca8afb213fcaafee710917ca25958ca472f581b15c6a80915f5765143d6e0"
+  },
+  "gibs_MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct": {
+   "dataset": "gibs_modis_terra_l3_snow_cover_monthly_average_pct",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct",
+   "raw_sha256": "a4ad90e64d12e2ae85a44191d0a5ae76fc085141da6916cc21ce95bd9d2492a6"
+  },
+  "gibs_MODIS_Terra_L3_EVI_Monthly": {
+   "dataset": "gibs_modis_terra_l3_evi_monthly",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MODIS_Terra_L3_EVI_Monthly",
+   "raw_sha256": "a53c8ebe490119dd5c966b1138e53d33fa815c91ddad842960367e8712535a21"
+  },
+  "gibs_MISR_Aerosol_Optical_Depth_Avg_Green_Monthly": {
+   "dataset": "gibs_misr_aerosol_optical_depth_avg_green_monthly",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MISR_Aerosol_Optical_Depth_Avg_Green_Monthly",
+   "raw_sha256": "415848c9476fb2b7c7b9589b246c73a4cf5389dab4216b57f59a6e4f7944dac2"
+  },
+  "gibs_MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual": {
+   "dataset": "gibs_modis_combined_l3_igbp_land_cover_type_annual",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual",
+   "raw_sha256": "e36d486ddacd74375fcede4e6bb1e893c9d2a91602d2dab70ba0e0ffe4a0e549"
+  },
+  "gibs_MODIS_Terra_L3_Land_Water_Mask": {
+   "dataset": "gibs_modis_terra_l3_land_water_mask",
+   "agency": "NASA",
+   "provider": "NASA ESDIS, Global Imagery Browse Services (GIBS)",
+   "product": "MODIS_Terra_L3_Land_Water_Mask",
+   "raw_sha256": "594b3a7c8985034ef5efae29970521ca08c720472481bdc8195552128fc65a53"
+  },
+  "gvp_holocene": {
+   "dataset": "gvp_holocene",
+   "agency": "Smithsonian Institution (not NASA)",
+   "provider": "Global Volcanism Program, National Museum of Natural History",
+   "product": "Volcanoes of the World, Holocene volcano list (GVP-VOTW WFS)",
+   "retrieved": "2026-11-10T13:37:39.920Z",
+   "raw_sha256": "cf5c3f8323385050eb59efdd8e9067d5b21c854ce5d149ecd05e0d18d02da899"
+  },
+  "gvp_pleistocene": {
+   "dataset": "gvp_pleistocene",
+   "agency": "Smithsonian Institution (not NASA)",
+   "provider": "Global Volcanism Program, National Museum of Natural History",
+   "product": "Volcanoes of the World, Pleistocene volcano list (GVP-VOTW WFS)",
+   "retrieved": "2026-11-10T13:44:35.135Z",
+   "raw_sha256": "771a047dc8bcc07b883375a4143a2a9f2c3243efa4e57a476aa7a7cbe5a57a14"
+  }
+ }
+}

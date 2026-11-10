@@ -1,0 +1,876 @@
+{
+ "version": "tai-v19-data-2.0.0",
+ "power": {
+  "WS10M": {
+   "parameter": "WS10M",
+   "requests": 450,
+   "ok": 450,
+   "failed": [],
+   "points": 159748,
+   "overlap_points": 13114,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "m/s",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2",
+    "POWER"
+   ],
+   "first_utc": "2026-11-10T13:37:27.203Z",
+   "last_utc": "2026-11-10T13:40:11.243Z",
+   "longname": "Wind Speed at 10 Meters",
+   "grid": "native",
+   "grid_points": 146634,
+   "land_cells_with_value": 76781,
+   "land_cells": 76781,
+   "range_ann": [
+    0.56,
+    17.36
+   ],
+   "file_sha256": "405d71d79e91750593c3b8e04c29124a75af11c36672f09fb859a5cca472ba64",
+   "failed_n": 0
+  },
+  "WS50M": {
+   "parameter": "WS50M",
+   "requests": 450,
+   "ok": 444,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=40&longitude-max=50&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=50&longitude-max=60&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=70&longitude-max=80&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=80&longitude-max=90&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=90&longitude-max=100&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=WS50M&community=RE&latitude-min=0&latitude-max=10&longitude-min=100&longitude-max=110&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 157708,
+   "overlap_points": 12898,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "m/s",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2",
+    "POWER"
+   ],
+   "first_utc": "2026-11-10T13:40:14.493Z",
+   "last_utc": "2026-11-10T13:44:44.475Z",
+   "longname": "Wind Speed at 50 Meters",
+   "grid": "native",
+   "grid_points": 144810,
+   "land_cells_with_value": 76275,
+   "land_cells": 76781,
+   "range_ann": [
+    1.31,
+    19.09
+   ],
+   "file_sha256": "541a1154f6d8e62bd6c70b3904087338d485c8a4f976135751d2f423ea14d5b0",
+   "failed_n": 6
+  },
+  "WS10M_MAX": {
+   "parameter": "WS10M_MAX",
+   "requests": 450,
+   "ok": 450,
+   "failed": [],
+   "points": 159748,
+   "overlap_points": 13114,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "m/s",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2",
+    "POWER"
+   ],
+   "first_utc": "2026-11-10T16:19:18.430Z",
+   "last_utc": "2026-11-10T16:23:16.494Z",
+   "longname": "Wind Speed at 10 Meters Maximum",
+   "grid": "native",
+   "grid_points": 146634,
+   "land_cells_with_value": 76781,
+   "land_cells": 76781,
+   "range_ann": [
+    1.53,
+    46.97
+   ],
+   "file_sha256": "354cf3bac3edec4a7d9a7c50915e31a21037eaa0d7a6a4aa834f7d5ea63cf440",
+   "failed_n": 0
+  },
+  "U10M": {
+   "parameter": "U10M",
+   "requests": 450,
+   "ok": 450,
+   "failed": [],
+   "points": 159748,
+   "overlap_points": 13114,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "m/s",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T15:59:13.363Z",
+   "last_utc": "2026-11-10T16:13:29.480Z",
+   "longname": "Eastward Wind at 10 Meters",
+   "grid": "native",
+   "grid_points": 146634,
+   "land_cells_with_value": 76781,
+   "land_cells": 76781,
+   "range_ann": [
+    -14.01,
+    13.81
+   ],
+   "file_sha256": "ffc16220695d77d9322d03d75623e056429b0239775b15cb812af89b666ca7c6",
+   "failed_n": 0
+  },
+  "V10M": {
+   "parameter": "V10M",
+   "requests": 450,
+   "ok": 441,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-110&longitude-max=-100&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-100&longitude-max=-90&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-90&longitude-max=-80&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-80&longitude-max=-70&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-70&longitude-max=-60&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-60&longitude-max=-50&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-30&longitude-max=-20&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-20&longitude-max=-10&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=V10M&community=RE&latitude-min=10&latitude-max=20&longitude-min=-10&longitude-max=0&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 156535,
+   "overlap_points": 12735,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "m/s",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T16:13:32.100Z",
+   "last_utc": "2026-11-10T16:19:16.154Z",
+   "longname": "Northward Wind at 10 Meters",
+   "grid": "native",
+   "grid_points": 143800,
+   "land_cells_with_value": 75788,
+   "land_cells": 76781,
+   "range_ann": [
+    -9.4,
+    15.94
+   ],
+   "file_sha256": "f55d3de30c169105fa691214ec17a8b38e8a754bb0c3566472b5b542fe809aa5",
+   "failed_n": 9
+  },
+  "AOD_55": {
+   "parameter": "AOD_55",
+   "requests": 450,
+   "ok": 444,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-110&longitude-max=-100&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-100&longitude-max=-90&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-90&longitude-max=-80&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-80&longitude-max=-70&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-70&longitude-max=-60&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=AOD_55&community=RE&latitude-min=60&latitude-max=70&longitude-min=-60&longitude-max=-50&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 44400,
+   "overlap_points": 0,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "dimensionless",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "SYN1DEG"
+   ],
+   "first_utc": "2026-11-10T13:44:46.874Z",
+   "last_utc": "2026-11-10T13:48:46.428Z",
+   "longname": "Aerosol Optical Depth 55",
+   "all_zero_to_missing": 4498,
+   "grid": "1deg",
+   "grid_points": 142400,
+   "land_cells_with_value": 61092,
+   "land_cells": 76781,
+   "range_ann": [
+    0.0,
+    1.05
+   ],
+   "file_sha256": "2068915c64e89d776e938c08878b9e0a0d5b7bf5392a8cc8e4d1c58f91434c3f",
+   "failed_n": 6
+  },
+  "PS": {
+   "parameter": "PS",
+   "requests": 450,
+   "ok": 450,
+   "failed": [],
+   "points": 159748,
+   "overlap_points": 13114,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "kPa",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T13:48:47.912Z",
+   "last_utc": "2026-11-10T13:53:07.479Z",
+   "longname": "Surface Pressure",
+   "grid": "native",
+   "grid_points": 146634,
+   "land_cells_with_value": 76781,
+   "land_cells": 76781,
+   "range_ann": [
+    51.44,
+    102.15
+   ],
+   "file_sha256": "b37416a479ab21a5ad38abe9b371442a71d826dbe661eb5755f6ff6a2bbafc60",
+   "failed_n": 0
+  },
+  "RH2M": {
+   "state": "not_downloaded"
+  },
+  "CLOUD_AMT": {
+   "state": "not_downloaded"
+  },
+  "GWETTOP": {
+   "parameter": "GWETTOP",
+   "requests": 450,
+   "ok": 447,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=GWETTOP&community=RE&latitude-min=50&latitude-max=60&longitude-min=160&longitude-max=170&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=GWETTOP&community=RE&latitude-min=50&latitude-max=60&longitude-min=170&longitude-max=180&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=GWETTOP&community=RE&latitude-min=60&latitude-max=70&longitude-min=-180&longitude-max=-170&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 158698,
+   "overlap_points": 12988,
+   "overlap_conflicts": 0,
+   "fill_values": 0,
+   "units": "1",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T13:53:08.859Z",
+   "last_utc": "2026-11-10T13:57:01.531Z",
+   "longname": "Surface Soil Wetness",
+   "grid": "native",
+   "grid_points": 145710,
+   "land_cells_with_value": 76577,
+   "land_cells": 76781,
+   "range_ann": [
+    0.03,
+    1.0
+   ],
+   "file_sha256": "dfadfba6216e857bca3fa8ed92af9bbd2f365a8f964dde987a7314cc65535e91",
+   "failed_n": 3
+  },
+  "GWETROOT": {
+   "state": "not_downloaded"
+  },
+  "ALLSKY_SRF_ALB": {
+   "state": "not_downloaded"
+  },
+  "ALLSKY_SFC_SW_DWN": {
+   "state": "not_downloaded"
+  },
+  "SNODP": {
+   "parameter": "SNODP",
+   "requests": 450,
+   "ok": 447,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=SNODP&community=RE&latitude-min=-50&latitude-max=-40&longitude-min=-10&longitude-max=0&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=SNODP&community=RE&latitude-min=-50&latitude-max=-40&longitude-min=30&longitude-max=40&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=SNODP&community=RE&latitude-min=-50&latitude-max=-40&longitude-min=50&longitude-max=60&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 158677,
+   "overlap_points": 13075,
+   "overlap_conflicts": 0,
+   "fill_values": 1212950,
+   "units": "cm",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T13:57:02.885Z",
+   "last_utc": "2026-11-10T14:00:57.398Z",
+   "longname": "Snow Depth",
+   "grid": "native",
+   "grid_points": 145602,
+   "land_cells_with_value": 54193,
+   "land_cells": 76781,
+   "range_ann": [
+    0.0,
+    367.93
+   ],
+   "file_sha256": "d67dee8892cb96bb1113f92b01aaa95ed882614eb9c88a2e5ef707c658689786",
+   "failed_n": 3
+  },
+  "FRSNO": {
+   "parameter": "FRSNO",
+   "requests": 450,
+   "ok": 447,
+   "failed": [
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=FRSNO&community=RE&latitude-min=10&latitude-max=20&longitude-min=50&longitude-max=60&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=FRSNO&community=RE&latitude-min=10&latitude-max=20&longitude-min=70&longitude-max=80&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    },
+    {
+     "url": "https://power.larc.nasa.gov/api/temporal/climatology/regional?parameters=FRSNO&community=RE&latitude-min=10&latitude-max=20&longitude-min=80&longitude-max=90&format=JSON",
+     "status": 429,
+     "error": "{\"header\": \"The POWER API failed to complete your request due to the submission of too many requests.\", \"message\": \"Please try again later. If the rate limiting persists, please email larc-power-project@mail.nasa.gov with the request URL and any other relevant information to determine an appropriate"
+    }
+   ],
+   "points": 158677,
+   "overlap_points": 12955,
+   "overlap_conflicts": 0,
+   "fill_values": 1218867,
+   "units": "1",
+   "period": [
+    "20010101",
+    "20251231"
+   ],
+   "api_version": "v2.10.1",
+   "sources": [
+    "MERRA2"
+   ],
+   "first_utc": "2026-11-10T14:00:59.051Z",
+   "last_utc": "2026-11-10T15:59:10.817Z",
+   "longname": "Land Snowcover Fraction",
+   "grid": "native",
+   "grid_points": 145722,
+   "land_cells_with_value": 53862,
+   "land_cells": 76781,
+   "range_ann": [
+    0.0,
+    1.0
+   ],
+   "file_sha256": "8cbd3537a5896b83bd05c22054232cb9961ea68e44926812fda950a8a156c891",
+   "failed_n": 3
+  }
+ },
+ "gibs": {
+  "MERRA2_Dust_Surface_Mass_Concentration_Monthly": {
+   "file_sha256": "1fcca8afb213fcaafee710917ca25958ca472f581b15c6a80915f5765143d6e0",
+   "layer": "MERRA2_Dust_Surface_Mass_Concentration_Monthly",
+   "images": 120,
+   "requested": 120,
+   "width": 1440,
+   "height": 720,
+   "colormap_url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MERRA2_Dust_Surface_Mass_Concentration_Monthly.xml",
+   "colormap_sha256": "edb238efbe3baa6f62835474e446c5958deb4040a41507a3daafbff32cbe7e0e",
+   "first": "2016-01-01",
+   "last": "2025-12-01",
+   "first_utc": "2026-11-10T13:44:03.257Z",
+   "last_utc": "2026-11-10T13:45:41.174Z",
+   "pixels": {
+    "pixels": 124416000,
+    "decoded": 124416000,
+    "nodata": 0,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 0,
+    "at_least_top_bin": 4396560,
+    "below_bottom_bin": 0
+   },
+   "top_bin_value": 90.0
+  },
+  "MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct": {
+   "file_sha256": "a4ad90e64d12e2ae85a44191d0a5ae76fc085141da6916cc21ce95bd9d2492a6",
+   "layer": "MODIS_Terra_L3_Snow_Cover_Monthly_Average_Pct",
+   "images": 120,
+   "requested": 120,
+   "width": 3600,
+   "height": 1800,
+   "colormap_url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_NDSI_Snow_Cover.xml",
+   "colormap_sha256": "4af042d24dffc7dd67b991589157285e7281307c85f74bd0188f46556dbafd7a",
+   "first": "2016-01-01",
+   "last": "2025-12-01",
+   "pixels": {
+    "pixels": 777600000,
+    "decoded": 126309694,
+    "nodata": 0,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 651290306,
+    "at_least_top_bin": 0,
+    "below_bottom_bin": 0
+   },
+   "first_utc": "2026-11-10T13:45:42.721Z",
+   "last_utc": "2026-11-10T13:50:02.814Z",
+   "lower_bound": true
+  },
+  "MODIS_Terra_L3_EVI_Monthly": {
+   "file_sha256": "a53c8ebe490119dd5c966b1138e53d33fa815c91ddad842960367e8712535a21",
+   "layer": "MODIS_Terra_L3_EVI_Monthly",
+   "images": 60,
+   "requested": 60,
+   "width": 1440,
+   "height": 720,
+   "colormap_url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_L3_EVI.xml",
+   "colormap_sha256": "ddaec57d61a3461af8fede59fb45be8f118cb1cec1329ca1e677295ed14f829a",
+   "first": "2021-01-01",
+   "last": "2025-12-01",
+   "first_utc": "2026-11-10T13:50:06.498Z",
+   "last_utc": "2026-11-10T13:51:17.890Z",
+   "pixels": {
+    "pixels": 62208000,
+    "decoded": 12400842,
+    "nodata": 0,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 49807158,
+    "at_least_top_bin": 0,
+    "below_bottom_bin": 0
+   },
+   "top_bin_value": null
+  },
+  "MISR_Aerosol_Optical_Depth_Avg_Green_Monthly": {
+   "file_sha256": "415848c9476fb2b7c7b9589b246c73a4cf5389dab4216b57f59a6e4f7944dac2",
+   "layer": "MISR_Aerosol_Optical_Depth_Avg_Green_Monthly",
+   "images": 120,
+   "requested": 120,
+   "width": 1440,
+   "height": 720,
+   "colormap_url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MISR_Aerosol_Optical_Depth_Avg_Green_Monthly.xml",
+   "colormap_sha256": "491f608f58e8ba2c36c685043863ab78ba8d5e54824e5053f85826b1337ca448",
+   "first": "2013-01-01",
+   "last": "2022-12-01",
+   "first_utc": "2026-11-10T13:51:19.643Z",
+   "last_utc": "2026-11-10T13:52:30.968Z",
+   "pixels": {
+    "pixels": 124416000,
+    "decoded": 65234364,
+    "nodata": 59181636,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 0,
+    "at_least_top_bin": 194315,
+    "below_bottom_bin": 0
+   },
+   "top_bin_value": 1.0
+  },
+  "MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual": {
+   "file_sha256": "e36d486ddacd74375fcede4e6bb1e893c9d2a91602d2dab70ba0e0ffe4a0e549",
+   "pixels": {
+    "pixels": 6480000,
+    "decoded": 6480000,
+    "nodata": 0,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 0,
+    "at_least_top_bin": 0,
+    "below_bottom_bin": 0
+   },
+   "time": "2024-01-01",
+   "colormap_sha256": "29a9b5fe6d976a0ea5da12c46d9accfe20a1807b3f602d36d940663d6e854ef7"
+  },
+  "MODIS_Terra_L3_Land_Water_Mask": {
+   "file_sha256": "594b3a7c8985034ef5efae29970521ca08c720472481bdc8195552128fc65a53",
+   "pixels": {
+    "pixels": 6480000,
+    "decoded": 4976554,
+    "nodata": 1503446,
+    "censored": 0,
+    "other_class": 0,
+    "transparent_unmapped": 0,
+    "at_least_top_bin": 0,
+    "below_bottom_bin": 0
+   },
+   "time": "2015-01-01"
+  }
+ },
+ "gvp": {
+  "holocene": {
+   "features": 1214,
+   "timeStamp": "2026-11-10T13:37:39.920Z",
+   "crs": "EPSG:4326"
+  },
+  "pleistocene": {
+   "features": 1452,
+   "timeStamp": "2026-11-10T13:44:35.135Z",
+   "crs": "EPSG:4326"
+  },
+  "cross_check": {
+   "transcribed": 39,
+   "agree": 39,
+   "differ": []
+  }
+ },
+ "sites": {
+  "cells": 101,
+  "cross_check": {
+   "cells_compared": 16,
+   "map_units_agree": 16,
+   "map_units_differ": [],
+   "gbif": [
+    {
+     "cell": 77940,
+     "transcribed": [
+      1776,
+      0,
+      2
+     ],
+     "download": [
+      1776,
+      0,
+      2
+     ]
+    },
+    {
+     "cell": 146152,
+     "transcribed": [
+      0,
+      0,
+      0
+     ],
+     "download": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 82546,
+     "transcribed": [
+      410,
+      0,
+      0
+     ],
+     "download": [
+      410,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 144991,
+     "transcribed": [
+      7,
+      0,
+      0
+     ],
+     "download": [
+      7,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 85422,
+     "transcribed": [
+      16100,
+      0,
+      8
+     ],
+     "download": [
+      16100,
+      0,
+      8
+     ]
+    },
+    {
+     "cell": 143844,
+     "transcribed": [
+      3,
+      0,
+      0
+     ],
+     "download": [
+      3,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 75058,
+     "transcribed": [
+      84,
+      0,
+      0
+     ],
+     "download": [
+      84,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 147310,
+     "transcribed": [
+      1,
+      0,
+      0
+     ],
+     "download": [
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 140962,
+     "transcribed": [
+      53,
+      0,
+      0
+     ],
+     "download": [
+      53,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 71025,
+     "transcribed": [
+      400,
+      0,
+      0
+     ],
+     "download": [
+      400,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 145569,
+     "transcribed": [
+      20,
+      0,
+      0
+     ],
+     "download": [
+      20,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 90022,
+     "transcribed": [
+      15162,
+      0,
+      1
+     ],
+     "download": [
+      15162,
+      0,
+      1
+     ]
+    },
+    {
+     "cell": 146728,
+     "transcribed": [
+      460,
+      47,
+      333
+     ],
+     "download": [
+      460,
+      47,
+      333
+     ]
+    },
+    {
+     "cell": 83696,
+     "transcribed": [
+      3268,
+      0,
+      1
+     ],
+     "download": [
+      3268,
+      0,
+      1
+     ]
+    },
+    {
+     "cell": 71024,
+     "transcribed": [
+      861,
+      0,
+      0
+     ],
+     "download": [
+      861,
+      0,
+      0
+     ]
+    },
+    {
+     "cell": 76787,
+     "transcribed": [
+      9994,
+      44,
+      2016
+     ],
+     "download": [
+      9994,
+      44,
+      2016
+     ]
+    }
+   ]
+  }
+ },
+ "cmr": {
+  "queried": 33,
+  "found": 32,
+  "requires_earthdata_login": 32
+ },
+ "cube": {
+  "variables": 34,
+  "bytes": 5221108,
+  "sha256": "045ba75ecedb4060704f58118c10e42bc6cd22ec3c1941e3fe918d35ca6f0bbb"
+ }
+}

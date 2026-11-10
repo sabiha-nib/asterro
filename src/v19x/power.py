@@ -97,6 +97,7 @@ def parse(param, raw=None):
         elif period != rep["period"]:
             raise ValidationError(f"{param}: climatology period differs between responses {period} vs {rep['period']}")
         units = ((j.get("parameters") or {}).get(param) or {}).get("units")
+        rep["longname"] = ((j.get("parameters") or {}).get(param) or {}).get("longname")
         if rep["units"] is None:
             rep["units"] = units
         elif units != rep["units"]:
