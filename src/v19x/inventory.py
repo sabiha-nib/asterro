@@ -19,8 +19,8 @@ from .common import p, VERSION
 
 ORDER = ["DISCOVERED", "ACCESSIBLE", "DOWNLOADED", "VALIDATED", "PROCESSED", "INTEGRATED", "CACHED"]
 STATES = ORDER + ["BLOCKED", "REQUIRES_AUTHENTICATION"]
-NASA_WORDS = ("nasa", "gsfc", "langley", "jpl", "ges disc", "lp daac", "nsidc daac", "laads", "gibs", "earthdata", "pds ", "usgs astrogeology",
-              "merra-2", "ceres", "lro ", "diviner", "mola", "mars 2020", "msl ")
+NASA_WORDS = ("nasa", "gsfc", "langley", "jpl", "ges disc", "lp daac", "nsidc daac", "laads", "gibs", "earthdata", "pds ", "pds",
+              "merra-2", "ceres", "lro ", "diviner", "mars 2020", "msl ")
 FULL = ["DISCOVERED", "ACCESSIBLE", "DOWNLOADED", "VALIDATED", "PROCESSED", "INTEGRATED"]
 ROUTE = "Claude desktop built-in browser on the user's computer: fetch() from the provider's own web origin; responses saved byte for byte to Downloads/asterro_data and copied into the build"
 

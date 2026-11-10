@@ -164,6 +164,8 @@ def main():
         src["sites_" + k] = {"dataset": k + "_sites", "agency": "Macrostrat, University of Wisconsin-Madison (not NASA)" if k == "macrostrat" else "GBIF Secretariat (not NASA)",
                              "product": "geologic_units/map at 101 cell centres" if k == "macrostrat" else "occurrence search counts in 101 cells", "raw_sha256": common.sha256_file(f)}
     open(os.path.join(OUT, "sites.json"), "w").write(json.dumps({"schema": "asterro.v19x.sites/1", **S}, ensure_ascii=False, separators=(",", ":")))
+    man["sources"] = src                      # the site sources are added after the cube was written: record them in its manifest too
+    open(os.path.join(OUT, "cube.json"), "w").write(json.dumps(man, ensure_ascii=False, indent=1))
     # ---------------------------------------------------------------- CMR discovery
     R = cmr.records(); rep["cmr"] = {"queried": len(R), "found": sum(r["found"] for r in R), "requires_earthdata_login": sum(bool(r.get("requires_earthdata_login")) for r in R)}
     open(os.path.join(OUT, "cmr.json"), "w").write(json.dumps({"schema": "asterro.v19x.cmr/1", "records": R}, ensure_ascii=False, separators=(",", ":")))

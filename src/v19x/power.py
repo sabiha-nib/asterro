@@ -35,7 +35,7 @@ PARAMS = {
     "GWETROOT": ("1", 0, 1.0001, "root-zone soil wetness"),
     "SNODP": ("cm", 0, 5000, "snow depth"),
     "FRSNO": ("1", 0, 1.0001, "fraction of land covered by snow"),
-    "ALLSKY_SRF_ALB": ("1", 0, 1.0001, "all-sky surface albedo"),
+    "ALLSKY_SRF_ALB": ("dimensionless", 0, 1.0001, "all-sky surface albedo"),
     "ALLSKY_SFC_SW_DWN": ("kW-hr/m^2/day", 0, 15, "all-sky surface shortwave downward irradiance"),
 }
 FILL = -999.0
@@ -69,13 +69,21 @@ def _grid_of_response(features):
 def parse(param, raw=None):
     """Return (values[NLAT*NLON, 13] float64 with NaN for missing, report dict)."""
     d = raw if raw is not None else load_raw(f"power/asterro_power_{param}.json.gz")
+    if raw is None:   # a later gap-fill pass for boxes the first pass could not get (HTTP 429): same URLs, successes replace failures
+        import os
+        from .common import RAW
+        fill = os.path.join(RAW, "power", f"asterro_power_{param}_fill.json.gz")
+        if os.path.exists(fill):
+            fd = load_raw(f"power/asterro_power_{param}_fill.json.gz")
+            got = {r["url"]: r for r in fd["responses"] if r and r.get("status") == 200}
+            d = dict(d, responses=[got.get(r["url"], r) if r and r.get("status") != 200 else r for r in d["responses"]], gap_filled=len(got))
     if d.get("parameter") != param:
         raise ValidationError(f"{param}: file holds parameter {d.get('parameter')}")
     grid = None                                   # "native" (0.5 x 0.625, the ASTERRO grid) or "1deg"
     vals = np.full((NLAT * NLON, 13), np.nan)
     seen = np.zeros(NLAT * NLON, bool)
     v1 = np.full((180 * 360, 13), np.nan); s1 = np.zeros(180 * 360, bool)
-    rep = {"parameter": param, "requests": len(d["responses"]), "ok": 0, "failed": [], "points": 0,
+    rep = {"parameter": param, "requests": len(d["responses"]), "gap_filled": d.get("gap_filled", 0), "ok": 0, "failed": [], "points": 0,
            "overlap_points": 0, "overlap_conflicts": 0, "fill_values": 0, "units": None, "period": None,
            "api_version": None, "sources": None, "first_utc": None, "last_utc": None}
     utcs = []
