@@ -52,7 +52,8 @@ try:
         check(h["orig"], "every original landing button is still on the page")
         anim = pg.evaluate("getComputedStyle(document.querySelector('.ds-act')).animationName")
         check(anim == "none", f"reduced motion: no animation on the new cards ({anim})")
-        tabs = pg.evaluate("[...document.querySelectorAll('nav.tabs button[data-tab]')].sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left).map(b => b.dataset.tab)")
+        # V20: the opening screen hides the tab bar until the person starts; the order is measured where the bar is shown
+        tabs = pg.evaluate("(() => { const a = document.querySelector('#app'); a.classList.remove('is-hero'); const t = [...document.querySelectorAll('nav.tabs button[data-tab]')].sort((a, b) => Math.round(a.getBoundingClientRect().top / 12) - Math.round(b.getBoundingClientRect().top / 12) || a.getBoundingClientRect().left - b.getBoundingClientRect().left).map(b => b.dataset.tab); a.classList.add('is-hero'); return t; })()")
         check(tabs == ["explore", "discover", "atlas", "local", "compare", "scenarios", "trajectory", "method", "data", "lab"], f"navigation grouped Explore · Discover · Compare · Learn · My research ({tabs})")
         # ---- explore through the first way in
         pg.click("[data-dsact=explore]"); pg.wait_for_function("S.searched", timeout=60000); time.sleep(0.6)

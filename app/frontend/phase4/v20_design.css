@@ -1,0 +1,128 @@
+/* ===== ASTERRO V20 design layer =====
+ * Loaded last (sorted after q1_design.css). It changes tokens, type and a few surfaces only; every element, id and
+ * behaviour of the earlier layers stays. Palette: deep navy foundation (#0B1D3A, #102552, #1E3A8A), refined blue for
+ * the active state (#3B82D8), sky (#93C5FD), pale blue for selected surfaces (#DBEAFE), near-white reading surfaces
+ * (#F8FAFC), slate text (#334155, #64748B), coral (#FD6E6E) only for warnings. Type: Helvetica (Helvetica Neue and
+ * Arial as metric-compatible fallbacks) for everything, Playfair Display only for the highlighted hero word.
+ * Glass: only on surfaces that float over the globe or over the page ([data-glass]); reading panels are opaque.
+ * No shadows, gradients, transitions or animations (the global rule in q1_design.css still applies). */
+:root{
+  --v20-navy:#0B1D3A; --v20-navy-2:#102552; --v20-navy-3:#1E3A8A; --v20-blue:#3B82D8; --v20-sky:#93C5FD;
+  --v20-pale:#DBEAFE; --v20-paper:#F8FAFC; --v20-slate:#334155; --v20-slate-2:#64748B; --v20-coral:#FD6E6E;
+  --v20-serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --ds-font:Helvetica,"Helvetica Neue",Arial,"Liberation Sans",sans-serif;
+  --ds-display:Helvetica,"Helvetica Neue",Arial,"Liberation Sans",sans-serif;
+  --ground:#0B1D3A; --panel:#F8FAFC; --panel-2:#EEF2F7; --raise:#E2E8F0; --line:#DCE3EC; --line-2:#C3CEDB;
+  --ink:#0B1D3A; --ink-2:#334155; --ink-3:#526175;
+  --moon:#1E3A8A; --earth:#1F6466;
+  --ds-focus:#3B82D8; --ds-sel:#DBEAFE; --ds-on-accent:#F8FAFC;
+}
+/* chrome over imagery: navy family */
+header.bar,.console,.viewport,.hero,#jn,.jl-toast,#ds-legal-dlg,#v20-nav,#v20-set{
+  --panel:#102552; --panel-2:#13306A; --raise:#1E3A8A; --line:#1F3B70; --line-2:#2D4F8C;
+  --ink:#F8FAFC; --ink-2:#CBD5E1; --ink-3:#A3B3C9;
+  --moon:#93C5FD; --ds-focus:#93C5FD; --ds-sel:#1E3A8A; --ds-on-accent:#0B1D3A; color:var(--ink)}
+#app[data-target="moon_south_pole"] :is(header.bar,.console,.viewport,.hero){--accent:var(--moon)}
+#ds-legal-dlg .ds-legal-box{--panel:#F8FAFC;--panel-2:#EEF2F7;--line:#DCE3EC;--line-2:#C3CEDB;--ink:#0B1D3A;--ink-2:#334155;--ink-3:#526175;color:var(--ink)}
+html,body{background:var(--v20-navy)}
+.viewport{background:var(--v20-navy)}
+header.bar{background:var(--v20-navy);border-bottom:1px solid #1F3B70}
+
+/* active and selected states: refined blue on navy, pale blue on reading surfaces */
+.tabs button{border-bottom:2px solid transparent!important}
+.tabs button[aria-selected="true"]{background:transparent;color:#F8FAFC;box-shadow:none;border-bottom-color:var(--v20-blue)!important;border-radius:0!important}
+.btn-primary,.btn-search{background:var(--v20-sky);border:1px solid var(--v20-sky);color:var(--v20-navy)}
+#left .btn-primary,#right .btn-primary,.ds-legal-box .btn-primary{background:var(--v20-navy-3);border-color:var(--v20-navy-3);color:var(--v20-paper)}
+:is(#left,#right,.ds-legal-box,.v20-sheet) :is([aria-pressed="true"],[aria-selected="true"],[aria-checked="true"],[aria-current="true"]):not(.site){background:var(--v20-pale)!important;color:var(--v20-navy)!important;border-color:var(--v20-blue)!important}
+.site[aria-current="true"]{background:var(--v20-pale)}
+:focus-visible{outline:2px solid var(--ds-focus)!important;outline-offset:2px}
+
+/* glass: only on floating surfaces */
+[data-glass]{background:rgba(16,37,82,.66)!important;-webkit-backdrop-filter:blur(14px) saturate(1.1)!important;backdrop-filter:blur(14px) saturate(1.1)!important;border:1px solid rgba(147,197,253,.22)!important}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){[data-glass]{background:rgba(16,37,82,.94)!important}}
+html.v20-contrast [data-glass]{background:#102552!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+
+/* hero: immersive first viewport, two-word title, no tab bar until the person starts */
+.hero{background:rgba(11,29,58,.70)}
+.hero h1.v20-title{font:400 clamp(44px,6.2vw,92px)/1.02 var(--ds-display);max-width:none;color:var(--v20-paper);margin:0 0 6px}
+html:not([lang="en"]) .hero h1.v20-title{font-size:clamp(40px,5.6vw,84px)}
+.v20-serif{font-family:var(--v20-serif);font-style:italic;font-weight:500;color:var(--v20-sky)}
+.hero .ds-lede{font:400 clamp(17px,1.5vw,21px)/1.45 var(--ds-font);color:#CBD5E1;max-width:44ch}
+#app.is-hero header.bar nav.tabs,#app.is-hero header.bar .target-ctl{display:none!important}
+#app.is-hero header.bar{border-bottom-color:transparent}
+
+/* header utilities: menu and settings */
+.v20-util{display:flex;gap:6px;align-items:center;flex:none}
+.v20-util button{font:500 13.5px/1 var(--ds-font);color:#F8FAFC;padding:9px 12px;border-radius:6px!important;cursor:pointer}
+.v20-util button svg{width:16px;height:16px;vertical-align:-3px;margin-right:6px;stroke:currentColor;fill:none;stroke-width:1.6}
+.brand{cursor:pointer}
+header.bar .brand-txt{width:auto;max-width:200px}
+header.bar.nav-row .brand-txt span{white-space:normal}
+.v20-util{margin-left:8px}
+.brand:focus-visible{outline:2px solid var(--v20-sky)!important}
+
+/* navigation and settings sheets (accessible dialogs) */
+#v20-nav,#v20-set{position:fixed;inset:0;z-index:60;display:flex;justify-content:flex-start;align-items:stretch;background:rgba(11,29,58,.55)}
+#v20-set{justify-content:flex-end}
+#v20-nav[hidden],#v20-set[hidden]{display:none}
+.v20-sheet{width:min(720px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;padding:20px clamp(16px,3vw,32px) 32px;color:#F8FAFC}
+#v20-set .v20-sheet{width:min(520px,100%)}
+.v20-sheet-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.v20-sheet-h h2{font:400 26px/1.15 var(--ds-display);margin:0;color:#F8FAFC}
+.v20-close{font:500 14px/1 var(--ds-font);color:#F8FAFC;background:transparent;border:1px solid #2D4F8C;padding:9px 14px;border-radius:6px!important;cursor:pointer}
+.v20-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 28px}
+.v20-group{min-width:0}
+.v20-group h3{font:600 12.5px/1.3 var(--ds-font);color:var(--v20-sky);margin:14px 0 6px;padding-bottom:6px;border-bottom:1px solid #2D4F8C}
+.v20-group ul{list-style:none;margin:0;padding:0}
+.v20-go{display:block;width:100%;text-align:left;background:transparent;border:0;border-radius:6px!important;color:#F8FAFC;padding:8px 10px;cursor:pointer}
+.v20-go b{display:block;font:500 15px/1.3 var(--ds-font)}
+.v20-go span{display:block;font:400 12.5px/1.4 var(--ds-font);color:#CBD5E1;margin-top:2px}
+.v20-go[aria-current="page"]{background:rgba(59,130,216,.22);outline:1px solid var(--v20-blue)}
+.v20-go:active{background:rgba(59,130,216,.18)}
+.v20-note{font:400 12.5px/1.5 var(--ds-font);color:#CBD5E1;margin:18px 0 0}
+.v20-set-sec{border-top:1px solid #2D4F8C;padding:14px 0}
+.v20-set-sec h3{font:600 14px/1.3 var(--ds-font);margin:0 0 8px;color:#F8FAFC}
+.v20-set-sec p{font:400 13.5px/1.5 var(--ds-font);color:#CBD5E1;margin:0 0 8px}
+.v20-row{display:flex;flex-wrap:wrap;gap:6px}
+.v20-row button,.v20-link{font:500 13.5px/1.2 var(--ds-font);color:#F8FAFC;background:transparent;border:1px solid #2D4F8C;border-radius:6px!important;padding:8px 12px;cursor:pointer}
+.v20-row button[aria-pressed="true"]{background:var(--v20-navy-3);border-color:var(--v20-sky)}
+.v20-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font:400 13px/1.45 var(--ds-font);color:#CBD5E1;margin:0 0 8px}
+.v20-kv dt{color:#A3B3C9}
+.v20-kv dd{margin:0;color:#F8FAFC;overflow-wrap:anywhere}
+.v20-msg{font:500 13px/1.4 var(--ds-font);color:var(--v20-sky);margin:8px 0 0}
+.v20-msg.bad{color:var(--v20-coral)}
+body.v20-lock{overflow:hidden}
+
+/* Local Impact: USGS MRDS mineral-occurrence context */
+.v20-mrds .v20-kv{color:var(--ink-2)}
+.v20-mrds .v20-kv dt{color:var(--ink-3)}
+.v20-mrds .v20-kv dd{color:var(--ink)}
+
+/* accessibility preferences (Settings) */
+html.v20-large body{font-size:16.5px}
+html.v20-large #left,html.v20-large #right{font-size:110%}
+html.v20-contrast{--ink-2:#0B1D3A;--ink-3:#334155;--line:#94A3B8;--line-2:#64748B}
+html.v20-contrast :is(header.bar,.console,.viewport,.hero,#jn,#v20-nav,#v20-set){--ink-2:#F8FAFC;--ink-3:#E2E8F0;--line:#93C5FD}
+
+@media (max-width:760px){
+  .v20-groups{grid-template-columns:minmax(0,1fr)}
+  .v20-sheet{width:100%}
+  .v20-util button .v20-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .v20-util button svg{margin-right:0}
+  .v20-util button{padding:9px 10px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Home after a search: the opening screen takes the whole stage again, whatever panel state the views left */
+#app.is-hero .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+#app.is-hero .ds-paneltog,#app.is-hero .ds-cfg{display:none!important}
+@media (max-width:1180px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr) 0!important}}
+@media (max-width:760px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:100vh!important}}
+select,input,textarea{font-family:var(--f-body)}
+/* touch targets: at least 40 px on every V20 control */
+.v20-close,.v20-row button,.v20-link,.v20-util button{min-height:40px}
+.v20-go{min-height:44px}
+/* short screens (phones in landscape): the opening screen scrolls from its top instead of centring past the top edge */
+.hero{overflow-y:auto}
+@media (max-height:640px){.hero{justify-content:flex-start;padding-top:20px}}
+.v20-mrds{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}

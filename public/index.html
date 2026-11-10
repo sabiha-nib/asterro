@@ -1518,6 +1518,135 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
 .v9x-inv details{margin:6px 0}
 .v9x-inv summary,.v9x-inv summary b,.v9x-inv summary .i18n-keep{overflow-wrap:anywhere;white-space:normal;min-width:0}
 @media (max-width:560px){.v9x-dl{grid-template-columns:1fr}.v9x-dl dt{margin-top:4px}}
+
+/* ===== ASTERRO V20 design layer =====
+ * Loaded last (sorted after q1_design.css). It changes tokens, type and a few surfaces only; every element, id and
+ * behaviour of the earlier layers stays. Palette: deep navy foundation (#0B1D3A, #102552, #1E3A8A), refined blue for
+ * the active state (#3B82D8), sky (#93C5FD), pale blue for selected surfaces (#DBEAFE), near-white reading surfaces
+ * (#F8FAFC), slate text (#334155, #64748B), coral (#FD6E6E) only for warnings. Type: Helvetica (Helvetica Neue and
+ * Arial as metric-compatible fallbacks) for everything, Playfair Display only for the highlighted hero word.
+ * Glass: only on surfaces that float over the globe or over the page ([data-glass]); reading panels are opaque.
+ * No shadows, gradients, transitions or animations (the global rule in q1_design.css still applies). */
+:root{
+  --v20-navy:#0B1D3A; --v20-navy-2:#102552; --v20-navy-3:#1E3A8A; --v20-blue:#3B82D8; --v20-sky:#93C5FD;
+  --v20-pale:#DBEAFE; --v20-paper:#F8FAFC; --v20-slate:#334155; --v20-slate-2:#64748B; --v20-coral:#FD6E6E;
+  --v20-serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --ds-font:Helvetica,"Helvetica Neue",Arial,"Liberation Sans",sans-serif;
+  --ds-display:Helvetica,"Helvetica Neue",Arial,"Liberation Sans",sans-serif;
+  --ground:#0B1D3A; --panel:#F8FAFC; --panel-2:#EEF2F7; --raise:#E2E8F0; --line:#DCE3EC; --line-2:#C3CEDB;
+  --ink:#0B1D3A; --ink-2:#334155; --ink-3:#526175;
+  --moon:#1E3A8A; --earth:#1F6466;
+  --ds-focus:#3B82D8; --ds-sel:#DBEAFE; --ds-on-accent:#F8FAFC;
+}
+/* chrome over imagery: navy family */
+header.bar,.console,.viewport,.hero,#jn,.jl-toast,#ds-legal-dlg,#v20-nav,#v20-set{
+  --panel:#102552; --panel-2:#13306A; --raise:#1E3A8A; --line:#1F3B70; --line-2:#2D4F8C;
+  --ink:#F8FAFC; --ink-2:#CBD5E1; --ink-3:#A3B3C9;
+  --moon:#93C5FD; --ds-focus:#93C5FD; --ds-sel:#1E3A8A; --ds-on-accent:#0B1D3A; color:var(--ink)}
+#app[data-target="moon_south_pole"] :is(header.bar,.console,.viewport,.hero){--accent:var(--moon)}
+#ds-legal-dlg .ds-legal-box{--panel:#F8FAFC;--panel-2:#EEF2F7;--line:#DCE3EC;--line-2:#C3CEDB;--ink:#0B1D3A;--ink-2:#334155;--ink-3:#526175;color:var(--ink)}
+html,body{background:var(--v20-navy)}
+.viewport{background:var(--v20-navy)}
+header.bar{background:var(--v20-navy);border-bottom:1px solid #1F3B70}
+
+/* active and selected states: refined blue on navy, pale blue on reading surfaces */
+.tabs button{border-bottom:2px solid transparent!important}
+.tabs button[aria-selected="true"]{background:transparent;color:#F8FAFC;box-shadow:none;border-bottom-color:var(--v20-blue)!important;border-radius:0!important}
+.btn-primary,.btn-search{background:var(--v20-sky);border:1px solid var(--v20-sky);color:var(--v20-navy)}
+#left .btn-primary,#right .btn-primary,.ds-legal-box .btn-primary{background:var(--v20-navy-3);border-color:var(--v20-navy-3);color:var(--v20-paper)}
+:is(#left,#right,.ds-legal-box,.v20-sheet) :is([aria-pressed="true"],[aria-selected="true"],[aria-checked="true"],[aria-current="true"]):not(.site){background:var(--v20-pale)!important;color:var(--v20-navy)!important;border-color:var(--v20-blue)!important}
+.site[aria-current="true"]{background:var(--v20-pale)}
+:focus-visible{outline:2px solid var(--ds-focus)!important;outline-offset:2px}
+
+/* glass: only on floating surfaces */
+[data-glass]{background:rgba(16,37,82,.66)!important;-webkit-backdrop-filter:blur(14px) saturate(1.1)!important;backdrop-filter:blur(14px) saturate(1.1)!important;border:1px solid rgba(147,197,253,.22)!important}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){[data-glass]{background:rgba(16,37,82,.94)!important}}
+html.v20-contrast [data-glass]{background:#102552!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+
+/* hero: immersive first viewport, two-word title, no tab bar until the person starts */
+.hero{background:rgba(11,29,58,.70)}
+.hero h1.v20-title{font:400 clamp(44px,6.2vw,92px)/1.02 var(--ds-display);max-width:none;color:var(--v20-paper);margin:0 0 6px}
+html:not([lang="en"]) .hero h1.v20-title{font-size:clamp(40px,5.6vw,84px)}
+.v20-serif{font-family:var(--v20-serif);font-style:italic;font-weight:500;color:var(--v20-sky)}
+.hero .ds-lede{font:400 clamp(17px,1.5vw,21px)/1.45 var(--ds-font);color:#CBD5E1;max-width:44ch}
+#app.is-hero header.bar nav.tabs,#app.is-hero header.bar .target-ctl{display:none!important}
+#app.is-hero header.bar{border-bottom-color:transparent}
+
+/* header utilities: menu and settings */
+.v20-util{display:flex;gap:6px;align-items:center;flex:none}
+.v20-util button{font:500 13.5px/1 var(--ds-font);color:#F8FAFC;padding:9px 12px;border-radius:6px!important;cursor:pointer}
+.v20-util button svg{width:16px;height:16px;vertical-align:-3px;margin-right:6px;stroke:currentColor;fill:none;stroke-width:1.6}
+.brand{cursor:pointer}
+header.bar .brand-txt{width:auto;max-width:200px}
+header.bar.nav-row .brand-txt span{white-space:normal}
+.v20-util{margin-left:8px}
+.brand:focus-visible{outline:2px solid var(--v20-sky)!important}
+
+/* navigation and settings sheets (accessible dialogs) */
+#v20-nav,#v20-set{position:fixed;inset:0;z-index:60;display:flex;justify-content:flex-start;align-items:stretch;background:rgba(11,29,58,.55)}
+#v20-set{justify-content:flex-end}
+#v20-nav[hidden],#v20-set[hidden]{display:none}
+.v20-sheet{width:min(720px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;padding:20px clamp(16px,3vw,32px) 32px;color:#F8FAFC}
+#v20-set .v20-sheet{width:min(520px,100%)}
+.v20-sheet-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.v20-sheet-h h2{font:400 26px/1.15 var(--ds-display);margin:0;color:#F8FAFC}
+.v20-close{font:500 14px/1 var(--ds-font);color:#F8FAFC;background:transparent;border:1px solid #2D4F8C;padding:9px 14px;border-radius:6px!important;cursor:pointer}
+.v20-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 28px}
+.v20-group{min-width:0}
+.v20-group h3{font:600 12.5px/1.3 var(--ds-font);color:var(--v20-sky);margin:14px 0 6px;padding-bottom:6px;border-bottom:1px solid #2D4F8C}
+.v20-group ul{list-style:none;margin:0;padding:0}
+.v20-go{display:block;width:100%;text-align:left;background:transparent;border:0;border-radius:6px!important;color:#F8FAFC;padding:8px 10px;cursor:pointer}
+.v20-go b{display:block;font:500 15px/1.3 var(--ds-font)}
+.v20-go span{display:block;font:400 12.5px/1.4 var(--ds-font);color:#CBD5E1;margin-top:2px}
+.v20-go[aria-current="page"]{background:rgba(59,130,216,.22);outline:1px solid var(--v20-blue)}
+.v20-go:active{background:rgba(59,130,216,.18)}
+.v20-note{font:400 12.5px/1.5 var(--ds-font);color:#CBD5E1;margin:18px 0 0}
+.v20-set-sec{border-top:1px solid #2D4F8C;padding:14px 0}
+.v20-set-sec h3{font:600 14px/1.3 var(--ds-font);margin:0 0 8px;color:#F8FAFC}
+.v20-set-sec p{font:400 13.5px/1.5 var(--ds-font);color:#CBD5E1;margin:0 0 8px}
+.v20-row{display:flex;flex-wrap:wrap;gap:6px}
+.v20-row button,.v20-link{font:500 13.5px/1.2 var(--ds-font);color:#F8FAFC;background:transparent;border:1px solid #2D4F8C;border-radius:6px!important;padding:8px 12px;cursor:pointer}
+.v20-row button[aria-pressed="true"]{background:var(--v20-navy-3);border-color:var(--v20-sky)}
+.v20-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font:400 13px/1.45 var(--ds-font);color:#CBD5E1;margin:0 0 8px}
+.v20-kv dt{color:#A3B3C9}
+.v20-kv dd{margin:0;color:#F8FAFC;overflow-wrap:anywhere}
+.v20-msg{font:500 13px/1.4 var(--ds-font);color:var(--v20-sky);margin:8px 0 0}
+.v20-msg.bad{color:var(--v20-coral)}
+body.v20-lock{overflow:hidden}
+
+/* Local Impact: USGS MRDS mineral-occurrence context */
+.v20-mrds .v20-kv{color:var(--ink-2)}
+.v20-mrds .v20-kv dt{color:var(--ink-3)}
+.v20-mrds .v20-kv dd{color:var(--ink)}
+
+/* accessibility preferences (Settings) */
+html.v20-large body{font-size:16.5px}
+html.v20-large #left,html.v20-large #right{font-size:110%}
+html.v20-contrast{--ink-2:#0B1D3A;--ink-3:#334155;--line:#94A3B8;--line-2:#64748B}
+html.v20-contrast :is(header.bar,.console,.viewport,.hero,#jn,#v20-nav,#v20-set){--ink-2:#F8FAFC;--ink-3:#E2E8F0;--line:#93C5FD}
+
+@media (max-width:760px){
+  .v20-groups{grid-template-columns:minmax(0,1fr)}
+  .v20-sheet{width:100%}
+  .v20-util button .v20-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .v20-util button svg{margin-right:0}
+  .v20-util button{padding:9px 10px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Home after a search: the opening screen takes the whole stage again, whatever panel state the views left */
+#app.is-hero .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+#app.is-hero .ds-paneltog,#app.is-hero .ds-cfg{display:none!important}
+@media (max-width:1180px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr) 0!important}}
+@media (max-width:760px){#app.is-hero .stage{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:100vh!important}}
+select,input,textarea{font-family:var(--f-body)}
+/* touch targets: at least 40 px on every V20 control */
+.v20-close,.v20-row button,.v20-link,.v20-util button{min-height:40px}
+.v20-go{min-height:44px}
+/* short screens (phones in landscape): the opening screen scrolls from its top instead of centring past the top edge */
+.hero{overflow-y:auto}
+@media (max-height:640px){.hero{justify-content:flex-start;padding-top:20px}}
+.v20-mrds{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -30311,6 +30440,701 @@ i18nExtend("de", {
  "v19x.saved.none": "Analysen werden hier gespeichert, wenn Sie in Lokale Wirkung einen Ort analysieren."
 });
 
+/* ASTERRO V20 interface, en catalogue. Machine-assisted translations in 9y1-9y4; not reviewed by native speakers. */
+i18nExtend("en", {
+ "v20.hero.a": "Planetary",
+ "v20.hero.b": "Intelligence",
+ "v20.home": "ASTERRO home",
+ "v20.menu": "Menu",
+ "v20.settings": "Settings",
+ "v20.close": "Close",
+ "v20.nav.title": "Navigate",
+ "v20.nav.aria": "Main navigation",
+ "v20.nav.note": "Every destination opens an existing view. Views that need results start the search first.",
+ "v20.g.discover": "Discover",
+ "v20.g.analyze": "Analyze",
+ "v20.g.plan": "Plan",
+ "v20.g.evidence": "Evidence",
+ "v20.g.trust": "Data and Trust",
+ "v20.d.home": "Home",
+ "v20.d.home_d": "The opening screen with the globe",
+ "v20.d.globe": "Globe",
+ "v20.d.globe_d": "The similarity field on the 3D globe, with the ranked sites",
+ "v20.d.discovery": "Global Discovery",
+ "v20.d.discovery_d": "Constellations, extremes, processes, science domains and patterns",
+ "v20.d.targets": "Target Explorer",
+ "v20.d.targets_d": "The catalogue of Moon and Mars targets and their readiness",
+ "v20.d.atlas": "Atlas",
+ "v20.d.atlas_d": "The planetary atlas with candidates for each target",
+ "v20.d.lab": "Research Lab",
+ "v20.d.lab_d": "The guided workflow and the fourteen research modules",
+ "v20.d.local": "Local Impact",
+ "v20.d.local_d": "Analyse a place you choose, with privacy controls",
+ "v20.d.compare": "Compare",
+ "v20.d.compare_d": "Compare the Moon and Mars targets side by side",
+ "v20.d.lens": "Difference Lens",
+ "v20.d.lens_d": "Similar, partly similar, different and unknown, dimension by dimension",
+ "v20.d.character": "Candidate Characterization",
+ "v20.d.character_d": "Every science domain and data layer for the selected site",
+ "v20.d.robust": "Robustness Lab",
+ "v20.d.robust_d": "How stable a ranking is when the weights change",
+ "v20.d.portfolio": "Portfolio",
+ "v20.d.portfolio_d": "A team of places that covers more of a target together",
+ "v20.d.trajectory": "Trajectory",
+ "v20.d.trajectory_d": "How the analogue field changes through the years",
+ "v20.d.profiles": "Mission and Operations Profiles",
+ "v20.d.profiles_d": "Rover, EVA, thermal, habitat and instrument objectives",
+ "v20.d.scenarios": "Scenarios",
+ "v20.d.scenarios_d": "Weighting scenarios and what they change",
+ "v20.d.passport": "Passport",
+ "v20.d.passport_d": "A shareable record of one analogue",
+ "v20.d.trace": "Trace",
+ "v20.d.trace_d": "Every input and step behind the selected score",
+ "v20.d.reproduce": "Reproduce",
+ "v20.d.reproduce_d": "The configuration and checksums to reproduce a result",
+ "v20.d.reports": "Reports",
+ "v20.d.reports_d": "Download a written report from the Research Lab",
+ "v20.d.journal": "Journal",
+ "v20.d.journal_d": "Your saved findings, kept in this browser",
+ "v20.d.catalogue": "Catalogue",
+ "v20.d.catalogue_d": "Every dataset with its state, provider and attribution",
+ "v20.d.sources": "Sources",
+ "v20.d.sources_d": "The data registry with versions, checksums and access routes",
+ "v20.d.gaps": "Data Gaps",
+ "v20.d.gaps_d": "Datasets that could not be obtained, and why",
+ "v20.d.trustc": "Trust Centre",
+ "v20.d.trustc_d": "What a result can and cannot tell you",
+ "v20.d.method": "Methodology",
+ "v20.d.method_d": "The six dimensions, thresholds and the 300 km rule",
+ "v20.set.title": "Settings",
+ "v20.set.legal": "Legal",
+ "v20.set.terms": "Terms of Service",
+ "v20.set.privacy": "Privacy Policy",
+ "v20.set.disclaimer": "Scientific Disclaimer",
+ "v20.set.lang": "Language",
+ "v20.set.lang_note": "Translations are machine-assisted and have not been reviewed by native speakers.",
+ "v20.set.access": "Accessibility",
+ "v20.set.motion": "Globe rotation",
+ "v20.set.motion_on": "Rotate",
+ "v20.set.motion_off": "Keep still",
+ "v20.set.text": "Text size",
+ "v20.set.text_std": "Standard",
+ "v20.set.text_lg": "Larger",
+ "v20.set.access_note": "Every control works by touch, mouse and keyboard; nothing depends on hovering. Your system's reduced-motion setting is respected.",
+ "v20.set.appear": "Appearance",
+ "v20.set.mode": "Detail",
+ "v20.set.contrast": "Contrast",
+ "v20.set.contrast_std": "Standard",
+ "v20.set.contrast_hi": "High",
+ "v20.set.data": "Data and offline",
+ "v20.set.d_src": "Data copy",
+ "v20.set.d_src_server": "loaded from the ASTERRO server",
+ "v20.set.d_src_offline_store": "stored in this browser",
+ "v20.set.d_src_none": "not loaded yet",
+ "v20.set.d_hash": "Cube checksum",
+ "v20.set.d_stored": "Stored on",
+ "v20.set.d_queried": "Providers queried",
+ "v20.set.d_net": "Network",
+ "v20.set.d_online": "online",
+ "v20.set.d_offline": "offline",
+ "v20.set.d_sw": "Offline app",
+ "v20.set.d_sw_on": "installed in this browser",
+ "v20.set.d_sw_off": "not installed (open the app once online)",
+ "v20.set.d_verify": "Verify stored data",
+ "v20.set.d_refresh": "Check for updated data",
+ "v20.set.d_load": "Load the data layers",
+ "v20.set.d_note": "Stored data are climatologies and catalogues with the date they were queried. They are never live.",
+ "v20.set.loc": "Location privacy",
+ "v20.set.loc_p": "ASTERRO asks for your device position only when you press the location button in Local Impact. The position is used in this browser to find the nearest grid cell and is never sent to a server.",
+ "v20.set.loc_saved": "Saved places in this browser: {n}",
+ "v20.set.loc_forget": "Forget saved places",
+ "v20.set.loc_done": "Saved places deleted from this browser.",
+ "v20.set.about": "About",
+ "v20.set.about_p": "ASTERRO finds measurable environmental analogues on Earth for places on the Moon and Mars. It does not certify any site, and NASA does not endorse it.",
+ "v20.set.v_ui": "Interface",
+ "v20.set.v_engine": "Similarity engine",
+ "v20.set.v_data": "Data layers",
+ "v20.set.v_cache": "Offline cache",
+ "v20.set.v_none": "not available",
+ "v20.dis.title": "Scientific Disclaimer",
+ "v20.dis.s1.h": "What a score means",
+ "v20.dis.s2.h": "Where the values come from",
+ "v20.dis.s2.p": "Every value names its dataset, provider, resolution and period. Reanalysis values are model output constrained by observations. Values decoded from imagery are binned, and some are lower bounds; they are labelled as such. Site queries cover a sample of places, not the whole planet.",
+ "v20.dis.s3.h": "What ASTERRO does not do",
+ "v20.dis.s3.p": "ASTERRO does not certify sites, rate hazards, estimate resources, or give engineering, safety, mining or investment advice. NASA does not endorse ASTERRO. Mineral-occurrence records show where sites were reported, not what the ground contains.",
+ "v20.dis.s4.h": "Reproducibility",
+ "v20.dis.s4.p": "The same inputs give the same result. Each result records the data checksums and configuration needed to reproduce it.",
+ "v20.mrds.h": "Mineral occurrences nearby",
+ "v20.mrds.src": "USGS Mineral Resources Data System (MRDS)",
+ "v20.mrds.not_nasa": "not NASA",
+ "v20.mrds.n": "Records within {r} km",
+ "v20.mrds.prod": "Producers or past producers",
+ "v20.mrds.near": "Nearest record",
+ "v20.mrds.near_v": "{name}, {com} ({stat}, {country}), {d} km",
+ "v20.mrds.top": "Most frequent primary commodities",
+ "v20.mrds.none": "No MRDS record within {r} km of this cell. This means no record, not no minerals.",
+ "v20.mrds.loading": "Loading the mineral-occurrence catalogue.",
+ "v20.mrds.error": "The mineral-occurrence catalogue could not be loaded. The rest of the analysis is unaffected.",
+ "v20.mrds.lim": "A catalogue of reported sites, not a composition map or a resource estimate. About {pct}% of the records are in the United States, so counts reflect how much was reported as well as geology. Not exploration or investment advice.",
+ "v20.mrds.meta": "File dated {date}, no further updates planned by USGS; queried {q}; SHA-256 {sha}."
+});
+
+/* ASTERRO V20 interface, bn catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("bn", {
+ "v20.hero.a": "গ্রহীয়",
+ "v20.hero.b": "বুদ্ধিমত্তা",
+ "v20.home": "ASTERRO প্রথম পাতা",
+ "v20.menu": "মেনু",
+ "v20.settings": "সেটিংস",
+ "v20.close": "বন্ধ করুন",
+ "v20.nav.title": "পথনির্দেশ",
+ "v20.nav.aria": "প্রধান পথনির্দেশ",
+ "v20.nav.note": "প্রতিটি গন্তব্য একটি বিদ্যমান দৃশ্য খোলে। যেসব দৃশ্যে ফলাফল লাগে, সেগুলো আগে অনুসন্ধান শুরু করে।",
+ "v20.g.discover": "আবিষ্কার",
+ "v20.g.analyze": "বিশ্লেষণ",
+ "v20.g.plan": "পরিকল্পনা",
+ "v20.g.evidence": "প্রমাণ",
+ "v20.g.trust": "ডেটা ও আস্থা",
+ "v20.d.home": "প্রথম পাতা",
+ "v20.d.home_d": "গ্লোবসহ শুরুর পর্দা",
+ "v20.d.globe": "গ্লোব",
+ "v20.d.globe_d": "ত্রিমাত্রিক গ্লোবে সাদৃশ্যের ক্ষেত্র, ক্রমানুসারে সাজানো স্থানসহ",
+ "v20.d.discovery": "বৈশ্বিক আবিষ্কার",
+ "v20.d.discovery_d": "নক্ষত্রপুঞ্জ, চরম অবস্থা, প্রক্রিয়া, বিজ্ঞানের ক্ষেত্র ও ধরন",
+ "v20.d.targets": "লক্ষ্য অনুসন্ধানী",
+ "v20.d.targets_d": "চাঁদ ও মঙ্গলের লক্ষ্যগুলোর তালিকা ও তাদের প্রস্তুতির মাত্রা",
+ "v20.d.atlas": "অ্যাটলাস",
+ "v20.d.atlas_d": "প্রতিটি লক্ষ্যের জন্য প্রার্থীসহ গ্রহীয় অ্যাটলাস",
+ "v20.d.lab": "গবেষণাগার",
+ "v20.d.lab_d": "নির্দেশিত কর্মধারা ও চৌদ্দটি গবেষণা মডিউল",
+ "v20.d.local": "স্থানীয় প্রভাব",
+ "v20.d.local_d": "আপনার বেছে নেওয়া একটি স্থান বিশ্লেষণ করুন, গোপনীয়তার নিয়ন্ত্রণসহ",
+ "v20.d.compare": "তুলনা",
+ "v20.d.compare_d": "চাঁদ ও মঙ্গলের লক্ষ্য পাশাপাশি তুলনা করুন",
+ "v20.d.lens": "পার্থক্যের লেন্স",
+ "v20.d.lens_d": "মাত্রা ধরে ধরে সদৃশ, আংশিক সদৃশ, ভিন্ন ও অজানা",
+ "v20.d.character": "প্রার্থীর বৈশিষ্ট্য নির্ণয়",
+ "v20.d.character_d": "নির্বাচিত স্থানের প্রতিটি বিজ্ঞানক্ষেত্র ও ডেটা স্তর",
+ "v20.d.robust": "দৃঢ়তা গবেষণাগার",
+ "v20.d.robust_d": "ওজন বদলালে একটি ক্রম কতটা স্থির থাকে",
+ "v20.d.portfolio": "পোর্টফোলিও",
+ "v20.d.portfolio_d": "কয়েকটি স্থানের একটি দল, যা একসঙ্গে একটি লক্ষ্যের বেশি অংশ ধরে",
+ "v20.d.trajectory": "গতিপথ",
+ "v20.d.trajectory_d": "বছরের পর বছর সাদৃশ্যক্ষেত্র কীভাবে বদলায়",
+ "v20.d.profiles": "অভিযান ও কার্যক্রমের প্রোফাইল",
+ "v20.d.profiles_d": "রোভার, মহাকাশচারণা, তাপ, আবাস ও যন্ত্রের লক্ষ্য",
+ "v20.d.scenarios": "পরিস্থিতি",
+ "v20.d.scenarios_d": "ওজনের বিভিন্ন পরিস্থিতি ও সেগুলো কী বদলায়",
+ "v20.d.passport": "পাসপোর্ট",
+ "v20.d.passport_d": "একটি সাদৃশ্যস্থানের ভাগযোগ্য বিবরণ",
+ "v20.d.trace": "অনুসরণ",
+ "v20.d.trace_d": "নির্বাচিত স্কোরের পেছনের প্রতিটি ইনপুট ও ধাপ",
+ "v20.d.reproduce": "পুনরুৎপাদন",
+ "v20.d.reproduce_d": "একটি ফলাফল পুনরুৎপাদনের কনফিগারেশন ও চেকসাম",
+ "v20.d.reports": "প্রতিবেদন",
+ "v20.d.reports_d": "গবেষণাগার থেকে একটি লিখিত প্রতিবেদন ডাউনলোড করুন",
+ "v20.d.journal": "জার্নাল",
+ "v20.d.journal_d": "আপনার সংরক্ষিত পর্যবেক্ষণ, এই ব্রাউজারে রাখা",
+ "v20.d.catalogue": "তালিকা",
+ "v20.d.catalogue_d": "প্রতিটি ডেটাসেট, তার অবস্থা, সরবরাহকারী ও স্বীকৃতিসহ",
+ "v20.d.sources": "উৎস",
+ "v20.d.sources_d": "সংস্করণ, চেকসাম ও প্রবেশপথসহ ডেটা নিবন্ধ",
+ "v20.d.gaps": "ডেটার ঘাটতি",
+ "v20.d.gaps_d": "যেসব ডেটাসেট পাওয়া যায়নি, এবং কেন",
+ "v20.d.trustc": "আস্থা কেন্দ্র",
+ "v20.d.trustc_d": "একটি ফলাফল কী বলতে পারে আর কী পারে না",
+ "v20.d.method": "পদ্ধতি",
+ "v20.d.method_d": "ছয়টি মাত্রা, সীমা মান ও ৩০০ কিমি নিয়ম",
+ "v20.set.title": "সেটিংস",
+ "v20.set.legal": "আইনি তথ্য",
+ "v20.set.terms": "পরিষেবার শর্তাবলি",
+ "v20.set.privacy": "গোপনীয়তা নীতি",
+ "v20.set.disclaimer": "বৈজ্ঞানিক সতর্কবার্তা",
+ "v20.set.lang": "ভাষা",
+ "v20.set.lang_note": "অনুবাদগুলো যন্ত্রের সহায়তায় করা এবং মাতৃভাষীরা যাচাই করেননি।",
+ "v20.set.access": "প্রবেশযোগ্যতা",
+ "v20.set.motion": "গ্লোবের ঘূর্ণন",
+ "v20.set.motion_on": "ঘোরান",
+ "v20.set.motion_off": "স্থির রাখুন",
+ "v20.set.text": "লেখার আকার",
+ "v20.set.text_std": "সাধারণ",
+ "v20.set.text_lg": "বড়",
+ "v20.set.access_note": "প্রতিটি নিয়ন্ত্রণ স্পর্শ, মাউস ও কিবোর্ডে কাজ করে; কিছুই কার্সর রাখার ওপর নির্ভর করে না। আপনার সিস্টেমের কম গতির পছন্দ মানা হয়।",
+ "v20.set.appear": "চেহারা",
+ "v20.set.mode": "বিস্তারিতের মাত্রা",
+ "v20.set.contrast": "বৈপরীত্য",
+ "v20.set.contrast_std": "সাধারণ",
+ "v20.set.contrast_hi": "উচ্চ",
+ "v20.set.data": "ডেটা ও অফলাইন",
+ "v20.set.d_src": "ডেটার কপি",
+ "v20.set.d_src_server": "ASTERRO সার্ভার থেকে লোড করা",
+ "v20.set.d_src_offline_store": "এই ব্রাউজারে সংরক্ষিত",
+ "v20.set.d_src_none": "এখনও লোড হয়নি",
+ "v20.set.d_hash": "কিউবের চেকসাম",
+ "v20.set.d_stored": "সংরক্ষণের তারিখ",
+ "v20.set.d_queried": "সরবরাহকারীদের কাছে অনুসন্ধানের তারিখ",
+ "v20.set.d_net": "নেটওয়ার্ক",
+ "v20.set.d_online": "অনলাইন",
+ "v20.set.d_offline": "অফলাইন",
+ "v20.set.d_sw": "অফলাইন অ্যাপ",
+ "v20.set.d_sw_on": "এই ব্রাউজারে ইনস্টল করা",
+ "v20.set.d_sw_off": "ইনস্টল করা নেই (একবার অনলাইনে অ্যাপটি খুলুন)",
+ "v20.set.d_verify": "সংরক্ষিত ডেটা যাচাই করুন",
+ "v20.set.d_refresh": "হালনাগাদ ডেটা আছে কি না দেখুন",
+ "v20.set.d_load": "ডেটা স্তরগুলো লোড করুন",
+ "v20.set.d_note": "সংরক্ষিত ডেটা হলো জলবায়ু-গড় ও তালিকা, অনুসন্ধানের তারিখসহ। এগুলো কখনও সরাসরি সম্প্রচার নয়।",
+ "v20.set.loc": "অবস্থানের গোপনীয়তা",
+ "v20.set.loc_p": "স্থানীয় প্রভাবে অবস্থানের বোতাম চাপলেই কেবল ASTERRO আপনার ডিভাইসের অবস্থান চায়। অবস্থানটি এই ব্রাউজারে নিকটতম গ্রিড ঘর খুঁজতে ব্যবহার হয় এবং কখনও কোনো সার্ভারে পাঠানো হয় না।",
+ "v20.set.loc_saved": "এই ব্রাউজারে সংরক্ষিত স্থান: {n}",
+ "v20.set.loc_forget": "সংরক্ষিত স্থানগুলো মুছে ফেলুন",
+ "v20.set.loc_done": "সংরক্ষিত স্থানগুলো এই ব্রাউজার থেকে মুছে ফেলা হয়েছে।",
+ "v20.set.about": "পরিচিতি",
+ "v20.set.about_p": "ASTERRO চাঁদ ও মঙ্গলের স্থানগুলোর জন্য পৃথিবীতে পরিমাপযোগ্য পরিবেশগত সাদৃশ্য খুঁজে বের করে। এটি কোনো স্থানকে প্রত্যয়ন করে না, এবং NASA এটি অনুমোদন করে না।",
+ "v20.set.v_ui": "ইন্টারফেস",
+ "v20.set.v_engine": "সাদৃশ্য ইঞ্জিন",
+ "v20.set.v_data": "ডেটা স্তর",
+ "v20.set.v_cache": "অফলাইন ক্যাশ",
+ "v20.set.v_none": "পাওয়া যায়নি",
+ "v20.dis.title": "বৈজ্ঞানিক সতর্কবার্তা",
+ "v20.dis.s1.h": "একটি স্কোরের অর্থ",
+ "v20.dis.s2.h": "মানগুলো কোথা থেকে আসে",
+ "v20.dis.s2.p": "প্রতিটি মান তার ডেটাসেট, সরবরাহকারী, রেজোলিউশন ও সময়কাল জানায়। পুনর্বিশ্লেষণের মান হলো পর্যবেক্ষণ দিয়ে সীমাবদ্ধ মডেলের ফল। ছবি থেকে পাঠোদ্ধার করা মানগুলো শ্রেণিতে ভাগ করা, আর কিছু মান নিম্নসীমা; সেগুলো সেভাবেই চিহ্নিত। স্থানভিত্তিক অনুসন্ধান পুরো গ্রহ নয়, কিছু স্থানের নমুনা জুড়ে।",
+ "v20.dis.s3.h": "ASTERRO যা করে না",
+ "v20.dis.s3.p": "ASTERRO কোনো স্থান প্রত্যয়ন করে না, ঝুঁকি নির্ধারণ করে না, সম্পদ অনুমান করে না, কিংবা প্রকৌশল, নিরাপত্তা, খনি বা বিনিয়োগ বিষয়ে পরামর্শ দেয় না। NASA ASTERRO অনুমোদন করে না। খনিজ উপস্থিতির রেকর্ড দেখায় কোথায় স্থান জানানো হয়েছে, মাটিতে কী আছে তা নয়।",
+ "v20.dis.s4.h": "পুনরুৎপাদনযোগ্যতা",
+ "v20.dis.s4.p": "একই ইনপুট একই ফল দেয়। প্রতিটি ফল পুনরুৎপাদনের জন্য প্রয়োজনীয় ডেটার চেকসাম ও কনফিগারেশন সংরক্ষণ করে।",
+ "v20.mrds.h": "কাছাকাছি খনিজের উপস্থিতি",
+ "v20.mrds.src": "USGS Mineral Resources Data System (MRDS)",
+ "v20.mrds.not_nasa": "NASA-র নয়",
+ "v20.mrds.n": "{r} কিমির মধ্যে রেকর্ড",
+ "v20.mrds.prod": "বর্তমান বা অতীত উৎপাদনকারী",
+ "v20.mrds.near": "নিকটতম রেকর্ড",
+ "v20.mrds.near_v": "{name}, {com} ({stat}, {country}), {d} কিমি",
+ "v20.mrds.top": "সবচেয়ে বেশি দেখা প্রধান পণ্য",
+ "v20.mrds.none": "এই ঘরের {r} কিমির মধ্যে কোনো MRDS রেকর্ড নেই। এর অর্থ রেকর্ড নেই, খনিজ নেই এমন নয়।",
+ "v20.mrds.loading": "খনিজ উপস্থিতির তালিকা লোড হচ্ছে।",
+ "v20.mrds.error": "খনিজ উপস্থিতির তালিকা লোড করা যায়নি। বিশ্লেষণের বাকি অংশ প্রভাবিত হয়নি।",
+ "v20.mrds.lim": "জানানো স্থানের একটি তালিকা, গঠনের মানচিত্র বা সম্পদের অনুমান নয়। প্রায় {pct}% রেকর্ড যুক্তরাষ্ট্রে, তাই সংখ্যাগুলো ভূতত্ত্বের পাশাপাশি কতটা জানানো হয়েছে তাও প্রতিফলিত করে। অনুসন্ধান বা বিনিয়োগের পরামর্শ নয়।",
+ "v20.mrds.meta": "ফাইলের তারিখ {date}, USGS আর হালনাগাদের পরিকল্পনা করেনি; অনুসন্ধানের তারিখ {q}; SHA-256 {sha}।"
+});
+
+/* ASTERRO V20 interface, es catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("es", {
+ "v20.hero.a": "Inteligencia",
+ "v20.hero.b": "planetaria",
+ "v20.home": "Inicio de ASTERRO",
+ "v20.menu": "Menú",
+ "v20.settings": "Ajustes",
+ "v20.close": "Cerrar",
+ "v20.nav.title": "Navegar",
+ "v20.nav.aria": "Navegación principal",
+ "v20.nav.note": "Cada destino abre una vista existente. Las vistas que necesitan resultados inician primero la búsqueda.",
+ "v20.g.discover": "Descubrir",
+ "v20.g.analyze": "Analizar",
+ "v20.g.plan": "Planificar",
+ "v20.g.evidence": "Evidencia",
+ "v20.g.trust": "Datos y confianza",
+ "v20.d.home": "Inicio",
+ "v20.d.home_d": "La pantalla de apertura con el globo",
+ "v20.d.globe": "Globo",
+ "v20.d.globe_d": "El campo de similitud en el globo 3D, con los sitios clasificados",
+ "v20.d.discovery": "Descubrimiento global",
+ "v20.d.discovery_d": "Constelaciones, extremos, procesos, dominios científicos y patrones",
+ "v20.d.targets": "Explorador de objetivos",
+ "v20.d.targets_d": "El catálogo de objetivos de la Luna y Marte y su grado de preparación",
+ "v20.d.atlas": "Atlas",
+ "v20.d.atlas_d": "El atlas planetario con candidatos para cada objetivo",
+ "v20.d.lab": "Laboratorio de investigación",
+ "v20.d.lab_d": "El flujo guiado y los catorce módulos de investigación",
+ "v20.d.local": "Impacto local",
+ "v20.d.local_d": "Analiza un lugar que elijas, con controles de privacidad",
+ "v20.d.compare": "Comparar",
+ "v20.d.compare_d": "Compara los objetivos de la Luna y Marte uno al lado del otro",
+ "v20.d.lens": "Lente de diferencias",
+ "v20.d.lens_d": "Similar, parcialmente similar, diferente y desconocido, dimensión por dimensión",
+ "v20.d.character": "Caracterización del candidato",
+ "v20.d.character_d": "Cada dominio científico y capa de datos del sitio seleccionado",
+ "v20.d.robust": "Laboratorio de robustez",
+ "v20.d.robust_d": "Qué tan estable es una clasificación cuando cambian los pesos",
+ "v20.d.portfolio": "Cartera",
+ "v20.d.portfolio_d": "Un equipo de lugares que juntos cubren más de un objetivo",
+ "v20.d.trajectory": "Trayectoria",
+ "v20.d.trajectory_d": "Cómo cambia el campo de análogos a lo largo de los años",
+ "v20.d.profiles": "Perfiles de misión y operaciones",
+ "v20.d.profiles_d": "Objetivos de rover, EVA, térmicos, de hábitat y de instrumentos",
+ "v20.d.scenarios": "Escenarios",
+ "v20.d.scenarios_d": "Escenarios de ponderación y lo que cambian",
+ "v20.d.passport": "Pasaporte",
+ "v20.d.passport_d": "Un registro compartible de un análogo",
+ "v20.d.trace": "Traza",
+ "v20.d.trace_d": "Cada dato de entrada y paso detrás de la puntuación seleccionada",
+ "v20.d.reproduce": "Reproducir",
+ "v20.d.reproduce_d": "La configuración y las sumas de verificación para reproducir un resultado",
+ "v20.d.reports": "Informes",
+ "v20.d.reports_d": "Descarga un informe escrito desde el laboratorio de investigación",
+ "v20.d.journal": "Diario",
+ "v20.d.journal_d": "Tus hallazgos guardados, conservados en este navegador",
+ "v20.d.catalogue": "Catálogo",
+ "v20.d.catalogue_d": "Cada conjunto de datos con su estado, proveedor y atribución",
+ "v20.d.sources": "Fuentes",
+ "v20.d.sources_d": "El registro de datos con versiones, sumas de verificación y rutas de acceso",
+ "v20.d.gaps": "Lagunas de datos",
+ "v20.d.gaps_d": "Conjuntos de datos que no se pudieron obtener, y por qué",
+ "v20.d.trustc": "Centro de confianza",
+ "v20.d.trustc_d": "Lo que un resultado puede y no puede decirte",
+ "v20.d.method": "Metodología",
+ "v20.d.method_d": "Las seis dimensiones, los umbrales y la regla de 300 km",
+ "v20.set.title": "Ajustes",
+ "v20.set.legal": "Información legal",
+ "v20.set.terms": "Términos del servicio",
+ "v20.set.privacy": "Política de privacidad",
+ "v20.set.disclaimer": "Aviso científico",
+ "v20.set.lang": "Idioma",
+ "v20.set.lang_note": "Las traducciones son asistidas por máquina y no han sido revisadas por hablantes nativos.",
+ "v20.set.access": "Accesibilidad",
+ "v20.set.motion": "Rotación del globo",
+ "v20.set.motion_on": "Girar",
+ "v20.set.motion_off": "Mantener quieto",
+ "v20.set.text": "Tamaño del texto",
+ "v20.set.text_std": "Estándar",
+ "v20.set.text_lg": "Más grande",
+ "v20.set.access_note": "Cada control funciona con toque, ratón y teclado; nada depende de pasar el cursor por encima. Se respeta la preferencia de movimiento reducido de tu sistema.",
+ "v20.set.appear": "Apariencia",
+ "v20.set.mode": "Detalle",
+ "v20.set.contrast": "Contraste",
+ "v20.set.contrast_std": "Estándar",
+ "v20.set.contrast_hi": "Alto",
+ "v20.set.data": "Datos y modo sin conexión",
+ "v20.set.d_src": "Copia de datos",
+ "v20.set.d_src_server": "cargada desde el servidor de ASTERRO",
+ "v20.set.d_src_offline_store": "guardada en este navegador",
+ "v20.set.d_src_none": "aún no cargada",
+ "v20.set.d_hash": "Suma de verificación del cubo",
+ "v20.set.d_stored": "Guardada el",
+ "v20.set.d_queried": "Proveedores consultados",
+ "v20.set.d_net": "Red",
+ "v20.set.d_online": "en línea",
+ "v20.set.d_offline": "sin conexión",
+ "v20.set.d_sw": "Aplicación sin conexión",
+ "v20.set.d_sw_on": "instalada en este navegador",
+ "v20.set.d_sw_off": "no instalada (abre la aplicación una vez con conexión)",
+ "v20.set.d_verify": "Verificar los datos guardados",
+ "v20.set.d_refresh": "Buscar datos actualizados",
+ "v20.set.d_load": "Cargar las capas de datos",
+ "v20.set.d_note": "Los datos guardados son climatologías y catálogos con la fecha en que se consultaron. Nunca son en tiempo real.",
+ "v20.set.loc": "Privacidad de la ubicación",
+ "v20.set.loc_p": "ASTERRO solo pide la posición de tu dispositivo cuando pulsas el botón de ubicación en Impacto local. La posición se usa en este navegador para encontrar la celda de la cuadrícula más cercana y nunca se envía a un servidor.",
+ "v20.set.loc_saved": "Lugares guardados en este navegador: {n}",
+ "v20.set.loc_forget": "Olvidar los lugares guardados",
+ "v20.set.loc_done": "Lugares guardados eliminados de este navegador.",
+ "v20.set.about": "Acerca de",
+ "v20.set.about_p": "ASTERRO encuentra en la Tierra análogos ambientales medibles de lugares de la Luna y Marte. No certifica ningún sitio y la NASA no lo respalda.",
+ "v20.set.v_ui": "Interfaz",
+ "v20.set.v_engine": "Motor de similitud",
+ "v20.set.v_data": "Capas de datos",
+ "v20.set.v_cache": "Caché sin conexión",
+ "v20.set.v_none": "no disponible",
+ "v20.dis.title": "Aviso científico",
+ "v20.dis.s1.h": "Qué significa una puntuación",
+ "v20.dis.s2.h": "De dónde vienen los valores",
+ "v20.dis.s2.p": "Cada valor indica su conjunto de datos, proveedor, resolución y período. Los valores de reanálisis son resultados de modelos restringidos por observaciones. Los valores decodificados de imágenes están agrupados en intervalos y algunos son límites inferiores; así se indican. Las consultas de sitios cubren una muestra de lugares, no todo el planeta.",
+ "v20.dis.s3.h": "Lo que ASTERRO no hace",
+ "v20.dis.s3.p": "ASTERRO no certifica sitios, no evalúa peligros, no estima recursos ni da consejos de ingeniería, seguridad, minería o inversión. La NASA no respalda a ASTERRO. Los registros de presencia de minerales muestran dónde se informaron sitios, no lo que contiene el terreno.",
+ "v20.dis.s4.h": "Reproducibilidad",
+ "v20.dis.s4.p": "Las mismas entradas dan el mismo resultado. Cada resultado registra las sumas de verificación de los datos y la configuración necesarias para reproducirlo.",
+ "v20.mrds.h": "Presencia de minerales cercana",
+ "v20.mrds.src": "USGS Mineral Resources Data System (MRDS)",
+ "v20.mrds.not_nasa": "no es de la NASA",
+ "v20.mrds.n": "Registros a menos de {r} km",
+ "v20.mrds.prod": "Productores actuales o pasados",
+ "v20.mrds.near": "Registro más cercano",
+ "v20.mrds.near_v": "{name}, {com} ({stat}, {country}), {d} km",
+ "v20.mrds.top": "Materias primas principales más frecuentes",
+ "v20.mrds.none": "Ningún registro del MRDS a menos de {r} km de esta celda. Significa que no hay registro, no que no haya minerales.",
+ "v20.mrds.loading": "Cargando el catálogo de presencia de minerales.",
+ "v20.mrds.error": "No se pudo cargar el catálogo de presencia de minerales. El resto del análisis no se ve afectado.",
+ "v20.mrds.lim": "Un catálogo de sitios informados, no un mapa de composición ni una estimación de recursos. Alrededor del {pct} % de los registros están en Estados Unidos, por lo que los recuentos reflejan tanto lo que se informó como la geología. No es un consejo de exploración ni de inversión.",
+ "v20.mrds.meta": "Archivo con fecha {date}, sin más actualizaciones previstas por el USGS; consultado el {q}; SHA-256 {sha}."
+});
+
+/* ASTERRO V20 interface, fr catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("fr", {
+ "v20.hero.a": "Intelligence",
+ "v20.hero.b": "planétaire",
+ "v20.home": "Accueil d'ASTERRO",
+ "v20.menu": "Menu",
+ "v20.settings": "Réglages",
+ "v20.close": "Fermer",
+ "v20.nav.title": "Naviguer",
+ "v20.nav.aria": "Navigation principale",
+ "v20.nav.note": "Chaque destination ouvre une vue existante. Les vues qui ont besoin de résultats lancent d'abord la recherche.",
+ "v20.g.discover": "Découvrir",
+ "v20.g.analyze": "Analyser",
+ "v20.g.plan": "Planifier",
+ "v20.g.evidence": "Preuves",
+ "v20.g.trust": "Données et confiance",
+ "v20.d.home": "Accueil",
+ "v20.d.home_d": "L'écran d'ouverture avec le globe",
+ "v20.d.globe": "Globe",
+ "v20.d.globe_d": "Le champ de similarité sur le globe 3D, avec les sites classés",
+ "v20.d.discovery": "Découverte mondiale",
+ "v20.d.discovery_d": "Constellations, extrêmes, processus, domaines scientifiques et motifs",
+ "v20.d.targets": "Explorateur de cibles",
+ "v20.d.targets_d": "Le catalogue des cibles de la Lune et de Mars et leur niveau de préparation",
+ "v20.d.atlas": "Atlas",
+ "v20.d.atlas_d": "L'atlas planétaire avec des candidats pour chaque cible",
+ "v20.d.lab": "Laboratoire de recherche",
+ "v20.d.lab_d": "Le parcours guidé et les quatorze modules de recherche",
+ "v20.d.local": "Impact local",
+ "v20.d.local_d": "Analysez un lieu de votre choix, avec des contrôles de confidentialité",
+ "v20.d.compare": "Comparer",
+ "v20.d.compare_d": "Comparez côte à côte les cibles de la Lune et de Mars",
+ "v20.d.lens": "Loupe des différences",
+ "v20.d.lens_d": "Similaire, partiellement similaire, différent et inconnu, dimension par dimension",
+ "v20.d.character": "Caractérisation du candidat",
+ "v20.d.character_d": "Chaque domaine scientifique et couche de données du site sélectionné",
+ "v20.d.robust": "Laboratoire de robustesse",
+ "v20.d.robust_d": "La stabilité d'un classement quand les pondérations changent",
+ "v20.d.portfolio": "Portefeuille",
+ "v20.d.portfolio_d": "Une équipe de lieux qui, ensemble, couvrent davantage une cible",
+ "v20.d.trajectory": "Trajectoire",
+ "v20.d.trajectory_d": "L'évolution du champ d'analogues au fil des années",
+ "v20.d.profiles": "Profils de mission et d'opérations",
+ "v20.d.profiles_d": "Objectifs rover, EVA, thermiques, d'habitat et d'instruments",
+ "v20.d.scenarios": "Scénarios",
+ "v20.d.scenarios_d": "Scénarios de pondération et ce qu'ils changent",
+ "v20.d.passport": "Passeport",
+ "v20.d.passport_d": "Une fiche partageable d'un analogue",
+ "v20.d.trace": "Trace",
+ "v20.d.trace_d": "Chaque entrée et chaque étape derrière le score sélectionné",
+ "v20.d.reproduce": "Reproduire",
+ "v20.d.reproduce_d": "La configuration et les sommes de contrôle pour reproduire un résultat",
+ "v20.d.reports": "Rapports",
+ "v20.d.reports_d": "Téléchargez un rapport écrit depuis le laboratoire de recherche",
+ "v20.d.journal": "Journal",
+ "v20.d.journal_d": "Vos découvertes enregistrées, conservées dans ce navigateur",
+ "v20.d.catalogue": "Catalogue",
+ "v20.d.catalogue_d": "Chaque jeu de données avec son état, son fournisseur et son attribution",
+ "v20.d.sources": "Sources",
+ "v20.d.sources_d": "Le registre des données avec versions, sommes de contrôle et voies d'accès",
+ "v20.d.gaps": "Lacunes de données",
+ "v20.d.gaps_d": "Les jeux de données qui n'ont pas pu être obtenus, et pourquoi",
+ "v20.d.trustc": "Centre de confiance",
+ "v20.d.trustc_d": "Ce qu'un résultat peut et ne peut pas vous dire",
+ "v20.d.method": "Méthodologie",
+ "v20.d.method_d": "Les six dimensions, les seuils et la règle des 300 km",
+ "v20.set.title": "Réglages",
+ "v20.set.legal": "Mentions légales",
+ "v20.set.terms": "Conditions d'utilisation",
+ "v20.set.privacy": "Politique de confidentialité",
+ "v20.set.disclaimer": "Avertissement scientifique",
+ "v20.set.lang": "Langue",
+ "v20.set.lang_note": "Les traductions sont assistées par machine et n'ont pas été relues par des locuteurs natifs.",
+ "v20.set.access": "Accessibilité",
+ "v20.set.motion": "Rotation du globe",
+ "v20.set.motion_on": "Tourner",
+ "v20.set.motion_off": "Garder immobile",
+ "v20.set.text": "Taille du texte",
+ "v20.set.text_std": "Standard",
+ "v20.set.text_lg": "Plus grande",
+ "v20.set.access_note": "Chaque commande fonctionne au toucher, à la souris et au clavier ; rien ne dépend du survol. Le réglage de réduction des animations de votre système est respecté.",
+ "v20.set.appear": "Apparence",
+ "v20.set.mode": "Niveau de détail",
+ "v20.set.contrast": "Contraste",
+ "v20.set.contrast_std": "Standard",
+ "v20.set.contrast_hi": "Élevé",
+ "v20.set.data": "Données et hors ligne",
+ "v20.set.d_src": "Copie des données",
+ "v20.set.d_src_server": "chargée depuis le serveur ASTERRO",
+ "v20.set.d_src_offline_store": "stockée dans ce navigateur",
+ "v20.set.d_src_none": "pas encore chargée",
+ "v20.set.d_hash": "Somme de contrôle du cube",
+ "v20.set.d_stored": "Stockée le",
+ "v20.set.d_queried": "Fournisseurs interrogés",
+ "v20.set.d_net": "Réseau",
+ "v20.set.d_online": "en ligne",
+ "v20.set.d_offline": "hors ligne",
+ "v20.set.d_sw": "Application hors ligne",
+ "v20.set.d_sw_on": "installée dans ce navigateur",
+ "v20.set.d_sw_off": "non installée (ouvrez l'application une fois en ligne)",
+ "v20.set.d_verify": "Vérifier les données stockées",
+ "v20.set.d_refresh": "Rechercher des données à jour",
+ "v20.set.d_load": "Charger les couches de données",
+ "v20.set.d_note": "Les données stockées sont des climatologies et des catalogues datés de leur interrogation. Elles ne sont jamais en temps réel.",
+ "v20.set.loc": "Confidentialité de la position",
+ "v20.set.loc_p": "ASTERRO ne demande la position de votre appareil que lorsque vous appuyez sur le bouton de localisation dans Impact local. La position sert dans ce navigateur à trouver la cellule de grille la plus proche et n'est jamais envoyée à un serveur.",
+ "v20.set.loc_saved": "Lieux enregistrés dans ce navigateur : {n}",
+ "v20.set.loc_forget": "Oublier les lieux enregistrés",
+ "v20.set.loc_done": "Lieux enregistrés supprimés de ce navigateur.",
+ "v20.set.about": "À propos",
+ "v20.set.about_p": "ASTERRO trouve sur Terre des analogues environnementaux mesurables de lieux de la Lune et de Mars. Il ne certifie aucun site et la NASA ne le cautionne pas.",
+ "v20.set.v_ui": "Interface",
+ "v20.set.v_engine": "Moteur de similarité",
+ "v20.set.v_data": "Couches de données",
+ "v20.set.v_cache": "Cache hors ligne",
+ "v20.set.v_none": "non disponible",
+ "v20.dis.title": "Avertissement scientifique",
+ "v20.dis.s1.h": "Ce que signifie un score",
+ "v20.dis.s2.h": "D'où viennent les valeurs",
+ "v20.dis.s2.p": "Chaque valeur indique son jeu de données, son fournisseur, sa résolution et sa période. Les valeurs de réanalyse sont des sorties de modèle contraintes par des observations. Les valeurs décodées d'images sont regroupées en classes et certaines sont des bornes inférieures ; elles sont signalées comme telles. Les requêtes par site couvrent un échantillon de lieux, pas toute la planète.",
+ "v20.dis.s3.h": "Ce qu'ASTERRO ne fait pas",
+ "v20.dis.s3.p": "ASTERRO ne certifie pas de sites, n'évalue pas les dangers, n'estime pas de ressources et ne donne aucun conseil d'ingénierie, de sécurité, minier ou d'investissement. La NASA ne cautionne pas ASTERRO. Les signalements de minéraux montrent où des sites ont été déclarés, pas ce que contient le sol.",
+ "v20.dis.s4.h": "Reproductibilité",
+ "v20.dis.s4.p": "Les mêmes entrées donnent le même résultat. Chaque résultat enregistre les sommes de contrôle des données et la configuration nécessaires pour le reproduire.",
+ "v20.mrds.h": "Signalements de minéraux à proximité",
+ "v20.mrds.src": "USGS Mineral Resources Data System (MRDS)",
+ "v20.mrds.not_nasa": "hors NASA",
+ "v20.mrds.n": "Fiches à moins de {r} km",
+ "v20.mrds.prod": "Producteurs actuels ou anciens",
+ "v20.mrds.near": "Fiche la plus proche",
+ "v20.mrds.near_v": "{name}, {com} ({stat}, {country}), {d} km",
+ "v20.mrds.top": "Substances principales les plus fréquentes",
+ "v20.mrds.none": "Aucune fiche MRDS à moins de {r} km de cette cellule. Cela signifie aucune fiche, pas aucun minéral.",
+ "v20.mrds.loading": "Chargement du catalogue des signalements de minéraux.",
+ "v20.mrds.error": "Le catalogue des signalements de minéraux n'a pas pu être chargé. Le reste de l'analyse n'est pas affecté.",
+ "v20.mrds.lim": "Un catalogue de sites déclarés, pas une carte de composition ni une estimation de ressources. Environ {pct} % des fiches se trouvent aux États-Unis : les décomptes reflètent autant l'effort de déclaration que la géologie. Ce n'est pas un conseil d'exploration ou d'investissement.",
+ "v20.mrds.meta": "Fichier daté du {date}, aucune mise à jour prévue par l'USGS ; interrogé le {q} ; SHA-256 {sha}."
+});
+
+/* ASTERRO V20 interface, de catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("de", {
+ "v20.hero.a": "Planetare",
+ "v20.hero.b": "Intelligenz",
+ "v20.home": "ASTERRO-Startseite",
+ "v20.menu": "Menü",
+ "v20.settings": "Einstellungen",
+ "v20.close": "Schließen",
+ "v20.nav.title": "Navigation",
+ "v20.nav.aria": "Hauptnavigation",
+ "v20.nav.note": "Jedes Ziel öffnet eine vorhandene Ansicht. Ansichten, die Ergebnisse brauchen, starten zuerst die Suche.",
+ "v20.g.discover": "Entdecken",
+ "v20.g.analyze": "Analysieren",
+ "v20.g.plan": "Planen",
+ "v20.g.evidence": "Belege",
+ "v20.g.trust": "Daten und Vertrauen",
+ "v20.d.home": "Startseite",
+ "v20.d.home_d": "Der Eröffnungsbildschirm mit dem Globus",
+ "v20.d.globe": "Globus",
+ "v20.d.globe_d": "Das Ähnlichkeitsfeld auf dem 3D-Globus, mit den gereihten Orten",
+ "v20.d.discovery": "Globale Entdeckung",
+ "v20.d.discovery_d": "Konstellationen, Extreme, Prozesse, Wissenschaftsbereiche und Muster",
+ "v20.d.targets": "Zielexplorer",
+ "v20.d.targets_d": "Der Katalog der Ziele auf Mond und Mars und ihr Reifegrad",
+ "v20.d.atlas": "Atlas",
+ "v20.d.atlas_d": "Der planetare Atlas mit Kandidaten für jedes Ziel",
+ "v20.d.lab": "Forschungslabor",
+ "v20.d.lab_d": "Der geführte Ablauf und die vierzehn Forschungsmodule",
+ "v20.d.local": "Lokale Wirkung",
+ "v20.d.local_d": "Analysieren Sie einen Ort Ihrer Wahl, mit Datenschutzeinstellungen",
+ "v20.d.compare": "Vergleichen",
+ "v20.d.compare_d": "Die Ziele auf Mond und Mars nebeneinander vergleichen",
+ "v20.d.lens": "Unterschiedslinse",
+ "v20.d.lens_d": "Ähnlich, teilweise ähnlich, verschieden und unbekannt, Dimension für Dimension",
+ "v20.d.character": "Kandidatenbeschreibung",
+ "v20.d.character_d": "Jeder Wissenschaftsbereich und jede Datenebene für den gewählten Ort",
+ "v20.d.robust": "Robustheitslabor",
+ "v20.d.robust_d": "Wie stabil eine Rangfolge bleibt, wenn sich die Gewichte ändern",
+ "v20.d.portfolio": "Portfolio",
+ "v20.d.portfolio_d": "Ein Team von Orten, die zusammen mehr von einem Ziel abdecken",
+ "v20.d.trajectory": "Verlauf",
+ "v20.d.trajectory_d": "Wie sich das Analogfeld über die Jahre verändert",
+ "v20.d.profiles": "Missions- und Betriebsprofile",
+ "v20.d.profiles_d": "Ziele für Rover, Außeneinsätze, Thermik, Habitat und Instrumente",
+ "v20.d.scenarios": "Szenarien",
+ "v20.d.scenarios_d": "Gewichtungsszenarien und was sie verändern",
+ "v20.d.passport": "Pass",
+ "v20.d.passport_d": "Ein teilbarer Steckbrief eines Analogs",
+ "v20.d.trace": "Nachvollzug",
+ "v20.d.trace_d": "Jede Eingabe und jeder Schritt hinter dem gewählten Wert",
+ "v20.d.reproduce": "Reproduzieren",
+ "v20.d.reproduce_d": "Die Konfiguration und Prüfsummen, um ein Ergebnis zu reproduzieren",
+ "v20.d.reports": "Berichte",
+ "v20.d.reports_d": "Einen schriftlichen Bericht aus dem Forschungslabor herunterladen",
+ "v20.d.journal": "Journal",
+ "v20.d.journal_d": "Ihre gespeicherten Funde, in diesem Browser aufbewahrt",
+ "v20.d.catalogue": "Katalog",
+ "v20.d.catalogue_d": "Jeder Datensatz mit Status, Anbieter und Zuordnung",
+ "v20.d.sources": "Quellen",
+ "v20.d.sources_d": "Das Datenregister mit Versionen, Prüfsummen und Zugangswegen",
+ "v20.d.gaps": "Datenlücken",
+ "v20.d.gaps_d": "Datensätze, die nicht beschafft werden konnten, und warum",
+ "v20.d.trustc": "Vertrauenszentrum",
+ "v20.d.trustc_d": "Was ein Ergebnis aussagen kann und was nicht",
+ "v20.d.method": "Methodik",
+ "v20.d.method_d": "Die sechs Dimensionen, die Schwellenwerte und die 300-km-Regel",
+ "v20.set.title": "Einstellungen",
+ "v20.set.legal": "Rechtliches",
+ "v20.set.terms": "Nutzungsbedingungen",
+ "v20.set.privacy": "Datenschutzerklärung",
+ "v20.set.disclaimer": "Wissenschaftlicher Hinweis",
+ "v20.set.lang": "Sprache",
+ "v20.set.lang_note": "Die Übersetzungen sind maschinell unterstützt und wurden nicht von Muttersprachlern geprüft.",
+ "v20.set.access": "Barrierefreiheit",
+ "v20.set.motion": "Drehung des Globus",
+ "v20.set.motion_on": "Drehen",
+ "v20.set.motion_off": "Stillhalten",
+ "v20.set.text": "Textgröße",
+ "v20.set.text_std": "Standard",
+ "v20.set.text_lg": "Größer",
+ "v20.set.access_note": "Jedes Bedienelement funktioniert mit Touch, Maus und Tastatur; nichts hängt vom Überfahren mit der Maus ab. Die Einstellung Ihres Systems für reduzierte Bewegung wird beachtet.",
+ "v20.set.appear": "Darstellung",
+ "v20.set.mode": "Detailgrad",
+ "v20.set.contrast": "Kontrast",
+ "v20.set.contrast_std": "Standard",
+ "v20.set.contrast_hi": "Hoch",
+ "v20.set.data": "Daten und offline",
+ "v20.set.d_src": "Datenkopie",
+ "v20.set.d_src_server": "vom ASTERRO-Server geladen",
+ "v20.set.d_src_offline_store": "in diesem Browser gespeichert",
+ "v20.set.d_src_none": "noch nicht geladen",
+ "v20.set.d_hash": "Prüfsumme des Würfels",
+ "v20.set.d_stored": "Gespeichert am",
+ "v20.set.d_queried": "Anbieter abgefragt",
+ "v20.set.d_net": "Netzwerk",
+ "v20.set.d_online": "online",
+ "v20.set.d_offline": "offline",
+ "v20.set.d_sw": "Offline-Anwendung",
+ "v20.set.d_sw_on": "in diesem Browser installiert",
+ "v20.set.d_sw_off": "nicht installiert (öffnen Sie die Anwendung einmal online)",
+ "v20.set.d_verify": "Gespeicherte Daten prüfen",
+ "v20.set.d_refresh": "Nach aktualisierten Daten suchen",
+ "v20.set.d_load": "Datenebenen laden",
+ "v20.set.d_note": "Gespeicherte Daten sind Klimatologien und Kataloge mit dem Datum ihrer Abfrage. Sie sind nie live.",
+ "v20.set.loc": "Standort-Datenschutz",
+ "v20.set.loc_p": "ASTERRO fragt die Position Ihres Geräts nur ab, wenn Sie in Lokale Wirkung die Standorttaste drücken. Die Position wird in diesem Browser verwendet, um die nächste Gitterzelle zu finden, und nie an einen Server gesendet.",
+ "v20.set.loc_saved": "In diesem Browser gespeicherte Orte: {n}",
+ "v20.set.loc_forget": "Gespeicherte Orte vergessen",
+ "v20.set.loc_done": "Gespeicherte Orte aus diesem Browser gelöscht.",
+ "v20.set.about": "Über ASTERRO",
+ "v20.set.about_p": "ASTERRO findet auf der Erde messbare Umweltanaloga für Orte auf Mond und Mars. Es zertifiziert keinen Ort, und die NASA unterstützt es nicht offiziell.",
+ "v20.set.v_ui": "Oberfläche",
+ "v20.set.v_engine": "Ähnlichkeitsrechner",
+ "v20.set.v_data": "Datenebenen",
+ "v20.set.v_cache": "Offline-Zwischenspeicher",
+ "v20.set.v_none": "nicht verfügbar",
+ "v20.dis.title": "Wissenschaftlicher Hinweis",
+ "v20.dis.s1.h": "Was ein Wert bedeutet",
+ "v20.dis.s2.h": "Woher die Werte stammen",
+ "v20.dis.s2.p": "Jeder Wert nennt seinen Datensatz, Anbieter, seine Auflösung und seinen Zeitraum. Reanalysewerte sind Modellergebnisse, die durch Beobachtungen eingegrenzt werden. Aus Bildern dekodierte Werte sind in Klassen eingeteilt, manche sind Untergrenzen; sie sind entsprechend gekennzeichnet. Ortsabfragen decken eine Stichprobe von Orten ab, nicht den ganzen Planeten.",
+ "v20.dis.s3.h": "Was ASTERRO nicht tut",
+ "v20.dis.s3.p": "ASTERRO zertifiziert keine Orte, bewertet keine Gefahren, schätzt keine Rohstoffe und gibt keine Ingenieur-, Sicherheits-, Bergbau- oder Anlageberatung. Die NASA unterstützt ASTERRO nicht offiziell. Mineralvorkommensdaten zeigen, wo Fundstellen gemeldet wurden, nicht, was der Boden enthält.",
+ "v20.dis.s4.h": "Reproduzierbarkeit",
+ "v20.dis.s4.p": "Gleiche Eingaben liefern das gleiche Ergebnis. Jedes Ergebnis speichert die Prüfsummen der Daten und die Konfiguration, die zu seiner Reproduktion nötig sind.",
+ "v20.mrds.h": "Mineralvorkommen in der Nähe",
+ "v20.mrds.src": "USGS Mineral Resources Data System (MRDS)",
+ "v20.mrds.not_nasa": "nicht NASA",
+ "v20.mrds.n": "Einträge im Umkreis von {r} km",
+ "v20.mrds.prod": "Aktuelle oder frühere Förderstätten",
+ "v20.mrds.near": "Nächster Eintrag",
+ "v20.mrds.near_v": "{name}, {com} ({stat}, {country}), {d} km",
+ "v20.mrds.top": "Häufigste Hauptrohstoffe",
+ "v20.mrds.none": "Kein MRDS-Eintrag im Umkreis von {r} km um diese Zelle. Das bedeutet keinen Eintrag, nicht keine Minerale.",
+ "v20.mrds.loading": "Der Katalog der Mineralvorkommen wird geladen.",
+ "v20.mrds.error": "Der Katalog der Mineralvorkommen konnte nicht geladen werden. Der Rest der Analyse ist nicht betroffen.",
+ "v20.mrds.lim": "Ein Katalog gemeldeter Fundstellen, keine Zusammensetzungskarte und keine Rohstoffschätzung. Etwa {pct} % der Einträge liegen in den Vereinigten Staaten, daher spiegeln die Zahlen ebenso die Meldetätigkeit wie die Geologie. Keine Explorations- oder Anlageberatung.",
+ "v20.mrds.meta": "Datei vom {date}, laut USGS keine weiteren Aktualisierungen geplant; abgefragt am {q}; SHA-256 {sha}."
+});
+
 /* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
  *
  * Everything the story-led journey shows is derived here from the unchanged baseline engine (TAIEngine,
@@ -36461,6 +37285,307 @@ if (typeof document !== "undefined") {
     else if (k === "clear") { v9xTx("analyses", "readwrite", s => v9xReq(s.clear())).then(() => { V9X.analyses = []; done({ k: "cleared" }); }).catch(() => done({ k: "failed" })); }
   });
 }
+
+/* ===== ASTERRO V20 interface layer =====
+ * Adds, without removing anything:
+ *   - an immersive opening: the two-word title, no tab bar until the person starts (the tabs keep their ids, order and
+ *     behaviour and return as soon as a view is opened);
+ *   - the logo always returns Home;
+ *   - grouped navigation (Discover, Analyze, Plan, Evidence, Data and Trust) in an accessible dialog that works as a
+ *     drawer on phones; every destination calls an existing view or function;
+ *   - Settings: Terms, Privacy, Scientific Disclaimer, language, accessibility, appearance, data and offline, location
+ *     privacy, About and versions;
+ *   - USGS MRDS mineral-occurrence context in Local Impact (src/v20/mrds.py; a catalogue, labelled "not NASA").
+ * Nothing here changes a score, weight, threshold, ranking or dataset of the engine. */
+const V20 = { version: "asterro-v20-ui-1.0.0", opener: null, open: null, msg: null, cache: null, mrds: null, mrdsErr: null, mrdsLoading: null,
+  prefs: { still: false, large: false, contrast: false }, KEY: "asterro.v20.prefs" };
+const V20_NAV = [
+  ["discover", ["home", "globe", "discovery", "targets", "atlas"]],
+  ["analyze", ["lab", "local", "compare", "lens", "character", "robust"]],
+  ["plan", ["portfolio", "trajectory", "profiles", "scenarios"]],
+  ["evidence", ["passport", "trace", "reproduce", "reports", "journal"]],
+  ["trust", ["catalogue", "sources", "gaps", "trustc", "method"]],
+];
+const V20_LANGS = [["en", "English"], ["bn", "বাংলা"], ["es", "Español"], ["fr", "Français"], ["de", "Deutsch"]];
+const V20_ICON = {
+  menu: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12"/></svg>',
+  settings: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.4"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></svg>',
+};
+
+/* ---------------------------------------------------------------- preferences (this browser only) */
+try { const p = JSON.parse(localStorage.getItem(V20.KEY) || "null"); if (p && typeof p === "object") Object.assign(V20.prefs, p); } catch (e) { /* storage unavailable */ }
+function v20SavePrefs() { try { localStorage.setItem(V20.KEY, JSON.stringify(V20.prefs)); } catch (e) { } }
+function v20ApplyPrefs() {
+  const h = document.documentElement;
+  h.classList.toggle("v20-large", !!V20.prefs.large); h.classList.toggle("v20-contrast", !!V20.prefs.contrast);
+  const reduce = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.GLOBE && (V20.prefs.still || reduce)) GLOBE.autoRotate = false;
+}
+
+/* ---------------------------------------------------------------- helpers */
+function v20T(k, o) { return tx("v20." + k, o); }
+function v20I() { return S.selected != null ? S.selected : (S.res && S.res.distinct ? S.res.distinct[0] : null); }
+function v20Need(fn) { if (S.searched) return fn(); if (typeof runSearch === "function") runSearch(); dsAfterSearch(fn); }
+function v20Scroll(sel) { setTimeout(() => { const n = document.querySelector(sel), L = document.querySelector("#left"); if (n && L) L.scrollTop += n.getBoundingClientRect().top - L.getBoundingClientRect().top - 8; }, 60); }
+function v20JnClose() { if (typeof JN !== "undefined" && JN.open && typeof jnClose === "function") jnClose(); }
+
+/* ---------------------------------------------------------------- destinations: each calls an existing view */
+const V20_GO = {
+  home: () => v20Home(),
+  globe: () => v20Need(() => { v20JnClose(); setTab("explore"); setProj(0); }),
+  discovery: () => v20Need(() => { v20JnClose(); setTab("discover"); }),
+  targets: () => v20Need(() => { v20JnClose(); if (typeof A3 !== "undefined") A3.view = "catalog"; setTab("atlas"); }),
+  atlas: () => v20Need(() => { v20JnClose(); if (typeof A3 !== "undefined" && A3.view === "catalog") A3.view = "home"; setTab("atlas"); }),
+  lab: () => v20Need(() => { v20JnClose(); setTab("lab"); }),
+  local: () => v20Need(() => { v20JnClose(); setTab("local"); }),
+  compare: () => v20Need(() => { v20JnClose(); setTab("compare"); }),
+  lens: () => v20Need(() => jnOpen("place", { i: v20I(), sec: "lens" })),
+  character: () => v20Need(() => { v20JnClose(); v7Open("domains", v20I()); }),
+  robust: () => v20Need(() => { v20JnClose(); if (typeof L !== "undefined") L.mod = "robust"; setTab("lab"); }),
+  portfolio: () => v20Need(() => jnOpen("portfolio")),
+  trajectory: () => v20Need(() => { v20JnClose(); setTab("trajectory"); }),
+  profiles: () => v20Need(() => jnOpen("missions")),
+  scenarios: () => v20Need(() => { v20JnClose(); setTab("scenarios"); }),
+  passport: () => v20Need(() => jnOpen("place", { i: v20I(), sec: "passport" })),
+  trace: () => v20Need(() => { v20JnClose(); select(v20I()); showTrace(); }),
+  reproduce: () => v20Need(() => { v20JnClose(); select(v20I()); showReproduce(); }),
+  reports: () => v20Need(() => { v20JnClose(); if (typeof DSF !== "undefined") DSF.step = DSF.steps.indexOf("reproduce") + 1; setTab("lab"); v20Scroll(".ds-flow"); }),
+  journal: () => v20Need(() => jnOpen("journal")),
+  catalogue: () => { v20JnClose(); setTab("data"); },
+  sources: () => { v20JnClose(); setTab("data"); v20Scroll("[data-v9registry]"); },
+  gaps: () => { v20JnClose(); if (typeof V9X !== "undefined") V9X.filter.state = "BLOCKED"; setTab("data"); v20Scroll("[data-v9xf='state']"); },
+  trustc: () => v20Need(() => jnOpen("place", { i: v20I(), sec: "trust" })),
+  method: () => { v20JnClose(); setTab("method"); },
+};
+function v20Current() {
+  const app = document.getElementById("app");
+  if (app && app.classList.contains("is-hero")) return "home";
+  if (typeof JN !== "undefined" && JN.open) return { portfolio: "portfolio", missions: "profiles", journal: "journal" }[JN.view] || (JN.view === "place" ? { lens: "lens", passport: "passport", trust: "trustc" }[JN.sec] : null);
+  return { explore: "globe", discover: "discovery", atlas: "atlas", lab: "lab", local: "local", compare: "compare", trajectory: "trajectory", scenarios: "scenarios", data: "catalogue", method: "method" }[S.tab] || null;
+}
+
+/* ---------------------------------------------------------------- Home (the logo) */
+function v20Home() {
+  v20Close(); v20JnClose();
+  if (typeof dsLegalClose === "function") dsLegalClose();
+  const app = document.getElementById("app"); if (!app) return;
+  app.classList.add("is-hero");
+  try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { }
+  window.dispatchEvent(new Event("resize"));
+  const h = document.querySelector("#hero h1"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+}
+
+/* ---------------------------------------------------------------- header: title, logo, utilities, glass */
+function v20Title() {
+  const h = document.querySelector("#hero h1"); if (!h) return;
+  h.classList.add("v20-title"); h.setAttribute("data-i18n-done", "");
+  h.innerHTML = `${esc(v20T("hero.a"))} <span class="v20-serif">${esc(v20T("hero.b"))}</span>`;
+}
+function v20Header() {
+  const bar = document.querySelector("header.bar"); if (!bar) return;
+  const brand = bar.querySelector(".brand");
+  if (brand) { brand.setAttribute("role", "link"); brand.setAttribute("tabindex", "0"); brand.setAttribute("aria-label", v20T("home")); brand.dataset.v20home = "1"; }
+  let u = bar.querySelector(".v20-util");
+  if (!u) { u = document.createElement("div"); u.className = "v20-util"; u.setAttribute("data-i18n-done", ""); if (brand) brand.insertAdjacentElement("afterend", u); else bar.prepend(u); }
+  u.innerHTML = `<button type="button" id="v20-menu" data-glass aria-haspopup="dialog" aria-controls="v20-nav" aria-expanded="${V20.open === "nav"}">${V20_ICON.menu}<span class="v20-lbl">${esc(v20T("menu"))}</span></button>`
+    + `<button type="button" id="v20-settings" data-glass aria-haspopup="dialog" aria-controls="v20-set" aria-expanded="${V20.open === "set"}">${V20_ICON.settings}<span class="v20-lbl">${esc(v20T("settings"))}</span></button>`;
+  for (const n of document.querySelectorAll(".vp-top .seg, #legend")) n.setAttribute("data-glass", "");
+}
+
+/* ---------------------------------------------------------------- dialogs (navigation, settings) */
+function v20Dialog(id, label) {
+  let d = document.getElementById(id);
+  if (!d) {
+    d = document.createElement("div"); d.id = id; d.hidden = true; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true");
+    d.setAttribute("aria-labelledby", id + "-title"); d.setAttribute("data-i18n-done", ""); document.body.appendChild(d);
+  }
+  return d;
+}
+function v20NavHTML() {
+  const cur = v20Current();
+  return `<div class="v20-sheet" data-glass><div class="v20-sheet-h"><h2 id="v20-nav-title" tabindex="-1">${esc(v20T("nav.title"))}</h2><button type="button" class="v20-close" data-v20close>${esc(v20T("close"))}</button></div>
+    <nav class="v20-groups" aria-label="${esc(v20T("nav.aria"))}">${V20_NAV.map(([g, items]) => `<section class="v20-group" data-v20group="${g}"><h3 id="v20-g-${g}">${esc(v20T("g." + g))}</h3><ul aria-labelledby="v20-g-${g}">${items.map(k => `<li><button type="button" class="v20-go" data-v20go="${k}"${cur === k ? ' aria-current="page"' : ""}><b>${esc(v20T("d." + k))}</b><span>${esc(v20T("d." + k + "_d"))}</span></button></li>`).join("")}</ul></section>`).join("")}</nav>
+    <p class="v20-note">${esc(v20T("nav.note"))}</p></div>`;
+}
+function v20Kv(rows) { return `<dl class="v20-kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join("")}</dl>`; }
+function v20SetHTML() {
+  const lang = (typeof I18N !== "undefined" && I18N.lang) || "en", P = V20.prefs;
+  const seg = (attr, opts) => `<div class="v20-row" role="group">${opts.map(([v, lab, on]) => `<button type="button" ${attr}="${v}" aria-pressed="${!!on}">${esc(lab)}</button>`).join("")}</div>`;
+  const X = typeof V9X !== "undefined" ? V9X : null, man = X && X.man;
+  const sw = typeof navigator !== "undefined" && navigator.serviceWorker && navigator.serviceWorker.controller;
+  const saved = typeof liSaved === "function" ? liSaved().length : 0;
+  const ret = X && typeof v9xRetrieved === "function" ? v9xRetrieved() : null;
+  const msg = V20.msg ? `<p class="v20-msg${V20.msg.bad ? " bad" : ""}" role="status">${esc(V20.msg.t)}</p>` : `<p class="v20-msg" role="status"></p>`;
+  return `<div class="v20-sheet" data-glass><div class="v20-sheet-h"><h2 id="v20-set-title" tabindex="-1">${esc(v20T("set.title"))}</h2><button type="button" class="v20-close" data-v20close>${esc(v20T("close"))}</button></div>
+  <section class="v20-set-sec" data-v20sec="legal"><h3>${esc(v20T("set.legal"))}</h3><div class="v20-row"><button type="button" class="v20-link" data-v20legal="terms">${esc(v20T("set.terms"))}</button><button type="button" class="v20-link" data-v20legal="privacy">${esc(v20T("set.privacy"))}</button><button type="button" class="v20-link" data-v20legal="disclaimer">${esc(v20T("set.disclaimer"))}</button></div></section>
+  <section class="v20-set-sec" data-v20sec="lang"><h3>${esc(v20T("set.lang"))}</h3>${seg("data-v20lang", V20_LANGS.map(([l, n]) => [l, n, l === lang]))}<p>${esc(v20T("set.lang_note"))}</p></section>
+  <section class="v20-set-sec" data-v20sec="access"><h3>${esc(v20T("set.access"))}</h3>
+    <p>${esc(v20T("set.motion"))}</p>${seg("data-v20still", [["0", v20T("set.motion_on"), !P.still], ["1", v20T("set.motion_off"), P.still]])}
+    <p>${esc(v20T("set.text"))}</p>${seg("data-v20large", [["0", v20T("set.text_std"), !P.large], ["1", v20T("set.text_lg"), P.large]])}
+    <p>${esc(v20T("set.access_note"))}</p></section>
+  <section class="v20-set-sec" data-v20sec="appear"><h3>${esc(v20T("set.appear"))}</h3>
+    <p>${esc(v20T("set.mode"))}</p>${typeof DS !== "undefined" ? seg("data-v20mode", [["simple", tx("ds.mode.simple"), DS.mode !== "advanced"], ["advanced", tx("ds.mode.advanced"), DS.mode === "advanced"]]) : ""}
+    <p>${esc(v20T("set.contrast"))}</p>${seg("data-v20contrast", [["0", v20T("set.contrast_std"), !P.contrast], ["1", v20T("set.contrast_hi"), P.contrast]])}</section>
+  <section class="v20-set-sec" data-v20sec="data"><h3>${esc(v20T("set.data"))}</h3>
+    ${v20Kv([[v20T("set.d_src"), esc(v20T("set.d_src_" + (X && X.src ? X.src : "none")))], [v20T("set.d_hash"), man ? `<span class="hash">${esc(man.sha256.slice(0, 16))}…</span>` : esc(v20T("set.v_none"))],
+      [v20T("set.d_stored"), esc(X && X.stored ? String(X.stored).slice(0, 10) : v20T("set.v_none"))], [v20T("set.d_queried"), esc(ret || v20T("set.v_none"))],
+      [v20T("set.d_net"), esc(v20T(navigator.onLine ? "set.d_online" : "set.d_offline"))], [v20T("set.d_sw"), esc(v20T(sw ? "set.d_sw_on" : "set.d_sw_off"))]])}
+    <div class="v20-row">${man ? `<button type="button" data-v20do="verify">${esc(v20T("set.d_verify"))}</button><button type="button" data-v20do="refresh">${esc(v20T("set.d_refresh"))}</button>` : `<button type="button" data-v20do="load">${esc(v20T("set.d_load"))}</button>`}</div>
+    ${msg}<p>${esc(v20T("set.d_note"))}</p></section>
+  <section class="v20-set-sec" data-v20sec="loc"><h3>${esc(v20T("set.loc"))}</h3><p>${esc(v20T("set.loc_p"))}</p><p>${esc(v20T("set.loc_saved", { n: txInt(saved) }))}</p>
+    <div class="v20-row"><button type="button" data-v20do="forget"${saved ? "" : " disabled"}>${esc(v20T("set.loc_forget"))}</button></div></section>
+  <section class="v20-set-sec" data-v20sec="about"><h3>${esc(v20T("set.about"))}</h3><p>${esc(v20T("set.about_p"))}</p>
+    ${v20Kv([[v20T("set.v_ui"), esc(V20.version)], [v20T("set.v_engine"), esc((S.app && S.app.algorithm_version) || v20T("set.v_none"))], [v20T("set.v_data"), esc((man && man.version) || "tai-v19-data-2.0.0")], [v20T("set.v_cache"), esc(V20.cache || v20T("set.v_none"))]])}</section></div>`;
+}
+function v20Render() {
+  if (V20.open === "nav") { const d = v20Dialog("v20-nav"); d.innerHTML = v20NavHTML(); }
+  if (V20.open === "set") { const d = v20Dialog("v20-set"); const f = document.activeElement && document.activeElement.closest && document.activeElement.closest("#v20-set") ? v20FocusKey(document.activeElement) : null; d.innerHTML = v20SetHTML(); if (f) { const n = d.querySelector(f); if (n) n.focus(); } }
+  v20Header();
+}
+function v20FocusKey(n) { for (const a of ["data-v20lang", "data-v20still", "data-v20large", "data-v20mode", "data-v20contrast", "data-v20do", "data-v20legal"]) if (n.hasAttribute(a)) return `[${a}="${n.getAttribute(a)}"]`; return null; }
+function v20OpenSheet(which) {
+  v20Close(true); v20JnClose();
+  V20.opener = document.activeElement; V20.open = which;
+  const d = v20Dialog(which === "nav" ? "v20-nav" : "v20-set");
+  if (which === "set" && !V20.cache && typeof caches !== "undefined") caches.keys().then(k => { const c = k.filter(x => x.startsWith("asterro-")).sort().pop(); V20.cache = c ? c.replace("asterro-", "") : null; if (V20.open === "set") v20Render(); }).catch(() => { });
+  v20Render(); d.hidden = false; document.body.classList.add("v20-lock");
+  setTimeout(() => { const t = document.getElementById(which === "nav" ? "v20-nav-title" : "v20-set-title"); if (t) t.focus(); }, 0);
+}
+function v20Close(silent) {
+  const was = V20.open; if (!was) return;
+  for (const id of ["v20-nav", "v20-set"]) { const d = document.getElementById(id); if (d) d.hidden = true; }
+  V20.open = null; V20.msg = null; document.body.classList.remove("v20-lock"); v20Header();
+  if (!silent) { const o = V20.opener && V20.opener !== document.body && document.contains(V20.opener) && V20.opener.offsetParent !== null ? V20.opener : document.getElementById(was === "nav" ? "v20-menu" : "v20-settings"); if (o && o.focus) o.focus(); }
+  V20.opener = null;
+}
+
+/* ---------------------------------------------------------------- Scientific Disclaimer (in the legal dialog) */
+{ const f = typeof dsLegalOpen === "function" ? dsLegalOpen : null; if (f) dsLegalOpen = function (kind) {
+  if (kind !== "disclaimer") return f.apply(this, arguments);
+  let d = document.getElementById("ds-legal-dlg");
+  if (!d) { d = document.createElement("div"); d.id = "ds-legal-dlg"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "ds-legal-title"); d.setAttribute("data-i18n-done", ""); document.body.appendChild(d); }
+  DS.legalOpener = DS.legalOpener || document.activeElement; DS.legal = kind;
+  const S4 = [["s1", tx("ui.disclaimer")], ["s2", v20T("dis.s2.p")], ["s3", v20T("dis.s3.p")], ["s4", v20T("dis.s4.p")]];
+  d.innerHTML = `<div class="ds-legal-box" data-dslegalbox="disclaimer"><div class="ds-legal-head"><div><h2 id="ds-legal-title" tabindex="-1">${esc(v20T("dis.title"))}</h2><p class="meta">${esc(tx("ds.legal.updated"))}</p></div>
+    <button type="button" class="btn-ghost btn-sm" data-dslegalclose>${esc(tx("ds.legal.close"))}</button></div>
+    ${S4.map(([k, p]) => `<h3>${esc(v20T("dis." + k + ".h"))}</h3><p>${esc(p)}</p>`).join("")}
+    <p class="meta"><a href="#terms" data-dslegal="terms">${esc(tx("ds.legal.terms"))}</a> · <a href="#privacy" data-dslegal="privacy">${esc(tx("ds.legal.privacy"))}</a></p></div>`;
+  d.hidden = false; if (typeof dsNoEmDash === "function") dsNoEmDash(d);
+  setTimeout(() => { const t = document.getElementById("ds-legal-title"); if (t) t.focus(); }, 0);
+}; }
+
+/* ---------------------------------------------------------------- Local Impact: USGS MRDS context */
+function v20MrdsLoad() {
+  if (V20.mrds || V20.mrdsLoading) return V20.mrdsLoading;
+  V20.mrdsErr = null;
+  V20.mrdsLoading = fetch("data/v20/mrds.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(j => { if (!j || !j.cells || !j.nearest_table) throw new Error("format"); V20.mrds = j; })
+    .catch(e => { V20.mrdsErr = String(e.message || e); }).finally(() => { V20.mrdsLoading = null; const n = document.querySelector("[data-v20mrds]"); if (n && typeof LI !== "undefined" && LI.i != null) n.innerHTML = v20MrdsHTML(LI.i); });   // in place: focus and scroll stay where they are
+  return V20.mrdsLoading;
+}
+function v20MrdsHTML(i) {
+  const head = `<div class="lbl">${esc(v20T("mrds.h"))}</div><p class="meta">${keep(v20T("mrds.src"))} · <span class="v9x-ag other">${esc(v20T("mrds.not_nasa"))}</span></p>`;
+  const M = V20.mrds;
+  if (!M) { if (!V20.mrdsErr) v20MrdsLoad(); return head + `<p class="meta" role="status">${esc(v20T(V20.mrdsErr ? "mrds.error" : "mrds.loading"))}</p>`; }
+  const r = Math.round(M.radius_km), c = M.cells[String(S.cell[i])];
+  const pct = (M.country_share[0] || [0, 0, 0])[2];
+  let body;
+  if (!c) body = `<p>${esc(v20T("mrds.none", { r: txInt(r) }))}</p>`;
+  else {
+    const t = M.nearest_table[c[3]] || [];
+    body = v20Kv([[v20T("mrds.n", { r: txInt(r) }), esc(txInt(c[0]))], [v20T("mrds.prod"), esc(txInt(c[1]))],
+      [v20T("mrds.near"), esc(v20T("mrds.near_v", { name: t[1] || t[0], com: t[2] || "–", stat: t[3] || "–", country: t[4] || "–", d: txNum(c[2], 1) }))],
+      [v20T("mrds.top"), c[4].map(k => keep(M.commodities[k])).join(", ") || "–"]]);
+  }
+  return head + body + `<p class="meta">${esc(v20T("mrds.lim", { pct: Math.round(pct) }))}</p><p class="meta">${esc(v20T("mrds.meta", { date: M.file_date, q: M.retrieved, sha: M.raw_sha256.slice(0, 16) + "…" }))}</p>`;
+}
+{ const f = viewLocal; viewLocal = function () {
+  let h = f.apply(this, arguments);
+  try {
+    if (typeof LI !== "undefined" && LI.i != null) {
+      // inside the data-layer section (the section order of Local Impact stays as V19x left it)
+      const blk = `<div class="v20-mrds" data-v20mrds data-i18n-done>${v20MrdsHTML(LI.i)}</div>`;
+      const a = h.indexOf('<section class="sec li-sec" data-lisec="v19x"'), z = a >= 0 ? h.indexOf("</section>", a) : -1;
+      if (z >= 0) h = h.slice(0, z) + blk + h.slice(z);
+      else { const k = h.indexOf('<section class="sec li-sec" data-lisec="report"'); const sec = `<section class="sec li-sec" data-i18n-done>${blk}</section>`; h = k >= 0 ? h.slice(0, k) + sec + h.slice(k) : h + sec; }
+    }
+  } catch (e) { console.error(e); }
+  return h;
+}; }
+
+/* ---------------------------------------------------------------- events */
+document.addEventListener("click", e => {
+  const t = e.target; if (!t || !t.closest) return;
+  if (t.closest("[data-v20home]")) { e.preventDefault(); v20Home(); return; }
+  if (t.closest("#v20-menu")) { V20.open === "nav" ? v20Close() : v20OpenSheet("nav"); return; }
+  if (t.closest("#v20-settings")) { V20.open === "set" ? v20Close() : v20OpenSheet("set"); return; }
+  if (t.closest("[data-v20close]") || t.id === "v20-nav" || t.id === "v20-set") { v20Close(); return; }
+  const g = t.closest("[data-v20go]"); if (g) { const k = g.dataset.v20go; v20Close(true); try { V20_GO[k](); } catch (err) { console.error(err); } return; }
+  const lg = t.closest("[data-v20legal]"); if (lg) { const k = lg.dataset.v20legal, op = document.getElementById("v20-settings"); v20Close(true); if (typeof DS !== "undefined") DS.legalOpener = op; dsLegalOpen(k); return; }
+  const P = V20.prefs, b = t.closest("button"); if (!b || !b.closest("#v20-set")) return;
+  if (b.dataset.v20lang) { setLang(b.dataset.v20lang); v20Render(); return; }
+  if (b.dataset.v20still) { P.still = b.dataset.v20still === "1"; if (window.GLOBE) GLOBE.autoRotate = !P.still && !(matchMedia("(prefers-reduced-motion: reduce)").matches); v20SavePrefs(); v20Render(); return; }
+  if (b.dataset.v20large) { P.large = b.dataset.v20large === "1"; v20SavePrefs(); v20ApplyPrefs(); v20Render(); return; }
+  if (b.dataset.v20contrast) { P.contrast = b.dataset.v20contrast === "1"; v20SavePrefs(); v20ApplyPrefs(); v20Render(); return; }
+  if (b.dataset.v20mode) { dsSetMode(b.dataset.v20mode); v20Render(); return; }
+  const k = b.dataset.v20do; if (!k) return;
+  const say = (key, bad) => { V20.msg = { t: tx(key), bad: !!bad }; v20Render(); };
+  if (k === "forget") { liStore([]); if (typeof LI !== "undefined") LI.results = null; say("v20.set.loc_done"); }
+  else if (k === "load") { v9xLoad().then(() => { V20.msg = null; v20Render(); }); }
+  else if (k === "refresh") { const old = V9X.man && V9X.man.sha256; V9X.err = null; v9xLoad(true).then(() => say("v19x.msg." + (V9X.src === "server" ? (V9X.man.sha256 === old ? "same" : "updated") : (V9X.online ? "failed" : "offline")), V9X.src !== "server")); }
+  else if (k === "verify") { v9xGet("cube").then(async r => { if (!r) return say("v19x.msg.nostore", true); const v = await AsterroV19X.verify(r.manifest, r.buffer, V9X.cellSha || await v9xCellSha()); say("v19x.msg." + (v.ok ? "verify_ok" : "verify_bad"), !v.ok); }); }
+});
+document.addEventListener("keydown", e => {
+  if (e.target && e.target.dataset && e.target.dataset.v20home && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); v20Home(); return; }
+  if (!V20.open) return;
+  const d = document.getElementById(V20.open === "nav" ? "v20-nav" : "v20-set"); if (!d || d.hidden) return;
+  if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); v20Close(); return; }
+  if (e.key === "Tab") {
+    const f = [...d.querySelectorAll("button:not([disabled]),a[href],[tabindex='-1'],select,input")].filter(n => n.offsetParent !== null || n === document.activeElement);
+    if (!f.length) return; const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+  }
+}, true);
+window.addEventListener("hashchange", () => { if (location.hash === "#disclaimer") dsLegalOpen("disclaimer"); });
+
+
+/* ---------------------------------------------------------------- fonts: Helvetica and Playfair Display only
+ * The baseline page links three other web fonts; the V20 tokens no longer use them, so the link is removed and the
+ * Playfair Display italic used by the hero word is requested instead (Georgia is the offline fallback). The protected
+ * baseline file index.src.html is not edited. */
+(function v20Fonts() {
+  try {
+    for (const l of document.querySelectorAll('link[rel="stylesheet"][href*="fonts.googleapis.com"]')) if (/Big\+Shoulders|Instrument\+Sans|JetBrains\+Mono/.test(l.href)) l.remove();
+    if (!document.getElementById("v20-font")) { const l = document.createElement("link"); l.id = "v20-font"; l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap"; document.head.appendChild(l); }
+  } catch (e) { /* offline: Georgia fallback */ }
+})();
+
+/* ---------------------------------------------------------------- the 3D globe is the default at every width
+ * The baseline switches phones (< 760 px) to the flat map once the data load. V20 keeps the globe until the person
+ * chooses the map themselves; the Map button works exactly as before. */
+document.addEventListener("pointerdown", e => { if (e.target && e.target.closest && e.target.closest("[data-proj]")) V20.projTouched = true; }, true);
+document.addEventListener("keydown", e => { if (e.target && e.target.closest && e.target.closest("[data-proj]")) V20.projTouched = true; }, true);
+{ const f = setProj; setProj = function (p) { if (p === 1 && !V20.projTouched && !S.searched && typeof innerWidth === "number" && innerWidth < 760) p = 0; return f.call(this, p); }; }
+
+/* ---------------------------------------------------------------- phones: the atlas button scrolls to the atlas once the search has laid out
+ * With the globe as the phone default the search reveal can finish later than the baseline's fixed 400 ms scroll, so
+ * the panel is brought into view again when the results exist (the baseline handler still runs as before). */
+document.addEventListener("click", e => {
+  if (!e.target || !e.target.closest || !e.target.closest("#hero-atlas") || innerWidth > 760) return;
+  const go = () => { const l = document.getElementById("left"); if (l && S.tab === "atlas") l.scrollIntoView({ block: "start" }); };
+  dsAfterSearch(() => { setTimeout(go, 400); setTimeout(go, 1600); });
+});
+
+/* ---------------------------------------------------------------- language changes and boot */
+{ const f = setLang; setLang = function () { const r = f.apply(this, arguments); try { v20Title(); v20Header(); if (V20.open) v20Render(); } catch (e) { console.error(e); } return r; }; }
+(function v20Boot() {
+  const go = () => {
+    v20Title(); v20Header(); v20ApplyPrefs();
+    if (location.hash === "#disclaimer") dsLegalOpen("disclaimer");
+    let n = 0; const iv = setInterval(() => { v20ApplyPrefs(); v20Header(); v20Title(); if (++n > 20 || window.GLOBE) { v20ApplyPrefs(); clearInterval(iv); } }, 250);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
+})();
 
 /* ===== Interface languages for the Markdown report =====
  * The baseline builds the report as English Markdown (reportMD, protected). In another language the report sheet

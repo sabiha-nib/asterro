@@ -4,7 +4,7 @@
 
 1. Prohibited-element audit of the RENDERED interface (computed styles and visible text), on the landing, the Atlas,
    the Research Laboratory (every workflow step) and the legal dialog, at 1440 x 900, 820 x 1180 and 390 x 844:
-   decorative gradients (data colour scales excepted), shadows, translucent blur, transitions and animations (hover
+   decorative gradients (data colour scales excepted), shadows, translucent blur (V20: allowed only on [data-glass] floating surfaces), transitions and animations (hover
    animation, animated arrows), corner radii above 8 px on boxes, coloured left stripes, pure white backgrounds,
    Inter / Geist / Space Grotesk, monospace outside code, purple, neon and pastel colours, em dashes, emojis,
    checkmarks, sparkles, the "not just X, it's Y" formula, testimonials and pricing, rows of exactly three cards and
@@ -45,6 +45,7 @@ AUDIT = r"""(scope) => {
   const hsl = ([r, g, b]) => { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; let h = 0, s = 0;
     if (mx !== mn) { const d = mx - mn; s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn); h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; } return [h, s, l]; };
   const DATA_SCALE = e => !!e.closest('.legend, .ramp, .lg-ramp, [data-scale], .track, .dm-et, input[type=range], .fill, .bar, .spark, svg, canvas');
+  const SELECTED = e => e.matches('[aria-pressed=true],[aria-selected=true],[aria-checked=true],[aria-current=true],[aria-current=page]') && [e.style.background, getComputedStyle(e).backgroundColor].some(c => /219, 234, 254|#dbeafe/i.test(c));
   const CODE = e => !!e.closest('code, pre, kbd, samp, .mono, .hash, .xt-cfg');
   const els = [root, ...root.querySelectorAll('*')].filter(e => !e.closest('canvas, svg, script, style, noscript, option') || e.tagName === 'svg');
   for (const e of els) {
@@ -53,7 +54,7 @@ AUDIT = r"""(scope) => {
     if (/gradient/.test(cs.backgroundImage) && !DATA_SCALE(e)) V.push('gradient ' + n + ' ' + cs.backgroundImage.slice(0, 60));
     if (cs.boxShadow !== 'none') V.push('shadow ' + n);
     if (cs.textShadow !== 'none') V.push('text-shadow ' + n);
-    if ((cs.backdropFilter && cs.backdropFilter !== 'none') || (cs.webkitBackdropFilter && cs.webkitBackdropFilter !== 'none')) V.push('glass ' + n);
+    if (((cs.backdropFilter && cs.backdropFilter !== 'none') || (cs.webkitBackdropFilter && cs.webkitBackdropFilter !== 'none')) && !e.hasAttribute('data-glass')) V.push('glass ' + n);  // V20: glass only on surfaces marked [data-glass] (floating controls, overlays, dialogs)
     if (cs.transitionDuration.split(',').some(d => parseFloat(d) > 0)) V.push('transition ' + n);
     if (cs.animationName !== 'none') V.push('animation ' + n);
     const rad = parseFloat(cs.borderTopLeftRadius) || 0;
@@ -72,7 +73,8 @@ AUDIT = r"""(scope) => {
       const [h, s, l] = hsl(c);
       if (h >= 255 && h <= 320 && s > 0.25 && l > 0.15 && l < 0.85 && !DATA_SCALE(e)) V.push('purple ' + prop + ' ' + n + ' ' + val);
       if (s > 0.85 && l > 0.45 && l < 0.7 && !DATA_SCALE(e)) V.push('neon ' + prop + ' ' + n + ' ' + val);
-      if (prop === 'background' && l > 0.8 && s > 0.25) V.push('pastel ' + n + ' ' + val);
+      const chroma = (Math.max(c[0], c[1], c[2]) - Math.min(c[0], c[1], c[2])) / 255;  // V20: HSL saturation is unstable near white; near-white slate tints (#F8FAFC, #E2E8F0) have almost no chroma
+      if (prop === 'background' && l > 0.8 && s > 0.25 && chroma > 0.08 && !SELECTED(e)) V.push('pastel ' + n + ' ' + val);  // V20: pale blue #DBEAFE is the selected-surface colour
     }
     if (cs.display === 'grid' || cs.display === 'flex') {
       const kids = [...e.children].filter(k => vis(k) && (() => { const k2 = getComputedStyle(k), b = rgb(k2.backgroundColor); return parseFloat(k2.borderTopWidth) > 0 || (b && b[3] > 0.2); })() && k.getBoundingClientRect().height > 70);

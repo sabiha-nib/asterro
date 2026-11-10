@@ -14,7 +14,7 @@ States (cumulative evidence, never assumed):
 The headline state is the furthest progress state reached; BLOCKED or REQUIRES_AUTHENTICATION when nothing was
 downloaded; NOT_INVESTIGATED when there is no evidence at all.
 """
-import json
+import json, os
 from .common import p, VERSION
 
 ORDER = ["DISCOVERED", "ACCESSIBLE", "DOWNLOADED", "VALIDATED", "PROCESSED", "INTEGRATED", "CACHED"]
@@ -123,6 +123,19 @@ def build(rep, cube, cmr_records, core):
                      "retrieved": None, "route": ROUTE, "processing": "per-cell parsing; lithology classes", "cube_variables": [], "raw_sha256": src.get("raw_sha256"),
                      "validation": f"all {len(rep['sites'].get('cross_check', {}).get('gbif', [])) and 'responses'} HTTP 200 with SHA-256; age order checked; the 16 cells transcribed earlier agree with these exact responses ({agree})",
                      "limitations": lim + "; a sample of 101 cells, not coverage", "flags": FULL + (["CACHED"] if "data/v19/env/sites.json" in core else [])})
+    # ---------------------------------------------------------------- V20: USGS Mineral Resources Data System (not NASA)
+    mp = p("public", "data", "v20", "mrds.json")
+    if os.path.exists(mp):
+        m = json.load(open(mp, encoding="utf-8"))
+        rows.append({"id": "usgs_mrds", "name": "USGS Mineral Resources Data System (MRDS), complete CSV", "agency": "U.S. Geological Survey (not NASA)",
+                     "provider": m["provider"], "product": m["product"], "url": m["url"], "docs": "https://mrdata.usgs.gov/mrds/",
+                     "variables": ["site name, position, primary commodity, development status, country"], "units": "records; km", "spatial": "points (reported site positions)",
+                     "temporal": f"catalogue snapshot (file {m['file_date']}; metadata edition {m['metadata_edition']}; maintenance: {m['maintenance']})", "period": "as published",
+                     "coverage": f"global catalogue, {m['country_share'][0][2]}% of records in the {m['country_share'][0][0]}; {len(m['cells'])} land cells have a record within {int(m['radius_km'])} km",
+                     "retrieved": m["retrieved"], "route": ROUTE, "processing": f"records with valid coordinates ({m['used']} of {m['records']}); per cell: records within {int(m['radius_km'])} km of the cell centre, producers, nearest record and the three most frequent primary commodities",
+                     "validation": f"archive SHA-256 pinned in src/v20/mrds.py; {m['excluded_bad_coordinates']} records with unusable coordinates excluded and counted; Atacama example checked in tests",
+                     "cube_variables": [], "raw_sha256": m["raw_sha256"], "limitations": m["limitations"],
+                     "flags": FULL + (["CACHED"] if "data/v20/mrds.json" in core else [])})
     # ---------------------------------------------------------------- NASA collections found through CMR
     gibs_rel = {v[1]: "gibs_" + k.lower() for k, v in GIBS.items()}
     for r in cmr_records:
@@ -146,7 +159,7 @@ def build(rep, cube, cmr_records, core):
     now = {"power_wind": "power_ws10m", "macrostrat_units": "macrostrat_sites", "macrostrat": "macrostrat_sites", "gvp_holocene": "gvp_holocene_full", "gvp_volcanoes": "gvp_holocene_full",
            "gbif_extremophiles": "gbif_sites", "gbif": "gbif_sites", "modis_snow": "gibs_modis_terra_l3_snow_cover_monthly_average_pct", "modis_vegetation": "gibs_modis_terra_l3_evi_monthly",
            "merra2_aerosol": "gibs_merra2_dust_surface_mass_concentration_monthly", "merra2_aer": "gibs_merra2_dust_surface_mass_concentration_monthly", "modis_aerosol": "power_aod_55",
-           "gibs_modis_aod": "gibs_misr_aerosol_optical_depth_avg_green_monthly", "merra2_wind": "power_ws10m", "merra2": "power_ws10m"}
+           "gibs_modis_aod": "gibs_misr_aerosol_optical_depth_avg_green_monthly", "merra2_wind": "power_ws10m", "merra2": "power_ws10m", "usgs_mrds": "usgs_mrds"}
     for s in V19["sources"]:
         st = s["state"]
         if st == "integrated_validated": f = FULL + (["CACHED"] if cached else [])
@@ -172,7 +185,7 @@ def build(rep, cube, cmr_records, core):
         {"route": "this build environment (cloud)", "result": "every provider refused: the egress proxy answered 403 to CONNECT", "class": "network_policy"},
         {"route": "the user's computer, shell", "result": "every provider refused: the shell's proxy answered 403 to CONNECT", "class": "network_policy"},
         {"route": "WebFetch service", "result": "Macrostrat, GVP and GBIF answered as transcriptions only; POWER and SoilGrids refused by robots.txt; GIBS images: server error; URLs over about 250 characters refused", "class": "service_limits"},
-        {"route": "the user's computer, Claude desktop browser", "result": "POWER, GIBS, CMR, GVP, Macrostrat and GBIF answered; files saved byte for byte; POWER refused some boxes with HTTP 429 (rate limit)", "class": "working"},
+        {"route": "the user's computer, Claude desktop browser", "result": "POWER, GIBS, CMR, GVP, Macrostrat, GBIF and (V20) USGS MRDS answered; files saved byte for byte; POWER refused some boxes with HTTP 429 (rate limit)", "class": "working"},
     ]
     return {"schema": "asterro.v19x.inventory/1", "version": VERSION, "states": STATES, "n": len(rows), "nasa": sum(r["nasa"] for r in rows),
             "counts": counts, "rows": rows, "routes": routes}

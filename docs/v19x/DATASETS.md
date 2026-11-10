@@ -1,6 +1,6 @@
 # ASTERRO V19 data extension: dataset report
 
-Generated from `public/data/v19/env/inventory.json` (129 datasets, 94 NASA, 35 from other providers) and `data/v19/x/build_report.json`. Cube: 39 variables x 76781 land cells, 5,988,918 bytes, SHA-256 `fa98e260ec178f8a…`.
+Generated from `public/data/v19/env/inventory.json` (130 datasets, 94 NASA, 36 from other providers) and `data/v19/x/build_report.json`. Cube: 39 variables x 76781 land cells, 5,988,918 bytes, SHA-256 `fa98e260ec178f8a…`.
 
 States are cumulative evidence: DISCOVERED → ACCESSIBLE → DOWNLOADED → VALIDATED → PROCESSED → INTEGRATED → CACHED; or BLOCKED / REQUIRES_AUTHENTICATION when nothing was downloaded.
 
@@ -9,7 +9,7 @@ States are cumulative evidence: DISCOVERED → ACCESSIBLE → DOWNLOADED → VAL
 | State | Datasets |
 |---|---|
 | BLOCKED | 48 |
-| CACHED | 37 |
+| CACHED | 38 |
 | REQUIRES_AUTHENTICATION | 32 |
 | INTEGRATED | 10 |
 | NOT_INVESTIGATED | 2 |
@@ -190,7 +190,7 @@ States are cumulative evidence: DISCOVERED → ACCESSIBLE → DOWNLOADED → VAL
 | MODIS land cover type, IGBP scheme, annual (GIBS) | NASA; NASA ESDIS, Global Imagery Browse Services (GIBS) | GIBS WMS layer MODIS_Combined_L3_IGBP_Land_Cover_Type_Annual (EPSG:4326, PNG) with colormap v1.3 | source 500 x 500 Meters; imagery requested at 3600 x 1800 pixels | 2024-01 to 2024-01 | CACHED |
 | MODIS land/water mask (GIBS) | NASA; NASA ESDIS, Global Imagery Browse Services (GIBS) | GIBS WMS layer MODIS_Terra_L3_Land_Water_Mask (EPSG:4326, PNG) with colormap v1.3 | source 250 x 250 Meters; imagery requested at 3600 x 1800 pixels | 2015-01 to 2015-01 | CACHED |
 
-## 5. Non-NASA datasets acquired in this release: 4
+## 5. Non-NASA datasets acquired in this release: 5
 
 | Dataset | Agency / provider | Product | Resolution | Period | State |
 |---|---|---|---|---|---|
@@ -198,6 +198,7 @@ States are cumulative evidence: DISCOVERED → ACCESSIBLE → DOWNLOADED → VAL
 | Smithsonian GVP Pleistocene volcano list (complete) | Smithsonian Institution (not NASA); Global Volcanism Program, National Museum of Natural History | Volcanoes of the World: GVP-VOTW:Smithsonian_VOTW_Pleistocene_Volcanoes (WFS 2.0, GeoJSON) | points (summit or field centre) | Pleistocene | CACHED |
 | Macrostrat geological map units at 101 cells | Macrostrat, University of Wisconsin-Madison (not NASA); Macrostrat, University of Wisconsin-Madison | https://macrostrat.org/api/v2/geologic_units/map | cell centre point query | as published | CACHED |
 | GBIF occurrence counts at 101 cells | GBIF Secretariat (not NASA); GBIF Secretariat | https://api.gbif.org/v1/occurrence/search | the 0.5 x 0.625 deg cell | as published | CACHED |
+| USGS Mineral Resources Data System (MRDS), complete CSV | U.S. Geological Survey (not NASA); U.S. Geological Survey, Mineral Resources Program | Mineral Resources Data System (MRDS), full CSV | points (reported site positions) | as published | CACHED |
 
 ## 9a. Datasets that need authentication (provider metadata): 32
 
@@ -323,7 +324,7 @@ States are cumulative evidence: DISCOVERED → ACCESSIBLE → DOWNLOADED → VAL
 | this build environment (cloud) | every provider refused: the egress proxy answered 403 to CONNECT | network_policy |
 | the user's computer, shell | every provider refused: the shell's proxy answered 403 to CONNECT | network_policy |
 | WebFetch service | Macrostrat, GVP and GBIF answered as transcriptions only; POWER and SoilGrids refused by robots.txt; GIBS images: server error; URLs over about 250 characters refused | service_limits |
-| the user's computer, Claude desktop browser | POWER, GIBS, CMR, GVP, Macrostrat and GBIF answered; files saved byte for byte; POWER refused some boxes with HTTP 429 (rate limit) | working |
+| the user's computer, Claude desktop browser | POWER, GIBS, CMR, GVP, Macrostrat, GBIF and (V20) USGS MRDS answered; files saved byte for byte; POWER refused some boxes with HTTP 429 (rate limit) | working |
 
 ## Cube variables
 
