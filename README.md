@@ -123,6 +123,11 @@ modelled:
   exploring the Moon and Mars?" Your position (with permission, never sent anywhere), a typed place or coordinates;
   a local profile with provenance for every value, comparison with any Moon or Mars target, what lies within 50–500 km,
   local discoveries with evidence and hypotheses, exploration relevance and a downloadable report.
+* **Planetary intelligence** (V19; see [docs/v19/README.md](docs/v19/README.md)): sixteen versioned science domains
+  that show no value without data, nine separate measures, why a candidate ranked, research objectives gated by data,
+  validation of the machine-learning patterns, a nine-state Data Integration Registry with per-dataset access
+  diagnostics, and geological map units, Holocene volcanoes and biological records (Macrostrat, Smithsonian GVP, GBIF)
+  at 16 analysed cells, shown beside published Moon and Mars observations without being scored.
 
 ## 5. Architecture
 

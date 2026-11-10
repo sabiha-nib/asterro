@@ -185,3 +185,21 @@ See `docs/v17/README.md` (section 14) and `docs/v17/DATA_REGISTRY.md`.
   available (providers unreachable); rivers, salt flats, volcanoes and caves are not shown nearby for the same reason.
 - Name search is offline and knows only Natural Earth regions and countries.
 - No external geocoding is used, by design, so that the position never leaves the browser.
+
+## V19 planetary intelligence
+
+- The build environment refuses every provider route (`data/v19/probe.json`). Through the WebFetch service, Macrostrat,
+  the Smithsonian GVP and GBIF were sampled at 16 cells only (`public/data/v19/site_samples.json`); everywhere else
+  geology and biology say "not sampled". The sampled values are transcriptions of the responses, not byte-verified files.
+- NASA POWER and SoilGrids refuse the fetch service (robots.txt), and Wikidata's SPARQL URLs exceed its length limit, so
+  wind, aerosols, soils and caves remain unavailable. Mineralogy, surface materials, dust, subsurface and resources show
+  no values.
+- Macrostrat units at these scales (1:5M or coarser) are regional classes, not field observations. GBIF counts reflect
+  sampling effort, and presence records say nothing about habitability. The material-evidence view lists published
+  Jezero and Lunar South Pole observations beside Earth map classes without comparing them.
+- The POWER wind acquisition (`src/v19/acquire_power.py`) is written but has not been run.
+- Catalogue descriptions marked "unverified" have not been checked against the providers.
+- ML validation covers stability, sensitivity, geographic bias and missing data; unsupervised models have no labels, so
+  no accuracy exists. Only 5 of the 12 V17 hidden-combination cells persist under every random start.
+- Evidence strength counts the Earth side of aridity and annual temperature range as reanalysis (MERRA-2), not observation.
+- V19 strings are machine-assisted translations, not reviewed by native speakers.

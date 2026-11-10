@@ -162,3 +162,15 @@ See `docs/v18/README.md`. Added: `app/frontend/phase4/{engine_v18.js, ui_31_loca
 `tests/phase4/{test_v18_local.mjs, test_v18_i18n.mjs, ui_v18_local_smoke.py}`, `docs/v18/`. Changed: `q1_design.css`
 (Local Impact styles, tab order, link-button colour on light panels), `tests/phase4/ui_layout_sweep.py` (Local Impact
 at seven viewports), `package.json`, `README.md`. Unchanged: the engine, V17 products, the registry, all 79 protected files.
+
+## V19: planetary intelligence frontier
+
+See `docs/v19/README.md`. Added: `src/v19/` (catalogue, registry, mlval, acquire_power), `scripts/{build_v19.py,
+probe_v19.py, v19_baseline.py, v19_dataset_report.py}`, `data/v19/` (baseline, probe, ml_validation),
+`public/data/v19/`, `app/frontend/phase4/{data_v19.js, engine_v19.js, ui_32_v19.js, i18n_95–99_v19_*.js}`,
+`tests/test_v19.py`, `tests/phase4/{test_v19_engine.mjs, test_v19_i18n.mjs, ui_v19_smoke.py}`, `docs/v19/`.
+Site samples (V19.1): `src/v19/samples.py`, `data/v19/samples/` (request URLs, transcribed values), `data/v19/acquired/`
+(hashed manifests for Macrostrat, GVP, GBIF), `data/v19/fetch_attempts.json`, `public/data/v19/site_samples.json`; the
+engine's geology and biology domains (0.2.0) show evidence only at sampled cells; a material-evidence view.
+Changed: `package.json` (V19 tests), `README.md`, `q1_design.css` (material view layout). Unchanged: the engine, the V17 products and registry, the V18 module,
+all 79 protected files, datasets, routes, reports.
