@@ -371,3 +371,7 @@ header.bar,.console,.viewport,.hero,#jn,.jl-toast{color-scheme:dark}
 @media (max-width:560px){table.t.xt-t.li-prof td.n{white-space:normal}table.t.xt-t.li-prof tbody th{min-width:96px}table.t.xt-t.li-prof td{padding-left:5px;padding-right:5px}}
 /* link buttons (.jn-lnk) were tuned for the dark theme; on the light panels they take the Moon-blue link colour */
 #left .jn-lnk,#right .jn-lnk{color:var(--moon)}
+/* ---- V19 site samples: material evidence side by side (never scored) */
+.v9-mat{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.v9-mat .xt-list li{line-height:1.5}
+@media (max-width:720px){.v9-mat{grid-template-columns:1fr}}
