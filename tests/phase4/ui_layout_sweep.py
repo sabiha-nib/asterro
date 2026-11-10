@@ -135,6 +135,11 @@ try:
             pg.evaluate("document.querySelector('[data-spcard]').scrollIntoView()")
             pg.screenshot(path=os.path.join(OUT, f"{tag}_surprise.png"))
             sweep(pg, f"{tag} Surprise me card", W, False)
+            # V18 Local Impact with an analysed place
+            pg.evaluate("setTab('local'); liSetPoint({ lat: -23.65, lon: -68.15 }, 'coordinates'); renderLeft()"); time.sleep(1.2)
+            pg.evaluate("window.scrollTo(0, 0); (document.querySelector('#left') || {}).scrollTop = 0")
+            pg.screenshot(path=os.path.join(OUT, f"{tag}_local_impact.png"))
+            sweep(pg, f"{tag} Local Impact", W, False)
             ctx.close()
         check(not errors, f"no page errors ({errors[:3]})")
 finally:

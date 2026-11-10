@@ -177,3 +177,11 @@ See `docs/v17/README.md` (section 14) and `docs/v17/DATA_REGISTRY.md`.
 - **Reference constants** (gravity, composition, day length) were transcribed from the NASA NSSDCA fact sheets and not
   re-retrieved.
 - **Translations** of the V17 strings are machine-assisted and have not been reviewed by native speakers.
+
+## V18 Local Impact
+
+- Every value describes the ~55 km grid cell containing the location, not the exact spot.
+- Land cover, water occurrence, vegetation, geology, mineral indicators, aerosols, wind, aspect and soil are not
+  available (providers unreachable); rivers, salt flats, volcanoes and caves are not shown nearby for the same reason.
+- Name search is offline and knows only Natural Earth regions and countries.
+- No external geocoding is used, by design, so that the position never leaves the browser.

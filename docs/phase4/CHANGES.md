@@ -155,3 +155,10 @@ i18n_85–89_v17_*.js}`, `tests/test_v17.py`, `tests/phase4/{test_v17_engine.mjs
 Changed: `ui_28_atlas.js` (card under the globe on tablets too), `ui_26_design.js` (the pictographic link arrow is
 dropped from rendered text), `q1_design.css` (V17 styles, Atlas overlays), `tests/phase4/ui_layout_sweep.py` (V17 views),
 `package.json` (V17 tests and builds), `README.md`. Unchanged: the engine, all 79 protected files, datasets, routes.
+
+## V18: Local Impact
+
+See `docs/v18/README.md`. Added: `app/frontend/phase4/{engine_v18.js, ui_31_local.js, i18n_90–94_v18_*.js}`,
+`tests/phase4/{test_v18_local.mjs, test_v18_i18n.mjs, ui_v18_local_smoke.py}`, `docs/v18/`. Changed: `q1_design.css`
+(Local Impact styles, tab order, link-button colour on light panels), `tests/phase4/ui_layout_sweep.py` (Local Impact
+at seven viewports), `package.json`, `README.md`. Unchanged: the engine, V17 products, the registry, all 79 protected files.

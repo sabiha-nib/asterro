@@ -119,6 +119,10 @@ modelled:
   * Surprise me: discovery modes on real data, three explanation levels, challenges and a journal that rewards
     careful reading, never a high score.
   * Data Integration Registry with eight explicit states; Science globe layer; 20-section research report.
+* **Local Impact** (V18; see [docs/v18/README.md](docs/v18/README.md)): "What can your location teach us about
+  exploring the Moon and Mars?" Your position (with permission, never sent anywhere), a typed place or coordinates;
+  a local profile with provenance for every value, comparison with any Moon or Mars target, what lies within 50–500 km,
+  local discoveries with evidence and hypotheses, exploration relevance and a downloadable report.
 
 ## 5. Architecture
 

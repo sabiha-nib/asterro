@@ -508,7 +508,7 @@
   },
   {
    "id": "jrc_gsw",
-   "class": "candidate",
+   "class": "referenced_only",
    "status": "blocked",
    "name": "JRC Global Surface Water",
    "provider": "European Commission JRC",
@@ -592,7 +592,7 @@
   },
   {
    "id": "mcs",
-   "class": "candidate",
+   "class": "referenced_only",
    "status": "blocked",
    "name": "MRO Mars Climate Sounder",
    "provider": "JPL / NASA PDS Atmospheres",

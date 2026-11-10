@@ -53,7 +53,7 @@ try:
         anim = pg.evaluate("getComputedStyle(document.querySelector('.ds-act')).animationName")
         check(anim == "none", f"reduced motion: no animation on the new cards ({anim})")
         tabs = pg.evaluate("[...document.querySelectorAll('nav.tabs button[data-tab]')].sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left).map(b => b.dataset.tab)")
-        check(tabs == ["explore", "discover", "atlas", "compare", "scenarios", "trajectory", "method", "data", "lab"], f"navigation grouped Explore · Discover · Compare · Learn · My research ({tabs})")
+        check(tabs == ["explore", "discover", "atlas", "local", "compare", "scenarios", "trajectory", "method", "data", "lab"], f"navigation grouped Explore · Discover · Compare · Learn · My research ({tabs})")
         # ---- explore through the first way in
         pg.click("[data-dsact=explore]"); pg.wait_for_function("S.searched", timeout=60000); time.sleep(0.6)
         check(pg.evaluate("S.tab") == "explore" and pg.evaluate("!document.querySelector('#app').classList.contains('is-hero')"), "'Explore Earth' runs the real search over every cell")
