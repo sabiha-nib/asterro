@@ -145,9 +145,12 @@ try:
             check(m["names"][:2] == ["Explore mode", "Research mode"], f"{dev}: Explore mode and Research mode are offered ({m['names']})")
             check("of 6 dimensions weighted" in m["cfg"], f"{dev}: the console summarises the analysis configuration ({m['cfg'][:60]})")
             if dev == "desktop":
+                # V20.1: the ranking may float over the globe, so the measure is the globe area NOT covered by the ranking
+                FREE = "(() => { const v = document.querySelector('#viewport').getBoundingClientRect(), r = document.querySelector('#right').getBoundingClientRect(); const cover = r.width > 0 && r.left < v.right && r.right > v.left ? Math.min(v.right, r.right) - Math.max(v.left, r.left) : 0; return v.width - cover; })()"
+                f0 = pg.evaluate(FREE)
                 tap('[data-dspanel="right"]'); time.sleep(0.6)
-                wr = pg.evaluate("({ hid: document.querySelector('#app').classList.contains('ds-hide-right'), vw: document.querySelector('#viewport').getBoundingClientRect().width })")
-                check(wr["hid"] and wr["vw"] > g["vw"] + 150, f"{dev} atlas: hiding the ranking widens the globe ({g['vw']:.0f} -> {wr['vw']:.0f} px)")
+                wr = pg.evaluate("({ hid: document.querySelector('#app').classList.contains('ds-hide-right'), vw: " + FREE + " })")
+                check(wr["hid"] and wr["vw"] > f0 + 150, f"{dev} atlas: hiding the ranking widens the uncovered globe ({f0:.0f} -> {wr['vw']:.0f} px)")
                 tap('[data-dspanel="right"]'); time.sleep(0.6)
                 check(not pg.evaluate("document.querySelector('#app').classList.contains('ds-hide-right')") and pg.evaluate("document.querySelectorAll('#right .site').length") >= 10, f"{dev} atlas: the ranking comes back")
                 pg.evaluate("dsSetMode('advanced')"); time.sleep(0.4)

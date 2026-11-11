@@ -1647,6 +1647,226 @@ select,input,textarea{font-family:var(--f-body)}
 .hero{overflow-y:auto}
 @media (max-height:640px){.hero{justify-content:flex-start;padding-top:20px}}
 .v20-mrds{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+
+/* ===== ASTERRO V20.1 visual transformation (UI only) =====
+ * Loaded after v20_design.css. Changes presentation only: the panels become deep navy, the globe becomes the centre of
+ * a rail + context panel + floating ranking workspace, the header becomes a slim command bar with a destination
+ * switch, and the opening screen, dialogs, forms, tables and phone layout are recomposed. Every element, id, order and
+ * behaviour underneath is unchanged. Palette (supplied): #0B1D3A #102552 #1E3A8A #3B82D8 #93C5FD #DBEAFE #F8FAFC
+ * #334155 #64748B; accents used: #FD6E6E (Mars, warnings), #B6DFED (both worlds), #0593C6 (links on navy). */
+:root{
+  --v21-rail:76px; --v21-hdr:56px;
+  --v21-bg:#0B1D3A; --v21-s1:#102552; --v21-s2:#13306A; --v21-s3:#1E3A8A; --v21-line:#1C3566; --v21-line2:#2B4C86;
+  --v21-ink:#F8FAFC; --v21-ink2:#CBD5E1; --v21-ink3:#A3B3C9; --v21-blue:#3B82D8; --v21-sky:#93C5FD; --v21-pale:#DBEAFE;
+  --v21-coral:#FD6E6E; --v21-cyan:#B6DFED;
+  --ground:#0B1D3A;
+}
+/* ---------------------------------------------------------------- one dark token set for every working surface */
+#left,#right,.console,#ds-acard,#sheet,#jn,.jl-toast,#v21-dest,#v21-rail,header.bar,.viewport,.hero{
+  --panel:#0B1D3A; --panel-2:#102552; --raise:#1E3A8A; --line:#1C3566; --line-2:#2B4C86;
+  --ink:#F8FAFC; --ink-2:#CBD5E1; --ink-3:#A3B3C9;
+  --mars:#FD6E6E; --moon:#93C5FD; --cross:#B6DFED; --earth:#93C5FD;
+  --match:#7FC0A0; --partial:#E0B35A; --mismatch:#FD6E6E;
+  --accent:var(--mars); --accent-dim:#3A2340; --ds-focus:#93C5FD; --ds-sel:#1E3A8A; --ds-on-accent:#0B1D3A;
+  color:var(--ink); color-scheme:dark}
+#app[data-target="moon_south_pole"] :is(#left,#right,.console,#ds-acard,header.bar,.viewport,.hero),#app[data-target^="moon_"] :is(#left,#right,.console,#ds-acard,header.bar,.viewport,.hero){--accent:var(--moon)}
+#app[data-target="cross"] :is(#left,#right,.console,#ds-acard,header.bar,.viewport,.hero){--accent:var(--cross)}
+.panel,#left,#right{background:var(--v21-bg)}
+#left{border-right:1px solid var(--v21-line)}
+/* selected surfaces on navy: dark blue fill, sky edge (pale blue is kept for light reading surfaces) */
+:is(#left,#right,.console,#sheet,#jn,#v21-dest) :is([aria-pressed="true"],[aria-selected="true"],[aria-checked="true"],[aria-current="true"]):not(.site){background:var(--v21-s3)!important;color:var(--v21-ink)!important;border-color:var(--v21-sky)!important}
+.site[aria-current="true"]{background:var(--v21-s3)}
+.site:hover{background:var(--v21-s1)}
+#left a,#right a,#sheet a,#jn a{color:var(--v21-sky)}
+/* cards, callouts, boxes inside panels: one surface, one border */
+:is(#left,#right,#sheet,#jn) :is(.sheet-card,.jn-card,.dm-info,.callout,.xt-box,.xt-proc,.xt-det,.rq-item,.empty,.ds-sum,.ds-flow,.card,.box,details){background:var(--v21-s1);border-color:var(--v21-line2)}
+:is(#left,#right,#sheet,#jn) :is(input,select,textarea){background:var(--v21-s1);color:var(--v21-ink);border:1px solid var(--v21-line2);border-radius:6px}
+:is(#left,#right,#sheet,#jn) :is(input,select,textarea):focus-visible{border-color:var(--v21-sky)}
+:is(#left,#right,#sheet,#jn) option{background:#102552;color:#F8FAFC}
+:is(#left,#right,#sheet,#jn) table th{color:var(--v21-ink2);border-color:var(--v21-line2)}
+:is(#left,#right,#sheet,#jn) table td{border-color:var(--v21-line)}
+:is(#left,#right,#sheet,#jn) :is(.btn-ghost,.btn-sm,button.lnk){color:var(--v21-ink)}
+:is(#left,#right,#sheet,#jn) .btn-ghost,:is(#left,#right,#sheet,#jn) .btn-sm{border-color:var(--v21-line2)}
+#left .btn-primary,#right .btn-primary,#sheet .btn-primary{background:var(--v21-sky);border-color:var(--v21-sky);color:var(--v21-bg)}
+.sec{border-color:var(--v21-line)}
+.lbl{color:var(--v21-ink2)}
+
+/* ---------------------------------------------------------------- slim command bar */
+header.bar{background:var(--v21-bg);border-bottom:1px solid var(--v21-line);min-height:var(--v21-hdr);gap:14px}
+.brand-txt b{font:700 16px/1.1 var(--ds-display);letter-spacing:.12em}
+.brand-txt span{font:400 10.5px/1.25 var(--ds-font);color:var(--v21-ink3)}
+.tabs button{font:500 13.5px/1 var(--ds-font);color:var(--v21-ink3);padding:11px 12px 9px}
+.tabs button:hover{color:var(--v21-ink)}
+.tabs button[aria-selected="true"]{color:var(--v21-ink);border-bottom-color:var(--v21-sky)!important}
+.bar.nav-row>.tabs{border-top:1px solid var(--v21-line)}
+.btn-search{background:var(--v21-sky);color:var(--v21-bg);border-color:var(--v21-sky);border-radius:8px!important;padding:10px 18px}
+.i18n-hdr,#lang-sel,.i18n-hdr button{border-radius:8px!important}
+
+/* destination switch (the target radios), with each target's own shaded-relief thumbnail */
+.target-ctl{border:1px solid var(--v21-line2);border-radius:8px!important;background:var(--v21-s1);padding:3px;gap:2px;overflow:visible}
+.target-ctl button{border:0!important;border-radius:8px!important;padding:5px 14px 5px 5px;display:grid;grid-template-columns:30px auto;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;line-height:1.15;color:var(--v21-ink2);min-height:40px}
+.target-ctl button::before{content:"";grid-row:1 / 3;grid-column:1;width:30px;height:30px;border-radius:50%;background:#1E3A8A center/cover no-repeat;border:1px solid var(--v21-line2)}
+#tgt-mars::before{background-image:url("data/thumb_jezero_mola.png")}
+#tgt-moon::before{background-image:url("data/thumb_southpole_lola.png")}
+#tgt-cross::before{background-image:url("data/thumb_jezero_mola.png"),url("data/thumb_southpole_lola.png");background-size:50% 100%,50% 100%;background-position:left,right}
+.target-ctl button>i{grid-column:2;grid-row:1;font:600 10px/1.2 var(--ds-font)!important;letter-spacing:.06em!important;color:var(--v21-ink3)!important}
+.target-ctl button[aria-checked="true"]{background:var(--v21-s3);color:var(--v21-ink)}
+.target-ctl button[aria-checked="true"]::before{border-color:var(--v21-sky)}
+#tgt-mars[aria-checked="true"]>i{color:var(--v21-coral)!important}
+#tgt-moon[aria-checked="true"]>i{color:var(--v21-sky)!important}
+#tgt-cross[aria-checked="true"]>i{color:var(--v21-cyan)!important}
+.tc-atlas{display:flex;align-items:center;gap:6px;padding:0 6px 0 10px;border-left:1px solid var(--v21-line2)!important}
+.tc-atlas i{font:600 10px/1.2 var(--ds-font)!important;color:var(--v21-ink3)!important;font-style:normal}
+.tc-atlas select{background:transparent;color:var(--v21-ink);border:0;font:500 13px/1.2 var(--ds-font);max-width:150px}
+.tc-atlas select option{background:#102552;color:#F8FAFC}
+.v21-allbtn{font:500 13px/1 var(--ds-font);color:var(--v21-ink);background:transparent;border:1px solid var(--v21-line2);border-radius:8px!important;padding:9px 14px;min-height:40px;cursor:pointer;flex:none}
+
+/* ---------------------------------------------------------------- navigation rail (desktop) */
+#v21-rail{display:none}
+@media (min-width:1181px){
+  body{padding-left:var(--v21-rail)}
+  #v21-rail{display:flex;position:fixed;left:0;top:0;bottom:0;width:var(--v21-rail);flex-direction:column;align-items:stretch;gap:2px;padding:10px 6px;background:var(--v21-bg);border-right:1px solid var(--v21-line);z-index:45}
+  #v20-nav{padding-left:var(--v21-rail)}
+  #v20-nav .v20-sheet{border-left:0}
+}
+.v21-rb{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;padding:9px 2px;border-radius:8px!important;color:var(--v21-ink3);background:transparent;border:0;cursor:pointer;font:500 10.5px/1.15 var(--ds-font);text-align:center;overflow-wrap:anywhere}
+.v21-rb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5}
+.v21-rb[aria-current="true"]{color:var(--v21-ink);background:var(--v21-s1)}
+.v21-rb[aria-current="true"] svg{stroke:var(--v21-sky)}
+.v21-rb:active{background:var(--v21-s1)}
+.v21-logo{padding:6px 2px 12px;border-bottom:1px solid var(--v21-line);margin-bottom:6px;color:var(--v21-ink)}
+.v21-logo svg{width:28px;height:28px}
+.v21-sp{flex:1}
+
+/* ---------------------------------------------------------------- globe-first workspace (desktop) */
+@media (min-width:1181px){
+  #app:not(.is-hero) .stage{grid-template-columns:minmax(300px,348px) minmax(0,1fr) 0!important}
+  #app.wide:not(.is-hero) .stage{grid-template-columns:minmax(400px,min(600px,34vw)) minmax(0,1fr) 0!important}
+  #app.ds-hide-left:not(.is-hero) .stage{grid-template-columns:0 minmax(0,1fr) 0!important}
+  #app:not(.is-hero) #right{position:absolute;top:64px;right:14px;bottom:14px;width:296px;z-index:6;border:1px solid var(--v21-line2);border-radius:8px!important;overflow:auto;background:rgba(11,29,58,.94)}
+  #app.ds-hide-right:not(.is-hero) #right{display:none}
+  #app:not(.is-hero) .viewport .ds-paneltog[data-dspanel="right"]{right:324px}
+}
+.vp-top .seg{border-radius:8px!important;padding:3px}
+.vp-top .seg button{border-radius:8px!important;font:500 12.5px/1 var(--ds-font);padding:8px 12px;color:var(--v21-ink2)}
+.vp-top .seg button[aria-pressed="true"]{background:var(--v21-s3);color:var(--v21-ink)}
+.legend{border-radius:8px!important}
+.readout{background:rgba(16,37,82,.92);border-color:var(--v21-line2);border-radius:8px!important;font-family:var(--ds-font)}
+.status{font-family:var(--ds-font);color:var(--v21-ink3)}
+.ds-paneltog{border-radius:8px!important;background:rgba(16,37,82,.9)!important;border:1px solid var(--v21-line2)!important;color:var(--v21-ink)!important;font:500 12px/1 var(--ds-font)!important}
+#markers .mk,#markers span{font-family:var(--ds-font)}
+
+/* compact scientific controls (the weight console) */
+.console{background:var(--v21-bg);border-top:1px solid var(--v21-line);padding:8px 16px 8px;gap:6px}
+.console :is(input[type=range]){accent-color:var(--v21-blue)}
+.console .profiles button,.console .ds-mode button{border-radius:8px!important;font:500 12.5px/1 var(--ds-font);padding:8px 12px}
+.console .disclaimer{font:400 11px/1.4 var(--ds-font);color:var(--v21-ink3)}
+
+/* ---------------------------------------------------------------- opening screen */
+.hero{background:rgba(11,29,58,.42)}
+@media (min-width:1181px){
+  .hero{display:grid!important;grid-template-columns:minmax(0,600px) minmax(0,1fr) minmax(300px,380px);grid-auto-rows:min-content;column-gap:40px;align-content:center;padding:28px 48px}
+  .hero>*{grid-column:1}
+  .hero>.ds-actions,.hero>.hero-targets{grid-column:3}
+  .hero>.ds-actions{grid-row:1 / 5;align-self:end}
+  .hero>.hero-targets{grid-row:5 / 8;align-self:start;flex-direction:column;flex-wrap:nowrap}
+}
+.hero h1.v20-title{font-size:clamp(46px,5.6vw,96px);letter-spacing:-.01em}
+.hero .eyebrow{color:var(--v21-ink3)}
+.hero-cta{gap:10px}
+.hero-cta .btn-ghost,.hero-cta button{border-radius:8px!important}
+.hero-cta #hero-search{background:var(--v21-sky);color:var(--v21-bg);border-color:var(--v21-sky)}
+.hero-targets .ht{border-radius:8px!important;background:rgba(16,37,82,.86);border:1px solid var(--v21-line2);padding:10px;min-height:84px}
+.hero-targets .ht img{width:64px;height:64px;border-radius:8px}
+.hero-targets .ht[aria-checked="true"]{border-color:var(--v21-sky);background:rgba(30,58,138,.9)}
+.ds-act{border-radius:8px!important}
+.hero .ds-actions{border-top:0}
+.hero-lang button{border-radius:8px!important}
+
+/* ---------------------------------------------------------------- dialogs and sheets share one surface */
+#sheet .sheet-card,#sheet>div{background:var(--v21-s1);border:1px solid var(--v21-line2);border-radius:8px!important;color:var(--v21-ink)}
+#ds-legal-dlg .ds-legal-box{border-radius:8px!important}
+#jn .jn-dlg{background:var(--v21-bg)}
+.jl-toast{background:var(--v21-s1)!important;border:1px solid var(--v21-line2)!important;border-radius:8px!important}
+
+/* destination picker */
+#v21-dest{position:fixed;inset:0;z-index:62;display:flex;justify-content:center;align-items:flex-start;background:rgba(11,29,58,.6);padding:5vh 16px;overflow-y:auto}
+#v21-dest[hidden]{display:none}
+.v21-dp{width:min(920px,100%);background:var(--v21-bg);border:1px solid var(--v21-line2);border-radius:8px!important;padding:22px clamp(16px,3vw,28px) 26px;color:var(--v21-ink)}
+.v21-dp-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.v21-dp-h h2{font:400 28px/1.15 var(--ds-display);margin:0}
+.v21-dp-h h2 .v20-serif{font-size:1em}
+.v21-dp-tabs{display:flex;gap:6px;margin:16px 0 6px}
+.v21-dp-tabs button{font:500 14px/1 var(--ds-font);color:var(--v21-ink2);background:transparent;border:1px solid var(--v21-line2);border-radius:8px!important;padding:10px 18px;min-height:42px;cursor:pointer}
+.v21-dp-tabs button[aria-selected="true"]{background:var(--v21-s3);color:var(--v21-ink);border-color:var(--v21-sky)}
+.v21-dp-note{font:400 12.5px/1.5 var(--ds-font);color:var(--v21-ink3);margin:6px 0 14px}
+.v21-dl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v21-d{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;padding:10px;border:1px solid var(--v21-line);border-radius:8px!important;background:var(--v21-s1)}
+.v21-d[aria-current="true"]{border-color:var(--v21-sky);background:#14306E}
+.v21-d img{width:96px;height:96px;object-fit:cover;border-radius:8px;background:#1E3A8A}
+.v21-d h3{font:600 15px/1.3 var(--ds-font);margin:0 0 2px;color:var(--v21-ink)}
+.v21-d p{font:400 12.5px/1.45 var(--ds-font);color:var(--v21-ink2);margin:0 0 6px}
+.v21-d .v21-meta{color:var(--v21-ink3)}
+.v21-d .v21-lv{display:inline-block;font:600 11px/1 var(--ds-font);padding:5px 8px;border-radius:8px;border:1px solid var(--v21-line2);color:var(--v21-sky);margin-right:6px}
+.v21-d .v21-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.v21-d .v21-acts button{font:500 12.5px/1 var(--ds-font);padding:9px 12px;min-height:38px;border-radius:8px!important;border:1px solid var(--v21-line2);background:transparent;color:var(--v21-ink);cursor:pointer}
+.v21-d .v21-acts button.v21-go{background:var(--v21-sky);border-color:var(--v21-sky);color:var(--v21-bg)}
+.v21-d .v21-acts button:disabled{opacity:.55;cursor:default}
+
+/* ---------------------------------------------------------------- tablet and phone: recomposed, not shrunk */
+@media (max-width:1180px){
+  .target-ctl button{padding:4px 10px 4px 4px}
+}
+@media (max-width:760px){
+  header.bar{gap:8px;padding:8px 12px;row-gap:8px}
+  .brand-txt span{display:none}
+  .target-ctl{order:5;flex:1 1 100%;justify-content:space-between}
+  .target-ctl button{flex:1 1 0;min-width:0;padding:4px 8px 4px 4px;gap:6px;font-size:12.5px}
+  .target-ctl button::before{width:26px;height:26px}
+  .target-ctl button{grid-template-columns:26px minmax(0,1fr)}
+  .tc-atlas{flex:1 1 100%;border-left:0!important;border-top:1px solid var(--v21-line2)!important;padding:6px 10px}
+  .tc-atlas select{max-width:none;flex:1}
+  .v21-allbtn{order:6;flex:1 1 100%}
+  .tabs{gap:4px}
+  .tabs button{padding:9px 10px;border:1px solid var(--v21-line)!important;border-radius:8px!important;font-size:13px}
+  .tabs button[aria-selected="true"]{border-color:var(--v21-sky)!important;background:var(--v21-s3)}
+  .stage,#app.wide .stage{grid-template-rows:64vh auto auto}
+  .vp-top{left:8px;right:8px;top:8px}
+  .vp-top .seg{max-width:100%;flex-wrap:wrap;border-radius:8px!important}
+  .vp-top .seg button{flex:none;padding:8px 10px}
+  #left,#right{border-radius:8px 8px 0 0!important;border-top:1px solid var(--v21-line2)}
+  .v21-dl{grid-template-columns:minmax(0,1fr)}
+  .v21-d{grid-template-columns:72px minmax(0,1fr)}
+  .v21-d img{width:72px;height:72px}
+  .hero{padding:20px 16px}
+  .hero-targets{display:flex!important;flex-direction:column;flex-wrap:nowrap!important;height:auto!important;max-height:none!important}
+  .hero-targets .ht{width:auto;min-width:0;min-height:0}
+}
+@media (max-width:380px){.target-ctl button>i{display:none}.target-ctl button{grid-template-columns:26px auto}}
+/* desktop: the rail carries Menu and Settings; floating globe controls stay clear of the ranking panel */
+@media (min-width:1181px){
+  header.bar .v20-util{display:none}
+  header.bar .brand-txt span{display:none}
+  #app:not(.is-hero):not(.ds-hide-right) .viewport :is(.jl-chip,.ds-paneltog[data-dspanel="right"],.status,.readout){right:324px!important}
+  #app:not(.is-hero):not(.ds-hide-right) .viewport .jl-chip{top:58px!important}
+}
+.jl-chip{font-size:12px!important;border-radius:8px!important;background:rgba(16,37,82,.9)!important;border:1px solid var(--v21-line2)!important;color:var(--v21-ink)!important;font-family:var(--ds-font)!important}
+/* tables follow their panel's ink (the page renders in quirks mode, where tables would otherwise take the body colour) */
+table{color:inherit}
+#left [data-p4],#right [data-p4]{--ink-3:#A3B3C9}
+:is(#left,#right,#sheet,#jn) :is(.btn-primary,.btn-primary.btn-sm){background:#93C5FD!important;border-color:#93C5FD!important;color:#0B1D3A!important}
+@media (max-width:760px){
+  .target-ctl{flex-wrap:wrap;border-radius:8px!important;padding:4px}
+  .target-ctl button{flex:1 1 30%;min-width:0;overflow:hidden}
+  .target-ctl .tc-atlas{flex:1 1 100%;border-radius:8px!important}
+}
+@media (max-width:760px){.tabs button[aria-selected="true"]{border-radius:8px!important}}
+/* the floating place card never rises into the row of globe controls */
+@media (min-width:1181px){.viewport .ds-acard{max-height:calc(100% - 196px);overflow:auto}}
+@media (max-width:1180px) and (min-width:761px){
+  .vp-top .seg button{padding:7px 10px;font-size:12px}
+  .viewport .ds-paneltog[data-dspanel="right"],html.ds-layers-open .viewport .ds-paneltog[data-dspanel="right"]{top:196px}
+}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -31135,6 +31355,131 @@ i18nExtend("de", {
  "v20.mrds.meta": "Datei vom {date}, laut USGS keine weiteren Aktualisierungen geplant; abgefragt am {q}; SHA-256 {sha}."
 });
 
+/* ASTERRO V20.1 shell, en catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("en", {
+ "v21.all": "All destinations",
+ "v21.title_a": "Choose a",
+ "v21.title_b": "destination",
+ "v21.mars": "Mars",
+ "v21.moon": "Moon",
+ "v21.both": "Both worlds",
+ "v21.both_d": "Compare Earth with Jezero Crater and the Lunar South Pole together, using the same six dimensions.",
+ "v21.explore": "Explore on the globe",
+ "v21.atlas": "Open in the Atlas",
+ "v21.atlas_only": "Atlas only (readiness below 3)",
+ "v21.level": "Readiness {n}",
+ "v21.coords": "{lat}, {lon}",
+ "v21.window": "{km} km window",
+ "v21.current": "Current destination",
+ "v21.note": "Every destination is a catalogued target with a verified position. Each image is shaded relief from the target's own elevation data.",
+ "v21.loading": "Loading the target catalogue.",
+ "v21.error": "The target catalogue could not be loaded. The three destinations in the header still work.",
+ "v21.count": "{n} destinations",
+ "v21.lat_n": "{v} N",
+ "v21.lat_s": "{v} S",
+ "v21.lon_e": "{v} E"
+});
+
+/* ASTERRO V20.1 shell, bn catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("bn", {
+ "v21.all": "সব গন্তব্য",
+ "v21.title_a": "একটি",
+ "v21.title_b": "গন্তব্য বেছে নিন",
+ "v21.mars": "মঙ্গল",
+ "v21.moon": "চাঁদ",
+ "v21.both": "দুই জগৎ",
+ "v21.both_d": "একই ছয়টি মাত্রা দিয়ে পৃথিবীকে জেজেরো খাদ ও চাঁদের দক্ষিণ মেরুর সঙ্গে একসঙ্গে তুলনা করুন।",
+ "v21.explore": "গ্লোবে অন্বেষণ করুন",
+ "v21.atlas": "অ্যাটলাসে খুলুন",
+ "v21.atlas_only": "শুধু অ্যাটলাসে (প্রস্তুতি ৩-এর নিচে)",
+ "v21.level": "প্রস্তুতি {n}",
+ "v21.coords": "{lat}, {lon}",
+ "v21.window": "{km} কিমি জানালা",
+ "v21.current": "বর্তমান গন্তব্য",
+ "v21.note": "প্রতিটি গন্তব্য যাচাই করা অবস্থানসহ একটি তালিকাভুক্ত লক্ষ্য। প্রতিটি ছবি লক্ষ্যটির নিজস্ব উচ্চতা-ডেটা থেকে তৈরি ছায়াময় ভূমিরূপ।",
+ "v21.loading": "লক্ষ্যের তালিকা লোড হচ্ছে।",
+ "v21.error": "লক্ষ্যের তালিকা লোড করা যায়নি। শিরোনামের তিনটি গন্তব্য এখনও কাজ করে।",
+ "v21.count": "{n}টি গন্তব্য",
+ "v21.lat_n": "{v} উ",
+ "v21.lat_s": "{v} দ",
+ "v21.lon_e": "{v} পূ"
+});
+
+/* ASTERRO V20.1 shell, es catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("es", {
+ "v21.all": "Todos los destinos",
+ "v21.title_a": "Elige un",
+ "v21.title_b": "destino",
+ "v21.mars": "Marte",
+ "v21.moon": "Luna",
+ "v21.both": "Ambos mundos",
+ "v21.both_d": "Compara la Tierra con el cráter Jezero y el polo sur lunar a la vez, con las mismas seis dimensiones.",
+ "v21.explore": "Explorar en el globo",
+ "v21.atlas": "Abrir en el Atlas",
+ "v21.atlas_only": "Solo en el Atlas (preparación inferior a 3)",
+ "v21.level": "Preparación {n}",
+ "v21.coords": "{lat}, {lon}",
+ "v21.window": "ventana de {km} km",
+ "v21.current": "Destino actual",
+ "v21.note": "Cada destino es un objetivo catalogado con una posición verificada. Cada imagen es un relieve sombreado de los datos de elevación del propio objetivo.",
+ "v21.loading": "Cargando el catálogo de objetivos.",
+ "v21.error": "No se pudo cargar el catálogo de objetivos. Los tres destinos de la cabecera siguen funcionando.",
+ "v21.count": "{n} destinos",
+ "v21.lat_n": "{v} N",
+ "v21.lat_s": "{v} S",
+ "v21.lon_e": "{v} E"
+});
+
+/* ASTERRO V20.1 shell, fr catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("fr", {
+ "v21.all": "Toutes les destinations",
+ "v21.title_a": "Choisir une",
+ "v21.title_b": "destination",
+ "v21.mars": "Mars",
+ "v21.moon": "Lune",
+ "v21.both": "Les deux mondes",
+ "v21.both_d": "Comparez la Terre au cratère Jezero et au pôle Sud lunaire à la fois, avec les mêmes six dimensions.",
+ "v21.explore": "Explorer sur le globe",
+ "v21.atlas": "Ouvrir dans l'Atlas",
+ "v21.atlas_only": "Atlas uniquement (préparation inférieure à 3)",
+ "v21.level": "Préparation {n}",
+ "v21.coords": "{lat}, {lon}",
+ "v21.window": "fenêtre de {km} km",
+ "v21.current": "Destination actuelle",
+ "v21.note": "Chaque destination est une cible cataloguée à la position vérifiée. Chaque image est un relief ombré tiré des données d'altitude de la cible.",
+ "v21.loading": "Chargement du catalogue des cibles.",
+ "v21.error": "Le catalogue des cibles n'a pas pu être chargé. Les trois destinations de l'en-tête fonctionnent toujours.",
+ "v21.count": "{n} destinations",
+ "v21.lat_n": "{v} N",
+ "v21.lat_s": "{v} S",
+ "v21.lon_e": "{v} E"
+});
+
+/* ASTERRO V20.1 shell, de catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("de", {
+ "v21.all": "Alle Ziele",
+ "v21.title_a": "Ein Ziel",
+ "v21.title_b": "wählen",
+ "v21.mars": "Mars",
+ "v21.moon": "Mond",
+ "v21.both": "Beide Welten",
+ "v21.both_d": "Die Erde gleichzeitig mit dem Jezero-Krater und dem Mondsüdpol vergleichen, mit denselben sechs Dimensionen.",
+ "v21.explore": "Auf dem Globus erkunden",
+ "v21.atlas": "Im Atlas öffnen",
+ "v21.atlas_only": "Nur im Atlas (Reifegrad unter 3)",
+ "v21.level": "Reifegrad {n}",
+ "v21.coords": "{lat}, {lon}",
+ "v21.window": "{km}-km-Fenster",
+ "v21.current": "Aktuelles Ziel",
+ "v21.note": "Jedes Ziel ist ein katalogisiertes Objekt mit geprüfter Position. Jedes Bild ist ein Schummerungsrelief aus den eigenen Höhendaten des Ziels.",
+ "v21.loading": "Der Zielkatalog wird geladen.",
+ "v21.error": "Der Zielkatalog konnte nicht geladen werden. Die drei Ziele in der Kopfzeile funktionieren weiterhin.",
+ "v21.count": "{n} Ziele",
+ "v21.lat_n": "{v} N",
+ "v21.lat_s": "{v} S",
+ "v21.lon_e": "{v} O"
+});
+
 /* ASTERRO — Discovery Journey engine (browser + Node), asterro-journey-1.0.0.
  *
  * Everything the story-led journey shows is derived here from the unchanged baseline engine (TAIEngine,
@@ -37521,7 +37866,7 @@ document.addEventListener("click", e => {
   if (t.closest("#v20-settings")) { V20.open === "set" ? v20Close() : v20OpenSheet("set"); return; }
   if (t.closest("[data-v20close]") || t.id === "v20-nav" || t.id === "v20-set") { v20Close(); return; }
   const g = t.closest("[data-v20go]"); if (g) { const k = g.dataset.v20go; v20Close(true); try { V20_GO[k](); } catch (err) { console.error(err); } return; }
-  const lg = t.closest("[data-v20legal]"); if (lg) { const k = lg.dataset.v20legal, op = document.getElementById("v20-settings"); v20Close(true); if (typeof DS !== "undefined") DS.legalOpener = op; dsLegalOpen(k); return; }
+  const lg = t.closest("[data-v20legal]"); if (lg) { const k = lg.dataset.v20legal, op = [document.getElementById("v20-settings"), document.querySelector("#v21-rail [data-v21rail=settings]")].find(n => n && n.offsetParent !== null); v20Close(true); if (typeof DS !== "undefined") DS.legalOpener = op; dsLegalOpen(k); return; }
   const P = V20.prefs, b = t.closest("button"); if (!b || !b.closest("#v20-set")) return;
   if (b.dataset.v20lang) { setLang(b.dataset.v20lang); v20Render(); return; }
   if (b.dataset.v20still) { P.still = b.dataset.v20still === "1"; if (window.GLOBE) GLOBE.autoRotate = !P.still && !(matchMedia("(prefers-reduced-motion: reduce)").matches); v20SavePrefs(); v20Render(); return; }
@@ -37584,6 +37929,155 @@ document.addEventListener("click", e => {
     if (location.hash === "#disclaimer") dsLegalOpen("disclaimer");
     let n = 0; const iv = setInterval(() => { v20ApplyPrefs(); v20Header(); v20Title(); if (++n > 20 || window.GLOBE) { v20ApplyPrefs(); clearInterval(iv); } }, 250);
   };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
+})();
+
+/* ===== ASTERRO V20.1 interface shell (presentation only) =====
+ * - a navigation rail on desktop: Home (logo), the five navigation groups, Settings; each opens the V20 navigation or
+ *   Settings dialog, so every destination is still the same existing view;
+ * - a destination picker for Mars and the Moon built from the published target registry (data/registry.json): real
+ *   names, positions, analysis windows, readiness levels and each target's own shaded-relief thumbnail; choosing a
+ *   destination calls the existing setTarget / setTab / Atlas code, nothing else;
+ * - an "All destinations" button beside the target switch.
+ * No score, weight, threshold, target or dataset is changed here. */
+const V21 = { reg: null, regErr: null, regLoading: null, body: null, opener: null, open: false };
+const V21_GLYPH = {
+  home: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6.5"/><ellipse cx="16" cy="16" rx="14" ry="5" transform="rotate(-24 16 16)" opacity=".6"/></svg>',
+  discover: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17M12 3.5c-2.6 2.4-2.6 14.6 0 17"/></svg>',
+  analyze: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/></svg>',
+  plan: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="17" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="19" cy="14" r="2"/><path d="M6.4 15.6 10.6 9.4M13.6 9.2l4 3.6"/></svg>',
+  evidence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8.5L18 7v13.5H6z"/><path d="M9 11h6M9 14.5h6M9 18h4"/></svg>',
+  trust: '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6.5" rx="7" ry="2.8"/><path d="M5 6.5v11c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-11M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></svg>',
+  settings: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>',
+};
+function v21T(k, o) { return tx("v21." + k, o); }
+
+/* ---------------------------------------------------------------- rail */
+function v21Rail() {
+  let r = document.getElementById("v21-rail");
+  if (!r) { r = document.createElement("nav"); r.id = "v21-rail"; r.setAttribute("data-i18n-done", ""); document.body.prepend(r); }
+  r.setAttribute("aria-label", v20T("nav.aria"));
+  const cur = typeof v20Current === "function" ? v20Current() : null;
+  const grp = (V20_NAV.find(([, items]) => items.includes(cur)) || [null])[0];
+  r.innerHTML = `<button type="button" class="v21-rb v21-logo" data-v20home="1" aria-label="${esc(v20T("home"))}">${V21_GLYPH.home}</button>`
+    + V20_NAV.map(([g]) => `<button type="button" class="v21-rb" data-v21rail="${g}" aria-current="${g === grp}" aria-haspopup="dialog">${V21_GLYPH[g]}<span>${esc(v20T("g." + g))}</span></button>`).join("")
+    + `<span class="v21-sp"></span><button type="button" class="v21-rb" data-v21rail="settings" aria-haspopup="dialog">${V21_GLYPH.settings}<span>${esc(v20T("settings"))}</span></button>`;
+}
+function v21OpenGroup(g) {
+  v20OpenSheet("nav");
+  setTimeout(() => {
+    const sec = document.querySelector(`#v20-nav [data-v20group="${g}"]`); if (!sec) return;
+    const sh = document.querySelector("#v20-nav .v20-sheet"); if (sh) sh.scrollTop += sec.getBoundingClientRect().top - sh.getBoundingClientRect().top - 60;
+    const b = sec.querySelector("[data-v20go]"); if (b) b.focus();
+  }, 30);
+}
+
+/* ---------------------------------------------------------------- destination picker */
+function v21RegLoad() {
+  if (V21.reg || V21.regLoading) return V21.regLoading;
+  V21.regErr = null;
+  V21.regLoading = fetch("data/registry.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(j => { if (!j || !Array.isArray(j.targets)) throw new Error("format"); V21.reg = j; })
+    .catch(e => { V21.regErr = String(e.message || e); })
+    .finally(() => { V21.regLoading = null; if (V21.open) v21Render(); });
+  return V21.regLoading;
+}
+function v21Body() { const t = S.T && S.T[S.targetId]; return V21.body || (S.targetId === "cross" ? "Both" : t ? t.body : "Mars"); }
+function v21BodyOf(r) { return r.body && typeof r.body === "object" ? r.body.name : r.body; }
+function v21Explorable(r) { return r.legacy || (r.readiness && r.readiness.level >= 3); }
+function v21Card(r) {
+  const L = r.location || {}, lv = r.readiness || {}, cur = S.targetId === r.id;
+  const thumb = r.id === "mars_jezero" ? "data/thumb_jezero_mola.png" : r.id === "moon_south_pole" ? "data/thumb_southpole_lola.png" : (r.thumbnail || "");
+  const lat = L.latitude != null ? L.latitude : L.lat, lon = L.longitude_east != null ? L.longitude_east : L.lon_east;
+  const ll = lat != null ? v21T("coords", { lat: v21T(lat < 0 ? "lat_s" : "lat_n", { v: txNum(Math.abs(lat), 2) + "°" }), lon: v21T("lon_e", { v: txNum(((lon % 360) + 360) % 360, 2) + "°" }) }) : "";
+  const ex = v21Explorable(r);
+  return `<li class="v21-d" data-v21d="${esc(r.id)}"${cur ? ' aria-current="true"' : ""}>
+    ${thumb ? `<img src="${esc(thumb)}" alt="${esc(r.thumbnail_caption || r.name)}" loading="lazy">` : `<span></span>`}
+    <div><h3>${keep(r.name)}</h3>
+      <p class="v21-meta">${esc(ll)}${L.window_km ? " · " + esc(v21T("window", { km: txNum(L.window_km, 1) })) : ""}</p>
+      <p>${lv.level != null ? `<span class="v21-lv">${esc(v21T("level", { n: txInt(lv.level) }))}</span>` : ""}${cur ? esc(v21T("current")) : ""}</p>
+      <div class="v21-acts"><button type="button" class="v21-go" data-v21go="${esc(r.id)}"${ex ? "" : " disabled"}>${esc(v21T(ex ? "explore" : "atlas_only"))}</button><button type="button" data-v21atlas="${esc(r.id)}">${esc(v21T("atlas"))}</button></div></div></li>`;
+}
+function v21Render() {
+  const d = document.getElementById("v21-dest"); if (!d) return;
+  const body = v21Body(), tabs = [["Mars", "mars"], ["Moon", "moon"], ["Both", "both"]];
+  let list;
+  if (body === "Both") list = `<ul class="v21-dl"><li class="v21-d"${S.targetId === "cross" ? ' aria-current="true"' : ""}><img src="data/thumb_jezero_mola.png" alt=""><div><h3>${esc(v21T("both"))}</h3><p>${esc(v21T("both_d"))}</p><div class="v21-acts"><button type="button" class="v21-go" data-v21go="cross">${esc(v21T("explore"))}</button></div></div></li></ul>`;
+  else if (!V21.reg) { if (!V21.regErr) v21RegLoad(); list = `<p class="v21-dp-note" role="status">${esc(v21T(V21.regErr ? "error" : "loading"))}</p>`; }
+  else {
+    const ts = V21.reg.targets.filter(r => v21BodyOf(r) === body).sort((a, b) => (b.legacy - a.legacy) || ((b.readiness || {}).level || 0) - ((a.readiness || {}).level || 0) || a.name.localeCompare(b.name));
+    list = `<p class="v21-dp-note">${esc(v21T("count", { n: txInt(ts.length) }))}</p><ul class="v21-dl">${ts.map(v21Card).join("")}</ul>`;
+  }
+  const ae = document.activeElement, refocus = ae && (ae.id === "v21-dest-title" || ae === document.body);
+  d.innerHTML = `<div class="v21-dp" role="document"><div class="v21-dp-h"><h2 id="v21-dest-title" tabindex="-1">${esc(v21T("title_a"))} <span class="v20-serif">${esc(v21T("title_b"))}</span></h2><button type="button" class="v20-close" data-v21close>${esc(v20T("close"))}</button></div>
+    <div class="v21-dp-tabs" role="tablist" aria-label="${esc(v21T("title_a") + " " + v21T("title_b"))}">${tabs.map(([b, k]) => `<button type="button" role="tab" data-v21body="${b}" aria-selected="${b === body}">${esc(v21T(k))}</button>`).join("")}</div>
+    <p class="v21-dp-note">${esc(v21T("note"))}</p>${list}</div>`;
+  if (refocus && V21.open) { const t = document.getElementById("v21-dest-title"); if (t) t.focus(); }
+}
+function v21OpenDest() {
+  if (typeof v20Close === "function") v20Close(true);
+  let d = document.getElementById("v21-dest");
+  if (!d) { d = document.createElement("div"); d.id = "v21-dest"; d.hidden = true; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "v21-dest-title"); d.setAttribute("data-i18n-done", ""); document.body.appendChild(d); }
+  V21.opener = document.activeElement; V21.open = true; V21.body = null;
+  v21Render(); d.hidden = false; document.body.classList.add("v20-lock");
+  setTimeout(() => { const t = document.getElementById("v21-dest-title"); if (t) t.focus(); }, 0);
+}
+function v21CloseDest(silent) {
+  const d = document.getElementById("v21-dest"); if (!d || d.hidden) return;
+  d.hidden = true; V21.open = false; document.body.classList.remove("v20-lock");
+  if (!silent) { const o = V21.opener && V21.opener !== document.body && document.contains(V21.opener) && V21.opener.offsetParent !== null ? V21.opener : document.getElementById("v21-all"); if (o) o.focus(); }
+}
+function v21WaitTarget(id, fn) { const t0 = Date.now(), iv = setInterval(() => { const ok = S.T && S.T[id]; if (ok || Date.now() - t0 > 30000) { clearInterval(iv); if (ok) fn(); } }, 150); }
+function v21Go(id) {
+  v21CloseDest(true);
+  v20Need(() => {
+    if (id === "cross" || TARGET_IDS.includes(id)) { setTarget(id); setTab("explore"); return; }
+    v21WaitTarget(id, () => { if (typeof a4ExploreOpen === "function") a4ExploreOpen(id); else { setTarget(id); setTab("explore"); } });
+  });
+}
+function v21Atlas(id) {
+  v21CloseDest(true);
+  v20Need(() => { if (typeof A3 !== "undefined") { A3.active = id; A3.view = "target"; } setTab("atlas"); });
+}
+
+/* ---------------------------------------------------------------- header: all destinations */
+function v21Header() {
+  const ctl = document.querySelector("header.bar .target-ctl"); if (!ctl) return;
+  let b = document.getElementById("v21-all");
+  if (!b) { b = document.createElement("button"); b.type = "button"; b.id = "v21-all"; b.className = "v21-allbtn"; b.setAttribute("aria-haspopup", "dialog"); b.setAttribute("data-i18n-done", ""); ctl.insertAdjacentElement("afterend", b); }
+  b.textContent = v21T("all");
+}
+
+/* ---------------------------------------------------------------- events */
+document.addEventListener("click", e => {
+  const t = e.target; if (!t || !t.closest) return;
+  const rb = t.closest("[data-v21rail]"); if (rb) { const g = rb.dataset.v21rail; if (g === "settings") v20OpenSheet("set"); else v21OpenGroup(g); return; }
+  if (t.closest("#v21-all")) { v21OpenDest(); return; }
+  if (t.closest("[data-v21close]") || t.id === "v21-dest") { v21CloseDest(); return; }
+  const tb = t.closest("[data-v21body]"); if (tb) { V21.body = tb.dataset.v21body; v21Render(); const n = document.querySelector(`[data-v21body="${V21.body}"]`); if (n) n.focus(); return; }
+  const go = t.closest("[data-v21go]"); if (go && !go.disabled) { v21Go(go.dataset.v21go); return; }
+  const at = t.closest("[data-v21atlas]"); if (at) { v21Atlas(at.dataset.v21atlas); return; }
+});
+document.addEventListener("keydown", e => {
+  if (!V21.open) return;
+  const d = document.getElementById("v21-dest"); if (!d || d.hidden) return;
+  if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); v21CloseDest(); return; }
+  if (e.key === "Tab") {
+    const f = [...d.querySelectorAll("button:not([disabled]),[tabindex='-1']")].filter(n => n.offsetParent !== null); if (!f.length) return;
+    const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+  }
+  if ((e.key === "ArrowRight" || e.key === "ArrowLeft") && e.target.matches && e.target.matches("[data-v21body]")) {
+    const all = [...d.querySelectorAll("[data-v21body]")], i = all.indexOf(e.target), n = all[(i + (e.key === "ArrowRight" ? 1 : all.length - 1)) % all.length];
+    V21.body = n.dataset.v21body; v21Render(); const m = d.querySelector(`[data-v21body="${V21.body}"]`); if (m) m.focus(); e.preventDefault();
+  }
+}, true);
+/* keep the rail's current group and the header button in step with the views and the language */
+{ const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { v21Rail(); } catch (e) { } return r; }; }
+{ const f = setLang; setLang = function () { const r = f.apply(this, arguments); try { v21Rail(); v21Header(); if (V21.open) v21Render(); } catch (e) { console.error(e); } return r; }; }
+{ const f = v20Home; v20Home = function () { const r = f.apply(this, arguments); try { v21Rail(); } catch (e) { } return r; }; }
+(function v21Boot() {
+  const go = () => { v21Rail(); v21Header(); let n = 0; const iv = setInterval(() => { v21Header(); v21Rail(); if (++n > 12) clearInterval(iv); }, 500); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
 })();
 

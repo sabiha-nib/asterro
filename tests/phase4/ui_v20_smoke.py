@@ -28,6 +28,8 @@ time.sleep(1.0)
 URL = f"http://localhost:{PORT}/index.html"
 AUDIT = re.search(r'AUDIT = r"""(.*?)"""', open(os.path.join(ROOT, "tests/phase4/ui_design_audit.py")).read(), re.S).group(1)
 ATACAMA = {"latitude": -23.65432, "longitude": -68.15678, "accuracy": 1200}
+# V20.1: on desktop the navigation rail carries Menu (one button per group) and Settings; the header buttons serve tablets and phones
+MENU, SETS = "#v21-rail [data-v21rail=discover]", "#v21-rail [data-v21rail=settings]"
 ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"]
 errors, fails = [], []
 DEST = {"globe": ("explore", None), "discovery": ("discover", None), "targets": ("atlas", None), "atlas": ("atlas", None), "lab": ("lab", None),
@@ -73,11 +75,11 @@ try:
         h = pg.evaluate("""() => { const h = document.querySelector('#hero h1'), s = h.querySelector('.v20-serif');
           const vis = e => { const r = e.getBoundingClientRect(), c = getComputedStyle(e); return r.width > 0 && r.height > 0 && c.display !== 'none' && c.visibility !== 'hidden'; };
           return { text: h.innerText.replace(/\\s+/g, ' ').trim(), serif: s && getComputedStyle(s).fontFamily, sans: getComputedStyle(h).fontFamily,
-            tabs: vis(document.querySelector('nav.tabs')), targets: vis(document.querySelector('.target-ctl')), menu: vis(document.querySelector('#v20-menu')),
-            settings: vis(document.querySelector('#v20-settings')), proj: S.proj, tagline: document.querySelector('#hero').innerText.includes("Find Earth's environmental analogues for worlds beyond Earth."),
+            tabs: vis(document.querySelector('nav.tabs')), targets: vis(document.querySelector('.target-ctl')), menu: vis(document.querySelector('#v21-rail [data-v21rail=discover]')),
+            settings: vis(document.querySelector('#v21-rail [data-v21rail=settings]')), proj: S.proj, tagline: document.querySelector('#hero').innerText.includes("Find Earth's environmental analogues for worlds beyond Earth."),
             brand: document.querySelector('.brand').getAttribute('role'), oldFonts: [...document.querySelectorAll('link[href*="fonts.googleapis.com"]')].map(l => l.href).filter(u => /Big\\+Shoulders|Instrument|JetBrains/.test(u)).length } }""")
         check(h["text"] == "Planetary Intelligence" and h["serif"].startswith('"Playfair Display"') and h["sans"].startswith("Helvetica"), f"the title is two words, Helvetica and Playfair Display ({h['text']}; {h['serif'][:30]}; {h['sans'][:20]})")
-        check(not h["tabs"] and not h["targets"] and h["menu"] and h["settings"], "the opening screen has no tab bar; Menu and Settings are visible")
+        check(not h["tabs"] and not h["targets"] and h["menu"] and h["settings"], "the opening screen has no tab bar; the rail with Menu groups and Settings is visible")
         check(h["tagline"] and h["brand"] == "link" and h["oldFonts"] == 0, "the ASTERRO tagline is kept, the logo is a link, and no other web font is requested")
         check(h["proj"] == 0, "the 3D globe is the default projection")
         fam = pg.evaluate("""() => [...new Set([...document.querySelectorAll('body *')].filter(e => e.offsetParent !== null && !e.closest('code,pre,kbd,samp,.mono,.hash,svg,canvas,[lang=bn]')).map(e => getComputedStyle(e).fontFamily.split(',')[0].replace(/"/g, '').trim()))]""")
@@ -87,15 +89,15 @@ try:
         base = pg.evaluate("(async () => { await runSearch(); return S.res.distinct.slice(0, 10).map(i => [i, +S.res.eff[i].toFixed(6)]); })()")
         pg.evaluate("v20Home()"); time.sleep(0.4)
         # ------------------------------------------------------------------ 2 navigation
-        pg.click("#v20-menu"); time.sleep(0.4)
+        pg.click(MENU); time.sleep(0.4)
         n = pg.evaluate("({open: !document.querySelector('#v20-nav').hidden, focus: document.activeElement.id, groups: [...document.querySelectorAll('#v20-nav [data-v20group]')].map(g => g.dataset.v20group), dest: document.querySelectorAll('#v20-nav [data-v20go]').length, glass: document.querySelector('#v20-nav .v20-sheet').hasAttribute('data-glass'), modal: document.querySelector('#v20-nav').getAttribute('aria-modal')})")
-        check(n["open"] and n["focus"] == "v20-nav-title" and n["groups"] == ["discover", "analyze", "plan", "evidence", "trust"] and n["dest"] == 25 and n["modal"] == "true", f"the menu is a modal dialog with five groups and 25 destinations, focus inside ({n})")
+        check(n["open"] and pg.evaluate("!!document.activeElement.closest('#v20-nav')") and n["groups"] == ["discover", "analyze", "plan", "evidence", "trust"] and n["dest"] == 25 and n["modal"] == "true", f"the menu is a modal dialog with five groups and 25 destinations, focus inside ({n})")
         audit(pg, "navigation dialog")
         pg.screenshot(path=os.path.join(OUT, "02_navigation_1440.png"))
         for _ in range(40): pg.keyboard.press("Tab")
         check(pg.evaluate("!!document.activeElement.closest('#v20-nav')"), "Tab keeps focus inside the menu")
         pg.keyboard.press("Escape"); time.sleep(0.2)
-        check(pg.evaluate("document.querySelector('#v20-nav').hidden && document.activeElement.id === 'v20-menu'"), "Escape closes the menu and returns focus to the Menu button")
+        check(pg.evaluate("document.querySelector('#v20-nav').hidden && document.activeElement.matches('#v21-rail [data-v21rail=discover]')"), "Escape closes the menu and returns focus to the Menu button")
         bad = []
         for k, (tab, other) in DEST.items():
             pg.evaluate("v20OpenSheet('nav')"); time.sleep(0.15)
@@ -113,7 +115,7 @@ try:
         pg.evaluate("setTab('data')"); time.sleep(0.3); pg.focus(".brand"); pg.keyboard.press("Enter"); time.sleep(0.3)
         check(pg.evaluate("document.querySelector('#app').classList.contains('is-hero')"), "the logo returns Home (keyboard)")
         # ------------------------------------------------------------------ 3 settings
-        pg.click("#v20-settings"); time.sleep(0.5)
+        pg.click(SETS); time.sleep(0.5)
         s = pg.evaluate("[...document.querySelectorAll('#v20-set [data-v20sec]')].map(x => x.dataset.v20sec)")
         check(s == ["legal", "lang", "access", "appear", "data", "loc", "about"], f"Settings: legal, language, accessibility, appearance, data and offline, location privacy, about ({s})")
         audit(pg, "settings dialog")
@@ -132,7 +134,7 @@ try:
         pg.evaluate("location.hash = '#disclaimer'"); time.sleep(0.4)
         check(pg.evaluate("document.querySelector('#ds-legal-title').textContent") == "Scientific Disclaimer", "the disclaimer opens by address (#disclaimer)")
         pg.keyboard.press("Escape"); pg.evaluate("history.replaceState(null, '', location.pathname)")
-        pg.click("#v20-settings"); time.sleep(0.3)
+        pg.click(SETS); time.sleep(0.3)
         pg.click("#v20-set [data-v20lang=de]"); time.sleep(0.4)
         de = pg.evaluate("({h: document.querySelector('#hero h1').innerText.replace(/\\s+/g, ' ').trim(), lang: document.documentElement.lang, set: document.querySelector('#v20-set-title').textContent})")
         pg.click("#v20-set [data-v20lang=en]"); time.sleep(0.4)
@@ -142,7 +144,7 @@ try:
         check(pr["c"] and pr["l"] and pr["rot"] is False and pr["saved"] == {"still": True, "large": True, "contrast": True}, f"contrast, text size and globe rotation work and are remembered ({pr})")
         pg.click("#v20-set [data-v20contrast='0']"); pg.click("#v20-set [data-v20large='0']"); pg.click("#v20-set [data-v20mode=advanced]"); time.sleep(0.2)
         check(pg.evaluate("DS.mode") == "advanced" and pg.evaluate("document.querySelector('#v20-set [data-v20mode=advanced]').getAttribute('aria-pressed')") == "true", "Detail switches to Research mode")
-        pg.click("#v20-set [data-v20mode=simple]"); pg.evaluate("document.querySelector('#v20-settings').focus(); v20Close(true); v20OpenSheet('set')")
+        pg.click("#v20-set [data-v20mode=simple]"); pg.evaluate("document.querySelector('#v21-rail [data-v21rail=settings]').focus(); v20Close(true); v20OpenSheet('set')")
         pg.evaluate("v9xLoad()"); pg.wait_for_function("!!V9X.man", timeout=60000)
         pg.evaluate("v20Render()"); time.sleep(0.3)
         if pg.evaluate("!!document.querySelector('#v20-set [data-v20do=verify]')"):
@@ -154,7 +156,7 @@ try:
         pg.click("#v20-set [data-v20do=forget]"); time.sleep(0.2)
         check(pg.evaluate("localStorage.getItem('asterro.local.v1') === null") and "0" in pg.evaluate("document.querySelector('#v20-set [data-v20sec=loc]').innerText"), "Forget saved places deletes them from this browser")
         pg.keyboard.press("Escape"); time.sleep(0.2)
-        check(pg.evaluate("document.activeElement.id") == "v20-settings", "Escape closes Settings and returns focus")
+        check(pg.evaluate("document.activeElement.matches('#v21-rail [data-v21rail=settings]')"), "Escape closes Settings and returns focus")
         # ------------------------------------------------------------------ 4 Local Impact: USGS MRDS
         pg.evaluate("setTab('local')"); time.sleep(0.8); pg.click("#li-geo"); pg.wait_for_function("LI.i != null")
         pg.wait_for_function("document.querySelector('[data-v20mrds]') && document.querySelector('[data-v20mrds]').innerText.includes('Records within')", timeout=60000)

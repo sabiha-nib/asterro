@@ -233,7 +233,7 @@ document.addEventListener("click", e => {
   if (t.closest("#v20-settings")) { V20.open === "set" ? v20Close() : v20OpenSheet("set"); return; }
   if (t.closest("[data-v20close]") || t.id === "v20-nav" || t.id === "v20-set") { v20Close(); return; }
   const g = t.closest("[data-v20go]"); if (g) { const k = g.dataset.v20go; v20Close(true); try { V20_GO[k](); } catch (err) { console.error(err); } return; }
-  const lg = t.closest("[data-v20legal]"); if (lg) { const k = lg.dataset.v20legal, op = document.getElementById("v20-settings"); v20Close(true); if (typeof DS !== "undefined") DS.legalOpener = op; dsLegalOpen(k); return; }
+  const lg = t.closest("[data-v20legal]"); if (lg) { const k = lg.dataset.v20legal, op = [document.getElementById("v20-settings"), document.querySelector("#v21-rail [data-v21rail=settings]")].find(n => n && n.offsetParent !== null); v20Close(true); if (typeof DS !== "undefined") DS.legalOpener = op; dsLegalOpen(k); return; }
   const P = V20.prefs, b = t.closest("button"); if (!b || !b.closest("#v20-set")) return;
   if (b.dataset.v20lang) { setLang(b.dataset.v20lang); v20Render(); return; }
   if (b.dataset.v20still) { P.still = b.dataset.v20still === "1"; if (window.GLOBE) GLOBE.autoRotate = !P.still && !(matchMedia("(prefers-reduced-motion: reduce)").matches); v20SavePrefs(); v20Render(); return; }
