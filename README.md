@@ -53,6 +53,86 @@ Algorithm version: `tai-sim-1.0.0` · Predictor stack SHA-256:
 26. [Repository structure and configuration](#26-repository-structure-and-configuration)
 27. [Licence, attribution and media policy](#27-licence-attribution-and-media-policy)
 
+Also at the top of this file: [NASA data in ASTERRO](#nasa-data-in-asterro) · [Use of artificial intelligence](#use-of-artificial-intelligence)
+
+---
+
+## NASA data in ASTERRO
+
+ASTERRO is built on NASA open data. NASA data set every number the Analogue Score uses for Mars, the Moon and, with
+USGS terrain, Earth. NASA does not endorse this project.
+
+**Data the score is computed from** (details and terms in §6):
+
+| What it measures | NASA source |
+|---|---|
+| Earth: aridity and annual temperature range | NASA POWER Climatology API (NASA Langley Research Center, MERRA-2) |
+| Earth: day and night land-surface temperature | MODIS/Aqua MYD11C3 (NASA LP DAAC), delivered through NASA GIBS |
+| Mars (Jezero Crater): terrain | MGS MOLA DEM 463 m (NASA PDS / USGS Astrogeology) |
+| Mars (Jezero Crater): thermal and temperature range | Mars 2020 MEDA (NASA PDS Atmospheres Node) |
+| Moon (south pole): terrain | LRO LOLA LDEM 118 m (NASA PDS / USGS Astrogeology) |
+| Moon (south pole): thermal | LRO Diviner polar maps (Williams et al. 2019, NASA PDS) |
+
+Earth elevation, slope and roughness come from USGS/NGA GMTED2010, which is not a NASA product.
+
+**Additional NASA data, used as context and never scored:**
+
+- 15 further NASA POWER climate parameters (wind, humidity, pressure, cloud, soil wetness, albedo, solar radiation,
+  snow);
+- NASA GIBS monthly layers: MERRA-2 dust, MODIS snow cover, vegetation index, land cover and land/water mask, and MISR
+  aerosol;
+- NASA PDS products for more Moon and Mars targets (Diviner global maps, MSL REMS);
+- the NASA Blue Marble basemap, shown on the globe only.
+
+**Inventory.** The Data and Trust view lists all 130 datasets ASTERRO uses or looked for, 94 of them from NASA. Each one
+shows its state:
+
+- integrated;
+- cached offline;
+- requires authentication;
+- blocked;
+- not investigated.
+
+Datasets that need a NASA Earthdata login were not downloaded and are marked as such. No credentials are stored in this
+repository.
+
+**Please acknowledge:**
+
+- NASA Langley Research Center POWER Project
+- NASA LP DAAC / MODIS
+- NASA ESDIS / GIBS
+- NASA Planetary Data System (Mars 2020 MEDA, MGS MOLA, LRO LOLA, LRO Diviner, MSL REMS)
+- USGS Astrogeology
+- NASA Earth Observatory (Blue Marble)
+
+## Use of artificial intelligence
+
+**ASTERRO's results come from data and fixed formulas, not from AI.** The application:
+
+- calls no AI service and has no chatbot;
+- generates no text, images or numbers with AI.
+
+The Analogue Score is a deterministic, versioned formula (`tai-sim-1.0.0`): the same inputs always give the same
+result, and every result can be traced and reproduced (§19).
+
+**Machine learning inside the application** is limited to classic, unsupervised statistics on the real data:
+
+- **k-means clustering.** Groups similar Earth cells into "analogue constellations" (§15) and pattern groups. It uses
+  fixed seeds, so the result is reproducible.
+- **Isolation forest (scikit-learn).** Flags statistically unusual places for inspection.
+
+These methods never change an Analogue Score. Their output is labelled as statistical patterns, not discoveries. No
+supervised model is trained, because there are no validated reference sites to train it on.
+
+**AI used to build the project.**
+
+- **Claude (Anthropic).** The project author directed the project and used Claude, an AI model, as a development
+  assistant. Claude wrote much of the code, tests and documentation, and all of the Bengali, Spanish, French and German
+  interface text. These translations have not yet been reviewed by native speakers, and the app says so.
+- **Higgsfield.** Used only as infrastructure: a sandbox for downloading NASA data, and a hosting option. The
+  application contains no AI-generated images, video or media. Every picture in it is drawn from real data (elevation
+  hillshades, NASA Blue Marble, the live score field).
+
 ---
 
 ## 1. Overview
