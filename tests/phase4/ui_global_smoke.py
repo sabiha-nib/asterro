@@ -66,7 +66,7 @@ try:
         pk = pg.evaluate("({picked: S.picked, top: S.res.distinct[0], hero: document.querySelector('#app').classList.contains('is-hero'), nb: ENG.haversine(S.lat[S.picked], S.lon[S.picked], S.lat[%d], S.lon[%d])})" % (land["i"], land["i"]))
         check(not pk["hero"] and pk["nb"] < 80, f"landing: clicking land on the globe starts the search and opens that place ({pk['nb']:.0f} km from the aimed cell)")
         pg.evaluate("a4Load()"); pg.wait_for_function("A4.reg && document.querySelector('#tc-atlas-sel')", timeout=60000); time.sleep(0.5)
-        tabs = pg.evaluate("[...document.querySelectorAll('.tabs button')].map(b => { const r = b.getBoundingClientRect(), q = b.parentElement.getBoundingClientRect(); return r.left >= q.left - 1 && r.right <= q.right + 1; })")
+        tabs = pg.evaluate("[...document.querySelectorAll('.tabs button')].map(b => { const r = b.getBoundingClientRect(), q = (b.closest('#v22-side') || b.parentElement).getBoundingClientRect(); return r.left >= q.left - 1 && r.right <= q.right + 1; })")
         check(all(tabs) and len(tabs) == 10, f"English, 1512 px, registry loaded: all {len(tabs)} tabs fully visible next to the header language control")
         # ---------------------------------------------------------------- narrated reveal = engine results
         pg.evaluate("setTarget('mars_jezero'); applyProfile('general')"); time.sleep(0.5)

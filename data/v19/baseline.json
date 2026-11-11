@@ -77,12 +77,12 @@
    "tests/phase2/fixtures/record_robustness_factorial_mars.json": "adacd74fa703d7ca9baeb4af3975330d717998f80cf186f505a6f17e4a91e227",
    "tests/phase2/js_eval.mjs": "366de0f84e6a86dcc14204d73fd202967ac1ddf4017bc4e861a4013b745d2106",
    "tests/phase2/test_lab_engine.mjs": "5f4adea69a92b3740232be4ecdf6cd29b6be8e1f3223440acb656ac497bf056e",
-   "tests/phase2/ui_lab_smoke.py": "04bd09a23c689106d693493b83020cfece53a60cb616a832ff5c9735603ff3df",
+   "tests/phase2/ui_lab_smoke.py": "510a747bcf240e31532af777fcd651d3927cd2cb7dd682794f41dec11f5181f3",
    "tests/test_data.py": "e769579f9a39ddcf977bf4e622952bf78236c76ae15fa0665b0a1795aa1a5e80",
    "tests/test_phase2.py": "2d4c08752dd306361917ac4d89610093a5a8968c2acd9d46d209651a67d051b3",
    "tests/test_scientific_spec.py": "cd64f89214dce29644943787ee95b8f30a3db489cd96ff84f76e6a03f639f276",
    "tests/test_similarity.py": "afb101c9e01afbb9bf0ef1bd6a90fe183eb38085acfc8dc756755892983f8186",
-   "tests/ui_smoke.py": "50143c65fbfdf4dc6d4b39789cbe9cb17fed60c5341aa9d5bcfa1d00e14740be"
+   "tests/ui_smoke.py": "efb5ce26ead3302be43b5a8010fcf7c50625229e24df7f8017bdffb9683632dd"
   },
   "protected_match_fixture": true,
   "reference_results": {

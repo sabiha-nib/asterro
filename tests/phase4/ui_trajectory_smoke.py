@@ -11,6 +11,18 @@ evidence, keyboard access, an accessibility audit, no horizontal overflow on a p
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_trajectory_shots"
 os.makedirs(OUT, exist_ok=True)
@@ -56,10 +68,10 @@ try:
         pg.on("pageerror", lambda e: errors.append("pageerror: " + str(e)))
         pg.on("console", lambda m: errors.append("console.error: " + m.text) if m.type == "error" and "ERR_TUNNEL" not in m.text and "fonts" not in m.text else None)
         pg.goto(URL); pg.wait_for_function("document.querySelector('#hero-facts').textContent.includes('valid land cells')", timeout=90000)
-        tabs = pg.evaluate("[...document.querySelectorAll('.tabs button')].map(b => { const r = b.getBoundingClientRect(), q = b.parentElement.getBoundingClientRect(); return [b.textContent, r.left >= q.left - 1 && r.right <= q.right + 1]; })")
+        tabs = pg.evaluate("[...document.querySelectorAll('.tabs button')].map(b => { const r = b.getBoundingClientRect(), q = (b.closest('#v22-side') || b.parentElement).getBoundingClientRect(); return [b.textContent, r.left >= q.left - 1 && r.right <= q.right + 1]; })")
         check("Trajectory" in [t[0] for t in tabs] and all(v for _, v in tabs), f"Trajectory tab present; all {len(tabs)} tabs fully visible at 1512 px")
         pg.click("#hero-search"); time.sleep(7)
-        pg.click("#tab-trajectory"); time.sleep(1.0)
+        nav_tab(pg, "trajectory"); time.sleep(1.0)
         check(pg.evaluate("T5.states.length") == 1 and pg.evaluate("T5.states[0].label").startswith("Start"), "opening the tab records the current Explore configuration")
         # ---- real slider, by keyboard: thermal weight 1.00 → 2.00 (4 steps of 0.25)
         pg.focus("#w-lst_diurnal_range")
@@ -126,7 +138,7 @@ try:
         m = b.new_page(viewport={"width": 390, "height": 844})
         m.on("pageerror", lambda e: errors.append("mobile pageerror: " + str(e)))
         m.goto(URL); m.wait_for_function("document.querySelector('#hero-facts').textContent.includes('valid land cells')", timeout=90000)
-        m.click("#hero-search"); time.sleep(7); m.click("#tab-trajectory"); time.sleep(1); m.evaluate("t5ProfileSweep()"); time.sleep(6)
+        m.click("#hero-search"); time.sleep(7); nav_tab(m, "trajectory"); time.sleep(1); m.evaluate("t5ProfileSweep()"); time.sleep(6)
         ov = m.evaluate("Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth")
         check(ov <= 0, f"mobile 390 px: no horizontal page overflow ({ov} px; the chart scrolls inside its own frame)")
         m.screenshot(path=f"{OUT}/traj_03_mobile.png")

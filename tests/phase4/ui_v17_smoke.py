@@ -7,6 +7,18 @@ layout, the prohibited-element audit on the new views, and the baseline left unc
 import json, os, re, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_v17_smoke"
 os.makedirs(OUT, exist_ok=True)
@@ -37,7 +49,7 @@ def boot(pg):
 
 
 def hub(pg, h):
-    pg.evaluate("document.querySelector('#tab-discover').scrollIntoView()"); pg.click("#tab-discover"); time.sleep(0.6)
+    pg.evaluate("document.querySelector('#tab-discover').scrollIntoView()"); nav_tab(pg, "discover"); time.sleep(0.6)
     pg.evaluate(f"document.querySelector('[data-xhub={h}]').scrollIntoView()"); pg.click(f"[data-xhub={h}]"); time.sleep(0.8)
 
 
@@ -49,7 +61,7 @@ try:
         boot(pg)
         base = pg.evaluate("({top: S.res.distinct[0], s: S.res.eff[S.res.distinct[0]], w: JSON.stringify(S.weights), tid: S.targetId})")
         # ------------------------------------------------ Atlas card -> Science domains
-        pg.click("#tab-atlas"); time.sleep(2.0)
+        nav_tab(pg, "atlas"); time.sleep(2.0)
         pg.evaluate("document.querySelectorAll('#right .site')[2].scrollIntoView()"); pg.click("#right .site >> nth=2"); time.sleep(1.2)
         card = pg.evaluate("(() => { const c = document.querySelector('#ds-acard'); return { txt: c.innerText, btn: !!c.querySelector('[data-v7dom]'), sel: S.selected }; })()")
         check(card["btn"] and "Novelty" in card["txt"], "Atlas card: novelty line and a Science domains button")
@@ -133,12 +145,12 @@ try:
         check(dl.value.suggested_filename.endswith(".md") and len(re.findall(r"^## \d+\. ", md, re.M)) == 20, f"the research report downloads with 20 sections ({dl.value.suggested_filename})")
         check("not a probability" in md and "tai-sim-1.0.0" in md and '"cell"' in md and "Earth's limitations" in md, "the report states its limits, versions and reproduction record")
         # ------------------------------------------------ Data Integration Registry
-        pg.click("#tab-data"); time.sleep(1.0)
+        nav_tab(pg, "data"); time.sleep(1.0)
         rg = pg.evaluate("({ n: document.querySelectorAll('[data-v7src]').length, st: [...new Set([...document.querySelectorAll('[data-v7src]')].map(r => r.dataset.v7state))], N: ASTERRO_V17.registry.sources.length })")
         check(rg["n"] == rg["N"] and "endpoint_unavailable" in rg["st"] and "integrated_validated" in rg["st"], f"the Data tab lists every source with its state ({rg['n']}; {rg['st']})")
         audit(pg, "Data Integration Registry")
         # ------------------------------------------------ Science layer
-        pg.click("#tab-atlas"); time.sleep(2.0)
+        nav_tab(pg, "atlas"); time.sleep(2.0)
         pg.click("#ds-layers"); time.sleep(0.4); pg.click("#layer-science"); time.sleep(1.0)
         lg = pg.evaluate("({ layer: S.layer, sel: !!document.querySelector('#v7-layer'), src: (document.querySelector('[data-v7legend]') || {}).textContent })")
         check(lg["layer"] == "science" and lg["sel"] and "NASA POWER" in (lg["src"] or ""), "the Science layer has a legend with source")

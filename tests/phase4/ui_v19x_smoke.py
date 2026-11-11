@@ -14,6 +14,18 @@ import json, os, re, subprocess, sys, time
 import numpy as np
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_v19x_smoke"
 os.makedirs(OUT, exist_ok=True)
@@ -92,7 +104,7 @@ try:
         v = sorted(set(pg.evaluate(AUDIT, "#left")))
         check(not v, f"data layers: no prohibited design element ({'; '.join(v[:4])})")
         # ---------------------------------------------------------------- Local Impact
-        pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); pg.click("#tab-local"); time.sleep(0.6)
+        pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); nav_tab(pg, "local"); time.sleep(0.6)
         pg.click("#li-geo"); pg.wait_for_function("LI.i != null"); time.sleep(1.5)
         li = pg.evaluate("""(() => { const secs = [...document.querySelectorAll('[data-lisec]')].map(s => s.dataset.lisec), s = document.querySelector('[data-lisec=v19x]');
             return { secs, volc: (s.querySelector('[data-v9xvolc]') || {}).textContent || '', n: s.querySelector('[data-v9xvar=volc_holo_100km] td.n').textContent.trim(),

@@ -52,9 +52,13 @@ try:
         check(h["orig"], "every original landing button is still on the page")
         anim = pg.evaluate("getComputedStyle(document.querySelector('.ds-act')).animationName")
         check(anim == "none", f"reduced motion: no animation on the new cards ({anim})")
-        # V20: the opening screen hides the tab bar until the person starts; the order is measured where the bar is shown
-        tabs = pg.evaluate("(() => { const a = document.querySelector('#app'); a.classList.remove('is-hero'); const t = [...document.querySelectorAll('nav.tabs button[data-tab]')].sort((a, b) => Math.round(a.getBoundingClientRect().top / 12) - Math.round(b.getBoundingClientRect().top / 12) || a.getBoundingClientRect().left - b.getBoundingClientRect().left).map(b => b.dataset.tab); a.classList.add('is-hero'); return t; })()")
-        check(tabs == ["explore", "discover", "atlas", "local", "compare", "scenarios", "trajectory", "method", "data", "lab"], f"navigation grouped Explore · Discover · Compare · Learn · My research ({tabs})")
+        # V20.3: the views are grouped in the sidebar, one section at a time; each section shows only its own views, in order
+        groups = pg.evaluate("""(() => { const out = {}; for (const g of ['discover', 'analyze', 'plan', 'evidence', 'trust']) { V22.sec = g; v22Side();
+          out[g] = [...document.querySelectorAll('nav.tabs button[data-tab]')].filter(b => b.offsetParent !== null).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top).map(b => b.dataset.tab); }
+          V22.sec = 'discover'; v22Side(); return out; })()""")
+        tabs = [t for g in ["discover", "analyze", "plan", "evidence", "trust"] for t in groups[g]]
+        check(all(len(v) == len(set(v)) for v in groups.values()) and groups["evidence"] == [], f"each section shows only its own views ({groups})")
+        check(tabs == ["explore", "discover", "atlas", "lab", "local", "compare", "trajectory", "scenarios", "data", "method"], f"navigation grouped Discover · Analyze · Plan · Evidence · Data and Trust, one section at a time ({tabs})")
         # ---- explore through the first way in
         pg.click("[data-dsact=explore]"); pg.wait_for_function("S.searched", timeout=60000); time.sleep(0.6)
         check(pg.evaluate("S.tab") == "explore" and pg.evaluate("!document.querySelector('#app').classList.contains('is-hero')"), "'Explore Earth' runs the real search over every cell")

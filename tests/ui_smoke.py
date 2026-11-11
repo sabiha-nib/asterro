@@ -3,6 +3,18 @@ weight change -> why-did-this-move -> trace -> reproduce -> tabs -> mobile. Save
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/claude-0/shots"
 os.makedirs(OUT, exist_ok=True)
@@ -26,14 +38,14 @@ try:
         pg.screenshot(path=f"{OUT}/03_selected.png")
         # thermal weight up
         pg.fill("#w-lst_diurnal_range", "3"); pg.dispatch_event("#w-lst_diurnal_range", "change"); time.sleep(0.8)
-        pg.click("#tab-scenarios"); time.sleep(0.5)
+        nav_tab(pg, "scenarios"); time.sleep(0.5)
         results["why"] = pg.inner_text("#why")[:400]
         pg.screenshot(path=f"{OUT}/04_scenarios.png")
         pg.click("button[data-whatif=thermal_x2]"); time.sleep(0.9)
         pg.screenshot(path=f"{OUT}/05_whatif.png")
-        pg.click("#tab-compare"); time.sleep(0.6); pg.screenshot(path=f"{OUT}/06_compare.png")
-        pg.click("#tab-discover"); time.sleep(0.8); pg.screenshot(path=f"{OUT}/07_discover.png")
-        pg.click("#tab-data"); time.sleep(0.5); pg.screenshot(path=f"{OUT}/08_data.png")
+        nav_tab(pg, "compare"); time.sleep(0.6); pg.screenshot(path=f"{OUT}/06_compare.png")
+        nav_tab(pg, "discover"); time.sleep(0.8); pg.screenshot(path=f"{OUT}/07_discover.png")
+        nav_tab(pg, "data"); time.sleep(0.5); pg.screenshot(path=f"{OUT}/08_data.png")
         pg.click("button[data-act=trace] >> nth=0"); time.sleep(0.5); pg.screenshot(path=f"{OUT}/09_trace.png")
         results["trace_formula"] = pg.inner_text("#sheet-body .formula")[:300]
         pg.click("#to-repro"); time.sleep(0.3)
@@ -41,9 +53,9 @@ try:
         json.dump(repro, open(f"{OUT}/reproduce.json", "w"), indent=1)   # check: python -m scripts.reproduce <OUT>/reproduce.json
         results["repro"] = repro["selected_cell"]
         pg.click("#sheet-close")
-        pg.click("#tab-method"); time.sleep(0.4); pg.screenshot(path=f"{OUT}/10_method.png")
-        pg.click("#tgt-moon"); pg.click("#tab-explore"); time.sleep(0.8); pg.screenshot(path=f"{OUT}/11_moon.png")
-        pg.click("#tgt-cross"); pg.click("#tab-compare"); time.sleep(1.2); pg.screenshot(path=f"{OUT}/12_cross.png")
+        nav_tab(pg, "method"); time.sleep(0.4); pg.screenshot(path=f"{OUT}/10_method.png")
+        pg.click("#tgt-moon"); nav_tab(pg, "explore"); time.sleep(0.8); pg.screenshot(path=f"{OUT}/11_moon.png")
+        pg.click("#tgt-cross"); nav_tab(pg, "compare"); time.sleep(1.2); pg.screenshot(path=f"{OUT}/12_cross.png")
         pg.click("#proj-map"); time.sleep(1.6); pg.screenshot(path=f"{OUT}/13_map.png")
         # click on the map to reverse search (centre of viewport)
         box = pg.locator("#globe").bounding_box(); pg.mouse.click(box["x"] + box["width"] * 0.62, box["y"] + box["height"] * 0.42); time.sleep(0.8)

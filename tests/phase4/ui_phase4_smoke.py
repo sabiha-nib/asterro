@@ -13,6 +13,18 @@ workspace (refusals, withheld metrics), the Mismatch Explorer, the Readiness & P
 import json, os, subprocess, sys, tempfile, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_p4_shots"
 os.makedirs(OUT, exist_ok=True)
@@ -91,7 +103,7 @@ try:
             json.dump(cfg, f); rp = f.name
         r = subprocess.run([sys.executable, "-m", "scripts.reproduce_registry", rp, "--repo", ROOT], cwd=ROOT, capture_output=True, text=True)
         check(r.returncode == 0, "Python reference engine reproduces the Shackleton Explore record: " + " | ".join(l for l in r.stdout.splitlines() if l.startswith("[")))
-        pg.click("#tab-lab"); time.sleep(1.0)
+        nav_tab(pg, "lab"); time.sleep(1.0)
         check("defined for the legacy targets" in pg.inner_text("#left"), "Phase II Lab shows a notice (not mismatched results) for a registry target")
         pg.click("#p4-lab-legacy"); time.sleep(2.5)
         back = pg.evaluate("({t: S.targetId, eff: Array.from(S.res.eff), ranges: JSON.stringify(S.ranges), top: Array.from(S.res.distinct)})")
@@ -101,7 +113,7 @@ try:
         check(cross["r"] == base["ranges"], f"cross-planet runs with the legacy table (#1 {cross['top']})")
         pg.click("[data-target=mars_jezero]"); time.sleep(1.5)
         # ---------------------------------------------------------------- atlas home
-        pg.click("#tab-atlas"); pg.wait_for_selector(".p4-tree", timeout=30000); time.sleep(0.6)
+        nav_tab(pg, "atlas"); pg.wait_for_selector(".p4-tree", timeout=30000); time.sleep(0.6)
         pg.screenshot(path=f"{OUT}/p4_02_atlas_home.png")
         pg.fill("#a4q", "Gale Crater"); time.sleep(0.4)
         hits = pg.eval_on_selector_all("#a4sr [role=option]", "x => x.map(o => o.textContent)")

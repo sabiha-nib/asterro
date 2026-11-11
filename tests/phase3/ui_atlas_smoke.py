@@ -7,6 +7,18 @@ browser replay, and checks page errors, the unchanged baseline result and mobile
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "/tmp/asterro_atlas_shots"
 FIX = "--fixtures" in sys.argv
@@ -46,7 +58,7 @@ try:
         pg.click("#hero-search"); time.sleep(6.5)
         base_top = pg.inner_text(".site >> nth=0")
         base = pg.evaluate("({eff: Array.from(S.res.eff.slice(0, 200)), w: JSON.stringify(S.weights), t: S.targetId, ranges: JSON.stringify(S.ranges)})")
-        pg.click("#tab-atlas"); time.sleep(0.8)
+        nav_tab(pg, "atlas"); time.sleep(0.8)
         pg.wait_for_selector(".p4-g1", timeout=30000); nav(pg, 'catalog')   # Phase IV: the Atlas opens on the hierarchical atlas
         pg.wait_for_selector(".at-cards", timeout=30000); time.sleep(0.8)
         res["mars_cards"] = pg.eval_on_selector_all(".at-card", "x => x.length")
@@ -106,7 +118,7 @@ try:
         # baseline unchanged after everything
         after = pg.evaluate("({eff: Array.from(S.res.eff.slice(0, 200)), w: JSON.stringify(S.weights), t: S.targetId, ranges: JSON.stringify(S.ranges)})")
         res["baseline_unchanged"] = after == base
-        pg.click("#tab-explore"); time.sleep(1.0)
+        nav_tab(pg, "explore"); time.sleep(1.0)
         res["baseline_top_same"] = pg.inner_text(".site >> nth=0") == base_top
         # mobile
         m = b.new_page(viewport={"width": 390, "height": 844})

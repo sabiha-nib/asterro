@@ -11,6 +11,18 @@ Research mode details, keyboard access, five languages, phone width, the prohibi
 import os, re, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_v19_smoke"
 os.makedirs(OUT, exist_ok=True)
@@ -116,7 +128,7 @@ try:
         check(rg and rg["acq"] == ["integrated_awaiting_validation"] * 3, "Macrostrat, the volcano catalogue and GBIF are 'integrated, awaiting full validation'")
         pg.screenshot(path=os.path.join(OUT, "v19_registry.png"))
         # Local Impact
-        pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); pg.click("#tab-local"); time.sleep(0.6)
+        pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); nav_tab(pg, "local"); time.sleep(0.6)
         pg.click("#li-geo"); pg.wait_for_function("LI.i != null"); time.sleep(1.0)
         li = pg.evaluate("""(() => { const secs = [...document.querySelectorAll('[data-lisec]')].map(s => s.dataset.lisec); const s = document.querySelector('[data-lisec=v19]');
           return { secs, doms: s ? s.querySelectorAll('[data-v9dom]').length : 0, profs: s ? s.querySelectorAll('[data-v9prof]').length : 0 }; })()""")

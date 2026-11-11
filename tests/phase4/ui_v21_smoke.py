@@ -1,4 +1,5 @@
-"""ASTERRO V20.1 visual shell in the browser (Playwright/Chromium).
+"""ASTERRO V20.1 / V20.3 visual shell in the browser (Playwright/Chromium). V20.3: the navigation rail became the dark sidebar
+with one section at a time, sections open their own workspaces, and the destination picker became a map-led explorer.
 
     python tests/phase4/ui_v21_smoke.py [outdir]
 
@@ -30,7 +31,7 @@ CONTRAST = r"""() => {
  const rgb = s => { const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?/.exec(s); return m ? [+m[1], +m[2], +m[3], m[4] == null ? 1 : +m[4]] : null; };
  const bgOf = e => { let c = [11,29,58]; const chain = []; for (let n = e; n; n = n.parentElement) chain.push(n); for (const n of chain.reverse()) { const b = rgb(getComputedStyle(n).backgroundColor); if (b && b[3] > 0) c = c.map((v, i) => v * (1 - b[3]) + b[i] * b[3]); } return c; };
  const out = [];
- for (const e of document.querySelectorAll('#left *, #right *, .console *, #jn *, #sheet *, #v21-dest *, #v20-set *, #ds-acard *')) {
+ for (const e of document.querySelectorAll('#left *, #right *, .console *, #jn *, #sheet *, #v21-dest *, #v20-set *, #ds-acard *, #v22-dash *, #v22-side *')) {
    if (!e.offsetParent && getComputedStyle(e).position !== 'fixed') continue;
    const own = [...e.childNodes].some(n => n.nodeType === 3 && n.nodeValue.trim()); if (!own) continue;
    const cs = getComputedStyle(e); if (cs.visibility === 'hidden' || +cs.opacity < .3) continue;
@@ -60,8 +61,8 @@ try:
         ctx = b.new_context(viewport={"width": 1440, "height": 900}, geolocation={"latitude": -23.65, "longitude": -68.16}, permissions=["geolocation"])
         pg = ctx.new_page(); pg.set_default_timeout(120000); pg.on("pageerror", lambda e: errors.append(str(e)))
         boot(pg)
-        r = pg.evaluate("({rail: !!document.querySelector('#v21-rail') && document.querySelector('#v21-rail').offsetWidth, groups: [...document.querySelectorAll('#v21-rail [data-v21rail]')].map(b => b.dataset.v21rail), home: !!document.querySelector('#v21-rail [data-v20home]'), bg: getComputedStyle(document.querySelector('#v21-rail')).backgroundColor})")
-        check(r["rail"] and r["rail"] <= 90 and r["groups"] == ["discover", "analyze", "plan", "evidence", "trust", "settings"] and r["home"] and r["bg"] == NAVY, f"desktop rail: Home, five groups, Settings, deep navy ({r})")
+        r = pg.evaluate("({w: document.querySelector('#v22-side').offsetWidth, secs: [...document.querySelectorAll('#v22-side [data-v22sec]')].map(b => b.dataset.v22sec), home: !!document.querySelector('#v22-side [data-v20home]'), set: !!document.querySelector('#v22-side [data-v22set=set]'), about: !!document.querySelector('#v22-side [data-v22set=about]'), bg: getComputedStyle(document.querySelector('#v22-side')).backgroundColor, tabsInHeader: !!document.querySelector('header.bar nav.tabs')})")
+        check(r["w"] <= 260 and r["secs"] == ["discover", "analyze", "plan", "evidence", "trust"] and r["home"] and r["set"] and r["about"] and r["bg"] == NAVY and not r["tabsInHeader"], f"desktop sidebar: Home, five sections, Settings and About, deep navy, no tab row in the header ({r})")
         base = pg.evaluate("(async () => { await runSearch(); return S.res.distinct.slice(0, 10).map(i => [i, +S.res.eff[i].toFixed(6)]); })()"); time.sleep(1.5)
         g = pg.evaluate("""(() => { const R = e => e.getBoundingClientRect(); const v = R(document.querySelector('#viewport')), l = R(document.querySelector('#left')), r = R(document.querySelector('#right'));
           const ctl = [...document.querySelectorAll('#viewport .vp-top, #viewport .jl-chip, #viewport .ds-paneltog')].map(R);
@@ -71,43 +72,46 @@ try:
         check(g["rightIn"] and g["overlap"] == 0, f"the ranking floats over the globe without covering a globe control ({g['overlap']} overlaps)")
         check(g["lbg"] == NAVY and g["rbg"].startswith("rgba(11, 29, 58") , f"context panel and ranking are deep navy ({g['lbg']}, {g['rbg']})")
         pg.screenshot(path=os.path.join(OUT, "01_globe_1440.png"))
+        cg = pg.evaluate("(() => { const c = document.querySelector('#globe').getBoundingClientRect(), r = document.querySelector('#right').getBoundingClientRect(), v = document.querySelector('#viewport').getBoundingClientRect(); return { cx: c.left + c.width / 2 + (GLOBE.offX || 0) * 0.5 * c.width, free: (v.left + Math.min(v.right, r.left)) / 2, full: Math.abs(c.width - v.width) < 2 }; })()")
+        check(cg["full"] and abs(cg["cx"] - cg["free"]) < 24, f"the canvas fills the viewport and the globe is centred in the part the ranking leaves free ({cg['cx']:.0f} vs {cg['free']:.0f})")
         bad = []
         for grp in ["discover", "analyze", "plan", "evidence", "trust"]:
-            pg.click(f"#v21-rail [data-v21rail={grp}]"); time.sleep(0.3)
-            s = pg.evaluate("({open: !document.querySelector('#v20-nav').hidden, grp: (document.activeElement.closest('[data-v20group]') || {}).dataset ? document.activeElement.closest('[data-v20group]').dataset.v20group : null})")
-            if not (s["open"] and s["grp"] == grp): bad.append((grp, s))
-            pg.keyboard.press("Escape"); time.sleep(0.2)
-            if not pg.evaluate(f"document.activeElement.matches('#v21-rail [data-v21rail={grp}]')"): bad.append((grp, "focus"))
-        check(not bad, f"each rail group opens the navigation at that group and Escape returns focus ({bad})")
-        pg.click("#v21-rail [data-v21rail=settings]"); time.sleep(0.3)
-        check(not pg.evaluate("document.querySelector('#v20-set').hidden"), "the rail opens Settings"); pg.keyboard.press("Escape")
+            pg.click(f"#v22-side [data-v22sec={grp}]"); time.sleep(0.8)
+            s2 = pg.evaluate("({cur: (document.querySelector('#v22-side [data-v22sec][aria-current=true]') || {}).dataset, dash: !document.querySelector('#v22-dash') || document.querySelector('#v22-dash').hidden ? null : document.querySelector('#v22-dash').dataset.sec, globe: !!document.querySelector('#viewport').offsetParent, tab: S.tab})")
+            want_dash = None if grp == "discover" else grp
+            if not (s2["cur"] and s2["cur"].get("v22sec") == grp and s2["dash"] == want_dash and s2["globe"] == (grp == "discover")): bad.append((grp, s2))
+            if grp != "discover": pg.screenshot(path=os.path.join(OUT, f"05_dashboard_{grp}_1440.png"))
+        check(not bad, f"each section opens its own workspace: Discover the globe, the others their dashboards without the globe ({bad})")
+        pg.click("#v22-side [data-v22set=set]"); time.sleep(0.3)
+        check(not pg.evaluate("document.querySelector('#v20-set').hidden"), "the sidebar opens Settings"); pg.keyboard.press("Escape")
+        pg.click("#v22-side [data-v22sec=discover]"); time.sleep(0.8)
         # ------------------------------------------------------------------ destinations
         pg.click("#v21-all"); pg.wait_for_function("document.querySelectorAll('#v21-dest .v21-d').length > 2", timeout=30000)
         d = pg.evaluate("({n: document.querySelectorAll('#v21-dest .v21-d').length, imgs: [...document.querySelectorAll('#v21-dest .v21-d img')].filter(i => i.complete && i.naturalWidth > 0).length, focus: document.activeElement.id, cur: (document.querySelector('#v21-dest [aria-current=true] h3') || {}).textContent})")
         check(d["n"] == 18 and d["focus"] == "v21-dest-title" and d["cur"] == "Jezero Crater", f"Mars destinations: 18 catalogued targets, current marked ({d})")
         pg.screenshot(path=os.path.join(OUT, "02_destinations_mars_1440.png"))
-        dis = pg.evaluate("({dis: [...document.querySelectorAll('#v21-dest [data-v21go]')].filter(b => b.disabled).length, l2: document.querySelectorAll('#v21-dest .v21-lv').length})")
-        check(dis["dis"] == 16, f"Mars targets below readiness 3 are Atlas only ({dis})")
+        dis = pg.evaluate("({dis: document.querySelectorAll('#v21-dest [data-v22atlasonly]').length, map: document.querySelectorAll('#v21-dest .v22-pin').length})")
+        check(dis["dis"] == 16, f"Mars targets below readiness 3 are marked Atlas only ({dis})")
         pg.click("[data-v21body=Moon]"); time.sleep(0.4)
         m = pg.evaluate("document.querySelectorAll('#v21-dest .v21-d').length")
         check(m == 15, f"Moon destinations: 15 catalogued targets ({m})")
         pg.screenshot(path=os.path.join(OUT, "03_destinations_moon_1440.png"))
-        pg.click("[data-v21go=moon_shackleton]"); pg.wait_for_function("S.targetId === 'moon_shackleton'", timeout=60000); time.sleep(0.6)
+        pg.click("#v21-dest .v22-tl [data-v22pick=moon_shackleton]"); time.sleep(0.3); pg.click("#v21-dest [data-v21go=moon_shackleton]"); pg.wait_for_function("S.targetId === 'moon_shackleton'", timeout=60000); time.sleep(0.6)
         check(pg.evaluate("S.tab === 'explore' && document.querySelector('#v21-dest').hidden"), "choosing Shackleton opens it on the globe through the existing target code")
         pg.evaluate("setTarget('mars_jezero')"); time.sleep(0.6)
         pg.click("#v21-all"); pg.wait_for_function("document.querySelectorAll('#v21-dest .v21-d').length > 2")
-        pg.click("[data-v21atlas=mars_gusev]"); time.sleep(2)
+        pg.click("#v21-dest .v22-pin[data-v22pick=mars_gusev]"); time.sleep(0.3); pg.click("#v21-dest [data-v21atlas=mars_gusev]"); time.sleep(2)
         check(pg.evaluate("S.tab === 'atlas' && A3.active === 'mars_gusev'"), "Open in the Atlas opens that target in the Atlas")
         pg.click("#v21-all"); time.sleep(0.4); pg.keyboard.press("Escape"); time.sleep(0.2)
         check(pg.evaluate("document.querySelector('#v21-dest').hidden && document.activeElement.id === 'v21-all'"), "Escape closes the picker and returns focus")
         # ------------------------------------------------------------------ contrast across views
         low = {}
         views = ["setTab('explore'); select(S.res.distinct[0])", "setTab('discover')", "setTab('atlas')", "setTab('lab')", "setTab('local'); document.querySelector('#li-geo').click()", "setTab('compare')", "setTab('scenarios')", "setTab('trajectory')", "setTab('method')", "setTab('data')",
-                 "V20_GO.lens()", "V20_GO.portfolio()", "V20_GO.passport()", "V20_GO.trace()", "V20_GO.journal()", "V20_GO.profiles()", "V20_GO.robust()", "v20OpenSheet('set')", "v21OpenDest()"]
+                 "V20_GO.lens()", "V20_GO.portfolio()", "V20_GO.passport()", "V20_GO.trace()", "V20_GO.journal()", "V20_GO.profiles()", "V20_GO.robust()", "v20OpenSheet('set')", "v21OpenDest()", "v22Dash('analyze')", "v22Dash('plan')", "v22Dash('evidence')", "v22Dash('trust')"]
         for js in views:
             pg.evaluate(js); time.sleep(1.6)
             for row in pg.evaluate(CONTRAST): low.setdefault(row[0] + " " + row[1], row[2:])
-            pg.evaluate("if (typeof jnClose === 'function') jnClose(); if (typeof closeSheet === 'function') closeSheet(); v20Close(true); v21CloseDest(true)")
+            pg.evaluate("if (typeof jnClose === 'function') jnClose(); if (typeof closeSheet === 'function') closeSheet(); v20Close(true); v21CloseDest(true); v22CloseDash()")
         check(not low, f"every text meets WCAG AA on its background across {len(views)} views ({list(low.items())[:4]})")
         after = pg.evaluate("(() => { setTarget('mars_jezero'); setTab('explore'); return S.res.distinct.slice(0, 10).map(i => [i, +S.res.eff[i].toFixed(6)]); })()")
         check(after == base, "the six-dimensional result is unchanged")
@@ -119,10 +123,10 @@ try:
             hx = q.evaluate("(() => { const h = document.querySelector('#hero'); return h.scrollWidth - h.clientWidth; })()")
             check(hx <= 1, f"{vw}x{vh}: the opening screen has no hidden sideways overflow ({hx} px)")
             q.evaluate("runSearch()"); q.wait_for_function("S.searched"); time.sleep(1)
-            ph = q.evaluate("""(() => ({ rail: document.querySelector('#v21-rail').offsetParent !== null, ov: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth,
+            ph = q.evaluate("""(() => ({ rail: document.querySelector('#v22-side').checkVisibility({ visibilityProperty: true }), ov: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth,
               tgt: [...document.querySelectorAll('.target-ctl button')].map(b => { const r = b.getBoundingClientRect(); return r.width > 40 && r.right <= innerWidth + 1 && r.height >= 36; }),
               lbg: getComputedStyle(document.querySelector('#left')).backgroundColor, proj: S.proj, gh: document.querySelector('#viewport').getBoundingClientRect().height }))()""")
-            check(not ph["rail"] and ph["ov"] <= 1 and all(ph["tgt"]) and ph["lbg"] == NAVY and ph["proj"] == 0, f"{vw}x{vh}: no rail, no sideways scroll, target switch fits, navy panels, globe ({ph})")
+            check((not ph["rail"] if vw <= 760 else ph["rail"]) and ph["ov"] <= 1 and all(ph["tgt"]) and ph["lbg"] == NAVY and ph["proj"] == 0, f"{vw}x{vh}: sidebar as a drawer on phones and a rail above 760 px, no sideways scroll, target switch fits, navy panels, globe ({ph})")
             q.screenshot(path=os.path.join(OUT, f"04_phone_{vw}x{vh}.png")); c2.close()
         b.close()
     check(not errors, f"no page error ({errors[:3]})")

@@ -22,6 +22,18 @@ Viewports: 390×844, 430×932, 768×1024, 1024×768, 1280×800, 1512×982.
 import json, os, re, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_responsive"
 os.makedirs(OUT, exist_ok=True)
@@ -37,6 +49,19 @@ if os.environ.get("ASTERRO_VP"):          # developer shortcut: e.g. ASTERRO_VP=
     VIEWPORTS = [v for v in VIEWPORTS if str(v[0]) in os.environ["ASTERRO_VP"].split(",")]
 
 
+def show_sub(pg):
+    """V20.3: show the open section's submenu (drawer on phones, flyout beside the rail on tablets; always shown on desktop)."""
+    if pg.evaluate("innerWidth <= 760"):
+        if not pg.evaluate("document.body.classList.contains('v22-drawer')"): pg.click("#v22-menu")
+    elif pg.evaluate("getComputedStyle(document.querySelector('#v22-sub')).display === 'none'"):
+        pg.click(f"#v22-side [data-v22sec={pg.evaluate('V22.sec')}]")
+    time.sleep(0.3)
+
+
+def hide_sub(pg):
+    if pg.evaluate("V22.drawer || V22.flyout"): pg.keyboard.press("Escape"); time.sleep(0.2)
+
+
 def check(ok, msg):
     print(("PASS " if ok else "FAIL ") + msg, flush=True)
     if not ok:
@@ -44,7 +69,7 @@ def check(ok, msg):
 
 
 HEADER = r"""() => { const vw = innerWidth, bar = document.querySelector('header.bar'), br = bar.getBoundingClientRect();
-  const tabs = [...document.querySelectorAll('nav.tabs button[data-tab]')].map(b => { const r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, hit = document.elementFromPoint(cx, cy);
+  const tabs = [...document.querySelectorAll('nav.tabs button[data-tab]')].filter(b => b.offsetParent !== null).map(b => { const r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, hit = document.elementFromPoint(cx, cy);
     return { id: b.dataset.tab, w: r.width, l: r.left, r: r.right, h: r.height, vis: r.width > 0 && r.height > 0 && r.left >= -1 && r.right <= vw + 1, hit: !!hit && (hit === b || b.contains(hit)), fs: parseFloat(getComputedStyle(b).fontSize), label: b.textContent.trim() }; });
   const hdr = document.querySelector('header.bar #i18n-hdr'), sel = hdr && hdr.querySelector('select[data-i18n-lang]'), code = hdr && hdr.querySelector('.i18n-code');
   const hr = hdr && hdr.getBoundingClientRect();
@@ -100,8 +125,10 @@ try:
             st0 = state(pg); hdr_bad = []
             for L in LANGS:
                 pg.evaluate(f"setLang('{L}')"); time.sleep(0.5)
+                show_sub(pg)
                 h = pg.evaluate(HEADER)
-                bad = [t["id"] for t in h["tabs"] if not (t["vis"] and t["hit"])]
+                hide_sub(pg)
+                bad = [t["id"] for t in h["tabs"] if not (t["vis"] and t["hit"])] + ([] if h["tabs"] else ["no view button shown"])
                 small = [t["id"] for t in h["tabs"] if t["fs"] < 10.5]
                 name_ok = h["name"] and h["value"] == L and (L == "en" or h["name"] != "EN")
                 if bad or small or h["scrollW"] > W + 1 or h["navScroll"] > 1 or not h["hdr"] or not h["hdrVis"] or h["inConsole"] or not name_ok:
@@ -114,7 +141,7 @@ try:
             pg.evaluate("setLang('de')"); time.sleep(0.4)
             for t in ["atlas", "data", "explore"]:
                 sel = f"nav.tabs button[data-tab={t}]"
-                (pg.tap if touch else pg.click)(sel); time.sleep(0.6)
+                nav_tab(pg, t, pg.tap if touch else pg.click); time.sleep(0.6)
             check(pg.evaluate("S.tab") == "explore" and pg.evaluate("document.querySelector('#tab-atlas').getAttribute('aria-selected')") == "false", f"{tag}: tabs work by {'tap' if touch else 'click'} (Deutsch)")
             # ------------------------------------------------ interfaces
             langs = ["de", "bn"] + (["en"] if W in (768, 1024) else [])
@@ -173,14 +200,16 @@ try:
             # ------------------------------------------------ Bengali typography (once per viewport class)
             if W in (390, 1512):
                 pg.evaluate("setLang('bn'); setTab('explore')"); time.sleep(0.4)
+                show_sub(pg)
                 ty = pg.evaluate(r"""async () => { await document.fonts.ready;
                   const m = (txt, w = 400) => { const s = document.createElement('span'); s.style.cssText = `font:${w} 20px var(--f-body);white-space:nowrap;position:absolute;visibility:hidden`; s.textContent = txt; document.body.appendChild(s); const x = s.getBoundingClientRect().width; s.remove(); return x; };
                   const conj = m('ক্ষ'), split = m('ক্‌ষ'), ki = m('কি'), k = m('ক'), i = m('ি'), bold = m('বাংলা ভাষা', 700), reg = m('বাংলা ভাষা', 400);
                   const fam = getComputedStyle(document.body).fontFamily;
                   const mw = f => { const s = document.createElement('span'); s.style.cssText = `font:400 40px ${f};white-space:nowrap;position:absolute;visibility:hidden`; s.textContent = 'mmmmwwwwiiii'; document.body.appendChild(s); const x = s.getBoundingClientRect().width; s.remove(); return x; };
                   const noto = mw('"Noto Sans Bengali", monospace') !== mw('monospace');   // a face is loaded only if its Latin metrics differ from the fallback's
-                  const bh = [...document.querySelectorAll('nav.tabs button')].map(b => b.getBoundingClientRect().height);
+                  const bh = [...document.querySelectorAll('nav.tabs button')].filter(b => b.offsetParent !== null).map(b => b.getBoundingClientRect().height);
                   return { conj, split, ki, ksum: k + i, bold, reg, fam, noto, bh: [Math.min(...bh), Math.max(...bh)] }; }""")
+                hide_sub(pg)
                 check(ty["conj"] + 2 < ty["split"], f"{tag}: Bengali conjuncts are shaped (ক্ষ {ty['conj']:.1f} px < ক্‌ষ {ty['split']:.1f} px)")
                 check(ty["ki"] < ty["ksum"] + 0.5, f"{tag}: the pre-base vowel sign combines with its consonant (কি {ty['ki']:.1f} px ≤ ক + ি {ty['ksum']:.1f} px)")
                 check(ty["bold"] > 0 and ty["reg"] > 0, f"{tag}: regular and bold Bengali both render ({ty['reg']:.1f} / {ty['bold']:.1f} px)")

@@ -1867,6 +1867,220 @@ table{color:inherit}
   .vp-top .seg button{padding:7px 10px;font-size:12px}
   .viewport .ds-paneltog[data-dspanel="right"],html.ds-layers-open .viewport .ds-paneltog[data-dspanel="right"]{top:196px}
 }
+
+/* ===== ASTERRO V20.3 application shell (presentation only) =====
+ * Persistent deep-navy sidebar with one section's submenu at a time, section dashboards, a globe used only where the
+ * task is geographic, a centred globe in Discover, a map-led destination explorer, and phone / tablet layouts of
+ * their own. Loaded after w21_shell.css. Every element, id and behaviour underneath is unchanged. */
+:root{--v22-w:236px;--v22-rail:76px}
+#v21-rail{display:none!important}
+header.bar .v20-util{display:none!important}
+#v22-menu{display:none}
+
+/* ---------------------------------------------------------------- the sidebar */
+#v22-side{position:fixed;left:0;top:0;bottom:0;width:var(--v22-w);z-index:46;display:flex;flex-direction:column;gap:6px;padding:10px 10px 12px;background:#0B1D3A;border-right:1px solid #1C3566;color:#F8FAFC;overflow-y:auto;overscroll-behavior:contain}
+.v22-top{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:2px 2px 10px;border-bottom:1px solid #1C3566}
+.v22-logo{display:flex;align-items:center;gap:10px;background:transparent;border:0;color:#F8FAFC;cursor:pointer;padding:6px;border-radius:6px!important;min-height:40px}
+.v22-logo svg{width:26px;height:26px;stroke:#F8FAFC;fill:none;stroke-width:1.6}
+.v22-logo b{font:700 15px/1 var(--ds-display);letter-spacing:.12em!important}
+.v22-col{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #1C3566;border-radius:6px!important;cursor:pointer}
+.v22-col svg{width:16px;height:16px;stroke:#A3B3C9;fill:none;stroke-width:1.8}
+.v22-secs{display:flex;flex-direction:column;gap:2px;padding-top:4px}
+.v22-sb{display:flex;align-items:center;gap:12px;width:100%;min-height:42px;padding:8px 10px;background:transparent;border:0;border-radius:6px!important;color:#A3B3C9;font:500 14px/1.2 var(--ds-font);text-align:left;cursor:pointer}
+.v22-sb svg{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6}
+.v22-sb[aria-current="true"]{background:#102552;color:#F8FAFC}
+.v22-sb[aria-current="true"] svg{stroke:#93C5FD}
+.v22-sb:active{background:#13306A}
+#v22-sub{display:flex;flex-direction:column;gap:1px;margin-top:6px;padding:10px 0 4px 10px;border-top:1px solid #1C3566}
+#v22-sub .v22-gen{display:contents}
+#v22-sub nav.tabs{display:contents}
+.v22-subt{font:600 11.5px/1.3 var(--ds-font);color:#93C5FD;margin:0 0 6px 4px;letter-spacing:.04em!important}
+#v22-sub .v22-it,#v22-sub nav.tabs button.v22-it{display:flex;align-items:center;width:100%;min-height:38px;padding:8px 10px!important;background:transparent;border:0!important;border-radius:6px!important;color:#CBD5E1;font:500 13.5px/1.25 var(--ds-font)!important;text-align:left;cursor:pointer;white-space:normal}
+#v22-sub nav.tabs button.v22-off{display:none!important}
+#v22-sub :is(.v22-it[aria-current="true"],nav.tabs button[aria-selected="true"]){background:#1E3A8A!important;color:#F8FAFC!important;border-bottom:0!important}
+.v22-foot{margin-top:auto;display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:1px solid #1C3566}
+
+/* desktop: persistent; collapsible to a rail with a flyout submenu */
+@media (min-width:1181px){
+  body{padding-left:var(--v22-w)!important}
+  body.v22-collapsed{padding-left:var(--v22-rail)!important}
+  body.v22-collapsed #v22-side{width:var(--v22-rail);padding-inline:8px}
+  body.v22-collapsed :is(.v22-logo b,.v22-sb span){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  body.v22-collapsed .v22-top{flex-direction:column}
+  body.v22-collapsed .v22-sb{justify-content:center;padding:8px}
+  body.v22-collapsed:not(.v22-flyout) #v22-sub{display:none}
+  body.v22-collapsed.v22-flyout #v22-sub{position:fixed;left:var(--v22-rail);top:0;bottom:0;width:248px;margin:0;padding:16px 12px;background:#102552;border-right:1px solid #2B4C86;border-top:0;overflow-y:auto;z-index:47}
+}
+/* tablet: a rail; the submenu opens beside it */
+@media (min-width:761px) and (max-width:1180px){
+  body{padding-left:var(--v22-rail)!important}
+  #v22-side{width:var(--v22-rail);padding-inline:8px}
+  #v22-side :is(.v22-logo b,.v22-col){display:none}
+  .v22-sb{flex-direction:column;gap:4px;padding:8px 2px;font-size:10.5px;text-align:center;justify-content:center;overflow-wrap:anywhere}
+  body:not(.v22-flyout) #v22-sub{display:none}
+  body.v22-flyout #v22-sub{position:fixed;left:var(--v22-rail);top:0;bottom:0;width:260px;margin:0;padding:16px 12px;background:#102552;border-right:1px solid #2B4C86;border-top:0;overflow-y:auto;z-index:47}
+}
+/* phone: a drawer opened from the header */
+@media (max-width:760px){
+  body{padding-left:0!important}
+  #v22-menu{display:flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;background:#102552;border:1px solid #2B4C86;border-radius:6px!important;color:#F8FAFC;font:500 13px/1 var(--ds-font);cursor:pointer;order:-2}
+  #v22-menu svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6}
+  #v22-menu .v20-lbl{position:static;width:auto;height:auto;clip:auto;overflow:visible}
+  #v22-side{width:min(320px,88vw);transform:translateX(-102%);visibility:hidden}
+  body.v22-drawer #v22-side{transform:none;visibility:visible}
+  body.v22-drawer::before{content:"";position:fixed;inset:0;background:rgba(11,29,58,.6);z-index:45}
+  #v22-side .v22-col{display:none}
+  .v22-secs{flex-direction:row;gap:2px}
+  .v22-sb{flex:1 1 0;flex-direction:column;gap:4px;padding:8px 2px;font-size:10.5px;text-align:center;justify-content:center;min-width:0;overflow-wrap:anywhere}
+  .v22-foot{flex-direction:row}
+  .v22-foot .v22-sb{flex-direction:row;font-size:13px}
+}
+
+/* ---------------------------------------------------------------- header: one slim command row */
+header.bar{gap:12px}
+@media (max-width:760px){
+  header.bar{flex-wrap:wrap;padding:8px 10px;row-gap:8px}
+  header.bar .brand{order:-1}
+  .target-ctl{order:5;flex:1 1 100%}
+  #v21-all{order:6;flex:1 1 100%;min-height:40px}
+  .stage,#app.wide .stage{grid-template-rows:52vh auto auto}
+}
+
+/* ---------------------------------------------------------------- workspaces */
+/* views without a geographic task use the whole workspace; the globe is not drawn behind them */
+#app.v22-solo .stage{grid-template-columns:minmax(0,1fr) 0 0!important;grid-template-rows:auto!important}
+#app.v22-solo :is(.viewport,#right){display:none!important}
+#app.v22-solo #left{border-right:0;padding-inline:max(0px,calc((100% - 1080px) / 2))}
+/* Discover: the globe is centred in the canvas the floating ranking leaves free */
+
+/* dashboards replace the whole stage */
+#app.v22-dash-on .stage{display:block!important;overflow-y:auto}
+#app.v22-dash-on .stage>:not(#v22-dash){display:none!important}
+#app.v22-dash-on .console{display:none!important}
+#v22-dash{background:#0B1D3A;color:#F8FAFC;min-height:100%}
+#v22-dash[hidden]{display:none}
+.v22-d{max-width:1160px;margin:0 auto;padding:28px clamp(16px,3vw,40px) 48px;display:flex;flex-direction:column;gap:18px}
+.v22-dh h1{font:400 clamp(30px,3.4vw,46px)/1.1 var(--ds-display);margin:2px 0 6px;color:#F8FAFC}
+.v22-eye{font:600 12px/1.3 var(--ds-font);color:#93C5FD;margin:0;letter-spacing:.04em!important}
+.v22-lead{font:400 16px/1.5 var(--ds-font);color:#CBD5E1;margin:0;max-width:70ch}
+.v22-panel{background:#102552;border:1px solid #1C3566;border-radius:8px!important;padding:18px 20px;min-width:0}
+.v22-h3{font:600 14px/1.3 var(--ds-font);color:#F8FAFC;margin:0 0 6px}
+.v22-panel .v22-h3+.v22-h3,.v22-panel .v22-kv+.v22-h3{margin-top:14px}
+.v22-note{font:400 12.5px/1.5 var(--ds-font);color:#A3B3C9;margin:6px 0 0}
+.v22-split{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.v22-split-r{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.v22-ev{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:16px;align-items:start}
+.v22-plan{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.v22-plan .v22-dl{margin-top:0}
+/* bar chart of the leading candidates */
+.v22-bars{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.v22-bar{display:grid;grid-template-columns:22px minmax(0,1.3fr) minmax(0,1fr) 64px;align-items:center;gap:10px;width:100%;padding:7px 6px;background:transparent;border:0;border-radius:6px!important;color:#F8FAFC;font:400 13.5px/1.3 var(--ds-font);text-align:left;cursor:pointer}
+.v22-bar:active{background:#13306A}
+.v22-bn{color:#A3B3C9;font-size:12px}
+.v22-bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v22-bar .track{height:8px;background:#0B1D3A;border-radius:4px;overflow:hidden;display:block}
+.v22-bar .fill{display:block;height:100%;background:#3B82D8;border-radius:4px}
+.v22-bar b{font-weight:600;text-align:right}
+.v22-dims,.v22-cs{list-style:none;margin:8px 0 0;padding:0}
+.v22-dims li{display:grid;grid-template-columns:minmax(0,1fr) auto 76px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #1C3566;font:400 13.5px/1.3 var(--ds-font);color:#CBD5E1}
+.v22-w{color:#A3B3C9;font-size:12.5px;text-align:right}
+.v22-st{font:600 11px/1 var(--ds-font);padding:4px 7px;border-radius:4px;border:1px solid #2B4C86;color:#CBD5E1}
+.v22-st-direct{color:#93C5FD;border-color:#3B82D8}
+.v22-st-proxy{color:#B6DFED}
+/* mission-profile heat map: cell fill = engine score (navy to refined blue) */
+.v22-tw{overflow-x:auto;margin-top:10px}
+.v22-matrix{border-collapse:separate;border-spacing:3px;font:400 12.5px/1.3 var(--ds-font);min-width:640px;width:100%}
+.v22-matrix th{color:#CBD5E1;font-weight:500;text-align:left;padding:4px 6px}
+.v22-matrix thead th{font-size:11.5px;color:#A3B3C9;vertical-align:bottom}
+.v22-hm{background:color-mix(in srgb,#3B82D8 calc(var(--v) * 100%),#0B1D3A);border-radius:4px;text-align:center;padding:8px 4px;color:#F8FAFC;font-weight:600}
+/* evidence */
+.v22-doc{background:#102552}
+.v22-big{font:400 26px/1.2 var(--ds-display);margin:6px 0 2px}
+.v22-score{font:400 34px/1.1 var(--v20-serif);font-style:italic;color:#93C5FD;margin:0}
+.v22-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:8px 0 0;font:400 13px/1.45 var(--ds-font)}
+.v22-kv dt{color:#A3B3C9}.v22-kv dd{margin:0;color:#F8FAFC;overflow-wrap:anywhere}
+/* data and trust */
+.v22-stack{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:10px;gap:2px}
+.v22-seg{display:block;min-width:4px}
+.v22-leg{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;font:400 13px/1.4 var(--ds-font);color:#CBD5E1}
+.v22-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.v22-s-cached{background:#93C5FD}.v22-s-integrated{background:#3B82D8}.v22-s-requires_authentication{background:#FD6E6E}.v22-s-blocked{background:#64748B}.v22-s-not_investigated{background:#334155}
+.v22-tbl{width:100%;border-collapse:collapse;font:400 12.5px/1.4 var(--ds-font)}
+.v22-tbl th,.v22-tbl td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid #1C3566;color:#CBD5E1;vertical-align:top}
+.v22-tbl th{color:#F8FAFC;font-weight:500}
+.v22-rules{list-style:none;margin:8px 0 0;padding:0;font:400 14px/1.5 var(--ds-font);color:#F8FAFC}
+.v22-rules li{padding:7px 0;border-bottom:1px solid #1C3566}
+/* destination rows (no card grid) */
+.v22-dl{margin-top:4px}
+.v22-dl ul{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid #1C3566}
+.v22-row{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;padding:12px 6px;background:transparent;border:0;border-bottom:1px solid #1C3566;border-radius:0!important;color:#F8FAFC;text-align:left;cursor:pointer}
+.v22-row b{font:600 14.5px/1.3 var(--ds-font)}
+.v22-row span{font:400 13px/1.4 var(--ds-font);color:#A3B3C9}
+.v22-row:active{background:#102552}
+
+/* ---------------------------------------------------------------- destination explorer */
+.v22-dp{width:min(1080px,100%)}
+.v22-map{position:relative;margin:10px 0 6px;border:1px solid #1C3566;border-radius:8px;overflow:hidden;background:#0B1D3A}
+.v22-map img{display:block;width:100%;height:auto;opacity:.92}
+.v22-dp[data-body="Mars"] .v22-map img{filter:sepia(.55) saturate(1.6) hue-rotate(-12deg) brightness(.95)}
+.v22-pin{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%!important;background:#0B1D3A;border:2px solid #F8FAFC;padding:0;cursor:pointer}
+.v22-pin::after{content:"";position:absolute;inset:-14px}
+.v22-dp[data-body="Mars"] .v22-pin{border-color:#FD6E6E}
+.v22-dp[data-body="Moon"] .v22-pin{border-color:#93C5FD}
+.v22-pin.on{background:#F8FAFC;width:20px;height:20px;margin:-10px 0 0 -10px}
+.v22-dpb{display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:14px;align-items:start}
+.v22-tl{list-style:none;margin:0;padding:0;max-height:520px;overflow-y:auto;border:1px solid #1C3566;border-radius:8px}
+.v22-tl li{border-bottom:1px solid #1C3566}
+.v22-tl button{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;background:transparent;border:0;color:#F8FAFC;text-align:left;cursor:pointer;border-radius:0!important}
+.v22-tl img{width:40px;height:40px;object-fit:cover;border-radius:4px;flex:none;background:#1E3A8A}
+.v22-tl h3{font:600 13.5px/1.25 var(--ds-font);margin:0}
+.v22-tl small{font:400 11.5px/1.3 var(--ds-font);color:#A3B3C9}
+.v22-tl li.on button{background:#1E3A8A}
+.v22-tl li[aria-current="true"] small{color:#93C5FD}
+.v22-feat{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:18px;padding:16px;background:#102552;border:1px solid #1C3566;border-radius:8px}
+.v22-fbig{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:#1E3A8A;image-rendering:auto}
+.v22-feat h3{font:400 26px/1.15 var(--ds-display);margin:4px 0 4px}
+.v22-ctx{font:400 13.5px/1.5 var(--ds-font);color:#CBD5E1}
+.v22-cs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;margin:10px 0 12px}
+.v22-cs li{display:flex;justify-content:space-between;gap:8px;font:400 12.5px/1.3 var(--ds-font);color:#CBD5E1;padding:4px 0;border-bottom:1px solid #1C3566}
+.v22-feat-both{grid-template-columns:minmax(0,260px) minmax(0,1fr)}
+.v22-fimg{display:flex;gap:6px}.v22-fimg img{width:50%;border-radius:6px}
+
+@media (max-width:1180px){
+  .v22-split,.v22-split-r,.v22-ev,.v22-plan{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .v22-d{padding:18px 14px 32px;gap:14px}
+  .v22-dpb,.v22-feat{grid-template-columns:minmax(0,1fr)}
+  .v22-tl{max-height:none}
+  .v22-fbig{max-width:220px}
+  .v22-bar{grid-template-columns:20px minmax(0,1fr) 58px}
+  .v22-bar .track{display:none}
+  .v22-dims li{grid-template-columns:minmax(0,1fr) auto}
+  .v22-w{grid-column:1 / -1;text-align:left}
+  .v22-cs{grid-template-columns:minmax(0,1fr)}
+}
+#v22-sub nav.tabs button::before,#v22-sub nav.tabs button::after{display:none!important;content:none!important}
+#v22-sub nav.tabs button{margin:0!important}
+/* the sidebar carries the logo on tablets and desktops */
+@media (min-width:761px){header.bar .brand{display:none}}
+/* while a dashboard is open, no view button is marked as the current one */
+#app.v22-dash-on #left{display:none}
+body:has(#app.v22-dash-on) #v22-sub nav.tabs button[aria-selected="true"]{background:transparent!important;color:#CBD5E1!important}
+#app.v22-solo:not(.is-hero) .stage,#app.wide.v22-solo:not(.is-hero) .stage,#app.v22-solo.ds-hide-left:not(.is-hero) .stage{grid-template-columns:minmax(0,1fr) 0 0!important}
+.v22-map{max-width:760px;margin-inline:auto}
+.v22-tl li.v21-d{display:block;padding:0;border:0;border-bottom:1px solid #1C3566;border-radius:0!important;background:transparent;grid-template-columns:none}
+.v22-tl li.v21-d[aria-current="true"]{border-color:#1C3566;background:transparent}
+@media (max-width:760px){header.bar .brand-txt{display:none}header.bar{column-gap:8px}}
+@media (min-width:1181px){html.ds-layers-open #app:not(.is-hero) .viewport .ds-paneltog{top:196px!important}html.ds-layers-open #app:not(.is-hero) .viewport .ds-paneltog[data-dspanel="right"]{top:240px!important}
+  #app.wide:not(.is-hero):not(.v22-solo) .stage{grid-template-columns:minmax(380px,min(560px,30vw)) minmax(0,1fr) 0!important}}
+/* tablet: a slimmer ranking column so the globe keeps the larger share beside the rail */
+@media (min-width:761px) and (max-width:1180px){
+  #app:not(.is-hero):not(.v22-solo) .stage,#app.wide:not(.is-hero):not(.v22-solo) .stage{grid-template-columns:minmax(0,1fr) 240px}
+}
+@media (min-width:1181px){html.ds-layers-open .viewport .ds-acard{max-height:calc(100% - 340px)}}
+/* V20.3: headings that receive focus only so screen readers announce a new view are not controls; no outline box */
+:is(h1,h2,h3)[tabindex="-1"]:is(:focus,:focus-visible){outline:none!important}
 </style>
 
 <div id="app" class="is-hero" data-target="mars_jezero">
@@ -29905,6 +30119,256 @@ i18nExtend("de", {
  "v19.reg.doc.verified_response": "Zugang, Felder und Lizenz durch die Antworten des Anbieters bestätigt"
 });
 
+/* ASTERRO V20.3 shell, en catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("en", {
+ "v22.over": "Overview",
+ "v22.collapse": "Collapse the menu",
+ "v22.expand": "Expand the menu",
+ "v22.about": "About",
+ "v22.loading": "Preparing the results.",
+ "v22.dest": "Destinations in this section",
+ "v22.weight": "weight {w}",
+ "v22.analyze.a": "Research",
+ "v22.analyze.b": "workspace",
+ "v22.analyze.lead": "The current analysis at a glance: the leading Earth candidates, how each dimension is measured for this target, and every analysis tool.",
+ "v22.analyze.top": "Leading analogue candidates",
+ "v22.analyze.top_d": "Distinct sites at least 300 km apart, scored by the unchanged engine under the current weights. Select one to see it on the globe.",
+ "v22.analyze.dims": "Dimensions for {t}",
+ "v22.analyze.dims_d": "DIRECT: measured for this target. PROXY: derived from a related measurement. Weights come from the active profile.",
+ "v22.plan.a": "Mission",
+ "v22.plan.b": "planning",
+ "v22.plan.lead": "How the leading candidates hold up across the seven mission and operations profiles, with the planning tools.",
+ "v22.plan.matrix": "Candidates across mission profiles",
+ "v22.plan.matrix_d": "Each cell is the engine's similarity score (%) of a leading candidate to {t} under that profile's weights. Darker means lower.",
+ "v22.plan.site": "Candidate",
+ "v22.evidence.a": "Scientific",
+ "v22.evidence.b": "evidence",
+ "v22.evidence.lead": "Records, provenance and reproducibility for the current result, and what this browser has saved.",
+ "v22.ev.preview": "Passport preview",
+ "v22.ev.preview_d": "Leading candidate for {t} under the current weights.",
+ "v22.ev.records": "Records in this browser",
+ "v22.ev.journal": "Journal marks",
+ "v22.ev.analyses": "Saved analyses",
+ "v22.ev.places": "Saved places",
+ "v22.ev.prov": "Provenance",
+ "v22.ev.prov_d": "Checksums identify the exact files behind every score; Reproduce gives the full configuration.",
+ "v22.ev.algo": "Algorithm",
+ "v22.ev.stack": "Predictor stack",
+ "v22.ev.cube": "Environmental cube",
+ "v22.trust.a": "Data",
+ "v22.trust.b": "intelligence",
+ "v22.trust.lead": "Every dataset ASTERRO uses or looked for, its state, where it comes from and the rules that turn it into a score.",
+ "v22.tr.inv": "Dataset inventory by state",
+ "v22.tr.nasa": "{t} datasets: {n} NASA, {m} from other providers.",
+ "v22.tr.engine": "Datasets behind the score",
+ "v22.tr.rules": "Rules of the score",
+ "v22.tr.match": "Match: similarity of at least {v}",
+ "v22.tr.partial": "Partial match: at least {v}",
+ "v22.tr.cov": "Minimum coverage: {v} of the dimensions",
+ "v22.tr.sep": "Distinct sites: at least {v} km apart",
+ "v22.dp.map": "Shaded relief of {b} with every catalogued destination"
+});
+
+/* ASTERRO V20.3 shell, bn catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("bn", {
+ "v22.over": "সারসংক্ষেপ",
+ "v22.collapse": "মেনু গুটিয়ে নিন",
+ "v22.expand": "মেনু খুলুন",
+ "v22.about": "পরিচিতি",
+ "v22.loading": "ফলাফল প্রস্তুত হচ্ছে।",
+ "v22.dest": "এই বিভাগের গন্তব্য",
+ "v22.weight": "ওজন {w}",
+ "v22.analyze.a": "গবেষণা",
+ "v22.analyze.b": "কর্মক্ষেত্র",
+ "v22.analyze.lead": "বর্তমান বিশ্লেষণ এক নজরে: শীর্ষ পার্থিব প্রার্থী, এই লক্ষ্যের জন্য প্রতিটি মাত্রা কীভাবে মাপা হয়, এবং সব বিশ্লেষণ-সরঞ্জাম।",
+ "v22.analyze.top": "শীর্ষ সাদৃশ্য প্রার্থী",
+ "v22.analyze.top_d": "অন্তত ৩০০ কিমি দূরের আলাদা স্থান, বর্তমান ওজনে অপরিবর্তিত ইঞ্জিনের স্কোর। গ্লোবে দেখতে একটি বেছে নিন।",
+ "v22.analyze.dims": "{t}-এর মাত্রা",
+ "v22.analyze.dims_d": "DIRECT: এই লক্ষ্যের জন্য মাপা। PROXY: সম্পর্কিত পরিমাপ থেকে নির্ণীত। ওজন আসে সক্রিয় প্রোফাইল থেকে।",
+ "v22.plan.a": "অভিযান",
+ "v22.plan.b": "পরিকল্পনা",
+ "v22.plan.lead": "সাতটি অভিযান ও কার্যক্রম প্রোফাইলে শীর্ষ প্রার্থীরা কেমন থাকে, পরিকল্পনার সরঞ্জামসহ।",
+ "v22.plan.matrix": "অভিযান প্রোফাইল জুড়ে প্রার্থী",
+ "v22.plan.matrix_d": "প্রতিটি ঘর হলো সেই প্রোফাইলের ওজনে {t}-এর সঙ্গে শীর্ষ প্রার্থীর ইঞ্জিন-সাদৃশ্য স্কোর (%)। গাঢ় মানে কম।",
+ "v22.plan.site": "প্রার্থী",
+ "v22.evidence.a": "বৈজ্ঞানিক",
+ "v22.evidence.b": "প্রমাণ",
+ "v22.evidence.lead": "বর্তমান ফলাফলের রেকর্ড, উৎস ও পুনরুৎপাদনযোগ্যতা, এবং এই ব্রাউজারে কী সংরক্ষিত আছে।",
+ "v22.ev.preview": "পাসপোর্টের পূর্বরূপ",
+ "v22.ev.preview_d": "বর্তমান ওজনে {t}-এর শীর্ষ প্রার্থী।",
+ "v22.ev.records": "এই ব্রাউজারের রেকর্ড",
+ "v22.ev.journal": "জার্নাল চিহ্ন",
+ "v22.ev.analyses": "সংরক্ষিত বিশ্লেষণ",
+ "v22.ev.places": "সংরক্ষিত স্থান",
+ "v22.ev.prov": "উৎস",
+ "v22.ev.prov_d": "চেকসাম প্রতিটি স্কোরের পেছনের সঠিক ফাইল চিহ্নিত করে; পুনরুৎপাদন পুরো কনফিগারেশন দেয়।",
+ "v22.ev.algo": "অ্যালগরিদম",
+ "v22.ev.stack": "পূর্বাভাসক স্তূপ",
+ "v22.ev.cube": "পরিবেশগত কিউব",
+ "v22.trust.a": "ডেটা",
+ "v22.trust.b": "বুদ্ধিমত্তা",
+ "v22.trust.lead": "ASTERRO যে সব ডেটাসেট ব্যবহার করে বা খুঁজেছে, তাদের অবস্থা, উৎস এবং যে নিয়মে তা স্কোরে পরিণত হয়।",
+ "v22.tr.inv": "অবস্থা অনুযায়ী ডেটাসেট তালিকা",
+ "v22.tr.nasa": "{t}টি ডেটাসেট: {n}টি NASA-র, {m}টি অন্য সরবরাহকারীর।",
+ "v22.tr.engine": "স্কোরের পেছনের ডেটাসেট",
+ "v22.tr.rules": "স্কোরের নিয়ম",
+ "v22.tr.match": "মিল: সাদৃশ্য অন্তত {v}",
+ "v22.tr.partial": "আংশিক মিল: অন্তত {v}",
+ "v22.tr.cov": "ন্যূনতম আওতা: মাত্রার {v}",
+ "v22.tr.sep": "আলাদা স্থান: অন্তত {v} কিমি দূরে",
+ "v22.dp.map": "{b}-এর ছায়াময় ভূমিরূপ, সব তালিকাভুক্ত গন্তব্যসহ"
+});
+
+/* ASTERRO V20.3 shell, es catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("es", {
+ "v22.over": "Resumen",
+ "v22.collapse": "Contraer el menú",
+ "v22.expand": "Expandir el menú",
+ "v22.about": "Acerca de",
+ "v22.loading": "Preparando los resultados.",
+ "v22.dest": "Destinos de esta sección",
+ "v22.weight": "peso {w}",
+ "v22.analyze.a": "Espacio de",
+ "v22.analyze.b": "investigación",
+ "v22.analyze.lead": "El análisis actual de un vistazo: los principales candidatos terrestres, cómo se mide cada dimensión para este objetivo y todas las herramientas de análisis.",
+ "v22.analyze.top": "Principales candidatos análogos",
+ "v22.analyze.top_d": "Sitios distintos separados al menos 300 km, puntuados por el motor sin cambios con los pesos actuales. Elige uno para verlo en el globo.",
+ "v22.analyze.dims": "Dimensiones para {t}",
+ "v22.analyze.dims_d": "DIRECT: medida para este objetivo. PROXY: derivada de una medición relacionada. Los pesos provienen del perfil activo.",
+ "v22.plan.a": "Planificación de",
+ "v22.plan.b": "misiones",
+ "v22.plan.lead": "Cómo se comportan los principales candidatos en los siete perfiles de misión y operaciones, con las herramientas de planificación.",
+ "v22.plan.matrix": "Candidatos según los perfiles de misión",
+ "v22.plan.matrix_d": "Cada celda es la puntuación de similitud del motor (%) de un candidato con {t} con los pesos de ese perfil. Más oscuro significa más bajo.",
+ "v22.plan.site": "Candidato",
+ "v22.evidence.a": "Evidencia",
+ "v22.evidence.b": "científica",
+ "v22.evidence.lead": "Registros, procedencia y reproducibilidad del resultado actual, y lo que ha guardado este navegador.",
+ "v22.ev.preview": "Vista previa del pasaporte",
+ "v22.ev.preview_d": "Principal candidato para {t} con los pesos actuales.",
+ "v22.ev.records": "Registros en este navegador",
+ "v22.ev.journal": "Marcas del diario",
+ "v22.ev.analyses": "Análisis guardados",
+ "v22.ev.places": "Lugares guardados",
+ "v22.ev.prov": "Procedencia",
+ "v22.ev.prov_d": "Las sumas de verificación identifican los archivos exactos detrás de cada puntuación; Reproducir da la configuración completa.",
+ "v22.ev.algo": "Algoritmo",
+ "v22.ev.stack": "Pila de predictores",
+ "v22.ev.cube": "Cubo ambiental",
+ "v22.trust.a": "Inteligencia de",
+ "v22.trust.b": "datos",
+ "v22.trust.lead": "Cada conjunto de datos que ASTERRO usa o buscó, su estado, su origen y las reglas que lo convierten en una puntuación.",
+ "v22.tr.inv": "Inventario de datos por estado",
+ "v22.tr.nasa": "{t} conjuntos de datos: {n} de la NASA, {m} de otros proveedores.",
+ "v22.tr.engine": "Datos detrás de la puntuación",
+ "v22.tr.rules": "Reglas de la puntuación",
+ "v22.tr.match": "Coincidencia: similitud de al menos {v}",
+ "v22.tr.partial": "Coincidencia parcial: al menos {v}",
+ "v22.tr.cov": "Cobertura mínima: {v} de las dimensiones",
+ "v22.tr.sep": "Sitios distintos: al menos a {v} km",
+ "v22.dp.map": "Relieve sombreado de {b} con todos los destinos catalogados"
+});
+
+/* ASTERRO V20.3 shell, fr catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("fr", {
+ "v22.over": "Vue d'ensemble",
+ "v22.collapse": "Replier le menu",
+ "v22.expand": "Déplier le menu",
+ "v22.about": "À propos",
+ "v22.loading": "Préparation des résultats.",
+ "v22.dest": "Destinations de cette section",
+ "v22.weight": "poids {w}",
+ "v22.analyze.a": "Espace de",
+ "v22.analyze.b": "recherche",
+ "v22.analyze.lead": "L'analyse en cours d'un coup d'œil : les principaux candidats terrestres, la façon dont chaque dimension est mesurée pour cette cible, et tous les outils d'analyse.",
+ "v22.analyze.top": "Principaux candidats analogues",
+ "v22.analyze.top_d": "Sites distincts distants d'au moins 300 km, notés par le moteur inchangé avec les pondérations actuelles. Choisissez-en un pour le voir sur le globe.",
+ "v22.analyze.dims": "Dimensions pour {t}",
+ "v22.analyze.dims_d": "DIRECT : mesurée pour cette cible. PROXY : dérivée d'une mesure apparentée. Les pondérations viennent du profil actif.",
+ "v22.plan.a": "Planification de",
+ "v22.plan.b": "mission",
+ "v22.plan.lead": "La tenue des principaux candidats selon les sept profils de mission et d'opérations, avec les outils de planification.",
+ "v22.plan.matrix": "Candidats selon les profils de mission",
+ "v22.plan.matrix_d": "Chaque cellule est le score de similarité du moteur (%) d'un candidat avec {t} selon les pondérations de ce profil. Plus foncé signifie plus bas.",
+ "v22.plan.site": "Candidat",
+ "v22.evidence.a": "Preuves",
+ "v22.evidence.b": "scientifiques",
+ "v22.evidence.lead": "Fiches, provenance et reproductibilité du résultat actuel, et ce que ce navigateur a enregistré.",
+ "v22.ev.preview": "Aperçu du passeport",
+ "v22.ev.preview_d": "Principal candidat pour {t} avec les pondérations actuelles.",
+ "v22.ev.records": "Fiches dans ce navigateur",
+ "v22.ev.journal": "Marques du journal",
+ "v22.ev.analyses": "Analyses enregistrées",
+ "v22.ev.places": "Lieux enregistrés",
+ "v22.ev.prov": "Provenance",
+ "v22.ev.prov_d": "Les sommes de contrôle identifient les fichiers exacts derrière chaque score ; Reproduire donne la configuration complète.",
+ "v22.ev.algo": "Algorithme",
+ "v22.ev.stack": "Pile de prédicteurs",
+ "v22.ev.cube": "Cube environnemental",
+ "v22.trust.a": "Intelligence des",
+ "v22.trust.b": "données",
+ "v22.trust.lead": "Chaque jeu de données qu'ASTERRO utilise ou a cherché, son état, son origine et les règles qui le transforment en score.",
+ "v22.tr.inv": "Inventaire des données par état",
+ "v22.tr.nasa": "{t} jeux de données : {n} de la NASA, {m} d'autres fournisseurs.",
+ "v22.tr.engine": "Données derrière le score",
+ "v22.tr.rules": "Règles du score",
+ "v22.tr.match": "Correspondance : similarité d'au moins {v}",
+ "v22.tr.partial": "Correspondance partielle : au moins {v}",
+ "v22.tr.cov": "Couverture minimale : {v} des dimensions",
+ "v22.tr.sep": "Sites distincts : au moins {v} km d'écart",
+ "v22.dp.map": "Relief ombré de {b} avec toutes les destinations cataloguées"
+});
+
+/* ASTERRO V20.3 shell, de catalogue. Machine-assisted; not reviewed by native speakers. */
+i18nExtend("de", {
+ "v22.over": "Übersicht",
+ "v22.collapse": "Menü einklappen",
+ "v22.expand": "Menü ausklappen",
+ "v22.about": "Über ASTERRO",
+ "v22.loading": "Die Ergebnisse werden vorbereitet.",
+ "v22.dest": "Ziele in diesem Bereich",
+ "v22.weight": "Gewicht {w}",
+ "v22.analyze.a": "Forschung",
+ "v22.analyze.b": "im Überblick",
+ "v22.analyze.lead": "Die aktuelle Analyse auf einen Blick: die führenden Kandidaten auf der Erde, wie jede Dimension für dieses Ziel gemessen wird, und alle Analysewerkzeuge.",
+ "v22.analyze.top": "Führende Analogkandidaten",
+ "v22.analyze.top_d": "Getrennte Orte, mindestens 300 km voneinander entfernt, bewertet vom unveränderten Rechner mit den aktuellen Gewichten. Wählen Sie einen, um ihn auf dem Globus zu sehen.",
+ "v22.analyze.dims": "Dimensionen für {t}",
+ "v22.analyze.dims_d": "DIRECT: für dieses Ziel gemessen. PROXY: aus einer verwandten Messung abgeleitet. Die Gewichte stammen aus dem aktiven Profil.",
+ "v22.plan.a": "Planung",
+ "v22.plan.b": "der Missionen",
+ "v22.plan.lead": "Wie sich die führenden Kandidaten über die sieben Missions- und Betriebsprofile halten, mit den Planungswerkzeugen.",
+ "v22.plan.matrix": "Kandidaten über die Missionsprofile",
+ "v22.plan.matrix_d": "Jede Zelle ist der Ähnlichkeitswert des Rechners (%) eines Kandidaten zu {t} mit den Gewichten dieses Profils. Dunkler bedeutet niedriger.",
+ "v22.plan.site": "Kandidat",
+ "v22.evidence.a": "Wissenschaftliche",
+ "v22.evidence.b": "Belege",
+ "v22.evidence.lead": "Aufzeichnungen, Herkunft und Reproduzierbarkeit des aktuellen Ergebnisses und was dieser Browser gespeichert hat.",
+ "v22.ev.preview": "Pass-Vorschau",
+ "v22.ev.preview_d": "Führender Kandidat für {t} mit den aktuellen Gewichten.",
+ "v22.ev.records": "Aufzeichnungen in diesem Browser",
+ "v22.ev.journal": "Journal-Markierungen",
+ "v22.ev.analyses": "Gespeicherte Analysen",
+ "v22.ev.places": "Gespeicherte Orte",
+ "v22.ev.prov": "Herkunft",
+ "v22.ev.prov_d": "Prüfsummen bezeichnen die genauen Dateien hinter jedem Wert; Reproduzieren liefert die vollständige Konfiguration.",
+ "v22.ev.algo": "Algorithmus",
+ "v22.ev.stack": "Prädiktorenstapel",
+ "v22.ev.cube": "Umweltwürfel",
+ "v22.trust.a": "Daten",
+ "v22.trust.b": "und Vertrauen",
+ "v22.trust.lead": "Jeder Datensatz, den ASTERRO nutzt oder gesucht hat, sein Status, seine Herkunft und die Regeln, die ihn in einen Wert verwandeln.",
+ "v22.tr.inv": "Datenbestand nach Status",
+ "v22.tr.nasa": "{t} Datensätze: {n} von der NASA, {m} von anderen Anbietern.",
+ "v22.tr.engine": "Daten hinter dem Wert",
+ "v22.tr.rules": "Regeln des Werts",
+ "v22.tr.match": "Übereinstimmung: Ähnlichkeit von mindestens {v}",
+ "v22.tr.partial": "Teilweise Übereinstimmung: mindestens {v}",
+ "v22.tr.cov": "Mindestabdeckung: {v} der Dimensionen",
+ "v22.tr.sep": "Getrennte Orte: mindestens {v} km entfernt",
+ "v22.dp.map": "Schummerungsrelief von {b} mit allen katalogisierten Zielen"
+});
+
 /* ASTERRO V19 data extension, en catalogue (generated). Machine-assisted; not reviewed by native speakers. */
 i18nExtend("en", {
  "v19x.nasa": "NASA",
@@ -38078,6 +38542,247 @@ document.addEventListener("keydown", e => {
 { const f = v20Home; v20Home = function () { const r = f.apply(this, arguments); try { v21Rail(); } catch (e) { } return r; }; }
 (function v21Boot() {
   const go = () => { v21Rail(); v21Header(); let n = 0; const iv = setInterval(() => { v21Header(); v21Rail(); if (++n > 12) clearInterval(iv); }, 500); };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
+})();
+
+/* ===== ASTERRO V20.3 application shell (presentation only) =====
+ * - one persistent deep-navy sidebar: the logo (Home), five sections, the selected section's own submenu only, and
+ *   Settings / About at the bottom; it collapses to a rail on desktop, is a rail with a flyout submenu on tablets and a
+ *   drawer on phones. The ten view buttons (nav.tabs, ids and text unchanged) live inside the submenus.
+ * - five section workspaces: Discover is the globe itself; Analyze, Plan, Evidence and Data & Trust open their own
+ *   dashboards built from the engine's current results and the published records (nothing invented).
+ * - views without a geographic task (Lab, Compare, Scenarios, Data, Method) use the full workspace without the globe.
+ * - the destination picker becomes a map-led explorer on each body's own shaded relief (MOLA / LOLA basemaps).
+ * - the globe's base imagery (NASA Blue Marble) is shown in its natural colours; the similarity field is unchanged.
+ * No score, weight, threshold, target, dataset, route or stored record is changed here. */
+const V22 = { sec: "discover", dash: null, drawer: false, flyout: false, pick: null, KEY: "asterro.v22.side",
+  collapsed: (() => { try { return localStorage.getItem("asterro.v22.side") === "collapsed"; } catch (e) { return false; } })() };
+const V22_SEC = {
+  discover: [["go", "home"], ["tab", "explore"], ["tab", "discover"], ["go", "targets"], ["tab", "atlas"]],
+  analyze: [["tab", "lab"], ["tab", "local"], ["tab", "compare"], ["go", "lens"], ["go", "character"], ["go", "robust"]],
+  plan: [["go", "portfolio"], ["tab", "trajectory"], ["go", "profiles"], ["tab", "scenarios"]],
+  evidence: [["go", "passport"], ["go", "trace"], ["go", "reproduce"], ["go", "reports"], ["go", "journal"]],
+  trust: [["tab", "data"], ["go", "sources"], ["go", "gaps"], ["go", "trustc"], ["tab", "method"]],
+};
+const V22_TABLBL = { explore: "globe", discover: "discovery", atlas: "atlas", lab: "lab", local: "local", compare: "compare", trajectory: "trajectory", scenarios: "scenarios", data: "catalogue", method: "method" };
+const V22_SOLO = ["lab", "scenarios", "data", "method"];
+const V22_GO_SEC = { lens: "analyze", character: "analyze", robust: "analyze", portfolio: "plan", profiles: "plan", passport: "evidence", trace: "evidence", reproduce: "evidence", reports: "evidence", journal: "evidence", sources: "trust", gaps: "trust", trustc: "trust", targets: "discover", home: "discover", globe: "discover", discovery: "discover", atlas: "discover" };
+function v22T(k, o) { return tx("v22." + k, o); }
+function v22SecOf(t) { for (const [s, items] of Object.entries(V22_SEC)) if (items.some(([k, id]) => k === "tab" && id === t)) return s; return null; }
+function v22Mode() { const w = innerWidth; return w <= 760 ? "phone" : w <= 1180 ? "tablet" : "desktop"; }
+
+/* ---------------------------------------------------------------- sidebar */
+function v22Side() {
+  let s = document.getElementById("v22-side");
+  if (!s) {
+    s = document.createElement("aside"); s.id = "v22-side"; s.setAttribute("data-i18n-done", "");
+    s.innerHTML = `<div class="v22-top"><button type="button" class="v22-logo" data-v20home="1">${V21_GLYPH.home}<b>ASTERRO</b></button><button type="button" class="v22-col" id="v22-collapse"></button></div>
+      <nav class="v22-secs"></nav><div id="v22-sub" role="group"></div><div class="v22-foot"></div>`;
+    document.body.prepend(s);
+    const tabs = document.querySelector("nav.tabs"); if (tabs) s.querySelector("#v22-sub").appendChild(tabs);
+  }
+  const mode = v22Mode(), sec = V22.sec;
+  s.dataset.sec = sec; s.dataset.mode = mode;
+  document.body.classList.toggle("v22-collapsed", mode === "desktop" && V22.collapsed);
+  document.body.classList.toggle("v22-drawer", mode === "phone" && V22.drawer);
+  document.body.classList.toggle("v22-flyout", mode !== "phone" && V22.flyout);
+  s.querySelector(".v22-logo").setAttribute("aria-label", v20T("home"));
+  const col = s.querySelector("#v22-collapse"); col.textContent = ""; col.setAttribute("aria-label", v22T(V22.collapsed ? "expand" : "collapse")); col.setAttribute("aria-expanded", String(!V22.collapsed));
+  col.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${V22.collapsed ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6"}"/></svg>`;
+  const cur = typeof v20Current === "function" ? v20Current() : null;
+  s.querySelector(".v22-secs").setAttribute("aria-label", v20T("nav.aria"));
+  s.querySelector(".v22-secs").innerHTML = Object.keys(V22_SEC).map(g => `<button type="button" class="v22-sb" data-v22sec="${g}" aria-current="${g === sec}" aria-controls="v22-sub" title="${esc(v20T("g." + g))}">${V21_GLYPH[g]}<span>${esc(v20T("g." + g))}</span></button>`).join("");
+  const sub = s.querySelector("#v22-sub"); sub.setAttribute("aria-label", v20T("g." + sec));
+  [...sub.querySelectorAll(":scope > .v22-gen")].forEach(n => n.remove());
+  const gen = (html, order) => { const d = document.createElement("div"); d.className = "v22-gen"; d.innerHTML = html; [...d.children].forEach(c => { c.style.order = order; }); sub.appendChild(d); return d; };
+  gen(`<p class="v22-subt">${esc(v20T("g." + sec))}</p>`, -2);
+  if (sec !== "discover") gen(`<button type="button" class="v22-it" data-v22dash="${sec}" aria-current="${V22.dash === sec}">${esc(v22T("over"))}</button>`, -1);
+  V22_SEC[sec].forEach(([k, id], n) => { if (k === "go") gen(`<button type="button" class="v22-it" data-v20go="${id}" aria-current="${!V22.dash && cur === id}">${esc(v20T("d." + id))}</button>`, n); });
+  for (const b of document.querySelectorAll("#v22-sub nav.tabs button[data-tab]")) {
+    const t = b.dataset.tab, sc = v22SecOf(t), n = sc ? V22_SEC[sc].findIndex(([k, id]) => k === "tab" && id === t) : 99;
+    b.style.order = n; b.classList.add("v22-it"); b.classList.toggle("v22-off", sc !== sec);
+  }
+  s.querySelector(".v22-foot").innerHTML = `<button type="button" class="v22-sb" data-v22set="set">${V21_GLYPH.settings}<span>${esc(v20T("settings"))}</span></button><button type="button" class="v22-sb" data-v22set="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6M12 7.5v.5"/></svg><span>${esc(v22T("about"))}</span></button>`;
+  let m = document.getElementById("v22-menu");
+  if (!m) { const bar = document.querySelector("header.bar"); m = document.createElement("button"); m.type = "button"; m.id = "v22-menu"; m.setAttribute("aria-controls", "v22-side"); m.setAttribute("data-i18n-done", ""); if (bar) bar.prepend(m); }
+  m.innerHTML = `${V20_ICON.menu}<span class="v20-lbl">${esc(v20T(V22.sec ? "g." + V22.sec : "menu"))}</span>`; m.setAttribute("aria-expanded", String(V22.drawer)); m.setAttribute("aria-label", v20T("menu"));
+  const app = document.getElementById("app");
+  setTimeout(v22Offset, 0);
+  if (app) { app.classList.toggle("v22-solo", !app.classList.contains("is-hero") && !V22.dash && V22_SOLO.includes(S.tab)); app.classList.toggle("v22-dash-on", !!V22.dash); app.dataset.v22section = sec; }
+}
+function v22CloseFloat() { if (V22.drawer || V22.flyout) { V22.drawer = false; V22.flyout = false; v22Side(); } }
+
+/* ---------------------------------------------------------------- dashboards (Analyze, Plan, Evidence, Data & Trust) */
+function v22Dash(sec) {
+  V22.sec = sec; V22.dash = sec;
+  let d = document.getElementById("v22-dash");
+  const stage = document.querySelector("main.stage"); if (!stage) return;
+  if (!d) { d = document.createElement("section"); d.id = "v22-dash"; d.setAttribute("data-i18n-done", ""); d.setAttribute("tabindex", "-1"); stage.appendChild(d); }
+  const app = document.getElementById("app"); if (app) app.classList.remove("is-hero");
+  d.hidden = false; d.dataset.sec = sec; d.setAttribute("aria-labelledby", "v22-dash-h");
+  if (!S.searched) { d.innerHTML = `<div class="v22-d"><p class="v22-lead" role="status">${esc(v22T("loading"))}</p></div>`; v22Side(); v20Need(() => { if (V22.dash === sec) v22Dash(sec); }); return; }
+  // the search flag can be set a moment before the ranked list exists (slow first load); wait for it rather than draw an empty chart
+  if (sec !== "trust" && !v22Top(1).length && (V22.wait = (V22.wait || 0) + 1) <= 40) { d.innerHTML = `<div class="v22-d"><p class="v22-lead" role="status">${esc(v22T("loading"))}</p></div>`; v22Side(); setTimeout(() => { if (V22.dash === sec) v22Dash(sec); }, 250); return; }
+  V22.wait = 0;
+  try { d.innerHTML = `<div class="v22-d v22-d-${sec}">${v22DashHead(sec)}${V22_DASH[sec]()}</div>`; } catch (e) { console.error(e); d.innerHTML = `<div class="v22-d"><p class="v22-lead">${esc(e.message)}</p></div>`; }
+  if (typeof dsNoEmDash === "function") dsNoEmDash(d);
+  v22Side(); d.scrollTop = 0;
+}
+function v22CloseDash() { const d = document.getElementById("v22-dash"); if (d) d.hidden = true; const was = V22.dash; V22.dash = null; if (was) try { v22Side(); } catch (e) { } }
+function v22DashHead(sec) { return `<header class="v22-dh"><p class="v22-eye">${esc(v20T("g." + sec))}</p><h1 id="v22-dash-h">${esc(v22T(sec + ".a"))} <span class="v20-serif">${esc(v22T(sec + ".b"))}</span></h1><p class="v22-lead">${esc(v22T(sec + ".lead"))}</p></header>`; }
+function v22Dest(sec) {
+  return `<nav class="v22-dl" aria-label="${esc(v22T("dest"))}"><p class="v22-h3">${esc(v22T("dest"))}</p><ul>${V22_SEC[sec].map(([k, id]) => {
+    const key = k === "tab" ? V22_TABLBL[id] : id;
+    return `<li><button type="button" class="v22-row" ${k === "tab" ? `data-v22tab="${id}"` : `data-v20go="${id}"`}><b>${esc(v20T("d." + key))}</b><span>${esc(v20T("d." + key + "_d"))}</span></button></li>`;
+  }).join("")}</ul></nav>`;
+}
+function v22Pct(x) { return txNum(100 * x, 1) + " %"; }
+function v22Top(n) { return (S.res && S.res.distinct || []).slice(0, n); }
+function v22TName() { return typeof jnTName === "function" ? jnTName(S.targetId === "cross" ? "mars_jezero" : S.targetId) : (TNAME[S.targetId] || S.targetId); }
+const V22_DASH = {
+  analyze() {
+    const top = v22Top(8), mx = Math.max(...top.map(i => S.res.eff[i]), 0.0001), tid = S.targetId === "cross" ? "mars_jezero" : S.targetId, T = S.T[tid] || {};
+    const bars = top.map((i, k) => `<li><button type="button" class="v22-bar" data-v22sel="${i}"><span class="v22-bn">${txInt(k + 1)}</span><span class="v22-bl">${jnPlace(i)}</span><span class="track"><span class="fill" style="width:${(100 * S.res.eff[i] / mx).toFixed(1)}%"></span></span><b>${esc(v22Pct(S.res.eff[i]))}</b></button></li>`).join("");
+    const dims = S.critIds.map(c => { const st = (T.status || {})[c] || "–", w = S.weights ? S.weights[c] : null;
+      return `<li><span>${esc(tx("crit." + c + ".short"))}</span><span class="v22-st v22-st-${esc(String(st).toLowerCase())}">${keep(st)}</span><span class="v22-w">${esc(v22T("weight", { w: txNum(w == null ? 1 : +w, 2) }))}</span></li>`; }).join("");
+    return `<div class="v22-split"><section class="v22-panel"><h2 class="v22-h3">${esc(v22T("analyze.top"))}</h2><p class="v22-note">${esc(v22T("analyze.top_d"))}</p><ol class="v22-bars">${bars}</ol></section>
+      <section class="v22-panel"><h2 class="v22-h3">${esc(v22T("analyze.dims", { t: v22TName() }))}</h2><ul class="v22-dims">${dims}</ul><p class="v22-note">${esc(v22T("analyze.dims_d"))}</p></section></div>${v22Dest("analyze")}`;
+  },
+  plan() {
+    const tid = S.targetId === "cross" ? "mars_jezero" : S.targetId, P = S.app.profiles || {}, pids = Object.keys(P), top = v22Top(8);
+    const res = pids.map(pid => { const w = P[pid].weights || P[pid]; try { return simFor(tid, w).eff; } catch (e) { return null; } });
+    const head = `<tr><th scope="col">${esc(v22T("plan.site"))}</th>${pids.map(pid => `<th scope="col">${esc(tx("profile." + pid))}</th>`).join("")}</tr>`;
+    const rows = top.map(i => `<tr><th scope="row">${jnPlace(i)}</th>${res.map(e => { const v = e ? e[i] : null; return `<td class="v22-hm" style="--v:${v == null ? 0 : Math.max(0, Math.min(1, v)).toFixed(3)}"><span>${v == null ? "–" : esc(txNum(100 * v, 0))}</span></td>`; }).join("")}</tr>`).join("");
+    return `<div class="v22-plan"><section class="v22-panel v22-wide"><h2 class="v22-h3">${esc(v22T("plan.matrix"))}</h2><p class="v22-note">${esc(v22T("plan.matrix_d", { t: v22TName() }))}</p>
+      <div class="v22-tw"><table class="v22-matrix" data-scale><thead>${head}</thead><tbody>${rows}</tbody></table></div></section>${v22Dest("plan")}</div>`;
+  },
+  evidence() {
+    const i = v22Top(1)[0], A = S.app, man = typeof V9X !== "undefined" && V9X.man, jl = typeof JL !== "undefined" ? Object.keys(JL.marks || {}).length : 0;
+    const an = typeof V9X !== "undefined" ? (V9X.analyses || []).length : 0, pl = typeof liSaved === "function" ? liSaved().length : 0;
+    const hashes = Object.entries(A.file_hashes || {}).map(([f, h]) => [f, String(h).slice(0, 16) + "…"]);
+    const prov = [[v22T("ev.algo"), esc(A.algorithm_version)], [v22T("ev.stack"), `<span class="hash">${esc(String(A.stack && A.stack.sha256 || "").slice(0, 16))}…</span>`], ...hashes.map(([f, h]) => [f, `<span class="hash">${esc(h)}</span>`]), [v22T("ev.cube"), man ? `<span class="hash">${esc(man.sha256.slice(0, 16))}…</span>` : esc(v20T("set.v_none"))]];
+    return `<div class="v22-ev"><section class="v22-panel v22-doc"><h2 class="v22-h3">${esc(v22T("ev.preview"))}</h2>
+        ${i != null ? `<p class="v22-big">${jnPlace(i)}</p><p class="v22-score">${esc(v22Pct(S.res.eff[i]))}</p><p class="v22-note">${esc(v22T("ev.preview_d", { t: v22TName() }))}</p>` : ""}
+        <h2 class="v22-h3">${esc(v22T("ev.records"))}</h2><dl class="v22-kv"><dt>${esc(v22T("ev.journal"))}</dt><dd>${esc(txInt(jl))}</dd><dt>${esc(v22T("ev.analyses"))}</dt><dd>${esc(txInt(an))}</dd><dt>${esc(v22T("ev.places"))}</dt><dd>${esc(txInt(pl))}</dd></dl></section>
+      <section class="v22-panel"><h2 class="v22-h3">${esc(v22T("ev.prov"))}</h2><dl class="v22-kv">${prov.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join("")}</dl><p class="v22-note">${esc(v22T("ev.prov_d"))}</p></section></div>${v22Dest("evidence")}`;
+  },
+  trust() {
+    const inv = typeof V9X !== "undefined" && V9X.inv;
+    if (!inv && typeof v9xInventory === "function" && !V22.invLoading) { V22.invLoading = fetch("data/v19/env/inventory.json").then(r => r.json()).then(j => { V22.inv = j; }).catch(() => { }).finally(() => { if (V22.dash === "trust") v22Dash("trust"); }); }
+    const I = inv || V22.inv, A = S.app, th = A.thresholds || {};
+    let invH = `<p class="v22-note" role="status">${esc(v22T("loading"))}</p>`;
+    if (I) {
+      const order = ["CACHED", "INTEGRATED", "REQUIRES_AUTHENTICATION", "BLOCKED", "NOT_INVESTIGATED"].filter(k => I.counts[k]);
+      invH = `<div class="v22-stack" data-scale>${order.map(k => `<span class="v22-seg v22-s-${k.toLowerCase()}" style="flex:${I.counts[k]}" title="${esc(tx("v19x.st." + k))}"></span>`).join("")}</div>
+        <ul class="v22-leg">${order.map(k => `<li><i class="v22-s-${k.toLowerCase()}"></i>${esc(tx("v19x.st." + k))} <b>${esc(txInt(I.counts[k]))}</b></li>`).join("")}</ul>
+        <p class="v22-note">${esc(v22T("tr.nasa", { n: txInt(I.nasa), m: txInt(I.n - I.nasa), t: txInt(I.n) }))}</p>`;
+    }
+    const ds = (A.datasets || []).map(d => `<tr><th scope="row">${keep(d.dataset)}</th><td>${keep(d.provider)}</td><td>${keep(d.role)}</td></tr>`).join("");
+    const rules = [["tr.match", txNum(th.match, 2)], ["tr.partial", txNum(th.partial, 2)], ["tr.cov", txNum(100 * (th.min_coverage != null ? th.min_coverage : 0.8), 0) + " %"], ["tr.sep", txInt(th.distinct_sep_km)]];
+    return `<section class="v22-panel v22-wide"><h2 class="v22-h3">${esc(v22T("tr.inv"))}</h2>${invH}</section>
+      <div class="v22-split v22-split-r"><section class="v22-panel"><h2 class="v22-h3">${esc(v22T("tr.engine"))}</h2><div class="v22-tw"><table class="v22-tbl"><tbody>${ds}</tbody></table></div></section>
+      <section class="v22-panel"><h2 class="v22-h3">${esc(v22T("tr.rules"))}</h2><ul class="v22-rules">${rules.map(([k, v]) => `<li>${esc(v22T(k, { v }))}</li>`).join("")}</ul><p class="v22-note">${esc(tx("ui.disclaimer"))}</p></section></div>${v22Dest("trust")}`;
+  },
+};
+
+/* ---------------------------------------------------------------- destination explorer (replaces the V20.1 card list) */
+function v22BodyMap(body, ts) {
+  const img = body === "Mars" ? "data/phase3/basemap_mars.png" : "data/phase3/basemap_moon.png";
+  const pts = ts.map(r => { const L = r.location || {}; let lon = L.longitude_east != null ? L.longitude_east : L.lon_east, lat = L.latitude != null ? L.latitude : L.lat; if (lat == null) return ""; lon = ((lon + 180) % 360 + 360) % 360 - 180;
+    return `<button type="button" class="v22-pin${V22.pick === r.id ? " on" : ""}${S.targetId === r.id ? " cur" : ""}" data-v22pick="${esc(r.id)}" style="left:${((lon + 180) / 360 * 100).toFixed(2)}%;top:${((90 - lat) / 180 * 100).toFixed(2)}%" aria-label="${esc(r.name)}"></button>`; }).join("");
+  return `<div class="v22-map" data-scale><img src="${img}" alt="${esc(v22T("dp.map", { b: v21T(body === "Mars" ? "mars" : "moon") }))}">${pts}</div>`;
+}
+v21Render = function () {
+  const d = document.getElementById("v21-dest"); if (!d) return;
+  const ae = document.activeElement, refocus = ae && (ae.id === "v21-dest-title" || ae === document.body);
+  const body = v21Body(), tabs = [["Mars", "mars"], ["Moon", "moon"], ["Both", "both"]];
+  let main;
+  if (body === "Both") main = `<div class="v22-feat v22-feat-both"><div class="v22-fimg"><img src="data/thumb_jezero_mola.png" alt=""><img src="data/thumb_southpole_lola.png" alt=""></div><div><h3>${esc(v21T("both"))}</h3><p>${esc(v21T("both_d"))}</p><div class="v21-acts"><button type="button" class="v21-go" data-v21go="cross"${S.targetId === "cross" ? ' aria-current="true"' : ""}>${esc(v21T("explore"))}</button></div></div></div>`;
+  else if (!V21.reg) { if (!V21.regErr) v21RegLoad(); main = `<p class="v21-dp-note" role="status">${esc(v21T(V21.regErr ? "error" : "loading"))}</p>`; }
+  else {
+    const ts = V21.reg.targets.filter(r => v21BodyOf(r) === body).sort((a, b) => (b.legacy - a.legacy) || ((b.readiness || {}).level || 0) - ((a.readiness || {}).level || 0) || a.name.localeCompare(b.name));
+    if (!V22.pick || !ts.some(r => r.id === V22.pick)) V22.pick = (ts.find(r => r.id === S.targetId) || ts[0] || {}).id;
+    const r = ts.find(x => x.id === V22.pick) || ts[0], L = r.location || {}, lv = r.readiness || {}, ex = v21Explorable(r);
+    const lat = L.latitude, lon = L.longitude_east;
+    const thumb = r.id === "mars_jezero" ? "data/thumb_jezero_mola.png" : r.id === "moon_south_pole" ? "data/thumb_southpole_lola.png" : r.thumbnail;
+    const cs = (r.fingerprint && r.fingerprint.criterion_status) || {};
+    const list = `<ul class="v22-tl">${ts.map(t => `<li class="v21-d${t.id === r.id ? " on" : ""}"${S.targetId === t.id ? ' aria-current="true"' : ""}${v21Explorable(t) ? "" : " data-v22atlasonly"}><button type="button" data-v22pick="${esc(t.id)}" aria-pressed="${t.id === r.id}"><img src="${esc(t.id === "mars_jezero" ? "data/thumb_jezero_mola.png" : t.id === "moon_south_pole" ? "data/thumb_southpole_lola.png" : t.thumbnail)}" alt="" loading="lazy"><span><h3>${keep(t.name)}</h3><small>${esc(v21T("level", { n: txInt((t.readiness || {}).level || 0) }))}${S.targetId === t.id ? " · " + esc(v21T("current")) : ""}</small></span></button></li>`).join("")}</ul>`;
+    const feat = `<article class="v22-feat" aria-live="polite"><img class="v22-fbig" src="${esc(thumb)}" alt="${esc(r.thumbnail_caption || r.name)}">
+      <div class="v22-fbody"><p class="v22-eye">${esc(v21T(body === "Mars" ? "mars" : "moon"))}${r.region ? " · " + keep(r.region.name) : ""}</p><h3>${keep(r.name)}</h3>
+        <p class="v21-meta">${lat != null ? esc(v21T("coords", { lat: v21T(lat < 0 ? "lat_s" : "lat_n", { v: txNum(Math.abs(lat), 2) + "°" }), lon: v21T("lon_e", { v: txNum(((lon % 360) + 360) % 360, 2) + "°" }) })) : ""}${L.window_km ? " · " + esc(v21T("window", { km: txNum(L.window_km, 1) })) : ""}</p>
+        ${r.context ? `<p class="v22-ctx">${keep(r.context)}</p>` : ""}
+        <p><span class="v21-lv">${esc(v21T("level", { n: txInt(lv.level || 0) }))}</span>${lv.label ? " · " + keep(lv.label) : ""}</p>
+        ${Object.keys(cs).length ? `<ul class="v22-cs">${Object.entries(cs).map(([c, s]) => `<li><span>${esc(tx("crit." + c + ".short"))}</span><b class="v22-st v22-st-${esc(String(s).toLowerCase())}">${keep(s)}</b></li>`).join("")}</ul>` : ""}
+        <div class="v21-acts"><button type="button" class="v21-go" data-v21go="${esc(r.id)}"${ex ? "" : " disabled"}>${esc(v21T(ex ? "explore" : "atlas_only"))}</button><button type="button" data-v21atlas="${esc(r.id)}">${esc(v21T("atlas"))}</button></div></div></article>`;
+    main = `${v22BodyMap(body, ts)}<p class="v21-dp-note">${esc(v21T("count", { n: txInt(ts.length) }))} · ${esc(v21T("note"))}</p><div class="v22-dpb">${list}${feat}</div>`;
+  }
+  d.innerHTML = `<div class="v21-dp v22-dp" role="document" data-body="${body}"><div class="v21-dp-h"><h2 id="v21-dest-title" tabindex="-1">${esc(v21T("title_a"))} <span class="v20-serif">${esc(v21T("title_b"))}</span></h2><button type="button" class="v20-close" data-v21close>${esc(v20T("close"))}</button></div>
+    <div class="v21-dp-tabs" role="tablist" aria-label="${esc(v21T("title_a") + " " + v21T("title_b"))}">${tabs.map(([b, k]) => `<button type="button" role="tab" data-v21body="${b}" aria-selected="${b === body}">${esc(v21T(k))}</button>`).join("")}</div>${main}</div>`;
+  if (refocus && V21.open) { const t = document.getElementById("v21-dest-title"); if (t) t.focus(); }
+};
+
+/* ---------------------------------------------------------------- globe: natural base colours, centred canvas */
+function v22Globe() {
+  const G = window.GLOBE; if (!G || G._v22 || typeof FS === "undefined" || typeof VS === "undefined") return;
+  const from = "vec3 b = mix(vec3(lum)*vec3(0.62,0.68,0.76), base, 0.28) * 0.36 * uBaseMix + vec3(0.012,0.016,0.022);";
+  const vEnd = "gl_Position = uProj * vec4(p.x, p.y, p.z - uDist, 1.0);";
+  if (!FS.includes(from) || !VS.includes(vEnd)) return;
+  try {
+    /* the same geometry, shifted horizontally in clip space by uOffX so the globe sits in the middle of the free canvas */
+    const vs = VS.replace("uniform vec2 uPan;", "uniform vec2 uPan; uniform float uOffX;").replace(vEnd, vEnd + " gl_Position.x += uOffX * gl_Position.w;");
+    G.prog = G.program(vs, FS.replace(from, "vec3 b = mix(vec3(lum)*vec3(0.70,0.78,0.88), base, 0.82) * 0.70 * uBaseMix + vec3(0.010,0.022,0.045);"));
+    G.rim = G.program(vs, FS_RIM); G.lineP = G.program(vs, FS_LINE);
+    G.offX = 0;
+    const u0 = G.uniforms.bind(G); G.uniforms = function (p, sc) { u0(p, sc); if (p.u.uOffX) this.gl.uniform1f(p.u.uOffX, this.offX || 0); };
+    const p0 = G.project.bind(G); G.project = function (lat, lon) { const r = p0(lat, lon); r.x += (this.offX || 0) * 0.5 * this.w; return r; };
+    const q0 = G.unproject.bind(G); G.unproject = function (px, py) { return q0(px - (this.offX || 0) * 0.5 * this.w, py); };
+    G._v22 = true; G.dirty = true; v22Offset();
+  } catch (e) { console.error(e); }
+}
+/* desktop Discover: the ranking floats over the right of the canvas; centre the globe in the part it leaves free */
+function v22Offset() {
+  const G = window.GLOBE; if (!G || !G._v22) return;
+  const app = document.getElementById("app"), r = document.getElementById("right"), v = document.getElementById("viewport");
+  let off = 0;
+  if (app && r && v && !app.classList.contains("is-hero") && v22Mode() === "desktop" && getComputedStyle(r).position === "absolute" && r.offsetParent !== null) {
+    const vr = v.getBoundingClientRect(), rr = r.getBoundingClientRect();
+    if (vr.width > 0 && rr.left < vr.right) off = -(vr.right - rr.left + 14) / vr.width;
+  }
+  if (Math.abs((G.offX || 0) - off) > 1e-4) { G.offX = off; G.dirty = true; if (typeof renderMarkers === "function") try { renderMarkers(); } catch (e) { } }
+}
+
+/* ---------------------------------------------------------------- events */
+document.addEventListener("click", e => {
+  const t = e.target; if (!t || !t.closest) return;
+  if (t.closest("#v22-menu")) { V22.drawer = !V22.drawer; v22Side(); if (V22.drawer) { const n = document.querySelector("#v22-side [data-v22sec][aria-current=true]"); if (n) n.focus(); } return; }
+  if (t.closest("#v22-collapse")) { V22.collapsed = !V22.collapsed; try { localStorage.setItem(V22.KEY, V22.collapsed ? "collapsed" : "open"); } catch (x) { } v22Side(); window.dispatchEvent(new Event("resize")); return; }
+  const sb = t.closest("#v22-side [data-v22sec]");
+  if (sb) {
+    const s = sb.dataset.v22sec; V22.sec = s;
+    if (v22Mode() !== "desktop" || V22.collapsed) { if (v22Mode() === "phone") V22.drawer = true; else V22.flyout = true; }
+    if (s === "discover") { v22CloseDash(); v20JnClose(); v22Side(); v20Need(() => { if (S.tab !== "explore") setTab("explore"); else { document.getElementById("app").classList.remove("is-hero"); renderLeft(); } v22Side(); }); }
+    else v22Dash(s);
+    return;
+  }
+  const dsh = t.closest("[data-v22dash]"); if (dsh) { v22CloseFloat(); v22Dash(dsh.dataset.v22dash); return; }
+  const st = t.closest("[data-v22set]"); if (st) { v22CloseFloat(); v20OpenSheet("set"); if (st.dataset.v22set === "about") setTimeout(() => { const a = document.querySelector('#v20-set [data-v20sec="about"]'); if (a) { a.scrollIntoView({ block: "start" }); a.setAttribute("tabindex", "-1"); a.focus(); } }, 40); return; }
+  const tb = t.closest("[data-v22tab]"); if (tb) { const k = tb.dataset.v22tab; v22CloseDash(); v22CloseFloat(); v20Need(() => setTab(k)); return; }
+  const sel = t.closest("[data-v22sel]"); if (sel) { const i = +sel.dataset.v22sel; v22CloseDash(); setTab("explore"); select(i, true); return; }
+  const pk = t.closest("[data-v22pick]"); if (pk) { V22.pick = pk.dataset.v22pick; v21Render(); const n = document.querySelector(`.v22-tl [data-v22pick="${V22.pick}"]`); if (n) n.focus(); return; }
+  if (t.closest("#v22-sub [data-tab], #v22-side [data-v20go], #v22-dash [data-v20go]")) { v22CloseDash(); v22CloseFloat(); }
+}, true);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && (V22.drawer || V22.flyout)) { const m = V22.drawer; v22CloseFloat(); const o = m ? document.getElementById("v22-menu") : document.querySelector("#v22-side [data-v22sec][aria-current=true]"); if (o) o.focus(); }
+});
+window.addEventListener("resize", () => { if (v22Mode() === "phone") V22.flyout = false; else V22.drawer = false; v22Side(); });
+{ const f = setTab; setTab = function (t) { const s = v22SecOf(t); if (s) V22.sec = s; v22CloseDash(); const r = f.apply(this, arguments); try { v22Side(); } catch (x) { } return r; }; }
+{ const f = renderLeft; renderLeft = function () { const r = f.apply(this, arguments); try { v22Side(); } catch (x) { } return r; }; }
+{ const f = v20Home; v20Home = function () { v22CloseDash(); V22.sec = "discover"; V22.drawer = false; V22.flyout = false; const r = f.apply(this, arguments); try { v22Side(); } catch (x) { } return r; }; }
+{ const f = setLang; setLang = function () { const r = f.apply(this, arguments); try { v22Side(); if (V22.dash) v22Dash(V22.dash); } catch (x) { console.error(x); } return r; }; }
+{ const f = setTarget; setTarget = function () { const r = f.apply(this, arguments); try { if (V22.dash) v22Dash(V22.dash); } catch (x) { } return r; }; }
+{ const f = jnOpen; jnOpen = function () { v22CloseDash(); const r = f.apply(this, arguments); try { v22Side(); } catch (x) { } return r; }; }
+(function v22Boot() {
+  const go = () => { v22Side(); let n = 0; const iv = setInterval(() => { v22Globe(); v22Side(); if (++n > 40 || (window.GLOBE && window.GLOBE._v22)) { v22Globe(); clearInterval(iv); } }, 250); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
 })();
 

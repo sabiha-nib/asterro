@@ -11,6 +11,18 @@ hidden after a weight change, the exported arena report is re-scored by the inde
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ROOT)
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_methods_shots"
@@ -63,7 +75,7 @@ try:
         pg.on("console", lambda m: errors.append("console.error: " + m.text) if m.type == "error" and "ERR_TUNNEL" not in m.text and "fonts" not in m.text else None)
         pg.goto(URL); pg.wait_for_function("document.querySelector('#hero-facts').textContent.includes('valid land cells')", timeout=90000)
         pg.click("#hero-search"); time.sleep(7)
-        pg.click("#tab-atlas"); pg.wait_for_selector(".p4-g1", timeout=60000); time.sleep(1)
+        nav_tab(pg, "atlas"); pg.wait_for_selector(".p4-g1", timeout=60000); time.sleep(1)
         # ---------------------------------------------------------------- mismatch signatures
         nav(pg, "mmsig", "Compare")
         info = pg.evaluate("({n: M6._last.F.nFamilies, sum: M6._last.F.families.reduce((t, f) => t + f.size, 0), el: M6._last.F.nEligible, lst: M6._last.C.find(x => x.criterion === 'lst_diurnal_range').structural})")
@@ -106,7 +118,7 @@ try:
         check(okpy and arep["schema"] == "asterro.method-arena/1", "exported arena report re-scored by the independent Python implementation: same leading sites for all 4 rules")
         check(len(arep["data_counterfactuals"]) == 3 and any(x["kept"] == 0 for x in arep["data_counterfactuals"]), "data counterfactuals for the 3 Earth sources are in the report")
         pg.evaluate("commitWeights({...S.weights, lst_diurnal_range: 2}, 'test')"); time.sleep(1.2)
-        pg.click("#tab-atlas"); time.sleep(1.0)
+        nav_tab(pg, "atlas"); time.sleep(1.0)
         check(pg.locator("text=results hidden until you re-run").count() == 1 and pg.locator("[data-m6=exp-arena]").count() == 0, "after a weight change the old arena results are hidden (never shown as current)")
         a2 = pg.evaluate(AUDIT)
         for k, a in (("signatures", a1), ("arena", a2)):

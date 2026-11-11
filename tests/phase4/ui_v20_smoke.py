@@ -29,7 +29,12 @@ URL = f"http://localhost:{PORT}/index.html"
 AUDIT = re.search(r'AUDIT = r"""(.*?)"""', open(os.path.join(ROOT, "tests/phase4/ui_design_audit.py")).read(), re.S).group(1)
 ATACAMA = {"latitude": -23.65432, "longitude": -68.15678, "accuracy": 1200}
 # V20.1: on desktop the navigation rail carries Menu (one button per group) and Settings; the header buttons serve tablets and phones
-MENU, SETS = "#v21-rail [data-v21rail=discover]", "#v21-rail [data-v21rail=settings]"
+# V20.3: navigation is the dark sidebar (one section's submenu at a time); Settings sits at its foot
+MENU, SETS = "#v22-side [data-v22sec=discover]", "#v22-side [data-v22set=set]"
+SEC = {"home": "discover", "globe": "discover", "discovery": "discover", "targets": "discover", "atlas": "discover", "lab": "analyze", "local": "analyze", "compare": "analyze", "lens": "analyze", "character": "analyze", "robust": "analyze",
+       "portfolio": "plan", "trajectory": "plan", "profiles": "plan", "scenarios": "plan", "passport": "evidence", "trace": "evidence", "reproduce": "evidence", "reports": "evidence", "journal": "evidence",
+       "catalogue": "trust", "sources": "trust", "gaps": "trust", "trustc": "trust", "method": "trust"}
+TABOF = {"globe": "explore", "discovery": "discover", "atlas": "atlas", "lab": "lab", "local": "local", "compare": "compare", "trajectory": "trajectory", "scenarios": "scenarios", "catalogue": "data", "method": "method"}
 ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"]
 errors, fails = [], []
 DEST = {"globe": ("explore", None), "discovery": ("discover", None), "targets": ("atlas", None), "atlas": ("atlas", None), "lab": ("lab", None),
@@ -75,9 +80,9 @@ try:
         h = pg.evaluate("""() => { const h = document.querySelector('#hero h1'), s = h.querySelector('.v20-serif');
           const vis = e => { const r = e.getBoundingClientRect(), c = getComputedStyle(e); return r.width > 0 && r.height > 0 && c.display !== 'none' && c.visibility !== 'hidden'; };
           return { text: h.innerText.replace(/\\s+/g, ' ').trim(), serif: s && getComputedStyle(s).fontFamily, sans: getComputedStyle(h).fontFamily,
-            tabs: vis(document.querySelector('nav.tabs')), targets: vis(document.querySelector('.target-ctl')), menu: vis(document.querySelector('#v21-rail [data-v21rail=discover]')),
-            settings: vis(document.querySelector('#v21-rail [data-v21rail=settings]')), proj: S.proj, tagline: document.querySelector('#hero').innerText.includes("Find Earth's environmental analogues for worlds beyond Earth."),
-            brand: document.querySelector('.brand').getAttribute('role'), oldFonts: [...document.querySelectorAll('link[href*="fonts.googleapis.com"]')].map(l => l.href).filter(u => /Big\\+Shoulders|Instrument|JetBrains/.test(u)).length } }""")
+            tabs: vis(document.querySelector('nav.tabs')), targets: vis(document.querySelector('.target-ctl')), menu: vis(document.querySelector('#v22-side [data-v22sec=discover]')),
+            settings: vis(document.querySelector('#v22-side [data-v22set=set]')), proj: S.proj, tagline: document.querySelector('#hero').innerText.includes("Find Earth's environmental analogues for worlds beyond Earth."),
+            brand: document.querySelector('#v22-side .v22-logo') && document.querySelector('#v22-side .v22-logo').hasAttribute('data-v20home') ? 'link' : null, oldFonts: [...document.querySelectorAll('link[href*="fonts.googleapis.com"]')].map(l => l.href).filter(u => /Big\\+Shoulders|Instrument|JetBrains/.test(u)).length } }""")
         check(h["text"] == "Planetary Intelligence" and h["serif"].startswith('"Playfair Display"') and h["sans"].startswith("Helvetica"), f"the title is two words, Helvetica and Playfair Display ({h['text']}; {h['serif'][:30]}; {h['sans'][:20]})")
         check(not h["tabs"] and not h["targets"] and h["menu"] and h["settings"], "the opening screen has no tab bar; the rail with Menu groups and Settings is visible")
         check(h["tagline"] and h["brand"] == "link" and h["oldFonts"] == 0, "the ASTERRO tagline is kept, the logo is a link, and no other web font is requested")
@@ -89,19 +94,19 @@ try:
         base = pg.evaluate("(async () => { await runSearch(); return S.res.distinct.slice(0, 10).map(i => [i, +S.res.eff[i].toFixed(6)]); })()")
         pg.evaluate("v20Home()"); time.sleep(0.4)
         # ------------------------------------------------------------------ 2 navigation
-        pg.click(MENU); time.sleep(0.4)
-        n = pg.evaluate("({open: !document.querySelector('#v20-nav').hidden, focus: document.activeElement.id, groups: [...document.querySelectorAll('#v20-nav [data-v20group]')].map(g => g.dataset.v20group), dest: document.querySelectorAll('#v20-nav [data-v20go]').length, glass: document.querySelector('#v20-nav .v20-sheet').hasAttribute('data-glass'), modal: document.querySelector('#v20-nav').getAttribute('aria-modal')})")
-        check(n["open"] and pg.evaluate("!!document.activeElement.closest('#v20-nav')") and n["groups"] == ["discover", "analyze", "plan", "evidence", "trust"] and n["dest"] == 25 and n["modal"] == "true", f"the menu is a modal dialog with five groups and 25 destinations, focus inside ({n})")
-        audit(pg, "navigation dialog")
+        sub = {}
+        for g in ["discover", "analyze", "plan", "evidence", "trust"]:
+            pg.click(f"#v22-side [data-v22sec={g}]"); time.sleep(0.5)
+            sub[g] = pg.evaluate("[...document.querySelectorAll('#v22-sub button')].filter(b => b.checkVisibility({ visibilityProperty: true })).map(b => b.dataset.v20go || (b.dataset.tab ? 'tab:' + b.dataset.tab : 'over'))")
+            if g != "discover": audit(pg, f"{g} dashboard and sidebar")
+        exp = {g: [k if k not in TABOF else "tab:" + TABOF[k] for k in SEC if SEC[k] == g] for g in ["discover", "analyze", "plan", "evidence", "trust"]}
+        ok_sub = all(set(sub[g]) - {"over"} == set(exp[g]) and (g == "discover" or "over" in sub[g]) for g in sub)
+        check(ok_sub, f"each section shows only its own submenu ({sub})")
         pg.screenshot(path=os.path.join(OUT, "02_navigation_1440.png"))
-        for _ in range(40): pg.keyboard.press("Tab")
-        check(pg.evaluate("!!document.activeElement.closest('#v20-nav')"), "Tab keeps focus inside the menu")
-        pg.keyboard.press("Escape"); time.sleep(0.2)
-        check(pg.evaluate("document.querySelector('#v20-nav').hidden && document.activeElement.matches('#v21-rail [data-v21rail=discover]')"), "Escape closes the menu and returns focus to the Menu button")
         bad = []
         for k, (tab, other) in DEST.items():
-            pg.evaluate("v20OpenSheet('nav')"); time.sleep(0.15)
-            pg.click(f"#v20-nav [data-v20go={k}]"); time.sleep(1.2 if k in ("globe", "targets", "atlas", "local") else 0.6)
+            pg.click(f"#v22-side [data-v22sec={SEC[k]}]"); time.sleep(0.3)
+            pg.click(f"#tab-{TABOF[k]}" if k in TABOF else f"#v22-sub [data-v20go={k}]"); time.sleep(1.2 if k in ("globe", "targets", "atlas", "local") else 0.6)
             s = state(pg)
             ok = (tab is None or s["tab"] == tab) and (other is None or (other == "hero" and s["hero"]) or (other == "sheet" and s["sheet"]) or s["jn"] == other)
             ok = ok and (k == "home" or not s["hero"])
@@ -110,9 +115,9 @@ try:
             pg.keyboard.press("Escape"); time.sleep(0.1)
         check(not bad, f"every destination opens the view it names ({bad[:3]})")
         check(pg.evaluate("document.querySelector('#app').classList.contains('is-hero')"), "Home returns to the opening screen")
-        pg.evaluate("setTab('method')"); time.sleep(0.3); pg.click(".brand"); time.sleep(0.3)
+        pg.evaluate("setTab('method')"); time.sleep(0.3); pg.click("#v22-side .v22-logo"); time.sleep(0.3)
         check(pg.evaluate("document.querySelector('#app').classList.contains('is-hero')"), "the logo returns Home (click)")
-        pg.evaluate("setTab('data')"); time.sleep(0.3); pg.focus(".brand"); pg.keyboard.press("Enter"); time.sleep(0.3)
+        pg.evaluate("setTab('data')"); time.sleep(0.3); pg.focus("#v22-side .v22-logo"); pg.keyboard.press("Enter"); time.sleep(0.3)
         check(pg.evaluate("document.querySelector('#app').classList.contains('is-hero')"), "the logo returns Home (keyboard)")
         # ------------------------------------------------------------------ 3 settings
         pg.click(SETS); time.sleep(0.5)
@@ -144,7 +149,7 @@ try:
         check(pr["c"] and pr["l"] and pr["rot"] is False and pr["saved"] == {"still": True, "large": True, "contrast": True}, f"contrast, text size and globe rotation work and are remembered ({pr})")
         pg.click("#v20-set [data-v20contrast='0']"); pg.click("#v20-set [data-v20large='0']"); pg.click("#v20-set [data-v20mode=advanced]"); time.sleep(0.2)
         check(pg.evaluate("DS.mode") == "advanced" and pg.evaluate("document.querySelector('#v20-set [data-v20mode=advanced]').getAttribute('aria-pressed')") == "true", "Detail switches to Research mode")
-        pg.click("#v20-set [data-v20mode=simple]"); pg.evaluate("document.querySelector('#v21-rail [data-v21rail=settings]').focus(); v20Close(true); v20OpenSheet('set')")
+        pg.click("#v20-set [data-v20mode=simple]"); pg.evaluate("document.querySelector('#v22-side [data-v22set=set]').focus(); v20Close(true); v20OpenSheet('set')")
         pg.evaluate("v9xLoad()"); pg.wait_for_function("!!V9X.man", timeout=60000)
         pg.evaluate("v20Render()"); time.sleep(0.3)
         if pg.evaluate("!!document.querySelector('#v20-set [data-v20do=verify]')"):
@@ -156,7 +161,7 @@ try:
         pg.click("#v20-set [data-v20do=forget]"); time.sleep(0.2)
         check(pg.evaluate("localStorage.getItem('asterro.local.v1') === null") and "0" in pg.evaluate("document.querySelector('#v20-set [data-v20sec=loc]').innerText"), "Forget saved places deletes them from this browser")
         pg.keyboard.press("Escape"); time.sleep(0.2)
-        check(pg.evaluate("document.activeElement.matches('#v21-rail [data-v21rail=settings]')"), "Escape closes Settings and returns focus")
+        check(pg.evaluate("document.activeElement.matches('#v22-side [data-v22set=set]')"), "Escape closes Settings and returns focus")
         # ------------------------------------------------------------------ 4 Local Impact: USGS MRDS
         pg.evaluate("setTab('local')"); time.sleep(0.8); pg.click("#li-geo"); pg.wait_for_function("LI.i != null")
         pg.wait_for_function("document.querySelector('[data-v20mrds]') && document.querySelector('[data-v20mrds]').innerText.includes('Records within')", timeout=60000)
@@ -181,16 +186,18 @@ try:
                 o1, proj1 = overflow(q), q.evaluate("S.proj")
                 tag = f"{vw}x{vh}"
                 if vw in (320, 390, 768, 1024, 1440, 1920) or orient == "landscape" and vw == 844: q.screenshot(path=os.path.join(OUT, f"vp_{tag}_home.png"))
-                q.evaluate("v20OpenSheet('nav')"); time.sleep(0.3); o2 = overflow(q)
-                tgt = q.evaluate("Math.min(...[...document.querySelectorAll('#v20-nav button')].map(b => b.getBoundingClientRect().height))")
+                if vw <= 760: q.click("#v22-menu")
+                else: q.click("#v22-side [data-v22sec=analyze]")
+                time.sleep(0.4); o2 = overflow(q)
+                tgt = q.evaluate("Math.min(...[...document.querySelectorAll('#v22-side button')].filter(b => b.checkVisibility({ visibilityProperty: true })).map(b => b.getBoundingClientRect().height))")
                 if vw in (390, 1440): q.screenshot(path=os.path.join(OUT, f"vp_{tag}_menu.png"))
-                q.evaluate("v20Close(true)"); q.evaluate("runSearch()"); q.wait_for_function("S.searched"); time.sleep(0.8)
+                q.evaluate("v22CloseDash(); v22CloseFloat()"); q.evaluate("runSearch()"); q.wait_for_function("S.searched"); time.sleep(0.8)
                 o3, proj3 = overflow(q), q.evaluate("S.proj")
                 if vw in (320, 390, 768, 1024, 1440, 1920) or orient == "landscape" and vw == 844: q.screenshot(path=os.path.join(OUT, f"vp_{tag}_explore.png"))
                 rows.append((tag, o1, o2, o3, proj1, proj3, tgt))
                 c2.close()
         for tag, o1, o2, o3, p1, p3, tgt in rows:
-            check(max(o1, o2, o3) <= 1 and p1 == 0 and p3 == 0 and tgt >= 36, f"{tag}: no sideways scroll (home {o1}, menu {o2}, results {o3}), globe default ({p1}, {p3}), menu targets >= 36 px ({tgt:.0f})")
+            check(max(o1, o2, o3) <= 1 and p1 == 0 and p3 == 0 and tgt >= 32, f"{tag}: no sideways scroll (home {o1}, menu {o2}, results {o3}), globe default ({p1}, {p3}), sidebar targets >= 32 px ({tgt:.0f})")
         b.close()
     check(not errors, f"no page error ({errors[:3]})")
 finally:

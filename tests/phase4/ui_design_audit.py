@@ -21,6 +21,18 @@
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_design_audit"
 os.makedirs(OUT, exist_ok=True)
@@ -123,7 +135,7 @@ try:
             pg.evaluate("runSearch()"); pg.wait_for_function("S.searched", timeout=60000); time.sleep(0.5)
             base = pg.evaluate("({top: S.res.distinct[0], s: S.res.eff[S.res.distinct[0]], w: JSON.stringify(S.weights), tid: S.targetId})")
             # ------------------------------------------------------------ Atlas
-            pg.evaluate("document.querySelector('#tab-atlas').scrollIntoView()"); tap("#tab-atlas"); pg.wait_for_function("S.tab === 'atlas'"); time.sleep(2.5)
+            pg.evaluate("document.querySelector('#tab-atlas').scrollIntoView()"); nav_tab(pg, "atlas", tap); pg.wait_for_function("S.tab === 'atlas'"); time.sleep(2.5)
             g = pg.evaluate("""(() => { const v = document.querySelector('#viewport').getBoundingClientRect(), l = document.querySelector('#left').getBoundingClientRect(), c = document.querySelector('#globe').getBoundingClientRect();
               return { vw: v.width, vh: v.height, lw: l.width, cw: c.width, globe: document.querySelector('#proj-globe').getAttribute('aria-pressed'), W: innerWidth,
                        layerHidden: getComputedStyle(document.querySelectorAll('#viewport .vp-top .seg')[1]).display === 'none', btn: !!document.querySelector('#ds-layers'),

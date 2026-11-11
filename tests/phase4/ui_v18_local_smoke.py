@@ -12,6 +12,18 @@ languages; the prohibited-element audit; the baseline left unchanged.
 import os, re, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_v18_smoke"
 os.makedirs(OUT, exist_ok=True)
@@ -42,7 +54,7 @@ def boot(pg):
     pg.evaluate("try { localStorage.removeItem('asterro.local.v1') } catch (e) {}")
     pg.evaluate("runSearch()"); pg.wait_for_function("S.searched", timeout=60000); time.sleep(0.4)
     pg.evaluate("document.querySelectorAll('.jl-toast').forEach(t => t.remove())")
-    pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); pg.click("#tab-local"); time.sleep(0.8)
+    pg.evaluate("document.querySelector('#tab-local').scrollIntoView()"); nav_tab(pg, "local"); time.sleep(0.8)
 
 
 def status(pg):
@@ -63,7 +75,8 @@ try:
         reqs = []; pg.on("request", lambda r: reqs.append((r.url, r.post_data or "")))
         boot(pg)
         base = pg.evaluate("({top: S.res.distinct[0], s: S.res.eff[S.res.distinct[0]], w: JSON.stringify(S.weights), tid: S.targetId})")
-        tab = pg.evaluate("[...document.querySelectorAll('.tabs [role=tab]')].filter(b => b.getBoundingClientRect().width > 0).map(b => b.id)")
+        # V20.3: the view buttons are grouped in the sidebar; Local Impact is listed with the Analyze views
+        tab = pg.evaluate("(() => { const s = V22.sec; V22.sec = 'analyze'; v22Side(); const vis = [...document.querySelectorAll('.tabs [role=tab]')].filter(b => b.getBoundingClientRect().width > 0).map(b => b.id); V22.sec = s; v22Side(); return [...document.querySelectorAll('.tabs [role=tab]')].map(b => b.id).filter(id => id !== 'tab-local' || vis.includes(id)); })()")
         check("tab-local" in tab and "tab-atlas" in tab and "tab-explore" in tab and "tab-lab" in tab, "Local Impact is a tab beside the existing ones")
         check(pg.evaluate("window.__geo.get + window.__geo.watch") == 0, "no position is requested before the person asks")
         check(pg.evaluate("!!document.querySelector('[data-lipriv]')") and "nowhere" in pg.evaluate("document.querySelector('[data-lipriv]').textContent"), "the privacy statement is shown before any position is used")

@@ -6,6 +6,18 @@ checks for page errors and that the baseline result is unchanged, and saves scre
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 
+def nav_tab(pg, t, act=None):
+    """V20.3 navigation: the view buttons live in the dark sidebar, one section at a time. Open the view's section
+    (from the menu button on phones), then press the view button itself. Every step is a real click or tap."""
+    act = act or pg.click
+    if pg.evaluate(f"(() => {{ const b = document.querySelector('#tab-{t}'); return !!b && b.checkVisibility({{ visibilityProperty: true }}) && !b.classList.contains('v22-off'); }})()"):
+        act(f"#tab-{t}"); return
+    sec = pg.evaluate(f"v22SecOf('{t}')")
+    if pg.evaluate("innerWidth <= 760 && !document.body.classList.contains('v22-drawer')"): act("#v22-menu")
+    act(f"#v22-side [data-v22sec={sec}]")
+    act(f"#tab-{t}")
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/asterro_lab_shots"
 os.makedirs(OUT, exist_ok=True)
@@ -36,7 +48,7 @@ try:
         pg.click("#hero-search"); time.sleep(6.5)
         base_top = pg.inner_text(".site >> nth=0")
         base_eff = pg.evaluate("Array.from(S.res.eff.slice(0, 50))")
-        pg.click("#tab-lab"); time.sleep(0.8)
+        nav_tab(pg, "lab"); time.sleep(0.8)
         pg.screenshot(path=f"{OUT}/lab_00_overview.png")
 
         def mod(m):
@@ -91,12 +103,12 @@ try:
         res["review_flags"] = pg.evaluate("[L.rev.flags.length, L.rev.nums.map(n => n.match + ':' + n.ok)]")
         pg.screenshot(path=f"{OUT}/lab_14_review.png")
         # baseline untouched?
-        pg.click("#tab-explore"); time.sleep(0.8)
+        nav_tab(pg, "explore"); time.sleep(0.8)
         res["baseline_unchanged"] = pg.inner_text(".site >> nth=0") == base_top and pg.evaluate("Array.from(S.res.eff.slice(0, 50))") == base_eff
         res["weights_after"] = pg.evaluate("S.weights")
         # moon + cross smoke through every module
         for tgt in ("tgt-moon", "tgt-cross"):
-            pg.click(f"#{tgt}"); time.sleep(1.2); pg.click("#tab-lab"); time.sleep(0.5)
+            pg.click(f"#{tgt}"); time.sleep(1.2); nav_tab(pg, "lab"); time.sleep(0.5)
             for m in ["robust", "portfolio", "atlas", "uncert", "failure", "graph", "xplanet", "temporal", "reqs", "obsval", "planner", "vault", "review"]:
                 mod(m)
                 txt = pg.inner_text("#left")
@@ -107,7 +119,7 @@ try:
         m = b.new_page(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True)
         m.on("pageerror", lambda e: errors.append("mobile pageerror: " + str(e)))
         m.goto("http://localhost:8790/index.html"); m.wait_for_function("document.querySelector('#hero-facts').textContent.includes('valid land cells')", timeout=60000)
-        m.click("#hero-search"); time.sleep(6); m.click("#tab-lab"); time.sleep(0.8)
+        m.click("#hero-search"); time.sleep(6); nav_tab(m, "lab"); time.sleep(0.8)
         res["mobile_overflow"] = m.evaluate("document.documentElement.scrollWidth - innerWidth")
         m.screenshot(path=f"{OUT}/lab_m_overview.png", full_page=True)
         b.close()
