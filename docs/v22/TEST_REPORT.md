@@ -50,18 +50,31 @@ The affected suites were run again on the final build and all pass:
 
 The published preview was checked in a browser: sidebar, flyout submenu, Analyze and Plan dashboards.
 
-## Offline suite (`npm test`): 175 of 176 pass
+## Offline suite (`npm test`): 177 of 177 pass
 
-The one failure is `test_v19::test_baseline_has_no_differences`. It is a drift guard: it compares the working tree with
-the fixed V19 commit `cab7a0c` and fails on any change to two things.
+The V19 drift guard (`test_v19::test_baseline_has_no_differences`) compares the working tree with the V19 commit
+`cab7a0c`. V20.3 changed two things on purpose:
 
-- **The order of the view buttons as rendered.** V20.3 replaces the horizontal tab row with per-section submenus, as the
-  brief requires, so the rendered order is now Discover · Analyze · Plan · Evidence · Data and Trust.
-- **Two protected test files, `tests/ui_smoke.py` and `tests/phase2/ui_lab_smoke.py`.** Their only change is the
-  navigation step: the test opens the section before pressing a view button.
+- **The rendered order of the view buttons.** They now sit in per-section submenus.
+- **One navigation step in two protected UI tests**, `tests/ui_smoke.py` and `tests/phase2/ui_lab_smoke.py`.
 
-The guard reports exactly these two differences and nothing else: no engine, data, threshold, profile, route or dataset
-difference. The test was left unchanged. Re-basing it on the V20.3 commit is a decision for the project owner.
+These two changes are listed in `data/v22/accepted_differences.json` with their exact old and new values. The guard
+accepts only an exact match, so any other difference fails, including a further edit to either file. This was tested:
+adding one line to `tests/ui_smoke.py` makes the guard fail.
+
+A new test, `test_accepted_differences_are_only_the_v20_3_navigation_change`, pins that list to these two changes and
+checks that the same ten views remain, only reordered.
+
+The GitHub workflow `.github/workflows/ci.yml` now checks out the full history (`fetch-depth: 0`). The guard needs
+`cab7a0c`, which a single-commit checkout does not contain.
+
+**Simulated GitHub run.** A fresh clone of the repository was tested locally:
+
+- `npm test`: 177 of 177 pass;
+- the registry schema check passes;
+- the stack rebuild reproduces the published SHA-256.
+
+This was run on a local Python 3.13. GitHub runs Python 3.11, which was not tested.
 
 ## Test changes (navigation only; no check removed or loosened)
 

@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }   # full history: the V17/V19 drift guards compare with earlier release commits
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - uses: actions/setup-node@v4

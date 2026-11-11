@@ -65,6 +65,21 @@ def main():
     if not CHECK:
         os.makedirs(os.path.join(ROOT, "data/v19"), exist_ok=True)
         json.dump(out, open(os.path.join(ROOT, "data/v19/baseline.json"), "w"), indent=1)
+    # V20.3: differences approved in a later release are listed with their exact old and new values; only an exact
+    # match is accepted, so any other or further change still fails
+    acc = json.load(open(os.path.join(ROOT, "data/v22/accepted_differences.json")))["accepted"]
+    accepted = {}
+    for k in list(diff):
+        if isinstance(diff[k], dict):
+            for x in list(diff[k]):
+                if acc.get(k, {}).get(x) == diff[k][x]:
+                    accepted.setdefault(k, {})[x] = diff[k].pop(x)
+            if not diff[k]:
+                del diff[k]
+        elif acc.get(k) == diff[k]:
+            accepted[k] = diff.pop(k)
+    if accepted:
+        print("accepted (data/v22/accepted_differences.json):", ", ".join(sorted(f"{k}:{x}" for k in accepted for x in (accepted[k] if isinstance(accepted[k], dict) else [""]))))
     print("differences:", json.dumps(diff)[:800] if diff else "none")
 
 

@@ -104,6 +104,16 @@ def test_baseline_has_no_differences():
     assert out.returncode == 0 and "differences: none" in out.stdout, out.stdout + out.stderr
 
 
+def test_accepted_differences_are_only_the_v20_3_navigation_change():
+    # the approved V20.3 change: two protected UI tests gained a navigation step, and the view buttons moved into
+    # per-section submenus; nothing else may be accepted, and the engine, data and other protected files stay exact
+    acc = json.load(open(os.path.join(ROOT, "data/v22/accepted_differences.json")))["accepted"]
+    assert sorted(acc) == ["protected", "rendered_tabs"]
+    assert sorted(acc["protected"]) == ["tests/phase2/ui_lab_smoke.py", "tests/ui_smoke.py"]
+    old, new = acc["rendered_tabs"]
+    assert sorted(old) == sorted(new) and len(new) == len(set(new)) == 10  # same ten views, only reordered
+
+
 def test_site_samples_rebuild_is_reproducible():
     from src.v19 import samples as SM
     doc = SM.build(write=False)
