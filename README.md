@@ -984,4 +984,4 @@ Implementation report with per-feature status: `docs/phase4/EXPANSION.md`.
 Requirement-by-requirement status: `docs/phase4/CHALLENGE_COMPLIANCE.md`.
 
 **Status.** ASTERRO has **not** been scientifically validated against field studies, it is not
-NASA-approved, and it designates no site as safe.
+NASA-approved, and it designates no site as safe. 
